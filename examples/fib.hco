@@ -1,0 +1,20 @@
+set c = 0;
+set next = 0;
+set first = 0;
+set second = 1;
+set n = 70;
+while (c < n)
+{
+	if ( c <= 1 )
+	{
+ 		set next = c;
+	}
+	else
+	{
+		set next = first + second;
+		set first = second;
+		set second = next;
+	}
+	print(next);
+	set c = c + 1;
+}

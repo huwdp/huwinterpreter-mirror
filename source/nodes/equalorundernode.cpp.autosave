@@ -1,0 +1,11 @@
+#include "underorequal.h"
+
+EqualOrUnderNode::EqualOrUnderNode(Node *node, Functions *functions, Variables *variables)
+{
+
+}
+
+Variable *EqualOrOverNode::execute()
+{
+    return nullptr;
+}

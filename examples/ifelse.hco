@@ -1,0 +1,9 @@
+set c= 1+1;
+if (c<1)
+{
+	print("If");
+}
+else
+{
+	print("Else");
+}
