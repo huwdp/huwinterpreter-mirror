@@ -24,8 +24,7 @@ std::shared_ptr<Variable> Str::run(std::shared_ptr<Token> token, std::vector<std
         std::shared_ptr<Variable> var = node1->execute();
         if (var != nullptr)
         {
-            auto a = std::shared_ptr<FakeString>(new FakeString("", var->toString()));
-            answer = (a);
+            answer = std::make_shared<FakeString>("", var->toString());
         }
     }
     else

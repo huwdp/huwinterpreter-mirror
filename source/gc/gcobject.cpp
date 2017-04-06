@@ -48,8 +48,7 @@ void GCObject::release()
 {
     if (references.empty())
     {
-        //delete var;
-        //var = nullptr;
+
     }
 }
 

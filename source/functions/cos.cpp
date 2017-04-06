@@ -28,8 +28,7 @@ std::shared_ptr<Variable> Cos::run(std::shared_ptr<Token> token, std::vector<std
             {
                 double temp = var->toDouble();
                 double output = std::cos(temp);
-                auto a = std::shared_ptr<FakeNumber>(new FakeNumber("", output));
-                answer = (a);
+                answer = std::make_shared<FakeNumber>(output);
             }
             catch (const std::invalid_argument ex)
             {

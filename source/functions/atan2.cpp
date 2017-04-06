@@ -32,8 +32,7 @@ std::shared_ptr<Variable> Atan2::run(std::shared_ptr<Token> token, std::vector<s
                 double x = var1->toDouble();
                 double y = var2->toDouble();
                 double output = std::atan2(x,y);
-                auto a = std::shared_ptr<FakeNumber>(new FakeNumber("", output));
-                answer = (a);
+                answer = std::make_shared<FakeNumber>(output);
             }
             catch (const std::invalid_argument ex)
             {

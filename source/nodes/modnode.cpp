@@ -28,8 +28,9 @@ std::shared_ptr<Variable> ModNode::execute()
     Debug::print("Mod");
     if (left != nullptr && right != nullptr)
     {
-        std::shared_ptr<Variable> r = right->execute();
         std::shared_ptr<Variable> l = left->execute();
+        std::shared_ptr<Variable> r = right->execute();
+
 
         if (l == nullptr)
         {

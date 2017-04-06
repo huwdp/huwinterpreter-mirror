@@ -35,19 +35,17 @@ std::shared_ptr<Variable> FileWrite::run(std::shared_ptr<Token> token, std::vect
                 IO file;
                 if (file.write(fileLocation, output))
                 {
-                    auto a = std::shared_ptr<FakeNumber>(new FakeNumber("", 1.0));
-                    answer = (a);
+                    answer = std::make_shared<FakeNumber>(1.0);
                 }
             }
             else
             {
-                auto b = std::shared_ptr<FakeNumber>(new FakeNumber("", 0.0));
-                answer = (b);
+                answer = std::make_shared<FakeNumber>(0.0);
             }
         }
         else
         {
-            auto c = std::shared_ptr<FakeNumber>(new FakeNumber("", 0.0));
+            auto c = std::shared_ptr<FakeNumber>(new FakeNumber( 0.0));
             answer = (c);
         }
     }

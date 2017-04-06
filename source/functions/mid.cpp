@@ -47,8 +47,7 @@ std::shared_ptr<Variable> Mid::run(std::shared_ptr<Token> token, std::vector<std
             {
                 Errors::add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
             }
-            auto a = std::shared_ptr<FakeString>(new FakeString("", temp));
-            answer = (a);
+            answer = std::make_shared<FakeString>("", temp);
         }
     }
     else

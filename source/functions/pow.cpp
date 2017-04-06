@@ -31,8 +31,7 @@ std::shared_ptr<Variable> Pow::run(std::shared_ptr<Token> token, std::vector<std
             {
                 double x = var1->toDouble();
                 double y = var2->toDouble();
-                auto a = std::shared_ptr<FakeNumber>(new FakeNumber("", std::pow(x,y)));
-                answer = (a);
+                answer = std::make_shared<FakeNumber>(std::pow(x,y));
             }
             catch (const std::invalid_argument ex)
             {

@@ -23,12 +23,26 @@ FakeNumber::FakeNumber(std::shared_ptr<Variable> variable)
 FakeNumber::FakeNumber(std::string name, double value)
     : Variable(name)
 {
-    std::shared_ptr<Variable> v(new FakeDouble("",value));
+    std::shared_ptr<Variable> v(new FakeDouble(value));
+    this->variable = std::move(toValue(v));
+}
+
+FakeNumber::FakeNumber(double value)
+    : Variable("")
+{
+    std::shared_ptr<Variable> v(new FakeDouble(value));
+    this->variable = std::move(toValue(v));
+}
+
+FakeNumber::FakeNumber(long long value)
+    : Variable("")
+{
+    std::shared_ptr<Variable> v(new FakeInt(value));
     this->variable = std::move(toValue(v));
 }
 
 FakeNumber::FakeNumber(std::string name, long long value)
-    : Variable(name)
+    : Variable("")
 {
     std::shared_ptr<Variable> v(new FakeInt("",value));
     this->variable = std::move(v);
@@ -321,7 +335,6 @@ std::shared_ptr<Variable> FakeNumber::toValue(std::shared_ptr<Variable> variable
     }
     else if (precision.getType(value) == INTEGER)
     {
-        //return variable;
         long long intValue = (long long)value;
         auto a = std::make_shared<FakeNumber>(std::make_shared<FakeInt>("",intValue));
         return a;

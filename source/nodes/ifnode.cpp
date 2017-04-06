@@ -31,8 +31,7 @@ std::shared_ptr<Variable> IfNode::execute()
     std::shared_ptr<Variable> c = condition->execute();
     if (c != nullptr)
     {
-        bool temp = c->toBool();
-        if (temp)
+        if (c->toBool())
         {
             if (body != nullptr)
             {

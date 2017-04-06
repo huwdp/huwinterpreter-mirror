@@ -28,8 +28,7 @@ std::shared_ptr<Variable> Floor::run(std::shared_ptr<Token> token, std::vector<s
             {
                 double temp = var->toDouble();
                 double output = std::floor(temp);
-                auto a = std::shared_ptr<FakeNumber>(new FakeNumber("", output));
-                answer = (a);
+                answer = std::make_shared<FakeNumber>(output);
             }
             catch (const std::invalid_argument ex)
             {

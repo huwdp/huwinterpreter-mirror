@@ -89,28 +89,28 @@ std::string FakeString::getValue()
 
 std::shared_ptr<Variable> FakeString::pow(std::shared_ptr<Variable> variable)
 {
-    Debug::print("Cannot power stings");
+    Debug::print("Cannot power strings");
     std::shared_ptr<Variable> null;
     return null;
 }
 
 std::shared_ptr<Variable> FakeString::mul(std::shared_ptr<Variable> variable)
 {
-    Debug::print("Cannot combine multiple stings");
+    Debug::print("Cannot combine multiple strings");
     std::shared_ptr<Variable> null;
     return null;
 }
 
 std::shared_ptr<Variable> FakeString::div(std::shared_ptr<Variable> variable)
 {
-    Debug::print("Cannot divide stings");
+    Debug::print("Cannot divide strings");
     std::shared_ptr<Variable> null;
     return null;
 }
 
 std::shared_ptr<Variable> FakeString::mod(std::shared_ptr<Variable> variable)
 {
-    Debug::print("Cannot mod stings");
+    Debug::print("Cannot mod strings");
     std::shared_ptr<Variable> null;
     return null;
 }
@@ -129,7 +129,7 @@ std::shared_ptr<Variable> FakeString::add(std::shared_ptr<Variable> variable)
 
 std::shared_ptr<Variable> FakeString::sub(std::shared_ptr<Variable> variable)
 {
-    Debug::print("Cannot subtract stings");
+    Debug::print("Cannot subtract strings");
     std::shared_ptr<Variable> null;
     return null;
 }

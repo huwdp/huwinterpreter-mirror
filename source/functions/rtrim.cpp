@@ -43,8 +43,7 @@ std::shared_ptr<Variable> RTrim::run(std::shared_ptr<Token> token, std::vector<s
                     --it;
                 }
             }
-            auto a = std::shared_ptr<FakeString>(new FakeString("", temp));
-            answer = (a);
+            answer = std::make_shared<FakeString>("", temp);
         }
     }
     else

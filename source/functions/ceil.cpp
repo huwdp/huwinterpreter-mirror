@@ -29,8 +29,7 @@ std::shared_ptr<Variable> Ceil::run(std::shared_ptr<Token> token, std::vector<st
             {
                 double temp = var->toDouble();
                 double output = std::ceil(temp);
-                auto a = std::shared_ptr<FakeNumber>(new FakeNumber("", output));
-                answer = (a);
+                answer = std::make_shared<FakeNumber>(output);
             }
             catch (const std::invalid_argument ex)
             {

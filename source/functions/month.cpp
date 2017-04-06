@@ -32,9 +32,7 @@ std::shared_ptr<Variable> Month::run(std::shared_ptr<Token> token, std::vector<s
                 std::tm tm = *std::localtime(&t);
                 std::stringstream ss;
                 ss << std::put_time(&tm, "%m");
-
-                auto a = std::shared_ptr<FakeString>(new FakeString("", ss.str()));
-                answer = a;
+                answer = std::make_shared<FakeString>("", ss.str());
             }
             catch (const std::invalid_argument ex)
             {

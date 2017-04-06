@@ -59,8 +59,7 @@ std::shared_ptr<Variable> Trim::run(std::shared_ptr<Token> token, std::vector<st
                     --it;
                 }
             }
-            auto a = std::shared_ptr<FakeString>(new FakeString("", temp));
-            answer = (a);
+            answer = std::make_shared<FakeString>("", temp);
         }
     }
     else

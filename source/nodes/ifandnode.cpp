@@ -28,8 +28,8 @@ std::shared_ptr<Variable> IfAndNode::execute()
     Debug::print("And");
     if (left != nullptr && right != nullptr)
     {
-        std::shared_ptr<Variable> r = right->execute();
         std::shared_ptr<Variable> l = left->execute();
+        std::shared_ptr<Variable> r = right->execute();
 
         if (l == nullptr)
         {
@@ -46,10 +46,10 @@ std::shared_ptr<Variable> IfAndNode::execute()
         bool ls = l->toBool();
         if (rs && ls)
         {
-            std::shared_ptr<Variable> trueVar(new FakeNumber("",1.0));
+            std::shared_ptr<Variable> trueVar(new FakeNumber(1.0));
             return (trueVar);
         }
-        std::shared_ptr<Variable> falseVar(new FakeNumber("",0.0));
+        std::shared_ptr<Variable> falseVar(new FakeNumber(0.0));
         return (falseVar);
     }
     Debug::print("Could not and.");

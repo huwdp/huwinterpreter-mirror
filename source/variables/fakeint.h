@@ -27,6 +27,7 @@ private:
     long long value;
 public:
     FakeInt();
+    FakeInt(long long value);
     FakeInt(std::string name, long long value);
     void setValue(double value);
     void setValue(std::string value);

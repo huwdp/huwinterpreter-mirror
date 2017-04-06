@@ -28,8 +28,9 @@ std::shared_ptr<Variable> SubNode::execute()
     Debug::print("SubNode");
     if (left != nullptr && right != nullptr)
     {
-        std::shared_ptr<Variable> r = right->execute();
         std::shared_ptr<Variable> l = left->execute();
+        std::shared_ptr<Variable> r = right->execute();
+
         if (l == nullptr)
         {
             Errors::add(std::make_shared<Error>(ERROR, "Invalid expression", token));

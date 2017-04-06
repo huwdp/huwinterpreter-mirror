@@ -17,16 +17,6 @@
 
 Variables::Variables()
 {
-    // Broken code below:
-    //addVariable(std::move(std::shared_ptr<FakeNumber>(new FakeNumber("PI", "3.14159265358979"))));
-    //addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("e", "2.718281828459045")));
-    //addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("y", "0.577215664901532")));
-    //addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("Φ", "1.618033988749894")));
-    //addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("φ", "0.618033988749894")));
-    //addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("δs", "2.41421356237309")));
-    //addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("ρ", "1.324717957244746")));
-
-
     addVariable(std::move(std::shared_ptr<FakeNumber>(new FakeNumber("PI", 3.14159265358979))));
     addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("e", 2.718281828459045)));
     addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("y", 0.577215664901532)));

@@ -18,7 +18,6 @@
 TextNode::TextNode(std::shared_ptr<Token> token, std::string value) : Node(token)
 {
     this->value = VariableTypeFactory::newVariable(TypeDetector::getType(value));
-    //this->value->setName("");
     this->value->setValue(value);
     Debug::print("TextNode");
 }

@@ -22,20 +22,18 @@ VariableTypeFactory::VariableTypeFactory()
 
 std::shared_ptr<Variable> VariableTypeFactory::newVariable(VarType varType)
 {
+    std::shared_ptr<Variable> null;
     if (varType == STRING)
     {
-        std::shared_ptr<Variable> var1(new FakeString("", ""));
-        return (var1);
+        return std::make_shared<FakeString>();
     }
     else if (varType == INTEGER)
     {
-        std::shared_ptr<Variable> var2(new FakeNumber("", (long long)0));
-        return (var2);
+        return std::make_shared<FakeNumber>((long long)0);
     }
     else if (varType == DOUBLE)
     {
-        std::shared_ptr<Variable> var3(new FakeNumber("", 0.0));
-        return (var3);
+        return std::make_shared<FakeDouble>(0.0);
     }
-    std::shared_ptr<Variable> null;return null;
+    return null;
 }

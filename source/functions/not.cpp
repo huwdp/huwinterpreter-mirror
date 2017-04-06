@@ -26,13 +26,11 @@ std::shared_ptr<Variable> Not::run(std::shared_ptr<Token> token, std::vector<std
         {
             if (var->toBool())
             {
-                auto a = std::shared_ptr<FakeNumber>(new FakeNumber("", 0.0));
-                answer = (a);
+                answer = std::make_shared<FakeNumber>(0.0);
             }
             else
             {
-                auto b = std::shared_ptr<FakeNumber>(new FakeNumber("", 1.0));
-                answer = (b);
+                answer = std::make_shared<FakeNumber>(1.0);
             }
         }
     }

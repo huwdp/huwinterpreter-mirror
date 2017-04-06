@@ -33,9 +33,7 @@ std::shared_ptr<Variable> Replace::run(std::shared_ptr<Token> token, std::vector
             std::string temp2 = var2->toString();
             std::string temp3 = var3->toString();
             temp1.replace(temp1.find(temp2),temp2.length(),temp3);
-
-            auto a = std::shared_ptr<FakeString>(new FakeString("", temp1));
-            answer = (a);
+            answer = std::make_shared<FakeString>("", temp1);
         }
     }
     else

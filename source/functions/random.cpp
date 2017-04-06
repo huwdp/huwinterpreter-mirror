@@ -23,8 +23,7 @@ std::shared_ptr<Variable> Random::run(std::shared_ptr<Token> token, std::vector<
         std::srand(std::time(0));
         int number = std::rand();
         double value = (double)number;
-        auto a = std::shared_ptr<FakeNumber>(new FakeNumber("", value));
-        answer = (a);
+        answer = std::make_shared<FakeNumber>(value);
     }
     else
     {

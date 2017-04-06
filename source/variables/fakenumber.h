@@ -30,6 +30,8 @@ private:
     std::shared_ptr<Variable> variable;
 public:
     FakeNumber(std::shared_ptr<Variable> variable);
+    FakeNumber(double value);
+    FakeNumber(long long value);
     FakeNumber(std::string name, double value);
     FakeNumber(std::string name, long long value);
     FakeNumber(std::string name, std::string value);

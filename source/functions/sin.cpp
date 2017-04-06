@@ -29,8 +29,7 @@ std::shared_ptr<Variable> Sin::run(std::shared_ptr<Token> token, std::vector<std
                 double temp = var->toDouble();
                 double output = std::sin(temp);
                 
-                auto a = std::shared_ptr<FakeNumber>(new FakeNumber("", output));
-                return (a);
+                return std::make_shared<FakeNumber>(output);
             }
             catch (const std::invalid_argument ex)
             {

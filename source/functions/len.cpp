@@ -26,8 +26,7 @@ std::shared_ptr<Variable> Len::run(std::shared_ptr<Token> token, std::vector<std
         {
             std::string temp = var->toString();
             double length = temp.length();
-            auto a = std::shared_ptr<FakeNumber>(new FakeNumber("", length));
-            answer = (a);
+            answer = std::make_shared<FakeNumber>(length);
         }
     }
     else

@@ -29,14 +29,13 @@ std::shared_ptr<Variable> Asc::run(std::shared_ptr<Token> token, std::vector<std
             {
                 int temp2 = temp.at(0);
                 double ascii = (double)temp2;
-                auto a = std::shared_ptr<FakeNumber>(new FakeNumber("", ascii));
-                answer = a;
+                answer = std::make_shared<FakeNumber>(ascii);
             }
         }
     }
     else
     {
-        auto b = std::shared_ptr<FakeString>(new FakeString("", ""));
+        auto b = std::shared_ptr<FakeString>(new FakeString("",""));
         answer = b;
         Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Asc function requires one argument", token));
     }

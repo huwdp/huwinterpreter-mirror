@@ -30,12 +30,12 @@ std::shared_ptr<Variable> WhileNode::execute()
     if (condition != nullptr)
     {
         std::shared_ptr<Variable> c = this->condition->execute();
-        bool bob = c->toBool();
-        while (bob)
+        bool loop = c->toBool();
+        while (loop)
         {
             body->execute();
             c = condition->execute();
-            bob = c->toBool();
+            loop = c->toBool();
         }
     }
     else

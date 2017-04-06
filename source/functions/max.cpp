@@ -47,8 +47,7 @@ std::shared_ptr<Variable> Max::run(std::shared_ptr<Token> token, std::vector<std
             }
             
         }
-        auto a = std::shared_ptr<FakeNumber>(new FakeNumber("", max));
-        answer = (a);
+        answer = std::make_shared<FakeNumber>(max);
     }
     else
     {

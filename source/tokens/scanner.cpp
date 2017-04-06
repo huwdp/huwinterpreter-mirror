@@ -160,8 +160,6 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
             }
             else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::ADDITION))
             {
-                //tokens.push_back(std::move(std::make_shared<Token>("+", TokenType::ADDITION, std::move(lineInfo))));
-
                 char token = fileReader->getPrev()->getContent();
                 fileReader->next();
                 if (tokenDetector->compare(token, LEFTARENTHESIS) ||
@@ -330,12 +328,6 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
             }
         }
         fileReader->next();
-    }
-
-    if (temp != "")
-    {
-        //tokens.push_back(new Token(temp, nullptr));
-        // Fix me!
     }
     return tokens;
 }

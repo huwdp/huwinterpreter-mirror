@@ -32,6 +32,7 @@ private:
     double value;
 public:
     FakeDouble();
+    FakeDouble(double value);
     FakeDouble(std::string name, double value);
     void setValue(double value);
     void setValue(std::string value);

@@ -89,13 +89,13 @@ void TextTokenManager::prev()
 
 std::shared_ptr<FileLine> TextTokenManager::peak()
 {
+    std::shared_ptr<FileLine> null;
     if (it != lines.end())
     {
         it++;
         return (*it);
         it--;
     }
-    std::shared_ptr<FileLine> null;
     return null;
 }
 

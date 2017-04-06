@@ -20,6 +20,12 @@ FakeInt::FakeInt()
     value = 0;
 }
 
+FakeInt::FakeInt(long long value)
+    : Variable("")
+{
+    this->value = value;
+}
+
 FakeInt::FakeInt(std::string name, long long value)
     : Variable(name)
 {
@@ -89,7 +95,7 @@ std::shared_ptr<Variable> FakeInt::pow(std::shared_ptr<Variable> variable)
         std::shared_ptr<Variable> null;
         return null;
     }
-    std::shared_ptr<Variable> temp(new FakeNumber("",std::pow(this->toDouble(),variable->toDouble())));
+    std::shared_ptr<Variable> temp(new FakeNumber(std::pow(this->toDouble(),variable->toDouble())));
     return temp;
 }
 
@@ -100,7 +106,6 @@ std::shared_ptr<Variable> FakeInt::mul(std::shared_ptr<Variable> variable)
         std::shared_ptr<Variable> null;
         return null;
     }
-
     std::shared_ptr<Variable> temp(new FakeNumber(std::make_shared<FakeDouble>()));
     temp->setValue((this->toDouble() * variable->toDouble()));
     return temp;
@@ -125,12 +130,7 @@ std::shared_ptr<Variable> FakeInt::mod(std::shared_ptr<Variable> variable)
         std::shared_ptr<Variable> null;
         return null;
     }
-
-
-
-    //std::cout << bob1 << " : " << bob2 << " : " << bob3 << std::endl;
-
-    auto a = std::shared_ptr<FakeNumber>(new FakeNumber("", fmod(this->toDouble(), variable->toDouble())));
+    auto a = std::shared_ptr<FakeNumber>(new FakeNumber( fmod(this->toDouble(), variable->toDouble())));
     return (a);
 }
 
@@ -142,10 +142,7 @@ std::shared_ptr<Variable> FakeInt::add(std::shared_ptr<Variable> variable)
         return null;
     }
     std::shared_ptr<Variable> temp(new FakeNumber(std::make_shared<FakeDouble>()));
-    double a1 = this->toDouble();
-    double a2 = variable->toDouble();
-    double temp2 = a1 + a2;
-    temp->setValue(temp2);
+    temp->setValue(this->toDouble() + variable->toDouble());
     return temp;
 }
 
@@ -169,12 +166,7 @@ std::shared_ptr<Variable> FakeInt::ifUnder(std::shared_ptr<Variable> variable)
         return null;
     }
     std::shared_ptr<Variable> temp(new FakeNumber(std::make_shared<FakeDouble>()));
-
-    double a = this->toDouble();
-    double b = variable->toDouble();
-
-
-    if (a < b)
+    if (this->toDouble() < variable->toDouble())
     {
         temp->setValue(double(1));
     }
@@ -242,9 +234,6 @@ std::shared_ptr<Variable> FakeInt::ifEqual(std::shared_ptr<Variable> variable)
         return null;
     }
     std::shared_ptr<Variable> temp(new FakeNumber(std::make_shared<FakeDouble>()));
-
-    //std::cout << this->toDouble() << ":" <<  node->toDouble() << std::endl;
-
     if (this->toDouble() == variable->toDouble())
     {
         temp->setValue(double(1));

@@ -23,10 +23,6 @@ GC::GC()
 
 void GC::exist(std::shared_ptr<Variable> var)
 {
-    // Find item in vector
-
-
-
 }
 
 GCObject *GC::add(std::shared_ptr<Variable> var)
@@ -38,7 +34,6 @@ GCObject *GC::add(std::shared_ptr<Variable> var)
 
 void GC::remove(std::shared_ptr<Variable> var)
 {
-    // Find and remove item in vector
     for (std::vector<GCObject*>::iterator it = list.begin(); it != list.end(); ++it)
     {
         if ((*it)->getVariable() == var)

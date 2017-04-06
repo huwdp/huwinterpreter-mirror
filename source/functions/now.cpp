@@ -22,8 +22,7 @@ std::shared_ptr<Variable> Now::run(std::shared_ptr<Token> token, std::vector<std
     {
         time_t t = std::time(0);
         double now = static_cast<double> (t);
-        auto a = std::shared_ptr<FakeNumber>(new FakeNumber("", now));
-        answer = (a);
+        answer = std::make_shared<FakeNumber>(now);
     }
     else
     {

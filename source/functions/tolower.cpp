@@ -27,8 +27,7 @@ std::shared_ptr<Variable> ToLower::run(std::shared_ptr<Token> token, std::vector
             std::string temp = var->toString();
             transform(temp.begin(), temp.end(), temp.begin(),::tolower);
             
-            auto a = std::shared_ptr<FakeString>(new FakeString("", temp));
-            answer = (a);
+            answer = std::make_shared<FakeString>("", temp);
         }
     }
     else

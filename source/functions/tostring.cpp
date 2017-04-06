@@ -24,8 +24,7 @@ std::shared_ptr<Variable> ToString::run(std::shared_ptr<Token> token, std::vecto
         std::shared_ptr<Variable> var = node->execute();
         std::string temp = var->toString();
         
-        auto a = std::shared_ptr<FakeString>(new FakeString("", temp));
-        answer = (a);
+        answer = std::make_shared<FakeString>("", temp);
     }
     else
     {

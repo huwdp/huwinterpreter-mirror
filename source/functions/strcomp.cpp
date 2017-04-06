@@ -29,8 +29,7 @@ std::shared_ptr<Variable> StrComp::run(std::shared_ptr<Token> token, std::vector
             std::string str1 = var1->toString();
             std::string str2 = var2->toString();
             double diff = double(str1.compare(str2));
-            auto a = std::shared_ptr<FakeNumber>(new FakeNumber("", diff));
-            answer = (a);
+            answer = std::make_shared<FakeNumber>(diff);
         }
     }
     else

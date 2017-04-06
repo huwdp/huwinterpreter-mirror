@@ -32,8 +32,7 @@ std::shared_ptr<Variable> Space::run(std::shared_ptr<Token> token, std::vector<s
                 {
                     output.append(" ");
                 }
-                auto a = std::shared_ptr<FakeString>(new FakeString("", output));
-                answer = (a);
+                answer = std::make_shared<FakeString>("", output);
             }
             catch (const std::invalid_argument ex)
             {

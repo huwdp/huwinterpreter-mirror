@@ -31,8 +31,7 @@ std::shared_ptr<Variable> Right::run(std::shared_ptr<Token> token, std::vector<s
             {
                 int position = std::round(var2->toDouble());
                 temp = temp.substr(temp.length()-position, position);
-                auto a = std::shared_ptr<FakeString>(new FakeString("", temp));
-                answer = (a);
+                answer = std::make_shared<FakeString>("", temp);
             }
             catch (const std::invalid_argument ex)
             {

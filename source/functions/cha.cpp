@@ -31,8 +31,7 @@ std::shared_ptr<Variable> Cha::run(std::shared_ptr<Token> token, std::vector<std
                 std::string output;
                 char c = ascii;
                 output.append(1,c);
-                auto a = std::shared_ptr<FakeString>(new FakeString("", output));
-                answer = (a);
+                answer = std::make_shared<FakeString>("",output);
             }
             catch (const std::invalid_argument ex)
             {
