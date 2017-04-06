@@ -169,12 +169,10 @@ std::shared_ptr<Node> Parser::value()
                 if (currentToken->getType() == TokenType::TEXT)
                 {
                     nextToken();
-                    std::shared_ptr<TextNode> n3(new TextNode(currentToken, word));
-                    return n3;
+                    return std::make_shared<TextNode>(currentToken, word);
                 }
                 nextToken();
-                std::shared_ptr<GetVarNode> n4(new GetVarNode(currentToken, word, variables));
-                return n4;
+                return std::make_shared<GetVarNode>(currentToken, word, variables);
             }
             Errors::add(std::make_shared<Error>(PARSER_ERROR, "Unidentified word", currentToken));
         }
