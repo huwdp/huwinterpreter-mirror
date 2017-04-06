@@ -411,6 +411,11 @@ std::shared_ptr<Node>Parser::statement()
             if (accept("else"))
             {
                 acceptIndentation();
+                if (currentToken->getContent() == "if")
+                {
+                    return std::make_shared<IfNode>(currentToken, condition2, statement2, statement(), block());
+                }
+
                 if (!expect(TokenType::LEFTBRACKET))
                 {
                     compilation = false;
