@@ -72,7 +72,9 @@ std::string FakeDouble::toString()
     {
         return std::to_string(toInt());
     }
-    return std::to_string(value);
+    std::stringstream ss;
+    ss << std::fixed << std::setprecision(6) << value;
+    return ss.str();
 }
 
 bool FakeDouble::toBool()

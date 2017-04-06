@@ -99,10 +99,6 @@ std::shared_ptr<Variable> FakeNumber::pow(std::shared_ptr<Variable> variable)
     {
         return null;
     }
-    if (variable->getType() == INTEGER && this->variable->getType() == INTEGER)
-    {
-        return toValue(this->variable->pow(variable));
-    }
     return toValue(this->variable->pow(variable));
 }
 
@@ -116,10 +112,6 @@ std::shared_ptr<Variable> FakeNumber::mul(std::shared_ptr<Variable> variable)
     if (this->variable == nullptr)
     {
         return null;
-    }
-    if (variable->getType() == INTEGER && this->variable->getType() == INTEGER)
-    {
-        return toValue(this->variable->mul(variable));
     }
     return toValue(this->variable->mul(variable));
 }
@@ -135,10 +127,6 @@ std::shared_ptr<Variable> FakeNumber::div(std::shared_ptr<Variable> variable)
     {
         return null;
     }
-    if (variable->getType() == INTEGER && this->variable->getType() == INTEGER)
-    {
-        return toValue(this->variable->div(variable));
-    }
     return toValue(this->variable->div(variable));
 }
 
@@ -152,10 +140,6 @@ std::shared_ptr<Variable> FakeNumber::mod(std::shared_ptr<Variable> variable)
     if (this->variable == nullptr)
     {
         return null;
-    }
-    if (variable->getType() == INTEGER && this->variable->getType() == INTEGER)
-    {
-        return toValue(this->variable->mod(variable));
     }
     return toValue(this->variable->mod(variable));
 }
@@ -171,10 +155,6 @@ std::shared_ptr<Variable> FakeNumber::add(std::shared_ptr<Variable> variable)
     {
         return null;
     }
-    if (variable->getType() == INTEGER && this->variable->getType() == INTEGER)
-    {
-        return toValue(this->variable->add(variable));
-    }
     return toValue(this->variable->add(variable));
 }
 
@@ -188,10 +168,6 @@ std::shared_ptr<Variable> FakeNumber::sub(std::shared_ptr<Variable> variable)
     if (this->variable == nullptr)
     {
         return null;
-    }
-    if (variable->getType() == INTEGER && this->variable->getType() == INTEGER)
-    {
-        return toValue(this->variable->sub(variable));
     }
     return toValue(this->variable->sub(variable));
 }
@@ -207,10 +183,6 @@ std::shared_ptr<Variable> FakeNumber::ifUnder(std::shared_ptr<Variable> variable
     {
         return null;
     }
-    if (variable->getType() == INTEGER && this->variable->getType() == INTEGER)
-    {
-        return toValue(this->variable->ifUnder(variable));
-    }
     return toValue(this->variable->ifUnder(variable));
 }
 
@@ -224,10 +196,6 @@ std::shared_ptr<Variable> FakeNumber::ifUnderOrEqual(std::shared_ptr<Variable> v
     if (this->variable == nullptr)
     {
         return null;
-    }
-    if (variable->getType() == INTEGER && this->variable->getType() == INTEGER)
-    {
-        return toValue(this->variable->ifUnderOrEqual(variable));
     }
     return toValue(this->variable->ifUnderOrEqual(variable));
 }
@@ -243,10 +211,6 @@ std::shared_ptr<Variable> FakeNumber::ifOver(std::shared_ptr<Variable> variable)
     {
         return null;
     }
-    if (variable->getType() == INTEGER && this->variable->getType() == INTEGER)
-    {
-        return toValue(this->variable->ifOver(variable));
-    }
     return toValue(this->variable->ifOver(variable));
 }
 
@@ -260,10 +224,6 @@ std::shared_ptr<Variable> FakeNumber::ifOverOrEqual(std::shared_ptr<Variable> va
     if (this->variable == nullptr)
     {
         return null;
-    }
-    if (variable->getType() == INTEGER && this->variable->getType() == INTEGER)
-    {
-        return toValue(this->variable->ifOverOrEqual(variable));
     }
     return toValue(this->variable->ifOverOrEqual(variable));
 }
@@ -279,10 +239,6 @@ std::shared_ptr<Variable> FakeNumber::ifEqual(std::shared_ptr<Variable> variable
     {
         return null;
     }
-    if (variable->getType() == INTEGER && this->variable->getType() == INTEGER)
-    {
-        return toValue(this->variable->ifEqual(variable));
-    }
     return toValue(this->variable->ifEqual(variable));
 }
 
@@ -296,10 +252,6 @@ std::shared_ptr<Variable> FakeNumber::ifNotEqual(std::shared_ptr<Variable> varia
     if (this->variable == nullptr)
     {
         return null;
-    }
-    if (variable->getType() == INTEGER && this->variable->getType() == INTEGER)
-    {
-        return toValue(this->variable->ifNotEqual(variable));
     }
     return toValue(this->variable->ifNotEqual(variable));
 }
@@ -357,6 +309,7 @@ std::shared_ptr<Variable> FakeNumber::equal(std::shared_ptr<Variable> variable)
 std::shared_ptr<Variable> FakeNumber::toValue(std::shared_ptr<Variable> variable)
 {
     Precision precision;
+    return variable;
     double value = variable->toDouble();
     if (precision.getType(value) == INTEGER && !precision.isSafeInteger(value))
     {

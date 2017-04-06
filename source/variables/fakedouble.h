@@ -23,6 +23,8 @@
 
 #include <iostream>
 #include <memory>
+#include <iomanip>
+#include <sstream>
 
 class FakeDouble : public Variable
 {
