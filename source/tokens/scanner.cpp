@@ -151,8 +151,26 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
             }
             else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::DIVISION))
             {
-                tokens.push_back(std::move(std::make_shared<Token>("/", TokenType::DIVISION, std::move(lineInfo))));
+                if (fileReader->peak()->getContent() == '*')
+                {
+                    fileReader->getNext();
+                    while (!fileReader->isEnd() && fileReader->getCurrent()->getContent() != '\n')
+                    {
+                        if (fileReader->getNext()->getContent() == '*')
+                        {
+                            if (fileReader->getNext()->getContent() == '/')
+                            {
+                                break;
+                            }
+                        }
 
+                        // Fix bug here
+                    }
+                }
+                else
+                {
+                    tokens.push_back(std::move(std::make_shared<Token>("/", TokenType::DIVISION, std::move(lineInfo))));
+                }
             }
             else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::MOD))
             {
