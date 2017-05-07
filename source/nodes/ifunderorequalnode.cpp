@@ -22,14 +22,14 @@ IfUnderOrEqualNode::IfUnderOrEqualNode(std::shared_ptr<Token> token, std::shared
     Debug::print("UnderOrEqualNode");
 }
 
-std::shared_ptr<Variable> IfUnderOrEqualNode::execute()
+std::shared_ptr<Variable> IfUnderOrEqualNode::execute(std::shared_ptr<Scope> scope)
 {
     std::shared_ptr<Variable> null;
     Debug::print("UnderOrEqualNode");
     if (left != nullptr && right != nullptr)
     {
-        std::shared_ptr<Variable> l = left->execute();
-        std::shared_ptr<Variable> r = right->execute();
+        std::shared_ptr<Variable> l = left->execute(scope);
+        std::shared_ptr<Variable> r = right->execute(scope);
 
         if (l == nullptr)
         {

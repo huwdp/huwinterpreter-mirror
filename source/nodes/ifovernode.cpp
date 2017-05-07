@@ -22,14 +22,14 @@ IfOverNode::IfOverNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left,
     Debug::print("OverNode");
 }
 
-std::shared_ptr<Variable> IfOverNode::execute()
+std::shared_ptr<Variable> IfOverNode::execute(std::shared_ptr<Scope> scope)
 {
     std::shared_ptr<Variable> null;
     Debug::print("OverNode");
     if (left != nullptr && right != nullptr)
     {
-        std::shared_ptr<Variable> l = left->execute();
-        std::shared_ptr<Variable> r = right->execute();
+        std::shared_ptr<Variable> l = left->execute(scope);
+        std::shared_ptr<Variable> r = right->execute(scope);
 
         if (l == nullptr)
         {

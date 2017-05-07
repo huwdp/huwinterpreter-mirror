@@ -22,10 +22,9 @@ class GetVarNode : public Node
 {
 private:
     std::string name;
-    std::shared_ptr<Variables> variables;
 public:
-    GetVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Variables> variables);
-    std::shared_ptr<Variable> execute();
+    GetVarNode(std::shared_ptr<Token> token, std::string name);
+    std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
 };
 
 #endif // GETVARNODE_H

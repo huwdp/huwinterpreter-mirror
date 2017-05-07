@@ -15,7 +15,9 @@
 
 #include "scan.h"
 
-std::shared_ptr<Variable> Scan::run(std::shared_ptr<Token> token, std::vector<std::shared_ptr<Node>> variables)
+std::shared_ptr<Variable> Scan::run(std::shared_ptr<Token> token,
+                                    std::shared_ptr<Scope> scope,
+                                    std::vector<std::shared_ptr<Node>> variables)
 {
     std::shared_ptr<Variable> answer;
     for (std::vector<std::shared_ptr<Node>>::iterator it = variables.begin(); it != variables.end(); ++it)
@@ -23,10 +25,10 @@ std::shared_ptr<Variable> Scan::run(std::shared_ptr<Token> token, std::vector<st
         if ((*it).get() != nullptr)
         {
             Node *node = (*it).get();
-            std::shared_ptr<Variable> var = (*it)->execute();
+            std::shared_ptr<Variable> var = (*it)->execute(scope);
             if (var != nullptr)
             {
-                std::shared_ptr<Variable> var = node->execute();
+                std::shared_ptr<Variable> var = node->execute(scope);
                 std::string input;
                 std::cin >> input;
                 var->setValue(input);

@@ -15,7 +15,9 @@
 
 #include "min.h"
 
-std::shared_ptr<Variable> Min::run(std::shared_ptr<Token> token, std::vector<std::shared_ptr<Node>> variables)
+std::shared_ptr<Variable> Min::run(std::shared_ptr<Token> token,
+                                   std::shared_ptr<Scope> scope,
+                                   std::vector<std::shared_ptr<Node>> variables)
 {
     std::shared_ptr<Variable> answer;
     if (variables.size() > 1)
@@ -23,7 +25,7 @@ std::shared_ptr<Variable> Min::run(std::shared_ptr<Token> token, std::vector<std
         double min = std::numeric_limits<double>::max();
         for (std::vector<std::shared_ptr<Node>>::iterator it = variables.begin(); it != variables.end(); ++it)
         {
-            std::shared_ptr<Variable> var = (*it).get()->execute();
+            std::shared_ptr<Variable> var = (*it).get()->execute(scope);
             try
             {
                 double temp = var->toDouble();

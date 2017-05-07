@@ -23,11 +23,11 @@ class SetVarNode : public Node
     std::string name;
     std::shared_ptr<Node> value;
     std::shared_ptr<Node> next;
-    std::shared_ptr<Variables> variables;
+    std::shared_ptr<Scope> scope;
 
 public:
-    SetVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value, std::shared_ptr<Node> next, std::shared_ptr<Variables> variables);
-    std::shared_ptr<Variable> execute();
+    SetVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value, std::shared_ptr<Node> next);
+    std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
 };
 
 #endif // SETVARNODE_H

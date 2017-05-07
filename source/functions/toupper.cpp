@@ -15,18 +15,20 @@
 
 #include "toupper.h"
 
-std::shared_ptr<Variable> ToUpper::run(std::shared_ptr<Token> token, std::vector<std::shared_ptr<Node>> variables)
+std::shared_ptr<Variable> ToUpper::run(std::shared_ptr<Token> token,
+                                       std::shared_ptr<Scope> scope,
+                                       std::vector<std::shared_ptr<Node>> variables)
 {
     std::shared_ptr<Variable> answer;
     if (variables.size() == 1)
     {
         Node *node = variables.at(0).get();
-        std::shared_ptr<Variable> var = node->execute();
+        std::shared_ptr<Variable> var = node->execute(scope);
 
         if (var != nullptr)
         {
             Node *node = variables.at(0).get();
-            std::shared_ptr<Variable> var = node->execute();
+            std::shared_ptr<Variable> var = node->execute(scope);
             std::string temp = var->toString();
             transform(temp.begin(), temp.end(), temp.begin(),::toupper);
             

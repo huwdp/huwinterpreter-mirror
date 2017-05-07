@@ -13,28 +13,12 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MONTHNAME_H
-#define MONTHNAME_H
+#include "emptyfunction.h"
 
-#include "function.h"
-#include <vector>
-#include <string>
-#include <iostream>
-#include <ctime>
-#include <iomanip>
-
-
-class MonthName : public Function
+std::shared_ptr<Variable> EmptyFunction::run(std::shared_ptr<Token> token,
+                                   std::shared_ptr<Scope> scope,
+                                   std::vector<std::shared_ptr<Node>> variables)
 {
-public:
-    MonthName()
-    {
-        name = "monthName";
-    }
-
-    std::shared_ptr<Variable> run(std::shared_ptr<Token> token,
-                                  std::shared_ptr<Scope> scope,
-                                  std::vector<std::shared_ptr<Node>> variables);
-};
-
-#endif // MONTHNAME_H
+    std::shared_ptr<Variable> null;
+    return null;
+}

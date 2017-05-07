@@ -22,7 +22,7 @@ TextNode::TextNode(std::shared_ptr<Token> token, std::string value) : Node(token
     Debug::print("TextNode");
 }
 
-std::shared_ptr<Variable> TextNode::execute()
+std::shared_ptr<Variable> TextNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("TextNode");
     return value;

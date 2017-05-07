@@ -21,13 +21,13 @@ BracketNode::BracketNode(std::shared_ptr<Token> token, std::shared_ptr<Node> nod
     Debug::print("Bracket");
 }
 
-std::shared_ptr<Variable> BracketNode::execute()
+std::shared_ptr<Variable> BracketNode::execute(std::shared_ptr<Scope> scope)
 {
     std::shared_ptr<Variable> null;
     Debug::print("Bracket");
     if (node != nullptr)
     {
-        std::shared_ptr<Variable> n = node->execute();
+        std::shared_ptr<Variable> n = node->execute(scope);
         if (n == nullptr)
         {
             Errors::add(std::make_shared<Error>(ERROR, "Invalid expression", token));

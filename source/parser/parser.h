@@ -59,17 +59,17 @@
 
 #include "../nodes/bracketnode.h"
 
-#include "../variables/variables.h"
-
+//#include "../variables/variables.h"
+#include "variables/scope.h"
+#include "functions/customfunction.h"
 
 class Parser
 {
 private:
     std::vector<std::shared_ptr<Token>> tokens;
     std::vector<std::shared_ptr<Token>>::iterator it;
-    std::shared_ptr<Variables> variables;
-    std::shared_ptr<Functions> functions;
     std::shared_ptr<Token> currentToken;
+    std::shared_ptr<Functions> functions;
     bool compilation;
 public:
     Parser(std::vector<std::shared_ptr<Token>> tokens);
@@ -91,6 +91,7 @@ public:
     std::shared_ptr<Node> bracket();
     std::shared_ptr<Node> statement();
     std::shared_ptr<Node> block();
+    std::shared_ptr<Node> parse();
     bool program();
 };
 

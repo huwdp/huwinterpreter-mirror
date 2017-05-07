@@ -15,14 +15,16 @@
 
 #include "fileread.h"
 
-std::shared_ptr<Variable> FileRead::run(std::shared_ptr<Token> token, std::vector<std::shared_ptr<Node>> variables)
+std::shared_ptr<Variable> FileRead::run(std::shared_ptr<Token> token,
+                                        std::shared_ptr<Scope> scope,
+                                        std::vector<std::shared_ptr<Node>> variables)
 {
     std::shared_ptr<Variable> answer;
     if (variables.size() == 1)
     {
         IO file;
         Node *fileLocation = variables.at(0).get();
-        std::shared_ptr<Variable> var = fileLocation->execute();
+        std::shared_ptr<Variable> var = fileLocation->execute(scope);
         std::string stream = file.read(var->toString());
         answer = std::make_shared<FakeString>("",stream);
     }

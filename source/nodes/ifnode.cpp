@@ -24,25 +24,25 @@ IfNode::IfNode(std::shared_ptr<Token> token, std::shared_ptr<Node> condition, st
     Debug::print("IfNode");
 }
 
-std::shared_ptr<Variable> IfNode::execute()
+std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> scope)
 {
     std::shared_ptr<Variable> null;
     Debug::print("IfNode");
-    std::shared_ptr<Variable> c = condition->execute();
+    std::shared_ptr<Variable> c = condition->execute(scope);
     if (c != nullptr)
     {
         if (c->toBool())
         {
             if (body != nullptr)
             {
-                body->execute();
+                body->execute(scope);
             }
         }
         else
         {
             if (elseNode != nullptr)
             {
-                elseNode->execute();
+                elseNode->execute(scope);
             }
         }
     }
@@ -52,7 +52,7 @@ std::shared_ptr<Variable> IfNode::execute()
     }
     if (next != nullptr)
     {
-        return next->execute();
+        return next->execute(scope);
     }
     return null;
 }

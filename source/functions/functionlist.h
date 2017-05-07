@@ -77,5 +77,9 @@
 #include "tan.h"
 #include "random.h"
 
+
+#include "print.h"
+#include "emptyfunction.h"
+
 #endif  //FUNCTIONLIST_H
 

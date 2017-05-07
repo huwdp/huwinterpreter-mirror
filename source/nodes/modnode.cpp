@@ -22,14 +22,14 @@ ModNode::ModNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::
     Debug::print("Mod");
 }
 
-std::shared_ptr<Variable> ModNode::execute()
+std::shared_ptr<Variable> ModNode::execute(std::shared_ptr<Scope> scope)
 {
     std::shared_ptr<Variable> null;
     Debug::print("Mod");
     if (left != nullptr && right != nullptr)
     {
-        std::shared_ptr<Variable> l = left->execute();
-        std::shared_ptr<Variable> r = right->execute();
+        std::shared_ptr<Variable> l = left->execute(scope);
+        std::shared_ptr<Variable> r = right->execute(scope);
 
 
         if (l == nullptr)

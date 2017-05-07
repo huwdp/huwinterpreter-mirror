@@ -15,7 +15,9 @@
 
 #include "filewrite.h"
 
-std::shared_ptr<Variable> FileWrite::run(std::shared_ptr<Token> token, std::vector<std::shared_ptr<Node>> variables)
+std::shared_ptr<Variable> FileWrite::run(std::shared_ptr<Token> token,
+                                         std::shared_ptr<Scope> scope,
+                                         std::vector<std::shared_ptr<Node>> variables)
 {
     std::shared_ptr<Variable> answer;
     if (variables.size() == 2)
@@ -25,8 +27,8 @@ std::shared_ptr<Variable> FileWrite::run(std::shared_ptr<Token> token, std::vect
 
         if (node1 != nullptr && node2 != nullptr)
         {
-            std::shared_ptr<Variable> var1 = node1->execute();
-            std::shared_ptr<Variable> var2 = node2->execute();
+            std::shared_ptr<Variable> var1 = node1->execute(scope);
+            std::shared_ptr<Variable> var2 = node2->execute(scope);
 
             if (var1 != nullptr && var2 != nullptr)
             {

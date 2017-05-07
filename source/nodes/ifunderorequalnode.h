@@ -25,7 +25,7 @@ private:
     std::shared_ptr<Node> right;
 public:
     IfUnderOrEqualNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right);
-    std::shared_ptr<Variable> execute();
+    std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
 };
 
 #endif // EQUALORUNDERNODE_H

@@ -25,16 +25,16 @@ void GC::exist(std::shared_ptr<Variable> var)
 {
 }
 
-GCObject *GC::add(std::shared_ptr<Variable> var)
+std::shared_ptr<GCObject> GC::add(std::shared_ptr<Variable> var)
 {
-    GCObject *gcObject = new GCObject(var);
-    list.push_back(gcObject);
+    std::shared_ptr<GCObject> gcObject(new GCObject(var));
+    list.push_back(std::move(gcObject));
     return gcObject;
 }
 
 void GC::remove(std::shared_ptr<Variable> var)
 {
-    for (std::vector<GCObject*>::iterator it = list.begin(); it != list.end(); ++it)
+    for (std::vector<std::shared_ptr<GCObject>>::iterator it = list.begin(); it != list.end(); ++it)
     {
         if ((*it)->getVariable() == var)
         {
@@ -45,22 +45,17 @@ void GC::remove(std::shared_ptr<Variable> var)
 
 void GC::removeAll()
 {
-    for (std::vector<GCObject*>::iterator it = list.begin(); it != list.end(); ++it)
+    for (std::vector<std::shared_ptr<GCObject>>::iterator it = list.begin(); it != list.end(); ++it)
     {
-        GCObject *gcObject = (*it);
-        delete gcObject;
+        std::shared_ptr<GCObject> gcObject = (*it);
     }
 }
 
 void GC::release()
 {
-    for (std::vector<GCObject*>::iterator it = list.begin(); it != list.end(); ++it)
+    for (std::vector<std::shared_ptr<GCObject>>::iterator it = list.begin(); it != list.end(); ++it)
     {
-        GCObject *gcObject = (*it);
-        if (gcObject->count() == 0)
-        {
-            delete gcObject;
-        }
+        std::shared_ptr<GCObject> gcObject = (*it);
     }
 }
 

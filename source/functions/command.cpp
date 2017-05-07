@@ -15,7 +15,9 @@
 
 #include "command.h"
 
-std::shared_ptr<Variable> Command::run(std::shared_ptr<Token> token, std::vector<std::shared_ptr<Node>> variables)
+std::shared_ptr<Variable> Command::run(std::shared_ptr<Token> token,
+                                       std::shared_ptr<Scope> scope,
+                                       std::vector<std::shared_ptr<Node>> variables)
 {
     std::shared_ptr<Variable> answer;
     if (variables.size() == 0)
@@ -29,7 +31,7 @@ std::shared_ptr<Variable> Command::run(std::shared_ptr<Token> token, std::vector
     {
         if ((*it).get() != nullptr)
         {
-            std::shared_ptr<Variable> var = (*it)->execute();
+            std::shared_ptr<Variable> var = (*it)->execute(scope);
             if (var != nullptr)
             {
                 system(var.get()->toString().c_str());

@@ -25,6 +25,7 @@
 #include "../variables/fakedouble.h"
 #include "../variables/fakestring.h"
 #include "tokens/token.h"
+#include "variables/scope.h"
 
 class Node
 {
@@ -46,7 +47,7 @@ public:
         this->token = token;
     }
 
-    virtual std::shared_ptr<Variable> execute() = 0;
+    virtual std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope) = 0;
     virtual ~Node()
     {
 

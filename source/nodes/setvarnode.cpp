@@ -15,36 +15,35 @@
 
 #include "setvarnode.h"
 
-SetVarNode::SetVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value, std::shared_ptr<Node> next, std::shared_ptr<Variables> variables) : Node(token)
+SetVarNode::SetVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value, std::shared_ptr<Node> next) : Node(token)
 {
     this->name = name;
     this->value = value;
     this->next = next;
-    this->variables = variables;
     Debug::print("SetVarNode");
 }
 
-std::shared_ptr<Variable> SetVarNode::execute()
+std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> scope)
 {
     std::shared_ptr<Variable> null;
     Debug::print("SetVarNode");
-    if (variables->exists(name))
+    if (scope->getVariables()->exists(name))
     {
-        std::shared_ptr<Variable> v = value->execute();
-        variables->set(name, v->toString());
+        std::shared_ptr<Variable> v = value->execute(scope);
+        scope->getVariables()->set(name, v->toString());
     }
     else
     {
         std::shared_ptr<Variable> var;
-        var = value->execute();
+        var = value->execute(scope);
         if (var != nullptr)
         {
-            variables->addVariable(name, var->toString());
+            scope->getVariables()->addVariable(name, var->toString());
         }
     }
     if (next != nullptr)
     {
-        return next->execute();
+        return next->execute(scope);
     }
     return null;
 }

@@ -15,18 +15,17 @@
 
 #include "getvarnode.h"
 
-GetVarNode::GetVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Variables> variables) : Node(token)
+GetVarNode::GetVarNode(std::shared_ptr<Token> token, std::string name) : Node(token)
 {
     this->name = name;
-    this->variables = variables;
     Debug::print("GetVarNode");
 }
 
-std::shared_ptr<Variable> GetVarNode::execute()
+std::shared_ptr<Variable> GetVarNode::execute(std::shared_ptr<Scope> scope)
 {
     std::shared_ptr<Variable> null;
     Debug::print("GetVarNode");
-    std::shared_ptr<Variable> var = variables->get(name);
+    std::shared_ptr<Variable> var = scope->getVariables()->get(name);
     if (var != nullptr)
     {
         return var;

@@ -122,35 +122,18 @@ Functions::Functions()
     functions["asc"] = std::move(asc);
     functions["cha"] = std::move(cha);
     functions["str"] = std::move(str);
-
-
-
 }
 
 std::shared_ptr<Function> Functions::get(std::string name)
 {
+    /*
     if (functions[name].get() != nullptr)
     {
         return (functions[name]);
     }
     std::shared_ptr<Function> null;
     return null;
-}
-
-bool Functions::addFunction(std::shared_ptr<Function> function)
-{
-    std::shared_ptr<Function> e = exists(function->getName());
-    if (e.get() == nullptr)
-    {
-        std::string name = function->getName();
-        functions[name] = (function);
-        return true;
-    }
-    return false;
-}
-
-std::shared_ptr<Function> Functions::exists(std::string name)
-{
+    */
     std::unordered_map<std::string,std::shared_ptr<Function>>::const_iterator got = functions.find(name);
     if (got == functions.end())
     {
@@ -163,20 +146,71 @@ std::shared_ptr<Function> Functions::exists(std::string name)
     }
 }
 
-std::shared_ptr<Function> Functions::exists(std::shared_ptr<Function> function)
+bool Functions::addFunction(std::shared_ptr<Function> function)
 {
-    std::shared_ptr<Function> e = exists(function->getName());
+    std::shared_ptr<Function> e = get(function->getName());
+    if (e.get() == nullptr)
+    {
+        std::string name = function->getName();
+        functions[name] = function;
+        return true;
+    }
+    return false;
+}
+
+bool Functions::addFunction(std::string name)
+{
+    std::shared_ptr<Function> e = get(name);
+    if (e.get() == nullptr)
+    {
+        //std::shared_ptr<Function> newFunction = std::make_shared<Function>();
+        //newFunction->setName(name);
+
+        std::shared_ptr<EmptyFunction> empty = std::make_shared<EmptyFunction>();
+        functions[name] = empty;
+        return true;
+    }
+    return false;
+}
+
+bool Functions::addFunction(std::string name, std::shared_ptr<Function> function)
+{
+    std::shared_ptr<Function> e = get(function->getName());
+    if (e.get() == nullptr)
+    {
+        function->setName(name);
+        functions[name] = function;
+        return true;
+    }
+    return false;
+}
+
+bool Functions::exists(std::string name)
+{
+    std::unordered_map<std::string,std::shared_ptr<Function>>::const_iterator got = functions.find(name);
+    if (got == functions.end())
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+bool Functions::exists(std::shared_ptr<Function> function)
+{
+    std::shared_ptr<Function> e = get(function->getName());
     if (e.get() != nullptr)
     {
-        return (e);
+        return true;
     }
-    std::shared_ptr<Function> null;
-    return null;
+    return false;
 }
 
 bool Functions::removeFunction(std::shared_ptr<Function> function)
 {
-    std::shared_ptr<Function> e = exists(function.get()->getName());
+    std::shared_ptr<Function> e = get(function.get()->getName());
     if (e.get() != nullptr)
     {
         this->functions.erase(function->getName());
@@ -187,7 +221,7 @@ bool Functions::removeFunction(std::shared_ptr<Function> function)
 
 bool Functions::removeFunction(std::string name)
 {
-    std::shared_ptr<Function> e = exists(name);
+    std::shared_ptr<Function> e = get(name);
     if (e.get() != nullptr)
     {
         this->functions.erase(name);

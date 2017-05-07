@@ -25,7 +25,9 @@ public:
     {
         name = "cos";
     }
-    std::shared_ptr<Variable> run(std::shared_ptr<Token> token, std::vector<std::shared_ptr<Node>> variables);
+    std::shared_ptr<Variable> run(std::shared_ptr<Token> token,
+                                  std::shared_ptr<Scope> scope,
+                                  std::vector<std::shared_ptr<Node>> variables);
 };
 
 #endif // COS

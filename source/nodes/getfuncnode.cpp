@@ -23,14 +23,14 @@ GetFuncNode::GetFuncNode(std::shared_ptr<Token> token, std::string name, std::sh
     Debug::print("GetFuncNode");
 }
 
-std::shared_ptr<Variable> GetFuncNode::execute()
+std::shared_ptr<Variable> GetFuncNode::execute(std::shared_ptr<Scope> scope)
 {
     std::shared_ptr<Variable> null;
     Debug::print("GetFuncNode");
     std::shared_ptr<Function> func = functions->get(name);
     if (func.get() != nullptr)
     {
-        auto a = func.get()->run(token, arguments);
+        auto a = func.get()->run(token, scope, arguments);
         return (a);
     }
     return null;

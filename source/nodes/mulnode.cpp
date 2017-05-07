@@ -22,14 +22,14 @@ MulNode::MulNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::
     Debug::print("MulNode");
 }
 
-std::shared_ptr<Variable> MulNode::execute()
+std::shared_ptr<Variable> MulNode::execute(std::shared_ptr<Scope> scope)
 {
     std::shared_ptr<Variable> null;
     Debug::print("MulNode");
     if (left != nullptr && right != nullptr)
     {
-        std::shared_ptr<Variable> l = left->execute();
-        std::shared_ptr<Variable> r = right->execute();
+        std::shared_ptr<Variable> l = left->execute(scope);
+        std::shared_ptr<Variable> r = right->execute(scope);
 
         if (l == nullptr)
         {

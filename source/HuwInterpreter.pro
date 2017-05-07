@@ -1,53 +1,21 @@
-TARGET = huw
+QT += core
+QT -= gui
+
+TARGET = HuwInterpreter
 CONFIG += console
 CONFIG -= app_bundle
 
 TEMPLATE = app
 
-SOURCES += main.cpp \
-    nodes/whilenode.cpp \
-    nodes/addnode.cpp \
-    nodes/subnode.cpp \
-    nodes/mulnode.cpp \
-    nodes/divnode.cpp \
-    nodes/equalnode.cpp \
-    nodes/numbernode.cpp \
-    nodes/ifequalnode.cpp \
-    nodes/ifoverorequalnode.cpp \
-    nodes/ifovernode.cpp \
-    nodes/ifnotequalnode.cpp \
-    nodes/ifundernode.cpp \
-    nodes/ifunderorequalnode.cpp \
-    nodes/getvarnode.cpp \
-    nodes/getfuncnode.cpp \
-    nodes/setvarnode.cpp \
-    nodes/modnode.cpp \
-    variables/fakedouble.cpp \
-    variables/fakestring.cpp \
-    variables/variable.cpp \
-    variables/variables.cpp \
-    nodes/runnode.cpp \
-    nodes/textnode.cpp \
+CONFIG += c++11
+CONFIG += j2
+
+
+SOURCES += \
     errors/debug.cpp \
     errors/error.cpp \
     errors/errors.cpp \
-    functions/function.cpp \
-    functions/functions.cpp \
-    parser/parser.cpp \
-    tokens/scanner.cpp \
-    tokens/tokendetector.cpp \
-    types/typedetector.cpp \
-    variables/variabletypefactory.cpp \
-    types/isnumeric.cpp \
-    nodes/ifnode.cpp \
-    io/io.cpp \
-    tokens/token.cpp \
-    gc/gc.cpp \
-    gc/gcobject.cpp \
-    tokens/lineinfo.cpp \
     errors/errortypestringfactory.cpp \
-    nodes/ifandnode.cpp \
-    nodes/ifornode.cpp \
     functions/abs.cpp \
     functions/acos.cpp \
     functions/asc.cpp \
@@ -63,6 +31,8 @@ SOURCES += main.cpp \
     functions/fileread.cpp \
     functions/filewrite.cpp \
     functions/floor.cpp \
+    functions/function.cpp \
+    functions/functions.cpp \
     functions/instr.cpp \
     functions/instrrev.cpp \
     functions/left.cpp \
@@ -87,6 +57,7 @@ SOURCES += main.cpp \
     functions/sin.cpp \
     functions/space.cpp \
     functions/sqrt.cpp \
+    functions/str.cpp \
     functions/strcomp.cpp \
     functions/strreverse.cpp \
     functions/tan.cpp \
@@ -97,94 +68,120 @@ SOURCES += main.cpp \
     functions/weekday.cpp \
     functions/weekdayname.cpp \
     functions/year.cpp \
-    functions/str.cpp \
+    gc/gc.cpp \
+    gc/gcobject.cpp \
+    io/fileline.cpp \
+    io/io.cpp \
+    nodes/addnode.cpp \
+    nodes/bracketnode.cpp \
+    nodes/divnode.cpp \
+    nodes/equalnode.cpp \
+    nodes/getfuncnode.cpp \
+    nodes/getvarnode.cpp \
+    nodes/ifandnode.cpp \
+    nodes/ifequalnode.cpp \
+    nodes/ifnode.cpp \
+    nodes/ifnotequalnode.cpp \
+    nodes/ifornode.cpp \
+    nodes/ifovernode.cpp \
+    nodes/ifoverorequalnode.cpp \
+    nodes/ifundernode.cpp \
+    nodes/ifunderorequalnode.cpp \
+    nodes/modnode.cpp \
+    nodes/mulnode.cpp \
+    nodes/numbernode.cpp \
+    nodes/runnode.cpp \
+    nodes/setvarnode.cpp \
+    nodes/subnode.cpp \
+    nodes/textnode.cpp \
+    nodes/whilenode.cpp \
+    parser/parser.cpp \
+    tokens/filetokenmanager.cpp \
+    tokens/lineinfo.cpp \
+    tokens/scanner.cpp \
+    tokens/texttokenmanager.cpp \
+    tokens/token.cpp \
+    tokens/tokendetector.cpp \
+    types/isnumeric.cpp \
+    types/typedetector.cpp \
     variables/fakearray.cpp \
+    variables/fakedouble.cpp \
     variables/fakeint.cpp \
     variables/fakenumber.cpp \
+    variables/fakestring.cpp \
+    variables/precision.cpp \
+    variables/scope.cpp \
+    variables/variable.cpp \
+    variables/variables.cpp \
+    variables/variabletypefactory.cpp \
     huwinterpreter.cpp \
-    nodes/bracketnode.cpp \
-    tokens/filetokenmanager.cpp \
-    tokens/texttokenmanager.cpp \
-    io/fileline.cpp \
-    variables/precision.cpp
-
-
-CONFIG += c++11
-CONFIG += j2
+    main.cpp \
+    functions/customfunction.cpp \
+    functions/emptyfunction.cpp
 
 HEADERS += \
-    variables/fakedouble.h \
-    variables/fakestring.h \
-    variables/variable.h \
-    nodes/node.h \
-    nodes/whilenode.h \
-    nodes/addnode.h \
-    nodes/subnode.h \
-    nodes/mulnode.h \
-    nodes/divnode.h \
-    nodes/equalnode.h \
-    nodes/numbernode.h \
-    nodes/ifequalnode.h \
-    nodes/getvarnode.h \
-    nodes/getfuncnode.h \
-    nodes/setvarnode.h \
-    nodes/modnode.h \
-    variables/fakedouble.h \
-    variables/fakestring.h \
-    variables/variable.h \
-    functions/print.h \
-    variables/variables.h \
-    nodes/runnode.h \
-    functions/command.h \
-    functions/dateformat.h \
-    functions/fileread.h \
-    functions/filewrite.h \
-    functions/month.h \
-    functions/monthname.h \
-    functions/not.h \
-    functions/now.h \
-    functions/scan.h \
-    functions/tostring.h \
-    functions/weekday.h \
-    functions/weekdayname.h \
-    functions/year.h \
-    functions/functionlist.h \
-    functions/asc.h \
-    functions/cha.h \
-    functions/instr.h \
-    functions/instrrev.h \
-    functions/tolower.h \
-    functions/toupper.h \
-    functions/left.h \
-    functions/len.h \
-    functions/ltrim.h \
-    functions/mid.h \
-    functions/replace.h \
-    functions/right.h \
-    functions/rtrim.h \
-    functions/space.h \
-    functions/strcomp.h \
-    functions/strreverse.h \
-    functions/trim.h \
+    errors/debug.h \
+    errors/error.h \
+    errors/errors.h \
+    errors/errortypes.h \
+    errors/errortypestringfactory.h \
+    errors/ierror.h \
+    errors/ierrors.h \
     functions/abs.h \
-    functions/cos.h \
-    functions/exp.h \
-    functions/round.h \
     functions/acos.h \
+    functions/asc.h \
     functions/asin.h \
     functions/atan.h \
     functions/atan2.h \
     functions/ceil.h \
+    functions/cha.h \
+    functions/command.h \
+    functions/cos.h \
+    functions/dateformat.h \
+    functions/exp.h \
+    functions/fileread.h \
+    functions/filewrite.h \
     functions/floor.h \
+    functions/function.h \
+    functions/functionlist.h \
+    functions/functions.h \
+    functions/instr.h \
+    functions/instrrev.h \
+    functions/left.h \
+    functions/len.h \
     functions/log.h \
+    functions/ltrim.h \
     functions/max.h \
+    functions/mid.h \
     functions/min.h \
+    functions/month.h \
+    functions/monthname.h \
+    functions/not.h \
+    functions/now.h \
     functions/pow.h \
+    functions/print.h \
     functions/random.h \
+    functions/replace.h \
+    functions/right.h \
+    functions/round.h \
+    functions/rtrim.h \
+    functions/scan.h \
     functions/sin.h \
+    functions/space.h \
     functions/sqrt.h \
+    functions/str.h \
+    functions/strcomp.h \
+    functions/strreverse.h \
     functions/tan.h \
-    nodes/textnode.h \
+    functions/tolower.h \
+    functions/tostring.h \
+    functions/toupper.h \
+    functions/trim.h \
+    functions/weekday.h \
+    functions/weekdayname.h \
+    functions/year.h \
+    gc/gc.h \
+    gc/gcobject.h \
     instructions/add.h \
     instructions/addequal.h \
     instructions/div.h \
@@ -203,45 +200,54 @@ HEADERS += \
     instructions/pow.h \
     instructions/sub.h \
     instructions/subequal.h \
-    errors/debug.h \
-    errors/error.h \
-    errors/errors.h \
-    functions/function.h \
-    functions/functions.h \
+    io/fileline.h \
+    io/io.h \
+    nodes/addnode.h \
+    nodes/bracketnode.h \
+    nodes/divnode.h \
+    nodes/equalnode.h \
+    nodes/getfuncnode.h \
+    nodes/getvarnode.h \
+    nodes/ifandnode.h \
+    nodes/ifequalnode.h \
+    nodes/ifnode.h \
+    nodes/ifnotequalnode.h \
+    nodes/ifornode.h \
+    nodes/ifovernode.h \
+    nodes/ifoverorequalnode.h \
+    nodes/ifundernode.h \
+    nodes/ifunderorequalnode.h \
+    nodes/modnode.h \
+    nodes/mulnode.h \
+    nodes/node.h \
+    nodes/numbernode.h \
+    nodes/runnode.h \
+    nodes/setvarnode.h \
+    nodes/subnode.h \
+    nodes/textnode.h \
+    nodes/whilenode.h \
     parser/parser.h \
+    tokens/filetokenmanager.h \
+    tokens/lineinfo.h \
     tokens/scanner.h \
+    tokens/texttokenmanager.h \
     tokens/token.h \
     tokens/tokendetector.h \
+    tokens/tokenmanager.h \
     types/isnumeric.h \
     types/tokentypes.h \
     types/typedetector.h \
-    variables/variabletypefactory.h \
-    errors/ierror.h \
-    errors/ierrors.h \
-    nodes/ifnode.h \
-    io/io.h \
-    gc/gc.h \
-    gc/gcobject.h \
-    tokens/lineinfo.h \
-    errors/errortypestringfactory.h \
-    errors/errortypes.h \
-    nodes/ifandnode.h \
-    nodes/ifoverorequalnode.h \
-    nodes/ifornode.h \
-    nodes/ifnotequalnode.h \
-    nodes/ifunderorequalnode.h \
-    nodes/ifundernode.h \
-    nodes/ifovernode.h \
-    functions/str.h \
     variables/fakearray.h \
+    variables/fakedouble.h \
     variables/fakeint.h \
     variables/fakenumber.h \
+    variables/fakestring.h \
+    variables/precision.h \
+    variables/scope.h \
+    variables/variable.h \
+    variables/variables.h \
+    variables/variabletypefactory.h \
     huwinterpreter.h \
-    nodes/bracketnode.h \
-    tokens/filetokenmanager.h \
-    tokens/texttokenmanager.h \
-    tokens/tokenmanager.h \
-    io/fileline.h \
-    variables/precision.h
-DISTFILES += \
-    untitled4.pro.user
+    functions/customfunction.h \
+    functions/emptyfunction.h
+

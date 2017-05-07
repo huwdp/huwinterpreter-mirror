@@ -15,15 +15,16 @@
 
 #include "variables.h"
 
-Variables::Variables()
+Variables::Variables(bool isEmpty)
 {
-    addVariable(std::move(std::shared_ptr<FakeNumber>(new FakeNumber("PI", 3.14159265358979))));
-    addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("e", 2.718281828459045)));
-    addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("y", 0.577215664901532)));
-    addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("Φ", 1.618033988749894)));
-    addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("φ", 0.618033988749894)));
-    addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("δs", 2.41421356237309)));
-    addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("ρ", 1.324717957244746)));
+    parent = nullptr;
+    addDefaltVariables(isEmpty);
+}
+
+Variables::Variables(std::shared_ptr<Variables> parent, bool isEmpty)
+{
+    this->parent = parent;
+    addDefaltVariables(isEmpty);
 }
 
 Variables::~Variables()
@@ -31,12 +32,36 @@ Variables::~Variables()
     variables.clear();
 }
 
+void Variables::addDefaltVariables(bool isEmpty)
+{
+    if (!isEmpty)
+    {
+        /*
+        addVariable(std::move(std::shared_ptr<FakeNumber>(new FakeNumber("PI", 3.14159265358979))));
+        addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("e", 2.718281828459045)));
+        addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("y", 0.577215664901532)));
+        addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("Φ", 1.618033988749894)));
+        addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("φ", 0.618033988749894)));
+        addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("δs", 2.41421356237309)));
+        addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("ρ", 1.324717957244746)));
+        */
+    }
+}
+
 std::shared_ptr<Variable> Variables::get(std::string name)
 {
+    std::shared_ptr<Variable> null;
+    if (parent != nullptr)
+    {
+        std::shared_ptr<Variable> variable = parent->get(name);
+        if (variable != nullptr)
+        {
+            return variable;
+        }
+    }
     std::unordered_map<std::string,std::shared_ptr<Variable>>::const_iterator got = variables.find(name);
     if (got == variables.end())
     {
-        std::shared_ptr<Variable> null;
         return null;
     }
     else
@@ -47,6 +72,10 @@ std::shared_ptr<Variable> Variables::get(std::string name)
 
 bool Variables::set(std::string name, std::string value)
 {
+    if (parent != nullptr && parent->exists(name))
+    {
+        return parent->set(name, value);
+    }
     std::unordered_map<std::string,std::shared_ptr<Variable>>::const_iterator got = variables.find(name);
     if (got == variables.end())
     {
@@ -61,10 +90,19 @@ bool Variables::set(std::string name, std::string value)
 
 std::shared_ptr<Variable> Variables::exists(std::string name)
 {
+    std::shared_ptr<Variable> null;
+    std::shared_ptr<Variable> variable;
+    if (parent != nullptr)
+    {
+        variable = parent->exists(name);
+        if (variable != nullptr)
+        {
+            return variable;
+        }
+    }
     std::unordered_map<std::string,std::shared_ptr<Variable>>::const_iterator got = variables.find(name);
     if (got == variables.end())
     {
-        std::shared_ptr<Variable> null;
         return null;
     }
     else
@@ -75,12 +113,24 @@ std::shared_ptr<Variable> Variables::exists(std::string name)
 
 std::shared_ptr<Variable> Variables::exists(std::shared_ptr<Variable> variable)
 {
+    std::shared_ptr<Variable> null;
+    if (variable.get() == nullptr)
+    {
+        return null;
+    }
+    if (parent != nullptr)
+    {
+        std::shared_ptr<Variable> exist = parent->exists(variable->getName());
+        if (exist != nullptr)
+        {
+            return exist;
+        }
+    }
     std::shared_ptr<Variable> e = exists(variable->getName());
     if (e != nullptr)
     {
         return e;
     }
-    std::shared_ptr<Variable> null;
     return null;
 }
 
@@ -90,6 +140,18 @@ bool Variables::addVariable(std::shared_ptr<Variable> variable)
     if (e == nullptr)
     {
         std::string name = variable->getName();
+        variables[name] = std::move(variable);
+        return true;
+    }
+    return false;
+}
+
+bool Variables::addVariable(std::string name, std::shared_ptr<Variable> variable)
+{
+    std::shared_ptr<Variable> e = exists(variable->getName());
+    if (e == nullptr)
+    {
+        variable->setName(name);
         variables[name] = std::move(variable);
         return true;
     }
@@ -106,7 +168,6 @@ bool Variables::addVariable(std::string name, std::string value)
         if (isNum)
         {
             std::shared_ptr<FakeNumber> a(new FakeNumber(name, value));
-            //var = std::shared_ptr(new FakeNumber(name, stod(value)));
             var = std::move(a);
         }
         else
@@ -133,6 +194,8 @@ bool Variables::removeVariable(std::shared_ptr<Variable> variable)
 
 bool Variables::removeVariable(std::string name)
 {
+    // fix here
+
     std::shared_ptr<Variable> e = exists(name);
     if (e != nullptr)
     {
@@ -140,4 +203,9 @@ bool Variables::removeVariable(std::string name)
         return true;
     }
     return false;
+}
+
+void Variables::setParent(std::shared_ptr<Variables> parent)
+{
+    this->parent = parent;
 }

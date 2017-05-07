@@ -33,10 +33,11 @@ public:
     Functions();
     std::shared_ptr<Function> get(std::string name);
     std::shared_ptr<Function> set(std::string name, std::string value);
-    std::shared_ptr<Function> exists(std::shared_ptr<Function> function);
-    std::shared_ptr<Function> exists(std::string name);
+    bool exists(std::shared_ptr<Function> function);
+    bool exists(std::string name);
     bool addFunction(std::shared_ptr<Function> function);
     bool addFunction(std::string name);
+    bool addFunction(std::string name, std::shared_ptr<Function> function);
     bool removeFunction(std::shared_ptr<Function> function);
     bool removeFunction(std::string name);
 };

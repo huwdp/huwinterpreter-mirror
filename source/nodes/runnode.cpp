@@ -22,17 +22,17 @@ RunNode::RunNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::
     Debug::print("RunNode");
 }
 
-std::shared_ptr<Variable> RunNode::execute()
+std::shared_ptr<Variable> RunNode::execute(std::shared_ptr<Scope> scope)
 {
     std::shared_ptr<Variable> null;
     Debug::print("RunNode");
     if (left != nullptr)
     {
-        left->execute();
+        left->execute(scope);
     }
     if (right != nullptr)
     {
-        right->execute();
+        right->execute(scope);
     }
     return null;
 }

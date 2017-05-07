@@ -15,13 +15,15 @@
 
 #include "str.h"
 
-std::shared_ptr<Variable> Str::run(std::shared_ptr<Token> token, std::vector<std::shared_ptr<Node>> variables)
+std::shared_ptr<Variable> Str::run(std::shared_ptr<Token> token,
+                                   std::shared_ptr<Scope> scope,
+                                   std::vector<std::shared_ptr<Node>> variables)
 {
     std::shared_ptr<Variable> answer;
     if (variables.size() == 1)
     {
         Node *node1 = variables.at(0).get();
-        std::shared_ptr<Variable> var = node1->execute();
+        std::shared_ptr<Variable> var = node1->execute(scope);
         if (var != nullptr)
         {
             answer = std::make_shared<FakeString>("", var->toString());

@@ -22,11 +22,11 @@
 class GC
 {
 private:
-    std::vector<GCObject*> list;
+    std::vector<std::shared_ptr<GCObject>> list;
 public:
     GC();
     void exist(std::shared_ptr<Variable> var);
-    GCObject *add(std::shared_ptr<Variable> var);
+    std::shared_ptr<GCObject> add(std::shared_ptr<Variable> var);
     void remove(std::shared_ptr<Variable> var);
     void removeAll();
     void release();

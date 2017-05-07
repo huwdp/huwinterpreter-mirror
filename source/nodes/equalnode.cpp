@@ -15,25 +15,25 @@
 
 #include "equalnode.h"
 
-EqualNode::EqualNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right, std::shared_ptr<Node> next, std::shared_ptr<Variables> variables) : Node(token)
+EqualNode::EqualNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right, std::shared_ptr<Node> next, std::shared_ptr<Scope> scope) : Node(token)
 {
     this->left = left;
     this->right = right;
     this->next = next;
-    this->variables = variables;
+    this->scope = scope;
     Debug::print("Equals");
 }
 
-std::shared_ptr<Variable> EqualNode::execute()
+std::shared_ptr<Variable> EqualNode::execute(std::shared_ptr<Scope> scope)
 {
     std::shared_ptr<Variable> null;
     Debug::print("Equals");
-    std::shared_ptr<Variable> l = left->execute();
-    std::shared_ptr<Node> left(new SetVarNode(token, l->getName(), right, nullptr, variables));
+    std::shared_ptr<Variable> l = left->execute(scope);
+    std::shared_ptr<Node> left(new SetVarNode(token, l->getName(), right, nullptr));
     this->left = left;
     if (next != nullptr)
     {
-        return (next->execute());
+        return (next->execute(scope));
     }
     return null;
 }

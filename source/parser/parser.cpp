@@ -19,8 +19,6 @@ Parser::Parser(std::vector<std::shared_ptr<Token>> tokens)
 {
     this->compilation = true;
     this->tokens = tokens;
-    std::shared_ptr<Variables> v(new Variables());
-    this->variables = v;
     this->functions = std::shared_ptr<Functions>(new Functions());
     if (!tokens.empty())
     {
@@ -119,7 +117,7 @@ std::shared_ptr<Node> Parser::value()
 
     std::shared_ptr<Node> null;
     acceptIndentation();
-    if (it != tokens.end())
+    if (it != tokens.end() && compilation)
     {
         if (TypeDetector::isNumeric(currentToken->getContent()))
         {
@@ -172,7 +170,7 @@ std::shared_ptr<Node> Parser::value()
                     return std::make_shared<TextNode>(currentToken, word);
                 }
                 nextToken();
-                return std::make_shared<GetVarNode>(currentToken, word, variables);
+                return std::make_shared<GetVarNode>(currentToken, word);
             }
             Errors::add(std::make_shared<Error>(PARSER_ERROR, "Unidentified word", currentToken));
         }
@@ -189,24 +187,21 @@ std::shared_ptr<Node> Parser::factor()
 {
     std::shared_ptr<Node> null;
     acceptIndentation();
-    if (it != tokens.end())
+    if (it != tokens.end() && compilation)
     {
         std::shared_ptr<Node> value;
         if (currentToken->getType() == TokenType::LEFTARENTHESIS)
         {
             nextToken();
             value = boolean();
-            //std::cout << value->getToken()->getContent();
             if (!expect(TokenType::RIGHTPARENTHESIS))
             {
                 compilation = false;
                 return null;
             }
-            //nextToken();
             return value;
         }
         std::shared_ptr<Node> value1 = this->value();
-        //std::cout << value1->getToken()->getContent();
         return value1;
     }
     return null;
@@ -216,7 +211,7 @@ std::shared_ptr<Node>Parser::term()
 {
     std::shared_ptr<Node> null;
     acceptIndentation();
-    if (it != tokens.end())
+    if (it != tokens.end() && compilation)
     {
         std::shared_ptr<Node> value = factor();
         acceptIndentation();
@@ -252,7 +247,7 @@ std::shared_ptr<Node>Parser::expression()
 {
     std::shared_ptr<Node> null;
     acceptIndentation();
-    if (it != tokens.end())
+    if (it != tokens.end() && compilation)
     {
         std::shared_ptr<Node> value = term();
         acceptIndentation();
@@ -281,7 +276,7 @@ std::shared_ptr<Node>Parser::expression()
 std::shared_ptr<Node>Parser::condition()
 {
     std::shared_ptr<Node> null;
-    if (it != tokens.end())
+    if (it != tokens.end() && compilation)
     {
         std::shared_ptr<Node> value = expression();
         if (value != nullptr)
@@ -343,7 +338,7 @@ std::shared_ptr<Node>Parser::condition()
 std::shared_ptr<Node>Parser::boolean()
 {
     std::shared_ptr<Node> null;
-    if (it != tokens.end())
+    if (it != tokens.end() && compilation)
     {
         std::shared_ptr<Node> value = condition();
         TokenType type = currentToken->getType();
@@ -373,7 +368,7 @@ std::shared_ptr<Node>Parser::boolean()
 std::shared_ptr<Node>Parser::statement()
 {
     std::shared_ptr<Node> null;
-    if (it != tokens.end())
+    if (it != tokens.end() && compilation)
     {
         acceptIndentation();
         if (accept("if"))
@@ -385,7 +380,7 @@ std::shared_ptr<Node>Parser::statement()
                 return null;
             }
             acceptIndentation();
-            std::shared_ptr<Node> condition2 = boolean();
+            std::shared_ptr<Node> conditionNode = boolean();
             acceptIndentation();
             if (!expect(TokenType::RIGHTPARENTHESIS))
             {
@@ -399,7 +394,7 @@ std::shared_ptr<Node>Parser::statement()
                 return null;
             }
             acceptIndentation();
-            std::shared_ptr<Node> statement2 = block();
+            std::shared_ptr<Node> statementNode = block();
             if (!expect(TokenType::RIGHTBRACKET))
             {
                 compilation = false;
@@ -411,7 +406,11 @@ std::shared_ptr<Node>Parser::statement()
                 acceptIndentation();
                 if (currentToken->getContent() == "if")
                 {
-                    return std::make_shared<IfNode>(currentToken, condition2, statement2, statement(), block());
+                    return std::make_shared<IfNode>(currentToken,
+                                                    conditionNode,
+                                                    statementNode,
+                                                    statement(),
+                                                    block());
                 }
 
                 if (!expect(TokenType::LEFTBRACKET))
@@ -429,25 +428,25 @@ std::shared_ptr<Node>Parser::statement()
                 }
                 acceptIndentation();
                 std::shared_ptr<Node> next = block();
-                return std::make_shared<IfNode>(currentToken, condition2, statement2, elseNode, next);
+                return std::make_shared<IfNode>(currentToken, conditionNode, statementNode, elseNode, next);
             }
             acceptIndentation();
             std::shared_ptr<Node> next = block();
-            return std::make_shared<IfNode>(currentToken, condition2, statement2, nullptr, next);
+            return std::make_shared<IfNode>(currentToken, conditionNode, statementNode, nullptr, next);
         }
         else if (accept("while"))
         {
             acceptIndentation();
             expect(TokenType::LEFTARENTHESIS);
-            std::shared_ptr<Node> condition2 = boolean();
+            std::shared_ptr<Node> conditionNode = boolean();
             expect(TokenType::RIGHTPARENTHESIS);
             acceptIndentation();
             expect(TokenType::LEFTBRACKET);
-            std::shared_ptr<Node> statement2 = block();
+            std::shared_ptr<Node> statementNode = block();
             expect(TokenType::RIGHTBRACKET);
             acceptIndentation();
             std::shared_ptr<Node> next = block();
-            return std::make_shared<WhileNode>(currentToken, condition2, statement2, next);
+            return std::make_shared<WhileNode>(currentToken, conditionNode, statementNode, next);
         }
         return null;
     }
@@ -458,7 +457,7 @@ std::shared_ptr<Node>Parser::block()
 {
     std::shared_ptr<Node> null;
     acceptIndentation();
-    if (it != tokens.end())
+    if (it != tokens.end() && compilation)
     {
         if (accept("set"))
         {
@@ -478,8 +477,8 @@ std::shared_ptr<Node>Parser::block()
             }
 
             acceptIndentation();
-            std::shared_ptr<Node> expression1 = boolean();
-            if (expression1 == nullptr)
+            std::shared_ptr<Node> expressionNode = boolean();
+            if (expressionNode == nullptr)
             {
                 compilation = false;
                 return null;
@@ -490,8 +489,8 @@ std::shared_ptr<Node>Parser::block()
                 compilation = false;
                 return null;
             }
-            std::shared_ptr<Node> block1 = block();
-            return std::make_shared<SetVarNode>(currentToken, word, expression1, block1, variables);
+            std::shared_ptr<Node> blockNode = block();
+            return std::make_shared<SetVarNode>(currentToken, word, expressionNode, blockNode);
         }
         else if (functions->get(this->currentToken->getContent()) != nullptr)
         {
@@ -522,9 +521,80 @@ std::shared_ptr<Node>Parser::block()
                 compilation = false;
                 return null;
             }
-            std::shared_ptr<Node> block2 = block();
+            std::shared_ptr<Node> blockNode = block();
             std::shared_ptr<Node> functions(new GetFuncNode(currentToken, word, this->functions, arguments));
-            return std::make_shared<RunNode>(currentToken, (functions), block2);
+            return std::make_shared<RunNode>(currentToken, (functions), blockNode);
+        }
+        else if (accept("function"))
+        {
+            acceptIndentation();
+            std::string word = currentToken->getContent();
+            nextToken();
+
+            // Check if word is word
+            // Check if word already exists in functions list
+            if (!TypeDetector::isWord(word) || functions->exists(word))
+            {
+                compilation = false;
+                return null;
+            }
+
+            // Here we add a hint that the function exists
+            functions->addFunction(word);
+            acceptIndentation();
+
+            if (!expect(TokenType::LEFTARENTHESIS))
+            {
+                functions->removeFunction(word);
+                compilation = false;
+                return null;
+            }
+            acceptIndentation();
+
+            std::vector<std::string> arguments;
+            if (currentToken->getType() != TokenType::RIGHTPARENTHESIS)
+            {
+                do
+                {
+                    acceptIndentation();
+                    // Check if argument is a set of char characters TODO
+                    arguments.push_back(currentToken->getContent());
+                    nextToken();
+                }
+                while (accept(TokenType::COMMA) && !accept(TokenType::RIGHTPARENTHESIS));
+            }
+            acceptIndentation();
+
+            if (!expect(TokenType::RIGHTPARENTHESIS))
+            {
+                functions->removeFunction(word);
+                compilation = false;
+                arguments.clear();
+                return null;
+            }
+            acceptIndentation();
+
+
+            if (!expect(TokenType::LEFTBRACKET))
+            {
+                functions->removeFunction(word);
+                compilation = false;
+                return false;
+            }
+            acceptIndentation();
+
+            std::shared_ptr<Node> blockNode = block();
+
+            acceptIndentation();
+            if (!expect(TokenType::RIGHTBRACKET))
+            {
+                functions->removeFunction(word);
+                compilation = false;
+                return false;
+            }
+            functions->addFunction(word, std::make_shared<CustomFunction>(currentToken, arguments, blockNode));
+            return block();
+
         }
         else
         {
@@ -534,15 +604,21 @@ std::shared_ptr<Node>Parser::block()
     return null;
 }
 
+std::shared_ptr<Node> Parser::parse()
+{
+    return block();
+}
+
 bool Parser::program()
 {
-    if (!tokens.empty())
+    std::shared_ptr<Scope> scope = std::make_shared<Scope>(std::move(std::make_shared<Variables>(false)));
+    if (!tokens.empty() && compilation)
     {
         nextToken();
-        std::shared_ptr<Node> done = block();
+        std::shared_ptr<Node> done = parse();
         if (done.get() != nullptr && compilation)
         {
-            done->execute();
+            done->execute(scope);
             return true;
         }
     }

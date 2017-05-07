@@ -28,18 +28,23 @@
 class Variables
 {
 private:
+    std::shared_ptr<Variables> parent;
     std::unordered_map<std::string, std::shared_ptr<Variable>> variables;
 public:
-    Variables();
+    Variables(bool isEmpty);
+    Variables(std::shared_ptr<Variables> parent, bool isEmpty);
     ~Variables();
+    void addDefaltVariables(bool isEmpty);
     std::shared_ptr<Variable> get(std::string name);
     bool set(std::string name, std::string value);
     std::shared_ptr<Variable> exists(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> exists(std::string name);
     bool addVariable(std::shared_ptr<Variable> variable);
+    bool addVariable(std::string name, std::shared_ptr<Variable> variable);
     bool addVariable(std::string name, std::string value);
     bool removeVariable(std::shared_ptr<Variable> variable);
     bool removeVariable(std::string name);
+    void setParent(std::shared_ptr<Variables> parent);
 };
 
 #endif // VARIABLES_H
