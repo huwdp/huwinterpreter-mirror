@@ -13,29 +13,19 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FUNCTION_H
-#define FUNCTION_H
-#include <string>
-#include <vector>
+#ifndef RETURNNODE_H
+#define RETURNNODE_H
+
+#include "node.h"
 #include <memory>
 
-#include "../variables/variable.h"
-#include "../nodes/node.h"
-#include "../errors/errors.h"
-#include "../errors/error.h"
-#include "io/fileline.h"
-
-class Function
+class ReturnNode : public Node
 {
-protected:
-    std::string name;
-    std::shared_ptr<Variable> null;
+private:
+    std::shared_ptr<Node> node;
 public:
-    std::string getName();
-    void setName(std::string name);
-    virtual std::shared_ptr<Variable> run(std::shared_ptr<Token> token,
-                                          std::shared_ptr<Scope> scope,
-                                          std::vector<std::shared_ptr<Node>> variables) = 0;
+    ReturnNode(std::shared_ptr<Node> node);
+    std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
 };
 
-#endif // FUNCTION_H
+#endif // RETURNNODE_H

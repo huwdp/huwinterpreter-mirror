@@ -26,6 +26,7 @@ private:
     std::string value;
 public:
     FakeString();
+    FakeString(std::string value);
     FakeString(std::string name, std::string value);
     void setValue(double value);
     void setValue(std::string value);

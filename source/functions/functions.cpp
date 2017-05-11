@@ -17,6 +17,7 @@
 
 Functions::Functions()
 {
+    /*
     std::shared_ptr<Command> command(new Command());
     std::shared_ptr<Function> dateFormat(new DateFormat());
     std::shared_ptr<Function> fileRead(new FileRead());
@@ -68,72 +69,64 @@ Functions::Functions()
     std::shared_ptr<Function> asc(new Asc());
     std::shared_ptr<Function> cha(new Cha());
     std::shared_ptr<Function> str(new Str());
+    */
 
 
-
-    functions["command"] = std::move(command);
-    functions["dateFormat"] = std::move(dateFormat);
-    functions["fileRead"] = std::move(fileRead);
-    functions["fileWrite"] = std::move(fileWrite);
-    functions["month"] = std::move(month);
-    functions["monthName"] = std::move(monthName);
-    functions["not"] = std::move(notF);
-    functions["now"] = std::move(now);
-    functions["print"] = std::move(print);
-    functions["scan"] = std::move(scan);
-    functions["weekday"] = std::move(weekday);
-    functions["weekdayName"] = std::move(weekdayName);
-    functions["year"] = std::move(year);
-
-
-    functions["abs"] = std::move(abs);
-    functions["acos"] = std::move(acos);
-    functions["asin"] = std::move(asin);
-    functions["atan"] = std::move(atan);
-    functions["atan2"] = std::move(atan2);
-    functions["ceil"] = std::move(ceil);
-    functions["cos"] = std::move(cos);
-    functions["exp"] = std::move(exp);
-    functions["sin"] = std::move(sin);
-    functions["sqrt"] = std::move(sqrt);
-    functions["tan"] = std::move(tan);
-    functions["pow"] = std::move(pow);
-    functions["min"] = std::move(min);
-    functions["max"] = std::move(max);
+    functions["command"] = std::move(std::make_shared<Command>());
+    functions["dateFormat"] = std::move(std::make_shared<DateFormat>());
+    functions["fileRead"] = std::move(std::make_shared<FileRead>());
+    functions["fileWrite"] = std::move(std::make_shared<FileWrite>());
+    functions["month"] = std::move(std::make_shared<Month>());
+    functions["monthName"] = std::move(std::make_shared<MonthName>());
+    functions["not"] = std::move(std::make_shared<Not>());
+    functions["now"] = std::move(std::make_shared<Now>());
+    functions["print"] = std::move(std::make_shared<Print>());
+    functions["scan"] = std::move(std::make_shared<Scan>());
+    functions["weekday"] = std::move(std::make_shared<Weekday>());
+    functions["weekdayName"] = std::move(std::make_shared<WeekdayName>());
+    functions["year"] = std::move(std::make_shared<Year>());
 
 
-    functions["inStr"] = std::move(inStr);
-    functions["inStrRev"] = std::move(inStrRev);
-    functions["toLower"] = std::move(toLower);
-    functions["left"] = std::move(left);
-    functions["len"] = std::move(len);
-    functions["lTrim"] = std::move(lTrim);
-    functions["mid"] = std::move(mid);
-    functions["right"] = std::move(right);
-    functions["rTrim"] = std::move(rTrim);
-    functions["space"] = std::move(space);
-    functions["strCmp"] = std::move(strComp);
-    functions["strRev"] = std::move(strReverse);
-    functions["trim"] = std::move(trim);
-    functions["toUpper"] = std::move(toUpper);
-    functions["random"] = std::move(random);
+    functions["abs"] = std::move(std::make_shared<Abs>());
+    functions["acos"] = std::move(std::make_shared<Acos>());
+    functions["asin"] = std::move(std::make_shared<Asin>());
+    functions["atan"] = std::move(std::make_shared<Atan>());
+    functions["atan2"] = std::move(std::make_shared<Atan2>());
+    functions["ceil"] = std::move(std::make_shared<Ceil>());
+    functions["cos"] = std::move(std::make_shared<Cos>());
+    functions["exp"] = std::move(std::make_shared<Exp>());
+    functions["sin"] = std::move(std::make_shared<Sin>());
+    functions["sqrt"] = std::move(std::make_shared<Sqrt>());
+    functions["tan"] = std::move(std::make_shared<Tan>());
+    functions["pow"] = std::move(std::make_shared<Pow>());
+    functions["min"] = std::move(std::make_shared<Min>());
+    functions["max"] = std::move(std::make_shared<Max>());
 
 
-    functions["asc"] = std::move(asc);
-    functions["cha"] = std::move(cha);
-    functions["str"] = std::move(str);
+    functions["inStr"] = std::move(std::make_shared<InStr>());
+    functions["inStrRev"] = std::move(std::make_shared<InStrRev>());
+    functions["toLower"] = std::move(std::make_shared<ToLower>());
+    functions["left"] = std::move(std::make_shared<Left>());
+    functions["len"] = std::move(std::make_shared<Len>());
+    functions["lTrim"] = std::move(std::make_shared<LTrim>());
+    functions["mid"] = std::move(std::make_shared<Mid>());
+    functions["right"] = std::move(std::make_shared<Right>());
+    functions["rTrim"] = std::move(std::make_shared<RTrim>());
+    functions["space"] = std::move(std::make_shared<Space>());
+    functions["strCmp"] = std::move(std::make_shared<StrComp>());
+    functions["strRev"] = std::move(std::make_shared<StrReverse>());
+    functions["trim"] = std::move(std::make_shared<Trim>());
+    functions["toUpper"] = std::move(std::make_shared<ToUpper>());
+    functions["random"] = std::move(std::make_shared<Random>());
+
+
+    functions["asc"] = std::move(std::make_shared<Asc>());
+    functions["cha"] = std::move(std::make_shared<Cha>());
+    functions["str"] = std::move(std::make_shared<Str>());
 }
 
 std::shared_ptr<Function> Functions::get(std::string name)
 {
-    /*
-    if (functions[name].get() != nullptr)
-    {
-        return (functions[name]);
-    }
-    std::shared_ptr<Function> null;
-    return null;
-    */
     std::unordered_map<std::string,std::shared_ptr<Function>>::const_iterator got = functions.find(name);
     if (got == functions.end())
     {

@@ -24,7 +24,7 @@ IfEqualNode::IfEqualNode(std::shared_ptr<Token> token, std::shared_ptr<Node> lef
 
 std::shared_ptr<Variable> IfEqualNode::execute(std::shared_ptr<Scope> scope)
 {
-    std::shared_ptr<Variable> null;
+    
     Debug::print("IfEqualNode");
     if (left != nullptr && right != nullptr)
     {

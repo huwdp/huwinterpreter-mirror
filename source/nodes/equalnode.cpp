@@ -26,14 +26,14 @@ EqualNode::EqualNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, s
 
 std::shared_ptr<Variable> EqualNode::execute(std::shared_ptr<Scope> scope)
 {
-    std::shared_ptr<Variable> null;
+    
     Debug::print("Equals");
     std::shared_ptr<Variable> l = left->execute(scope);
-    std::shared_ptr<Node> left(new SetVarNode(token, l->getName(), right, nullptr));
+    std::shared_ptr<Node> left = std::make_shared<SetVarNode>(token, l->getName(), right, nullptr);
     this->left = left;
     if (next != nullptr)
     {
-        return (next->execute(scope));
+        return next->execute(scope);
     }
     return null;
 }

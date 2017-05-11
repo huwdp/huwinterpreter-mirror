@@ -10,6 +10,7 @@ TEMPLATE = app
 CONFIG += c++11
 CONFIG += j2
 
+QMAKE_CXXFLAGS += -Wl,--stack,4194304
 
 SOURCES += \
     errors/debug.cpp \
@@ -68,8 +69,6 @@ SOURCES += \
     functions/weekday.cpp \
     functions/weekdayname.cpp \
     functions/year.cpp \
-    gc/gc.cpp \
-    gc/gcobject.cpp \
     io/fileline.cpp \
     io/io.cpp \
     nodes/addnode.cpp \
@@ -117,7 +116,9 @@ SOURCES += \
     huwinterpreter.cpp \
     main.cpp \
     functions/customfunction.cpp \
-    functions/emptyfunction.cpp
+    functions/emptyfunction.cpp \
+    nodes/returnnode.cpp \
+    nodes/setreturnnode.cpp
 
 HEADERS += \
     errors/debug.h \
@@ -180,8 +181,6 @@ HEADERS += \
     functions/weekday.h \
     functions/weekdayname.h \
     functions/year.h \
-    gc/gc.h \
-    gc/gcobject.h \
     instructions/add.h \
     instructions/addequal.h \
     instructions/div.h \
@@ -249,5 +248,7 @@ HEADERS += \
     variables/variabletypefactory.h \
     huwinterpreter.h \
     functions/customfunction.h \
-    functions/emptyfunction.h
+    functions/emptyfunction.h \
+    nodes/returnnode.h \
+    nodes/setreturnnode.h
 

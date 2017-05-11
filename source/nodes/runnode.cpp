@@ -24,7 +24,7 @@ RunNode::RunNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::
 
 std::shared_ptr<Variable> RunNode::execute(std::shared_ptr<Scope> scope)
 {
-    std::shared_ptr<Variable> null;
+    
     Debug::print("RunNode");
     if (left != nullptr)
     {

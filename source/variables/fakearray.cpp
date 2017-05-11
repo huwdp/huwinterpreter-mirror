@@ -79,102 +79,102 @@ double FakeArray2::getValue()
 
 std::shared_ptr<Variable> FakeArray2::pow(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
+    
     return null;
 }
 
 std::shared_ptr<Variable> FakeArray2::mul(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
+    
     return null;
 }
 
 std::shared_ptr<Variable> FakeArray2::div(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
+    
     return null;
 }
 
 std::shared_ptr<Variable> FakeArray2::mod(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
+    
     return null;
 }
 
 std::shared_ptr<Variable> FakeArray2::add(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
+    
     return null;
 }
 
 std::shared_ptr<Variable> FakeArray2::sub(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
+    
     return null;
 }
 
 std::shared_ptr<Variable> FakeArray2::ifUnder(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
+    
     return null;
 }
 
 std::shared_ptr<Variable> FakeArray2::ifUnderOrEqual(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
+    
     return null;
 }
 
 std::shared_ptr<Variable> FakeArray2::ifOver(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
+    
     return null;
 }
 
 std::shared_ptr<Variable> FakeArray2::ifOverOrEqual(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
+    
     return null;
 }
 
 std::shared_ptr<Variable> FakeArray2::ifEqual(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
+    
     return null;
 }
 
 std::shared_ptr<Variable> FakeArray2::ifNotEqual(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
+    
     return null;
 }
 
 std::shared_ptr<Variable> FakeArray2::addEqual(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
+    
     return null;
 }
 
 std::shared_ptr<Variable> FakeArray2::subEqual(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
+    
     return null;
 }
 
 std::shared_ptr<Variable> FakeArray2::mulEqual(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
+    
     return null;
 }
 
 std::shared_ptr<Variable> FakeArray2::divEqual(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
+    
     return null;
 }
 
 std::shared_ptr<Variable> FakeArray2::equal(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
+    
     return null;
 }

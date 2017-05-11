@@ -24,7 +24,7 @@ SubNode::SubNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::
 
 std::shared_ptr<Variable> SubNode::execute(std::shared_ptr<Scope> scope)
 {
-    std::shared_ptr<Variable> null;
+
     Debug::print("SubNode");
     if (left != nullptr && right != nullptr)
     {

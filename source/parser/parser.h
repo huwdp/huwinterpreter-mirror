@@ -18,48 +18,51 @@
 
 #include <string>
 #include <vector>
-#include "../tokens/token.h"
-#include "../tokens/tokendetector.h"
+#include "tokens/token.h"
+#include "tokens/tokendetector.h"
 #include <iostream>
 #include <sstream>
 #include <memory>
 
-#include "../errors/errors.h"
-#include "../errors/error.h"
-#include "../nodes/node.h"
+#include "errors/errors.h"
+#include "errors/error.h"
+#include "nodes/node.h"
 
-#include "../nodes/ifnode.h"
-#include "../nodes/whilenode.h"
+#include "nodes/ifnode.h"
+#include "nodes/whilenode.h"
 
 
-#include "../nodes/equalnode.h"
+#include "nodes/equalnode.h"
 
-#include "../nodes/ifequalnode.h"
-#include "../nodes/ifnotequalnode.h"
-#include "../nodes/ifundernode.h"
-#include "../nodes/ifunderorequalnode.h"
-#include "../nodes/ifovernode.h"
-#include "../nodes/ifoverorequalnode.h"
+#include "nodes/ifequalnode.h"
+#include "nodes/ifnotequalnode.h"
+#include "nodes/ifundernode.h"
+#include "nodes/ifunderorequalnode.h"
+#include "nodes/ifovernode.h"
+#include "nodes/ifoverorequalnode.h"
 
-#include "../nodes/ifandnode.h"
-#include "../nodes/ifornode.h"
+#include "nodes/ifandnode.h"
+#include "nodes/ifornode.h"
 
-#include "../nodes/getvarnode.h"
-#include "../nodes/setvarnode.h"
-#include "../nodes/getfuncnode.h"
-#include "../nodes/numbernode.h"
-#include "../nodes/textnode.h"
-#include "../nodes/runnode.h"
+#include "nodes/getvarnode.h"
+#include "nodes/setvarnode.h"
+#include "nodes/getfuncnode.h"
+#include "nodes/numbernode.h"
+#include "nodes/textnode.h"
+#include "nodes/runnode.h"
 
-#include "../nodes/addnode.h"
-#include "../nodes/subnode.h"
-#include "../nodes/mulnode.h"
-#include "../nodes/divnode.h"
-#include "../nodes/modnode.h"
+#include "nodes/addnode.h"
+#include "nodes/subnode.h"
+#include "nodes/mulnode.h"
+#include "nodes/divnode.h"
+#include "nodes/modnode.h"
 
-#include "../nodes/bracketnode.h"
+#include "nodes/returnnode.h"
+#include "nodes/setreturnnode.h"
 
-//#include "../variables/variables.h"
+#include "nodes/bracketnode.h"
+
+//#include "variables/variables.h"
 #include "variables/scope.h"
 #include "functions/customfunction.h"
 
@@ -71,6 +74,7 @@ private:
     std::shared_ptr<Token> currentToken;
     std::shared_ptr<Functions> functions;
     bool compilation;
+    std::shared_ptr<Node> null;
 public:
     Parser(std::vector<std::shared_ptr<Token>> tokens);
     bool getCompilation();

@@ -24,7 +24,6 @@ IfAndNode::IfAndNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, s
 
 std::shared_ptr<Variable> IfAndNode::execute(std::shared_ptr<Scope> scope)
 {
-    std::shared_ptr<Variable> null;
     Debug::print("And");
     if (left != nullptr && right != nullptr)
     {
@@ -46,11 +45,9 @@ std::shared_ptr<Variable> IfAndNode::execute(std::shared_ptr<Scope> scope)
         bool ls = l->toBool();
         if (rs && ls)
         {
-            std::shared_ptr<Variable> trueVar(new FakeNumber(1.0));
-            return (trueVar);
+            return std::make_shared<FakeNumber>((long long)1);
         }
-        std::shared_ptr<Variable> falseVar(new FakeNumber(0.0));
-        return (falseVar);
+        return std::make_shared<FakeNumber>((long long)0);
     }
     Debug::print("Could not and.");
     return null;

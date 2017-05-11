@@ -31,3 +31,4 @@ public:
 };
 
 #endif // SETVARNODE_H
+

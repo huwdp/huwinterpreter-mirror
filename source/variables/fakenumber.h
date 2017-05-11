@@ -29,12 +29,18 @@ class FakeNumber : public Variable
 private:
     std::shared_ptr<Variable> variable;
 public:
+    FakeNumber(bool value);
     FakeNumber(std::shared_ptr<Variable> variable);
     FakeNumber(double value);
     FakeNumber(long long value);
     FakeNumber(std::string name, double value);
     FakeNumber(std::string name, long long value);
     FakeNumber(std::string name, std::string value);
+    /*~FakeNumber()
+    {
+        std::cout << "destroy" <<std::endl;
+    }*/
+
     void setValue(double value);
     void setValue(std::string value);
     void setValue(long long value);

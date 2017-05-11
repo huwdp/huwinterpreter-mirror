@@ -54,7 +54,7 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
     std::vector<std::shared_ptr<Token>> tokens;
     std::string temp = "";
 
-    std::shared_ptr<LineInfo> lineInfo(new LineInfo("", fileReader->getCurrent()->getLineNumber(),0));
+    std::shared_ptr<LineInfo> lineInfo = std::make_shared<LineInfo>("", fileReader->getCurrent()->getLineNumber(),0);
 
     while (!fileReader->isEnd())
     {

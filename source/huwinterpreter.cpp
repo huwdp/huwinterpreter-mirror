@@ -34,14 +34,14 @@ void HuwInterpreter::runFile(std::string fileLocation)
         return;
     }
 
-    std::shared_ptr<FileTokenManager> fileTokenManager(new FileTokenManager(fileLocation));
+    std::shared_ptr<FileTokenManager> fileTokenManager = std::make_shared<FileTokenManager>(fileLocation);
     std::vector<std::shared_ptr<Token>> tokens = scanner->tokenize(fileTokenManager);
     runTokens(tokens);
 }
 
 void HuwInterpreter::runText(std::string text)
 {
-    std::shared_ptr<TokenManager> textTokenManager(new TextTokenManager(text));
+    std::shared_ptr<TokenManager> textTokenManager = std::make_shared<TextTokenManager>(text);
     std::vector<std::shared_ptr<Token>> tokens = scanner->tokenize(textTokenManager);
     runTokens(tokens);
 }

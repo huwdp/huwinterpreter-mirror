@@ -13,27 +13,18 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GCOBJECT_H
-#define GCOBJECT_H
+#ifndef SETRETURNNODE_H
+#define SETRETURNNODE_H
 
-#include <string>
-#include <vector>
-#include <algorithm>
-#include "variables/variable.h"
+#include "node.h"
 
-class GCObject
+class SetReturnNode : public Node
 {
 private:
-    std::shared_ptr<Variable> var;
-    std::vector<std::string> references;
+    std::shared_ptr<Node> node;
 public:
-    GCObject(std::shared_ptr<Variable> var);
-    std::shared_ptr<Variable> getVariable();
-    void setVariable(std::shared_ptr<Variable> var);
-    void add(std::string value);
-    void remove(std::string value);
-    void release();
-    int count();
+    SetReturnNode(std::shared_ptr<Node> node);
+    std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
 };
 
-#endif // GCOBJECT_H
+#endif // SETRETURNNODE_H

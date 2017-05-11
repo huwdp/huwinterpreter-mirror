@@ -13,46 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "gcobject.h"
+#include "setreturnnode.h"
 
-GCObject::GCObject(std::shared_ptr<Variable> var)
+SetReturnNode::SetReturnNode(std::shared_ptr<Node> node)
+    : Node(nullptr)
 {
-    this->var = var;
+    this->node = node;
 }
 
-std::shared_ptr<Variable> GCObject::getVariable()
+std::shared_ptr<Variable> SetReturnNode::execute(std::shared_ptr<Scope> scope)
 {
-    return var;
-}
-
-void GCObject::setVariable(std::shared_ptr<Variable> var)
-{
-    this->var = var;
-}
-
-void GCObject::add(std::string value)
-{
-    references.push_back(value);
-}
-
-void GCObject::remove(std::string value)
-{
-    std::vector<std::string>::iterator it = std::find(references.begin(), references.end(), value);
-    if(it != references.end())
-    {
-        references.erase(it);
-    }
-}
-
-void GCObject::release()
-{
-    if (references.empty())
-    {
-
-    }
-}
-
-int GCObject::count()
-{
-    return references.size();
+    scope->setReturnValue(node->execute(scope));
 }

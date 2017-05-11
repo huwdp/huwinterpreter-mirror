@@ -31,6 +31,7 @@ class Variable
 private:
     std::string name;
 public:
+    std::shared_ptr<Variable> null;
     Variable();
     Variable(std::string name);
     std::string getName();

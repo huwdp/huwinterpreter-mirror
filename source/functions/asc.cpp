@@ -37,8 +37,7 @@ std::shared_ptr<Variable> Asc::run(std::shared_ptr<Token> token,
     }
     else
     {
-        auto b = std::shared_ptr<FakeString>(new FakeString("",""));
-        answer = b;
+        answer = std::make_shared<FakeString>();
         Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Asc function requires one argument", token));
     }
     

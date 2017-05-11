@@ -13,24 +13,20 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef GC_H
-#define GC_H
+#include "returnnode.h"
 
-#include <queue>
-#include "gcobject.h"
-
-class GC
+ReturnNode::ReturnNode(std::shared_ptr<Node> node)
+    : Node(nullptr)
 {
-private:
-    std::vector<std::shared_ptr<GCObject>> list;
-public:
-    GC();
-    void exist(std::shared_ptr<Variable> var);
-    std::shared_ptr<GCObject> add(std::shared_ptr<Variable> var);
-    void remove(std::shared_ptr<Variable> var);
-    void removeAll();
-    void release();
-    int count();
-};
+    this->node = node;
+}
 
-#endif // GC_H
+std::shared_ptr<Variable> ReturnNode::execute(std::shared_ptr<Scope> scope)
+{
+
+    if (scope->getReturnValue().get() != nullptr)
+    {
+        return null;
+    }
+    return node->execute(scope);
+}

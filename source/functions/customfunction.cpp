@@ -25,7 +25,7 @@ std::shared_ptr<Variable> CustomFunction::run(std::shared_ptr<Token> token,
                                               std::shared_ptr<Scope> scope,
                                               std::vector<std::shared_ptr<Node>> variables)
 {
-    std::shared_ptr<Variable> null;
+
     // New scope
     std::shared_ptr<Scope> newScope = std::make_shared<Scope>();
 

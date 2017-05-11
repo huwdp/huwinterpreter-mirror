@@ -27,7 +27,7 @@ FileTokenManager::FileTokenManager(std::string input)
             lineNumber++;
             for (std::string::iterator it = line.begin(); it != line.end(); ++it)
             {
-                std::shared_ptr<FileLine> fileLine(new FileLine((*it), lineNumber));
+                std::shared_ptr<FileLine> fileLine = std::make_shared<FileLine>((*it), lineNumber);
                 lines.push_back(std::move(fileLine));
             }
         }

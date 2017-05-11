@@ -47,8 +47,7 @@ std::shared_ptr<Variable> FileWrite::run(std::shared_ptr<Token> token,
         }
         else
         {
-            auto c = std::shared_ptr<FakeNumber>(new FakeNumber( 0.0));
-            answer = (c);
+           answer = std::make_shared<FakeNumber>(0.0);
         }
     }
     else

@@ -24,7 +24,7 @@ IfOverOrEqualNode::IfOverOrEqualNode(std::shared_ptr<Token> token, std::shared_p
 
 std::shared_ptr<Variable> IfOverOrEqualNode::execute(std::shared_ptr<Scope> scope)
 {
-    std::shared_ptr<Variable> null;
+    
     Debug::print("OverOrEqual");
     if (left != nullptr && right != nullptr)
     {

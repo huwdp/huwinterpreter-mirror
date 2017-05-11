@@ -66,7 +66,13 @@ long long FakeInt::toInt()
 
 std::string FakeInt::toString()
 {
-    return std::to_string(value);
+    //return std::to_string(value);
+
+
+
+    std::stringstream ss;
+    ss << value;
+    return ss.str();
 }
 
 bool FakeInt::toBool()
@@ -92,177 +98,114 @@ std::shared_ptr<Variable> FakeInt::pow(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
-        std::shared_ptr<Variable> null;
         return null;
     }
-    std::shared_ptr<Variable> temp(new FakeNumber(std::pow(this->toDouble(),variable->toDouble())));
-    return temp;
+    return std::move(std::make_shared<FakeNumber>(std::pow(this->toDouble(),variable->toDouble())));
 }
 
 std::shared_ptr<Variable> FakeInt::mul(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
-        std::shared_ptr<Variable> null;
         return null;
     }
-    std::shared_ptr<Variable> temp(new FakeNumber(std::make_shared<FakeDouble>()));
-    temp->setValue((this->toDouble() * variable->toDouble()));
-    return temp;
+    return std::move(std::make_shared<FakeNumber>(this->toDouble() * variable->toDouble()));
 }
 
 std::shared_ptr<Variable> FakeInt::div(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
-        std::shared_ptr<Variable> null;
         return null;
     }
-    std::shared_ptr<Variable> temp(new FakeNumber(std::make_shared<FakeDouble>()));
-    temp->setValue(this->toDouble() / variable->toDouble());
-    return temp;
+    return std::move(std::make_shared<FakeNumber>(this->toDouble() / variable->toDouble()));
 }
 
 std::shared_ptr<Variable> FakeInt::mod(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
-        std::shared_ptr<Variable> null;
+        
         return null;
     }
-    auto a = std::shared_ptr<FakeNumber>(new FakeNumber( fmod(this->toDouble(), variable->toDouble())));
-    return (a);
+    return std::make_shared<FakeNumber>(fmod(this->toDouble(), variable->toDouble()));
 }
 
 std::shared_ptr<Variable> FakeInt::add(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
-        std::shared_ptr<Variable> null;
         return null;
     }
-    std::shared_ptr<Variable> temp(new FakeNumber(std::make_shared<FakeDouble>()));
-    temp->setValue(this->toDouble() + variable->toDouble());
-    return temp;
+    return std::move(std::make_shared<FakeNumber>(this->toDouble() + variable->toDouble()));
 }
 
 std::shared_ptr<Variable> FakeInt::sub(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
-        std::shared_ptr<Variable> null;
         return null;
     }
-    std::shared_ptr<Variable> temp(new FakeNumber(std::make_shared<FakeDouble>()));
-    temp->setValue(this->toDouble() - variable->toDouble());
-    return temp;
+    return std::move(std::make_shared<FakeNumber>(this->toDouble() - variable->toDouble()));
 }
 
 std::shared_ptr<Variable> FakeInt::ifUnder(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
-        std::shared_ptr<Variable> null;
         return null;
     }
-    std::shared_ptr<Variable> temp(new FakeNumber(std::make_shared<FakeDouble>()));
-    if (this->toDouble() < variable->toDouble())
-    {
-        temp->setValue(double(1));
-    }
-    else
-        temp->setValue(double(0));
-    return temp;
+    return std::move(std::make_shared<FakeNumber>(this->toDouble() < variable->toDouble()));
 }
 
 std::shared_ptr<Variable> FakeInt::ifUnderOrEqual(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
-        std::shared_ptr<Variable> null;
         return null;
     }
-    std::shared_ptr<Variable> temp(new FakeNumber(std::make_shared<FakeDouble>()));
-    if (this->toDouble() <= variable->toDouble())
-    {
-        temp->setValue(double(1));
-    }
-    else
-        temp->setValue(double(0));
-    return temp;
+    return std::move(std::make_shared<FakeNumber>(this->toDouble() <= variable->toDouble()));
 }
 
 std::shared_ptr<Variable> FakeInt::ifOver(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
-        std::shared_ptr<Variable> null;
         return null;
     }
-    std::shared_ptr<Variable> temp(new FakeNumber(std::make_shared<FakeDouble>()));
-    if (this->toDouble() > variable->toDouble())
-    {
-        temp->setValue(double(1));
-    }
-    else
-        temp->setValue(double(0));
-    return temp;
+    return std::move(std::make_shared<FakeNumber>(this->toDouble() > variable->toDouble()));
 }
 
 std::shared_ptr<Variable> FakeInt::ifOverOrEqual(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
-        std::shared_ptr<Variable> null;
         return null;
     }
-    std::shared_ptr<Variable> temp(new FakeNumber(std::make_shared<FakeDouble>()));
-    if (this->toDouble() >= variable->toDouble())
-    {
-        temp->setValue(double(1));
-    }
-    else
-        temp->setValue(double(0));
-    return temp;
+    return std::move(std::make_shared<FakeNumber>(this->toDouble() >= variable->toDouble()));
 }
 
 std::shared_ptr<Variable> FakeInt::ifEqual(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
-        std::shared_ptr<Variable> null;
         return null;
     }
-    std::shared_ptr<Variable> temp(new FakeNumber(std::make_shared<FakeDouble>()));
-    if (this->toDouble() == variable->toDouble())
-    {
-        temp->setValue(double(1));
-    }
-    else
-        temp->setValue(double(0));
-    return temp;
+    return std::move(std::make_shared<FakeNumber>(this->toDouble() == variable->toDouble()));
 }
 
 std::shared_ptr<Variable> FakeInt::ifNotEqual(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
-        std::shared_ptr<Variable> null;
+        
         return null;
     }
-    std::shared_ptr<Variable> temp(new FakeNumber(std::make_shared<FakeDouble>()));
-    if (this->toDouble() != variable->toDouble())
-    {
-        temp->setValue(double(1));
-    }
-    else
-        temp->setValue(double(0));
-    return temp;
+    return std::move(std::make_shared<FakeNumber>(std::make_shared<FakeDouble>(this->toDouble() != variable->toDouble())));
 }
 
 std::shared_ptr<Variable> FakeInt::addEqual(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
     if (variable == nullptr)
     {
         return null;
@@ -272,7 +215,6 @@ std::shared_ptr<Variable> FakeInt::addEqual(std::shared_ptr<Variable> variable)
 
 std::shared_ptr<Variable> FakeInt::subEqual(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
     if (variable == nullptr)
     {
         return null;
@@ -282,7 +224,6 @@ std::shared_ptr<Variable> FakeInt::subEqual(std::shared_ptr<Variable> variable)
 
 std::shared_ptr<Variable> FakeInt::mulEqual(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
     if (variable == nullptr)
     {
         return null;
@@ -292,7 +233,6 @@ std::shared_ptr<Variable> FakeInt::mulEqual(std::shared_ptr<Variable> variable)
 
 std::shared_ptr<Variable> FakeInt::divEqual(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
     if (variable == nullptr)
     {
         return null;
@@ -302,7 +242,6 @@ std::shared_ptr<Variable> FakeInt::divEqual(std::shared_ptr<Variable> variable)
 
 std::shared_ptr<Variable> FakeInt::equal(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
     if (variable == nullptr)
     {
         return null;

@@ -26,7 +26,7 @@ IfNode::IfNode(std::shared_ptr<Token> token, std::shared_ptr<Node> condition, st
 
 std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> scope)
 {
-    std::shared_ptr<Variable> null;
+    
     Debug::print("IfNode");
     std::shared_ptr<Variable> c = condition->execute(scope);
     if (c != nullptr)

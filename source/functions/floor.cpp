@@ -45,7 +45,7 @@ std::shared_ptr<Variable> Floor::run(std::shared_ptr<Token> token,
                 Errors::add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
             }
         }
-        std::shared_ptr<Variable> null;
+        
         return null;
     }
     else

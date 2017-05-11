@@ -2,7 +2,7 @@
 
 Scope::Scope()
 {
-    variables = std::make_shared<Variables>(false);
+    variables = std::move(std::make_shared<Variables>(false));
 }
 
 Scope::Scope(std::shared_ptr<Variables> parent)

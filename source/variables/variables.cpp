@@ -18,13 +18,13 @@
 Variables::Variables(bool isEmpty)
 {
     parent = nullptr;
-    addDefaltVariables(isEmpty);
+    addDefaultVariables(isEmpty);
 }
 
 Variables::Variables(std::shared_ptr<Variables> parent, bool isEmpty)
 {
     this->parent = parent;
-    addDefaltVariables(isEmpty);
+    addDefaultVariables(isEmpty);
 }
 
 Variables::~Variables()
@@ -32,25 +32,23 @@ Variables::~Variables()
     variables.clear();
 }
 
-void Variables::addDefaltVariables(bool isEmpty)
+void Variables::addDefaultVariables(bool isEmpty)
 {
     if (!isEmpty)
     {
-        /*
-        addVariable(std::move(std::shared_ptr<FakeNumber>(new FakeNumber("PI", 3.14159265358979))));
-        addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("e", 2.718281828459045)));
-        addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("y", 0.577215664901532)));
-        addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("Φ", 1.618033988749894)));
-        addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("φ", 0.618033988749894)));
-        addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("δs", 2.41421356237309)));
-        addVariable(std::shared_ptr<FakeNumber>(new FakeNumber("ρ", 1.324717957244746)));
-        */
+        addVariable(std::move(std::make_shared<FakeNumber>("PI", 3.14159265358979)));
+        addVariable(std::move(std::make_shared<FakeNumber>("e", 2.718281828459045)));
+        addVariable(std::move(std::make_shared<FakeNumber>("y", 0.577215664901532)));
+        addVariable(std::move(std::make_shared<FakeNumber>("Φ", 1.618033988749894)));
+        addVariable(std::move(std::make_shared<FakeNumber>("φ", 0.618033988749894)));
+        addVariable(std::move(std::make_shared<FakeNumber>("δs", 2.41421356237309)));
+        addVariable(std::move(std::make_shared<FakeNumber>("ρ", 1.324717957244746)));
     }
 }
 
 std::shared_ptr<Variable> Variables::get(std::string name)
 {
-    std::shared_ptr<Variable> null;
+    
     if (parent != nullptr)
     {
         std::shared_ptr<Variable> variable = parent->get(name);
@@ -90,7 +88,7 @@ bool Variables::set(std::string name, std::string value)
 
 std::shared_ptr<Variable> Variables::exists(std::string name)
 {
-    std::shared_ptr<Variable> null;
+    
     std::shared_ptr<Variable> variable;
     if (parent != nullptr)
     {
@@ -113,7 +111,7 @@ std::shared_ptr<Variable> Variables::exists(std::string name)
 
 std::shared_ptr<Variable> Variables::exists(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> null;
+    
     if (variable.get() == nullptr)
     {
         return null;
@@ -167,13 +165,11 @@ bool Variables::addVariable(std::string name, std::string value)
         std::shared_ptr<Variable> var;
         if (isNum)
         {
-            std::shared_ptr<FakeNumber> a(new FakeNumber(name, value));
-            var = std::move(a);
+            var = std::make_shared<FakeNumber>(name, value);
         }
         else
         {
-            std::shared_ptr<FakeString> b(new FakeString(name, value));
-            var = std::move(b);
+            var = std::make_shared<FakeNumber>(name, value);
         }
         variables[name] = std::move(var);
         return true;

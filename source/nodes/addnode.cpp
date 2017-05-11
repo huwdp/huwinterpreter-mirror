@@ -24,7 +24,6 @@ AddNode::AddNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::
 
 std::shared_ptr<Variable> AddNode::execute(std::shared_ptr<Scope> scope)
 {
-    std::shared_ptr<Variable> null;
     Debug::print("Add");
     if (left != nullptr && right != nullptr)
     {
@@ -40,8 +39,7 @@ std::shared_ptr<Variable> AddNode::execute(std::shared_ptr<Scope> scope)
             Errors::add(std::make_shared<Error>(ERROR, "Invalid expression", token));
             return null;
         }
-        std::shared_ptr<Variable> v = l->add(r);
-        return (v);
+        return l->add(r);
     }
     Debug::print("Could not add.");
     return null;

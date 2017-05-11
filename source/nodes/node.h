@@ -30,6 +30,7 @@
 class Node
 {
 protected:
+    std::shared_ptr<Variable> null;
     std::shared_ptr<Token> token;
 public:
     Node(std::shared_ptr<Token> token)
