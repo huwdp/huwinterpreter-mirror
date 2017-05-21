@@ -29,7 +29,6 @@ std::shared_ptr<Variable> CustomFunction::run(std::shared_ptr<Token> token,
     // New scope
     std::shared_ptr<Scope> newScope = std::make_shared<Scope>();
 
-
     if (arguments.size() != variables.size())
     {
         Errors::add(
@@ -50,7 +49,7 @@ std::shared_ptr<Variable> CustomFunction::run(std::shared_ptr<Token> token,
         ++variableIt;
     }
 
-    if (newScope != nullptr && block != nullptr)
+    if (block != nullptr)
     {
         std::shared_ptr<Variable> output = block->execute(newScope);
 

@@ -8,9 +8,9 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 CONFIG += c++11
-CONFIG += j2
+CONFIG += j3
 
-QMAKE_CXXFLAGS += -Wl,--stack,4194304
+QMAKE_CXXFLAGS_WARN_OFF -= -Wunused-parameter
 
 SOURCES += \
     errors/debug.cpp \

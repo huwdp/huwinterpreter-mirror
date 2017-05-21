@@ -18,9 +18,9 @@
 
 #include <string>
 #include <memory>
-#include "../types/tokentypes.h"
-#include "../tokens/token.h"
-#include "../tokens/lineinfo.h"
+#include "types/tokentypes.h"
+#include "tokens/token.h"
+#include "tokens/lineinfo.h"
 
 class Token
 {

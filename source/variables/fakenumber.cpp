@@ -273,7 +273,7 @@ std::shared_ptr<Variable> FakeNumber::ifNotEqual(std::shared_ptr<Variable> varia
 
 std::shared_ptr<Variable> FakeNumber::addEqual(std::shared_ptr<Variable> variable)
 {
-    
+
     if (variable == nullptr)
     {
         return null;
@@ -283,7 +283,7 @@ std::shared_ptr<Variable> FakeNumber::addEqual(std::shared_ptr<Variable> variabl
 
 std::shared_ptr<Variable> FakeNumber::subEqual(std::shared_ptr<Variable> variable)
 {
-    
+
     if (variable == nullptr)
     {
         return null;
@@ -293,7 +293,7 @@ std::shared_ptr<Variable> FakeNumber::subEqual(std::shared_ptr<Variable> variabl
 
 std::shared_ptr<Variable> FakeNumber::mulEqual(std::shared_ptr<Variable> variable)
 {
-    
+
     if (variable == nullptr)
     {
         return null;
@@ -303,7 +303,7 @@ std::shared_ptr<Variable> FakeNumber::mulEqual(std::shared_ptr<Variable> variabl
 
 std::shared_ptr<Variable> FakeNumber::divEqual(std::shared_ptr<Variable> variable)
 {
-    
+
     if (variable == nullptr)
     {
         return null;
@@ -313,7 +313,7 @@ std::shared_ptr<Variable> FakeNumber::divEqual(std::shared_ptr<Variable> variabl
 
 std::shared_ptr<Variable> FakeNumber::equal(std::shared_ptr<Variable> variable)
 {
-    
+
     if (variable == nullptr)
     {
         return null;

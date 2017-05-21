@@ -207,46 +207,9 @@ std::shared_ptr<Variable> FakeDouble::ifNotEqual(std::shared_ptr<Variable> varia
 {
     if (variable == nullptr)
     {
-        
         return null;
     }
     return std::move(std::make_shared<FakeNumber>(this->toDouble() != variable->toDouble()));
-}
-
-std::shared_ptr<Variable> FakeDouble::addEqual(std::shared_ptr<Variable> variable)
-{
-    if (variable == nullptr)
-    {
-        return null;
-    }
-    return null;
-}
-
-std::shared_ptr<Variable> FakeDouble::subEqual(std::shared_ptr<Variable> variable)
-{
-    if (variable == nullptr)
-    {
-        return null;
-    }
-    return null;
-}
-
-std::shared_ptr<Variable> FakeDouble::mulEqual(std::shared_ptr<Variable> variable)
-{
-    if (variable == nullptr)
-    {
-        return null;
-    }
-    return null;
-}
-
-std::shared_ptr<Variable> FakeDouble::divEqual(std::shared_ptr<Variable> variable)
-{
-    if (variable == nullptr)
-    {
-        return null;
-    }
-    return null;
 }
 
 std::shared_ptr<Variable> FakeDouble::equal(std::shared_ptr<Variable> variable)

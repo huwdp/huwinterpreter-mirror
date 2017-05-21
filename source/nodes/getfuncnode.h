@@ -17,8 +17,8 @@
 #define GETFUNCNODE_H
 
 #include "node.h"
-#include "../functions/function.h"
-#include "../functions/functions.h"
+#include "functions/function.h"
+#include "functions/functions.h"
 
 class GetFuncNode : public Node
 {

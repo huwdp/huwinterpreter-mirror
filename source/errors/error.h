@@ -19,7 +19,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include "../tokens/token.h"
+#include "tokens/token.h"
 #include "errortypes.h"
 #include "errortypestringfactory.h"
 

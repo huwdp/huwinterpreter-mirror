@@ -97,8 +97,9 @@ std::shared_ptr<FileLine> FileTokenManager::peak()
     if (it != lines.end())
     {
         it++;
-        return (*it);
+        std::shared_ptr<FileLine> line = (*it);
         it--;
+        return line;
     }
     std::shared_ptr<FileLine> null;
     return null;

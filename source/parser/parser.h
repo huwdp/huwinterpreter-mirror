@@ -92,6 +92,7 @@ public:
     std::shared_ptr<Node> expression();
     std::shared_ptr<Node> condition();
     std::shared_ptr<Node> boolean();
+    std::shared_ptr<Node> compound();
     std::shared_ptr<Node> bracket();
     std::shared_ptr<Node> statement();
     std::shared_ptr<Node> block();

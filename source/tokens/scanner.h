@@ -22,8 +22,8 @@
 #include <vector>
 #include <iostream>
 #include <memory>
-#include "../errors/debug.h"
-#include "../types/typedetector.h"
+#include "errors/debug.h"
+#include "types/typedetector.h"
 #include "tokendetector.h"
 #include "token.h"
 #include "tokenmanager.h"

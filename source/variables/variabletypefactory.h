@@ -19,8 +19,8 @@
 #include "variable.h"
 #include "fakedouble.h"
 #include "fakestring.h"
-#include "../types/tokentypes.h"
-#include "../types/typedetector.h"
+#include "types/tokentypes.h"
+#include "types/typedetector.h"
 
 class VariableTypeFactory
 {

@@ -18,14 +18,16 @@
 
 #include <string.h>
 #include <memory>
-#include "../errors/debug.h"
-#include "../errors/errors.h"
-#include "../variables/variables.h"
-#include "../variables/variable.h"
-#include "../variables/fakedouble.h"
-#include "../variables/fakestring.h"
+#include "errors/debug.h"
+#include "errors/errors.h"
+#include "variables/variables.h"
+#include "variables/variable.h"
+#include "variables/fakedouble.h"
+#include "variables/fakestring.h"
 #include "tokens/token.h"
 #include "variables/scope.h"
+
+class Scope;
 
 class Node
 {

@@ -19,7 +19,7 @@
 #include <unordered_map>
 #include <string>
 #include <sstream>
-#include "../types/tokentypes.h"
+#include "types/tokentypes.h"
 
 class TokenDetector
 {

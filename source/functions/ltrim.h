@@ -16,8 +16,8 @@
 #ifndef LTRIM
 #define LTRIM
 
-#include "../functions/function.h"
-#include "../types/typedetector.h"
+#include "functions/function.h"
+#include "types/typedetector.h"
 
 class LTrim : public Function
 {

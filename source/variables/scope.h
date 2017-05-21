@@ -1,8 +1,11 @@
 #ifndef SCOPE_H
 #define SCOPE_H
 
+#include "nodes/node.h"
 #include "variables/variables.h"
 #include <memory>
+
+class Node;
 
 class Scope
 {

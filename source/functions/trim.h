@@ -18,7 +18,7 @@
 
 #include "function.h"
 
-#include "../types/typedetector.h"
+#include "types/typedetector.h"
 #include "ltrim.h"
 #include "rtrim.h"
 

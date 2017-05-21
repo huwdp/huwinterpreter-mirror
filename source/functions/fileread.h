@@ -17,7 +17,7 @@
 #define FILEREAD_H
 
 #include "function.h"
-#include "../io/io.h"
+#include "io/io.h"
 #include <vector>
 #include <string>
 #include <iostream>

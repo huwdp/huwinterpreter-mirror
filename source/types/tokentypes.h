@@ -41,7 +41,11 @@ enum TokenType {RIGHTPARENTHESIS,
                  QUOTE,
                  AND,
                  OR,
-                 DOT
+                 DOT,
+                 MULTIPLICATIONEQUAL,
+                 DIVISIONEQUAL,
+                 ADDITIONEQUAL,
+                 SUBTRACTIONEQUAL,
 };
 
 

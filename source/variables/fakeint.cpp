@@ -204,42 +204,6 @@ std::shared_ptr<Variable> FakeInt::ifNotEqual(std::shared_ptr<Variable> variable
     return std::move(std::make_shared<FakeNumber>(std::make_shared<FakeDouble>(this->toDouble() != variable->toDouble())));
 }
 
-std::shared_ptr<Variable> FakeInt::addEqual(std::shared_ptr<Variable> variable)
-{
-    if (variable == nullptr)
-    {
-        return null;
-    }
-    return null;
-}
-
-std::shared_ptr<Variable> FakeInt::subEqual(std::shared_ptr<Variable> variable)
-{
-    if (variable == nullptr)
-    {
-        return null;
-    }
-    return null;
-}
-
-std::shared_ptr<Variable> FakeInt::mulEqual(std::shared_ptr<Variable> variable)
-{
-    if (variable == nullptr)
-    {
-        return null;
-    }
-    return null;
-}
-
-std::shared_ptr<Variable> FakeInt::divEqual(std::shared_ptr<Variable> variable)
-{
-    if (variable == nullptr)
-    {
-        return null;
-    }
-    return null;
-}
-
 std::shared_ptr<Variable> FakeInt::equal(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)

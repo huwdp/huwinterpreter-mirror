@@ -33,7 +33,6 @@ void HuwInterpreter::runFile(std::string fileLocation)
         Errors::print();
         return;
     }
-
     std::shared_ptr<FileTokenManager> fileTokenManager = std::make_shared<FileTokenManager>(fileLocation);
     std::vector<std::shared_ptr<Token>> tokens = scanner->tokenize(fileTokenManager);
     runTokens(tokens);

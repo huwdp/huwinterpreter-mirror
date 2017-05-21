@@ -22,9 +22,9 @@
 #include <vector>
 #include <cmath>
 #include <memory>
-#include "../types/typedetector.h"
-#include "../errors/debug.h"
-#include "../errors/errors.h"
+#include "types/typedetector.h"
+#include "errors/debug.h"
+#include "errors/errors.h"
 
 class Variable
 {
@@ -56,10 +56,6 @@ public:
     virtual std::shared_ptr<Variable> ifOverOrEqual(std::shared_ptr<Variable> variable) = 0;
     virtual std::shared_ptr<Variable> ifEqual(std::shared_ptr<Variable> variable) = 0;
     virtual std::shared_ptr<Variable> ifNotEqual(std::shared_ptr<Variable> variable) = 0;
-    virtual std::shared_ptr<Variable> addEqual(std::shared_ptr<Variable> variable) = 0;
-    virtual std::shared_ptr<Variable> subEqual(std::shared_ptr<Variable> variable) = 0;
-    virtual std::shared_ptr<Variable> mulEqual(std::shared_ptr<Variable> variable) = 0;
-    virtual std::shared_ptr<Variable> divEqual(std::shared_ptr<Variable> variable) = 0;
     virtual std::shared_ptr<Variable> equal(std::shared_ptr<Variable> variable) = 0;
 };
 

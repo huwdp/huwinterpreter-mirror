@@ -17,8 +17,8 @@
 #define NUMBERNODE_H
 
 #include "node.h"
-#include "../variables/variabletypefactory.h"
-#include "../types/typedetector.h"
+#include "variables/variabletypefactory.h"
+#include "types/typedetector.h"
 
 class NumberNode : public Node
 {

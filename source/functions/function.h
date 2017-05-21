@@ -19,10 +19,10 @@
 #include <vector>
 #include <memory>
 
-#include "../variables/variable.h"
-#include "../nodes/node.h"
-#include "../errors/errors.h"
-#include "../errors/error.h"
+#include "variables/variable.h"
+#include "nodes/node.h"
+#include "errors/errors.h"
+#include "errors/error.h"
 #include "io/fileline.h"
 
 class Function
