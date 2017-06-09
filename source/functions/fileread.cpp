@@ -23,7 +23,7 @@ std::shared_ptr<Variable> FileRead::run(std::shared_ptr<Token> token,
     if (variables.size() == 1)
     {
         IO file;
-        Node *fileLocation = variables.at(0);
+        std::shared_ptr<Node> fileLocation = variables.at(0);
         std::shared_ptr<Variable> var = fileLocation->execute(scope);
         std::string stream = file.read(var->toString());
         answer = std::make_shared<StringVariable>("",stream);

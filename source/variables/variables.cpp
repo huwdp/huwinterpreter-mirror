@@ -48,7 +48,6 @@ void Variables::addDefaultVariables(bool isEmpty)
 
 std::shared_ptr<Variable> Variables::get(std::string name)
 {
-    
     if (parent != nullptr)
     {
         std::shared_ptr<Variable> variable = parent->get(name);
@@ -88,7 +87,6 @@ bool Variables::set(std::string name, std::string value)
 
 std::shared_ptr<Variable> Variables::exists(std::string name)
 {
-    
     std::shared_ptr<Variable> variable;
     if (parent != nullptr)
     {
@@ -111,7 +109,6 @@ std::shared_ptr<Variable> Variables::exists(std::string name)
 
 std::shared_ptr<Variable> Variables::exists(std::shared_ptr<Variable> variable)
 {
-    
     if (variable == nullptr)
     {
         return null;
