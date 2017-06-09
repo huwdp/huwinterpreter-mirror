@@ -22,7 +22,7 @@ std::shared_ptr<Variable> Str::run(std::shared_ptr<Token> token,
     std::shared_ptr<Variable> answer;
     if (variables.size() == 1)
     {
-        Node *node1 = variables.at(0).get();
+        std::shared_ptr<Node> node1 = variables.at(0);
         std::shared_ptr<Variable> var = node1->execute(scope);
         if (var != nullptr)
         {

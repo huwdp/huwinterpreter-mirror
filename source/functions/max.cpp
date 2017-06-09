@@ -25,7 +25,7 @@ std::shared_ptr<Variable> Max::run(std::shared_ptr<Token> token,
         double max = std::numeric_limits<double>::min();
         for (std::vector<std::shared_ptr<Node>>::iterator it = variables.begin(); it != variables.end(); it++)
         {
-            std::shared_ptr<Variable> var = (*it).get()->execute(scope);
+            std::shared_ptr<Variable> var = (*it)->execute(scope);
             try
             {
                 double temp = var->toDouble();

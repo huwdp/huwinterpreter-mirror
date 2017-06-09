@@ -142,7 +142,7 @@ std::shared_ptr<Function> Functions::get(std::string name)
 bool Functions::addFunction(std::shared_ptr<Function> function)
 {
     std::shared_ptr<Function> e = get(function->getName());
-    if (e.get() == nullptr)
+    if (e == nullptr)
     {
         std::string name = function->getName();
         functions[name] = function;
@@ -154,7 +154,7 @@ bool Functions::addFunction(std::shared_ptr<Function> function)
 bool Functions::addFunction(std::string name)
 {
     std::shared_ptr<Function> e = get(name);
-    if (e.get() == nullptr)
+    if (e == nullptr)
     {
         //std::shared_ptr<Function> newFunction = std::make_shared<Function>();
         //newFunction->setName(name);
@@ -169,7 +169,7 @@ bool Functions::addFunction(std::string name)
 bool Functions::addFunction(std::string name, std::shared_ptr<Function> function)
 {
     std::shared_ptr<Function> e = get(function->getName());
-    if (e.get() == nullptr)
+    if (e == nullptr)
     {
         function->setName(name);
         functions[name] = function;
@@ -194,7 +194,7 @@ bool Functions::exists(std::string name)
 bool Functions::exists(std::shared_ptr<Function> function)
 {
     std::shared_ptr<Function> e = get(function->getName());
-    if (e.get() != nullptr)
+    if (e != nullptr)
     {
         return true;
     }
@@ -203,8 +203,8 @@ bool Functions::exists(std::shared_ptr<Function> function)
 
 bool Functions::removeFunction(std::shared_ptr<Function> function)
 {
-    std::shared_ptr<Function> e = get(function.get()->getName());
-    if (e.get() != nullptr)
+    std::shared_ptr<Function> e = get(function->getName());
+    if (e != nullptr)
     {
         this->functions.erase(function->getName());
         return true;
@@ -215,7 +215,7 @@ bool Functions::removeFunction(std::shared_ptr<Function> function)
 bool Functions::removeFunction(std::string name)
 {
     std::shared_ptr<Function> e = get(name);
-    if (e.get() != nullptr)
+    if (e != nullptr)
     {
         this->functions.erase(name);
         return true;

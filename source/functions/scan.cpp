@@ -22,9 +22,9 @@ std::shared_ptr<Variable> Scan::run(std::shared_ptr<Token> token,
     std::shared_ptr<Variable> answer;
     for (std::vector<std::shared_ptr<Node>>::iterator it = variables.begin(); it != variables.end(); ++it)
     {
-        if ((*it).get() != nullptr)
+        if ((*it) != nullptr)
         {
-            Node *node = (*it).get();
+            Node *node = (*it);
             std::shared_ptr<Variable> var = (*it)->execute(scope);
             if (var != nullptr)
             {

@@ -147,7 +147,7 @@ std::shared_ptr<Variable> StringVariable::ifUnder(std::shared_ptr<Variable> vari
     std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>();
     if (this->toString().compare(variable->toString()) < 0)
     {
-        temp.get()->setValue(double(1));
+        temp->setValue(double(1));
     }
     else
     {

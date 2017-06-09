@@ -22,9 +22,9 @@ std::shared_ptr<Variable> Replace::run(std::shared_ptr<Token> token,
     std::shared_ptr<Variable> answer;
     if (variables.size() == 3)
     {
-        Node *node1 = variables.at(0).get();
-        Node *node2 = variables.at(1).get();
-        Node *node3 = variables.at(2).get();
+        std::shared_ptr<Node> node1 = variables.at(0);
+        std::shared_ptr<Node> node2 = variables.at(1);
+        Node *node3 = variables.at(2);
         std::shared_ptr<Variable> var1 = node1->execute(scope);
         std::shared_ptr<Variable> var2 = node2->execute(scope);
         std::shared_ptr<Variable> var3 = node3->execute(scope);

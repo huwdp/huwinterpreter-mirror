@@ -75,15 +75,15 @@ std::string Error::getMessage()
         std::shared_ptr<LineInfo> lineInfo = token->getLineInfo();
         if (lineInfo != nullptr)
         {
-            if (lineInfo.get()->getLineNumber() >= 0)
+            if (lineInfo->getLineNumber() >= 0)
             {
                 message.append(" on line ");
-                message.append(std::to_string(lineInfo.get()->getLineNumber()));
+                message.append(std::to_string(lineInfo->getLineNumber()));
             }
-            if (lineInfo.get()->getCharNumber() > 0)
+            if (lineInfo->getCharNumber() > 0)
             {
                 message.append(" on character");
-                message.append(std::to_string(lineInfo.get()->getCharNumber()));
+                message.append(std::to_string(lineInfo->getCharNumber()));
             }
         }
     }

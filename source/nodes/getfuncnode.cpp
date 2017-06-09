@@ -28,9 +28,9 @@ std::shared_ptr<Variable> GetFuncNode::execute(std::shared_ptr<Scope> scope)
     
     Debug::print("GetFuncNode");
     std::shared_ptr<Function> func = functions->get(name);
-    if (func.get() != nullptr)
+    if (func != nullptr)
     {
-        return func.get()->run(token, scope, arguments);
+        return func->run(token, scope, arguments);
     }
     return null;
 }

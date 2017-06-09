@@ -778,10 +778,10 @@ bool Parser::program()
     {
         nextToken();
         std::shared_ptr<Node> done = parse();
-        if (done.get() != nullptr && compilation)
+        if (done != nullptr && compilation)
         {
             std::shared_ptr<Variable> output = done->execute(scope);
-            if (output.get() != nullptr)
+            if (output != nullptr)
             {
                 std::cout << output->toString() << std::endl;
             }

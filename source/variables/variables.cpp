@@ -112,7 +112,7 @@ std::shared_ptr<Variable> Variables::exists(std::string name)
 std::shared_ptr<Variable> Variables::exists(std::shared_ptr<Variable> variable)
 {
     
-    if (variable.get() == nullptr)
+    if (variable == nullptr)
     {
         return null;
     }

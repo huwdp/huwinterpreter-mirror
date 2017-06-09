@@ -22,8 +22,8 @@ std::shared_ptr<Variable> FileWrite::run(std::shared_ptr<Token> token,
     std::shared_ptr<Variable> answer;
     if (variables.size() == 2)
     {
-        Node *node1 = variables.at(0).get();
-        Node *node2 = variables.at(1).get();
+        std::shared_ptr<Node> node1 = variables.at(0);
+        std::shared_ptr<Node> node2 = variables.at(1);
 
         if (node1 != nullptr && node2 != nullptr)
         {
