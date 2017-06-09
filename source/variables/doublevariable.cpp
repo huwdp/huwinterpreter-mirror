@@ -74,14 +74,11 @@ double DoubleVariable::toDouble()
 std::string DoubleVariable::toString()
 {
     Precision precision;
-    std::stringstream ss;
     if (precision.getType(value) == INTEGER)
     {
-        ss << toInt();
-        return ss.str();
+        return std::to_string(toInt());
     }
-    ss << std::fixed << std::setprecision(6) << value;
-    return ss.str();
+    return std::to_string(value);
 }
 
 bool DoubleVariable::toBool()

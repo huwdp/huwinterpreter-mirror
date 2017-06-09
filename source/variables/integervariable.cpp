@@ -66,13 +66,7 @@ long long IntegerVariable::toInt()
 
 std::string IntegerVariable::toString()
 {
-    //return std::to_string(value);
-
-
-
-    std::stringstream ss;
-    ss << value;
-    return ss.str();
+    return std::to_string(value);
 }
 
 bool IntegerVariable::toBool()
