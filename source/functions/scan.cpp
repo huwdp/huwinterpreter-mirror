@@ -33,7 +33,6 @@ std::shared_ptr<Variable> Scan::run(std::shared_ptr<Token> token,
                 std::cin >> input;
                 var->setValue(input);
             }
-            
         }
     }
     

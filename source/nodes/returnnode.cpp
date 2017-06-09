@@ -23,7 +23,6 @@ ReturnNode::ReturnNode(std::shared_ptr<Node> node)
 
 std::shared_ptr<Variable> ReturnNode::execute(std::shared_ptr<Scope> scope)
 {
-
     if (scope->getReturnValue() != nullptr)
     {
         return null;

@@ -25,7 +25,6 @@ WhileNode::WhileNode(std::shared_ptr<Token> token, std::shared_ptr<Node> conditi
 
 std::shared_ptr<Variable> WhileNode::execute(std::shared_ptr<Scope> scope)
 {
-    
     Debug::print("WhileNode");
     if (condition != nullptr)
     {
@@ -41,7 +40,6 @@ std::shared_ptr<Variable> WhileNode::execute(std::shared_ptr<Scope> scope)
     else
     {
         Errors::add(std::make_shared<Error>(STATEMENT_ERROR, "Could not compare."));
-        
         return null;
     }
     if (next != nullptr)
