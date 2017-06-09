@@ -123,6 +123,11 @@ Functions::Functions()
     functions["asc"] = std::move(std::make_shared<Asc>());
     functions["cha"] = std::move(std::make_shared<Cha>());
     functions["str"] = std::move(std::make_shared<Str>());
+
+    functions["array"] = std::move(std::make_shared<Array>());
+    functions["arrayGet"] = std::move(std::make_shared<ArrayGet>());
+    functions["arraySet"] = std::move(std::make_shared<ArraySet>());
+    functions["arrayUnset"] = std::move(std::make_shared<ArrayUnset>());
 }
 
 std::shared_ptr<Function> Functions::get(std::string name)

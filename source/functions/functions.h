@@ -23,8 +23,6 @@
 
 #include "print.h"
 
-
-
 class Functions
 {
 private:

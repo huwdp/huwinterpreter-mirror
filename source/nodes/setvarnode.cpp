@@ -37,7 +37,7 @@ std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> scope)
         var = value->execute(scope);
         if (var != nullptr)
         {
-            scope->getVariables()->addVariable(name, var->toString());
+            scope->getVariables()->addVariable(name, var);
         }
     }
     if (next != nullptr)

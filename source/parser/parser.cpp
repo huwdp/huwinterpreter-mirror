@@ -171,19 +171,17 @@ std::shared_ptr<Node> Parser::value()
                     return null;
                 }
                 acceptIndentation();
-                return std::make_shared<ReturnNode>(
-                                                    std::make_shared<GetFuncNode>(currentToken, word, functions, arguments));
+                return std::make_shared<GetFuncNode>(currentToken, word, functions, arguments);
             }
             else
             {
                 if (currentToken->getType() == TokenType::TEXT)
                 {
                     nextToken();
-                    return std::make_shared<ReturnNode>(
-                                                        std::make_shared<TextNode>(currentToken, word));
+                    return std::make_shared<TextNode>(currentToken, word);
                 }
                 nextToken();
-                return std::make_shared<ReturnNode>(std::make_shared<GetVarNode>(currentToken, word));
+                return std::make_shared<GetVarNode>(currentToken, word);
             }
             Errors::add(std::make_shared<Error>(PARSER_ERROR, "Unidentified word", currentToken));
         }

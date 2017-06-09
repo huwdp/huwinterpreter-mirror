@@ -36,7 +36,7 @@ std::shared_ptr<Variable> ArrayUnset::run(std::shared_ptr<Token> token,
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "ArrayGet function requires three argument", token));
+        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "ArrayGet function requires two argument", token));
     }
     return returnNode;
 }

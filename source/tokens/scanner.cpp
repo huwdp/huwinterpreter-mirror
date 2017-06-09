@@ -159,9 +159,9 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                     fileReader->getNext();
                     while (!fileReader->isEnd() && fileReader->getCurrent()->getContent() != '\n')
                     {
-                        if (fileReader->getNext()->getContent() == '*')
+                        if (!fileReader->isEnd() && fileReader->getNext()->getContent() == '*')
                         {
-                            if (fileReader->getNext()->getContent() == '/')
+                            if (!fileReader->isEnd() && fileReader->getNext()->getContent() == '/')
                             {
                                 break;
                             }

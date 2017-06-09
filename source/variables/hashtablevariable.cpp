@@ -196,7 +196,7 @@ std::shared_ptr<Variable> HashTableVariable::decrement()
 
 void HashTableVariable::set(std::string index, std::shared_ptr<Variable> value)
 {
-    map[index] == std::move(value);
+    map[index] = std::move(value);
 }
 
 std::shared_ptr<Variable> HashTableVariable::get(std::string index)

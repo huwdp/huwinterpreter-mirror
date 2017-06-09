@@ -77,9 +77,15 @@
 #include "tan.h"
 #include "random.h"
 
-
+// Other
 #include "print.h"
 #include "emptyfunction.h"
+
+//Array
+#include "functions/array.h"
+#include "functions/arrayget.h"
+#include "functions/arrayset.h"
+#include "functions/arrayunset.h"
 
 #endif  //FUNCTIONLIST_H
 

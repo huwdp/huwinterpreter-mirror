@@ -68,7 +68,6 @@ std::shared_ptr<Variable> Trim::run(std::shared_ptr<Token> token,
     {
         Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Trim function requires one argument", token));
     }
-    
     return returnNode;
 }
 
