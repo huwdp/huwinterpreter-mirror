@@ -19,7 +19,7 @@ std::shared_ptr<Variable> Scan::run(std::shared_ptr<Token> token,
                                     std::shared_ptr<Scope> scope,
                                     std::vector<std::shared_ptr<Node>> variables)
 {
-    std::shared_ptr<Variable> answer;
+    std::shared_ptr<Variable> returnNode;
     for (std::vector<std::shared_ptr<Node>>::iterator it = variables.begin(); it != variables.end(); ++it)
     {
         if ((*it) != nullptr)
@@ -36,5 +36,5 @@ std::shared_ptr<Variable> Scan::run(std::shared_ptr<Token> token,
         }
     }
     
-    return answer;
+    return returnNode;
 }

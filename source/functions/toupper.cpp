@@ -19,7 +19,7 @@ std::shared_ptr<Variable> ToUpper::run(std::shared_ptr<Token> token,
                                        std::shared_ptr<Scope> scope,
                                        std::vector<std::shared_ptr<Node>> variables)
 {
-    std::shared_ptr<Variable> answer;
+    std::shared_ptr<Variable> returnNode;
     if (variables.size() == 1)
     {
         std::shared_ptr<Node> node = variables.at(0);
@@ -32,7 +32,7 @@ std::shared_ptr<Variable> ToUpper::run(std::shared_ptr<Token> token,
             std::string temp = var->toString();
             transform(temp.begin(), temp.end(), temp.begin(),::toupper);
             
-            answer = std::make_shared<StringVariable>("", temp);
+            returnNode = std::make_shared<StringVariable>("", temp);
         }
     }
     else
@@ -40,5 +40,5 @@ std::shared_ptr<Variable> ToUpper::run(std::shared_ptr<Token> token,
         Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "ToUpper requires one at least argument", token));
     }
     
-    return answer;
+    return returnNode;
 }

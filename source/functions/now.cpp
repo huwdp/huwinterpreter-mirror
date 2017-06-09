@@ -19,17 +19,17 @@ std::shared_ptr<Variable> Now::run(std::shared_ptr<Token> token,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)
 {
-    std::shared_ptr<Variable> answer;
+    std::shared_ptr<Variable> returnNode;
     if (variables.size() == 0)
     {
         time_t t = std::time(0);
         double now = static_cast<double> (t);
-        answer = std::make_shared<NumberVariable>(now);
+        returnNode = std::make_shared<NumberVariable>(now);
     }
     else
     {
         Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Too many arguments in Now.", token));
     }
 
-    return answer;
+    return returnNode;
 }

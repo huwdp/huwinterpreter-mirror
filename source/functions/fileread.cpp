@@ -19,18 +19,18 @@ std::shared_ptr<Variable> FileRead::run(std::shared_ptr<Token> token,
                                         std::shared_ptr<Scope> scope,
                                         std::vector<std::shared_ptr<Node>> variables)
 {
-    std::shared_ptr<Variable> answer;
+    std::shared_ptr<Variable> returnNode;
     if (variables.size() == 1)
     {
         IO file;
         std::shared_ptr<Node> fileLocation = variables.at(0);
         std::shared_ptr<Variable> var = fileLocation->execute(scope);
         std::string stream = file.read(var->toString());
-        answer = std::make_shared<StringVariable>("",stream);
+        returnNode = std::make_shared<StringVariable>("",stream);
     }
     else
     {
         Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Too many arguments in FileRead", token));
     }
-    return answer;
+    return returnNode;
 }

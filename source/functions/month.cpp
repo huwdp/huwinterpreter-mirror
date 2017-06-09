@@ -19,7 +19,7 @@ std::shared_ptr<Variable> Month::run(std::shared_ptr<Token> token,
                                      std::shared_ptr<Scope> scope,
                                      std::vector<std::shared_ptr<Node>> variables)
 {
-    std::shared_ptr<Variable> answer;
+    std::shared_ptr<Variable> returnNode;
     if (variables.size() == 1)
     {
         std::shared_ptr<Node> node = variables.at(0);
@@ -34,7 +34,7 @@ std::shared_ptr<Variable> Month::run(std::shared_ptr<Token> token,
                 std::tm tm = *std::localtime(&t);
                 std::stringstream ss;
                 ss << std::put_time(&tm, "%m");
-                answer = std::make_shared<StringVariable>("", ss.str());
+                returnNode = std::make_shared<StringVariable>("", ss.str());
             }
             catch (const std::invalid_argument ex)
             {
@@ -56,5 +56,5 @@ std::shared_ptr<Variable> Month::run(std::shared_ptr<Token> token,
         Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Month function requires 1 argument", token));
     }
     
-    return answer;
+    return returnNode;
 }

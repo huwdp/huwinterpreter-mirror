@@ -19,7 +19,7 @@ std::shared_ptr<Variable> Max::run(std::shared_ptr<Token> token,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)
 {
-    std::shared_ptr<Variable> answer;
+    std::shared_ptr<Variable> returnNode;
     if (variables.size() > 0)
     {
         double max = std::numeric_limits<double>::min();
@@ -49,13 +49,13 @@ std::shared_ptr<Variable> Max::run(std::shared_ptr<Token> token,
             }
             
         }
-        answer = std::make_shared<NumberVariable>(max);
+        returnNode = std::make_shared<NumberVariable>(max);
     }
     else
     {
         Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Max function requires at least two arguments", token));
     }
 
-    return answer;
+    return returnNode;
 }
 

@@ -19,7 +19,7 @@ std::shared_ptr<Variable> Asc::run(std::shared_ptr<Token> token,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)
 {
-    std::shared_ptr<Variable> answer;
+    std::shared_ptr<Variable> returnNode;
     if (variables.size() == 1)
     {
         std::shared_ptr<Node> node = variables.at(0);
@@ -31,16 +31,16 @@ std::shared_ptr<Variable> Asc::run(std::shared_ptr<Token> token,
             {
                 int temp2 = temp.at(0);
                 double ascii = (double)temp2;
-                answer = std::make_shared<NumberVariable>(ascii);
+                returnNode = std::make_shared<NumberVariable>(ascii);
             }
         }
     }
     else
     {
-        answer = std::make_shared<StringVariable>();
+        returnNode = std::make_shared<StringVariable>();
         Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Asc function requires one argument", token));
     }
     
-    return answer;
+    return returnNode;
 }
 

@@ -19,7 +19,7 @@ std::shared_ptr<Variable> InStr::run(std::shared_ptr<Token> token,
                                      std::shared_ptr<Scope> scope,
                                      std::vector<std::shared_ptr<Node>> variables)
 {
-    std::shared_ptr<Variable> answer;
+    std::shared_ptr<Variable> returnNode;
     if (variables.size() == 2)
     {
         std::shared_ptr<Node> node1 = variables.at(0);
@@ -33,11 +33,11 @@ std::shared_ptr<Variable> InStr::run(std::shared_ptr<Token> token,
             std::size_t found = str.find(str2);
             if (found != std::string::npos)
             {
-                answer = std::make_shared<NumberVariable>((long long)found);
+                returnNode = std::make_shared<NumberVariable>((long long)found);
             }
             else
             {
-                answer = std::make_shared<NumberVariable>(-1.0);
+                returnNode = std::make_shared<NumberVariable>(-1.0);
             }
         }
     }
@@ -45,6 +45,6 @@ std::shared_ptr<Variable> InStr::run(std::shared_ptr<Token> token,
     {
         Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "InStr function requires two arguments", token));
     }
-    return answer;
+    return returnNode;
 }
 

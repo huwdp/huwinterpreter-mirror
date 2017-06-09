@@ -4,7 +4,7 @@ std::shared_ptr<Variable> ArrayUnset::run(std::shared_ptr<Token> token,
                               std::shared_ptr<Scope> scope,
                               std::vector<std::shared_ptr<Node>> variables)
 {
-    std::shared_ptr<Variable> answer;
+    std::shared_ptr<Variable> returnNode;
     if (variables.size() == 2)
     {
         std::shared_ptr<Node> node1 = variables.at(0);
@@ -38,5 +38,5 @@ std::shared_ptr<Variable> ArrayUnset::run(std::shared_ptr<Token> token,
     {
         Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "ArrayGet function requires three argument", token));
     }
-    return answer;
+    return returnNode;
 }

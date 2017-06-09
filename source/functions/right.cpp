@@ -19,7 +19,7 @@ std::shared_ptr<Variable> Right::run(std::shared_ptr<Token> token,
                                      std::shared_ptr<Scope> scope,
                                      std::vector<std::shared_ptr<Node>> variables)
 {
-    std::shared_ptr<Variable> answer;
+    std::shared_ptr<Variable> returnNode;
     if (variables.size() == 2)
     {
         std::shared_ptr<Node> node1 = variables.at(0);
@@ -33,7 +33,7 @@ std::shared_ptr<Variable> Right::run(std::shared_ptr<Token> token,
             {
                 int position = std::round(var2->toDouble());
                 temp = temp.substr(temp.length()-position, position);
-                answer = std::make_shared<StringVariable>("", temp);
+                returnNode = std::make_shared<StringVariable>("", temp);
             }
             catch (const std::invalid_argument ex)
             {
@@ -54,6 +54,6 @@ std::shared_ptr<Variable> Right::run(std::shared_ptr<Token> token,
         Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Right function requires two arguments", token));
     }
     
-    return answer;
+    return returnNode;
 }
 

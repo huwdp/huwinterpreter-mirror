@@ -19,18 +19,18 @@ std::shared_ptr<Variable> Random::run(std::shared_ptr<Token> token,
                                       std::shared_ptr<Scope> scope,
                                       std::vector<std::shared_ptr<Node>> variables)
 {
-    std::shared_ptr<Variable> answer;
+    std::shared_ptr<Variable> returnNode;
     if (variables.size() == 0)
     {
         std::srand(std::time(0));
         int number = std::rand();
         double value = (double)number;
-        answer = std::make_shared<NumberVariable>(value);
+        returnNode = std::make_shared<NumberVariable>(value);
     }
     else
     {
         Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Random requires 0 arguments", token));
     }
     
-    return answer;
+    return returnNode;
 }

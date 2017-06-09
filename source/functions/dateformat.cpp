@@ -19,7 +19,7 @@ std::shared_ptr<Variable> DateFormat::run(std::shared_ptr<Token> token,
                                           std::shared_ptr<Scope> scope,
                                           std::vector<std::shared_ptr<Node>> variables)
 {
-    std::shared_ptr<Variable> answer;
+    std::shared_ptr<Variable> returnNode;
     if (variables.size() == 2)
     {
         std::shared_ptr<Node> node1 = variables.at(0);
@@ -44,7 +44,7 @@ std::shared_ptr<Variable> DateFormat::run(std::shared_ptr<Token> token,
             }
             else
             {
-                answer = std::make_shared<StringVariable>("",ss.str());
+                returnNode = std::make_shared<StringVariable>("",ss.str());
             }
         }
         catch (const std::invalid_argument ex)
@@ -65,5 +65,5 @@ std::shared_ptr<Variable> DateFormat::run(std::shared_ptr<Token> token,
         Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Too many arguments in DateFormat", token));
     }
 
-    return answer;
+    return returnNode;
 }

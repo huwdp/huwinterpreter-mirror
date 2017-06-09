@@ -19,7 +19,7 @@ std::shared_ptr<Variable> Command::run(std::shared_ptr<Token> token,
                                        std::shared_ptr<Scope> scope,
                                        std::vector<std::shared_ptr<Node>> variables)
 {
-    std::shared_ptr<Variable> answer;
+    std::shared_ptr<Variable> returnNode;
     if (variables.size() == 0)
     {
         Debug::print("Command function requires at least 1 argument");
@@ -38,5 +38,5 @@ std::shared_ptr<Variable> Command::run(std::shared_ptr<Token> token,
             }
         }
     }
-    return answer;
+    return returnNode;
 }

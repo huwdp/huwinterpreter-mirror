@@ -19,7 +19,7 @@ std::shared_ptr<Variable> Not::run(std::shared_ptr<Token> token,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)
 {
-    std::shared_ptr<Variable> answer;
+    std::shared_ptr<Variable> returnNode;
     if (variables.size() == 1)
     {
         std::shared_ptr<Node> node = variables.at(0);
@@ -28,11 +28,11 @@ std::shared_ptr<Variable> Not::run(std::shared_ptr<Token> token,
         {
             if (var->toBool())
             {
-                answer = std::make_shared<NumberVariable>(0.0);
+                returnNode = std::make_shared<NumberVariable>(0.0);
             }
             else
             {
-                answer = std::make_shared<NumberVariable>(1.0);
+                returnNode = std::make_shared<NumberVariable>(1.0);
             }
         }
     }
@@ -40,5 +40,5 @@ std::shared_ptr<Variable> Not::run(std::shared_ptr<Token> token,
     {
         Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Not requires 1 argument", token));
     }
-    return answer;
+    return returnNode;
 }

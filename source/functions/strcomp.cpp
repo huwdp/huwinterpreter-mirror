@@ -19,7 +19,7 @@ std::shared_ptr<Variable> StrComp::run(std::shared_ptr<Token> token,
                                        std::shared_ptr<Scope> scope,
                                        std::vector<std::shared_ptr<Node>> variables)
 {
-    std::shared_ptr<Variable> answer;
+    std::shared_ptr<Variable> returnNode;
     if (variables.size() == 2)
     {
         std::shared_ptr<Node> node1 = variables.at(0);
@@ -31,7 +31,7 @@ std::shared_ptr<Variable> StrComp::run(std::shared_ptr<Token> token,
             std::string str1 = var1->toString();
             std::string str2 = var2->toString();
             double diff = double(str1.compare(str2));
-            answer = std::make_shared<NumberVariable>(diff);
+            returnNode = std::make_shared<NumberVariable>(diff);
         }
     }
     else
@@ -39,5 +39,5 @@ std::shared_ptr<Variable> StrComp::run(std::shared_ptr<Token> token,
         Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "StrComp function requires two arguments", token));
     }
     
-    return answer;
+    return returnNode;
 }

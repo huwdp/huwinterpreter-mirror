@@ -19,7 +19,7 @@ std::shared_ptr<Variable> Replace::run(std::shared_ptr<Token> token,
                                        std::shared_ptr<Scope> scope,
                                        std::vector<std::shared_ptr<Node>> variables)
 {
-    std::shared_ptr<Variable> answer;
+    std::shared_ptr<Variable> returnNode;
     if (variables.size() == 3)
     {
         std::shared_ptr<Node> node1 = variables.at(0);
@@ -35,7 +35,7 @@ std::shared_ptr<Variable> Replace::run(std::shared_ptr<Token> token,
             std::string temp2 = var2->toString();
             std::string temp3 = var3->toString();
             temp1.replace(temp1.find(temp2),temp2.length(),temp3);
-            answer = std::make_shared<StringVariable>("", temp1);
+            returnNode = std::make_shared<StringVariable>("", temp1);
         }
     }
     else
@@ -43,5 +43,5 @@ std::shared_ptr<Variable> Replace::run(std::shared_ptr<Token> token,
         Errors::add("Replace requires three argument");
     }
 
-    return answer;
+    return returnNode;
 }

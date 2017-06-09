@@ -19,14 +19,14 @@ std::shared_ptr<Variable> Str::run(std::shared_ptr<Token> token,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)
 {
-    std::shared_ptr<Variable> answer;
+    std::shared_ptr<Variable> returnNode;
     if (variables.size() == 1)
     {
         std::shared_ptr<Node> node1 = variables.at(0);
         std::shared_ptr<Variable> var = node1->execute(scope);
         if (var != nullptr)
         {
-            answer = std::make_shared<StringVariable>("", var->toString());
+            returnNode = std::make_shared<StringVariable>("", var->toString());
         }
     }
     else
@@ -34,5 +34,5 @@ std::shared_ptr<Variable> Str::run(std::shared_ptr<Token> token,
         Errors::add("Str requires one argument");
     }
 
-    return answer;
+    return returnNode;
 }
