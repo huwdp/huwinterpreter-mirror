@@ -121,7 +121,11 @@ SOURCES += \
     variables/integervariable.cpp \
     variables/numbervariable.cpp \
     variables/stringvariable.cpp \
-    variables/hashtablevariable.cpp
+    variables/hashtablevariable.cpp \
+    functions/arrayget.cpp \
+    functions/arrayset.cpp \
+    functions/array.cpp \
+    functions/arrayunset.cpp
 
 HEADERS += \
     errors/debug.h \
@@ -241,5 +245,9 @@ HEADERS += \
     variables/hashtablevariable.h \
     variables/stringvariable.h \
     variables/numbervariable.h \
-    variables/integervariable.h
+    variables/integervariable.h \
+    functions/arrayget.h \
+    functions/arrayset.h \
+    functions/array.h \
+    functions/arrayunset.h
 
