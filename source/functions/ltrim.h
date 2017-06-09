@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LTRIM
-#define LTRIM
+#ifndef LTRIM_H
+#define LTRIM_H
 
 #include "functions/function.h"
 #include "types/typedetector.h"

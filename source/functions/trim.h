@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TRIM
-#define TRIM
+#ifndef TRIM_H
+#define TRIM_H
 
 #include "function.h"
 

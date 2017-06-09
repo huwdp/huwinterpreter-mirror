@@ -28,7 +28,7 @@ std::shared_ptr<Variable> Len::run(std::shared_ptr<Token> token,
         {
             std::string temp = var->toString();
             double length = temp.length();
-            answer = std::make_shared<FakeNumber>(length);
+            answer = std::make_shared<NumberVariable>(length);
         }
     }
     else

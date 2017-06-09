@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABS
-#define ABS
+#ifndef ABS_H
+#define ABS_H
 
 #include "function.h"
 

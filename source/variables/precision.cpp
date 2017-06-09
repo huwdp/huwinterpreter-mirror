@@ -40,7 +40,7 @@ bool Precision::isSafeInteger(long long value = 0)
 
 VarType Precision::getType(double value = 0.0)
 {
-    if ((fmod(value,1) == 0.0) || (fabs(value - (round(value))) < 0.000000001))
+    if ((fmod(value,1) == 0.0) || (fabs(value - round(value)) < 0.000000001))
     {
         return VarType::INTEGER;
     }

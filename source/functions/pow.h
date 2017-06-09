@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef POW
-#define POW
+#ifndef POW_H
+#define POW_H
 
 #include "function.h"
 

@@ -28,11 +28,11 @@ std::shared_ptr<Variable> Not::run(std::shared_ptr<Token> token,
         {
             if (var->toBool())
             {
-                answer = std::make_shared<FakeNumber>(0.0);
+                answer = std::make_shared<NumberVariable>(0.0);
             }
             else
             {
-                answer = std::make_shared<FakeNumber>(1.0);
+                answer = std::make_shared<NumberVariable>(1.0);
             }
         }
     }

@@ -31,13 +31,13 @@ std::shared_ptr<Variable> Asc::run(std::shared_ptr<Token> token,
             {
                 int temp2 = temp.at(0);
                 double ascii = (double)temp2;
-                answer = std::make_shared<FakeNumber>(ascii);
+                answer = std::make_shared<NumberVariable>(ascii);
             }
         }
     }
     else
     {
-        answer = std::make_shared<FakeString>();
+        answer = std::make_shared<StringVariable>();
         Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Asc function requires one argument", token));
     }
     

@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TOUPPER
-#define TOUPPER
+#ifndef TOUPPER_H
+#define TOUPPER_H
 
 #include "function.h"
 #include <algorithm>

@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MID
-#define MID
+#ifndef MID_H
+#define MID_H
 
 #include "function.h"
 

@@ -44,7 +44,7 @@ std::shared_ptr<Variable> DateFormat::run(std::shared_ptr<Token> token,
             }
             else
             {
-                answer = std::make_shared<FakeString>("",ss.str());
+                answer = std::make_shared<StringVariable>("",ss.str());
             }
         }
         catch (const std::invalid_argument ex)

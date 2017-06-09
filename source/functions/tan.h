@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TAN
-#define TAN
+#ifndef TAN_H
+#define TAN_H
 
 #include "function.h"
 

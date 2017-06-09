@@ -34,7 +34,7 @@ std::shared_ptr<Variable> Month::run(std::shared_ptr<Token> token,
                 std::tm tm = *std::localtime(&t);
                 std::stringstream ss;
                 ss << std::put_time(&tm, "%m");
-                answer = std::make_shared<FakeString>("", ss.str());
+                answer = std::make_shared<StringVariable>("", ss.str());
             }
             catch (const std::invalid_argument ex)
             {

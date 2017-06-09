@@ -22,8 +22,8 @@
 #include "errors/errors.h"
 #include "variables/variables.h"
 #include "variables/variable.h"
-#include "variables/fakedouble.h"
-#include "variables/fakestring.h"
+#include "variables/doublevariable.h"
+#include "variables/stringvariable.h"
 #include "tokens/token.h"
 #include "variables/scope.h"
 

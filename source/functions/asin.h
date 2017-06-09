@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ASIN
-#define ASIN
+#ifndef ASIN_H
+#define ASIN_H
 
 #include "function.h"
 

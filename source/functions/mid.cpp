@@ -49,7 +49,7 @@ std::shared_ptr<Variable> Mid::run(std::shared_ptr<Token> token,
             {
                 Errors::add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
             }
-            answer = std::make_shared<FakeString>("", temp);
+            answer = std::make_shared<StringVariable>("", temp);
         }
     }
     else

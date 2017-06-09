@@ -33,11 +33,11 @@ std::shared_ptr<Variable> InStr::run(std::shared_ptr<Token> token,
             std::size_t found = str.find(str2);
             if (found != std::string::npos)
             {
-                answer = std::make_shared<FakeNumber>((long long)found);
+                answer = std::make_shared<NumberVariable>((long long)found);
             }
             else
             {
-                answer = std::make_shared<FakeNumber>(-1.0);
+                answer = std::make_shared<NumberVariable>(-1.0);
             }
         }
     }

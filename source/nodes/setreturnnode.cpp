@@ -24,4 +24,5 @@ SetReturnNode::SetReturnNode(std::shared_ptr<Node> node)
 std::shared_ptr<Variable> SetReturnNode::execute(std::shared_ptr<Scope> scope)
 {
     scope->setReturnValue(node->execute(scope));
+    return null;
 }

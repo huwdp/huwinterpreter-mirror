@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FUNCTIONLIST
-#define FUNCTIONLIST
+#ifndef FUNCTIONLIST_H
+#define FUNCTIONLIST_H
 
 // IO
 #include "print.h"

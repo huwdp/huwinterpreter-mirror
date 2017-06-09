@@ -25,7 +25,7 @@ std::shared_ptr<Variable> Random::run(std::shared_ptr<Token> token,
         std::srand(std::time(0));
         int number = std::rand();
         double value = (double)number;
-        answer = std::make_shared<FakeNumber>(value);
+        answer = std::make_shared<NumberVariable>(value);
     }
     else
     {

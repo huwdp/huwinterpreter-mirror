@@ -13,34 +13,22 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FAKENUMBER_H
-#define FAKENUMBER_H
+#ifndef INTEGERVARIABLE_H
+#define INTEGERVARIABLE_H
 
 #include <iostream>
 
 #include "variable.h"
-#include "fakedouble.h"
-#include "fakeint.h"
-#include "variabletypefactory.h"
-#include "precision.h"
+#include "numbervariable.h"
 
-class FakeNumber : public Variable
+class IntegerVariable : public Variable
 {
 private:
-    std::shared_ptr<Variable> variable;
+    long long value;
 public:
-    FakeNumber(bool value);
-    FakeNumber(std::shared_ptr<Variable> variable);
-    FakeNumber(double value);
-    FakeNumber(long long value);
-    FakeNumber(std::string name, double value);
-    FakeNumber(std::string name, long long value);
-    FakeNumber(std::string name, std::string value);
-    /*~FakeNumber()
-    {
-        std::cout << "destroy" <<std::endl;
-    }*/
-
+    IntegerVariable();
+    IntegerVariable(long long value);
+    IntegerVariable(std::string name, long long value);
     void setValue(double value);
     void setValue(std::string value);
     void setValue(long long value);
@@ -50,9 +38,6 @@ public:
     bool toBool();
     VarType getType();
     double getValue();
-
-    std::shared_ptr<Variable> toValue(std::shared_ptr<Variable> variable);
-
     std::shared_ptr<Variable> pow(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> mul(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> div(std::shared_ptr<Variable> variable);
@@ -70,6 +55,11 @@ public:
     std::shared_ptr<Variable> mulEqual(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> divEqual(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> equal(std::shared_ptr<Variable> variable);
+    std::shared_ptr<Variable> increment();
+    std::shared_ptr<Variable> decrement();
+    std::shared_ptr<Variable> get(std::string index);
+    void set(std::string index, std::shared_ptr<Variable> value);
+    void unset(std::string index);
 };
 
-#endif // FAKENUMBER_H
+#endif // IntegerVariable_H

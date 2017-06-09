@@ -13,27 +13,24 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FAKEDOUBLE
-#define FAKEDOUBLE
-
-#include <iostream>
-
-#include "variable.h"
-#include "fakenumber.h"
+#ifndef HASHTABLEVARIABLE_H
+#define HASHTABLEVARIABLE_H
 
 #include <iostream>
 #include <memory>
-#include <iomanip>
-#include <sstream>
+#include <unordered_map>
+#include "numbervariable.h"
 
-class FakeDouble : public Variable
+#include "variable.h"
+
+class HashTableVariable : public Variable
 {
 private:
-    double value;
+    std::unordered_map<std::string, std::shared_ptr<Variable>> map;
 public:
-    FakeDouble();
-    FakeDouble(double value);
-    FakeDouble(std::string name, double value);
+    HashTableVariable();
+    HashTableVariable(std::string name, double value);
+    HashTableVariable(std::string name, long long value);
     void setValue(double value);
     void setValue(std::string value);
     void setValue(long long value);
@@ -60,6 +57,11 @@ public:
     std::shared_ptr<Variable> mulEqual(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> divEqual(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> equal(std::shared_ptr<Variable> variable);
+    std::shared_ptr<Variable> increment();
+    std::shared_ptr<Variable> decrement();
+    std::shared_ptr<Variable> get(std::string index);
+    void set(std::string index, std::shared_ptr<Variable> value);
+    void unset(std::string index);
 };
 
 

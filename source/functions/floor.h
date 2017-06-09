@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FLOOR
-#define FLOOR
+#ifndef FLOOR_H
+#define FLOOR_H
 
 #include "function.h"
 

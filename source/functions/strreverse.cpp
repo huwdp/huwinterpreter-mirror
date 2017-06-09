@@ -28,7 +28,7 @@ std::shared_ptr<Variable> StrReverse::run(std::shared_ptr<Token> token,
         {
             std::string temp = var->toString();
             std::reverse(temp.begin(), temp.end());
-            answer = std::make_shared<FakeString>("", temp);
+            answer = std::make_shared<StringVariable>("", temp);
         }
         
     }

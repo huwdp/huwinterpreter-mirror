@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ACOS
-#define ACOS
+#ifndef ACOS_H
+#define ACOS_H
 
 #include "function.h"
 

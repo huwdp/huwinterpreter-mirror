@@ -42,9 +42,9 @@ std::shared_ptr<Variable> IfOrNode::execute(std::shared_ptr<Scope> scope)
         }
         if (r->toBool() || l->toBool())
         {
-            return std::make_shared<FakeNumber>((long long)1);
+            return std::make_shared<NumberVariable>((long long)1);
         }
-        return std::make_shared<FakeNumber>((long long)0);
+        return std::make_shared<NumberVariable>((long long)0);
     }
     Debug::print("Could not or.");
     return null;

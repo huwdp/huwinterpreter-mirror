@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LEN
-#define LEN
+#ifndef LEN_H
+#define LEN_H
 
 #include "function.h"
 

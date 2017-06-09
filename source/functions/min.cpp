@@ -48,7 +48,7 @@ std::shared_ptr<Variable> Min::run(std::shared_ptr<Token> token,
             }
             
         }
-        answer = std::make_shared<FakeNumber>(min);
+        answer = std::make_shared<NumberVariable>(min);
     }
     else
     {

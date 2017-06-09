@@ -13,22 +13,27 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FakeArray
-#define FakeArray
+#ifndef DOUBLEVARIABLE_H
+#define DOUBLEVARIABLE_H
+
+#include <iostream>
+
+#include "variable.h"
+#include "numbervariable.h"
 
 #include <iostream>
 #include <memory>
+#include <iomanip>
+#include <sstream>
 
-#include "variable.h"
-
-class FakeArray2 : public Variable
+class DoubleVariable : public Variable
 {
 private:
-
+    double value;
 public:
-    FakeArray2();
-    FakeArray2(std::string name, double value);
-    FakeArray2(std::string name, long long value);
+    DoubleVariable();
+    DoubleVariable(double value);
+    DoubleVariable(std::string name, double value);
     void setValue(double value);
     void setValue(std::string value);
     void setValue(long long value);
@@ -55,6 +60,11 @@ public:
     std::shared_ptr<Variable> mulEqual(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> divEqual(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> equal(std::shared_ptr<Variable> variable);
+    std::shared_ptr<Variable> increment();
+    std::shared_ptr<Variable> decrement();
+    std::shared_ptr<Variable> get(std::string index);
+    void set(std::string index, std::shared_ptr<Variable> value);
+    void unset(std::string index);
 };
 
 

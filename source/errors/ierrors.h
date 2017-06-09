@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef IERRORS
-#define IERRORS
+#ifndef IERRORS_H
+#define IERRORS_H
 
 #include <iostream>
 #include <string>

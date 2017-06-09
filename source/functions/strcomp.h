@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef STRCOMP
-#define STRCOMP
+#ifndef STRCOMP_H
+#define STRCOMP_H
 
 #include "function.h"
 

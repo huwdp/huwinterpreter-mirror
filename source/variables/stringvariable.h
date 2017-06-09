@@ -13,31 +13,30 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FAKEINT_H
-#define FAKEINT_H
-
-#include <iostream>
+#ifndef STRINGVARIABLE_H
+#define STRINGVARIABLE_H
 
 #include "variable.h"
-#include "fakenumber.h"
+#include "doublevariable.h"
+#include "variabletypefactory.h"
 
-class FakeInt : public Variable
+class StringVariable : public Variable
 {
 private:
-    long long value;
+    std::string value;
 public:
-    FakeInt();
-    FakeInt(long long value);
-    FakeInt(std::string name, long long value);
+    StringVariable();
+    StringVariable(std::string value);
+    StringVariable(std::string name, std::string value);
     void setValue(double value);
     void setValue(std::string value);
     void setValue(long long value);
     double toDouble();
-    long long toInt();
     std::string toString();
     bool toBool();
+    long long toInt();
     VarType getType();
-    double getValue();
+    std::string getValue();
     std::shared_ptr<Variable> pow(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> mul(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> div(std::shared_ptr<Variable> variable);
@@ -55,6 +54,12 @@ public:
     std::shared_ptr<Variable> mulEqual(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> divEqual(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> equal(std::shared_ptr<Variable> variable);
+    std::shared_ptr<Variable> increment();
+    std::shared_ptr<Variable> decrement();
+    std::shared_ptr<Variable> get(std::string index);
+    void set(std::string index, std::shared_ptr<Variable> value);
+    void unset(std::string index);
 };
 
-#endif // FAKEINT_H
+#endif // StringVariable
+

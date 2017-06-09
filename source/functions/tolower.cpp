@@ -29,7 +29,7 @@ std::shared_ptr<Variable> ToLower::run(std::shared_ptr<Token> token,
             std::string temp = var->toString();
             transform(temp.begin(), temp.end(), temp.begin(),::tolower);
             
-            answer = std::make_shared<FakeString>("", temp);
+            answer = std::make_shared<StringVariable>("", temp);
         }
     }
     else

@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ROUND
-#define ROUND
+#ifndef ROUND_H
+#define ROUND_H
 
 #include "function.h"
 

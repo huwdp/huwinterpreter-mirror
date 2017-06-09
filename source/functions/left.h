@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LEFT
-#define LEFT
+#ifndef LEFT_H
+#define LEFT_H
 
 #include "function.h"
 

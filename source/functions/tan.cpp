@@ -30,7 +30,7 @@ std::shared_ptr<Variable> Tan::run(std::shared_ptr<Token> token,
             {
                 double temp = var->toDouble();
                 double output = std::tan(temp);
-                answer = std::make_shared<FakeNumber>(output);
+                answer = std::make_shared<NumberVariable>(output);
             }
             catch (const std::invalid_argument ex)
             {

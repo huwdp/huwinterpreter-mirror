@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MAX
-#define MAX
+#ifndef MAX_H
+#define MAX_H
 
 #include "function.h"
 #include <limits>

@@ -26,7 +26,7 @@ std::shared_ptr<Variable> FileRead::run(std::shared_ptr<Token> token,
         Node *fileLocation = variables.at(0).get();
         std::shared_ptr<Variable> var = fileLocation->execute(scope);
         std::string stream = file.read(var->toString());
-        answer = std::make_shared<FakeString>("",stream);
+        answer = std::make_shared<StringVariable>("",stream);
     }
     else
     {

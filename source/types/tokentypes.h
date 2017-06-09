@@ -46,6 +46,8 @@ enum TokenType {RIGHTPARENTHESIS,
                  DIVISIONEQUAL,
                  ADDITIONEQUAL,
                  SUBTRACTIONEQUAL,
+                 INCREMENT,
+                 DECREMENT
 };
 
 

@@ -8,9 +8,10 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 CONFIG += c++11
-CONFIG += j3
+CONFIG += j6
+CONFIG += Wunused-parameter
 
-QMAKE_CXXFLAGS_WARN_OFF -= -Wunused-parameter
+QMAKE_CXXFLAGS_WARN_OFF += -Wunused-parameter
 
 SOURCES += \
     errors/debug.cpp \
@@ -103,11 +104,6 @@ SOURCES += \
     tokens/tokendetector.cpp \
     types/isnumeric.cpp \
     types/typedetector.cpp \
-    variables/fakearray.cpp \
-    variables/fakedouble.cpp \
-    variables/fakeint.cpp \
-    variables/fakenumber.cpp \
-    variables/fakestring.cpp \
     variables/precision.cpp \
     variables/scope.cpp \
     variables/variable.cpp \
@@ -118,7 +114,14 @@ SOURCES += \
     functions/customfunction.cpp \
     functions/emptyfunction.cpp \
     nodes/returnnode.cpp \
-    nodes/setreturnnode.cpp
+    nodes/setreturnnode.cpp \
+    nodes/incrementnode.cpp \
+    nodes/decrementnode.cpp \
+    variables/doublevariable.cpp \
+    variables/integervariable.cpp \
+    variables/numbervariable.cpp \
+    variables/stringvariable.cpp \
+    variables/hashtablevariable.cpp
 
 HEADERS += \
     errors/debug.h \
@@ -126,7 +129,6 @@ HEADERS += \
     errors/errors.h \
     errors/errortypes.h \
     errors/errortypestringfactory.h \
-    errors/ierror.h \
     errors/ierrors.h \
     functions/abs.h \
     functions/acos.h \
@@ -181,24 +183,6 @@ HEADERS += \
     functions/weekday.h \
     functions/weekdayname.h \
     functions/year.h \
-    instructions/add.h \
-    instructions/addequal.h \
-    instructions/div.h \
-    instructions/divequal.h \
-    instructions/equal.h \
-    instructions/ifequal.h \
-    instructions/ifnotequal.h \
-    instructions/ifover.h \
-    instructions/ifoverorequal.h \
-    instructions/ifunder.h \
-    instructions/ifunderorequal.h \
-    instructions/instruction.h \
-    instructions/mod.h \
-    instructions/mul.h \
-    instructions/mulequal.h \
-    instructions/pow.h \
-    instructions/sub.h \
-    instructions/subequal.h \
     io/fileline.h \
     io/io.h \
     nodes/addnode.h \
@@ -236,11 +220,11 @@ HEADERS += \
     types/isnumeric.h \
     types/tokentypes.h \
     types/typedetector.h \
-    variables/fakearray.h \
-    variables/fakedouble.h \
-    variables/fakeint.h \
-    variables/fakenumber.h \
-    variables/fakestring.h \
+    variables/HashTableVariable.h \
+    variables/DoubleVariable.h \
+    variables/IntegerVariable.h \
+    variables/NumberVariable.h \
+    variables/StringVariable.h \
     variables/precision.h \
     variables/scope.h \
     variables/variable.h \
@@ -250,5 +234,12 @@ HEADERS += \
     functions/customfunction.h \
     functions/emptyfunction.h \
     nodes/returnnode.h \
-    nodes/setreturnnode.h
+    nodes/setreturnnode.h \
+    nodes/incrementnode.h \
+    nodes/decrementnode.h \
+    variables/doublevariable.h \
+    variables/hashtablevariable.h \
+    variables/stringvariable.h \
+    variables/numbervariable.h \
+    variables/integervariable.h
 

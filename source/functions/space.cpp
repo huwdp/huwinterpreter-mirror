@@ -29,12 +29,12 @@ std::shared_ptr<Variable> Space::run(std::shared_ptr<Token> token,
             std::string output;
             try
             {
-                int length = std::round((var->toDouble()));
+                int length = std::round(var->toDouble());
                 for (int i = 0; i < length; ++i)
                 {
                     output.append(" ");
                 }
-                answer = std::make_shared<FakeString>("", output);
+                answer = std::make_shared<StringVariable>("", output);
             }
             catch (const std::invalid_argument ex)
             {

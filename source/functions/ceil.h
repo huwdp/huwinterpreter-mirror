@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CEIL
-#define CEIL
+#ifndef CEIL_H
+#define CEIL_H
 
 #include "function.h"
 

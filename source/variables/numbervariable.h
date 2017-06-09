@@ -13,30 +13,46 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FAKESTRING
-#define FAKESTRING
+#ifndef NUMBERVARIABLE_H
+#define NUMBERVARIABLE_H
+
+#include <iostream>
 
 #include "variable.h"
-#include "fakedouble.h"
+#include "doublevariable.h"
+#include "integervariable.h"
 #include "variabletypefactory.h"
+#include "precision.h"
 
-class FakeString : public Variable
+class NumberVariable : public Variable
 {
 private:
-    std::string value;
+    std::shared_ptr<Variable> variable;
 public:
-    FakeString();
-    FakeString(std::string value);
-    FakeString(std::string name, std::string value);
+    NumberVariable(bool value);
+    NumberVariable(std::shared_ptr<Variable> variable);
+    NumberVariable(double value);
+    NumberVariable(long long value);
+    NumberVariable(std::string name, double value);
+    NumberVariable(std::string name, long long value);
+    NumberVariable(std::string name, std::string value);
+    /*~NumberVariable()
+    {
+        std::cout << "destroy" <<std::endl;
+    }*/
+
     void setValue(double value);
     void setValue(std::string value);
     void setValue(long long value);
     double toDouble();
+    long long toInt();
     std::string toString();
     bool toBool();
-    long long toInt();
     VarType getType();
-    std::string getValue();
+    double getValue();
+
+    std::shared_ptr<Variable> toValue(std::shared_ptr<Variable> variable);
+
     std::shared_ptr<Variable> pow(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> mul(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> div(std::shared_ptr<Variable> variable);
@@ -54,7 +70,11 @@ public:
     std::shared_ptr<Variable> mulEqual(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> divEqual(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> equal(std::shared_ptr<Variable> variable);
+    std::shared_ptr<Variable> increment();
+    std::shared_ptr<Variable> decrement();
+    std::shared_ptr<Variable> get(std::string index);
+    void set(std::string index, std::shared_ptr<Variable> value);
+    void unset(std::string index);
 };
 
-#endif // FAKESTRING
-
+#endif // NumberVariable_H

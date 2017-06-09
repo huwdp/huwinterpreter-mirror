@@ -42,7 +42,7 @@ std::shared_ptr<Variable> LTrim::run(std::shared_ptr<Token> token,
                 }
                 ++it;
             }
-            answer = std::make_shared<FakeString>("", temp);
+            answer = std::make_shared<StringVariable>("", temp);
         }
     }
     else

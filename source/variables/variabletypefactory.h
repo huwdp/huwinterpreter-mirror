@@ -17,8 +17,8 @@
 #define VARIABLETYPEFACTORY_H
 
 #include "variable.h"
-#include "fakedouble.h"
-#include "fakestring.h"
+#include "doublevariable.h"
+#include "stringvariable.h"
 #include "types/tokentypes.h"
 #include "types/typedetector.h"
 

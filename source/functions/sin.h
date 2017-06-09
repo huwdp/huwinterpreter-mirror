@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SIN
-#define SIN
+#ifndef SIN_H
+#define SIN_H
 
 #include "function.h"
 

@@ -13,41 +13,41 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "fakestring.h"
+#include "stringvariable.h"
 
-FakeString::FakeString()
+StringVariable::StringVariable()
 {
 
 }
 
-FakeString::FakeString(std::string value)
+StringVariable::StringVariable(std::string value)
     : Variable("")
 {
     this->value = value;
 }
 
-FakeString::FakeString(std::string name, std::string value)
+StringVariable::StringVariable(std::string name, std::string value)
     : Variable(name)
 {
     this->value = value;
 }
 
-void FakeString::setValue(double value)
+void StringVariable::setValue(double value)
 {
     this->value = std::to_string(value);
 }
 
-void FakeString::setValue(std::string value)
+void StringVariable::setValue(std::string value)
 {
     this->value = value;
 }
 
-void FakeString::setValue(long long value)
+void StringVariable::setValue(long long value)
 {
     this->value = value;
 }
 
-double FakeString::toDouble()
+double StringVariable::toDouble()
 {
     double value = 0.0;
     try
@@ -61,17 +61,17 @@ double FakeString::toDouble()
     return value;
 }
 
-std::string FakeString::toString()
+std::string StringVariable::toString()
 {
     return value;
 }
 
-long long FakeString::toInt()
+long long StringVariable::toInt()
 {
     return 0;
 }
 
-bool FakeString::toBool()
+bool StringVariable::toBool()
 {
     if (value != "0")
     {
@@ -83,56 +83,56 @@ bool FakeString::toBool()
     }
 }
 
-VarType FakeString::getType()
+VarType StringVariable::getType()
 {
     return STRING;
 }
 
-std::string FakeString::getValue()
+std::string StringVariable::getValue()
 {
     return value;
 }
 
-std::shared_ptr<Variable> FakeString::pow(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::pow(std::shared_ptr<Variable> variable)
 {
-    Debug::print("Cannot power strings");
+    Debug::print("Cannot call power method on string");
     return null;
 }
 
-std::shared_ptr<Variable> FakeString::mul(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::mul(std::shared_ptr<Variable> variable)
 {
-    Debug::print("Cannot combine multiple strings");
+    Debug::print("Cannot call multiple method on string");
     return null;
 }
 
-std::shared_ptr<Variable> FakeString::div(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::div(std::shared_ptr<Variable> variable)
 {
-    Debug::print("Cannot divide strings");
+    Debug::print("Cannot call divide method on string");
     return null;
 }
 
-std::shared_ptr<Variable> FakeString::mod(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::mod(std::shared_ptr<Variable> variable)
 {
-    Debug::print("Cannot mod strings");
+    Debug::print("Cannot call mod method on string");
     return null;
 }
 
-std::shared_ptr<Variable> FakeString::add(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::add(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
         return null;
     }
-    return std::make_shared<FakeString>(this->toString() + variable->toString());
+    return std::make_shared<StringVariable>(this->toString() + variable->toString());
 }
 
-std::shared_ptr<Variable> FakeString::sub(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::sub(std::shared_ptr<Variable> variable)
 {
-    Debug::print("Cannot subtract strings");
+    Debug::print("Cannot call subtract method on string");
     return null;
 }
 
-std::shared_ptr<Variable> FakeString::ifUnder(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::ifUnder(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
@@ -144,7 +144,7 @@ std::shared_ptr<Variable> FakeString::ifUnder(std::shared_ptr<Variable> variable
         var->setValue(toString());
         return var->ifUnder(variable);
     }
-    std::shared_ptr<FakeInt> temp = std::make_shared<FakeInt>();
+    std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>();
     if (this->toString().compare(variable->toString()) < 0)
     {
         temp.get()->setValue(double(1));
@@ -156,7 +156,7 @@ std::shared_ptr<Variable> FakeString::ifUnder(std::shared_ptr<Variable> variable
     return temp;
 }
 
-std::shared_ptr<Variable> FakeString::ifUnderOrEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::ifUnderOrEqual(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
@@ -168,7 +168,7 @@ std::shared_ptr<Variable> FakeString::ifUnderOrEqual(std::shared_ptr<Variable> v
         var->setValue(toString());
         return var->ifUnderOrEqual(variable);
     }
-    std::shared_ptr<FakeInt> temp = std::make_shared<FakeInt>();
+    std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>();
     if (this->toString().compare(variable->toString()) <= 0)
     {
         temp->setValue(double(1));
@@ -180,7 +180,7 @@ std::shared_ptr<Variable> FakeString::ifUnderOrEqual(std::shared_ptr<Variable> v
     return temp;
 }
 
-std::shared_ptr<Variable> FakeString::ifOver(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::ifOver(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
@@ -192,7 +192,7 @@ std::shared_ptr<Variable> FakeString::ifOver(std::shared_ptr<Variable> variable)
         var->setValue(toString());
         return var->ifOver(variable);
     }
-    std::shared_ptr<FakeInt> temp = std::make_shared<FakeInt>();
+    std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>();
     if (this->toString().compare(variable->toString()) > 0)
     {
         temp->setValue(double(1));
@@ -204,7 +204,7 @@ std::shared_ptr<Variable> FakeString::ifOver(std::shared_ptr<Variable> variable)
     return temp;
 }
 
-std::shared_ptr<Variable> FakeString::ifOverOrEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::ifOverOrEqual(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
@@ -216,7 +216,7 @@ std::shared_ptr<Variable> FakeString::ifOverOrEqual(std::shared_ptr<Variable> va
         var->setValue(toString());
         return var->ifOverOrEqual(variable);
     }
-    std::shared_ptr<FakeInt> temp = std::make_shared<FakeInt>();
+    std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>();
     if (this->toString().compare(variable->toString()) >= 0)
     {
         temp->setValue(double(1));
@@ -228,7 +228,7 @@ std::shared_ptr<Variable> FakeString::ifOverOrEqual(std::shared_ptr<Variable> va
     return temp;
 }
 
-std::shared_ptr<Variable> FakeString::ifEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::ifEqual(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
@@ -240,7 +240,7 @@ std::shared_ptr<Variable> FakeString::ifEqual(std::shared_ptr<Variable> variable
         var->setValue(toString());
         return var->ifEqual(variable);
     }
-    std::shared_ptr<FakeInt> temp = std::make_shared<FakeInt>();
+    std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>();
     if (this->toString().compare(variable->toString()) == 0)
     {
         temp->setValue(double(1));
@@ -252,7 +252,7 @@ std::shared_ptr<Variable> FakeString::ifEqual(std::shared_ptr<Variable> variable
     return temp;
 }
 
-std::shared_ptr<Variable> FakeString::ifNotEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::ifNotEqual(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
@@ -264,7 +264,7 @@ std::shared_ptr<Variable> FakeString::ifNotEqual(std::shared_ptr<Variable> varia
         var->setValue(toString());
         return var->ifNotEqual(variable);
     }
-    std::shared_ptr<FakeInt> temp = std::make_shared<FakeInt>();
+    std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>();
     if (this->toString().compare(variable->toString()) != 0)
     {
         temp->setValue(double(1));
@@ -276,47 +276,84 @@ std::shared_ptr<Variable> FakeString::ifNotEqual(std::shared_ptr<Variable> varia
     return temp;
 }
 
-std::shared_ptr<Variable> FakeString::addEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::addEqual(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
         return null;
     }
+    std::string value = this->value;
+    value.append(variable->toString());
+    return std::make_shared<StringVariable>(value);
+}
+
+std::shared_ptr<Variable> StringVariable::subEqual(std::shared_ptr<Variable> variable)
+{
+    if (variable == nullptr)
+    {
+        return null;
+    }
+    return null;
+    Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call subtract method on a string"));
+}
+
+std::shared_ptr<Variable> StringVariable::mulEqual(std::shared_ptr<Variable> variable)
+{
+    if (variable == nullptr)
+    {
+        return null;
+    }
+    Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call multiply method on a string"));
     return null;
 }
 
-std::shared_ptr<Variable> FakeString::subEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::divEqual(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
         return null;
     }
+    Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call divide method on a string"));
     return null;
 }
 
-std::shared_ptr<Variable> FakeString::mulEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::equal(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
     {
         return null;
     }
+    if (value.compare(variable->toString()) == 0)
+    {
+        return std::make_shared<NumberVariable>(true);
+    }
+    return std::make_shared<NumberVariable>(false);
+}
+
+std::shared_ptr<Variable> StringVariable::increment()
+{
+    Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call increment method on a string"));
     return null;
 }
 
-std::shared_ptr<Variable> FakeString::divEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::decrement()
 {
-    if (variable == nullptr)
-    {
-        return null;
-    }
+    Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call decrement method on a string"));
     return null;
 }
 
-std::shared_ptr<Variable> FakeString::equal(std::shared_ptr<Variable> variable)
+void StringVariable::set(std::string index, std::shared_ptr<Variable> value)
 {
-    if (variable == nullptr)
-    {
-        return null;
-    }
+    Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call set method in string. String is not an array"));
+}
+
+std::shared_ptr<Variable> StringVariable::get(std::string value)
+{
+    Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call get method in string. String is not an array"));
     return null;
+}
+
+void StringVariable::unset(std::string index)
+{
+    Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call unset method in string. String is not an array"));
 }

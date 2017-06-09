@@ -45,9 +45,9 @@ std::shared_ptr<Variable> IfAndNode::execute(std::shared_ptr<Scope> scope)
         bool ls = l->toBool();
         if (rs && ls)
         {
-            return std::make_shared<FakeNumber>((long long)1);
+            return std::make_shared<NumberVariable>((long long)1);
         }
-        return std::make_shared<FakeNumber>((long long)0);
+        return std::make_shared<NumberVariable>((long long)0);
     }
     Debug::print("Could not and.");
     return null;

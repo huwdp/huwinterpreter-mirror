@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MIN
-#define MIN
+#ifndef MIN_H
+#define MIN_H
 
 #include "function.h"
 #include <limits>

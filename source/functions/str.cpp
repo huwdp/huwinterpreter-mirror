@@ -26,7 +26,7 @@ std::shared_ptr<Variable> Str::run(std::shared_ptr<Token> token,
         std::shared_ptr<Variable> var = node1->execute(scope);
         if (var != nullptr)
         {
-            answer = std::make_shared<FakeString>("", var->toString());
+            answer = std::make_shared<StringVariable>("", var->toString());
         }
     }
     else

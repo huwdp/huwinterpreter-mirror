@@ -25,15 +25,15 @@ std::shared_ptr<Variable> VariableTypeFactory::newVariable(VarType varType)
     std::shared_ptr<Variable> null;
     if (varType == STRING)
     {
-        return std::make_shared<FakeString>();
+        return std::make_shared<StringVariable>();
     }
     else if (varType == INTEGER)
     {
-        return std::make_shared<FakeNumber>((long long)0);
+        return std::make_shared<NumberVariable>((long long)0);
     }
     else if (varType == DOUBLE)
     {
-        return std::make_shared<FakeDouble>(0.0);
+        return std::make_shared<NumberVariable>(0.0);
     }
     return null;
 }

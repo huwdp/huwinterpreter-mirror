@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ATAN2
-#define ATAN2
+#ifndef ATAN2_H
+#define ATAN2_H
 
 #include "function.h"
 

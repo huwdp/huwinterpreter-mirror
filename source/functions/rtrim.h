@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef RTRIM
-#define RTRIM
+#ifndef RTRIM_H
+#define RTRIM_H
 
 #include "function.h"
 

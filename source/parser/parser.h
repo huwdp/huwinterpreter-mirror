@@ -62,6 +62,9 @@
 
 #include "nodes/bracketnode.h"
 
+#include "nodes/incrementnode.h"
+#include "nodes/decrementnode.h"
+
 //#include "variables/variables.h"
 #include "variables/scope.h"
 #include "functions/customfunction.h"
@@ -80,6 +83,8 @@ public:
     bool getCompilation();
     void setCompilation(bool compilation);
     void nextToken();
+    void prevToken();
+    std::shared_ptr<Token> peakToken();
     void error(const std::string msg);
     bool acceptIndentation();
     bool accept(std::string s);

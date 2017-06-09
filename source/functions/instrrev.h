@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INSTRREV
-#define INSTRREV
+#ifndef INSTRREV_H
+#define INSTRREV_H
 
 #include "function.h"
 

@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LOG
-#define LOG
+#ifndef LOG_H
+#define LOG_H
 
 #include "function.h"
 

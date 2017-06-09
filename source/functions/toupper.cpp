@@ -32,7 +32,7 @@ std::shared_ptr<Variable> ToUpper::run(std::shared_ptr<Token> token,
             std::string temp = var->toString();
             transform(temp.begin(), temp.end(), temp.begin(),::toupper);
             
-            answer = std::make_shared<FakeString>("", temp);
+            answer = std::make_shared<StringVariable>("", temp);
         }
     }
     else

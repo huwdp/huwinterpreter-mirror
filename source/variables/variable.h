@@ -56,7 +56,11 @@ public:
     virtual std::shared_ptr<Variable> ifOverOrEqual(std::shared_ptr<Variable> variable) = 0;
     virtual std::shared_ptr<Variable> ifEqual(std::shared_ptr<Variable> variable) = 0;
     virtual std::shared_ptr<Variable> ifNotEqual(std::shared_ptr<Variable> variable) = 0;
-    virtual std::shared_ptr<Variable> equal(std::shared_ptr<Variable> variable) = 0;
+    virtual std::shared_ptr<Variable> increment() = 0;
+    virtual std::shared_ptr<Variable> decrement() = 0;
+    virtual std::shared_ptr<Variable> get(std::string index) = 0;
+    virtual void set(std::string index, std::shared_ptr<Variable> value) = 0;
+    virtual void unset(std::string index) = 0;
 };
 
 #endif

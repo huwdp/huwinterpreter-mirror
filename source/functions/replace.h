@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef REPLACE
-#define REPLACE
+#ifndef REPLACE_H
+#define REPLACE_H
 
 #include "function.h"
 #include <algorithm>

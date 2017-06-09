@@ -21,8 +21,8 @@
 #include <string>
 #include <unordered_map>
 #include "variable.h"
-#include "fakedouble.h"
-#include "fakestring.h"
+#include "doublevariable.h"
+#include "stringvariable.h"
 #include "types/typedetector.h"
 
 class Variables

@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef STRREVERSE
-#define STRREVERSE
+#ifndef STRREVERSE_H
+#define STRREVERSE_H
 
 #include "function.h"
 #include <algorithm>

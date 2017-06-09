@@ -55,6 +55,27 @@ void Parser::nextToken()
     }
 }
 
+void Parser::prevToken()
+{
+    if (it != tokens.begin())
+    {
+        it--;
+        currentToken = (*it);
+    }
+}
+
+std::shared_ptr<Token> Parser::peakToken()
+{
+    std::shared_ptr<Token> output;
+    if (it != tokens.end())
+    {
+        it++;
+        output = (*it);
+        it--;
+    }
+    return output;
+}
+
 bool Parser::accept(std::string s)
 {
     if (this->currentToken->getContent() == s)
@@ -116,10 +137,10 @@ std::shared_ptr<Node> Parser::value()
         if (TypeDetector::isNumeric(currentToken->getContent()))
         {
             std::string number = currentToken->getContent();
-            std::shared_ptr<Node> temp = std::make_shared<NumberNode>(currentToken, number);
+            std::shared_ptr<Node> node = std::make_shared<NumberNode>(currentToken, number);
             nextToken();
             acceptIndentation();
-            return temp;
+            return node;
         }
         else if (TypeDetector::isWord(currentToken->getContent()))
         {
@@ -162,6 +183,24 @@ std::shared_ptr<Node> Parser::value()
                                                         std::make_shared<TextNode>(currentToken, word));
                 }
                 nextToken();
+
+                /*
+                //nextToken();
+                std::shared_ptr<Token> peak = currentToken;
+                prevToken();
+
+                if (peak->getType() == TokenType::INCREMENT)
+                {
+                    std::shared_ptr<Node> node = std::make_shared<IncrementNode>(currentToken, std::make_shared<GetVarNode>(currentToken, word));
+                    return std::move(std::make_shared<ReturnNode>(std::move(node)));
+                }
+                else if (peak->getType() == DECREMENT)
+                {
+                    std::shared_ptr<Node> node = std::make_shared<DecrementNode>(currentToken, std::make_shared<GetVarNode>(currentToken, word));
+                    return std::move(std::make_shared<ReturnNode>(std::move(node)));
+                }
+                */
+
                 return std::make_shared<ReturnNode>(std::make_shared<GetVarNode>(currentToken, word));
             }
             Errors::add(std::make_shared<Error>(PARSER_ERROR, "Unidentified word", currentToken));
@@ -201,14 +240,13 @@ std::shared_ptr<Node> Parser::factor()
 
 std::shared_ptr<Node> Parser::term()
 {
-
     acceptIndentation();
     if (!tokens.empty() && compilation)
     {
         std::shared_ptr<Node> value = factor();
         acceptIndentation();
 
-        std::shared_ptr<Node> temp = value;
+        std::shared_ptr<Node> node = value;
 
         while (!tokens.empty() && (currentToken->getType() == TokenType::MULTIPLICATION ||
                currentToken->getType() == TokenType::DIVISION ||
@@ -219,21 +257,21 @@ std::shared_ptr<Node> Parser::term()
             acceptIndentation();
             if (type == TokenType::MULTIPLICATION)
             {
-                temp = std::make_shared<ReturnNode>(
-                                                    std::make_shared<MulNode>(currentToken, temp, (factor())));
+                node = std::make_shared<ReturnNode>(
+                                                    std::make_shared<MulNode>(currentToken, node, factor()));
             }
             else if (type == TokenType::DIVISION)
             {
-                temp = std::make_shared<ReturnNode>(
-                                                    std::make_shared<DivNode>(currentToken, temp, (factor())));
+                node = std::make_shared<ReturnNode>(
+                                                    std::make_shared<DivNode>(currentToken, node, factor()));
             }
             else if (type == TokenType::MOD)
             {
-                temp = std::make_shared<ReturnNode>(
-                                                    std::make_shared<ModNode>(currentToken, temp, (factor())));
+                node = std::make_shared<ReturnNode>(
+                                                    std::make_shared<ModNode>(currentToken, node, factor()));
             }
         }
-        return std::make_shared<ReturnNode>(temp);
+        return std::make_shared<ReturnNode>(node);
     }
     return null;
 }
@@ -246,7 +284,7 @@ std::shared_ptr<Node> Parser::expression()
         std::shared_ptr<Node> value = term();
         acceptIndentation();
 
-        std::shared_ptr<Node> temp = value;
+        std::shared_ptr<Node> node = value;
 
         while (!tokens.empty() && (currentToken->getType() == TokenType::ADDITION || currentToken->getType() == TokenType::SUBTRACTION))
         {
@@ -255,22 +293,23 @@ std::shared_ptr<Node> Parser::expression()
             acceptIndentation();
             if (type == TokenType::ADDITION)
             {
-                temp = std::make_shared<ReturnNode>(
-                                                    std::make_shared<AddNode>(currentToken, temp, (term())));
+                node = std::make_shared<ReturnNode>(
+                                                    std::make_shared<AddNode>(currentToken, node, term()));
             }
             else
             {
-                temp = std::make_shared<ReturnNode>(
-                                                    std::make_shared<SubNode>(currentToken, temp, (term())));
+                node = std::make_shared<ReturnNode>(
+                                                    std::make_shared<SubNode>(currentToken, node, term()));
             }
         }
-        return std::make_shared<ReturnNode>(temp);
+        return std::make_shared<ReturnNode>(node);
     }
     return null;
 }
 
 std::shared_ptr<Node> Parser::condition()
 {
+    acceptIndentation();
     if (!tokens.empty() && compilation)
     {
         std::shared_ptr<Node> value = expression();
@@ -278,7 +317,7 @@ std::shared_ptr<Node> Parser::condition()
         {
             TokenType type = currentToken->getType();
 
-            std::shared_ptr<Node> temp = value;
+            std::shared_ptr<Node> node = value;
 
             while (!tokens.empty() && (currentToken->getType() == TokenType::IFEQUALS ||
                    currentToken->getType() == TokenType::IFNOTEQUALS ||
@@ -291,46 +330,46 @@ std::shared_ptr<Node> Parser::condition()
                 {
                     nextToken();
                     std::shared_ptr<Node> next = expression();
-                    temp = std::make_shared<ReturnNode>(
-                                                        std::make_shared<IfEqualNode>(currentToken, temp, (next)));
+                    node = std::make_shared<ReturnNode>(
+                                                        std::make_shared<IfEqualNode>(currentToken, node, next));
                 }
                 else if (type == TokenType::IFNOTEQUALS)
                 {
                     nextToken();
                     std::shared_ptr<Node> next = expression();
-                    temp = std::make_shared<ReturnNode>(
-                                                        std::make_shared<IfNotEqualNode>(currentToken, temp, (next)));
+                    node = std::make_shared<ReturnNode>(
+                                                        std::make_shared<IfNotEqualNode>(currentToken, node, next));
                 }
                 else if (type == TokenType::IFLESSTHAN)
                 {
                     nextToken();
                     std::shared_ptr<Node> next = expression();
-                    temp = std::make_shared<ReturnNode>(
-                                                        std::make_shared<IfUnderNode>(currentToken, temp, (next)));
+                    node = std::make_shared<ReturnNode>(
+                                                        std::make_shared<IfUnderNode>(currentToken, node, next));
                 }
                 else if (type == TokenType::IFLESSTHANOREQUAL)
                 {
                     nextToken();
                     std::shared_ptr<Node> next = expression();
-                    temp = std::make_shared<ReturnNode>(
-                                                        std::make_shared<IfUnderOrEqualNode>(currentToken, temp, (next)));
+                    node = std::make_shared<ReturnNode>(
+                                                        std::make_shared<IfUnderOrEqualNode>(currentToken, node, next));
                 }
                 else if (type == TokenType::IFGREATER)
                 {
                     nextToken();
                     std::shared_ptr<Node> next = expression();
-                    temp = std::make_shared<ReturnNode>(
-                                                        std::make_shared<IfOverNode>(currentToken, temp, (next)));
+                    node = std::make_shared<ReturnNode>(
+                                                        std::make_shared<IfOverNode>(currentToken, node, next));
                 }
                 else if (type == TokenType::IFGREATERTHANOREQUAL)
                 {
                     nextToken();
                     std::shared_ptr<Node> next = expression();
-                    temp = std::make_shared<ReturnNode>(
-                                                        std::make_shared<IfOverOrEqualNode>(currentToken, temp, (next)));
+                    node = std::make_shared<ReturnNode>(
+                                                        std::make_shared<IfOverOrEqualNode>(currentToken, node, next));
                 }
             }
-            return temp;
+            return node;
         }
     }
     return null;
@@ -338,12 +377,13 @@ std::shared_ptr<Node> Parser::condition()
 
 std::shared_ptr<Node> Parser::boolean()
 {
+    acceptIndentation();
     if (!tokens.empty() && compilation)
     {
         std::shared_ptr<Node> value = condition();
         TokenType type = currentToken->getType();
 
-        std::shared_ptr<Node> temp = value;
+        std::shared_ptr<Node> node = value;
 
         while (currentToken->getType() == TokenType::AND || currentToken->getType() == TokenType::OR)
         {
@@ -351,18 +391,18 @@ std::shared_ptr<Node> Parser::boolean()
             {
                 nextToken();
                 std::shared_ptr<Node> next = condition();
-                temp = std::make_shared<ReturnNode>(
-                                                    std::make_shared<IfAndNode>(currentToken, temp, (next)));
+                node = std::make_shared<ReturnNode>(
+                                                    std::make_shared<IfAndNode>(currentToken, node, next));
             }
             else if (type == TokenType::OR)
             {
                 nextToken();
                 std::shared_ptr<Node> next = condition();
-                temp = std::make_shared<ReturnNode>(
-                                                    std::make_shared<IfOrNode>(currentToken, temp, (next)));
+                node = std::make_shared<ReturnNode>(
+                                                    std::make_shared<IfOrNode>(currentToken, node, next));
             }
         }
-        return temp;
+        return node;
     }
     return null;
 }
@@ -376,7 +416,7 @@ std::shared_ptr<Node> Parser::compound()
         std::shared_ptr<Node> value = term();
         acceptIndentation();
 
-        std::shared_ptr<Node> temp = value;
+        std::shared_ptr<Node> node = value;
 
         while (!tokens.empty() &&
                (currentToken->getType() == TokenType::ADDITIONEQUAL ||
@@ -390,18 +430,18 @@ std::shared_ptr<Node> Parser::compound()
             switch (type)
             {
             case ADDITIONEQUAL:
-               temp = std::make_shared<ReturnNode>(std::make_shared<AddNode>(currentToken, temp, (boolean())));
+               node = std::make_shared<ReturnNode>(std::make_shared<AddNode>(currentToken, node, (boolean())));
                break;
             case SUBTRACTIONEQUAL:
-                temp = std::make_shared<ReturnNode>(std::make_shared<AddNode>(currentToken, temp, (boolean())));
+                node = std::make_shared<ReturnNode>(std::make_shared<AddNode>(currentToken, node, (boolean())));
                 break;
             case MULTIPLICATIONEQUAL:
-                temp = std::make_shared<ReturnNode>(std::make_shared<AddNode>(currentToken, temp, (boolean())));
+                node = std::make_shared<ReturnNode>(std::make_shared<AddNode>(currentToken, node, (boolean())));
                 break;
             case DIVISIONEQUAL:
-                temp = std::make_shared<ReturnNode>(std::make_shared<AddNode>(currentToken, temp, (boolean())));
+                node = std::make_shared<ReturnNode>(std::make_shared<AddNode>(currentToken, node, (boolean())));
             }
-            return std::make_shared<ReturnNode>(temp);
+            return std::make_shared<ReturnNode>(node);
         }
     }
     */
@@ -410,6 +450,7 @@ std::shared_ptr<Node> Parser::compound()
 
 std::shared_ptr<Node> Parser::statement()
 {
+    acceptIndentation();
     if (!tokens.empty() && compilation)
     {
         acceptIndentation();
@@ -491,7 +532,7 @@ std::shared_ptr<Node> Parser::statement()
             expect(TokenType::RIGHTBRACKET);
             acceptIndentation();
             std::shared_ptr<Node> next = block();
-            return std::make_shared<ReturnNode>((std::make_shared<WhileNode>(currentToken, conditionNode, statementNode, next)));
+            return std::make_shared<ReturnNode>(std::make_shared<WhileNode>(currentToken, conditionNode, statementNode, next));
         }
         return null;
     }
@@ -528,12 +569,36 @@ std::shared_ptr<Node> Parser::block()
 
             TokenType tokenType = currentToken->getType();
 
+
+            if (accept(TokenType::INCREMENT))
+            {
+                std::shared_ptr<Node> node = std::make_shared<IncrementNode>(currentToken, std::make_shared<GetVarNode>(currentToken, word));
+                if (!expect(TokenType::SEMICOLON))
+                {
+                    compilation = false;
+                    return null;
+                }
+                return std::make_shared<RunNode>(currentToken, std::move(std::make_shared<ReturnNode>(std::move(node))), std::move(block()));
+            }
+
+            if (accept(TokenType::DECREMENT))
+            {
+                std::shared_ptr<Node> node = std::make_shared<DecrementNode>(currentToken, std::make_shared<GetVarNode>(currentToken, word));
+                if (!expect(TokenType::SEMICOLON))
+                {
+                    compilation = false;
+                    return null;
+                }
+                return std::make_shared<RunNode>(currentToken, std::move(std::make_shared<ReturnNode>(std::move(node))), std::move(block()));
+            }
+
             if (tokenType != TokenType::EQUALS &&
                     tokenType != TokenType::ADDITIONEQUAL &&
                     tokenType != TokenType::SUBTRACTIONEQUAL &&
                     tokenType != TokenType::MULTIPLICATIONEQUAL &&
                     tokenType != TokenType::DIVISIONEQUAL)
             {
+                // Unexpected token... report error here
                 compilation = false;
                 return null;
             }
@@ -556,48 +621,35 @@ std::shared_ptr<Node> Parser::block()
 
             if (tokenType == TokenType::EQUALS)
             {
-                return std::make_shared<ReturnNode>(std::make_shared<SetVarNode>(currentToken, word, expressionNode, blockNode));
+                return std::move(std::make_shared<ReturnNode>(std::make_shared<SetVarNode>(currentToken, word, expressionNode, blockNode)));
             }
             else if (tokenType == TokenType::ADDITIONEQUAL)
             {
-                //add
-
-                std::shared_ptr<Node> getNode = std::make_shared<ReturnNode>(std::make_shared<GetVarNode>(currentToken, word));
-                std::shared_ptr<Node> addNode = std::make_shared<AddNode>(currentToken, getNode, expressionNode);
-                return std::make_shared<ReturnNode>(std::make_shared<SetVarNode>(currentToken, word, std::move(addNode), blockNode));
+                std::shared_ptr<Node> getNode = std::move(std::make_shared<ReturnNode>(std::make_shared<GetVarNode>(currentToken, word)));
+                std::shared_ptr<Node> addNode = std::move(std::make_shared<AddNode>(currentToken, getNode, expressionNode));
+                return std::move(std::make_shared<ReturnNode>(std::make_shared<SetVarNode>(currentToken, word, std::move(addNode), blockNode)));
             }
             else if (tokenType == TokenType::SUBTRACTIONEQUAL)
             {
-                std::shared_ptr<Node> getNode = std::make_shared<ReturnNode>(std::make_shared<GetVarNode>(currentToken, word));
-                std::shared_ptr<Node> subNode = std::make_shared<SubNode>(currentToken, getNode, expressionNode);
-                return std::make_shared<ReturnNode>(std::make_shared<SetVarNode>(currentToken, word, std::move(subNode), blockNode));
+                std::shared_ptr<Node> getNode = std::move(std::make_shared<ReturnNode>(std::make_shared<GetVarNode>(currentToken, word)));
+                std::shared_ptr<Node> subNode = std::move(std::make_shared<SubNode>(currentToken, getNode, expressionNode));
+                return std::move(std::make_shared<ReturnNode>(std::make_shared<SetVarNode>(currentToken, word, std::move(subNode), blockNode)));
             }
             else if (tokenType == TokenType::MULTIPLICATIONEQUAL)
             {
-                std::shared_ptr<Node> getNode = std::make_shared<ReturnNode>(std::make_shared<GetVarNode>(currentToken, word));
-                std::shared_ptr<Node> mulNode = std::make_shared<MulNode>(currentToken, getNode, expressionNode);
-                return std::make_shared<ReturnNode>(std::make_shared<SetVarNode>(currentToken, word, std::move(mulNode), blockNode));
+                std::shared_ptr<Node> getNode = std::move(std::make_shared<ReturnNode>(std::make_shared<GetVarNode>(currentToken, word)));
+                std::shared_ptr<Node> mulNode = std::move(std::make_shared<MulNode>(currentToken, getNode, expressionNode));
+                return std::move(std::make_shared<ReturnNode>(std::make_shared<SetVarNode>(currentToken, word, std::move(mulNode), blockNode)));
             }
             else if (tokenType == TokenType::DIVISIONEQUAL)
             {
-                std::shared_ptr<Node> getNode = std::make_shared<ReturnNode>(std::make_shared<GetVarNode>(currentToken, word));
-                std::shared_ptr<Node> divNode = std::make_shared<DivNode>(currentToken, getNode, expressionNode);
-                return std::make_shared<ReturnNode>(std::make_shared<SetVarNode>(currentToken, word, std::move(divNode), blockNode));
+                std::shared_ptr<Node> getNode = std::move(std::make_shared<ReturnNode>(std::make_shared<GetVarNode>(currentToken, word)));
+                std::shared_ptr<Node> divNode = std::move(std::make_shared<DivNode>(currentToken, getNode, expressionNode));
+                return std::move(std::make_shared<ReturnNode>(std::make_shared<SetVarNode>(currentToken, word, std::move(divNode), blockNode)));
             }
 
             compilation = false;
             return null;
-
-
-
-
-
-
-
-
-
-
-
         }
         else if (functions->get(this->currentToken->getContent()) != nullptr)
         {
@@ -721,7 +773,7 @@ std::shared_ptr<Node> Parser::parse()
 
 bool Parser::program()
 {
-    std::shared_ptr<Scope> scope = std::make_shared<Scope>(std::move(std::make_shared<Variables>(false)));
+    std::shared_ptr<Scope> scope = std::move(std::make_shared<Scope>(std::move(std::make_shared<Variables>(false))));
     if (!tokens.empty() && compilation)
     {
         nextToken();

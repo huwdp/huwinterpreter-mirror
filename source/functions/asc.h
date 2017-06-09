@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ASC
-#define ASC
+#ifndef ASC_H
+#define ASC_H
 
 #include "function.h"
 

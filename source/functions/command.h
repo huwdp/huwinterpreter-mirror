@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COMMAND
-#define COMMAND
+#ifndef COMMAND_H
+#define COMMAND_H
 
 #include "function.h"
 #include <vector>

@@ -49,7 +49,7 @@ std::shared_ptr<Variable> Max::run(std::shared_ptr<Token> token,
             }
             
         }
-        answer = std::make_shared<FakeNumber>(max);
+        answer = std::make_shared<NumberVariable>(max);
     }
     else
     {

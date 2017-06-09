@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TOLOWER
-#define TOLOWER
+#ifndef TOLOWER_H
+#define TOLOWER_H
 
 #include "function.h"
 #include <algorithm>

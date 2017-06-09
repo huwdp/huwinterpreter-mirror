@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COS
-#define COS
+#ifndef COS_H
+#define COS_H
 
 #include "function.h"
 
@@ -30,5 +30,5 @@ public:
                                   std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // COS
+#endif // COS_H
 

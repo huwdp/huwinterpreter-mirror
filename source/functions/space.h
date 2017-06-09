@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SPACE
-#define SPACE
+#ifndef SPACE_H
+#define SPACE_H
 
 #include "function.h"
 
