@@ -17,30 +17,30 @@
 
 NumberVariable::NumberVariable(bool value)
 {
-    this->variable = std::move(toValue(std::move(std::make_shared<IntegerVariable>((long long)(int)value))));
+    this->variable = std::move(std::move(std::make_shared<IntegerVariable>((long long)(int)value)));
 }
 
 NumberVariable::NumberVariable(std::shared_ptr<Variable> variable)
 {
-    this->variable = toValue(variable);
+    this->variable = variable;
 }
 
 NumberVariable::NumberVariable(std::string name, double value)
     : Variable(name)
 {
-    this->variable = std::move(toValue(std::move(std::make_shared<DoubleVariable>(value))));
+    this->variable = std::move(std::move(std::make_shared<DoubleVariable>(value)));
 }
 
 NumberVariable::NumberVariable(double value)
     : Variable("")
 {
-    this->variable = std::move(toValue(std::move(std::make_shared<DoubleVariable>(value))));
+    this->variable = std::move(std::move(std::make_shared<DoubleVariable>(value)));
 }
 
 NumberVariable::NumberVariable(long long value)
     : Variable("")
 {
-    this->variable = std::move(toValue(std::move(std::make_shared<IntegerVariable>(value))));
+    this->variable = std::move(std::move(std::make_shared<IntegerVariable>(value)));
 }
 
 NumberVariable::NumberVariable(std::string name, long long value)
@@ -274,20 +274,15 @@ std::shared_ptr<Variable> NumberVariable::ifNotEqual(std::shared_ptr<Variable> v
 std::shared_ptr<Variable> NumberVariable::toValue(std::shared_ptr<Variable> variable)
 {
     Precision precision;
-    return variable;
     double value = variable->toDouble();
     if (precision.getType(value) == INTEGER && !precision.isSafeInteger(value))
-    {
-        return std::move(variable);
-    }
-    else if (variable->getType() == INTEGER)
     {
         return std::move(variable);
     }
     else if (precision.getType(value) == INTEGER)
     {
         long long intValue = (long long)value;
-        return std::move(std::make_shared<NumberVariable>(std::move(std::make_shared<IntegerVariable>(intValue))));
+        return std::make_shared<NumberVariable>(std::move(std::make_shared<IntegerVariable>(intValue)));
     }
     return std::move(variable);
 }
