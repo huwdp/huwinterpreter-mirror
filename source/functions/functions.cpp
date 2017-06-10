@@ -17,61 +17,6 @@
 
 Functions::Functions()
 {
-    /*
-    std::shared_ptr<Command> command(new Command());
-    std::shared_ptr<Function> dateFormat(new DateFormat());
-    std::shared_ptr<Function> fileRead(new FileRead());
-    std::shared_ptr<Function> fileWrite(new FileWrite());
-    std::shared_ptr<Function> month(new Month());
-    std::shared_ptr<Function> monthName(new MonthName());
-    std::shared_ptr<Function> notF(new Not());
-    std::shared_ptr<Function> now(new Now());
-    std::shared_ptr<Function> print(new Print());
-    std::shared_ptr<Function> scan(new Scan());
-    std::shared_ptr<Function> weekday(new Weekday());
-    std::shared_ptr<Function> weekdayName(new WeekdayName());
-    std::shared_ptr<Function> year(new Year());
-
-
-    std::shared_ptr<Function> abs(new Abs());
-    std::shared_ptr<Function> acos(new Acos());
-    std::shared_ptr<Function> asin(new Asin());
-    std::shared_ptr<Function> atan(new Atan());
-    std::shared_ptr<Function> atan2(new Atan2());
-    std::shared_ptr<Function> ceil(new Ceil());
-    std::shared_ptr<Function> cos(new Cos());
-    std::shared_ptr<Function> exp(new Exp());
-    std::shared_ptr<Function> sin(new Sin());
-    std::shared_ptr<Function> sqrt(new Sqrt());
-    std::shared_ptr<Function> tan(new Tan());
-    std::shared_ptr<Function> pow(new Pow());
-    std::shared_ptr<Function> min(new Min());
-    std::shared_ptr<Function> max(new Max());
-
-
-    std::shared_ptr<Function> inStr(new InStr());
-    std::shared_ptr<Function> inStrRev(new InStrRev());
-    std::shared_ptr<Function> toLower(new ToLower());
-    std::shared_ptr<Function> left(new Left());
-    std::shared_ptr<Function> len(new Len());
-    std::shared_ptr<Function> lTrim(new LTrim());
-    std::shared_ptr<Function> mid(new Mid());
-    std::shared_ptr<Function> right(new Right());
-    std::shared_ptr<Function> rTrim(new RTrim());
-    std::shared_ptr<Function> space(new Space());
-    std::shared_ptr<Function> strComp(new StrComp());
-    std::shared_ptr<Function> strReverse(new StrReverse());
-    std::shared_ptr<Function> trim(new Trim());
-    std::shared_ptr<Function> toUpper(new ToUpper());
-    std::shared_ptr<Function> random(new Random());
-
-
-    std::shared_ptr<Function> asc(new Asc());
-    std::shared_ptr<Function> cha(new Cha());
-    std::shared_ptr<Function> str(new Str());
-    */
-
-
     functions["command"] = std::move(std::make_shared<Command>());
     functions["dateFormat"] = std::move(std::make_shared<DateFormat>());
     functions["fileRead"] = std::move(std::make_shared<FileRead>());
@@ -128,6 +73,8 @@ Functions::Functions()
     functions["arrayGet"] = std::move(std::make_shared<ArrayGet>());
     functions["arraySet"] = std::move(std::make_shared<ArraySet>());
     functions["arrayUnset"] = std::move(std::make_shared<ArrayUnset>());
+
+    functions["count"] = std::move(std::make_shared<Count>());
 }
 
 std::shared_ptr<Function> Functions::get(std::string name)

@@ -87,5 +87,8 @@
 #include "functions/arrayset.h"
 #include "functions/arrayunset.h"
 
+// String/array
+#include "functions/count.h"
+
 #endif  //FUNCTIONLIST_H
 

@@ -56,6 +56,7 @@ public:
     std::shared_ptr<Variable> equal(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> increment();
     std::shared_ptr<Variable> decrement();
+    std::shared_ptr<Variable> count();
     std::shared_ptr<Variable> get(std::string index);
     void set(std::string index, std::shared_ptr<Variable> value);
     void unset(std::string index);

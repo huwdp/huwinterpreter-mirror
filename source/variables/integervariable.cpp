@@ -209,6 +209,12 @@ std::shared_ptr<Variable> IntegerVariable::decrement()
     return std::move(std::make_shared<NumberVariable>(this->toDouble()));
 }
 
+std::shared_ptr<Variable> IntegerVariable::count()
+{
+    Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call count method on integer"));
+    return null;
+}
+
 void IntegerVariable::set(std::string index, std::shared_ptr<Variable> value)
 {
     Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call set method on integer type. Integer is not an array"));

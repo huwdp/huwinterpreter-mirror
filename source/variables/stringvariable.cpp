@@ -342,6 +342,11 @@ std::shared_ptr<Variable> StringVariable::decrement()
     return null;
 }
 
+std::shared_ptr<Variable> StringVariable::count()
+{
+    return std::make_shared<NumberVariable>((long long)value.size());
+}
+
 void StringVariable::set(std::string index, std::shared_ptr<Variable> value)
 {
     Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call set method in string. String is not an array"));

@@ -215,6 +215,12 @@ std::shared_ptr<Variable> DoubleVariable::increment()
     return std::move(std::make_shared<NumberVariable>(this->toDouble()));
 }
 
+std::shared_ptr<Variable> DoubleVariable::count()
+{
+    Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call count method on double"));
+    return null;
+}
+
 std::shared_ptr<Variable> DoubleVariable::decrement()
 {
     this->value--;

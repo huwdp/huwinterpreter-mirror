@@ -304,6 +304,11 @@ std::shared_ptr<Variable> NumberVariable::decrement()
     return variable;
 }
 
+std::shared_ptr<Variable> NumberVariable::count()
+{
+    return variable->count();
+}
+
 void NumberVariable::set(std::string index, std::shared_ptr<Variable> value)
 {
     variable->set(index, value);

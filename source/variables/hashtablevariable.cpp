@@ -182,6 +182,11 @@ std::shared_ptr<Variable> HashTableVariable::equal(std::shared_ptr<Variable> var
     return std::move(std::make_shared<NumberVariable>(toString() == variable->toString()));
 }
 
+std::shared_ptr<Variable> HashTableVariable::count()
+{
+    return std::make_shared<NumberVariable>((long long)this->map.size());
+}
+
 std::shared_ptr<Variable> HashTableVariable::increment()
 {
     Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot decrement an array"));

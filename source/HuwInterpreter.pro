@@ -125,7 +125,8 @@ SOURCES += \
     functions/arrayget.cpp \
     functions/arrayset.cpp \
     functions/array.cpp \
-    functions/arrayunset.cpp
+    functions/arrayunset.cpp \
+    functions/count.cpp
 
 HEADERS += \
     errors/debug.h \
@@ -249,5 +250,6 @@ HEADERS += \
     functions/arrayget.h \
     functions/arrayset.h \
     functions/array.h \
-    functions/arrayunset.h
+    functions/arrayunset.h \
+    functions/count.h
 
