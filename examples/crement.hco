@@ -1,0 +1,5 @@
+set a = 10;
+set a++;
+print(a);
+set a--;
+print(a);
