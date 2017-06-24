@@ -78,7 +78,18 @@ std::string DoubleVariable::toString()
     {
         return std::to_string(toInt());
     }
-    return std::to_string(value);
+    std::stringstream ss;
+    ss.precision(numberPrecision);
+    ss << value;
+    std::string output = ss.str();
+
+
+
+    if (output.length() > 8)
+    {
+        return output.substr(0, 8);
+    }
+    return output;
 }
 
 bool DoubleVariable::toBool()

@@ -19,8 +19,6 @@
 #include <string>
 #include <iostream>
 
-
-
 class Debug
 {
 private:

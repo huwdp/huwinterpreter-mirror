@@ -29,6 +29,7 @@
 class DoubleVariable : public Variable
 {
 private:
+    const int numberPrecision = 15;
     double value;
 public:
     DoubleVariable();

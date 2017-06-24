@@ -28,6 +28,7 @@ class NumberVariable : public Variable
 {
 private:
     std::shared_ptr<Variable> variable;
+    Precision precision;
 public:
     NumberVariable(bool value);
     NumberVariable(std::shared_ptr<Variable> variable);
@@ -51,8 +52,6 @@ public:
     VarType getType();
     double getValue();
 
-    std::shared_ptr<Variable> toValue(std::shared_ptr<Variable> variable);
-
     std::shared_ptr<Variable> pow(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> mul(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> div(std::shared_ptr<Variable> variable);
@@ -73,6 +72,13 @@ public:
     std::shared_ptr<Variable> increment();
     std::shared_ptr<Variable> decrement();
     std::shared_ptr<Variable> count();
+
+    std::shared_ptr<Variable> toValue(std::shared_ptr<Variable> variable);
+
+
+    std::shared_ptr<Variable> toInternalValue(double value);
+    std::shared_ptr<Variable> toInternalValue(long long value);
+
     std::shared_ptr<Variable> get(std::string index);
     void set(std::string index, std::shared_ptr<Variable> value);
     void unset(std::string index);

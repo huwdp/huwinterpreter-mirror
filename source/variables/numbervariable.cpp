@@ -17,7 +17,7 @@
 
 NumberVariable::NumberVariable(bool value)
 {
-    this->variable = std::move(std::move(std::make_shared<IntegerVariable>((long long)(int)value)));
+    this->variable = std::move(std::make_shared<IntegerVariable>((long long)(int)value));
 }
 
 NumberVariable::NumberVariable(std::shared_ptr<Variable> variable)
@@ -28,25 +28,25 @@ NumberVariable::NumberVariable(std::shared_ptr<Variable> variable)
 NumberVariable::NumberVariable(std::string name, double value)
     : Variable(name)
 {
-    this->variable = std::move(std::move(std::make_shared<DoubleVariable>(value)));
+    this->variable = std::move(toInternalValue(value));
 }
 
 NumberVariable::NumberVariable(double value)
     : Variable("")
 {
-    this->variable = std::move(std::move(std::make_shared<DoubleVariable>(value)));
+    this->variable = std::move(toInternalValue(value));
 }
 
 NumberVariable::NumberVariable(long long value)
     : Variable("")
 {
-    this->variable = std::move(std::move(std::make_shared<IntegerVariable>(value)));
+    this->variable = std::move(toInternalValue(value));
 }
 
 NumberVariable::NumberVariable(std::string name, long long value)
-    : Variable("")
+    : Variable(name)
 {
-    this->variable = std::move(std::make_shared<IntegerVariable>(value));
+    this->variable = std::move(toInternalValue(value));
 }
 
 NumberVariable::NumberVariable(std::string name, std::string value)
@@ -105,7 +105,6 @@ double NumberVariable::getValue()
 
 std::shared_ptr<Variable> NumberVariable::pow(std::shared_ptr<Variable> variable)
 {
-    
     if (variable == nullptr)
     {
         return null;
@@ -119,7 +118,6 @@ std::shared_ptr<Variable> NumberVariable::pow(std::shared_ptr<Variable> variable
 
 std::shared_ptr<Variable> NumberVariable::mul(std::shared_ptr<Variable> variable)
 {
-    
     if (variable == nullptr)
     {
         return null;
@@ -147,7 +145,6 @@ std::shared_ptr<Variable> NumberVariable::div(std::shared_ptr<Variable> variable
 
 std::shared_ptr<Variable> NumberVariable::mod(std::shared_ptr<Variable> variable)
 {
-    
     if (variable == nullptr)
     {
         return null;
@@ -161,7 +158,6 @@ std::shared_ptr<Variable> NumberVariable::mod(std::shared_ptr<Variable> variable
 
 std::shared_ptr<Variable> NumberVariable::add(std::shared_ptr<Variable> variable)
 {
-    
     if (variable == nullptr)
     {
         return null;
@@ -175,7 +171,6 @@ std::shared_ptr<Variable> NumberVariable::add(std::shared_ptr<Variable> variable
 
 std::shared_ptr<Variable> NumberVariable::sub(std::shared_ptr<Variable> variable)
 {
-    
     if (variable == nullptr)
     {
         return null;
@@ -189,7 +184,6 @@ std::shared_ptr<Variable> NumberVariable::sub(std::shared_ptr<Variable> variable
 
 std::shared_ptr<Variable> NumberVariable::ifUnder(std::shared_ptr<Variable> variable)
 {
-    
     if (variable == nullptr)
     {
         return null;
@@ -203,7 +197,6 @@ std::shared_ptr<Variable> NumberVariable::ifUnder(std::shared_ptr<Variable> vari
 
 std::shared_ptr<Variable> NumberVariable::ifUnderOrEqual(std::shared_ptr<Variable> variable)
 {
-    
     if (variable == nullptr)
     {
         return null;
@@ -217,7 +210,6 @@ std::shared_ptr<Variable> NumberVariable::ifUnderOrEqual(std::shared_ptr<Variabl
 
 std::shared_ptr<Variable> NumberVariable::ifOver(std::shared_ptr<Variable> variable)
 {
-    
     if (variable == nullptr)
     {
         return null;
@@ -231,7 +223,6 @@ std::shared_ptr<Variable> NumberVariable::ifOver(std::shared_ptr<Variable> varia
 
 std::shared_ptr<Variable> NumberVariable::ifOverOrEqual(std::shared_ptr<Variable> variable)
 {
-    
     if (variable == nullptr)
     {
         return null;
@@ -245,7 +236,6 @@ std::shared_ptr<Variable> NumberVariable::ifOverOrEqual(std::shared_ptr<Variable
 
 std::shared_ptr<Variable> NumberVariable::ifEqual(std::shared_ptr<Variable> variable)
 {
-    
     if (variable == nullptr)
     {
         return null;
@@ -259,7 +249,6 @@ std::shared_ptr<Variable> NumberVariable::ifEqual(std::shared_ptr<Variable> vari
 
 std::shared_ptr<Variable> NumberVariable::ifNotEqual(std::shared_ptr<Variable> variable)
 {
-    
     if (variable == nullptr)
     {
         return null;
@@ -271,11 +260,35 @@ std::shared_ptr<Variable> NumberVariable::ifNotEqual(std::shared_ptr<Variable> v
     return toValue(std::move(this->variable->ifNotEqual(variable)));
 }
 
+std::shared_ptr<Variable> NumberVariable::toInternalValue(double value)
+{
+    if (precision.isSafeInteger(value))
+    {
+        return std::move(std::make_shared<DoubleVariable>(value));
+    }
+    else
+    {
+        if (precision.getType(value) == DOUBLE)
+        {
+            return std::move(std::make_shared<DoubleVariable>(value));
+        }
+        return std::move(std::make_shared<IntegerVariable>(value));
+    }
+}
+
+std::shared_ptr<Variable> NumberVariable::toInternalValue(long long value)
+{
+    if (precision.isSafeInteger(value))
+    {
+        return std::move(std::make_shared<DoubleVariable>(value));
+    }
+    return std::move(std::make_shared<DoubleVariable>(value));
+}
+
 std::shared_ptr<Variable> NumberVariable::toValue(std::shared_ptr<Variable> variable)
 {
-    Precision precision;
     double value = variable->toDouble();
-    if (precision.getType(value) == INTEGER && !precision.isSafeInteger(value))
+    if (precision.isSafeInteger(value))
     {
         return std::move(variable);
     }
