@@ -99,6 +99,7 @@ public:
     std::shared_ptr<Node> boolean();
     std::shared_ptr<Node> compound();
     std::shared_ptr<Node> bracket();
+    std::shared_ptr<Node> elseStatement();
     std::shared_ptr<Node> statement();
     std::shared_ptr<Node> block();
     std::shared_ptr<Node> parse();

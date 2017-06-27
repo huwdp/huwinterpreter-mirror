@@ -26,7 +26,7 @@ private:
     std::shared_ptr<Node> elseNode;
     std::shared_ptr<Node> next;
 public:
-    IfNode(std::shared_ptr<Token> token, std::shared_ptr<Node> condition, std::shared_ptr<Node> body, std::shared_ptr<Node> elseNode, std::shared_ptr<Node> next);
+    IfNode(std::shared_ptr<Token> token, std::shared_ptr<Node> condition, std::shared_ptr<Node> body, std::shared_ptr<Node> elseNode);
     std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
 };
 

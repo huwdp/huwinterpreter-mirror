@@ -15,13 +15,12 @@
 
 #include "ifnode.h"
 
-IfNode::IfNode(std::shared_ptr<Token> token, std::shared_ptr<Node> condition, std::shared_ptr<Node> body, std::shared_ptr<Node> elseNode, std::shared_ptr<Node> next) : Node(token)
+IfNode::IfNode(std::shared_ptr<Token> token, std::shared_ptr<Node> condition, std::shared_ptr<Node> body, std::shared_ptr<Node> elseNode) : Node(token)
 {
+    Debug::print("IfNode");
     this->condition = condition;
     this->body = body;
     this->elseNode = elseNode;
-    this->next = next;
-    Debug::print("IfNode");
 }
 
 std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> scope)
@@ -49,10 +48,6 @@ std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> scope)
     else
     {
         Errors::add(std::make_shared<Error>(STATEMENT_ERROR, "Could not compare."));
-    }
-    if (next != nullptr)
-    {
-        return next->execute(scope);
     }
     return null;
 }

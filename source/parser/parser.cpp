@@ -387,6 +387,73 @@ std::shared_ptr<Node> Parser::boolean()
     return null;
 }
 
+std::shared_ptr<Node> Parser::elseStatement()
+{
+    std::shared_ptr<Node> returnNode = null;
+    std::shared_ptr<Node> conditionNode = null;
+    std::shared_ptr<Node> statementNode = null;
+    std::shared_ptr<Node> elseNode = null;
+    acceptIndentation();
+    if (accept("else"))
+    {
+        acceptIndentation();
+        if (accept("if"))
+        {
+            acceptIndentation();
+            if (!expect(TokenType::LEFTARENTHESIS))
+            {
+                compilation = false;
+                return null;
+            }
+            acceptIndentation();
+            conditionNode = boolean();
+            acceptIndentation();
+            if (!expect(TokenType::RIGHTPARENTHESIS))
+            {
+                compilation = false;
+                return null;
+            }
+            acceptIndentation();
+            if (!expect(TokenType::LEFTBRACKET))
+            {
+                compilation = false;
+                return null;
+            }
+            acceptIndentation();
+            statementNode = block();
+            if (!expect(TokenType::RIGHTBRACKET))
+            {
+                compilation = false;
+                return null;
+            }
+            acceptIndentation();
+
+            elseNode = std::move(elseStatement());
+            acceptIndentation();
+        }
+        else
+        {
+            acceptIndentation();
+            if (!expect(TokenType::LEFTBRACKET))
+            {
+                compilation = false;
+                return null;
+            }
+            acceptIndentation();
+            std::shared_ptr<Node> node = block();
+            if (!expect(TokenType::RIGHTBRACKET))
+            {
+                compilation = false;
+                return null;
+            }
+            acceptIndentation();
+            return node;
+        }
+        returnNode = std::make_shared<ReturnNode>(std::make_shared<IfNode>(currentToken, conditionNode, statementNode, elseNode));
+    }
+    return returnNode;
+}
+
 std::shared_ptr<Node> Parser::statement()
 {
     acceptIndentation();
@@ -423,41 +490,13 @@ std::shared_ptr<Node> Parser::statement()
                 return null;
             }
             acceptIndentation();
-            if (accept("else"))
-            {
-                acceptIndentation();
-                if (currentToken->getContent() == "if")
-                {
-                    return std::make_shared<ReturnNode>(
-                                                        std::make_shared<IfNode>(currentToken,
-                                                                                 conditionNode,
-                                                                                 statementNode,
-                                                                                 statement(),
-                                                                                 block()));
-                }
 
-                if (!expect(TokenType::LEFTBRACKET))
-                {
-                    compilation = false;
-                    return null;
-                }
-                acceptIndentation();
-                std::shared_ptr<Node> elseNode = block();
-                acceptIndentation();
-                if (!expect(TokenType::RIGHTBRACKET))
-                {
-                    compilation = false;
-                    return null;
-                }
-                acceptIndentation();
-                std::shared_ptr<Node> next = block();
-                return std::make_shared<ReturnNode>(
-                                                    std::make_shared<IfNode>(currentToken, conditionNode, statementNode, elseNode, next));
-            }
+            std::shared_ptr<Node> elseNode = std::move(elseStatement());
+
             acceptIndentation();
             std::shared_ptr<Node> next = block();
-            return std::make_shared<ReturnNode>(
-                                                std::make_shared<IfNode>(currentToken, conditionNode, statementNode, nullptr, next));
+            std::shared_ptr<Node> returnNode = std::make_shared<ReturnNode>(std::make_shared<IfNode>(currentToken, conditionNode, statementNode, elseNode));
+            return std::make_shared<RunNode>(this->currentToken, returnNode, next);
         }
         else if (accept("while"))
         {
@@ -601,7 +640,6 @@ std::shared_ptr<Node> Parser::block()
                 compilation = false;
                 return null;
             }
-
 
             std::vector<std::shared_ptr<Node>> arguments;
             if (currentToken->getType() != TokenType::RIGHTPARENTHESIS)
