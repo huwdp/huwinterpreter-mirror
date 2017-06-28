@@ -28,13 +28,17 @@ std::shared_ptr<Variable> IfOrNode::execute(std::shared_ptr<Scope> scope)
     if (left != nullptr && right != nullptr)
     {
         std::shared_ptr<Variable> l = left->execute(scope);
-        std::shared_ptr<Variable> r = right->execute(scope);
-
         if (l == nullptr)
         {
             Errors::add(std::make_shared<Error>(ERROR, "Invalid expression", token));
             return null;
         }
+        if (l->toBool())
+        {
+            return std::make_shared<NumberVariable>(true);
+        }
+
+        std::shared_ptr<Variable> r = right->execute(scope);
         if (r == nullptr)
         {
             Errors::add(std::make_shared<Error>(ERROR, "Invalid expression", token));
@@ -42,9 +46,9 @@ std::shared_ptr<Variable> IfOrNode::execute(std::shared_ptr<Scope> scope)
         }
         if (r->toBool() || l->toBool())
         {
-            return std::make_shared<NumberVariable>((long long)1);
+            return std::make_shared<NumberVariable>(true);
         }
-        return std::make_shared<NumberVariable>((long long)0);
+        return std::make_shared<NumberVariable>(false);
     }
     Debug::print("Could not or.");
     return null;
