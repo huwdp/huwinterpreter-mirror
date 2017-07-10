@@ -37,13 +37,12 @@ void Parser::setCompilation(bool compilation)
     this->compilation = compilation;
 }
 
-bool Parser::acceptIndentation()
+void Parser::acceptIndentation()
 {
     while ((this->currentToken->getContent() == " " || this->currentToken->getContent() == "\t") && !tokens.empty())
     {
         nextToken();
     }
-    return true;
 }
 
 void Parser::nextToken()
