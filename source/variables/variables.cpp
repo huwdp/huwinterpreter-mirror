@@ -17,13 +17,6 @@
 
 Variables::Variables(bool isEmpty)
 {
-    parent = nullptr;
-    addDefaultVariables(isEmpty);
-}
-
-Variables::Variables(std::shared_ptr<Variables> parent, bool isEmpty)
-{
-    this->parent = parent;
     addDefaultVariables(isEmpty);
 }
 
@@ -48,14 +41,6 @@ void Variables::addDefaultVariables(bool isEmpty)
 
 std::shared_ptr<Variable> Variables::get(std::string name)
 {
-    if (parent != nullptr)
-    {
-        std::shared_ptr<Variable> variable = parent->get(name);
-        if (variable != nullptr)
-        {
-            return variable;
-        }
-    }
     std::unordered_map<std::string,std::shared_ptr<Variable>>::const_iterator got = variables.find(name);
     if (got == variables.end())
     {
@@ -69,10 +54,6 @@ std::shared_ptr<Variable> Variables::get(std::string name)
 
 bool Variables::set(std::string name, std::string value)
 {
-    if (parent != nullptr && parent->exists(name))
-    {
-        return parent->set(name, value);
-    }
     std::unordered_map<std::string,std::shared_ptr<Variable>>::const_iterator got = variables.find(name);
     if (got == variables.end())
     {
@@ -87,15 +68,6 @@ bool Variables::set(std::string name, std::string value)
 
 std::shared_ptr<Variable> Variables::exists(std::string name)
 {
-    std::shared_ptr<Variable> variable;
-    if (parent != nullptr)
-    {
-        variable = parent->exists(name);
-        if (variable != nullptr)
-        {
-            return variable;
-        }
-    }
     std::unordered_map<std::string,std::shared_ptr<Variable>>::const_iterator got = variables.find(name);
     if (got == variables.end())
     {
@@ -112,14 +84,6 @@ std::shared_ptr<Variable> Variables::exists(std::shared_ptr<Variable> variable)
     if (variable == nullptr)
     {
         return null;
-    }
-    if (parent != nullptr)
-    {
-        std::shared_ptr<Variable> exist = parent->exists(variable->getName());
-        if (exist != nullptr)
-        {
-            return exist;
-        }
     }
     std::shared_ptr<Variable> e = exists(variable->getName());
     if (e != nullptr)
@@ -187,8 +151,6 @@ bool Variables::removeVariable(std::shared_ptr<Variable> variable)
 
 bool Variables::removeVariable(std::string name)
 {
-    // fix here
-
     std::shared_ptr<Variable> e = exists(name);
     if (e != nullptr)
     {
@@ -196,9 +158,4 @@ bool Variables::removeVariable(std::string name)
         return true;
     }
     return false;
-}
-
-void Variables::setParent(std::shared_ptr<Variables> parent)
-{
-    this->parent = parent;
 }

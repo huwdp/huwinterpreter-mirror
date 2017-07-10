@@ -28,12 +28,10 @@
 class Variables
 {
 private:
-    std::shared_ptr<Variables> parent;
     std::unordered_map<std::string, std::shared_ptr<Variable>> variables;
 public:
     std::shared_ptr<Variable> null;
     Variables(bool isEmpty);
-    Variables(std::shared_ptr<Variables> parent, bool isEmpty);
     ~Variables();
     void addDefaultVariables(bool isEmpty);
     std::shared_ptr<Variable> get(std::string name);

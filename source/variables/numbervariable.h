@@ -37,10 +37,6 @@ public:
     NumberVariable(std::string name, double value);
     NumberVariable(std::string name, long long value);
     NumberVariable(std::string name, std::string value);
-    /*~NumberVariable()
-    {
-        std::cout << "destroy" <<std::endl;
-    }*/
 
     void setValue(double value);
     void setValue(std::string value);

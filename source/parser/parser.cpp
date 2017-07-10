@@ -750,7 +750,7 @@ std::shared_ptr<Node> Parser::parse()
 
 bool Parser::program()
 {
-    std::shared_ptr<Scope> scope = std::move(std::make_shared<Scope>(std::move(std::make_shared<Variables>(false))));
+    std::shared_ptr<Scope> scope = std::make_shared<Scope>();
     if (!tokens.empty() && compilation)
     {
         nextToken();
