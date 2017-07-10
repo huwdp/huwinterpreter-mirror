@@ -1,0 +1,19 @@
+set i = 0;
+set list = array();
+
+/* Add items to the hash table */
+while (i < 10)
+{
+    arraySet(list, i, "Item " + i);
+    set i++;
+}
+
+/* Print items */
+set i = 0;
+while (i < 10)
+{
+    print(arrayGet(list, i));
+    set i++;
+}
+
+print("Array count: " + count(list));
