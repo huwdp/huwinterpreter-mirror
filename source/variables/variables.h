@@ -23,6 +23,7 @@
 #include "variable.h"
 #include "doublevariable.h"
 #include "stringvariable.h"
+#include "constantvariable.h"
 #include "types/typedetector.h"
 
 class Variables

@@ -29,13 +29,13 @@ void Variables::addDefaultVariables(bool isEmpty)
 {
     if (!isEmpty)
     {
-        addVariable(std::move(std::make_shared<NumberVariable>("PI", 3.14159265358979)));
-        addVariable(std::move(std::make_shared<NumberVariable>("e", 2.718281828459045)));
-        addVariable(std::move(std::make_shared<NumberVariable>("y", 0.577215664901532)));
-        addVariable(std::move(std::make_shared<NumberVariable>("Φ", 1.618033988749894)));
-        addVariable(std::move(std::make_shared<NumberVariable>("φ", 0.618033988749894)));
-        addVariable(std::move(std::make_shared<NumberVariable>("δs", 2.41421356237309)));
-        addVariable(std::move(std::make_shared<NumberVariable>("ρ", 1.324717957244746)));
+        addVariable(std::move(std::make_shared<ConstantVariable>(std::make_shared<NumberVariable>("PI", 3.14159265358979))));
+        addVariable(std::move(std::make_shared<ConstantVariable>(std::make_shared<NumberVariable>("e", 2.718281828459045))));
+        addVariable(std::move(std::make_shared<ConstantVariable>(std::make_shared<NumberVariable>("y", 0.577215664901532))));
+        addVariable(std::move(std::make_shared<ConstantVariable>(std::make_shared<NumberVariable>("Φ", 1.618033988749894))));
+        addVariable(std::move(std::make_shared<ConstantVariable>(std::make_shared<NumberVariable>("φ", 0.618033988749894))));
+        addVariable(std::move(std::make_shared<ConstantVariable>(std::make_shared<NumberVariable>("δs", 2.41421356237309))));
+        addVariable(std::move(std::make_shared<ConstantVariable>(std::make_shared<NumberVariable>("ρ", 1.324717957244746))));
     }
 }
 
