@@ -113,7 +113,6 @@ SOURCES += \
     main.cpp \
     functions/customfunction.cpp \
     functions/emptyfunction.cpp \
-    nodes/returnnode.cpp \
     nodes/setreturnnode.cpp \
     nodes/incrementnode.cpp \
     nodes/decrementnode.cpp \
@@ -239,7 +238,6 @@ HEADERS += \
     huwinterpreter.h \
     functions/customfunction.h \
     functions/emptyfunction.h \
-    nodes/returnnode.h \
     nodes/setreturnnode.h \
     nodes/incrementnode.h \
     nodes/decrementnode.h \

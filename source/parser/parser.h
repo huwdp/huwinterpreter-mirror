@@ -57,7 +57,6 @@
 #include "nodes/divnode.h"
 #include "nodes/modnode.h"
 
-#include "nodes/returnnode.h"
 #include "nodes/setreturnnode.h"
 
 #include "nodes/bracketnode.h"
