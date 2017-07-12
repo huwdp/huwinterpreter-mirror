@@ -25,6 +25,10 @@ IfOrNode::IfOrNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std
 std::shared_ptr<Variable> IfOrNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("Or");
+    if (scope->getReturnValue() != nullptr)
+    {
+        return scope->getReturnValue();
+    }
     if (left != nullptr && right != nullptr)
     {
         std::shared_ptr<Variable> l = left->execute(scope);

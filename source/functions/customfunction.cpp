@@ -51,7 +51,8 @@ std::shared_ptr<Variable> CustomFunction::run(std::shared_ptr<Token> token,
 
     if (block != nullptr)
     {
-        std::shared_ptr<Variable> output = block->execute(newScope);
+        block->execute(newScope);
+        std::shared_ptr<Variable> output = newScope->getReturnValue();
 
         // Remove arguments given from scope
         for (std::vector<std::string>::iterator it1 = arguments.begin(); it1 != arguments.end(); ++it1)

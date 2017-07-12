@@ -23,8 +23,11 @@ GetVarNode::GetVarNode(std::shared_ptr<Token> token, std::string name) : Node(to
 
 std::shared_ptr<Variable> GetVarNode::execute(std::shared_ptr<Scope> scope)
 {
-    
     Debug::print("GetVarNode");
+    if (scope->getReturnValue() != nullptr)
+    {
+        return scope->getReturnValue();
+    }
     std::shared_ptr<Variable> var = scope->getVariables()->get(name);
     if (var != nullptr)
     {

@@ -26,5 +26,9 @@ NumberNode::NumberNode(std::shared_ptr<Token> token, std::string value) : Node(t
 std::shared_ptr<Variable> NumberNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("NumberNode");
+    if (scope->getReturnValue() != nullptr)
+    {
+        return scope->getReturnValue();
+    }
     return value;
 }

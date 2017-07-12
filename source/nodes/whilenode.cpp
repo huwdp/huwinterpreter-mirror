@@ -26,12 +26,20 @@ WhileNode::WhileNode(std::shared_ptr<Token> token, std::shared_ptr<Node> conditi
 std::shared_ptr<Variable> WhileNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("WhileNode");
+    if (scope->getReturnValue() != nullptr)
+    {
+        return scope->getReturnValue();
+    }
     if (condition != nullptr)
     {
         std::shared_ptr<Variable> c = this->condition->execute(scope);
         bool loop = c->toBool();
         while (loop)
         {
+            if (scope->getReturnValue() != nullptr)
+            {
+                return scope->getReturnValue();
+            }
             body->execute(scope);
             c = condition->execute(scope);
             loop = c->toBool();

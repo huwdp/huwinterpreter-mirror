@@ -25,8 +25,11 @@ IfNode::IfNode(std::shared_ptr<Token> token, std::shared_ptr<Node> condition, st
 
 std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> scope)
 {
-    
     Debug::print("IfNode");
+    if (scope->getReturnValue() != nullptr)
+    {
+        return scope->getReturnValue();
+    }
     std::shared_ptr<Variable> c = condition->execute(scope);
     if (c != nullptr)
     {
@@ -35,6 +38,10 @@ std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> scope)
             if (body != nullptr)
             {
                 body->execute(scope);
+                if (scope->getReturnValue() != nullptr)
+                {
+                    return scope->getReturnValue();
+                }
             }
         }
         else
@@ -42,6 +49,10 @@ std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> scope)
             if (elseNode != nullptr)
             {
                 elseNode->execute(scope);
+                if (scope->getReturnValue() != nullptr)
+                {
+                    return scope->getReturnValue();
+                }
             }
         }
     }

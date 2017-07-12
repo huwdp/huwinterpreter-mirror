@@ -26,6 +26,10 @@ std::shared_ptr<Variable> IfOverNode::execute(std::shared_ptr<Scope> scope)
 {
     
     Debug::print("OverNode");
+    if (scope->getReturnValue() != nullptr)
+    {
+        return scope->getReturnValue();
+    }
     if (left != nullptr && right != nullptr)
     {
         std::shared_ptr<Variable> l = left->execute(scope);

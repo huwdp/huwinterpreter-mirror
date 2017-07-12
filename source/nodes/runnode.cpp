@@ -24,15 +24,26 @@ RunNode::RunNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::
 
 std::shared_ptr<Variable> RunNode::execute(std::shared_ptr<Scope> scope)
 {
-    
     Debug::print("RunNode");
+    if (scope->getReturnValue() != nullptr)
+    {
+        return scope->getReturnValue();
+    }
     if (left != nullptr)
     {
         left->execute(scope);
+        if (scope->getReturnValue() != nullptr)
+        {
+            return scope->getReturnValue();
+        }
     }
     if (right != nullptr)
     {
         right->execute(scope);
+        if (scope->getReturnValue() != nullptr)
+        {
+            return scope->getReturnValue();
+        }
     }
     return null;
 }

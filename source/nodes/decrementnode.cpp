@@ -9,6 +9,10 @@ DecrementNode::DecrementNode(std::shared_ptr<Token> token, std::shared_ptr<Node>
 std::shared_ptr<Variable> DecrementNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("Decrement");
+    if (scope->getReturnValue() != nullptr)
+    {
+        return scope->getReturnValue();
+    }
     if (node != nullptr)
     {
         std::shared_ptr<Variable> n = node->execute(scope);

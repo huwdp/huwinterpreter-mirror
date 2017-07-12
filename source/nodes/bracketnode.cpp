@@ -24,6 +24,10 @@ BracketNode::BracketNode(std::shared_ptr<Token> token, std::shared_ptr<Node> nod
 std::shared_ptr<Variable> BracketNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("Bracket");
+    if (scope->getReturnValue() != nullptr)
+    {
+        return scope->getReturnValue();
+    }
     if (node != nullptr)
     {
         std::shared_ptr<Variable> n = node->execute(scope);

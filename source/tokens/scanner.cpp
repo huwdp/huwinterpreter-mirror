@@ -41,7 +41,38 @@ bool isCharacter(char character)
     {
         return true;
     }
+    //return false;
+    if (isNum(character))
+    {
+        return false;
+    }
     return false;
+    switch (character)
+    {
+    case ' ':
+    case '\t':
+    case '(':
+    case ')':
+    case '{':
+    case '}':
+    case '+':
+    case '-':
+    case '*':
+    case '/':
+    case '^':
+    case '&':
+    case '|':
+    case '<':
+    case '>':
+    case '!':
+    case '.':
+    case '"':
+    case '\'':
+    case ',':
+    case ';':
+        return false;
+    }
+    return true;
 }
 
 std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManager> fileReader)
@@ -123,6 +154,16 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                     fileReader->next();
                 }
             }
+
+
+
+
+
+
+
+
+
+
             lineInfo = std::make_shared<LineInfo>("", fileReader->getCurrent()->getLineNumber(),0);
             if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::LEFTARENTHESIS))
             {

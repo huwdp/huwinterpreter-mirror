@@ -26,6 +26,10 @@ SetVarNode::SetVarNode(std::shared_ptr<Token> token, std::string name, std::shar
 std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("SetVarNode");
+    if (scope->getReturnValue() != nullptr)
+    {
+        return scope->getReturnValue();
+    }
     if (scope->getVariables()->exists(name))
     {
         std::shared_ptr<Variable> v = value->execute(scope);
@@ -35,6 +39,11 @@ std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> scope)
     {
         std::shared_ptr<Variable> var;
         var = value->execute(scope);
+        if (scope->getReturnValue() != nullptr)
+        {
+            return scope->getReturnValue();
+        }
+
         if (var != nullptr)
         {
             scope->getVariables()->addVariable(name, var);
