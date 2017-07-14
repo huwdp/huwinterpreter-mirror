@@ -1,0 +1,15 @@
+function fac(n)
+{
+    return factailrec(1, n);
+}
+
+function factailrec(acc, n)
+{
+    if (n < 2)
+    {
+        return acc;
+    }
+    return factailrec(n * acc, n - 1);
+}
+
+print(fac(14));
