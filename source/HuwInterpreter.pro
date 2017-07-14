@@ -1,6 +1,3 @@
-QT += core
-QT -= gui
-
 TARGET = HuwInterpreter
 CONFIG += console
 CONFIG -= app_bundle

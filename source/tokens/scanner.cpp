@@ -41,12 +41,10 @@ bool isCharacter(char character)
     {
         return true;
     }
-    //return false;
     if (isNum(character))
     {
         return false;
     }
-    return false;
     switch (character)
     {
     case ' ':
@@ -70,6 +68,8 @@ bool isCharacter(char character)
     case '\'':
     case ',':
     case ';':
+    case '=':
+    case '%':
         return false;
     }
     return true;
