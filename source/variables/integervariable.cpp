@@ -223,6 +223,7 @@ void IntegerVariable::set(std::string index, std::shared_ptr<Variable> value)
 std::shared_ptr<Variable> IntegerVariable::get(std::string value)
 {
     Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call get method on integer type. Integer is not an array"));
+    return null;
 }
 
 void IntegerVariable::unset(std::string index)

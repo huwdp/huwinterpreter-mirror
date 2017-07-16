@@ -246,6 +246,7 @@ void DoubleVariable::set(std::string index, std::shared_ptr<Variable> value)
 std::shared_ptr<Variable> DoubleVariable::get(std::string value)
 {
     Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call get method on double type. Double is not an array"));
+    return null;
 }
 
 void DoubleVariable::unset(std::string index)
