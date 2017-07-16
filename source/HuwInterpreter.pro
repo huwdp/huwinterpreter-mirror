@@ -123,7 +123,9 @@ SOURCES += \
     functions/array.cpp \
     functions/arrayunset.cpp \
     functions/count.cpp \
-    variables/constantvariable.cpp
+    variables/constantvariable.cpp \
+    tokens/unusabletokens.cpp \
+    tokens/tokens.cpp
 
 HEADERS += \
     errors/debug.h \
@@ -222,11 +224,6 @@ HEADERS += \
     types/isnumeric.h \
     types/tokentypes.h \
     types/typedetector.h \
-    variables/HashTableVariable.h \
-    variables/DoubleVariable.h \
-    variables/IntegerVariable.h \
-    variables/NumberVariable.h \
-    variables/StringVariable.h \
     variables/precision.h \
     variables/scope.h \
     variables/variable.h \
@@ -248,5 +245,8 @@ HEADERS += \
     functions/array.h \
     functions/arrayunset.h \
     functions/count.h \
-    variables/constantvariable.h
+    variables/constantvariable.h \
+    tokens/tokenmanager.h \
+    tokens/unusabletokens.h \
+    tokens/tokens.h
 

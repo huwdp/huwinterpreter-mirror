@@ -27,14 +27,16 @@
 #include "tokendetector.h"
 #include "token.h"
 #include "tokenmanager.h"
+#include "unusabletokens.h"
 
 class Scanner
 {
 private:
+    std::shared_ptr<UnusableTokens> unusableTokens;
     std::shared_ptr<TokenDetector> tokenDetector;
+    bool isAllowedCharacter(char character);
 public:
     Scanner();
-    ~Scanner();
     std::vector<std::shared_ptr<Token>> tokenize(std::shared_ptr<TokenManager> fileReader);
 };
 

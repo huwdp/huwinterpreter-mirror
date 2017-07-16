@@ -29,11 +29,6 @@ Token::Token(std::string content, TokenType type, std::shared_ptr<LineInfo> line
     this->lineInfo = lineInfo;
 }
 
-Token::~Token()
-{
-
-}
-
 std::string Token::getContent()
 {
     return content;

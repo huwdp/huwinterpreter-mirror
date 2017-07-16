@@ -31,7 +31,6 @@ private:
 public:
     Token(std::string content, std::shared_ptr<LineInfo> lineInfo);
     Token(std::string content, TokenType type, std::shared_ptr<LineInfo> lineInfo);
-    ~Token();
     std::string getContent();
     TokenType getType();
     void setType(TokenType type);

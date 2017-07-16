@@ -22,57 +22,21 @@
 
 Scanner::Scanner()
 {
+    unusableTokens = std::make_shared<UnusableTokens>();
     tokenDetector = std::make_shared<TokenDetector>();
 }
 
-Scanner::~Scanner()
-{
-
-}
-
-bool isNum(char num)
-{
-    return TypeDetector::isNumeric(num);
-}
-
-bool isCharacter(char character)
+bool Scanner::isAllowedCharacter(char character)
 {
     if (std::isalpha(character))
     {
         return true;
     }
-    if (isNum(character))
+    if (TypeDetector::isNumeric(character))
     {
         return false;
     }
-    switch (character)
-    {
-    case ' ':
-    case '\t':
-    case '(':
-    case ')':
-    case '{':
-    case '}':
-    case '+':
-    case '-':
-    case '*':
-    case '/':
-    case '^':
-    case '&':
-    case '|':
-    case '<':
-    case '>':
-    case '!':
-    case '.':
-    case '"':
-    case '\'':
-    case ',':
-    case ';':
-    case '=':
-    case '%':
-        return false;
-    }
-    return true;
+    return unusableTokens->exists(character);
 }
 
 std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManager> fileReader)
@@ -102,7 +66,7 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
         {
             temp.push_back(fileReader->getCurrent()->getContent());
         }
-        else if (isCharacter(fileReader->getCurrent()->getContent()))
+        else if (isAllowedCharacter(fileReader->getCurrent()->getContent()))
         {
             temp.push_back(fileReader->getCurrent()->getContent());
         }
