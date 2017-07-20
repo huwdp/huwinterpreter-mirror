@@ -207,6 +207,19 @@ std::shared_ptr<Node> Parser::factor()
             }
             return value;
         }
+        else if (currentToken->getType() == ADDITION)
+        {
+            nextToken();
+            return std::move(factor());
+        }
+        else if (currentToken->getType() == SUBTRACTION)
+        {
+            nextToken();
+            return std::move(std::make_shared<UnaryMinusNode>(currentToken, std::move(factor())));
+        }
+
+        // Eventually implement other unary stuff here
+
         value = this->value();
         return value;
     }

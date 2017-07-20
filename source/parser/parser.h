@@ -56,6 +56,7 @@
 #include "nodes/mulnode.h"
 #include "nodes/divnode.h"
 #include "nodes/modnode.h"
+#include "nodes/unaryminusnode.h"
 
 #include "nodes/setreturnnode.h"
 
@@ -67,6 +68,9 @@
 //#include "variables/variables.h"
 #include "variables/scope.h"
 #include "functions/customfunction.h"
+
+
+
 
 class Parser
 {
