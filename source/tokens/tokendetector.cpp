@@ -42,6 +42,7 @@ TokenDetector::TokenDetector()
     types[","] = TokenType::COMMA;
     types["\""] = TokenType::QUOTE;
     types["."] = TokenType::DOT;
+    types["!"] = TokenType::NOT;
 }
 
 std::string TokenDetector::getString(TokenType token)

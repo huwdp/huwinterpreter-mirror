@@ -74,7 +74,6 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
         {
             if (!temp.empty())
             {
-
                 tokens.push_back(std::move(std::make_shared<Token>(temp, std::move(lineInfo))));
                 temp = "";
             }
@@ -129,6 +128,10 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                 tokens.push_back(std::move(std::make_shared<Token>(")", TokenType::RIGHTPARENTHESIS, std::move(lineInfo))));
             }
             else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::SEMICOLON))
+            {
+                tokens.push_back(std::move(std::make_shared<Token>(";", TokenType::SEMICOLON, std::move(lineInfo))));
+            }
+            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::NOT))
             {
                 tokens.push_back(std::move(std::make_shared<Token>(";", TokenType::SEMICOLON, std::move(lineInfo))));
             }

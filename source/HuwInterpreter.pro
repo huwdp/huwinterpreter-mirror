@@ -126,7 +126,8 @@ SOURCES += \
     variables/constantvariable.cpp \
     tokens/unusabletokens.cpp \
     tokens/tokens.cpp \
-    nodes/unaryminusnode.cpp
+    nodes/unaryminusnode.cpp \
+    nodes/unarynotnode.cpp
 
 HEADERS += \
     errors/debug.h \
@@ -250,5 +251,6 @@ HEADERS += \
     tokens/tokenmanager.h \
     tokens/unusabletokens.h \
     tokens/tokens.h \
-    nodes/unaryminusnode.h
+    nodes/unaryminusnode.h \
+    nodes/unarynotnode.h
 

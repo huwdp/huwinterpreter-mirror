@@ -217,6 +217,11 @@ std::shared_ptr<Node> Parser::factor()
             nextToken();
             return std::move(std::make_shared<UnaryMinusNode>(currentToken, std::move(factor())));
         }
+        else if (currentToken->getType() == NOT)
+        {
+            nextToken();
+            return std::move(std::make_shared<UnaryNotNode>(currentToken, std::move(factor())));
+        }
 
         // Eventually implement other unary stuff here
 

@@ -57,6 +57,7 @@
 #include "nodes/divnode.h"
 #include "nodes/modnode.h"
 #include "nodes/unaryminusnode.h"
+#include "nodes/unarynotnode.h"
 
 #include "nodes/setreturnnode.h"
 
