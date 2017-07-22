@@ -15,23 +15,6 @@
 
 #include "hashtablevariable.h"
 
-HashTableVariable::HashTableVariable()
-{
-
-}
-
-HashTableVariable::HashTableVariable(std::string name, double value)
-    : Variable(name)
-{
-
-}
-
-HashTableVariable::HashTableVariable(std::string name, long long value)
-    : Variable(name)
-{
-
-}
-
 void HashTableVariable::setValue(double value)
 {
 

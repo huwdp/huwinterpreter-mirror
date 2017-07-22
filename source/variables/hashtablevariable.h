@@ -28,9 +28,6 @@ class HashTableVariable : public Variable
 private:
     std::unordered_map<std::string, std::shared_ptr<Variable>> map;
 public:
-    HashTableVariable();
-    HashTableVariable(std::string name, double value);
-    HashTableVariable(std::string name, long long value);
     void setValue(double value);
     void setValue(std::string value);
     void setValue(long long value);
