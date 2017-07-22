@@ -146,7 +146,6 @@ std::shared_ptr<Node> Parser::value()
                 nextToken();
                 if (!expect(LEFTARENTHESIS))
                 {
-                    compilation = false;
                     return null;
                 }
                 std::vector<std::shared_ptr<Node>> arguments;
@@ -162,7 +161,6 @@ std::shared_ptr<Node> Parser::value()
 
                 if (!expect(RIGHTPARENTHESIS))
                 {
-                    compilation = false;
                     arguments.clear();
                     return null;
                 }
@@ -202,7 +200,6 @@ std::shared_ptr<Node> Parser::factor()
             value = boolean();
             if (!expect(RIGHTPARENTHESIS))
             {
-                compilation = false;
                 return null;
             }
             return value;
@@ -394,7 +391,6 @@ std::shared_ptr<Node> Parser::elseStatement()
             acceptIndentation();
             if (!expect(LEFTARENTHESIS))
             {
-                compilation = false;
                 return null;
             }
             acceptIndentation();
@@ -402,20 +398,17 @@ std::shared_ptr<Node> Parser::elseStatement()
             acceptIndentation();
             if (!expect(RIGHTPARENTHESIS))
             {
-                compilation = false;
                 return null;
             }
             acceptIndentation();
             if (!expect(LEFTBRACKET))
             {
-                compilation = false;
                 return null;
             }
             acceptIndentation();
             statementNode = block();
             if (!expect(RIGHTBRACKET))
             {
-                compilation = false;
                 return null;
             }
             acceptIndentation();
@@ -428,14 +421,12 @@ std::shared_ptr<Node> Parser::elseStatement()
             acceptIndentation();
             if (!expect(LEFTBRACKET))
             {
-                compilation = false;
                 return null;
             }
             acceptIndentation();
             std::shared_ptr<Node> node = block();
             if (!expect(RIGHTBRACKET))
             {
-                compilation = false;
                 return null;
             }
             acceptIndentation();
@@ -457,7 +448,6 @@ std::shared_ptr<Node> Parser::statement()
             acceptIndentation();
             if (!expect(LEFTARENTHESIS))
             {
-                compilation = false;
                 return null;
             }
             acceptIndentation();
@@ -465,20 +455,17 @@ std::shared_ptr<Node> Parser::statement()
             acceptIndentation();
             if (!expect(RIGHTPARENTHESIS))
             {
-                compilation = false;
                 return null;
             }
             acceptIndentation();
             if (!expect(LEFTBRACKET))
             {
-                compilation = false;
                 return null;
             }
             acceptIndentation();
             std::shared_ptr<Node> statementNode = block();
             if (!expect(RIGHTBRACKET))
             {
-                compilation = false;
                 return null;
             }
             acceptIndentation();
@@ -523,7 +510,6 @@ std::shared_ptr<Node> Parser::block()
             std::shared_ptr<Node> returnNode = std::make_shared<SetReturnNode>(std::move(boolean()));
             if (!expect(SEMICOLON))
             {
-                compilation = false;
                 return null;
             }
             return std::move(returnNode);
@@ -547,7 +533,6 @@ std::shared_ptr<Node> Parser::block()
                 std::shared_ptr<Node> node = std::make_shared<IncrementNode>(currentToken, std::make_shared<GetVarNode>(currentToken, word));
                 if (!expect(SEMICOLON))
                 {
-                    compilation = false;
                     return null;
                 }
                 return std::make_shared<RunNode>(currentToken, std::move(std::move(node)), std::move(block()));
@@ -558,7 +543,6 @@ std::shared_ptr<Node> Parser::block()
                 std::shared_ptr<Node> node = std::make_shared<DecrementNode>(currentToken, std::make_shared<GetVarNode>(currentToken, word));
                 if (!expect(SEMICOLON))
                 {
-                    compilation = false;
                     return null;
                 }
                 return std::make_shared<RunNode>(currentToken, std::move(std::move(node)), std::move(block()));
@@ -586,7 +570,6 @@ std::shared_ptr<Node> Parser::block()
             acceptIndentation();
             if (!expect(SEMICOLON))
             {
-                compilation = false;
                 return null;
             }
             std::shared_ptr<Node> blockNode = block();
@@ -629,7 +612,6 @@ std::shared_ptr<Node> Parser::block()
             nextToken();
             if (!expect(LEFTARENTHESIS))
             {
-                compilation = false;
                 return null;
             }
             std::vector<std::shared_ptr<Node>> arguments;
@@ -645,12 +627,10 @@ std::shared_ptr<Node> Parser::block()
             }
             if (!expect(RIGHTPARENTHESIS))
             {
-                compilation = false;
                 return null;
             }
             if (!expect(SEMICOLON))
             {
-                compilation = false;
                 return null;
             }
             std::shared_ptr<Node> blockNode = block();
@@ -678,7 +658,6 @@ std::shared_ptr<Node> Parser::block()
             if (!expect(LEFTARENTHESIS))
             {
                 functions->removeFunction(word);
-                compilation = false;
                 return null;
             }
             acceptIndentation();
@@ -699,8 +678,7 @@ std::shared_ptr<Node> Parser::block()
 
             if (!expect(RIGHTPARENTHESIS))
             {
-                functions->removeFunction(word);
-                compilation = false;
+                functions->removeFunction(word);          
                 arguments.clear();
                 return null;
             }
@@ -709,7 +687,6 @@ std::shared_ptr<Node> Parser::block()
             if (!expect(LEFTBRACKET))
             {
                 functions->removeFunction(word);
-                compilation = false;
                 return false;
             }
             acceptIndentation();
@@ -720,7 +697,6 @@ std::shared_ptr<Node> Parser::block()
             if (!expect(RIGHTBRACKET))
             {
                 functions->removeFunction(word);
-                compilation = false;
                 return false;
             }
             functions->addFunction(word, std::make_shared<CustomFunction>(currentToken, arguments, blockNode));
