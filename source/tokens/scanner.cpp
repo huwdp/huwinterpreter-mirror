@@ -63,7 +63,7 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
         {
             temp.push_back(fileReader->getCurrent()->getContent());
         }
-        else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::DOT))
+        else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), DOT))
         {
             temp.push_back(fileReader->getCurrent()->getContent());
         }
@@ -78,10 +78,10 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                 tokens.push_back(std::move(std::make_shared<Token>(temp, std::move(lineInfo))));
                 temp = "";
             }
-            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::QUOTE))
+            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), QUOTE))
             {
                 fileReader->next();
-                while (!tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::QUOTE) && !fileReader->isEnd())
+                while (!tokenDetector->compare(fileReader->getCurrent()->getContent(), QUOTE) && !fileReader->isEnd())
                 {
                     lineInfo = std::make_shared<LineInfo>("", fileReader->getCurrent()->getLineNumber(),0);
                     if (fileReader->getCurrent()->getContent() == '\\')
@@ -109,7 +109,7 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                         fileReader->next();
                     }
                 }
-                tokens.push_back(std::move(std::make_shared<Token>(temp, TokenType::TEXT, std::move(lineInfo))));
+                tokens.push_back(std::move(std::make_shared<Token>(temp, TEXT, std::move(lineInfo))));
                 temp = "";
 
                 // Move to next it
@@ -120,39 +120,39 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
             }
 
             lineInfo = std::make_shared<LineInfo>("", fileReader->getCurrent()->getLineNumber(),0);
-            if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::LEFTARENTHESIS))
+            if (tokenDetector->compare(fileReader->getCurrent()->getContent(), LEFTARENTHESIS))
             {
-                tokens.push_back(std::move(std::make_shared<Token>("(", TokenType::LEFTARENTHESIS, std::move(lineInfo))));
+                tokens.push_back(std::move(std::make_shared<Token>("(", LEFTARENTHESIS, std::move(lineInfo))));
             }
-            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::RIGHTPARENTHESIS))
+            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), RIGHTPARENTHESIS))
             {
-                tokens.push_back(std::move(std::make_shared<Token>(")", TokenType::RIGHTPARENTHESIS, std::move(lineInfo))));
+                tokens.push_back(std::move(std::make_shared<Token>(")", RIGHTPARENTHESIS, std::move(lineInfo))));
             }
-            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::SEMICOLON))
+            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), SEMICOLON))
             {
-                tokens.push_back(std::move(std::make_shared<Token>(";", TokenType::SEMICOLON, std::move(lineInfo))));
+                tokens.push_back(std::move(std::make_shared<Token>(";", SEMICOLON, std::move(lineInfo))));
             }
-            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::NOT))
+            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), NOT))
             {
-                tokens.push_back(std::move(std::make_shared<Token>("!", TokenType::NOT, std::move(lineInfo))));
+                tokens.push_back(std::move(std::make_shared<Token>("!", NOT, std::move(lineInfo))));
             }
             else if (fileReader->getCurrent()->getContent() == ' ' || fileReader->getCurrent()->getContent() == '\t')
             {
-                tokens.push_back(std::move(std::make_shared<Token>(" ", TokenType::INDENTATION, std::move(lineInfo))));
+                tokens.push_back(std::move(std::make_shared<Token>(" ", INDENTATION, std::move(lineInfo))));
             }
-            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::MULTIPLICATION))
+            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), MULTIPLICATION))
             {
-                if (tokenDetector->compare(fileReader->peak()->getContent(), TokenType::EQUALS))
+                if (tokenDetector->compare(fileReader->peak()->getContent(), EQUALS))
                 {
                     fileReader->getNext();
-                    tokens.push_back(std::make_shared<Token>("*=", TokenType::MULTIPLICATIONEQUAL, std::move(lineInfo)));
+                    tokens.push_back(std::make_shared<Token>("*=", MULTIPLICATIONEQUAL, std::move(lineInfo)));
                 }
                 else
                 {
-                    tokens.push_back(std::make_shared<Token>("*", TokenType::MULTIPLICATION, std::move(lineInfo)));
+                    tokens.push_back(std::make_shared<Token>("*", MULTIPLICATION, std::move(lineInfo)));
                 }
             }
-            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::DIVISION))
+            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), DIVISION))
             {
                 if (fileReader->peak()->getContent() == '*')
                 {
@@ -172,53 +172,53 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                 }
                 else
                 {
-                    if (tokenDetector->compare(fileReader->peak()->getContent(), TokenType::EQUALS))
+                    if (tokenDetector->compare(fileReader->peak()->getContent(), EQUALS))
                     {
                         fileReader->getNext();
-                        tokens.push_back(std::make_shared<Token>("/=", TokenType::DIVISIONEQUAL, std::move(lineInfo)));
+                        tokens.push_back(std::make_shared<Token>("/=", DIVISIONEQUAL, std::move(lineInfo)));
                     }
                     else
                     {
-                        tokens.push_back(std::make_shared<Token>("/", TokenType::DIVISION, std::move(lineInfo)));
+                        tokens.push_back(std::make_shared<Token>("/", DIVISION, std::move(lineInfo)));
                     }
                 }
             }
-            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::MOD))
+            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), MOD))
             {
-                tokens.push_back(std::move(std::make_shared<Token>("%", TokenType::MOD, std::move(lineInfo))));
+                tokens.push_back(std::move(std::make_shared<Token>("%", MOD, std::move(lineInfo))));
             }
-            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::ADDITION))
+            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), ADDITION))
             {
-                if (tokenDetector->compare(fileReader->peak()->getContent(), TokenType::EQUALS))
+                if (tokenDetector->compare(fileReader->peak()->getContent(), EQUALS))
                 {
                     fileReader->getNext();
-                    tokens.push_back(std::move(std::make_shared<Token>("+=", TokenType::ADDITIONEQUAL, std::move(lineInfo))));
+                    tokens.push_back(std::move(std::make_shared<Token>("+=", ADDITIONEQUAL, std::move(lineInfo))));
                 }
-                else if (tokenDetector->compare(fileReader->peak()->getContent(), TokenType::ADDITION))
+                else if (tokenDetector->compare(fileReader->peak()->getContent(), ADDITION))
                 {
                     fileReader->getNext();
-                    tokens.push_back(std::move(std::make_shared<Token>("++", TokenType::INCREMENT, std::move(lineInfo))));
+                    tokens.push_back(std::move(std::make_shared<Token>("++", INCREMENT, std::move(lineInfo))));
                 }
                 else
                 {
-                    tokens.push_back(std::move(std::make_shared<Token>("+", TokenType::ADDITION, std::move(lineInfo))));
+                    tokens.push_back(std::move(std::make_shared<Token>("+", ADDITION, std::move(lineInfo))));
                 }
             }
-            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::SUBTRACTION))
+            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), SUBTRACTION))
             {
-                if (tokenDetector->compare(fileReader->peak()->getContent(), TokenType::EQUALS))
+                if (tokenDetector->compare(fileReader->peak()->getContent(), EQUALS))
                 {
                     fileReader->getNext();
-                    tokens.push_back(std::move(std::make_shared<Token>("-=", TokenType::SUBTRACTIONEQUAL, std::move(lineInfo))));
+                    tokens.push_back(std::move(std::make_shared<Token>("-=", SUBTRACTIONEQUAL, std::move(lineInfo))));
                 }
-                else if (tokenDetector->compare(fileReader->peak()->getContent(), TokenType::SUBTRACTION))
+                else if (tokenDetector->compare(fileReader->peak()->getContent(), SUBTRACTION))
                 {
                     fileReader->getNext();
-                    tokens.push_back(std::move(std::make_shared<Token>("--", TokenType::DECREMENT, std::move(lineInfo))));
+                    tokens.push_back(std::move(std::make_shared<Token>("--", DECREMENT, std::move(lineInfo))));
                 }
                 else
                 {
-                    tokens.push_back(std::move(std::make_shared<Token>("-", TokenType::SUBTRACTION, std::move(lineInfo))));
+                    tokens.push_back(std::move(std::make_shared<Token>("-", SUBTRACTION, std::move(lineInfo))));
                 }
             }
             else if (fileReader->getCurrent()->getContent() == '=')
@@ -228,17 +228,17 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                     fileReader->next();
                     if (fileReader->getCurrent()->getContent() == '=')
                     {
-                        tokens.push_back(std::move(std::make_shared<Token>("==", TokenType::IFEQUALS, std::move(lineInfo))));
+                        tokens.push_back(std::move(std::make_shared<Token>("==", IFEQUALS, std::move(lineInfo))));
                     }
                     else
                     {
                         fileReader->prev();
-                        tokens.push_back(std::move(std::make_shared<Token>("=", TokenType::EQUALS, std::move(lineInfo))));
+                        tokens.push_back(std::move(std::make_shared<Token>("=", EQUALS, std::move(lineInfo))));
                     }
                 }
                 else
                 {
-                    tokens.push_back(std::move(std::make_shared<Token>("=", TokenType::EQUALS, std::move(lineInfo))));
+                    tokens.push_back(std::move(std::make_shared<Token>("=", EQUALS, std::move(lineInfo))));
                 }
             }
             else if (fileReader->getCurrent()->getContent() == '&')
@@ -248,7 +248,7 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                     fileReader->next();
                     if (fileReader->getCurrent()->getContent() == '&')
                     {
-                        tokens.push_back(std::move(std::make_shared<Token>("&&", TokenType::AND, std::move(lineInfo))));
+                        tokens.push_back(std::move(std::make_shared<Token>("&&", AND, std::move(lineInfo))));
                     }
                     else
                     {
@@ -268,7 +268,7 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                     fileReader->next();
                     if (fileReader->getCurrent()->getContent() == '|')
                     {
-                        tokens.push_back(std::move(std::make_shared<Token>("||", TokenType::OR, std::move(lineInfo))));
+                        tokens.push_back(std::move(std::make_shared<Token>("||", OR, std::move(lineInfo))));
                     }
                     else
                     {
@@ -286,9 +286,9 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                 if (!fileReader->isEnd())
                 {
                     fileReader->next();
-                    if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::EQUALS))
+                    if (tokenDetector->compare(fileReader->getCurrent()->getContent(), EQUALS))
                     {
-                        tokens.push_back(std::move(std::make_shared<Token>("!=", TokenType::IFNOTEQUALS, std::move(lineInfo))));
+                        tokens.push_back(std::move(std::make_shared<Token>("!=", IFNOTEQUALS, std::move(lineInfo))));
                     }
                 }
                 else
@@ -296,7 +296,7 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
 
                 }
             }
-            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::IFLESSTHAN))
+            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), IFLESSTHAN))
             {
                 if (!fileReader->isEnd())
                 {
@@ -304,55 +304,55 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                     if (fileReader->getCurrent()->getContent() == '=')
                     {
 
-                        tokens.push_back(std::move(std::make_shared<Token>("<=", TokenType::IFLESSTHANOREQUAL, std::move(lineInfo))));
+                        tokens.push_back(std::move(std::make_shared<Token>("<=", IFLESSTHANOREQUAL, std::move(lineInfo))));
                     }
                     else
                     {
-                        tokens.push_back(std::move(std::make_shared<Token>("<", TokenType::IFLESSTHAN, std::move(lineInfo))));
+                        tokens.push_back(std::move(std::make_shared<Token>("<", IFLESSTHAN, std::move(lineInfo))));
                         fileReader->prev();
                     }
                 }
                 else
                 {
-                    tokens.push_back(std::move(std::make_shared<Token>("<", TokenType::IFLESSTHAN, std::move(lineInfo))));
+                    tokens.push_back(std::move(std::make_shared<Token>("<", IFLESSTHAN, std::move(lineInfo))));
                 }
             }
-            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::IFGREATER))
+            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), IFGREATER))
             {
                 if (!fileReader->isEnd())
                 {
                     fileReader->next();
                     if (fileReader->getCurrent()->getContent() == '=')
                     {
-                        tokens.push_back(std::move(std::make_shared<Token>(">=", TokenType::IFGREATERTHANOREQUAL, std::move(lineInfo))));
+                        tokens.push_back(std::move(std::make_shared<Token>(">=", IFGREATERTHANOREQUAL, std::move(lineInfo))));
                     }
                     else
                     {
 
-                        tokens.push_back(std::move(std::make_shared<Token>(">", TokenType::IFGREATER, std::move(lineInfo))));
+                        tokens.push_back(std::move(std::make_shared<Token>(">", IFGREATER, std::move(lineInfo))));
                         fileReader->prev();
                     }
                 }
                 else
                 {
-                    tokens.push_back(std::move(std::make_shared<Token>(">", TokenType::IFGREATER, std::move(lineInfo))));
+                    tokens.push_back(std::move(std::make_shared<Token>(">", IFGREATER, std::move(lineInfo))));
                 }
             }
-            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::SEMICOLON))
+            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), SEMICOLON))
             {
-                tokens.push_back(std::move(std::make_shared<Token>(";", TokenType::SEMICOLON, std::move(lineInfo))));
+                tokens.push_back(std::move(std::make_shared<Token>(";", SEMICOLON, std::move(lineInfo))));
             }
-            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::RIGHTBRACKET))
+            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), RIGHTBRACKET))
             {
-                tokens.push_back(std::move(std::make_shared<Token>("}", TokenType::RIGHTBRACKET, lineInfo)));
+                tokens.push_back(std::move(std::make_shared<Token>("}", RIGHTBRACKET, lineInfo)));
             }
-            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::LEFTBRACKET))
+            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), LEFTBRACKET))
             {
-                tokens.push_back(std::move(std::make_shared<Token>("{", TokenType::LEFTBRACKET, std::move(lineInfo))));
+                tokens.push_back(std::move(std::make_shared<Token>("{", LEFTBRACKET, std::move(lineInfo))));
             }
-            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::COMMA))
+            else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), COMMA))
             {
-                tokens.push_back(std::move(std::make_shared<Token>(",", TokenType::COMMA, std::move(lineInfo))));
+                tokens.push_back(std::move(std::make_shared<Token>(",", COMMA, std::move(lineInfo))));
             }
         }
         fileReader->next();

@@ -1,20 +1,39 @@
-#ifndef TOKENMAP_H
-#define TOKENMAP_H
+/*
+    HuwInterpreter is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    HuwInterpreter is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#ifndef TOKENDETECTOR_H
+#define TOKENDETECTOR_H
 
 #include <unordered_map>
-#include <algorithm>
+#include <string>
+#include <sstream>
 #include "types/tokentypes.h"
 
-class Tokens
+class TokenDetector
 {
 private:
-    std::unordered_map<std::string, TokenType> items;
+    std::unordered_map<std::string, TokenType> types;
 public:
-    Tokens();
+    TokenDetector();
     void init();
-    bool exists(TokenType tokenType);
-    bool exists(std::string text);
-    void add(TokenType tokenType, std::string text);
+    std::string getString(TokenType token);
+    TokenType getToken(std::string value);
+    bool compare(std::string value1, TokenType value2);
+    bool compare(char value1, TokenType value2);
 };
 
-#endif // TOKENMAP_H
+
+
+#endif // TOKENDETECTOR_H

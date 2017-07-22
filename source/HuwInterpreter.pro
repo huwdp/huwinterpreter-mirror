@@ -1,4 +1,6 @@
 TARGET = HuwInterpreter
+CONFIG += console
+CONFIG -= app_bundle
 
 TEMPLATE = app
 
@@ -96,7 +98,6 @@ SOURCES += \
     tokens/scanner.cpp \
     tokens/texttokenmanager.cpp \
     tokens/token.cpp \
-    tokens/tokendetector.cpp \
     types/isnumeric.cpp \
     types/typedetector.cpp \
     variables/precision.cpp \
@@ -123,9 +124,9 @@ SOURCES += \
     functions/count.cpp \
     variables/constantvariable.cpp \
     tokens/unusabletokens.cpp \
-    tokens/tokens.cpp \
     nodes/unaryminusnode.cpp \
-    nodes/unarynotnode.cpp
+    nodes/unarynotnode.cpp \
+    tokens/tokens.cpp
 
 HEADERS += \
     errors/debug.h \
@@ -219,7 +220,6 @@ HEADERS += \
     tokens/scanner.h \
     tokens/texttokenmanager.h \
     tokens/token.h \
-    tokens/tokendetector.h \
     tokens/tokenmanager.h \
     types/isnumeric.h \
     types/tokentypes.h \
@@ -248,7 +248,7 @@ HEADERS += \
     variables/constantvariable.h \
     tokens/tokenmanager.h \
     tokens/unusabletokens.h \
-    tokens/tokens.h \
     nodes/unaryminusnode.h \
-    nodes/unarynotnode.h
+    nodes/unarynotnode.h \
+    tokens/tokens.h
 
