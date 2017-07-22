@@ -141,6 +141,7 @@ std::shared_ptr<Node> Parser::value()
         {
             std::string word = currentToken->getContent();
             acceptIndentation();
+            //if (functions->get(word) != nullptr || (peakToken() != nullptr ? peakToken()->getType() == LEFTARENTHESIS : false))
             if (functions->get(word) != nullptr || peakToken()->getType() == LEFTARENTHESIS)
             {
                 nextToken();

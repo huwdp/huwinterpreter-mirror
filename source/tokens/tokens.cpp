@@ -13,43 +13,56 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "tokendetector.h"
+#include "tokens.h"
 
-void TokenDetector::init()
+Tokens::Tokens()
 {
-
+    init();
 }
 
-TokenDetector::TokenDetector()
+void Tokens::init()
 {
-    types[")"] = TokenType::RIGHTPARENTHESIS;
-    types["("] = TokenType::LEFTARENTHESIS;
-    types["*"] = TokenType::MULTIPLICATION;
-    types["/"] = TokenType::DIVISION;
-    types["+"] = TokenType::ADDITION;
-    types["-"] = TokenType::SUBTRACTION;
-    types["%"] = TokenType::MOD;
-    types["="] = TokenType::EQUALS;
-    types["=="] = TokenType::IFEQUALS;
-    types["!="] = TokenType::IFNOTEQUALS;
-    types["<"] = TokenType::IFLESSTHAN;
-    types["<="] = TokenType::IFLESSTHANOREQUAL;
-    types[">"] = TokenType::IFGREATER;
-    types[">="] = TokenType::IFGREATERTHANOREQUAL;
-    types["{"] = TokenType::LEFTBRACKET;
-    types["}"] = TokenType::RIGHTBRACKET;
-    types[";"] = TokenType::SEMICOLON;
-    types[","] = TokenType::COMMA;
-    types["\""] = TokenType::QUOTE;
-    types["."] = TokenType::DOT;
-    types["!"] = TokenType::NOT;
+    types.clear();
+    types[")"] = RIGHTPARENTHESIS;
+    types["("] = LEFTARENTHESIS;
+    types["*"] = MULTIPLICATION;
+    types["/"] = DIVISION;
+    types["-"] = SUBTRACTION;
+    types["%"] = MOD;
+    types["="] = EQUALS;
+    types["=="] = IFEQUALS;
+    types["!="] = IFNOTEQUALS;
+    types["<"] = IFLESSTHAN;
+    types["<="] = IFLESSTHANOREQUAL;
+    types[">"] = IFGREATER;
+    types[">="] = IFGREATERTHANOREQUAL;
+    types["{"] = LEFTBRACKET;
+    types["}"] = RIGHTBRACKET;
+    types[";"] = SEMICOLON;
+    types[","] = COMMA;
+    types["\""] = QUOTE;
+    types["."] = DOT;
+    types["!"] = NOT;
+    types["+"] = ADDITION;
+    types["&"] = BITWISEAND;
+    types["|"] = BITWISEOR;
+    types["&&"] = AND;
+    types["||"] = OR;
+    types["*="] = MULTIPLICATIONEQUAL;
+    types["/="] = DIVISIONEQUAL;
+    types["+="] = ADDITIONEQUAL;
+    types["-="] = SUBTRACTIONEQUAL;
+    types["++"] = INCREMENT;
+    types["--"] = DECREMENT;
+    types["\t"] = TABINDENTATION;
+    types[" "] = INDENTATION;
 }
 
-std::string TokenDetector::getString(TokenType token)
+std::string Tokens::get(TokenType value)
 {
     for (std::unordered_map<std::string, TokenType>::iterator it = types.begin(); it != types.end(); ++it)
     {
-        if (it->second == token)
+        if (it->second == value)
         {
             return it->first;
         }
@@ -57,14 +70,18 @@ std::string TokenDetector::getString(TokenType token)
     return "";
 }
 
-TokenType TokenDetector::getToken(std::string value)
+TokenType Tokens::get(std::string value)
 {
-    return types[value];
+    if (exists(value))
+    {
+        return types[value];
+    }
+    return WORD;
 }
 
-bool TokenDetector::compare(std::string value1, TokenType value2)
+bool Tokens::compare(std::string value1, TokenType value2)
 {
-    std::unordered_map<std::string,TokenType>::const_iterator got = types.find(value1);
+    std::unordered_map<std::string, TokenType>::const_iterator got = types.find(value1);
     if (got != types.end())
     {
         if (got->second == value2)
@@ -75,11 +92,30 @@ bool TokenDetector::compare(std::string value1, TokenType value2)
     return false;
 }
 
-bool TokenDetector::compare(char value1, TokenType value2)
+bool Tokens::compare(char value1, TokenType value2)
 {
     std::stringstream ss;
     std::string temp;
     ss << value1;
     ss >> temp;
     return compare(temp, value2);
+}
+
+bool Tokens::exists(TokenType value)
+{
+    return std::find_if(types.begin(), types.end(),
+        [value](const std::unordered_map<std::string, TokenType>::value_type& item) { return item.second == value; }) != types.end();
+}
+
+bool Tokens::exists(std::string value)
+{
+    return types.find(value) != types.end();
+}
+
+void Tokens::add(std::string text, TokenType tokenType)
+{
+    if (!exists(tokenType))
+    {
+        types[text] = tokenType;
+    }
 }

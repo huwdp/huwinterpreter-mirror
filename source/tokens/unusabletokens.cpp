@@ -3,83 +3,79 @@
 UnusableTokens::UnusableTokens()
 {
     init();
+    tokens = std::make_shared<Tokens>();
 }
 
 void UnusableTokens::init()
 {
     items.clear();
-    /*
-    words.push_back("\t");
-    words.push_back("(");
-    words.push_back(")");
-    words.push_back("{");
-    words.push_back("}");
-    words.push_back("+");
-    words.push_back("-");
-    words.push_back("*");
-    words.push_back("/");
-    words.push_back("^");
-    words.push_back("&");
-    words.push_back("|");
-    words.push_back("<");
-    words.push_back(">");
-    words.push_back("!");
-    words.push_back(".");
-    words.push_back("\"");
-    words.push_back(",");
-    words.push_back(";");
-    words.push_back("=");
-    words.push_back("%");
-    */
-    items["("] = LEFTARENTHESIS;
-    items["*"] = MULTIPLICATION;
-    items["/"] = DIVISION;
-    items["+"] = ADDITION;
-    items["-"] = SUBTRACTION;
-    items["%"] = MOD;
-    items["="] = EQUALS;
-    items["=="] = IFEQUALS;
-    items["!="] = IFNOTEQUALS;
-    items["<"] = IFLESSTHAN;
-    items["<="] = IFLESSTHANOREQUAL;
-    items[">"] = IFGREATER;
-    items[">="] = IFGREATERTHANOREQUAL;
-    items["{"] = LEFTBRACKET;
-    items["}"] = RIGHTBRACKET;
-    items[";"] = SEMICOLON;
-    items[","] = COMMA;
-    items["&&"] = AND;
-    items["||"] = OR;
-    items["."] = DOT;
-    items["*="] = MULTIPLICATIONEQUAL;
-    items["/="] = DIVISIONEQUAL;
-    items["+="] = ADDITIONEQUAL;
-    items["-="] = SUBTRACTIONEQUAL;
-    items["++"] = INCREMENT;
-    items["--"] = DECREMENT;
+    items.push_back(RIGHTPARENTHESIS);
+    items.push_back(LEFTARENTHESIS);
+    items.push_back(MULTIPLICATION);
+    items.push_back(DIVISION);
+    items.push_back(SUBTRACTION);
+    items.push_back(MOD);
+    items.push_back(EQUALS);
+    items.push_back(IFEQUALS);
+    items.push_back(IFNOTEQUALS);
+    items.push_back(IFLESSTHAN);
+    items.push_back(IFLESSTHANOREQUAL);
+    items.push_back(IFGREATER);
+    items.push_back(IFGREATERTHANOREQUAL);
+    items.push_back(LEFTBRACKET);
+    items.push_back(RIGHTBRACKET);
+    items.push_back(SEMICOLON);
+    items.push_back(COMMA);
+    items.push_back(QUOTE);
+    items.push_back(NOT);
+    items.push_back(LEFTARENTHESIS);
+    items.push_back(MULTIPLICATION);
+    items.push_back(DIVISION);
+    items.push_back(ADDITION);
+    items.push_back(AND);
+    items.push_back(OR);
+    items.push_back(BITWISEAND);
+    items.push_back(BITWISEOR);
+    items.push_back(DOT);
+    items.push_back(MULTIPLICATIONEQUAL);
+    items.push_back(DIVISIONEQUAL);
+    items.push_back(ADDITIONEQUAL);
+    items.push_back(SUBTRACTIONEQUAL);
+    items.push_back(INCREMENT);
+    items.push_back(DECREMENT);
 }
 
-bool UnusableTokens::exists(TokenType tokenType)
+bool UnusableTokens::tokenExists(TokenType tokenType)
 {
-    return std::find_if(items.begin(), items.end(),
-        [tokenType](const std::unordered_map<std::string, TokenType>::value_type& item) { return item.second == tokenType; }) != items.end();
+    for (std::vector<TokenType>::iterator it = items.begin(); it != items.end(); ++it)
+    {
+        if ((*it) == tokenType)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
-bool UnusableTokens::exists(std::string text)
+bool UnusableTokens::exists(std::string value)
 {
-    return items.find(text) != items.end();
+    return tokenExists(tokens->get(value));
 }
 
-bool UnusableTokens::exists(char character)
+bool UnusableTokens::exists(char value)
 {
-    return items.find(std::to_string(character)) != items.end();
+    std::stringstream ss;
+    std::string temp;
+    ss << value;
+    ss >> temp;
+    return exists(temp);
 }
 
-void UnusableTokens::add(TokenType tokenType, std::string text)
+void UnusableTokens::add(TokenType tokenType)
 {
     if (!exists(tokenType))
     {
-        items[text] = tokenType;
+        items.push_back(tokenType);
     }
 }
 

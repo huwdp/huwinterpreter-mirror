@@ -19,7 +19,7 @@
 #include <string>
 #include <vector>
 #include "tokens/token.h"
-#include "tokens/tokendetector.h"
+#include "tokens/tokens.h"
 #include <iostream>
 #include <sstream>
 #include <memory>

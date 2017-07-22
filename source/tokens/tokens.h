@@ -20,20 +20,22 @@
 #include <string>
 #include <sstream>
 #include "types/tokentypes.h"
+#include <algorithm>
 
-class TokenDetector
+class Tokens
 {
 private:
     std::unordered_map<std::string, TokenType> types;
 public:
-    TokenDetector();
+    Tokens();
     void init();
-    std::string getString(TokenType token);
-    TokenType getToken(std::string value);
+    std::string get(TokenType value);
+    TokenType get(std::string value);
     bool compare(std::string value1, TokenType value2);
     bool compare(char value1, TokenType value2);
+    bool exists(TokenType value);
+    bool exists(std::string value);
+    void add(std::string text, TokenType tokenType);
 };
-
-
 
 #endif // TOKENDETECTOR_H

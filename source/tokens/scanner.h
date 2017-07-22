@@ -24,17 +24,26 @@
 #include <memory>
 #include "errors/debug.h"
 #include "types/typedetector.h"
-#include "tokendetector.h"
+#include "tokens.h"
 #include "token.h"
 #include "tokenmanager.h"
 #include "unusabletokens.h"
+#include "tokens.h"
+
+#include <set>
 
 class Scanner
 {
 private:
     std::shared_ptr<UnusableTokens> unusableTokens;
-    std::shared_ptr<TokenDetector> tokenDetector;
+    std::shared_ptr<Tokens> tokens;
+    std::vector<std::shared_ptr<Token>> items;
     bool isAllowedCharacter(char character);
+    void AddToken(TokenType tokenType,
+                  std::shared_ptr<LineInfo> lineInfo);
+    void AddToken(std::string text,
+                  TokenType tokenType,
+                  std::shared_ptr<LineInfo> lineInfo);
 public:
     Scanner();
     std::vector<std::shared_ptr<Token>> tokenize(std::shared_ptr<TokenManager> fileReader);
