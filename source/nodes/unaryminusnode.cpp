@@ -15,7 +15,11 @@ std::shared_ptr<Variable> UnaryMinusNode::execute(std::shared_ptr<Scope> scope)
     }
     if (node != nullptr)
     {
-        return node->execute(scope)->mul(std::make_shared<IntegerVariable>(-1));
+        std::shared_ptr<Variable> value = node->execute(scope);
+        if (value != nullptr)
+        {
+            return value->mul(std::make_shared<IntegerVariable>(-1));
+        }
     }
     return null;
 }
