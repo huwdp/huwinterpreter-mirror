@@ -24,6 +24,7 @@ Scanner::Scanner()
 {
     unusableTokens = std::make_shared<UnusableTokens>();
     tokenDetector = std::make_shared<TokenDetector>();
+
 }
 
 bool Scanner::isAllowedCharacter(char character)
@@ -133,7 +134,7 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
             }
             else if (tokenDetector->compare(fileReader->getCurrent()->getContent(), TokenType::NOT))
             {
-                tokens.push_back(std::move(std::make_shared<Token>(";", TokenType::SEMICOLON, std::move(lineInfo))));
+                tokens.push_back(std::move(std::make_shared<Token>("!", TokenType::NOT, std::move(lineInfo))));
             }
             else if (fileReader->getCurrent()->getContent() == ' ' || fileReader->getCurrent()->getContent() == '\t')
             {
