@@ -253,3 +253,8 @@ void DoubleVariable::unset(std::string index)
 {
     Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call unset method on double type. Double is not an array"));
 }
+
+std::shared_ptr<Variable> DoubleVariable::copy()
+{
+    return std::move(std::make_shared<DoubleVariable>(value));
+}

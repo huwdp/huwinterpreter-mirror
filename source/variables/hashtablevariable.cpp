@@ -196,3 +196,13 @@ void HashTableVariable::unset(std::string index)
 {
     map.erase(index);
 }
+
+std::shared_ptr<Variable> HashTableVariable::copy()
+{
+    std::shared_ptr<HashTableVariable> map = std::make_shared<HashTableVariable>();
+    for (std::unordered_map<std::string, std::shared_ptr<Variable>>::iterator it = this->map.begin(); it != this->map.end(); ++it)
+    {
+        map->set((*it).first, (*it).second->copy());
+    }
+    return map;
+}

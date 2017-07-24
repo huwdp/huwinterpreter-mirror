@@ -17,7 +17,7 @@
 
 Variable::Variable()
 {
-
+    
 }
 
 Variable::Variable(std::string name)

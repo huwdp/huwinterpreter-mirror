@@ -60,6 +60,7 @@ public:
     std::shared_ptr<Variable> get(std::string index);
     void set(std::string index, std::shared_ptr<Variable> value);
     void unset(std::string index);
+    std::shared_ptr<Variable> copy();
 };
 
 

@@ -230,3 +230,8 @@ void IntegerVariable::unset(std::string index)
 {
     Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call unset method on integer type. Integer is not an array"));
 }
+
+std::shared_ptr<Variable> IntegerVariable::copy()
+{
+    return std::move(std::make_shared<IntegerVariable>(value));
+}

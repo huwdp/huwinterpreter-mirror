@@ -95,24 +95,30 @@ std::shared_ptr<Variable> Variables::exists(std::shared_ptr<Variable> variable)
 
 bool Variables::addVariable(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> e = exists(variable->getName());
-    if (e == nullptr)
+    if (variable != nullptr)
     {
-        std::string name = variable->getName();
-        variables[name] = std::move(variable);
-        return true;
+        std::shared_ptr<Variable> e = exists(variable->getName());
+        if (e == nullptr)
+        {
+            std::string name = variable->getName();
+            variables[name] = std::move(variable);
+            return true;
+        }
     }
     return false;
 }
 
 bool Variables::addVariable(std::string name, std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> e = exists(variable->getName());
-    if (e == nullptr)
+    if (variable != nullptr)
     {
-        variable->setName(name);
-        variables[name] = std::move(variable);
-        return true;
+        std::shared_ptr<Variable> e = exists(name);
+        if (e == nullptr)
+        {
+            variable->setName(name);
+            variables[name] = std::move(variable);
+            return true;
+        }
     }
     return false;
 }
@@ -140,11 +146,14 @@ bool Variables::addVariable(std::string name, std::string value)
 
 bool Variables::removeVariable(std::shared_ptr<Variable> variable)
 {
-    std::shared_ptr<Variable> e = exists(variable->getName());
-    if (e != nullptr)
+    if (variable != nullptr)
     {
-        this->variables.erase(variable->getName());
-        return true;
+        std::shared_ptr<Variable> e = exists(variable->getName());
+        if (e != nullptr)
+        {
+            this->variables.erase(variable->getName());
+            return true;
+        }
     }
     return false;
 }

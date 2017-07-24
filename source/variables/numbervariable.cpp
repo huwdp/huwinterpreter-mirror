@@ -332,3 +332,12 @@ void NumberVariable::unset(std::string index)
     variable->unset(index);
 }
 
+std::shared_ptr<Variable> NumberVariable::copy()
+{
+    if (variable == nullptr)
+    {
+        return null;
+    }
+    return variable->copy();
+}
+

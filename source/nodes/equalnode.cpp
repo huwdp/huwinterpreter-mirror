@@ -36,7 +36,11 @@ std::shared_ptr<Variable> EqualNode::execute(std::shared_ptr<Scope> scope)
     this->left = left;
     if (next != nullptr)
     {
-        return next->execute(scope);
+        std::shared_ptr<Variable> value = next->execute(scope);
+        if (value != nullptr)
+        {
+            return value->copy();
+        }
     }
     return null;
 }

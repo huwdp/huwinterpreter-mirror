@@ -258,3 +258,12 @@ void ConstantVariable::unset(std::string index)
     }
     return this->variable->unset(index);
 }
+
+std::shared_ptr<Variable> ConstantVariable::copy()
+{
+    if (variable != nullptr)
+    {
+        return null;
+    }
+    return variable->copy();
+}

@@ -45,7 +45,11 @@ std::shared_ptr<Variable> CustomFunction::run(std::shared_ptr<Token> token,
     std::vector<std::shared_ptr<Node>>::iterator variableIt = variables.begin();
     for (std::vector<std::string>::iterator argumentIt = arguments.begin(); argumentIt != arguments.end(); ++argumentIt)
     {
-        newScope->getVariables()->addVariable((*argumentIt), (*variableIt)->execute(scope)->toString());
+        std::shared_ptr<Variable> argument = (*variableIt)->execute(scope);
+        if (argument != nullptr)
+        {
+            newScope->getVariables()->addVariable((*argumentIt), argument->copy());
+        }
         ++variableIt;
     }
 

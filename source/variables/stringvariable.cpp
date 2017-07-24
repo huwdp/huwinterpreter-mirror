@@ -362,3 +362,8 @@ void StringVariable::unset(std::string index)
 {
     Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call unset method in string. String is not an array"));
 }
+
+std::shared_ptr<Variable> StringVariable::copy()
+{
+    return std::make_shared<StringVariable>(value);
+}
