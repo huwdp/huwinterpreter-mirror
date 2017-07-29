@@ -126,7 +126,9 @@ SOURCES += \
     tokens/unusabletokens.cpp \
     nodes/unaryminusnode.cpp \
     nodes/unarynotnode.cpp \
-    tokens/tokens.cpp
+    tokens/tokens.cpp \
+    nodes/bitwiseandnode.cpp \
+    nodes/bitwiseornode.cpp
 
 HEADERS += \
     errors/debug.h \
@@ -250,5 +252,7 @@ HEADERS += \
     tokens/unusabletokens.h \
     nodes/unaryminusnode.h \
     nodes/unarynotnode.h \
-    tokens/tokens.h
+    tokens/tokens.h \
+    nodes/bitwiseandnode.h \
+    nodes/bitwiseornode.h
 

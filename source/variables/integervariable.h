@@ -62,6 +62,8 @@ public:
     void set(std::string index, std::shared_ptr<Variable> value);
     void unset(std::string index);
     std::shared_ptr<Variable> copy();
+    std::shared_ptr<Variable> bitwiseAnd(std::shared_ptr<Variable> variable);
+    std::shared_ptr<Variable> bitwiseOr(std::shared_ptr<Variable> variable);
 };
 
 #endif // IntegerVariable_H

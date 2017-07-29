@@ -206,3 +206,15 @@ std::shared_ptr<Variable> HashTableVariable::copy()
     }
     return map;
 }
+
+std::shared_ptr<Variable> HashTableVariable::bitwiseAnd(std::shared_ptr<Variable> variable)
+{
+    Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call bitwiseAnd on an array"));
+    return null;
+}
+
+std::shared_ptr<Variable> HashTableVariable::bitwiseOr(std::shared_ptr<Variable> variable)
+{
+    Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call biteiseOR on an array"));
+    return null;
+}

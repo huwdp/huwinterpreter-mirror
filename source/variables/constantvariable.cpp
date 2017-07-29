@@ -95,7 +95,7 @@ VarType ConstantVariable::getType()
 
 std::shared_ptr<Variable> ConstantVariable::pow(std::shared_ptr<Variable> variable)
 {
-    if (this->variable == null && variable == nullptr)
+    if (this->variable == null || variable == nullptr)
     {
         return null;
     }
@@ -104,7 +104,7 @@ std::shared_ptr<Variable> ConstantVariable::pow(std::shared_ptr<Variable> variab
 
 std::shared_ptr<Variable> ConstantVariable::mul(std::shared_ptr<Variable> variable)
 {
-    if (this->variable == null && variable == nullptr)
+    if (this->variable == null || variable == nullptr)
     {
         return null;
     }
@@ -113,7 +113,7 @@ std::shared_ptr<Variable> ConstantVariable::mul(std::shared_ptr<Variable> variab
 
 std::shared_ptr<Variable> ConstantVariable::div(std::shared_ptr<Variable> variable)
 {
-    if (this->variable == null && variable == nullptr)
+    if (this->variable == null || variable == nullptr)
     {
         return null;
     }
@@ -122,7 +122,7 @@ std::shared_ptr<Variable> ConstantVariable::div(std::shared_ptr<Variable> variab
 
 std::shared_ptr<Variable> ConstantVariable::mod(std::shared_ptr<Variable> variable)
 {
-    if (this->variable == null && variable == nullptr)
+    if (this->variable == null || variable == nullptr)
     {
         return null;
     }
@@ -131,7 +131,7 @@ std::shared_ptr<Variable> ConstantVariable::mod(std::shared_ptr<Variable> variab
 
 std::shared_ptr<Variable> ConstantVariable::add(std::shared_ptr<Variable> variable)
 {
-    if (this->variable == null && variable == nullptr)
+    if (this->variable == null || variable == nullptr)
     {
         return null;
     }
@@ -140,7 +140,7 @@ std::shared_ptr<Variable> ConstantVariable::add(std::shared_ptr<Variable> variab
 
 std::shared_ptr<Variable> ConstantVariable::sub(std::shared_ptr<Variable> variable)
 {
-    if (this->variable == null && variable == nullptr)
+    if (this->variable == null || variable == nullptr)
     {
         return null;
     }
@@ -149,7 +149,7 @@ std::shared_ptr<Variable> ConstantVariable::sub(std::shared_ptr<Variable> variab
 
 std::shared_ptr<Variable> ConstantVariable::ifUnder(std::shared_ptr<Variable> variable)
 {
-    if (this->variable == null && variable == nullptr)
+    if (this->variable == null || variable == nullptr)
     {
         return null;
     }
@@ -158,7 +158,7 @@ std::shared_ptr<Variable> ConstantVariable::ifUnder(std::shared_ptr<Variable> va
 
 std::shared_ptr<Variable> ConstantVariable::ifUnderOrEqual(std::shared_ptr<Variable> variable)
 {
-    if (this->variable == null && variable == nullptr)
+    if (this->variable == null || variable == nullptr)
     {
         return null;
     }
@@ -167,7 +167,7 @@ std::shared_ptr<Variable> ConstantVariable::ifUnderOrEqual(std::shared_ptr<Varia
 
 std::shared_ptr<Variable> ConstantVariable::ifOver(std::shared_ptr<Variable> variable)
 {
-    if (this->variable == null && variable == nullptr)
+    if (this->variable == null || variable == nullptr)
     {
         return null;
     }
@@ -176,7 +176,7 @@ std::shared_ptr<Variable> ConstantVariable::ifOver(std::shared_ptr<Variable> var
 
 std::shared_ptr<Variable> ConstantVariable::ifOverOrEqual(std::shared_ptr<Variable> variable)
 {
-    if (this->variable == null && variable == nullptr)
+    if (this->variable == null || variable == nullptr)
     {
         return null;
     }
@@ -185,7 +185,7 @@ std::shared_ptr<Variable> ConstantVariable::ifOverOrEqual(std::shared_ptr<Variab
 
 std::shared_ptr<Variable> ConstantVariable::ifEqual(std::shared_ptr<Variable> variable)
 {
-    if (this->variable == null && variable == nullptr)
+    if (this->variable == null || variable == nullptr)
     {
         return null;
     }
@@ -194,7 +194,7 @@ std::shared_ptr<Variable> ConstantVariable::ifEqual(std::shared_ptr<Variable> va
 
 std::shared_ptr<Variable> ConstantVariable::ifNotEqual(std::shared_ptr<Variable> variable)
 {
-    if (this->variable == null && variable == nullptr)
+    if (this->variable == null || variable == nullptr)
     {
         return null;
     }
@@ -213,7 +213,7 @@ std::shared_ptr<Variable> ConstantVariable::increment()
 
 std::shared_ptr<Variable> ConstantVariable::count()
 {
-    if (this->variable == null && variable == nullptr)
+    if (this->variable == null || variable == nullptr)
     {
         return null;
     }
@@ -242,7 +242,7 @@ void ConstantVariable::set(std::string index, std::shared_ptr<Variable> value)
 
 std::shared_ptr<Variable> ConstantVariable::get(std::string value)
 {
-    if (this->variable == null && variable == nullptr)
+    if (this->variable == null || variable == nullptr)
     {
         return null;
     }
@@ -266,4 +266,22 @@ std::shared_ptr<Variable> ConstantVariable::copy()
         return null;
     }
     return variable->copy();
+}
+
+std::shared_ptr<Variable> ConstantVariable::bitwiseAnd(std::shared_ptr<Variable> variable)
+{
+    if (!isSet && this->variable == null && variable == nullptr)
+    {
+        return null;
+    }
+    return this->variable->bitwiseAnd(variable);
+}
+
+std::shared_ptr<Variable> ConstantVariable::bitwiseOr(std::shared_ptr<Variable> variable)
+{
+    if (!isSet && this->variable == null && variable == nullptr)
+    {
+        return null;
+    }
+    return this->variable->bitwiseOr(variable);
 }

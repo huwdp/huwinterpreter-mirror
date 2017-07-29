@@ -105,11 +105,7 @@ double NumberVariable::getValue()
 
 std::shared_ptr<Variable> NumberVariable::pow(std::shared_ptr<Variable> variable)
 {
-    if (variable == nullptr)
-    {
-        return null;
-    }
-    if (this->variable == nullptr)
+    if (variable == nullptr || this->variable == nullptr)
     {
         return null;
     }
@@ -118,11 +114,7 @@ std::shared_ptr<Variable> NumberVariable::pow(std::shared_ptr<Variable> variable
 
 std::shared_ptr<Variable> NumberVariable::mul(std::shared_ptr<Variable> variable)
 {
-    if (variable == nullptr)
-    {
-        return null;
-    }
-    if (this->variable == nullptr)
+    if (variable == nullptr || this->variable == nullptr)
     {
         return null;
     }
@@ -131,12 +123,7 @@ std::shared_ptr<Variable> NumberVariable::mul(std::shared_ptr<Variable> variable
 
 std::shared_ptr<Variable> NumberVariable::div(std::shared_ptr<Variable> variable)
 {
-    
-    if (variable == nullptr)
-    {
-        return null;
-    }
-    if (this->variable == nullptr)
+    if (variable == nullptr || this->variable == nullptr)
     {
         return null;
     }
@@ -145,11 +132,7 @@ std::shared_ptr<Variable> NumberVariable::div(std::shared_ptr<Variable> variable
 
 std::shared_ptr<Variable> NumberVariable::mod(std::shared_ptr<Variable> variable)
 {
-    if (variable == nullptr)
-    {
-        return null;
-    }
-    if (this->variable == nullptr)
+    if (variable == nullptr || this->variable == nullptr)
     {
         return null;
     }
@@ -158,11 +141,7 @@ std::shared_ptr<Variable> NumberVariable::mod(std::shared_ptr<Variable> variable
 
 std::shared_ptr<Variable> NumberVariable::add(std::shared_ptr<Variable> variable)
 {
-    if (variable == nullptr)
-    {
-        return null;
-    }
-    if (this->variable == nullptr)
+    if (variable == nullptr || this->variable == nullptr)
     {
         return null;
     }
@@ -171,11 +150,7 @@ std::shared_ptr<Variable> NumberVariable::add(std::shared_ptr<Variable> variable
 
 std::shared_ptr<Variable> NumberVariable::sub(std::shared_ptr<Variable> variable)
 {
-    if (variable == nullptr)
-    {
-        return null;
-    }
-    if (this->variable == nullptr)
+    if (variable == nullptr || this->variable == nullptr)
     {
         return null;
     }
@@ -184,11 +159,7 @@ std::shared_ptr<Variable> NumberVariable::sub(std::shared_ptr<Variable> variable
 
 std::shared_ptr<Variable> NumberVariable::ifUnder(std::shared_ptr<Variable> variable)
 {
-    if (variable == nullptr)
-    {
-        return null;
-    }
-    if (this->variable == nullptr)
+    if (variable == nullptr || this->variable == nullptr)
     {
         return null;
     }
@@ -197,11 +168,7 @@ std::shared_ptr<Variable> NumberVariable::ifUnder(std::shared_ptr<Variable> vari
 
 std::shared_ptr<Variable> NumberVariable::ifUnderOrEqual(std::shared_ptr<Variable> variable)
 {
-    if (variable == nullptr)
-    {
-        return null;
-    }
-    if (this->variable == nullptr)
+    if (variable == nullptr || this->variable == nullptr)
     {
         return null;
     }
@@ -210,11 +177,7 @@ std::shared_ptr<Variable> NumberVariable::ifUnderOrEqual(std::shared_ptr<Variabl
 
 std::shared_ptr<Variable> NumberVariable::ifOver(std::shared_ptr<Variable> variable)
 {
-    if (variable == nullptr)
-    {
-        return null;
-    }
-    if (this->variable == nullptr)
+    if (variable == nullptr || this->variable == nullptr)
     {
         return null;
     }
@@ -223,11 +186,7 @@ std::shared_ptr<Variable> NumberVariable::ifOver(std::shared_ptr<Variable> varia
 
 std::shared_ptr<Variable> NumberVariable::ifOverOrEqual(std::shared_ptr<Variable> variable)
 {
-    if (variable == nullptr)
-    {
-        return null;
-    }
-    if (this->variable == nullptr)
+    if (variable == nullptr || this->variable == nullptr)
     {
         return null;
     }
@@ -236,11 +195,7 @@ std::shared_ptr<Variable> NumberVariable::ifOverOrEqual(std::shared_ptr<Variable
 
 std::shared_ptr<Variable> NumberVariable::ifEqual(std::shared_ptr<Variable> variable)
 {
-    if (variable == nullptr)
-    {
-        return null;
-    }
-    if (this->variable == nullptr)
+    if (variable == nullptr || this->variable == nullptr)
     {
         return null;
     }
@@ -249,11 +204,7 @@ std::shared_ptr<Variable> NumberVariable::ifEqual(std::shared_ptr<Variable> vari
 
 std::shared_ptr<Variable> NumberVariable::ifNotEqual(std::shared_ptr<Variable> variable)
 {
-    if (variable == nullptr)
-    {
-        return null;
-    }
-    if (this->variable == nullptr)
+    if (variable == nullptr || this->variable == nullptr)
     {
         return null;
     }
@@ -339,5 +290,23 @@ std::shared_ptr<Variable> NumberVariable::copy()
         return null;
     }
     return variable->copy();
+}
+
+std::shared_ptr<Variable> NumberVariable::bitwiseAnd(std::shared_ptr<Variable> variable)
+{
+    if (variable == nullptr || this->variable == nullptr)
+    {
+        return null;
+    }
+    return this->variable->bitwiseAnd(variable);
+}
+
+std::shared_ptr<Variable> NumberVariable::bitwiseOr(std::shared_ptr<Variable> variable)
+{
+    if (variable == nullptr || this->variable == nullptr)
+    {
+        return null;
+    }
+    return this->variable->bitwiseOr(variable);
 }
 

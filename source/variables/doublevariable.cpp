@@ -17,7 +17,7 @@
 
 DoubleVariable::DoubleVariable()
 {
-
+    this->value = 0;
 }
 
 DoubleVariable::DoubleVariable(double value)
@@ -258,3 +258,25 @@ std::shared_ptr<Variable> DoubleVariable::copy()
 {
     return std::move(std::make_shared<DoubleVariable>(value));
 }
+
+std::shared_ptr<Variable> DoubleVariable::bitwiseAnd(std::shared_ptr<Variable> variable)
+{
+    if (variable == nullptr)
+    {
+        return null;
+    }
+    long long value = (long long)((long long)this->value & variable->toInt());
+    return std::move(std::make_shared<NumberVariable>(value));
+}
+
+std::shared_ptr<Variable> DoubleVariable::bitwiseOr(std::shared_ptr<Variable> variable)
+{
+    if (variable == nullptr)
+    {
+        return null;
+    }
+    long long value = (long long)((long long)this->value | variable->toInt());
+    return std::move(std::make_shared<NumberVariable>(value));
+}
+
+

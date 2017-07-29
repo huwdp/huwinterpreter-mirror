@@ -235,3 +235,27 @@ std::shared_ptr<Variable> IntegerVariable::copy()
 {
     return std::move(std::make_shared<IntegerVariable>(value));
 }
+
+std::shared_ptr<Variable> IntegerVariable::bitwiseAnd(std::shared_ptr<Variable> variable)
+{
+    if (variable == nullptr)
+    {
+        return null;
+    }
+    long long value = (long long)(this->value & variable->toInt());
+    return std::move(std::make_shared<NumberVariable>(value));
+}
+
+std::shared_ptr<Variable> IntegerVariable::bitwiseOr(std::shared_ptr<Variable> variable)
+{
+    if (variable == nullptr)
+    {
+        return null;
+    }
+    if (variable == nullptr)
+    {
+        return null;
+    }
+    long long value = (long long)(this->value | variable->toInt());
+    return std::move(std::make_shared<NumberVariable>(value));
+}

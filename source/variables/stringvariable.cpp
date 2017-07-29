@@ -367,3 +367,15 @@ std::shared_ptr<Variable> StringVariable::copy()
 {
     return std::make_shared<StringVariable>(value);
 }
+
+std::shared_ptr<Variable> StringVariable::bitwiseAnd(std::shared_ptr<Variable> variable)
+{
+    Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call bitwiseAnd method in string"));
+    return null;
+}
+
+std::shared_ptr<Variable> StringVariable::bitwiseOr(std::shared_ptr<Variable> variable)
+{
+    Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call bitwiseOR method in string"));
+    return null;
+}
