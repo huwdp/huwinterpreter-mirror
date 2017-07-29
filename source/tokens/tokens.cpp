@@ -23,68 +23,64 @@ Tokens::Tokens()
 void Tokens::init()
 {
     types.clear();
-    types[")"] = RIGHTPARENTHESIS;
-    types["("] = LEFTARENTHESIS;
-    types["*"] = MULTIPLICATION;
-    types["/"] = DIVISION;
-    types["-"] = SUBTRACTION;
-    types["%"] = MOD;
-    types["="] = EQUALS;
-    types["=="] = IFEQUALS;
-    types["!="] = IFNOTEQUALS;
-    types["<"] = IFLESSTHAN;
-    types["<="] = IFLESSTHANOREQUAL;
-    types[">"] = IFGREATER;
-    types[">="] = IFGREATERTHANOREQUAL;
-    types["{"] = LEFTBRACKET;
-    types["}"] = RIGHTBRACKET;
-    types[";"] = SEMICOLON;
-    types[","] = COMMA;
-    types["\""] = QUOTE;
-    types["."] = DOT;
-    types["!"] = NOT;
-    types["+"] = ADDITION;
-    types["&"] = BITWISEAND;
-    types["|"] = BITWISEOR;
-    types["&&"] = AND;
-    types["||"] = OR;
-    types["*="] = MULTIPLICATIONEQUAL;
-    types["/="] = DIVISIONEQUAL;
-    types["+="] = ADDITIONEQUAL;
-    types["-="] = SUBTRACTIONEQUAL;
-    types["++"] = INCREMENT;
-    types["--"] = DECREMENT;
-    types["\t"] = TABINDENTATION;
-    types[" "] = INDENTATION;
+    types[RIGHTPARENTHESIS] = ")";
+    types[LEFTARENTHESIS] = "(";
+    types[MULTIPLICATION] = "*";
+    types[DIVISION] = "/";
+    types[SUBTRACTION] = "-";
+    types[MOD] = "%";
+    types[EQUALS] = "=";
+    types[IFEQUALS] = "==";
+    types[IFNOTEQUALS] = "!=";
+    types[IFLESSTHAN] = "<";
+    types[IFLESSTHANOREQUAL] = "<=";
+    types[IFGREATER] = ">";
+    types[IFGREATERTHANOREQUAL] = ">=";
+    types[LEFTBRACKET] = "{";
+    types[RIGHTBRACKET] = "}";
+    types[SEMICOLON] = ";";
+    types[COMMA] = ",";
+    types[QUOTE] = "\"";
+    types[DOT] = ".";
+    types[NOT] = "!";
+    types[ADDITION] = "+";
+    types[BITWISEAND] = "&";
+    types[BITWISEOR] = "|";
+    types[AND] = "&&";
+    types[OR] = "||";
+    types[MULTIPLICATIONEQUAL] = "*=";
+    types[DIVISIONEQUAL] = "/=";
+    types[ADDITIONEQUAL] = "+=";
+    types[SUBTRACTIONEQUAL] = "-=";
+    types[INCREMENT] = "++";
+    types[DECREMENT] = "--";
+    types[TABINDENTATION] = "\t";
+    types[INDENTATION] = " ";
 }
 
 std::string Tokens::get(TokenType value)
 {
-    for (std::unordered_map<std::string, TokenType>::iterator it = types.begin(); it != types.end(); ++it)
-    {
-        if (it->second == value)
-        {
-            return it->first;
-        }
-    }
-    return "";
+    return types[value];
 }
 
 TokenType Tokens::get(std::string value)
 {
-    if (exists(value))
+    for (std::unordered_map<ushort, std::string>::iterator it = types.begin(); it != types.end(); ++it)
     {
-        return types[value];
+        if (it->second == value)
+        {
+            return (TokenType)it->first;
+        }
     }
     return WORD;
 }
 
 bool Tokens::compare(std::string value1, TokenType value2)
 {
-    std::unordered_map<std::string, TokenType>::const_iterator got = types.find(value1);
+    std::unordered_map<ushort, std::string>::const_iterator got = types.find(value2);
     if (got != types.end())
     {
-        if (got->second == value2)
+        if (got->second == value1)
         {
             return true;
         }
@@ -103,19 +99,19 @@ bool Tokens::compare(char value1, TokenType value2)
 
 bool Tokens::exists(TokenType value)
 {
-    return std::find_if(types.begin(), types.end(),
-        [value](const std::unordered_map<std::string, TokenType>::value_type& item) { return item.second == value; }) != types.end();
+    return types.find(value) != types.end();
 }
 
 bool Tokens::exists(std::string value)
 {
-    return types.find(value) != types.end();
+    return std::find_if(types.begin(), types.end(),
+        [value](const std::unordered_map<ushort, std::string>::value_type& item) { return item.second == value; }) != types.end();
 }
 
 void Tokens::add(std::string text, TokenType tokenType)
 {
     if (!exists(tokenType))
     {
-        types[text] = tokenType;
+        types[tokenType] = text;
     }
 }

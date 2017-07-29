@@ -25,7 +25,7 @@
 class Tokens
 {
 private:
-    std::unordered_map<std::string, TokenType> types;
+    std::unordered_map<ushort, std::string> types;
 public:
     Tokens();
     void init();
