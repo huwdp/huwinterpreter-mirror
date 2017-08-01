@@ -43,6 +43,8 @@
 
 #include "nodes/ifandnode.h"
 #include "nodes/ifornode.h"
+#include "nodes/bitwiseandnode.h"
+#include "nodes/bitwiseornode.h"
 
 #include "nodes/getvarnode.h"
 #include "nodes/setvarnode.h"

@@ -17,7 +17,7 @@
 #define TOKENTYPES
 
 enum TokenType {RIGHTPARENTHESIS,
-                 LEFTARENTHESIS,
+                 LEFTPARENTHESIS,
                  MULTIPLICATION,
                  DIVISION,
                  ADDITION,

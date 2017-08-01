@@ -136,9 +136,9 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
 
             lineInfo = std::make_shared<LineInfo>("", fileReader->getCurrent()->getLineNumber(),0);
 
-            if (tokens->compare(fileReader->getCurrent()->getContent(), LEFTARENTHESIS))
+            if (tokens->compare(fileReader->getCurrent()->getContent(), LEFTPARENTHESIS))
             {
-                AddToken(LEFTARENTHESIS, std::move(lineInfo));
+                AddToken(LEFTPARENTHESIS, std::move(lineInfo));
             }
             else if (tokens->compare(fileReader->getCurrent()->getContent(), RIGHTPARENTHESIS))
             {

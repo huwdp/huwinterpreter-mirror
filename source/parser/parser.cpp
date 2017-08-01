@@ -142,10 +142,10 @@ std::shared_ptr<Node> Parser::value()
             std::string word = currentToken->getContent();
             acceptIndentation();
             std::shared_ptr<Token> peak = peakToken();
-            if (peak != nullptr && peakToken()->getType() == LEFTARENTHESIS)
+            if (peak != nullptr && peakToken()->getType() == LEFTPARENTHESIS)
             {
                 nextToken();
-                if (!expect(LEFTARENTHESIS))
+                if (!expect(LEFTPARENTHESIS))
                 {
                     return null;
                 }
@@ -195,7 +195,7 @@ std::shared_ptr<Node> Parser::factor()
     if (!tokens.empty() && compilation)
     {
         std::shared_ptr<Node> value;
-        if (currentToken->getType() == LEFTARENTHESIS)
+        if (currentToken->getType() == LEFTPARENTHESIS)
         {
             nextToken();
             value = boolean();
@@ -371,6 +371,18 @@ std::shared_ptr<Node> Parser::boolean()
                 std::shared_ptr<Node> next = condition();
                 node = std::make_shared<IfOrNode>(currentToken, node, next);
             }
+            else if (type == BITWISEAND)
+            {
+                nextToken();
+                std::shared_ptr<Node> next = condition();
+                node = std::make_shared<BitwiseAndNode>(currentToken, node, next);
+            }
+            else if (type == BITWISEOR)
+            {
+                nextToken();
+                std::shared_ptr<Node> next = condition();
+                node = std::make_shared<BitwiseOrNode>(currentToken, node, next);
+            }
         }
         return node;
     }
@@ -390,7 +402,7 @@ std::shared_ptr<Node> Parser::elseStatement()
         if (accept("if"))
         {
             acceptIndentation();
-            if (!expect(LEFTARENTHESIS))
+            if (!expect(LEFTPARENTHESIS))
             {
                 return null;
             }
@@ -447,7 +459,7 @@ std::shared_ptr<Node> Parser::statement()
         if (accept("if"))
         {
             acceptIndentation();
-            if (!expect(LEFTARENTHESIS))
+            if (!expect(LEFTPARENTHESIS))
             {
                 return null;
             }
@@ -481,7 +493,7 @@ std::shared_ptr<Node> Parser::statement()
         else if (accept("while"))
         {
             acceptIndentation();
-            expect(LEFTARENTHESIS);
+            expect(LEFTPARENTHESIS);
             std::shared_ptr<Node> conditionNode = boolean();
             acceptIndentation();
             expect(RIGHTPARENTHESIS);
@@ -611,7 +623,7 @@ std::shared_ptr<Node> Parser::block()
         {
             std::string word = this->currentToken->getContent();
             nextToken();
-            if (!expect(LEFTARENTHESIS))
+            if (!expect(LEFTPARENTHESIS))
             {
                 return null;
             }
@@ -656,7 +668,7 @@ std::shared_ptr<Node> Parser::block()
             functions->addFunction(word);
             acceptIndentation();
 
-            if (!expect(LEFTARENTHESIS))
+            if (!expect(LEFTPARENTHESIS))
             {
                 functions->removeFunction(word);
                 return null;

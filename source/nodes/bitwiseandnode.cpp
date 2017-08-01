@@ -43,8 +43,8 @@ std::shared_ptr<Variable> BitwiseAndNode::execute(std::shared_ptr<Scope> scope)
             Errors::add(std::make_shared<Error>(ERROR, "Invalid expression", token));
             return null;
         }
-        return l->add(r);
+        return l->bitwiseAnd(r);
     }
-    Debug::print("Could not add.");
+    Debug::print("Could not bitwiseAnd");
     return null;
 }

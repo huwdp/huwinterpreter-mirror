@@ -24,7 +24,7 @@ void Tokens::init()
 {
     types.clear();
     types[RIGHTPARENTHESIS] = ")";
-    types[LEFTARENTHESIS] = "(";
+    types[LEFTPARENTHESIS] = "(";
     types[MULTIPLICATION] = "*";
     types[DIVISION] = "/";
     types[SUBTRACTION] = "-";

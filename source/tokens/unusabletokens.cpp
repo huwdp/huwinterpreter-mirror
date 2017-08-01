@@ -25,7 +25,7 @@ void UnusableTokens::init()
 {
     items.clear();
     items.push_back(RIGHTPARENTHESIS);
-    items.push_back(LEFTARENTHESIS);
+    items.push_back(LEFTPARENTHESIS);
     items.push_back(MULTIPLICATION);
     items.push_back(DIVISION);
     items.push_back(SUBTRACTION);
@@ -43,7 +43,7 @@ void UnusableTokens::init()
     items.push_back(COMMA);
     items.push_back(QUOTE);
     items.push_back(NOT);
-    items.push_back(LEFTARENTHESIS);
+    items.push_back(LEFTPARENTHESIS);
     items.push_back(MULTIPLICATION);
     items.push_back(DIVISION);
     items.push_back(ADDITION);

@@ -29,5 +29,22 @@ std::shared_ptr<Variable> BitwiseOrNode::execute(std::shared_ptr<Scope> scope)
     {
         return scope->getReturnValue();
     }
-
+    if (left != nullptr && right != nullptr)
+    {
+        std::shared_ptr<Variable> l = left->execute(scope);
+        std::shared_ptr<Variable> r = right->execute(scope);
+        if (l == nullptr)
+        {
+            Errors::add(std::make_shared<Error>(ERROR, "Invalid expression", token));
+            return null;
+        }
+        if (r == nullptr)
+        {
+            Errors::add(std::make_shared<Error>(ERROR, "Invalid expression", token));
+            return null;
+        }
+        return l->bitwiseOr(r);
+    }
+    Debug::print("Could not bitwiseOr");
+    return null;
 }
