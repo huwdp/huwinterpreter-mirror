@@ -13,7 +13,6 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 #include "isnumbertype.h"
 
 std::shared_ptr<Variable> IsNumberType::run(std::shared_ptr<Token> token,

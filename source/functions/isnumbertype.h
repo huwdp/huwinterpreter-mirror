@@ -14,8 +14,8 @@
 */
 
 
-#ifndef ISNUMBER_H
-#define ISNUMBER_H
+#ifndef ISNUMBERTYPE_H
+#define ISNUMBERTYPE_H
 
 #include "function.h"
 
@@ -32,4 +32,4 @@ public:
                                   std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // ISNUMBER_H
+#endif // ISNUMBERTYPE_H

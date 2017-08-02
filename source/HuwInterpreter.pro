@@ -135,7 +135,10 @@ SOURCES += \
     functions/isdoubletype.cpp \
     functions/isnumbertype.cpp \
     functions/isinttype.cpp \
-    functions/isstringtype.cpp
+    functions/isstringtype.cpp \
+    functions/isint.cpp \
+    functions/isdouble.cpp \
+    functions/isnumber.cpp
 
 HEADERS += \
     errors/debug.h \
@@ -268,5 +271,8 @@ HEADERS += \
     functions/isdoubletype.h \
     functions/isinttype.h \
     functions/isnumbertype.h \
-    functions/isstringtype.h
+    functions/isstringtype.h \
+    functions/isint.h \
+    functions/isdouble.h \
+    functions/isnumber.h
 

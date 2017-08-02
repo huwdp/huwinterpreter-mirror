@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ISDOUBLE_H
-#define ISDOUBLE_H
+#ifndef ISDOUBLETYPE_H
+#define ISDOUBLETYPE_H
 
 #include "function.h"
 
@@ -31,4 +31,4 @@ public:
                                   std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // ISDOUBLE_H
+#endif // ISDOUBLETYPE_H

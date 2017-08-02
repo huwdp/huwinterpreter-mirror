@@ -13,22 +13,21 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ISDOUBLE_H
-#define ISDOUBLE_H
+#ifndef ISNUMBER_H
+#define ISNUMBER_H
 
 #include "function.h"
 
-class IsDouble : public Function
+class IsNumber : public Function
 {
 public:
-    IsDouble()
+    IsNumber()
     {
-        name = "isDouble";
+        name = "isNumber";
     }
-
     std::shared_ptr<Variable> run(std::shared_ptr<Token> token,
                                   std::shared_ptr<Scope> scope,
                                   std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // ISDOUBLE_H
+#endif // ISNUMBER_H

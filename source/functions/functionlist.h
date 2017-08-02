@@ -97,5 +97,9 @@
 #include "isarraytype.h"
 #include "isnumbertype.h"
 
+#include "isint.h"
+#include "isdouble.h"
+#include "isnumber.h"
+
 #endif  //FUNCTIONLIST_H
 

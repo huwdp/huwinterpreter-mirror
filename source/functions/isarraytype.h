@@ -14,8 +14,8 @@
 */
 
 
-#ifndef ISARRAY_H
-#define ISARRAY_H
+#ifndef ISARRAYTYPE_H
+#define ISARRAYTYPE_H
 
 #include "function.h"
 
@@ -32,4 +32,4 @@ public:
                                             std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // ISARRAY_H
+#endif // ISARRAYTYPE_H

@@ -13,9 +13,9 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "isint.h"
+#include "isnumber.h"
 
-std::shared_ptr<Variable> IsInt::run(std::shared_ptr<Token> token,
+std::shared_ptr<Variable> IsNumber::run(std::shared_ptr<Token> token,
                               std::shared_ptr<Scope> scope,
                               std::vector<std::shared_ptr<Node>> variables)
 {
@@ -26,16 +26,12 @@ std::shared_ptr<Variable> IsInt::run(std::shared_ptr<Token> token,
         std::shared_ptr<Variable> var = node->execute(scope);
         if (node != nullptr)
         {
-            if (var->getType() == INTEGER)
-            {
-                returnNode = std::make_shared<NumberVariable>(true);
-            }
-            returnNode = std::make_shared<NumberVariable>(TypeDetector::isInteger(var->toString()));
+            returnNode = std::make_shared<NumberVariable>(TypeDetector::isNumeric(var->toString()));
         }
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "isInt function requires one arguments", token));
+        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "isNumber function requires one arguments", token));
     }
     return returnNode;
 }

@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ISINT_H
-#define ISINT_H
+#ifndef ISINTTYPE_H
+#define ISINTTYPE_H
 
 #include "function.h"
 
@@ -31,4 +31,4 @@ public:
                                   std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // ISINT_H
+#endif // ISINTTYPE_H

@@ -81,6 +81,10 @@ Functions::Functions()
     functions["isStringType"] = std::move(std::make_shared<IsStringType>());
     functions["isArrayType"] = std::move(std::make_shared<IsArrayType>());
     functions["isNumberType"] = std::move(std::make_shared<IsNumberType>());
+
+    functions["isInt"] = std::move(std::make_shared<IsInt>());
+    functions["isDouble"] = std::move(std::make_shared<IsDouble>());
+    functions["isNumber"] = std::move(std::make_shared<IsNumber>());
 }
 
 std::shared_ptr<Function> Functions::get(std::string name)

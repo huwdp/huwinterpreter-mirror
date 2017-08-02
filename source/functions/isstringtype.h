@@ -14,8 +14,8 @@
 */
 
 
-#ifndef ISSTRING_H
-#define ISSTRING_H
+#ifndef ISSTRINGTYPE_H
+#define ISSTRINGTYPE_H
 
 #include "function.h"
 
@@ -32,4 +32,4 @@ public:
                                   std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // ISSTRING_H
+#endif // ISSTRINGTYPE_H
