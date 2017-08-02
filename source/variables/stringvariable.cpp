@@ -93,6 +93,11 @@ std::string StringVariable::getValue()
     return value;
 }
 
+bool StringVariable::isNumber()
+{
+    return false;
+}
+
 std::shared_ptr<Variable> StringVariable::pow(std::shared_ptr<Variable> variable)
 {
     Debug::print("Cannot call power method on string");

@@ -90,5 +90,12 @@
 // String/array
 #include "functions/count.h"
 
+#include "isinttype.h"
+#include "isdoubletype.h"
+#include "isnumbertype.h"
+#include "isstringtype.h"
+#include "isarraytype.h"
+#include "isnumbertype.h"
+
 #endif  //FUNCTIONLIST_H
 

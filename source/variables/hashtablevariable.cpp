@@ -60,6 +60,11 @@ double HashTableVariable::getValue()
     return 0.0;
 }
 
+bool HashTableVariable::isNumber()
+{
+    return false;
+}
+
 std::shared_ptr<Variable> HashTableVariable::pow(std::shared_ptr<Variable> variable)
 {
     Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call pow method on an arrap"));

@@ -103,6 +103,11 @@ double NumberVariable::getValue()
     return variable->toDouble();
 }
 
+bool NumberVariable::isNumber()
+{
+    return true;
+}
+
 std::shared_ptr<Variable> NumberVariable::pow(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr || this->variable == nullptr)

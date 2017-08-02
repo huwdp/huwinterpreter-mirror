@@ -130,7 +130,12 @@ SOURCES += \
     nodes/bitwiseandnode.cpp \
     nodes/bitwiseornode.cpp \
     nodes/intnode.cpp \
-    nodes/doublenode.cpp
+    nodes/doublenode.cpp \
+    functions/isarraytype.cpp \
+    functions/isdoubletype.cpp \
+    functions/isnumbertype.cpp \
+    functions/isinttype.cpp \
+    functions/isstringtype.cpp
 
 HEADERS += \
     errors/debug.h \
@@ -258,5 +263,10 @@ HEADERS += \
     nodes/bitwiseandnode.h \
     nodes/bitwiseornode.h \
     nodes/intnode.h \
-    nodes/doublenode.h
+    nodes/doublenode.h \
+    functions/isarraytype.h \
+    functions/isdoubletype.h \
+    functions/isinttype.h \
+    functions/isnumbertype.h \
+    functions/isstringtype.h
 

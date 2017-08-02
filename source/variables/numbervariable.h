@@ -47,7 +47,7 @@ public:
     bool toBool();
     VarType getType();
     double getValue();
-
+    bool isNumber();
     std::shared_ptr<Variable> pow(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> mul(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> div(std::shared_ptr<Variable> variable);

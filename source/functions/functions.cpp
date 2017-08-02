@@ -75,6 +75,12 @@ Functions::Functions()
     functions["arrayUnset"] = std::move(std::make_shared<ArrayUnset>());
 
     functions["count"] = std::move(std::make_shared<Count>());
+
+    functions["isIntType"] = std::move(std::make_shared<IsIntType>());
+    functions["isDoubleType"] = std::move(std::make_shared<IsDoubleType>());
+    functions["isStringType"] = std::move(std::make_shared<IsStringType>());
+    functions["isArrayType"] = std::move(std::make_shared<IsArrayType>());
+    functions["isNumberType"] = std::move(std::make_shared<IsNumberType>());
 }
 
 std::shared_ptr<Function> Functions::get(std::string name)

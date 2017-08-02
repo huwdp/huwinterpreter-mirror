@@ -44,6 +44,7 @@ public:
     virtual std::string toString() = 0;
     virtual bool toBool() = 0;
     virtual VarType getType() = 0;
+    virtual bool isNumber() = 0;
     virtual std::shared_ptr<Variable> pow(std::shared_ptr<Variable> variable) = 0;
     virtual std::shared_ptr<Variable> mul(std::shared_ptr<Variable> variable) = 0;
     virtual std::shared_ptr<Variable> div(std::shared_ptr<Variable> variable) = 0;

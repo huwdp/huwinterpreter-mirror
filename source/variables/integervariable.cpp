@@ -88,6 +88,11 @@ double IntegerVariable::getValue()
     return value;
 }
 
+bool IntegerVariable::isNumber()
+{
+    return true;
+}
+
 std::shared_ptr<Variable> IntegerVariable::pow(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)

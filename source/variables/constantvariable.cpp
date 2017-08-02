@@ -93,6 +93,11 @@ VarType ConstantVariable::getType()
     return variable->getType();
 }
 
+bool ConstantVariable::isNumber()
+{
+    return variable->isNumber();
+}
+
 std::shared_ptr<Variable> ConstantVariable::pow(std::shared_ptr<Variable> variable)
 {
     if (this->variable == null || variable == nullptr)

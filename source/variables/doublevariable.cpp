@@ -111,6 +111,11 @@ double DoubleVariable::getValue()
     return value;
 }
 
+bool DoubleVariable::isNumber()
+{
+    return true;
+}
+
 std::shared_ptr<Variable> DoubleVariable::pow(std::shared_ptr<Variable> variable)
 {
     if (variable == nullptr)
