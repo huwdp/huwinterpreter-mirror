@@ -128,7 +128,9 @@ SOURCES += \
     nodes/unarynotnode.cpp \
     tokens/tokens.cpp \
     nodes/bitwiseandnode.cpp \
-    nodes/bitwiseornode.cpp
+    nodes/bitwiseornode.cpp \
+    nodes/intnode.cpp \
+    nodes/doublenode.cpp
 
 HEADERS += \
     errors/debug.h \
@@ -254,5 +256,7 @@ HEADERS += \
     nodes/unarynotnode.h \
     tokens/tokens.h \
     nodes/bitwiseandnode.h \
-    nodes/bitwiseornode.h
+    nodes/bitwiseornode.h \
+    nodes/intnode.h \
+    nodes/doublenode.h
 
