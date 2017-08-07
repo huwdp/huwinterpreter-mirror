@@ -129,8 +129,6 @@ SOURCES += \
     tokens/tokens.cpp \
     nodes/bitwiseandnode.cpp \
     nodes/bitwiseornode.cpp \
-    nodes/intnode.cpp \
-    nodes/doublenode.cpp \
     functions/isarraytype.cpp \
     functions/isdoubletype.cpp \
     functions/isnumbertype.cpp \
@@ -138,7 +136,9 @@ SOURCES += \
     functions/isstringtype.cpp \
     functions/isint.cpp \
     functions/isdouble.cpp \
-    functions/isnumber.cpp
+    functions/isnumber.cpp \
+    functions/todouble.cpp \
+    functions/toint.cpp
 
 HEADERS += \
     errors/debug.h \
@@ -265,8 +265,6 @@ HEADERS += \
     tokens/tokens.h \
     nodes/bitwiseandnode.h \
     nodes/bitwiseornode.h \
-    nodes/intnode.h \
-    nodes/doublenode.h \
     functions/isarraytype.h \
     functions/isdoubletype.h \
     functions/isinttype.h \
@@ -274,5 +272,7 @@ HEADERS += \
     functions/isstringtype.h \
     functions/isint.h \
     functions/isdouble.h \
-    functions/isnumber.h
+    functions/isnumber.h \
+    functions/todouble.h \
+    functions/toint.h
 

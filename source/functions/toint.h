@@ -13,18 +13,18 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INTNODE_H
-#define INTNODE_H
+#ifndef TOINT_H
+#define TOINT_H
 
-#include "node.h"
+#include "function.h"
 
-class IntNode : public Node
+class ToInt : public Function
 {
-private:
-    std::shared_ptr<Node> node;
 public:
-    IntNode(std::shared_ptr<Token> token, std::shared_ptr<Node> node);
-    std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
+    ToInt();
+    std::shared_ptr<Variable> run(std::shared_ptr<Token> token,
+                                              std::shared_ptr<Scope> scope,
+                                              std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // INTNODE_H
+#endif // TOINT_H

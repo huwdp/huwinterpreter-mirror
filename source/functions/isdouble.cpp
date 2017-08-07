@@ -30,7 +30,10 @@ std::shared_ptr<Variable> IsDouble::run(std::shared_ptr<Token> token,
             {
                 returnNode = std::make_shared<NumberVariable>(true);
             }
-            returnNode = std::make_shared<NumberVariable>(false);
+            else
+            {
+                returnNode = std::make_shared<NumberVariable>(false);
+            }
         }
     }
     else

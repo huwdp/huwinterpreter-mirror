@@ -13,18 +13,18 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DOUBLENODE_H
-#define DOUBLENODE_H
+#ifndef TODOUBLE_H
+#define TODOUBLE_H
 
-#include "node.h"
+#include "function.h"
 
-class DoubleNode : public Node
+class ToDouble : public Function
 {
-private:
-    std::shared_ptr<Node> node;
 public:
-    DoubleNode(std::shared_ptr<Token> token, std::shared_ptr<Node> node);
-    std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
+    ToDouble();
+    std::shared_ptr<Variable> run(std::shared_ptr<Token> token,
+                                              std::shared_ptr<Scope> scope,
+                                              std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // DOUBLENODE_H
+#endif // TODOUBLE_H

@@ -13,33 +13,38 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "todouble.h"
 
-#include "isarraytype.h"
+ToDouble::ToDouble()
+{
+    name = "toDouble";
+}
 
-std::shared_ptr<Variable> IsArrayType::run(std::shared_ptr<Token> token,
-                                        std::shared_ptr<Scope> scope,
-                                        std::vector<std::shared_ptr<Node>> variables)
+std::shared_ptr<Variable> ToDouble::run(std::shared_ptr<Token> token,
+                                          std::shared_ptr<Scope> scope,
+                                          std::vector<std::shared_ptr<Node>> variables)
 {
     std::shared_ptr<Variable> returnNode;
     if (variables.size() == 1)
     {
         std::shared_ptr<Node> node = variables.at(0);
         std::shared_ptr<Variable> var = node->execute(scope);
-        if (node != nullptr)
+        if (var != nullptr)
         {
-            if (var->getType() == ARRAY)
+            if (var->getType() == DOUBLE)
             {
-                returnNode = std::make_shared<NumberVariable>(true);
+                return var;
             }
-            else
+            else if (var->isNumber() || TypeDetector::isNumeric(var->toString()))
             {
-                returnNode = std::make_shared<NumberVariable>(false);
+                return std::make_shared<NumberVariable>(var->toDouble());
             }
         }
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "isIntType function requires one arguments", token));
+        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "toDouble function requires one argument", token));
     }
+
     return returnNode;
 }

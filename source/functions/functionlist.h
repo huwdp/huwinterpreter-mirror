@@ -101,5 +101,8 @@
 #include "isdouble.h"
 #include "isnumber.h"
 
+#include "toint.h"
+#include "todouble.h"
+
 #endif  //FUNCTIONLIST_H
 
