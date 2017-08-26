@@ -1,4 +1,4 @@
-set c= 1+1;
+let c= 1+1;
 if (c<1)
 {
 	print("If");

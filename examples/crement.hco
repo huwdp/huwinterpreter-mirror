@@ -1,5 +1,5 @@
-set a = 10;
-set a++;
+let a = 10;
+let a++;
 print(a);
-set a--;
+let a--;
 print(a);
