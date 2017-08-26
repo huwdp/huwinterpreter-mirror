@@ -48,6 +48,8 @@
 
 #include "nodes/getvarnode.h"
 #include "nodes/setvarnode.h"
+#include "nodes/addconstnode.h"
+#include "nodes/addvarnode.h"
 #include "nodes/getfuncnode.h"
 #include "nodes/numbernode.h"
 #include "nodes/textnode.h"
@@ -84,9 +86,7 @@ private:
     std::shared_ptr<Functions> functions;
     bool compilation;
     std::shared_ptr<Node> null;
-public:
-    Parser(std::vector<std::shared_ptr<Token>> tokens);
-    bool getCompilation();
+
     void setCompilation(bool compilation);
     void nextToken();
     void prevToken();
@@ -97,6 +97,7 @@ public:
     bool accept(TokenType tokenType);
     bool expect(std::string s);
     bool expect(TokenType tokenType);
+    void errorMessage(std::string errorMsg, std::shared_ptr<Token> currentToken);
     std::shared_ptr<Node> value();
     std::shared_ptr<Node> factor();
     std::shared_ptr<Node> term();
@@ -105,11 +106,17 @@ public:
     std::shared_ptr<Node> boolean();
     std::shared_ptr<Node> compound();
     std::shared_ptr<Node> bracket();
+    std::shared_ptr<Node> assingment();
+    std::shared_ptr<Node> decloration();
     std::shared_ptr<Node> elseStatement();
     std::shared_ptr<Node> statement();
     std::shared_ptr<Node> block();
+
+public:
+    Parser(std::vector<std::shared_ptr<Token>> tokens);
+    bool getCompilation();
     std::shared_ptr<Node> parse();
-    bool program();
+    bool execute();
 };
 
 #endif // PARSER_H

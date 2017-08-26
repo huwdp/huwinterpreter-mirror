@@ -46,7 +46,10 @@ std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> scope)
 
         if (var != nullptr)
         {
-            scope->getVariables()->addVariable(name, var);
+            if (!scope->getVariables()->setVariable(name, var))
+            {
+                Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Variable not declared", token));
+            }
         }
     }
     if (next != nullptr)

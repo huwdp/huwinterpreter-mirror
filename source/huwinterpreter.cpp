@@ -48,7 +48,7 @@ void HuwInterpreter::runText(std::string text)
 void HuwInterpreter::runTokens(std::vector<std::shared_ptr<Token>> tokens)
 {
     std::unique_ptr<Parser> parser(new Parser(tokens));
-    parser->program();
+    parser->execute();
     Errors::print();
     Errors::removeAll();
 }

@@ -45,6 +45,7 @@ public:
     bool removeVariable(std::shared_ptr<Variable> variable);
     bool removeVariable(std::string name);
     void setParent(std::shared_ptr<Variables> parent);
+    bool setVariable(std::string name, std::shared_ptr<Variable> variable);
 };
 
 #endif // VARIABLES_H

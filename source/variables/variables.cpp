@@ -168,3 +168,14 @@ bool Variables::removeVariable(std::string name)
     }
     return false;
 }
+
+bool Variables::setVariable(std::string name, std::shared_ptr<Variable> variable)
+{
+    std::shared_ptr<Variable> e = exists(name);
+    if (e == nullptr)
+    {
+        return false;
+    }
+    this->variables[name] = std::move(variable);
+    return true;
+}

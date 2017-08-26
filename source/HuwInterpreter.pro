@@ -138,7 +138,10 @@ SOURCES += \
     functions/isdouble.cpp \
     functions/isnumber.cpp \
     functions/todouble.cpp \
-    functions/toint.cpp
+    functions/toint.cpp \
+    nodes/addconstnode.cpp \
+    nodes/addvarnode.cpp
+
 
 HEADERS += \
     errors/debug.h \
@@ -274,5 +277,7 @@ HEADERS += \
     functions/isdouble.h \
     functions/isnumber.h \
     functions/todouble.h \
-    functions/toint.h
+    functions/toint.h \
+    nodes/addconstnode.h \
+    nodes/addvarnode.h
 
