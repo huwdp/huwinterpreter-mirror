@@ -49,3 +49,14 @@ std::shared_ptr<Variable> SubNode::execute(std::shared_ptr<Scope> scope)
     Debug::print("Could not sub.");
     return null;
 }
+
+std::string SubNode::toString()
+{
+    std::string output;
+    if (left != nullptr && right != nullptr)
+    {
+        output.append(left->toString()).append("-").append(right->toString());
+    }
+    return output;
+}
+

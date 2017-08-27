@@ -45,3 +45,13 @@ std::shared_ptr<Variable> UnaryNotNode::execute(std::shared_ptr<Scope> scope)
     }
     return null;
 }
+
+std::string UnaryNotNode::toString()
+{
+    std::string output;
+    if (node != nullptr)
+    {
+        output.append("!").append(node->toString());
+    }
+    return output;
+}

@@ -30,6 +30,7 @@
 class HuwInterpreter
 {
 private:
+    std::shared_ptr<Node> null;
     std::shared_ptr<Scanner> scanner;
     std::shared_ptr<FileTokenManager> fileTokenManager;
     std::vector<std::shared_ptr<Token>> tokens;
@@ -38,7 +39,11 @@ public:
     HuwInterpreter();
     void runFile(std::string fileLocation);
     void runText(std::string text);
-    void runTokens(std::vector<std::shared_ptr<Token>>);
+    void runTokens(std::vector<std::shared_ptr<Token>> tokens);
+
+    std::shared_ptr<Node> parseFile(std::string fileLocation);
+    std::shared_ptr<Node> parseText(std::string text);
+    std::shared_ptr<Node> parseTokens(std::vector<std::shared_ptr<Token>> tokens);
 };
 
 #endif // HUWINTERPRETER_H

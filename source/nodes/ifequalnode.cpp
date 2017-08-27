@@ -51,3 +51,12 @@ std::shared_ptr<Variable> IfEqualNode::execute(std::shared_ptr<Scope> scope)
     Debug::print("Could not compare.");
     return null;
 }
+
+std::string IfEqualNode::toString()
+{
+    if (left != nullptr && right != nullptr)
+    {
+        return left->toString() + "==" + right->toString();
+    }
+    return "";
+}

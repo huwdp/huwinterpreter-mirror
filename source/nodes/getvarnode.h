@@ -25,6 +25,7 @@ private:
 public:
     GetVarNode(std::shared_ptr<Token> token, std::string name);
     std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
+    std::string toString();
 };
 
 #endif // GETVARNODE_H

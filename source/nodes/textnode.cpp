@@ -31,3 +31,13 @@ std::shared_ptr<Variable> TextNode::execute(std::shared_ptr<Scope> scope)
     }
     return value;
 }
+
+std::string TextNode::toString()
+{
+    std::string output;
+    if (value != nullptr)
+    {
+        output.append("\"").append(value->toString()).append("\"");
+    }
+    return output;
+}

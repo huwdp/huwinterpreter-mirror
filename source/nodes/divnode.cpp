@@ -48,3 +48,13 @@ std::shared_ptr<Variable> DivNode::execute(std::shared_ptr<Scope> scope)
     Debug::print("Could not div.");
     return null;
 }
+
+std::string DivNode::toString()
+{
+    std::string output;
+    if (left != nullptr && right != nullptr)
+    {
+        output.append(left->toString()).append("/").append(right->toString());
+    }
+    return output;
+}

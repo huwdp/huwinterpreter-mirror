@@ -26,6 +26,7 @@ private:
 public:
     TextNode(std::shared_ptr<Token> token, std::string value);
     std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
+    std::string toString();
 };
 
 #endif // TEXTNODE_H

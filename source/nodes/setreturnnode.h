@@ -25,6 +25,7 @@ private:
 public:
     SetReturnNode(std::shared_ptr<Node> node);
     std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
+    std::string toString();
 };
 
 #endif // SETRETURNNODE_H

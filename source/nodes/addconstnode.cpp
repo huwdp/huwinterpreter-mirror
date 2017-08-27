@@ -59,3 +59,12 @@ std::shared_ptr<Variable> AddConstNode::execute(std::shared_ptr<Scope> scope)
     }
     return null;
 }
+
+std::string AddConstNode::toString()
+{
+    if (value != nullptr)
+    {
+        return "const " + value->toString() + ";";
+    }
+    return "";
+}

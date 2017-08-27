@@ -41,3 +41,13 @@ std::shared_ptr<Variable> IncrementNode::execute(std::shared_ptr<Scope> scope)
     Debug::print("Could not increment.");
     return null;
 }
+
+std::string IncrementNode::toString()
+{
+    std::string output;
+    if (node != nullptr)
+    {
+        output.append(node->toString());
+    }
+    return output;
+}

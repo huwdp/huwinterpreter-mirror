@@ -48,3 +48,13 @@ std::shared_ptr<Variable> BitwiseOrNode::execute(std::shared_ptr<Scope> scope)
     Debug::print("Could not bitwiseOr");
     return null;
 }
+
+std::string BitwiseOrNode::toString()
+{
+    std::string output;
+    if (left != nullptr && right != nullptr)
+    {
+        output.append(left->toString()).append("|").append(right->toString());
+    }
+    return output;
+}

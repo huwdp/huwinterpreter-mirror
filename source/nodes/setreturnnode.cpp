@@ -32,3 +32,13 @@ std::shared_ptr<Variable> SetReturnNode::execute(std::shared_ptr<Scope> scope)
     return scope->getReturnValue();
     return null;
 }
+
+std::string SetReturnNode::toString()
+{
+    std::string output;
+    if (node != nullptr)
+    {
+        output.append("return ").append(node->toString());
+    }
+    return output;
+}

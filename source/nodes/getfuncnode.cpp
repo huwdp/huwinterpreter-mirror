@@ -38,3 +38,8 @@ std::shared_ptr<Variable> GetFuncNode::execute(std::shared_ptr<Scope> scope)
     }
     return null;
 }
+
+std::string GetFuncNode::toString()
+{
+    return "";
+}

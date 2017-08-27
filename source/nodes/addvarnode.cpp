@@ -59,3 +59,17 @@ std::shared_ptr<Variable> AddVarNode::execute(std::shared_ptr<Scope> scope)
     }
     return null;
 }
+
+std::string AddVarNode::toString()
+{
+    std::string output;
+    if (value != nullptr)
+    {
+        output.append("let ").append(name).append("=").append(value->toString()).append(";");
+    }
+    if (next != nullptr)
+    {
+        output.append(next->toString());
+    }
+    return output;
+}

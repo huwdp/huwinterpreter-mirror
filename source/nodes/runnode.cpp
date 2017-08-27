@@ -47,3 +47,23 @@ std::shared_ptr<Variable> RunNode::execute(std::shared_ptr<Scope> scope)
     }
     return null;
 }
+
+std::string RunNode::toString()
+{
+    std::string output;
+    if (left != nullptr && right != nullptr)
+    {
+        output.append(left->toString()).append(";").append(right->toString()).append(";");
+        return output;
+    }
+    if (left != nullptr)
+    {
+        output.append(left->toString());
+    }
+    if (right != nullptr)
+    {
+        output.append(right->toString());
+    }
+    return output;
+}
+

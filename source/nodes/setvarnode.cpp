@@ -58,3 +58,18 @@ std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> scope)
     }
     return null;
 }
+
+std::string SetVarNode::toString()
+{
+    std::string output;
+    if (value != nullptr)
+    {
+        output.append("let ").append(name).append("=").append(value->toString());
+    }
+    if (next != nullptr)
+    {
+        output.append(";").append(next->toString());
+    }
+    return output;
+}
+

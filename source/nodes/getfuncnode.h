@@ -29,6 +29,7 @@ private:
 public:
     GetFuncNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Functions> functions, std::vector<std::shared_ptr<Node>> arguments);
     std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
+    std::string toString();
 };
 
 #endif // GETFUNCNODE_H

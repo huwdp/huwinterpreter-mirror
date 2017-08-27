@@ -51,6 +51,7 @@ public:
     }
 
     virtual std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope) = 0;
+    virtual std::string toString() = 0;
     virtual ~Node()
     {
 

@@ -41,3 +41,12 @@ std::shared_ptr<Variable> BracketNode::execute(std::shared_ptr<Scope> scope)
     Debug::print("Could not bracket.");
     return null;
 }
+
+std::string BracketNode::toString()
+{
+    if (node != nullptr)
+    {
+        return "(" + node->toString() + ")";
+    }
+    return "";
+}

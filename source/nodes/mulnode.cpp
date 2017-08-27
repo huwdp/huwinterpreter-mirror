@@ -50,3 +50,13 @@ std::shared_ptr<Variable> MulNode::execute(std::shared_ptr<Scope> scope)
     Debug::print("Could not mul.");
     return null;
 }
+
+std::string MulNode::toString()
+{
+    std::string output;
+    if (left != nullptr && right != nullptr)
+    {
+        output.append(left->toString()).append("*").append(right->toString());
+    }
+    return output;
+}

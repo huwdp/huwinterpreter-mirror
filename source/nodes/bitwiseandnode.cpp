@@ -48,3 +48,13 @@ std::shared_ptr<Variable> BitwiseAndNode::execute(std::shared_ptr<Scope> scope)
     Debug::print("Could not bitwiseAnd");
     return null;
 }
+
+std::string BitwiseAndNode::toString()
+{
+    std::string output;
+    if (left != nullptr && right != nullptr)
+    {
+        output.append(left->toString()).append("&").append(right->toString());
+    }
+    return output;
+}

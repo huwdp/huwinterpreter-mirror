@@ -36,3 +36,8 @@ std::shared_ptr<Variable> GetVarNode::execute(std::shared_ptr<Scope> scope)
     Debug::print("Could not find variable.");
     return null;
 }
+
+std::string GetVarNode::toString()
+{
+    return name;
+}

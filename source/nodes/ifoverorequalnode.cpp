@@ -50,3 +50,13 @@ std::shared_ptr<Variable> IfOverOrEqualNode::execute(std::shared_ptr<Scope> scop
     Debug::print("Could not compare.");
     return null;
 }
+
+std::string IfOverOrEqualNode::toString()
+{
+    std::string output;
+    if (left != nullptr && right != nullptr)
+    {
+        output.append(left->toString()).append(">=").append(right->toString());
+    }
+    return output;
+}

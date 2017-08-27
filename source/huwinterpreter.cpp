@@ -52,3 +52,33 @@ void HuwInterpreter::runTokens(std::vector<std::shared_ptr<Token>> tokens)
     Errors::print();
     Errors::removeAll();
 }
+
+std::shared_ptr<Node> HuwInterpreter::parseFile(std::string fileLocation)
+{
+    std::ifstream file (fileLocation.c_str());
+    bool exists = (bool)file;
+    if (!exists)
+    {
+        std::string errorMessage = "Could not find file \"";
+        errorMessage.append(fileLocation);
+        errorMessage.append("\"");
+        return null;
+    }
+    std::shared_ptr<FileTokenManager> fileTokenManager = std::make_shared<FileTokenManager>(fileLocation);
+    std::vector<std::shared_ptr<Token>> tokens = scanner->tokenize(fileTokenManager);
+    return parseTokens(tokens);
+}
+
+std::shared_ptr<Node> HuwInterpreter::parseText(std::string text)
+{
+    std::shared_ptr<TokenManager> textTokenManager = std::make_shared<TextTokenManager>(text);
+    std::vector<std::shared_ptr<Token>> tokens = scanner->tokenize(textTokenManager);
+    return parseTokens(tokens);
+}
+
+std::shared_ptr<Node> HuwInterpreter::parseTokens(std::vector<std::shared_ptr<Token>> tokens)
+{
+    std::shared_ptr<Parser> parser = std::make_shared<Parser>(tokens);
+    std::shared_ptr<Node> node = parser->parse();
+    return node;
+}

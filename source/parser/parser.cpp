@@ -899,7 +899,12 @@ std::shared_ptr<Node> Parser::block()
 
 std::shared_ptr<Node> Parser::parse()
 {
-    return block();
+    if (!tokens.empty() && compilation)
+    {
+        nextToken();
+        return block();
+    }
+    return null;
 }
 
 bool Parser::execute()
@@ -907,7 +912,6 @@ bool Parser::execute()
     std::shared_ptr<Scope> scope = std::make_shared<Scope>();
     if (!tokens.empty() && compilation)
     {
-        nextToken();
         std::shared_ptr<Node> done = parse();
         if (done != nullptr && compilation)
         {

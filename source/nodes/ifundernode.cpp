@@ -50,3 +50,13 @@ std::shared_ptr<Variable> IfUnderNode::execute(std::shared_ptr<Scope> scope)
     Debug::print("Could not compare.");
     return null;
 }
+
+std::string IfUnderNode::toString()
+{
+    std::string output;
+    if (left != nullptr && right != nullptr)
+    {
+        output.append(left->toString()).append("<").append(right->toString());
+    }
+    return output;
+}

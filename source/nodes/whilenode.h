@@ -27,6 +27,7 @@ private:
 public:
     WhileNode(std::shared_ptr<Token> token, std::shared_ptr<Node> condition, std::shared_ptr<Node> body, std::shared_ptr<Node> next);
     std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
+    std::string toString();
 };
 
 #endif // WHILENODE_H

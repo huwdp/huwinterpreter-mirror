@@ -57,3 +57,13 @@ std::shared_ptr<Variable> IfOrNode::execute(std::shared_ptr<Scope> scope)
     Debug::print("Could not or.");
     return null;
 }
+
+std::string IfOrNode::toString()
+{
+    if (left != nullptr && right != nullptr)
+    {
+        return left->toString() + "||" + right->toString();
+    }
+    return "";
+}
+

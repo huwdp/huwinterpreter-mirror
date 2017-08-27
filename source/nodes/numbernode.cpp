@@ -31,3 +31,9 @@ std::shared_ptr<Variable> NumberNode::execute(std::shared_ptr<Scope> scope)
     }
     return value;
 }
+
+std::string NumberNode::toString()
+{
+    return value->toString();
+}
+

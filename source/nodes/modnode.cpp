@@ -50,3 +50,13 @@ std::shared_ptr<Variable> ModNode::execute(std::shared_ptr<Scope> scope)
     Debug::print("Could not mod.");
     return null;
 }
+
+std::string ModNode::toString()
+{
+    std::string output;
+    if (left != nullptr && right != nullptr)
+    {
+        output.append(left->toString()).append("%").append(right->toString());
+    }
+    return output;
+}

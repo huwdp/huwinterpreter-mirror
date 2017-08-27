@@ -58,3 +58,12 @@ std::shared_ptr<Variable> IfAndNode::execute(std::shared_ptr<Scope> scope)
     Debug::print("Could not and");
     return null;
 }
+
+std::string IfAndNode::toString()
+{
+    if (left != nullptr && right != nullptr)
+    {
+        return left->toString() + "&&" + right->toString();
+    }
+    return "";
+}

@@ -44,3 +44,17 @@ std::shared_ptr<Variable> EqualNode::execute(std::shared_ptr<Scope> scope)
     }
     return null;
 }
+
+std::string EqualNode::toString()
+{
+    std::string output;
+    if (left != nullptr && right != nullptr)
+    {
+        output.append(left->toString()).append("=").append(right->toString()).append(";");
+    }
+    if (next != nullptr)
+    {
+        output.append(next->toString());
+    }
+    return output;
+}

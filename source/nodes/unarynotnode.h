@@ -25,6 +25,7 @@ private:
 public:
     UnaryNotNode(std::shared_ptr<Token> token, std::shared_ptr<Node> node);
     std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
+    std::string toString();
 };
 
 #endif // UNARYNOTNODE_H

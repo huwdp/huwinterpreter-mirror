@@ -48,3 +48,13 @@ std::shared_ptr<Variable> AddNode::execute(std::shared_ptr<Scope> scope)
     Debug::print("Could not add.");
     return null;
 }
+
+std::string AddNode::toString()
+{
+    std::string output;
+    if (left != nullptr && right != nullptr)
+    {
+        output.append(left->toString()).append("+").append(right->toString());
+    }
+    return output;
+}

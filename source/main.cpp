@@ -30,19 +30,21 @@ void printHelp(int argc, char* argv[])
     {
         std::cerr << "1. Usage: " << argv[0] << " [filename] to run file." << std::endl;
         std::cerr << "2. Usage: " << argv[0] << " -t [text] to run text." << std::endl;
-        std::cerr << "3. Usage: " << argv[0] << " -h for help." << std::endl;
+        std::cerr << "3. Usage: " << argv[0] << " -hc [filename] for HuwCode formatter" << std::endl;
+        std::cerr << "4. Usage: " << argv[0] << " -h for help." << std::endl;
     }
     else
     {
         std::cerr << "1. Usage: [filename] to run file." << std::endl;
         std::cerr << "2. Usage: -t [text] to run text." << std::endl;
-        std::cerr << "3. Usage: -h for help." << std::endl;
+        std::cerr << "3. Usage: -hc for HuwCode formatter" << std::endl;
+        std::cerr << "4. Usage: -h for help." << std::endl;
     }
 }
 
 int main(int argc, char* argv[])
 {
-    std::unique_ptr<HuwInterpreter> interpreter(new HuwInterpreter());
+    std::shared_ptr<HuwInterpreter> interpreter = std::make_shared<HuwInterpreter>();
     if (argc < 2)
     {
         printHelp(argc, argv);
@@ -64,6 +66,14 @@ int main(int argc, char* argv[])
             interpreter->runText(text);
             std::cout << ">>>";
             std::getline (std::cin,text);
+        }
+    }
+    else if (argument == "-hc" && argc == 3)
+    {
+        std::shared_ptr<Node> node = interpreter->parseFile(argv[2]);
+        if (node != nullptr)
+        {
+            std::cout << node->toString() << std::endl;
         }
     }
     else

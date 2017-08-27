@@ -62,3 +62,24 @@ std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> scope)
     }
     return null;
 }
+
+std::string IfNode::toString()
+{
+    std::string output;
+    output.append("if (");
+    if (condition != nullptr)
+    {
+        output.append(condition->toString());
+    }
+    output.append("){");
+    if (body != nullptr)
+    {
+        output.append(body->toString());
+    }
+    output.append("}");
+    if (elseNode != nullptr)
+    {
+        output.append("else").append("{").append(elseNode->toString()).append("}");
+    }
+    return output;
+}

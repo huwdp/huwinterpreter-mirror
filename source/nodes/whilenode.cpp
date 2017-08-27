@@ -56,3 +56,24 @@ std::shared_ptr<Variable> WhileNode::execute(std::shared_ptr<Scope> scope)
     }
     return null;
 }
+
+std::string WhileNode::toString()
+{
+    std::string output;
+    output.append("while (");
+    if (condition != nullptr)
+    {
+        output.append(condition->toString());
+    }
+    output.append("){");
+    if (body != nullptr)
+    {
+        output.append(body->toString());
+    }
+    output.append("}");
+    if (next != nullptr)
+    {
+        output.append(next->toString());
+    }
+    return output;
+}

@@ -41,3 +41,12 @@ std::shared_ptr<Variable> DecrementNode::execute(std::shared_ptr<Scope> scope)
     Debug::print("Could not increment.");
     return null;
 }
+
+std::string DecrementNode::toString()
+{
+    if (node != nullptr)
+    {
+        return node->toString() + "--";
+    }
+    return "";
+}
