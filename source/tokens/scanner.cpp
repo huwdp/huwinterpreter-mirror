@@ -38,12 +38,12 @@ bool Scanner::isAllowedCharacter(char character)
 
 void Scanner::AddToken(TokenType tokenType, std::shared_ptr<LineInfo> lineInfo)
 {
-    items.push_back(std::move(std::make_shared<Token>(tokens->get(tokenType), tokenType, std::move(lineInfo))));
+    items.push_back(std::move(std::make_shared<Token>(tokens->get(tokenType), tokenType, lineInfo)));
 }
 
 void Scanner::AddToken(std::string text, TokenType tokenType, std::shared_ptr<LineInfo> lineInfo)
 {
-    items.push_back(std::move(std::make_shared<Token>(text , tokenType, std::move(lineInfo))));
+    items.push_back(std::move(std::make_shared<Token>(text , tokenType, lineInfo)));
 }
 
 std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManager> fileReader)
@@ -59,7 +59,7 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
         {
             if (!temp.empty())
             {
-                items.push_back(std::move(std::make_shared<Token>(temp, std::move(lineInfo))));
+                items.push_back(std::move(std::make_shared<Token>(temp, lineInfo)));
                 temp = "";
             }
         }
@@ -91,7 +91,7 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
         {
             if (!temp.empty())
             {
-                items.push_back(std::move(std::make_shared<Token>(temp, std::move(lineInfo))));
+                items.push_back(std::move(std::make_shared<Token>(temp, lineInfo)));
                 temp = "";
             }
             else if (tokens->compare(fileReader->getCurrent()->getContent(), QUOTE))
@@ -124,7 +124,7 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                         fileReader->next();
                     }
                 }
-                items.push_back(std::move(std::make_shared<Token>(temp, TEXT, std::move(lineInfo))));
+                items.push_back(std::move(std::make_shared<Token>(temp, TEXT, lineInfo)));
                 temp = "";
 
                 // Move to next it
@@ -138,19 +138,19 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
 
             if (tokens->compare(fileReader->getCurrent()->getContent(), LEFTPARENTHESIS))
             {
-                AddToken(LEFTPARENTHESIS, std::move(lineInfo));
+                AddToken(LEFTPARENTHESIS, lineInfo);
             }
             else if (tokens->compare(fileReader->getCurrent()->getContent(), RIGHTPARENTHESIS))
             {
-                AddToken(RIGHTPARENTHESIS, std::move(lineInfo));
+                AddToken(RIGHTPARENTHESIS, lineInfo);
             }
             else if (tokens->compare(fileReader->getCurrent()->getContent(), SEMICOLON))
             {
-                AddToken(SEMICOLON, std::move(lineInfo));
+                AddToken(SEMICOLON, lineInfo);
             }
             else if (tokens->compare(fileReader->getCurrent()->getContent(), NOT))
             {
-                AddToken(NOT, std::move(lineInfo));
+                AddToken(NOT, lineInfo);
             }
             else if (fileReader->getCurrent()->getContent() == ' ' || fileReader->getCurrent()->getContent() == '\t')
             {
@@ -161,11 +161,11 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                 if (tokens->compare(fileReader->peak()->getContent(), EQUALS))
                 {
                     fileReader->next();
-                    AddToken(MULTIPLICATIONEQUAL, std::move(lineInfo));
+                    AddToken(MULTIPLICATIONEQUAL, lineInfo);
                 }
                 else
                 {
-                    AddToken(MULTIPLICATION, std::move(lineInfo));
+                    AddToken(MULTIPLICATION, lineInfo);
                 }
             }
             else if (tokens->compare(fileReader->getCurrent()->getContent(), DIVISION))
@@ -189,33 +189,33 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                     if (tokens->compare(fileReader->peak()->getContent(), EQUALS))
                     {
                         fileReader->next();
-                        AddToken(DIVISIONEQUAL, std::move(lineInfo));
+                        AddToken(DIVISIONEQUAL, lineInfo);
                     }
                     else
                     {
-                        AddToken(DIVISION, std::move(lineInfo));
+                        AddToken(DIVISION, lineInfo);
                     }
                 }
             }
             else if (tokens->compare(fileReader->getCurrent()->getContent(), MOD))
             {
-                AddToken(MOD, std::move(lineInfo));
+                AddToken(MOD, lineInfo);
             }
             else if (tokens->compare(fileReader->getCurrent()->getContent(), ADDITION))
             {
                 if (tokens->compare(fileReader->peak()->getContent(), EQUALS))
                 {
                     fileReader->next();
-                    AddToken(ADDITIONEQUAL, std::move(lineInfo));
+                    AddToken(ADDITIONEQUAL, lineInfo);
                 }
                 else if (tokens->compare(fileReader->peak()->getContent(), ADDITION))
                 {
                     fileReader->next();
-                    AddToken(INCREMENT, std::move(lineInfo));
+                    AddToken(INCREMENT, lineInfo);
                 }
                 else
                 {
-                    AddToken(ADDITION, std::move(lineInfo));
+                    AddToken(ADDITION, lineInfo);
                 }
             }
             else if (tokens->compare(fileReader->getCurrent()->getContent(), SUBTRACTION))
@@ -223,16 +223,16 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                 if (tokens->compare(fileReader->peak()->getContent(), EQUALS))
                 {
                     fileReader->next();
-                    AddToken(SUBTRACTIONEQUAL, std::move(lineInfo));
+                    AddToken(SUBTRACTIONEQUAL, lineInfo);
                 }
                 else if (tokens->compare(fileReader->peak()->getContent(), SUBTRACTION))
                 {
                     fileReader->next();
-                    AddToken(DECREMENT, std::move(lineInfo));
+                    AddToken(DECREMENT, lineInfo);
                 }
                 else
                 {
-                    AddToken(SUBTRACTION, std::move(lineInfo));
+                    AddToken(SUBTRACTION, lineInfo);
                 }
             }
             else if (tokens->compare(fileReader->getCurrent()->getContent(), EQUALS))
@@ -241,17 +241,17 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                 {
                     if (tokens->compare(fileReader->getNext()->getContent(), EQUALS))
                     {
-                        AddToken(IFEQUALS, std::move(lineInfo));
+                        AddToken(IFEQUALS, lineInfo);
                     }
                     else
                     {
                         fileReader->prev();
-                        AddToken(EQUALS, std::move(lineInfo));
+                        AddToken(EQUALS, lineInfo);
                     }
                 }
                 else
                 {
-                    AddToken(EQUALS, std::move(lineInfo));
+                    AddToken(EQUALS, lineInfo);
                 }
             }
             else if (tokens->compare(fileReader->getCurrent()->getContent(), BITWISEAND))
@@ -260,7 +260,7 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                 {
                     if (tokens->compare(fileReader->getNext()->getContent(), BITWISEAND))
                     {
-                        AddToken(AND, std::move(lineInfo));
+                        AddToken(AND, lineInfo);
                     }
                 }
             }
@@ -270,7 +270,7 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                 {
                     if (tokens->compare(fileReader->getNext()->getContent(), BITWISEOR))
                     {
-                        AddToken(OR, std::move(lineInfo));
+                        AddToken(OR, lineInfo);
                     }
                 }
             }
@@ -280,7 +280,7 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                 {
                     if (tokens->compare(fileReader->getNext()->getContent(), EQUALS))
                     {
-                        AddToken(IFNOTEQUALS, std::move(lineInfo));
+                        AddToken(IFNOTEQUALS, lineInfo);
                     }
                 }
             }
@@ -290,17 +290,17 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                 {
                     if (tokens->compare(fileReader->getNext()->getContent(), EQUALS))
                     {
-                        AddToken(IFLESSTHANOREQUAL, std::move(lineInfo));
+                        AddToken(IFLESSTHANOREQUAL, lineInfo);
                     }
                     else
                     {
-                        AddToken(IFLESSTHAN, std::move(lineInfo));
+                        AddToken(IFLESSTHAN, lineInfo);
                         fileReader->prev();
                     }
                 }
                 else
                 {
-                    items.push_back(std::move(std::make_shared<Token>("<", IFLESSTHAN, std::move(lineInfo))));
+                    items.push_back(std::move(std::make_shared<Token>("<", IFLESSTHAN, lineInfo)));
                 }
             }
             else if (tokens->compare(fileReader->getCurrent()->getContent(), IFGREATER))
@@ -309,34 +309,34 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                 {
                     if (tokens->compare(fileReader->getNext()->getContent(), EQUALS))
                     {
-                        AddToken(IFGREATERTHANOREQUAL, std::move(lineInfo));
+                        AddToken(IFGREATERTHANOREQUAL, lineInfo);
                     }
                     else
                     {
-                        AddToken(IFGREATER, std::move(lineInfo));
+                        AddToken(IFGREATER, lineInfo);
                         fileReader->prev();
                     }
                 }
                 else
                 {
-                    AddToken(IFGREATER, std::move(lineInfo));
+                    AddToken(IFGREATER, lineInfo);
                 }
             }
             else if (tokens->compare(fileReader->getCurrent()->getContent(), SEMICOLON))
             {
-                AddToken(SEMICOLON, std::move(lineInfo));
+                AddToken(SEMICOLON, lineInfo);
             }
             else if (tokens->compare(fileReader->getCurrent()->getContent(), RIGHTBRACKET))
             {
-                AddToken(RIGHTBRACKET, std::move(lineInfo));
+                AddToken(RIGHTBRACKET, lineInfo);
             }
             else if (tokens->compare(fileReader->getCurrent()->getContent(), LEFTBRACKET))
             {
-                AddToken(LEFTBRACKET, std::move(lineInfo));
+                AddToken(LEFTBRACKET, lineInfo);
             }
             else if (tokens->compare(fileReader->getCurrent()->getContent(), COMMA))
             {
-                AddToken(COMMA, std::move(lineInfo));
+                AddToken(COMMA, lineInfo);
             }
         }
         fileReader->next();

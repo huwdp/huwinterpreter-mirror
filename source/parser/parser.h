@@ -28,6 +28,8 @@
 #include "errors/error.h"
 #include "nodes/node.h"
 
+#include "nodes/nodefactory.h"
+
 #include "nodes/ifnode.h"
 #include "nodes/whilenode.h"
 
@@ -74,9 +76,6 @@
 #include "variables/scope.h"
 #include "functions/customfunction.h"
 
-
-
-
 class Parser
 {
 private:
@@ -86,6 +85,7 @@ private:
     std::shared_ptr<Functions> functions;
     bool compilation;
     std::shared_ptr<Node> null;
+    std::shared_ptr<NodeFactory> codeFactory;
 
     void setCompilation(bool compilation);
     void nextToken();
@@ -111,7 +111,6 @@ private:
     std::shared_ptr<Node> elseStatement();
     std::shared_ptr<Node> statement();
     std::shared_ptr<Node> block();
-
 public:
     Parser(std::vector<std::shared_ptr<Token>> tokens);
     bool getCompilation();

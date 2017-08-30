@@ -140,7 +140,8 @@ SOURCES += \
     functions/todouble.cpp \
     functions/toint.cpp \
     nodes/addconstnode.cpp \
-    nodes/addvarnode.cpp
+    nodes/addvarnode.cpp \
+    nodes/huwcodenodefactory.cpp
 
 
 HEADERS += \
@@ -279,5 +280,7 @@ HEADERS += \
     functions/todouble.h \
     functions/toint.h \
     nodes/addconstnode.h \
-    nodes/addvarnode.h
+    nodes/addvarnode.h \
+    nodes/huwcodenodefactory.h \
+    nodes/nodefactory.h
 
