@@ -15,7 +15,8 @@
 
 #include "bracketnode.h"
 
-BracketNode::BracketNode(std::shared_ptr<Token> token, std::shared_ptr<Node> node) : Node(token)
+BracketNode::BracketNode(std::shared_ptr<Token> token, std::shared_ptr<Node> node)
+    : Node(token)
 {
     this->node = node;
     Debug::print("Bracket");

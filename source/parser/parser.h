@@ -79,6 +79,7 @@
 class Parser
 {
 private:
+    std::shared_ptr<NodeFactory> nodeFactory;
     std::vector<std::shared_ptr<Token>> tokens;
     std::vector<std::shared_ptr<Token>>::iterator it;
     std::shared_ptr<Token> currentToken;
@@ -112,7 +113,8 @@ private:
     std::shared_ptr<Node> statement();
     std::shared_ptr<Node> block();
 public:
-    Parser(std::vector<std::shared_ptr<Token>> tokens);
+    Parser(std::vector<std::shared_ptr<Token>> tokens,
+           std::shared_ptr<NodeFactory> nodeFactory);
     bool getCompilation();
     std::shared_ptr<Node> parse();
     bool execute();

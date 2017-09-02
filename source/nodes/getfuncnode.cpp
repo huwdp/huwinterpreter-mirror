@@ -15,7 +15,8 @@
 
 #include "getfuncnode.h"
 
-GetFuncNode::GetFuncNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Functions> functions, std::vector<std::shared_ptr<Node>> arguments) : Node(token)
+GetFuncNode::GetFuncNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Functions> functions, std::vector<std::shared_ptr<Node>> arguments)
+    : Node(token)
 {
     this->name = name;
     this->functions = functions;

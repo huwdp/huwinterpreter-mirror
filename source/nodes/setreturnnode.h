@@ -20,7 +20,7 @@
 
 class SetReturnNode : public Node
 {
-private:
+protected:
     std::shared_ptr<Node> node;
 public:
     SetReturnNode(std::shared_ptr<Node> node);

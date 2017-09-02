@@ -15,7 +15,8 @@
 
 #include "ifandnode.h"
 
-IfAndNode::IfAndNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right) : Node(token)
+IfAndNode::IfAndNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+    : Node(token)
 {
     this->left = left;
     this->right = right;

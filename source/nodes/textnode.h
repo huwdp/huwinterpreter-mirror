@@ -21,7 +21,7 @@
 
 class TextNode : public Node
 {
-private:
+protected:
     std::shared_ptr<Variable> value;
 public:
     TextNode(std::shared_ptr<Token> token, std::string value);

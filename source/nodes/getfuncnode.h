@@ -22,7 +22,7 @@
 
 class GetFuncNode : public Node
 {
-private:
+protected:
     std::string name;
     std::shared_ptr<Functions> functions;
     std::vector<std::shared_ptr<Node>> arguments;

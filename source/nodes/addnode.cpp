@@ -15,7 +15,8 @@
 
 #include "addnode.h"
 
-AddNode::AddNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right) : Node(token)
+AddNode::AddNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+    : Node(token)
 {
     this->left = left;
     this->right = right;

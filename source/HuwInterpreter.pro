@@ -15,6 +15,38 @@ SOURCES += \
     errors/error.cpp \
     errors/errors.cpp \
     errors/errortypestringfactory.cpp \
+    io/fileline.cpp \
+    io/io.cpp \
+    types/typedetector.cpp \
+    variables/precision.cpp \
+    variables/scope.cpp \
+    variables/variable.cpp \
+    variables/variables.cpp \
+    variables/variabletypefactory.cpp \
+    huwinterpreter.cpp \
+    functions/customfunction.cpp \
+    functions/emptyfunction.cpp \
+    variables/doublevariable.cpp \
+    variables/integervariable.cpp \
+    variables/numbervariable.cpp \
+    variables/stringvariable.cpp \
+    variables/hashtablevariable.cpp \
+    functions/arrayget.cpp \
+    functions/arrayset.cpp \
+    functions/array.cpp \
+    functions/arrayunset.cpp \
+    functions/count.cpp \
+    variables/constantvariable.cpp \
+    tokens/unusabletokens.cpp \
+    functions/isarraytype.cpp \
+    functions/isdoubletype.cpp \
+    functions/isnumbertype.cpp \
+    functions/isinttype.cpp \
+    functions/isstringtype.cpp \
+    functions/isint.cpp \
+    functions/isdouble.cpp \
+    functions/todouble.cpp \
+    functions/toint.cpp \
     functions/abs.cpp \
     functions/acos.cpp \
     functions/asc.cpp \
@@ -34,6 +66,7 @@ SOURCES += \
     functions/functions.cpp \
     functions/instr.cpp \
     functions/instrrev.cpp \
+    functions/isnumber.cpp \
     functions/left.cpp \
     functions/len.cpp \
     functions/log.cpp \
@@ -67,81 +100,84 @@ SOURCES += \
     functions/weekday.cpp \
     functions/weekdayname.cpp \
     functions/year.cpp \
-    io/fileline.cpp \
-    io/io.cpp \
-    nodes/addnode.cpp \
-    nodes/bracketnode.cpp \
-    nodes/divnode.cpp \
-    nodes/equalnode.cpp \
-    nodes/getfuncnode.cpp \
-    nodes/getvarnode.cpp \
-    nodes/ifandnode.cpp \
-    nodes/ifequalnode.cpp \
-    nodes/ifnode.cpp \
-    nodes/ifnotequalnode.cpp \
-    nodes/ifornode.cpp \
-    nodes/ifovernode.cpp \
-    nodes/ifoverorequalnode.cpp \
-    nodes/ifundernode.cpp \
-    nodes/ifunderorequalnode.cpp \
-    nodes/modnode.cpp \
-    nodes/mulnode.cpp \
-    nodes/numbernode.cpp \
-    nodes/runnode.cpp \
-    nodes/setvarnode.cpp \
-    nodes/subnode.cpp \
-    nodes/textnode.cpp \
-    nodes/whilenode.cpp \
     parser/parser.cpp \
     tokens/filetokenmanager.cpp \
     tokens/lineinfo.cpp \
     tokens/scanner.cpp \
     tokens/texttokenmanager.cpp \
     tokens/token.cpp \
-    types/isnumeric.cpp \
-    types/typedetector.cpp \
-    variables/precision.cpp \
-    variables/scope.cpp \
-    variables/variable.cpp \
-    variables/variables.cpp \
-    variables/variabletypefactory.cpp \
-    huwinterpreter.cpp \
-    main.cpp \
-    functions/customfunction.cpp \
-    functions/emptyfunction.cpp \
-    nodes/setreturnnode.cpp \
-    nodes/incrementnode.cpp \
-    nodes/decrementnode.cpp \
-    variables/doublevariable.cpp \
-    variables/integervariable.cpp \
-    variables/numbervariable.cpp \
-    variables/stringvariable.cpp \
-    variables/hashtablevariable.cpp \
-    functions/arrayget.cpp \
-    functions/arrayset.cpp \
-    functions/array.cpp \
-    functions/arrayunset.cpp \
-    functions/count.cpp \
-    variables/constantvariable.cpp \
-    tokens/unusabletokens.cpp \
-    nodes/unaryminusnode.cpp \
-    nodes/unarynotnode.cpp \
     tokens/tokens.cpp \
+    types/isnumeric.cpp \
+    main.cpp \
+    nodes/addconstnode.cpp \
+    nodes/addnode.cpp \
+    nodes/addvarnode.cpp \
     nodes/bitwiseandnode.cpp \
     nodes/bitwiseornode.cpp \
-    functions/isarraytype.cpp \
-    functions/isdoubletype.cpp \
-    functions/isnumbertype.cpp \
-    functions/isinttype.cpp \
-    functions/isstringtype.cpp \
-    functions/isint.cpp \
-    functions/isdouble.cpp \
-    functions/isnumber.cpp \
-    functions/todouble.cpp \
-    functions/toint.cpp \
-    nodes/addconstnode.cpp \
-    nodes/addvarnode.cpp \
-    nodes/huwcodenodefactory.cpp
+    nodes/getfuncnode.cpp \
+    nodes/equalnode.cpp \
+    nodes/divnode.cpp \
+    nodes/decrementnode.cpp \
+    nodes/bracketnode.cpp \
+    nodes/ifequalnode.cpp \
+    nodes/ifnode.cpp \
+    nodes/ifandnode.cpp \
+    nodes/huwcodenodefactory.cpp \
+    nodes/getvarnode.cpp \
+    nodes/ifnotequalnode.cpp \
+    nodes/ifornode.cpp \
+    nodes/ifovernode.cpp \
+    nodes/ifoverorequalnode.cpp \
+    nodes/ifundernode.cpp \
+    nodes/ifunderorequalnode.cpp \
+    nodes/numbernode.cpp \
+    nodes/mulnode.cpp \
+    nodes/modnode.cpp \
+    nodes/incrementnode.cpp \
+    nodes/runnode.cpp \
+    nodes/setreturnnode.cpp \
+    nodes/setvarnode.cpp \
+    nodes/subnode.cpp \
+    nodes/textnode.cpp \
+    nodes/unaryminusnode.cpp \
+    nodes/whilenode.cpp \
+    nodes/unarynotnode.cpp \
+    nodes/js/jsaddconstnode.cpp \
+    nodes/js/jsaddnode.cpp \
+    nodes/js/jsaddvarnode.cpp \
+    nodes/js/jsbitwiseandnode.cpp \
+    nodes/js/jsbitwiseornode.cpp \
+    nodes/js/jsbracketnode.cpp \
+    nodes/js/jsdecrementnode.cpp \
+    nodes/js/jsdivnode.cpp \
+    nodes/js/jsequalnode.cpp \
+    nodes/js/jsgetfuncnode.cpp \
+    nodes/js/jsgetvarnode.cpp \
+    nodes/js/jsifandnode.cpp \
+    nodes/js/jsifequalnode.cpp \
+    nodes/js/jsifnode.cpp \
+    nodes/js/jsifnotequalnode.cpp \
+    nodes/js/jsifornode.cpp \
+    nodes/js/jsifovernode.cpp \
+    nodes/js/jsifoverorequalnod.cpp \
+    nodes/js/jsifundernode.cpp \
+    nodes/js/jsifunderorequalnode.cpp \
+    nodes/js/jsincrementnode.cpp \
+    nodes/js/jsmodnode.cpp \
+    nodes/js/jsmulnode.cpp \
+    nodes/js/jsnodefactory.cpp \
+    nodes/js/jsnumbernode.cpp \
+    nodes/js/jsrunnode.cpp \
+    nodes/js/jssetreturnnode.cpp \
+    nodes/js/jssetvarnode.cpp \
+    nodes/js/jssubnode.cpp \
+    nodes/js/jstextnode.cpp \
+    nodes/js/jsunaryminusnode.cpp \
+    nodes/js/jsunarynotnode.cpp \
+    nodes/js/jswhilenode.cpp \
+    nodes/nodefactoryfactory.cpp
+
+
 
 
 HEADERS += \
@@ -151,59 +187,6 @@ HEADERS += \
     errors/errortypes.h \
     errors/errortypestringfactory.h \
     errors/ierrors.h \
-    functions/abs.h \
-    functions/acos.h \
-    functions/asc.h \
-    functions/asin.h \
-    functions/atan.h \
-    functions/atan2.h \
-    functions/ceil.h \
-    functions/cha.h \
-    functions/command.h \
-    functions/cos.h \
-    functions/dateformat.h \
-    functions/exp.h \
-    functions/fileread.h \
-    functions/filewrite.h \
-    functions/floor.h \
-    functions/function.h \
-    functions/functionlist.h \
-    functions/functions.h \
-    functions/instr.h \
-    functions/instrrev.h \
-    functions/left.h \
-    functions/len.h \
-    functions/log.h \
-    functions/ltrim.h \
-    functions/max.h \
-    functions/mid.h \
-    functions/min.h \
-    functions/month.h \
-    functions/monthname.h \
-    functions/not.h \
-    functions/now.h \
-    functions/pow.h \
-    functions/print.h \
-    functions/random.h \
-    functions/replace.h \
-    functions/right.h \
-    functions/round.h \
-    functions/rtrim.h \
-    functions/scan.h \
-    functions/sin.h \
-    functions/space.h \
-    functions/sqrt.h \
-    functions/str.h \
-    functions/strcomp.h \
-    functions/strreverse.h \
-    functions/tan.h \
-    functions/tolower.h \
-    functions/tostring.h \
-    functions/toupper.h \
-    functions/trim.h \
-    functions/weekday.h \
-    functions/weekdayname.h \
-    functions/year.h \
     io/fileline.h \
     io/io.h \
     nodes/addnode.h \
@@ -246,8 +229,6 @@ HEADERS += \
     variables/variables.h \
     variables/variabletypefactory.h \
     huwinterpreter.h \
-    functions/customfunction.h \
-    functions/emptyfunction.h \
     nodes/setreturnnode.h \
     nodes/incrementnode.h \
     nodes/decrementnode.h \
@@ -257,10 +238,7 @@ HEADERS += \
     variables/numbervariable.h \
     variables/integervariable.h \
     functions/arrayget.h \
-    functions/arrayset.h \
     functions/array.h \
-    functions/arrayunset.h \
-    functions/count.h \
     variables/constantvariable.h \
     tokens/tokenmanager.h \
     tokens/unusabletokens.h \
@@ -269,18 +247,149 @@ HEADERS += \
     tokens/tokens.h \
     nodes/bitwiseandnode.h \
     nodes/bitwiseornode.h \
-    functions/isarraytype.h \
     functions/isdoubletype.h \
     functions/isinttype.h \
     functions/isnumbertype.h \
-    functions/isstringtype.h \
     functions/isint.h \
     functions/isdouble.h \
     functions/isnumber.h \
-    functions/todouble.h \
-    functions/toint.h \
     nodes/addconstnode.h \
     nodes/addvarnode.h \
     nodes/huwcodenodefactory.h \
-    nodes/nodefactory.h
+    nodes/nodefactory.h \
+    functions/abs.h \
+    functions/acos.h \
+    functions/arrayset.h \
+    functions/arrayunset.h \
+    functions/asc.h \
+    functions/asin.h \
+    functions/atan.h \
+    functions/atan2.h \
+    functions/ceil.h \
+    functions/cha.h \
+    functions/command.h \
+    functions/cos.h \
+    functions/count.h \
+    functions/customfunction.h \
+    functions/dateformat.h \
+    functions/emptyfunction.h \
+    functions/exp.h \
+    functions/fileread.h \
+    functions/filewrite.h \
+    functions/floor.h \
+    functions/function.h \
+    functions/functionlist.h \
+    functions/functions.h \
+    functions/instr.h \
+    functions/instrrev.h \
+    functions/isarraytype.h \
+    functions/isstringtype.h \
+    functions/left.h \
+    functions/len.h \
+    functions/log.h \
+    functions/ltrim.h \
+    functions/max.h \
+    functions/mid.h \
+    functions/min.h \
+    functions/month.h \
+    functions/monthname.h \
+    functions/not.h \
+    functions/now.h \
+    functions/pow.h \
+    functions/print.h \
+    functions/random.h \
+    functions/replace.h \
+    functions/right.h \
+    functions/round.h \
+    functions/rtrim.h \
+    functions/scan.h \
+    functions/sin.h \
+    functions/space.h \
+    functions/sqrt.h \
+    functions/str.h \
+    functions/strcomp.h \
+    functions/strreverse.h \
+    functions/tan.h \
+    functions/todouble.h \
+    functions/toint.h \
+    functions/tolower.h \
+    functions/tostring.h \
+    functions/toupper.h \
+    functions/trim.h \
+    functions/weekday.h \
+    functions/weekdayname.h \
+    functions/year.h \
+    nodes/addconstnode.h \
+    nodes/addnode.h \
+    nodes/addvarnode.h \
+    nodes/bitwiseandnode.h \
+    nodes/bitwiseornode.h \
+    nodes/bracketnode.h \
+    nodes/decrementnode.h \
+    nodes/divnode.h \
+    nodes/equalnode.h \
+    nodes/getfuncnode.h \
+    nodes/getvarnode.h \
+    nodes/huwcodenodefactory.h \
+    nodes/ifandnode.h \
+    nodes/ifequalnode.h \
+    nodes/ifnode.h \
+    nodes/ifnotequalnode.h \
+    nodes/ifornode.h \
+    nodes/ifovernode.h \
+    nodes/ifoverorequalnode.h \
+    nodes/ifundernode.h \
+    nodes/ifunderorequalnode.h \
+    nodes/incrementnode.h \
+    nodes/modnode.h \
+    nodes/mulnode.h \
+    nodes/node.h \
+    nodes/nodefactory.h \
+    nodes/numbernode.h \
+    nodes/runnode.h \
+    nodes/setreturnnode.h \
+    nodes/setvarnode.h \
+    nodes/subnode.h \
+    nodes/textnode.h \
+    nodes/unaryminusnode.h \
+    nodes/unarynotnode.h \
+    nodes/whilenode.h \
+    parser/parser.h \
+    types/isnumeric.h \
+    types/tokentypes.h \
+    nodes/js/jsaddconstnode.h \
+    nodes/js/jsaddnode.h \
+    nodes/js/jsaddvarnode.h \
+    nodes/js/jsbitwiseandnode.h \
+    nodes/js/jsbitwiseornode.h \
+    nodes/js/jsbracketnode.h \
+    nodes/js/jsdecrementnode.h \
+    nodes/js/jsdivnode.h \
+    nodes/js/jsequalnode.h \
+    nodes/js/jsgetfuncnode.h \
+    nodes/js/jsgetvarnode.h \
+    nodes/js/jsifandnode.h \
+    nodes/js/jsifequalnode.h \
+    nodes/js/jsifnode.h \
+    nodes/js/jsifnotequalnode.h \
+    nodes/js/jsifornode.h \
+    nodes/js/jsifovernode.h \
+    nodes/js/jsifoverorequalnode.h \
+    nodes/js/jsifundernode.h \
+    nodes/js/jsifunderorequalnode.h \
+    nodes/js/jsincrementnode.h \
+    nodes/js/jsmodnode.h \
+    nodes/js/jsmulnode.h \
+    nodes/js/jsnodefactory.h \
+    nodes/js/jsnumbernode.h \
+    nodes/js/jsrunnode.h \
+    nodes/js/jssetreturnnode.h \
+    nodes/js/jssetvarnode.h \
+    nodes/js/jssubnode.h \
+    nodes/js/jstextnode.h \
+    nodes/js/jsunaryminusnode.h \
+    nodes/js/jsunarynotnode.h \
+    nodes/js/jswhilenode.h \
+    nodes/nodefactoryfactory.h
+
 

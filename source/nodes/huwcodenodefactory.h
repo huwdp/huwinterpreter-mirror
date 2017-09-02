@@ -18,48 +18,6 @@
 
 #include "nodefactory.h"
 
-#include "node.h"
-#include  "equalnode.h"
-
-#include  "ifequalnode.h"
-#include  "ifnotequalnode.h"
-#include  "ifundernode.h"
-#include  "ifunderorequalnode.h"
-#include  "ifovernode.h"
-#include  "ifoverorequalnode.h"
-#include "ifnode.h"
-
-#include "whilenode.h"
-
-#include  "ifandnode.h"
-#include  "ifornode.h"
-#include  "bitwiseandnode.h"
-#include  "bitwiseornode.h"
-
-#include  "getvarnode.h"
-#include  "setvarnode.h"
-#include  "addconstnode.h"
-#include  "addvarnode.h"
-#include  "getfuncnode.h"
-#include  "numbernode.h"
-#include  "textnode.h"
-#include  "runnode.h"
-
-#include  "addnode.h"
-#include  "subnode.h"
-#include  "mulnode.h"
-#include  "divnode.h"
-#include  "modnode.h"
-#include  "unaryminusnode.h"
-#include  "unarynotnode.h"
-
-#include  "setreturnnode.h"
-
-#include  "bracketnode.h"
-
-#include  "incrementnode.h"
-#include  "decrementnode.h"
-
 class HuwCodeNodeFactory : public NodeFactory
 {
 public:

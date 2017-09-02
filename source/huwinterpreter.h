@@ -26,10 +26,14 @@
 #include "errors/errors.h"
 #include "tokens/filetokenmanager.h"
 #include "tokens/texttokenmanager.h"
+#include "nodes/nodefactory.h"
+#include "nodes/huwcodenodefactory.h"
+#include "nodes/nodefactoryfactory.h"
 
 class HuwInterpreter
 {
 private:
+    std::shared_ptr<NodeFactory> nodeFactory;
     std::shared_ptr<Node> null;
     std::shared_ptr<Scanner> scanner;
     std::shared_ptr<FileTokenManager> fileTokenManager;

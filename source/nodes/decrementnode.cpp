@@ -15,7 +15,8 @@
 
 #include "decrementnode.h"
 
-DecrementNode::DecrementNode(std::shared_ptr<Token> token, std::shared_ptr<Node> node) : Node(token)
+DecrementNode::DecrementNode(std::shared_ptr<Token> token, std::shared_ptr<Node> node)
+    : Node(token)
 {
     this->node = node;
     Debug::print("Decrement");

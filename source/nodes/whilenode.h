@@ -20,7 +20,7 @@
 
 class WhileNode : public Node
 {
-private:
+protected:
     std::shared_ptr<Node> condition;
     std::shared_ptr<Node> body;
     std::shared_ptr<Node> next;

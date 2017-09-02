@@ -15,7 +15,8 @@
 
 #include "ifnode.h"
 
-IfNode::IfNode(std::shared_ptr<Token> token, std::shared_ptr<Node> condition, std::shared_ptr<Node> body, std::shared_ptr<Node> elseNode) : Node(token)
+IfNode::IfNode(std::shared_ptr<Token> token, std::shared_ptr<Node> condition, std::shared_ptr<Node> body, std::shared_ptr<Node> elseNode)
+    : Node(token)
 {
     Debug::print("IfNode");
     this->condition = condition;

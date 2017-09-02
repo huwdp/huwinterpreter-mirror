@@ -20,7 +20,7 @@
 
 class AddVarNode : public Node
 {
-private:
+protected:
     std::string name;
     std::shared_ptr<Node> value;
     std::shared_ptr<Node> next;

@@ -15,7 +15,8 @@
 
 #include "setvarnode.h"
 
-SetVarNode::SetVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value, std::shared_ptr<Node> next) : Node(token)
+SetVarNode::SetVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value, std::shared_ptr<Node> next)
+    : Node(token)
 {
     this->name = name;
     this->value = value;

@@ -21,7 +21,7 @@
 
 class EqualNode : public Node
 {
-private:
+protected:
     std::shared_ptr<Node> left;
     std::shared_ptr<Node> right;
     std::shared_ptr<Node> next;

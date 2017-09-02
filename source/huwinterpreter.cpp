@@ -17,6 +17,8 @@
 
 HuwInterpreter::HuwInterpreter()
 {
+    std::shared_ptr<NodeFactoryFactory> nodeFactoryFactory = std::make_shared<NodeFactoryFactory>();
+    nodeFactory = nodeFactoryFactory->build(HUWCODE);
     scanner = std::make_shared<Scanner>();
 }
 
@@ -47,7 +49,7 @@ void HuwInterpreter::runText(std::string text)
 
 void HuwInterpreter::runTokens(std::vector<std::shared_ptr<Token>> tokens)
 {
-    std::unique_ptr<Parser> parser(new Parser(tokens));
+    std::unique_ptr<Parser> parser(new Parser(tokens, nodeFactory));
     parser->execute();
     Errors::print();
     Errors::removeAll();
@@ -78,7 +80,7 @@ std::shared_ptr<Node> HuwInterpreter::parseText(std::string text)
 
 std::shared_ptr<Node> HuwInterpreter::parseTokens(std::vector<std::shared_ptr<Token>> tokens)
 {
-    std::shared_ptr<Parser> parser = std::make_shared<Parser>(tokens);
+    std::shared_ptr<Parser> parser = std::make_shared<Parser>(tokens, nodeFactory);
     std::shared_ptr<Node> node = parser->parse();
     return node;
 }

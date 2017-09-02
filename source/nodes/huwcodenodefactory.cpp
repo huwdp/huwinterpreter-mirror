@@ -239,7 +239,7 @@ std::shared_ptr<Node> HuwCodeNodeFactory::CreateWhileNode(std::shared_ptr<Token>
                                                    std::shared_ptr<Node> body,
                                                    std::shared_ptr<Node> next)
 {
-    return std::make_shared<WhileNode>(token, condition, body, next);
+    return std::make_shared<WhileNode>(token, std::move(condition), std::move(body), next);
 }
 
 

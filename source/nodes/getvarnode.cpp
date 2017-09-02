@@ -15,7 +15,8 @@
 
 #include "getvarnode.h"
 
-GetVarNode::GetVarNode(std::shared_ptr<Token> token, std::string name) : Node(token)
+GetVarNode::GetVarNode(std::shared_ptr<Token> token, std::string name)
+    : Node(token)
 {
     this->name = name;
     Debug::print("GetVarNode");

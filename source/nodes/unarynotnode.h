@@ -20,7 +20,7 @@
 
 class UnaryNotNode : public Node
 {
-private:
+protected:
     std::shared_ptr<Node> node;
 public:
     UnaryNotNode(std::shared_ptr<Token> token, std::shared_ptr<Node> node);

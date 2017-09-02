@@ -22,7 +22,7 @@
 
 class NumberNode : public Node
 {
-private:
+protected:
     std::shared_ptr<Variable> value;
 public:
     NumberNode(std::shared_ptr<Token> token, std::string value);

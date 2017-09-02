@@ -21,6 +21,7 @@
 #include <fstream>
 #include <memory>
 #include "io/fileline.h"
+#include "types/tokentypes.h"
 
 class TokenManager
 {

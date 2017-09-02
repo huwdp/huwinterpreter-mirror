@@ -15,7 +15,8 @@
 
 #include "incrementnode.h"
 
-IncrementNode::IncrementNode(std::shared_ptr<Token> token, std::shared_ptr<Node> node) : Node(token)
+IncrementNode::IncrementNode(std::shared_ptr<Token> token, std::shared_ptr<Node> node)
+    : Node(token)
 {
     this->node = node;
     Debug::print("Increment");

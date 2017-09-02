@@ -20,7 +20,7 @@
 
 class IfOrNode : public Node
 {
-private:
+protected:
     std::shared_ptr<Node> left;
     std::shared_ptr<Node> right;
 public:

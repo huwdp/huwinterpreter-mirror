@@ -15,7 +15,8 @@
 
 #include "ifunderorequalnode.h"
 
-IfUnderOrEqualNode::IfUnderOrEqualNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right) : Node(token)
+IfUnderOrEqualNode::IfUnderOrEqualNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+    : Node(token)
 {
     this->left = left;
     this->right = right;

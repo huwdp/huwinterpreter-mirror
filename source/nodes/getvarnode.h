@@ -20,7 +20,7 @@
 
 class GetVarNode : public Node
 {
-private:
+protected:
     std::string name;
 public:
     GetVarNode(std::shared_ptr<Token> token, std::string name);

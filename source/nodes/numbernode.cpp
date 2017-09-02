@@ -15,7 +15,8 @@
 
 #include "numbernode.h"
 
-NumberNode::NumberNode(std::shared_ptr<Token> token, std::string value) : Node(token)
+NumberNode::NumberNode(std::shared_ptr<Token> token, std::string value)
+    : Node(token)
 {
     this->value = VariableTypeFactory::newVariable(TypeDetector::getType(value));
     this->value->setValue(value);
