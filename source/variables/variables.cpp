@@ -75,7 +75,7 @@ std::shared_ptr<Variable> Variables::exists(std::string name)
     }
     else
     {
-        return std::move(got->second);
+        return got->second;
     }
 }
 
