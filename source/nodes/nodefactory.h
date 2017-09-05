@@ -60,6 +60,8 @@
 #include  "incrementnode.h"
 #include  "decrementnode.h"
 
+#include "semicolonnode.h"
+
 class NodeFactory
 {
 public:
@@ -88,6 +90,7 @@ public:
     virtual std::shared_ptr<Node> CreateMulNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right) = 0;
     virtual std::shared_ptr<Node> CreateNumberNode(std::shared_ptr<Token> token, std::string value) = 0;
     virtual std::shared_ptr<Node> CreateRunNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right) = 0;
+    virtual std::shared_ptr<Node> CreateSemicolonNode(std::shared_ptr<Node> node) = 0;
     virtual std::shared_ptr<Node> CreateSetReturnNode(std::shared_ptr<Node> node) = 0;
     virtual std::shared_ptr<Node> CreateSetVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value, std::shared_ptr<Node> next) = 0;
     virtual std::shared_ptr<Node> CreateSubNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right) = 0;

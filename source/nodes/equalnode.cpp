@@ -51,7 +51,7 @@ std::string EqualNode::toString()
     std::string output;
     if (left != nullptr && right != nullptr)
     {
-        output.append(left->toString()).append("=").append(right->toString()).append(";");
+        output.append(left->toString()).append("=").append(right->toString());
     }
     if (next != nullptr)
     {

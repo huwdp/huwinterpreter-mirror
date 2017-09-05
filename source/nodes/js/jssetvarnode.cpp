@@ -25,11 +25,11 @@ std::string JSSetVarNode::toString()
     std::string output;
     if (value != nullptr)
     {
-        output.append("let ").append(name).append("=").append(value->toString());
+        output.append("let ").append(name).append("=").append(value->toString()).append(";");
     }
     if (next != nullptr)
     {
-        output.append(";").append(next->toString());
+        output.append(next->toString()).append(";");
     }
     return output;
 }

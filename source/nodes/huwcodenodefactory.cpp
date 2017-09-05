@@ -196,6 +196,11 @@ std::shared_ptr<Node> HuwCodeNodeFactory::CreateRunNode(std::shared_ptr<Token> t
     return std::make_shared<RunNode>(token, left, right);
 }
 
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateSemicolonNode(std::shared_ptr<Node> node)
+{
+    return std::make_shared<SemicolonNode>(node);
+}
+
 std::shared_ptr<Node> HuwCodeNodeFactory::CreateSetReturnNode(std::shared_ptr<Node> node)
 {
     return std::make_shared<SetReturnNode>(node);

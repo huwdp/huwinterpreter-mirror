@@ -201,6 +201,11 @@ std::shared_ptr<Node> JSNodeFactory::CreateSetReturnNode(std::shared_ptr<Node> n
     return std::make_shared<JSSetReturnNode>(node);
 }
 
+std::shared_ptr<Node> JSNodeFactory::CreateSemicolonNode(std::shared_ptr<Node> node)
+{
+    return std::make_shared<SemicolonNode>(node);
+}
+
 std::shared_ptr<Node> JSNodeFactory::CreateSetVarNode(std::shared_ptr<Token> token,
                                                     std::string name,
                                                     std::shared_ptr<Node> value,

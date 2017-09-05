@@ -175,7 +175,9 @@ SOURCES += \
     nodes/js/jsunaryminusnode.cpp \
     nodes/js/jsunarynotnode.cpp \
     nodes/js/jswhilenode.cpp \
-    nodes/nodefactoryfactory.cpp
+    nodes/nodefactoryfactory.cpp \
+    nodes/semicolonnode.cpp \
+    nodes/js/jssemicolonnode.cpp
 
 
 
@@ -390,6 +392,9 @@ HEADERS += \
     nodes/js/jsunaryminusnode.h \
     nodes/js/jsunarynotnode.h \
     nodes/js/jswhilenode.h \
-    nodes/nodefactoryfactory.h
+    nodes/nodefactoryfactory.h \
+    nodes/semicolonnode.h \
+    nodes/js/jssemicolonnode.h
+
 
 

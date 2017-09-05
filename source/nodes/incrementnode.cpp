@@ -48,7 +48,7 @@ std::string IncrementNode::toString()
     std::string output;
     if (node != nullptr)
     {
-        output.append(node->toString());
+        output.append(node->toString()).append("++");
     }
     return output;
 }

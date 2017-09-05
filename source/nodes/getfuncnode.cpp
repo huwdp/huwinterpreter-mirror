@@ -42,5 +42,11 @@ std::shared_ptr<Variable> GetFuncNode::execute(std::shared_ptr<Scope> scope)
 
 std::string GetFuncNode::toString()
 {
-    return "";
+    std::string output;
+    output.append(name).append("(");
+    for (std::vector<std::shared_ptr<Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
+    {
+        output.append((*it)->toString());
+    }
+    return output.append(")");
 }

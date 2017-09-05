@@ -54,6 +54,38 @@ SOURCES       = ../source/errors/debug.cpp \
 		../source/errors/error.cpp \
 		../source/errors/errors.cpp \
 		../source/errors/errortypestringfactory.cpp \
+		../source/io/fileline.cpp \
+		../source/io/io.cpp \
+		../source/types/typedetector.cpp \
+		../source/variables/precision.cpp \
+		../source/variables/scope.cpp \
+		../source/variables/variable.cpp \
+		../source/variables/variables.cpp \
+		../source/variables/variabletypefactory.cpp \
+		../source/huwinterpreter.cpp \
+		../source/functions/customfunction.cpp \
+		../source/functions/emptyfunction.cpp \
+		../source/variables/doublevariable.cpp \
+		../source/variables/integervariable.cpp \
+		../source/variables/numbervariable.cpp \
+		../source/variables/stringvariable.cpp \
+		../source/variables/hashtablevariable.cpp \
+		../source/functions/arrayget.cpp \
+		../source/functions/arrayset.cpp \
+		../source/functions/array.cpp \
+		../source/functions/arrayunset.cpp \
+		../source/functions/count.cpp \
+		../source/variables/constantvariable.cpp \
+		../source/tokens/unusabletokens.cpp \
+		../source/functions/isarraytype.cpp \
+		../source/functions/isdoubletype.cpp \
+		../source/functions/isnumbertype.cpp \
+		../source/functions/isinttype.cpp \
+		../source/functions/isstringtype.cpp \
+		../source/functions/isint.cpp \
+		../source/functions/isdouble.cpp \
+		../source/functions/todouble.cpp \
+		../source/functions/toint.cpp \
 		../source/functions/abs.cpp \
 		../source/functions/acos.cpp \
 		../source/functions/asc.cpp \
@@ -73,6 +105,7 @@ SOURCES       = ../source/errors/debug.cpp \
 		../source/functions/functions.cpp \
 		../source/functions/instr.cpp \
 		../source/functions/instrrev.cpp \
+		../source/functions/isnumber.cpp \
 		../source/functions/left.cpp \
 		../source/functions/len.cpp \
 		../source/functions/log.cpp \
@@ -106,84 +139,120 @@ SOURCES       = ../source/errors/debug.cpp \
 		../source/functions/weekday.cpp \
 		../source/functions/weekdayname.cpp \
 		../source/functions/year.cpp \
-		../source/io/fileline.cpp \
-		../source/io/io.cpp \
-		../source/nodes/addnode.cpp \
-		../source/nodes/bracketnode.cpp \
-		../source/nodes/divnode.cpp \
-		../source/nodes/equalnode.cpp \
-		../source/nodes/getfuncnode.cpp \
-		../source/nodes/getvarnode.cpp \
-		../source/nodes/ifandnode.cpp \
-		../source/nodes/ifequalnode.cpp \
-		../source/nodes/ifnode.cpp \
-		../source/nodes/ifnotequalnode.cpp \
-		../source/nodes/ifornode.cpp \
-		../source/nodes/ifovernode.cpp \
-		../source/nodes/ifoverorequalnode.cpp \
-		../source/nodes/ifundernode.cpp \
-		../source/nodes/ifunderorequalnode.cpp \
-		../source/nodes/modnode.cpp \
-		../source/nodes/mulnode.cpp \
-		../source/nodes/numbernode.cpp \
-		../source/nodes/runnode.cpp \
-		../source/nodes/setvarnode.cpp \
-		../source/nodes/subnode.cpp \
-		../source/nodes/textnode.cpp \
-		../source/nodes/whilenode.cpp \
 		../source/parser/parser.cpp \
 		../source/tokens/filetokenmanager.cpp \
 		../source/tokens/lineinfo.cpp \
 		../source/tokens/scanner.cpp \
 		../source/tokens/texttokenmanager.cpp \
 		../source/tokens/token.cpp \
-		../source/types/isnumeric.cpp \
-		../source/types/typedetector.cpp \
-		../source/variables/precision.cpp \
-		../source/variables/scope.cpp \
-		../source/variables/variable.cpp \
-		../source/variables/variables.cpp \
-		../source/variables/variabletypefactory.cpp \
-		../source/huwinterpreter.cpp \
-		../source/main.cpp \
-		../source/functions/customfunction.cpp \
-		../source/functions/emptyfunction.cpp \
-		../source/nodes/setreturnnode.cpp \
-		../source/nodes/incrementnode.cpp \
-		../source/nodes/decrementnode.cpp \
-		../source/variables/doublevariable.cpp \
-		../source/variables/integervariable.cpp \
-		../source/variables/numbervariable.cpp \
-		../source/variables/stringvariable.cpp \
-		../source/variables/hashtablevariable.cpp \
-		../source/functions/arrayget.cpp \
-		../source/functions/arrayset.cpp \
-		../source/functions/array.cpp \
-		../source/functions/arrayunset.cpp \
-		../source/functions/count.cpp \
-		../source/variables/constantvariable.cpp \
-		../source/tokens/unusabletokens.cpp \
-		../source/nodes/unaryminusnode.cpp \
-		../source/nodes/unarynotnode.cpp \
 		../source/tokens/tokens.cpp \
+		../source/types/isnumeric.cpp \
+		../source/main.cpp \
+		../source/nodes/addconstnode.cpp \
+		../source/nodes/addnode.cpp \
+		../source/nodes/addvarnode.cpp \
 		../source/nodes/bitwiseandnode.cpp \
 		../source/nodes/bitwiseornode.cpp \
-		../source/functions/isarraytype.cpp \
-		../source/functions/isdoubletype.cpp \
-		../source/functions/isnumbertype.cpp \
-		../source/functions/isinttype.cpp \
-		../source/functions/isstringtype.cpp \
-		../source/functions/isint.cpp \
-		../source/functions/isdouble.cpp \
-		../source/functions/isnumber.cpp \
-		../source/functions/todouble.cpp \
-		../source/functions/toint.cpp \
-		../source/nodes/addconstnode.cpp \
-		../source/nodes/addvarnode.cpp 
+		../source/nodes/getfuncnode.cpp \
+		../source/nodes/equalnode.cpp \
+		../source/nodes/divnode.cpp \
+		../source/nodes/decrementnode.cpp \
+		../source/nodes/bracketnode.cpp \
+		../source/nodes/ifequalnode.cpp \
+		../source/nodes/ifnode.cpp \
+		../source/nodes/ifandnode.cpp \
+		../source/nodes/huwcodenodefactory.cpp \
+		../source/nodes/getvarnode.cpp \
+		../source/nodes/ifnotequalnode.cpp \
+		../source/nodes/ifornode.cpp \
+		../source/nodes/ifovernode.cpp \
+		../source/nodes/ifoverorequalnode.cpp \
+		../source/nodes/ifundernode.cpp \
+		../source/nodes/ifunderorequalnode.cpp \
+		../source/nodes/numbernode.cpp \
+		../source/nodes/mulnode.cpp \
+		../source/nodes/modnode.cpp \
+		../source/nodes/incrementnode.cpp \
+		../source/nodes/runnode.cpp \
+		../source/nodes/setreturnnode.cpp \
+		../source/nodes/setvarnode.cpp \
+		../source/nodes/subnode.cpp \
+		../source/nodes/textnode.cpp \
+		../source/nodes/unaryminusnode.cpp \
+		../source/nodes/whilenode.cpp \
+		../source/nodes/unarynotnode.cpp \
+		../source/nodes/js/jsaddconstnode.cpp \
+		../source/nodes/js/jsaddnode.cpp \
+		../source/nodes/js/jsaddvarnode.cpp \
+		../source/nodes/js/jsbitwiseandnode.cpp \
+		../source/nodes/js/jsbitwiseornode.cpp \
+		../source/nodes/js/jsbracketnode.cpp \
+		../source/nodes/js/jsdecrementnode.cpp \
+		../source/nodes/js/jsdivnode.cpp \
+		../source/nodes/js/jsequalnode.cpp \
+		../source/nodes/js/jsgetfuncnode.cpp \
+		../source/nodes/js/jsgetvarnode.cpp \
+		../source/nodes/js/jsifandnode.cpp \
+		../source/nodes/js/jsifequalnode.cpp \
+		../source/nodes/js/jsifnode.cpp \
+		../source/nodes/js/jsifnotequalnode.cpp \
+		../source/nodes/js/jsifornode.cpp \
+		../source/nodes/js/jsifovernode.cpp \
+		../source/nodes/js/jsifoverorequalnod.cpp \
+		../source/nodes/js/jsifundernode.cpp \
+		../source/nodes/js/jsifunderorequalnode.cpp \
+		../source/nodes/js/jsincrementnode.cpp \
+		../source/nodes/js/jsmodnode.cpp \
+		../source/nodes/js/jsmulnode.cpp \
+		../source/nodes/js/jsnodefactory.cpp \
+		../source/nodes/js/jsnumbernode.cpp \
+		../source/nodes/js/jsrunnode.cpp \
+		../source/nodes/js/jssetreturnnode.cpp \
+		../source/nodes/js/jssetvarnode.cpp \
+		../source/nodes/js/jssubnode.cpp \
+		../source/nodes/js/jstextnode.cpp \
+		../source/nodes/js/jsunaryminusnode.cpp \
+		../source/nodes/js/jsunarynotnode.cpp \
+		../source/nodes/js/jswhilenode.cpp \
+		../source/nodes/nodefactoryfactory.cpp \
+		../source/nodes/semicolonnode.cpp \
+		../source/nodes/js/jssemicolonnode.cpp 
 OBJECTS       = debug.o \
 		error.o \
 		errors.o \
 		errortypestringfactory.o \
+		fileline.o \
+		io.o \
+		typedetector.o \
+		precision.o \
+		scope.o \
+		variable.o \
+		variables.o \
+		variabletypefactory.o \
+		huwinterpreter.o \
+		customfunction.o \
+		emptyfunction.o \
+		doublevariable.o \
+		integervariable.o \
+		numbervariable.o \
+		stringvariable.o \
+		hashtablevariable.o \
+		arrayget.o \
+		arrayset.o \
+		array.o \
+		arrayunset.o \
+		count.o \
+		constantvariable.o \
+		unusabletokens.o \
+		isarraytype.o \
+		isdoubletype.o \
+		isnumbertype.o \
+		isinttype.o \
+		isstringtype.o \
+		isint.o \
+		isdouble.o \
+		todouble.o \
+		toint.o \
 		abs.o \
 		acos.o \
 		asc.o \
@@ -203,6 +272,7 @@ OBJECTS       = debug.o \
 		functions.o \
 		instr.o \
 		instrrev.o \
+		isnumber.o \
 		left.o \
 		len.o \
 		log.o \
@@ -236,80 +306,84 @@ OBJECTS       = debug.o \
 		weekday.o \
 		weekdayname.o \
 		year.o \
-		fileline.o \
-		io.o \
-		addnode.o \
-		bracketnode.o \
-		divnode.o \
-		equalnode.o \
-		getfuncnode.o \
-		getvarnode.o \
-		ifandnode.o \
-		ifequalnode.o \
-		ifnode.o \
-		ifnotequalnode.o \
-		ifornode.o \
-		ifovernode.o \
-		ifoverorequalnode.o \
-		ifundernode.o \
-		ifunderorequalnode.o \
-		modnode.o \
-		mulnode.o \
-		numbernode.o \
-		runnode.o \
-		setvarnode.o \
-		subnode.o \
-		textnode.o \
-		whilenode.o \
 		parser.o \
 		filetokenmanager.o \
 		lineinfo.o \
 		scanner.o \
 		texttokenmanager.o \
 		token.o \
-		isnumeric.o \
-		typedetector.o \
-		precision.o \
-		scope.o \
-		variable.o \
-		variables.o \
-		variabletypefactory.o \
-		huwinterpreter.o \
-		main.o \
-		customfunction.o \
-		emptyfunction.o \
-		setreturnnode.o \
-		incrementnode.o \
-		decrementnode.o \
-		doublevariable.o \
-		integervariable.o \
-		numbervariable.o \
-		stringvariable.o \
-		hashtablevariable.o \
-		arrayget.o \
-		arrayset.o \
-		array.o \
-		arrayunset.o \
-		count.o \
-		constantvariable.o \
-		unusabletokens.o \
-		unaryminusnode.o \
-		unarynotnode.o \
 		tokens.o \
+		isnumeric.o \
+		main.o \
+		addconstnode.o \
+		addnode.o \
+		addvarnode.o \
 		bitwiseandnode.o \
 		bitwiseornode.o \
-		isarraytype.o \
-		isdoubletype.o \
-		isnumbertype.o \
-		isinttype.o \
-		isstringtype.o \
-		isint.o \
-		isdouble.o \
-		isnumber.o \
-		todouble.o \
-		toint.o \
-		addconstnode.o \
-		addvarnode.o
+		getfuncnode.o \
+		equalnode.o \
+		divnode.o \
+		decrementnode.o \
+		bracketnode.o \
+		ifequalnode.o \
+		ifnode.o \
+		ifandnode.o \
+		huwcodenodefactory.o \
+		getvarnode.o \
+		ifnotequalnode.o \
+		ifornode.o \
+		ifovernode.o \
+		ifoverorequalnode.o \
+		ifundernode.o \
+		ifunderorequalnode.o \
+		numbernode.o \
+		mulnode.o \
+		modnode.o \
+		incrementnode.o \
+		runnode.o \
+		setreturnnode.o \
+		setvarnode.o \
+		subnode.o \
+		textnode.o \
+		unaryminusnode.o \
+		whilenode.o \
+		unarynotnode.o \
+		jsaddconstnode.o \
+		jsaddnode.o \
+		jsaddvarnode.o \
+		jsbitwiseandnode.o \
+		jsbitwiseornode.o \
+		jsbracketnode.o \
+		jsdecrementnode.o \
+		jsdivnode.o \
+		jsequalnode.o \
+		jsgetfuncnode.o \
+		jsgetvarnode.o \
+		jsifandnode.o \
+		jsifequalnode.o \
+		jsifnode.o \
+		jsifnotequalnode.o \
+		jsifornode.o \
+		jsifovernode.o \
+		jsifoverorequalnod.o \
+		jsifundernode.o \
+		jsifunderorequalnode.o \
+		jsincrementnode.o \
+		jsmodnode.o \
+		jsmulnode.o \
+		jsnodefactory.o \
+		jsnumbernode.o \
+		jsrunnode.o \
+		jssetreturnnode.o \
+		jssetvarnode.o \
+		jssubnode.o \
+		jstextnode.o \
+		jsunaryminusnode.o \
+		jsunarynotnode.o \
+		jswhilenode.o \
+		nodefactoryfactory.o \
+		semicolonnode.o \
+		jssemicolonnode.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -389,59 +463,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../source/errors/errortypes.h \
 		../source/errors/errortypestringfactory.h \
 		../source/errors/ierrors.h \
-		../source/functions/abs.h \
-		../source/functions/acos.h \
-		../source/functions/asc.h \
-		../source/functions/asin.h \
-		../source/functions/atan.h \
-		../source/functions/atan2.h \
-		../source/functions/ceil.h \
-		../source/functions/cha.h \
-		../source/functions/command.h \
-		../source/functions/cos.h \
-		../source/functions/dateformat.h \
-		../source/functions/exp.h \
-		../source/functions/fileread.h \
-		../source/functions/filewrite.h \
-		../source/functions/floor.h \
-		../source/functions/function.h \
-		../source/functions/functionlist.h \
-		../source/functions/functions.h \
-		../source/functions/instr.h \
-		../source/functions/instrrev.h \
-		../source/functions/left.h \
-		../source/functions/len.h \
-		../source/functions/log.h \
-		../source/functions/ltrim.h \
-		../source/functions/max.h \
-		../source/functions/mid.h \
-		../source/functions/min.h \
-		../source/functions/month.h \
-		../source/functions/monthname.h \
-		../source/functions/not.h \
-		../source/functions/now.h \
-		../source/functions/pow.h \
-		../source/functions/print.h \
-		../source/functions/random.h \
-		../source/functions/replace.h \
-		../source/functions/right.h \
-		../source/functions/round.h \
-		../source/functions/rtrim.h \
-		../source/functions/scan.h \
-		../source/functions/sin.h \
-		../source/functions/space.h \
-		../source/functions/sqrt.h \
-		../source/functions/str.h \
-		../source/functions/strcomp.h \
-		../source/functions/strreverse.h \
-		../source/functions/tan.h \
-		../source/functions/tolower.h \
-		../source/functions/tostring.h \
-		../source/functions/toupper.h \
-		../source/functions/trim.h \
-		../source/functions/weekday.h \
-		../source/functions/weekdayname.h \
-		../source/functions/year.h \
 		../source/io/fileline.h \
 		../source/io/io.h \
 		../source/nodes/addnode.h \
@@ -484,8 +505,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../source/variables/variables.h \
 		../source/variables/variabletypefactory.h \
 		../source/huwinterpreter.h \
-		../source/functions/customfunction.h \
-		../source/functions/emptyfunction.h \
 		../source/nodes/setreturnnode.h \
 		../source/nodes/incrementnode.h \
 		../source/nodes/decrementnode.h \
@@ -495,10 +514,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
 		../source/functions/arrayget.h \
-		../source/functions/arrayset.h \
 		../source/functions/array.h \
-		../source/functions/arrayunset.h \
-		../source/functions/count.h \
 		../source/variables/constantvariable.h \
 		../source/tokens/tokenmanager.h \
 		../source/tokens/unusabletokens.h \
@@ -507,21 +523,187 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../source/tokens/tokens.h \
 		../source/nodes/bitwiseandnode.h \
 		../source/nodes/bitwiseornode.h \
-		../source/functions/isarraytype.h \
 		../source/functions/isdoubletype.h \
 		../source/functions/isinttype.h \
 		../source/functions/isnumbertype.h \
-		../source/functions/isstringtype.h \
 		../source/functions/isint.h \
 		../source/functions/isdouble.h \
 		../source/functions/isnumber.h \
+		../source/nodes/addconstnode.h \
+		../source/nodes/addvarnode.h \
+		../source/nodes/huwcodenodefactory.h \
+		../source/nodes/nodefactory.h \
+		../source/functions/abs.h \
+		../source/functions/acos.h \
+		../source/functions/arrayset.h \
+		../source/functions/arrayunset.h \
+		../source/functions/asc.h \
+		../source/functions/asin.h \
+		../source/functions/atan.h \
+		../source/functions/atan2.h \
+		../source/functions/ceil.h \
+		../source/functions/cha.h \
+		../source/functions/command.h \
+		../source/functions/cos.h \
+		../source/functions/count.h \
+		../source/functions/customfunction.h \
+		../source/functions/dateformat.h \
+		../source/functions/emptyfunction.h \
+		../source/functions/exp.h \
+		../source/functions/fileread.h \
+		../source/functions/filewrite.h \
+		../source/functions/floor.h \
+		../source/functions/function.h \
+		../source/functions/functionlist.h \
+		../source/functions/functions.h \
+		../source/functions/instr.h \
+		../source/functions/instrrev.h \
+		../source/functions/isarraytype.h \
+		../source/functions/isstringtype.h \
+		../source/functions/left.h \
+		../source/functions/len.h \
+		../source/functions/log.h \
+		../source/functions/ltrim.h \
+		../source/functions/max.h \
+		../source/functions/mid.h \
+		../source/functions/min.h \
+		../source/functions/month.h \
+		../source/functions/monthname.h \
+		../source/functions/not.h \
+		../source/functions/now.h \
+		../source/functions/pow.h \
+		../source/functions/print.h \
+		../source/functions/random.h \
+		../source/functions/replace.h \
+		../source/functions/right.h \
+		../source/functions/round.h \
+		../source/functions/rtrim.h \
+		../source/functions/scan.h \
+		../source/functions/sin.h \
+		../source/functions/space.h \
+		../source/functions/sqrt.h \
+		../source/functions/str.h \
+		../source/functions/strcomp.h \
+		../source/functions/strreverse.h \
+		../source/functions/tan.h \
 		../source/functions/todouble.h \
 		../source/functions/toint.h \
+		../source/functions/tolower.h \
+		../source/functions/tostring.h \
+		../source/functions/toupper.h \
+		../source/functions/trim.h \
+		../source/functions/weekday.h \
+		../source/functions/weekdayname.h \
+		../source/functions/year.h \
 		../source/nodes/addconstnode.h \
-		../source/nodes/addvarnode.h ../source/errors/debug.cpp \
+		../source/nodes/addnode.h \
+		../source/nodes/addvarnode.h \
+		../source/nodes/bitwiseandnode.h \
+		../source/nodes/bitwiseornode.h \
+		../source/nodes/bracketnode.h \
+		../source/nodes/decrementnode.h \
+		../source/nodes/divnode.h \
+		../source/nodes/equalnode.h \
+		../source/nodes/getfuncnode.h \
+		../source/nodes/getvarnode.h \
+		../source/nodes/huwcodenodefactory.h \
+		../source/nodes/ifandnode.h \
+		../source/nodes/ifequalnode.h \
+		../source/nodes/ifnode.h \
+		../source/nodes/ifnotequalnode.h \
+		../source/nodes/ifornode.h \
+		../source/nodes/ifovernode.h \
+		../source/nodes/ifoverorequalnode.h \
+		../source/nodes/ifundernode.h \
+		../source/nodes/ifunderorequalnode.h \
+		../source/nodes/incrementnode.h \
+		../source/nodes/modnode.h \
+		../source/nodes/mulnode.h \
+		../source/nodes/node.h \
+		../source/nodes/nodefactory.h \
+		../source/nodes/numbernode.h \
+		../source/nodes/runnode.h \
+		../source/nodes/setreturnnode.h \
+		../source/nodes/setvarnode.h \
+		../source/nodes/subnode.h \
+		../source/nodes/textnode.h \
+		../source/nodes/unaryminusnode.h \
+		../source/nodes/unarynotnode.h \
+		../source/nodes/whilenode.h \
+		../source/parser/parser.h \
+		../source/types/isnumeric.h \
+		../source/types/tokentypes.h \
+		../source/nodes/js/jsaddconstnode.h \
+		../source/nodes/js/jsaddnode.h \
+		../source/nodes/js/jsaddvarnode.h \
+		../source/nodes/js/jsbitwiseandnode.h \
+		../source/nodes/js/jsbitwiseornode.h \
+		../source/nodes/js/jsbracketnode.h \
+		../source/nodes/js/jsdecrementnode.h \
+		../source/nodes/js/jsdivnode.h \
+		../source/nodes/js/jsequalnode.h \
+		../source/nodes/js/jsgetfuncnode.h \
+		../source/nodes/js/jsgetvarnode.h \
+		../source/nodes/js/jsifandnode.h \
+		../source/nodes/js/jsifequalnode.h \
+		../source/nodes/js/jsifnode.h \
+		../source/nodes/js/jsifnotequalnode.h \
+		../source/nodes/js/jsifornode.h \
+		../source/nodes/js/jsifovernode.h \
+		../source/nodes/js/jsifoverorequalnode.h \
+		../source/nodes/js/jsifundernode.h \
+		../source/nodes/js/jsifunderorequalnode.h \
+		../source/nodes/js/jsincrementnode.h \
+		../source/nodes/js/jsmodnode.h \
+		../source/nodes/js/jsmulnode.h \
+		../source/nodes/js/jsnodefactory.h \
+		../source/nodes/js/jsnumbernode.h \
+		../source/nodes/js/jsrunnode.h \
+		../source/nodes/js/jssetreturnnode.h \
+		../source/nodes/js/jssetvarnode.h \
+		../source/nodes/js/jssubnode.h \
+		../source/nodes/js/jstextnode.h \
+		../source/nodes/js/jsunaryminusnode.h \
+		../source/nodes/js/jsunarynotnode.h \
+		../source/nodes/js/jswhilenode.h \
+		../source/nodes/nodefactoryfactory.h \
+		../source/nodes/semicolonnode.h \
+		../source/nodes/js/jssemicolonnode.h ../source/errors/debug.cpp \
 		../source/errors/error.cpp \
 		../source/errors/errors.cpp \
 		../source/errors/errortypestringfactory.cpp \
+		../source/io/fileline.cpp \
+		../source/io/io.cpp \
+		../source/types/typedetector.cpp \
+		../source/variables/precision.cpp \
+		../source/variables/scope.cpp \
+		../source/variables/variable.cpp \
+		../source/variables/variables.cpp \
+		../source/variables/variabletypefactory.cpp \
+		../source/huwinterpreter.cpp \
+		../source/functions/customfunction.cpp \
+		../source/functions/emptyfunction.cpp \
+		../source/variables/doublevariable.cpp \
+		../source/variables/integervariable.cpp \
+		../source/variables/numbervariable.cpp \
+		../source/variables/stringvariable.cpp \
+		../source/variables/hashtablevariable.cpp \
+		../source/functions/arrayget.cpp \
+		../source/functions/arrayset.cpp \
+		../source/functions/array.cpp \
+		../source/functions/arrayunset.cpp \
+		../source/functions/count.cpp \
+		../source/variables/constantvariable.cpp \
+		../source/tokens/unusabletokens.cpp \
+		../source/functions/isarraytype.cpp \
+		../source/functions/isdoubletype.cpp \
+		../source/functions/isnumbertype.cpp \
+		../source/functions/isinttype.cpp \
+		../source/functions/isstringtype.cpp \
+		../source/functions/isint.cpp \
+		../source/functions/isdouble.cpp \
+		../source/functions/todouble.cpp \
+		../source/functions/toint.cpp \
 		../source/functions/abs.cpp \
 		../source/functions/acos.cpp \
 		../source/functions/asc.cpp \
@@ -541,6 +723,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../source/functions/functions.cpp \
 		../source/functions/instr.cpp \
 		../source/functions/instrrev.cpp \
+		../source/functions/isnumber.cpp \
 		../source/functions/left.cpp \
 		../source/functions/len.cpp \
 		../source/functions/log.cpp \
@@ -574,80 +757,84 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../source/functions/weekday.cpp \
 		../source/functions/weekdayname.cpp \
 		../source/functions/year.cpp \
-		../source/io/fileline.cpp \
-		../source/io/io.cpp \
-		../source/nodes/addnode.cpp \
-		../source/nodes/bracketnode.cpp \
-		../source/nodes/divnode.cpp \
-		../source/nodes/equalnode.cpp \
-		../source/nodes/getfuncnode.cpp \
-		../source/nodes/getvarnode.cpp \
-		../source/nodes/ifandnode.cpp \
-		../source/nodes/ifequalnode.cpp \
-		../source/nodes/ifnode.cpp \
-		../source/nodes/ifnotequalnode.cpp \
-		../source/nodes/ifornode.cpp \
-		../source/nodes/ifovernode.cpp \
-		../source/nodes/ifoverorequalnode.cpp \
-		../source/nodes/ifundernode.cpp \
-		../source/nodes/ifunderorequalnode.cpp \
-		../source/nodes/modnode.cpp \
-		../source/nodes/mulnode.cpp \
-		../source/nodes/numbernode.cpp \
-		../source/nodes/runnode.cpp \
-		../source/nodes/setvarnode.cpp \
-		../source/nodes/subnode.cpp \
-		../source/nodes/textnode.cpp \
-		../source/nodes/whilenode.cpp \
 		../source/parser/parser.cpp \
 		../source/tokens/filetokenmanager.cpp \
 		../source/tokens/lineinfo.cpp \
 		../source/tokens/scanner.cpp \
 		../source/tokens/texttokenmanager.cpp \
 		../source/tokens/token.cpp \
-		../source/types/isnumeric.cpp \
-		../source/types/typedetector.cpp \
-		../source/variables/precision.cpp \
-		../source/variables/scope.cpp \
-		../source/variables/variable.cpp \
-		../source/variables/variables.cpp \
-		../source/variables/variabletypefactory.cpp \
-		../source/huwinterpreter.cpp \
-		../source/main.cpp \
-		../source/functions/customfunction.cpp \
-		../source/functions/emptyfunction.cpp \
-		../source/nodes/setreturnnode.cpp \
-		../source/nodes/incrementnode.cpp \
-		../source/nodes/decrementnode.cpp \
-		../source/variables/doublevariable.cpp \
-		../source/variables/integervariable.cpp \
-		../source/variables/numbervariable.cpp \
-		../source/variables/stringvariable.cpp \
-		../source/variables/hashtablevariable.cpp \
-		../source/functions/arrayget.cpp \
-		../source/functions/arrayset.cpp \
-		../source/functions/array.cpp \
-		../source/functions/arrayunset.cpp \
-		../source/functions/count.cpp \
-		../source/variables/constantvariable.cpp \
-		../source/tokens/unusabletokens.cpp \
-		../source/nodes/unaryminusnode.cpp \
-		../source/nodes/unarynotnode.cpp \
 		../source/tokens/tokens.cpp \
+		../source/types/isnumeric.cpp \
+		../source/main.cpp \
+		../source/nodes/addconstnode.cpp \
+		../source/nodes/addnode.cpp \
+		../source/nodes/addvarnode.cpp \
 		../source/nodes/bitwiseandnode.cpp \
 		../source/nodes/bitwiseornode.cpp \
-		../source/functions/isarraytype.cpp \
-		../source/functions/isdoubletype.cpp \
-		../source/functions/isnumbertype.cpp \
-		../source/functions/isinttype.cpp \
-		../source/functions/isstringtype.cpp \
-		../source/functions/isint.cpp \
-		../source/functions/isdouble.cpp \
-		../source/functions/isnumber.cpp \
-		../source/functions/todouble.cpp \
-		../source/functions/toint.cpp \
-		../source/nodes/addconstnode.cpp \
-		../source/nodes/addvarnode.cpp
+		../source/nodes/getfuncnode.cpp \
+		../source/nodes/equalnode.cpp \
+		../source/nodes/divnode.cpp \
+		../source/nodes/decrementnode.cpp \
+		../source/nodes/bracketnode.cpp \
+		../source/nodes/ifequalnode.cpp \
+		../source/nodes/ifnode.cpp \
+		../source/nodes/ifandnode.cpp \
+		../source/nodes/huwcodenodefactory.cpp \
+		../source/nodes/getvarnode.cpp \
+		../source/nodes/ifnotequalnode.cpp \
+		../source/nodes/ifornode.cpp \
+		../source/nodes/ifovernode.cpp \
+		../source/nodes/ifoverorequalnode.cpp \
+		../source/nodes/ifundernode.cpp \
+		../source/nodes/ifunderorequalnode.cpp \
+		../source/nodes/numbernode.cpp \
+		../source/nodes/mulnode.cpp \
+		../source/nodes/modnode.cpp \
+		../source/nodes/incrementnode.cpp \
+		../source/nodes/runnode.cpp \
+		../source/nodes/setreturnnode.cpp \
+		../source/nodes/setvarnode.cpp \
+		../source/nodes/subnode.cpp \
+		../source/nodes/textnode.cpp \
+		../source/nodes/unaryminusnode.cpp \
+		../source/nodes/whilenode.cpp \
+		../source/nodes/unarynotnode.cpp \
+		../source/nodes/js/jsaddconstnode.cpp \
+		../source/nodes/js/jsaddnode.cpp \
+		../source/nodes/js/jsaddvarnode.cpp \
+		../source/nodes/js/jsbitwiseandnode.cpp \
+		../source/nodes/js/jsbitwiseornode.cpp \
+		../source/nodes/js/jsbracketnode.cpp \
+		../source/nodes/js/jsdecrementnode.cpp \
+		../source/nodes/js/jsdivnode.cpp \
+		../source/nodes/js/jsequalnode.cpp \
+		../source/nodes/js/jsgetfuncnode.cpp \
+		../source/nodes/js/jsgetvarnode.cpp \
+		../source/nodes/js/jsifandnode.cpp \
+		../source/nodes/js/jsifequalnode.cpp \
+		../source/nodes/js/jsifnode.cpp \
+		../source/nodes/js/jsifnotequalnode.cpp \
+		../source/nodes/js/jsifornode.cpp \
+		../source/nodes/js/jsifovernode.cpp \
+		../source/nodes/js/jsifoverorequalnod.cpp \
+		../source/nodes/js/jsifundernode.cpp \
+		../source/nodes/js/jsifunderorequalnode.cpp \
+		../source/nodes/js/jsincrementnode.cpp \
+		../source/nodes/js/jsmodnode.cpp \
+		../source/nodes/js/jsmulnode.cpp \
+		../source/nodes/js/jsnodefactory.cpp \
+		../source/nodes/js/jsnumbernode.cpp \
+		../source/nodes/js/jsrunnode.cpp \
+		../source/nodes/js/jssetreturnnode.cpp \
+		../source/nodes/js/jssetvarnode.cpp \
+		../source/nodes/js/jssubnode.cpp \
+		../source/nodes/js/jstextnode.cpp \
+		../source/nodes/js/jsunaryminusnode.cpp \
+		../source/nodes/js/jsunarynotnode.cpp \
+		../source/nodes/js/jswhilenode.cpp \
+		../source/nodes/nodefactoryfactory.cpp \
+		../source/nodes/semicolonnode.cpp \
+		../source/nodes/js/jssemicolonnode.cpp
 QMAKE_TARGET  = HuwInterpreter
 DESTDIR       = 
 TARGET        = HuwInterpreter
@@ -827,8 +1014,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../source/errors/debug.h ../source/errors/error.h ../source/errors/errors.h ../source/errors/errortypes.h ../source/errors/errortypestringfactory.h ../source/errors/ierrors.h ../source/functions/abs.h ../source/functions/acos.h ../source/functions/asc.h ../source/functions/asin.h ../source/functions/atan.h ../source/functions/atan2.h ../source/functions/ceil.h ../source/functions/cha.h ../source/functions/command.h ../source/functions/cos.h ../source/functions/dateformat.h ../source/functions/exp.h ../source/functions/fileread.h ../source/functions/filewrite.h ../source/functions/floor.h ../source/functions/function.h ../source/functions/functionlist.h ../source/functions/functions.h ../source/functions/instr.h ../source/functions/instrrev.h ../source/functions/left.h ../source/functions/len.h ../source/functions/log.h ../source/functions/ltrim.h ../source/functions/max.h ../source/functions/mid.h ../source/functions/min.h ../source/functions/month.h ../source/functions/monthname.h ../source/functions/not.h ../source/functions/now.h ../source/functions/pow.h ../source/functions/print.h ../source/functions/random.h ../source/functions/replace.h ../source/functions/right.h ../source/functions/round.h ../source/functions/rtrim.h ../source/functions/scan.h ../source/functions/sin.h ../source/functions/space.h ../source/functions/sqrt.h ../source/functions/str.h ../source/functions/strcomp.h ../source/functions/strreverse.h ../source/functions/tan.h ../source/functions/tolower.h ../source/functions/tostring.h ../source/functions/toupper.h ../source/functions/trim.h ../source/functions/weekday.h ../source/functions/weekdayname.h ../source/functions/year.h ../source/io/fileline.h ../source/io/io.h ../source/nodes/addnode.h ../source/nodes/bracketnode.h ../source/nodes/divnode.h ../source/nodes/equalnode.h ../source/nodes/getfuncnode.h ../source/nodes/getvarnode.h ../source/nodes/ifandnode.h ../source/nodes/ifequalnode.h ../source/nodes/ifnode.h ../source/nodes/ifnotequalnode.h ../source/nodes/ifornode.h ../source/nodes/ifovernode.h ../source/nodes/ifoverorequalnode.h ../source/nodes/ifundernode.h ../source/nodes/ifunderorequalnode.h ../source/nodes/modnode.h ../source/nodes/mulnode.h ../source/nodes/node.h ../source/nodes/numbernode.h ../source/nodes/runnode.h ../source/nodes/setvarnode.h ../source/nodes/subnode.h ../source/nodes/textnode.h ../source/nodes/whilenode.h ../source/parser/parser.h ../source/tokens/filetokenmanager.h ../source/tokens/lineinfo.h ../source/tokens/scanner.h ../source/tokens/texttokenmanager.h ../source/tokens/token.h ../source/tokens/tokenmanager.h ../source/types/isnumeric.h ../source/types/tokentypes.h ../source/types/typedetector.h ../source/variables/precision.h ../source/variables/scope.h ../source/variables/variable.h ../source/variables/variables.h ../source/variables/variabletypefactory.h ../source/huwinterpreter.h ../source/functions/customfunction.h ../source/functions/emptyfunction.h ../source/nodes/setreturnnode.h ../source/nodes/incrementnode.h ../source/nodes/decrementnode.h ../source/variables/doublevariable.h ../source/variables/hashtablevariable.h ../source/variables/stringvariable.h ../source/variables/numbervariable.h ../source/variables/integervariable.h ../source/functions/arrayget.h ../source/functions/arrayset.h ../source/functions/array.h ../source/functions/arrayunset.h ../source/functions/count.h ../source/variables/constantvariable.h ../source/tokens/tokenmanager.h ../source/tokens/unusabletokens.h ../source/nodes/unaryminusnode.h ../source/nodes/unarynotnode.h ../source/tokens/tokens.h ../source/nodes/bitwiseandnode.h ../source/nodes/bitwiseornode.h ../source/functions/isarraytype.h ../source/functions/isdoubletype.h ../source/functions/isinttype.h ../source/functions/isnumbertype.h ../source/functions/isstringtype.h ../source/functions/isint.h ../source/functions/isdouble.h ../source/functions/isnumber.h ../source/functions/todouble.h ../source/functions/toint.h ../source/nodes/addconstnode.h ../source/nodes/addvarnode.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../source/errors/debug.cpp ../source/errors/error.cpp ../source/errors/errors.cpp ../source/errors/errortypestringfactory.cpp ../source/functions/abs.cpp ../source/functions/acos.cpp ../source/functions/asc.cpp ../source/functions/asin.cpp ../source/functions/atan.cpp ../source/functions/atan2.cpp ../source/functions/ceil.cpp ../source/functions/cha.cpp ../source/functions/command.cpp ../source/functions/cos.cpp ../source/functions/dateformat.cpp ../source/functions/exp.cpp ../source/functions/fileread.cpp ../source/functions/filewrite.cpp ../source/functions/floor.cpp ../source/functions/function.cpp ../source/functions/functions.cpp ../source/functions/instr.cpp ../source/functions/instrrev.cpp ../source/functions/left.cpp ../source/functions/len.cpp ../source/functions/log.cpp ../source/functions/ltrim.cpp ../source/functions/max.cpp ../source/functions/mid.cpp ../source/functions/min.cpp ../source/functions/month.cpp ../source/functions/monthname.cpp ../source/functions/not.cpp ../source/functions/now.cpp ../source/functions/pow.cpp ../source/functions/print.cpp ../source/functions/random.cpp ../source/functions/replace.cpp ../source/functions/right.cpp ../source/functions/round.cpp ../source/functions/rtrim.cpp ../source/functions/scan.cpp ../source/functions/sin.cpp ../source/functions/space.cpp ../source/functions/sqrt.cpp ../source/functions/str.cpp ../source/functions/strcomp.cpp ../source/functions/strreverse.cpp ../source/functions/tan.cpp ../source/functions/tolower.cpp ../source/functions/tostring.cpp ../source/functions/toupper.cpp ../source/functions/trim.cpp ../source/functions/weekday.cpp ../source/functions/weekdayname.cpp ../source/functions/year.cpp ../source/io/fileline.cpp ../source/io/io.cpp ../source/nodes/addnode.cpp ../source/nodes/bracketnode.cpp ../source/nodes/divnode.cpp ../source/nodes/equalnode.cpp ../source/nodes/getfuncnode.cpp ../source/nodes/getvarnode.cpp ../source/nodes/ifandnode.cpp ../source/nodes/ifequalnode.cpp ../source/nodes/ifnode.cpp ../source/nodes/ifnotequalnode.cpp ../source/nodes/ifornode.cpp ../source/nodes/ifovernode.cpp ../source/nodes/ifoverorequalnode.cpp ../source/nodes/ifundernode.cpp ../source/nodes/ifunderorequalnode.cpp ../source/nodes/modnode.cpp ../source/nodes/mulnode.cpp ../source/nodes/numbernode.cpp ../source/nodes/runnode.cpp ../source/nodes/setvarnode.cpp ../source/nodes/subnode.cpp ../source/nodes/textnode.cpp ../source/nodes/whilenode.cpp ../source/parser/parser.cpp ../source/tokens/filetokenmanager.cpp ../source/tokens/lineinfo.cpp ../source/tokens/scanner.cpp ../source/tokens/texttokenmanager.cpp ../source/tokens/token.cpp ../source/types/isnumeric.cpp ../source/types/typedetector.cpp ../source/variables/precision.cpp ../source/variables/scope.cpp ../source/variables/variable.cpp ../source/variables/variables.cpp ../source/variables/variabletypefactory.cpp ../source/huwinterpreter.cpp ../source/main.cpp ../source/functions/customfunction.cpp ../source/functions/emptyfunction.cpp ../source/nodes/setreturnnode.cpp ../source/nodes/incrementnode.cpp ../source/nodes/decrementnode.cpp ../source/variables/doublevariable.cpp ../source/variables/integervariable.cpp ../source/variables/numbervariable.cpp ../source/variables/stringvariable.cpp ../source/variables/hashtablevariable.cpp ../source/functions/arrayget.cpp ../source/functions/arrayset.cpp ../source/functions/array.cpp ../source/functions/arrayunset.cpp ../source/functions/count.cpp ../source/variables/constantvariable.cpp ../source/tokens/unusabletokens.cpp ../source/nodes/unaryminusnode.cpp ../source/nodes/unarynotnode.cpp ../source/tokens/tokens.cpp ../source/nodes/bitwiseandnode.cpp ../source/nodes/bitwiseornode.cpp ../source/functions/isarraytype.cpp ../source/functions/isdoubletype.cpp ../source/functions/isnumbertype.cpp ../source/functions/isinttype.cpp ../source/functions/isstringtype.cpp ../source/functions/isint.cpp ../source/functions/isdouble.cpp ../source/functions/isnumber.cpp ../source/functions/todouble.cpp ../source/functions/toint.cpp ../source/nodes/addconstnode.cpp ../source/nodes/addvarnode.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../source/errors/debug.h ../source/errors/error.h ../source/errors/errors.h ../source/errors/errortypes.h ../source/errors/errortypestringfactory.h ../source/errors/ierrors.h ../source/io/fileline.h ../source/io/io.h ../source/nodes/addnode.h ../source/nodes/bracketnode.h ../source/nodes/divnode.h ../source/nodes/equalnode.h ../source/nodes/getfuncnode.h ../source/nodes/getvarnode.h ../source/nodes/ifandnode.h ../source/nodes/ifequalnode.h ../source/nodes/ifnode.h ../source/nodes/ifnotequalnode.h ../source/nodes/ifornode.h ../source/nodes/ifovernode.h ../source/nodes/ifoverorequalnode.h ../source/nodes/ifundernode.h ../source/nodes/ifunderorequalnode.h ../source/nodes/modnode.h ../source/nodes/mulnode.h ../source/nodes/node.h ../source/nodes/numbernode.h ../source/nodes/runnode.h ../source/nodes/setvarnode.h ../source/nodes/subnode.h ../source/nodes/textnode.h ../source/nodes/whilenode.h ../source/parser/parser.h ../source/tokens/filetokenmanager.h ../source/tokens/lineinfo.h ../source/tokens/scanner.h ../source/tokens/texttokenmanager.h ../source/tokens/token.h ../source/tokens/tokenmanager.h ../source/types/isnumeric.h ../source/types/tokentypes.h ../source/types/typedetector.h ../source/variables/precision.h ../source/variables/scope.h ../source/variables/variable.h ../source/variables/variables.h ../source/variables/variabletypefactory.h ../source/huwinterpreter.h ../source/nodes/setreturnnode.h ../source/nodes/incrementnode.h ../source/nodes/decrementnode.h ../source/variables/doublevariable.h ../source/variables/hashtablevariable.h ../source/variables/stringvariable.h ../source/variables/numbervariable.h ../source/variables/integervariable.h ../source/functions/arrayget.h ../source/functions/array.h ../source/variables/constantvariable.h ../source/tokens/tokenmanager.h ../source/tokens/unusabletokens.h ../source/nodes/unaryminusnode.h ../source/nodes/unarynotnode.h ../source/tokens/tokens.h ../source/nodes/bitwiseandnode.h ../source/nodes/bitwiseornode.h ../source/functions/isdoubletype.h ../source/functions/isinttype.h ../source/functions/isnumbertype.h ../source/functions/isint.h ../source/functions/isdouble.h ../source/functions/isnumber.h ../source/nodes/addconstnode.h ../source/nodes/addvarnode.h ../source/nodes/huwcodenodefactory.h ../source/nodes/nodefactory.h ../source/functions/abs.h ../source/functions/acos.h ../source/functions/arrayset.h ../source/functions/arrayunset.h ../source/functions/asc.h ../source/functions/asin.h ../source/functions/atan.h ../source/functions/atan2.h ../source/functions/ceil.h ../source/functions/cha.h ../source/functions/command.h ../source/functions/cos.h ../source/functions/count.h ../source/functions/customfunction.h ../source/functions/dateformat.h ../source/functions/emptyfunction.h ../source/functions/exp.h ../source/functions/fileread.h ../source/functions/filewrite.h ../source/functions/floor.h ../source/functions/function.h ../source/functions/functionlist.h ../source/functions/functions.h ../source/functions/instr.h ../source/functions/instrrev.h ../source/functions/isarraytype.h ../source/functions/isstringtype.h ../source/functions/left.h ../source/functions/len.h ../source/functions/log.h ../source/functions/ltrim.h ../source/functions/max.h ../source/functions/mid.h ../source/functions/min.h ../source/functions/month.h ../source/functions/monthname.h ../source/functions/not.h ../source/functions/now.h ../source/functions/pow.h ../source/functions/print.h ../source/functions/random.h ../source/functions/replace.h ../source/functions/right.h ../source/functions/round.h ../source/functions/rtrim.h ../source/functions/scan.h ../source/functions/sin.h ../source/functions/space.h ../source/functions/sqrt.h ../source/functions/str.h ../source/functions/strcomp.h ../source/functions/strreverse.h ../source/functions/tan.h ../source/functions/todouble.h ../source/functions/toint.h ../source/functions/tolower.h ../source/functions/tostring.h ../source/functions/toupper.h ../source/functions/trim.h ../source/functions/weekday.h ../source/functions/weekdayname.h ../source/functions/year.h ../source/nodes/addconstnode.h ../source/nodes/addnode.h ../source/nodes/addvarnode.h ../source/nodes/bitwiseandnode.h ../source/nodes/bitwiseornode.h ../source/nodes/bracketnode.h ../source/nodes/decrementnode.h ../source/nodes/divnode.h ../source/nodes/equalnode.h ../source/nodes/getfuncnode.h ../source/nodes/getvarnode.h ../source/nodes/huwcodenodefactory.h ../source/nodes/ifandnode.h ../source/nodes/ifequalnode.h ../source/nodes/ifnode.h ../source/nodes/ifnotequalnode.h ../source/nodes/ifornode.h ../source/nodes/ifovernode.h ../source/nodes/ifoverorequalnode.h ../source/nodes/ifundernode.h ../source/nodes/ifunderorequalnode.h ../source/nodes/incrementnode.h ../source/nodes/modnode.h ../source/nodes/mulnode.h ../source/nodes/node.h ../source/nodes/nodefactory.h ../source/nodes/numbernode.h ../source/nodes/runnode.h ../source/nodes/setreturnnode.h ../source/nodes/setvarnode.h ../source/nodes/subnode.h ../source/nodes/textnode.h ../source/nodes/unaryminusnode.h ../source/nodes/unarynotnode.h ../source/nodes/whilenode.h ../source/parser/parser.h ../source/types/isnumeric.h ../source/types/tokentypes.h ../source/nodes/js/jsaddconstnode.h ../source/nodes/js/jsaddnode.h ../source/nodes/js/jsaddvarnode.h ../source/nodes/js/jsbitwiseandnode.h ../source/nodes/js/jsbitwiseornode.h ../source/nodes/js/jsbracketnode.h ../source/nodes/js/jsdecrementnode.h ../source/nodes/js/jsdivnode.h ../source/nodes/js/jsequalnode.h ../source/nodes/js/jsgetfuncnode.h ../source/nodes/js/jsgetvarnode.h ../source/nodes/js/jsifandnode.h ../source/nodes/js/jsifequalnode.h ../source/nodes/js/jsifnode.h ../source/nodes/js/jsifnotequalnode.h ../source/nodes/js/jsifornode.h ../source/nodes/js/jsifovernode.h ../source/nodes/js/jsifoverorequalnode.h ../source/nodes/js/jsifundernode.h ../source/nodes/js/jsifunderorequalnode.h ../source/nodes/js/jsincrementnode.h ../source/nodes/js/jsmodnode.h ../source/nodes/js/jsmulnode.h ../source/nodes/js/jsnodefactory.h ../source/nodes/js/jsnumbernode.h ../source/nodes/js/jsrunnode.h ../source/nodes/js/jssetreturnnode.h ../source/nodes/js/jssetvarnode.h ../source/nodes/js/jssubnode.h ../source/nodes/js/jstextnode.h ../source/nodes/js/jsunaryminusnode.h ../source/nodes/js/jsunarynotnode.h ../source/nodes/js/jswhilenode.h ../source/nodes/nodefactoryfactory.h ../source/nodes/semicolonnode.h ../source/nodes/js/jssemicolonnode.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../source/errors/debug.cpp ../source/errors/error.cpp ../source/errors/errors.cpp ../source/errors/errortypestringfactory.cpp ../source/io/fileline.cpp ../source/io/io.cpp ../source/types/typedetector.cpp ../source/variables/precision.cpp ../source/variables/scope.cpp ../source/variables/variable.cpp ../source/variables/variables.cpp ../source/variables/variabletypefactory.cpp ../source/huwinterpreter.cpp ../source/functions/customfunction.cpp ../source/functions/emptyfunction.cpp ../source/variables/doublevariable.cpp ../source/variables/integervariable.cpp ../source/variables/numbervariable.cpp ../source/variables/stringvariable.cpp ../source/variables/hashtablevariable.cpp ../source/functions/arrayget.cpp ../source/functions/arrayset.cpp ../source/functions/array.cpp ../source/functions/arrayunset.cpp ../source/functions/count.cpp ../source/variables/constantvariable.cpp ../source/tokens/unusabletokens.cpp ../source/functions/isarraytype.cpp ../source/functions/isdoubletype.cpp ../source/functions/isnumbertype.cpp ../source/functions/isinttype.cpp ../source/functions/isstringtype.cpp ../source/functions/isint.cpp ../source/functions/isdouble.cpp ../source/functions/todouble.cpp ../source/functions/toint.cpp ../source/functions/abs.cpp ../source/functions/acos.cpp ../source/functions/asc.cpp ../source/functions/asin.cpp ../source/functions/atan.cpp ../source/functions/atan2.cpp ../source/functions/ceil.cpp ../source/functions/cha.cpp ../source/functions/command.cpp ../source/functions/cos.cpp ../source/functions/dateformat.cpp ../source/functions/exp.cpp ../source/functions/fileread.cpp ../source/functions/filewrite.cpp ../source/functions/floor.cpp ../source/functions/function.cpp ../source/functions/functions.cpp ../source/functions/instr.cpp ../source/functions/instrrev.cpp ../source/functions/isnumber.cpp ../source/functions/left.cpp ../source/functions/len.cpp ../source/functions/log.cpp ../source/functions/ltrim.cpp ../source/functions/max.cpp ../source/functions/mid.cpp ../source/functions/min.cpp ../source/functions/month.cpp ../source/functions/monthname.cpp ../source/functions/not.cpp ../source/functions/now.cpp ../source/functions/pow.cpp ../source/functions/print.cpp ../source/functions/random.cpp ../source/functions/replace.cpp ../source/functions/right.cpp ../source/functions/round.cpp ../source/functions/rtrim.cpp ../source/functions/scan.cpp ../source/functions/sin.cpp ../source/functions/space.cpp ../source/functions/sqrt.cpp ../source/functions/str.cpp ../source/functions/strcomp.cpp ../source/functions/strreverse.cpp ../source/functions/tan.cpp ../source/functions/tolower.cpp ../source/functions/tostring.cpp ../source/functions/toupper.cpp ../source/functions/trim.cpp ../source/functions/weekday.cpp ../source/functions/weekdayname.cpp ../source/functions/year.cpp ../source/parser/parser.cpp ../source/tokens/filetokenmanager.cpp ../source/tokens/lineinfo.cpp ../source/tokens/scanner.cpp ../source/tokens/texttokenmanager.cpp ../source/tokens/token.cpp ../source/tokens/tokens.cpp ../source/types/isnumeric.cpp ../source/main.cpp ../source/nodes/addconstnode.cpp ../source/nodes/addnode.cpp ../source/nodes/addvarnode.cpp ../source/nodes/bitwiseandnode.cpp ../source/nodes/bitwiseornode.cpp ../source/nodes/getfuncnode.cpp ../source/nodes/equalnode.cpp ../source/nodes/divnode.cpp ../source/nodes/decrementnode.cpp ../source/nodes/bracketnode.cpp ../source/nodes/ifequalnode.cpp ../source/nodes/ifnode.cpp ../source/nodes/ifandnode.cpp ../source/nodes/huwcodenodefactory.cpp ../source/nodes/getvarnode.cpp ../source/nodes/ifnotequalnode.cpp ../source/nodes/ifornode.cpp ../source/nodes/ifovernode.cpp ../source/nodes/ifoverorequalnode.cpp ../source/nodes/ifundernode.cpp ../source/nodes/ifunderorequalnode.cpp ../source/nodes/numbernode.cpp ../source/nodes/mulnode.cpp ../source/nodes/modnode.cpp ../source/nodes/incrementnode.cpp ../source/nodes/runnode.cpp ../source/nodes/setreturnnode.cpp ../source/nodes/setvarnode.cpp ../source/nodes/subnode.cpp ../source/nodes/textnode.cpp ../source/nodes/unaryminusnode.cpp ../source/nodes/whilenode.cpp ../source/nodes/unarynotnode.cpp ../source/nodes/js/jsaddconstnode.cpp ../source/nodes/js/jsaddnode.cpp ../source/nodes/js/jsaddvarnode.cpp ../source/nodes/js/jsbitwiseandnode.cpp ../source/nodes/js/jsbitwiseornode.cpp ../source/nodes/js/jsbracketnode.cpp ../source/nodes/js/jsdecrementnode.cpp ../source/nodes/js/jsdivnode.cpp ../source/nodes/js/jsequalnode.cpp ../source/nodes/js/jsgetfuncnode.cpp ../source/nodes/js/jsgetvarnode.cpp ../source/nodes/js/jsifandnode.cpp ../source/nodes/js/jsifequalnode.cpp ../source/nodes/js/jsifnode.cpp ../source/nodes/js/jsifnotequalnode.cpp ../source/nodes/js/jsifornode.cpp ../source/nodes/js/jsifovernode.cpp ../source/nodes/js/jsifoverorequalnod.cpp ../source/nodes/js/jsifundernode.cpp ../source/nodes/js/jsifunderorequalnode.cpp ../source/nodes/js/jsincrementnode.cpp ../source/nodes/js/jsmodnode.cpp ../source/nodes/js/jsmulnode.cpp ../source/nodes/js/jsnodefactory.cpp ../source/nodes/js/jsnumbernode.cpp ../source/nodes/js/jsrunnode.cpp ../source/nodes/js/jssetreturnnode.cpp ../source/nodes/js/jssetvarnode.cpp ../source/nodes/js/jssubnode.cpp ../source/nodes/js/jstextnode.cpp ../source/nodes/js/jsunaryminusnode.cpp ../source/nodes/js/jsunarynotnode.cpp ../source/nodes/js/jswhilenode.cpp ../source/nodes/nodefactoryfactory.cpp ../source/nodes/semicolonnode.cpp ../source/nodes/js/jssemicolonnode.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -897,6 +1084,793 @@ errors.o: ../source/errors/errors.cpp ../source/errors/errors.h \
 errortypestringfactory.o: ../source/errors/errortypestringfactory.cpp ../source/errors/errortypestringfactory.h \
 		../source/errors/errortypes.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o errortypestringfactory.o ../source/errors/errortypestringfactory.cpp
+
+fileline.o: ../source/io/fileline.cpp ../source/io/fileline.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fileline.o ../source/io/fileline.cpp
+
+io.o: ../source/io/io.cpp ../source/io/io.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o io.o ../source/io/io.cpp
+
+typedetector.o: ../source/types/typedetector.cpp ../source/types/typedetector.h \
+		../source/types/tokentypes.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o typedetector.o ../source/types/typedetector.cpp
+
+precision.o: ../source/variables/precision.cpp ../source/variables/precision.h \
+		../source/types/tokentypes.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o precision.o ../source/variables/precision.cpp
+
+scope.o: ../source/variables/scope.cpp ../source/variables/scope.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scope.o ../source/variables/scope.cpp
+
+variable.o: ../source/variables/variable.cpp ../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o variable.o ../source/variables/variable.cpp
+
+variables.o: ../source/variables/variables.cpp ../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/nodes/node.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o variables.o ../source/variables/variables.cpp
+
+variabletypefactory.o: ../source/variables/variabletypefactory.cpp ../source/variables/variabletypefactory.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/precision.h \
+		../source/variables/stringvariable.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o variabletypefactory.o ../source/variables/variabletypefactory.cpp
+
+huwinterpreter.o: ../source/huwinterpreter.cpp ../source/huwinterpreter.h \
+		../source/parser/parser.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/tokens/tokens.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/nodes/nodefactory.h \
+		../source/nodes/equalnode.h \
+		../source/nodes/setvarnode.h \
+		../source/nodes/ifequalnode.h \
+		../source/nodes/ifnotequalnode.h \
+		../source/nodes/ifundernode.h \
+		../source/nodes/ifunderorequalnode.h \
+		../source/nodes/ifovernode.h \
+		../source/nodes/ifoverorequalnode.h \
+		../source/nodes/ifnode.h \
+		../source/nodes/whilenode.h \
+		../source/nodes/ifandnode.h \
+		../source/nodes/ifornode.h \
+		../source/nodes/bitwiseandnode.h \
+		../source/nodes/bitwiseornode.h \
+		../source/nodes/getvarnode.h \
+		../source/nodes/addconstnode.h \
+		../source/nodes/addvarnode.h \
+		../source/nodes/getfuncnode.h \
+		../source/functions/function.h \
+		../source/io/fileline.h \
+		../source/functions/functions.h \
+		../source/functions/functionlist.h \
+		../source/functions/print.h \
+		../source/functions/scan.h \
+		../source/functions/command.h \
+		../source/functions/not.h \
+		../source/functions/str.h \
+		../source/functions/asc.h \
+		../source/functions/cha.h \
+		../source/functions/instr.h \
+		../source/functions/instrrev.h \
+		../source/functions/tolower.h \
+		../source/functions/left.h \
+		../source/functions/len.h \
+		../source/functions/ltrim.h \
+		../source/functions/mid.h \
+		../source/functions/replace.h \
+		../source/functions/right.h \
+		../source/functions/rtrim.h \
+		../source/functions/space.h \
+		../source/functions/strcomp.h \
+		../source/functions/strreverse.h \
+		../source/functions/trim.h \
+		../source/functions/toupper.h \
+		../source/functions/weekday.h \
+		../source/functions/weekdayname.h \
+		../source/functions/year.h \
+		../source/functions/now.h \
+		../source/functions/month.h \
+		../source/functions/monthname.h \
+		../source/functions/dateformat.h \
+		../source/functions/fileread.h \
+		../source/io/io.h \
+		../source/functions/filewrite.h \
+		../source/functions/abs.h \
+		../source/functions/acos.h \
+		../source/functions/asin.h \
+		../source/functions/atan.h \
+		../source/functions/atan2.h \
+		../source/functions/ceil.h \
+		../source/functions/cos.h \
+		../source/functions/exp.h \
+		../source/functions/floor.h \
+		../source/functions/log.h \
+		../source/functions/max.h \
+		../source/functions/min.h \
+		../source/functions/pow.h \
+		../source/functions/sin.h \
+		../source/functions/random.h \
+		../source/functions/round.h \
+		../source/functions/sqrt.h \
+		../source/functions/tan.h \
+		../source/functions/emptyfunction.h \
+		../source/functions/array.h \
+		../source/variables/hashtablevariable.h \
+		../source/functions/arrayget.h \
+		../source/functions/arrayset.h \
+		../source/functions/arrayunset.h \
+		../source/functions/count.h \
+		../source/functions/isinttype.h \
+		../source/functions/isdoubletype.h \
+		../source/functions/isnumbertype.h \
+		../source/functions/isstringtype.h \
+		../source/functions/isarraytype.h \
+		../source/functions/isint.h \
+		../source/functions/isdouble.h \
+		../source/functions/isnumber.h \
+		../source/functions/toint.h \
+		../source/functions/todouble.h \
+		../source/nodes/numbernode.h \
+		../source/nodes/textnode.h \
+		../source/nodes/runnode.h \
+		../source/nodes/addnode.h \
+		../source/nodes/subnode.h \
+		../source/nodes/mulnode.h \
+		../source/nodes/divnode.h \
+		../source/nodes/modnode.h \
+		../source/nodes/unaryminusnode.h \
+		../source/nodes/unarynotnode.h \
+		../source/nodes/setreturnnode.h \
+		../source/nodes/bracketnode.h \
+		../source/nodes/incrementnode.h \
+		../source/nodes/decrementnode.h \
+		../source/nodes/semicolonnode.h \
+		../source/functions/customfunction.h \
+		../source/tokens/scanner.h \
+		../source/tokens/tokenmanager.h \
+		../source/tokens/unusabletokens.h \
+		../source/tokens/filetokenmanager.h \
+		../source/tokens/texttokenmanager.h \
+		../source/nodes/huwcodenodefactory.h \
+		../source/nodes/nodefactoryfactory.h \
+		../source/nodes/js/jsnodefactory.h \
+		../source/nodes/js/jsequalnode.h \
+		../source/nodes/js/jsifequalnode.h \
+		../source/nodes/js/jsifnotequalnode.h \
+		../source/nodes/js/jsifundernode.h \
+		../source/nodes/js/jsifunderorequalnode.h \
+		../source/nodes/js/jsifovernode.h \
+		../source/nodes/js/jsifoverorequalnode.h \
+		../source/nodes/js/jsifnode.h \
+		../source/nodes/js/jswhilenode.h \
+		../source/nodes/js/jsifandnode.h \
+		../source/nodes/js/jsifornode.h \
+		../source/nodes/js/jsbitwiseandnode.h \
+		../source/nodes/js/jsbitwiseornode.h \
+		../source/nodes/js/jsgetvarnode.h \
+		../source/nodes/js/jssetvarnode.h \
+		../source/nodes/js/jsaddconstnode.h \
+		../source/nodes/js/jsaddvarnode.h \
+		../source/nodes/js/jsgetfuncnode.h \
+		../source/nodes/js/jsnumbernode.h \
+		../source/nodes/js/jstextnode.h \
+		../source/nodes/js/jsrunnode.h \
+		../source/nodes/js/jsaddnode.h \
+		../source/nodes/js/jssubnode.h \
+		../source/nodes/js/jsmulnode.h \
+		../source/nodes/js/jsdivnode.h \
+		../source/nodes/js/jsmodnode.h \
+		../source/nodes/js/jsunaryminusnode.h \
+		../source/nodes/js/jsunarynotnode.h \
+		../source/nodes/js/jssetreturnnode.h \
+		../source/nodes/js/jsbracketnode.h \
+		../source/nodes/js/jsincrementnode.h \
+		../source/nodes/js/jsdecrementnode.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o huwinterpreter.o ../source/huwinterpreter.cpp
+
+customfunction.o: ../source/functions/customfunction.cpp ../source/functions/customfunction.h \
+		../source/functions/function.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/nodes/node.h \
+		../source/variables/variables.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/io/fileline.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o customfunction.o ../source/functions/customfunction.cpp
+
+emptyfunction.o: ../source/functions/emptyfunction.cpp ../source/functions/emptyfunction.h \
+		../source/functions/function.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/nodes/node.h \
+		../source/variables/variables.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/io/fileline.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o emptyfunction.o ../source/functions/emptyfunction.cpp
+
+doublevariable.o: ../source/variables/doublevariable.cpp ../source/variables/doublevariable.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o doublevariable.o ../source/variables/doublevariable.cpp
+
+integervariable.o: ../source/variables/integervariable.cpp ../source/variables/integervariable.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/numbervariable.h \
+		../source/variables/doublevariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o integervariable.o ../source/variables/integervariable.cpp
+
+numbervariable.o: ../source/variables/numbervariable.cpp ../source/variables/numbervariable.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/doublevariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o numbervariable.o ../source/variables/numbervariable.cpp
+
+stringvariable.o: ../source/variables/stringvariable.cpp ../source/variables/stringvariable.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/precision.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stringvariable.o ../source/variables/stringvariable.cpp
+
+hashtablevariable.o: ../source/variables/hashtablevariable.cpp ../source/variables/hashtablevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/doublevariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o hashtablevariable.o ../source/variables/hashtablevariable.cpp
+
+arrayget.o: ../source/functions/arrayget.cpp ../source/functions/arrayget.h \
+		../source/functions/function.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/nodes/node.h \
+		../source/variables/variables.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/io/fileline.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o arrayget.o ../source/functions/arrayget.cpp
+
+arrayset.o: ../source/functions/arrayset.cpp ../source/functions/arrayset.h \
+		../source/functions/function.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/nodes/node.h \
+		../source/variables/variables.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/io/fileline.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o arrayset.o ../source/functions/arrayset.cpp
+
+array.o: ../source/functions/array.cpp ../source/functions/array.h \
+		../source/functions/function.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/nodes/node.h \
+		../source/variables/variables.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/io/fileline.h \
+		../source/variables/hashtablevariable.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o array.o ../source/functions/array.cpp
+
+arrayunset.o: ../source/functions/arrayunset.cpp ../source/functions/arrayunset.h \
+		../source/functions/function.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/nodes/node.h \
+		../source/variables/variables.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/io/fileline.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o arrayunset.o ../source/functions/arrayunset.cpp
+
+count.o: ../source/functions/count.cpp ../source/functions/count.h \
+		../source/functions/function.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/nodes/node.h \
+		../source/variables/variables.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/io/fileline.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o count.o ../source/functions/count.cpp
+
+constantvariable.o: ../source/variables/constantvariable.cpp ../source/variables/constantvariable.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o constantvariable.o ../source/variables/constantvariable.cpp
+
+unusabletokens.o: ../source/tokens/unusabletokens.cpp ../source/tokens/unusabletokens.h \
+		../source/types/tokentypes.h \
+		../source/tokens/tokens.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o unusabletokens.o ../source/tokens/unusabletokens.cpp
+
+isarraytype.o: ../source/functions/isarraytype.cpp ../source/functions/isarraytype.h \
+		../source/functions/function.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/nodes/node.h \
+		../source/variables/variables.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/io/fileline.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isarraytype.o ../source/functions/isarraytype.cpp
+
+isdoubletype.o: ../source/functions/isdoubletype.cpp ../source/functions/isdoubletype.h \
+		../source/functions/function.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/nodes/node.h \
+		../source/variables/variables.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/io/fileline.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isdoubletype.o ../source/functions/isdoubletype.cpp
+
+isnumbertype.o: ../source/functions/isnumbertype.cpp ../source/functions/isnumbertype.h \
+		../source/functions/function.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/nodes/node.h \
+		../source/variables/variables.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/io/fileline.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isnumbertype.o ../source/functions/isnumbertype.cpp
+
+isinttype.o: ../source/functions/isinttype.cpp ../source/functions/isinttype.h \
+		../source/functions/function.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/nodes/node.h \
+		../source/variables/variables.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/io/fileline.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isinttype.o ../source/functions/isinttype.cpp
+
+isstringtype.o: ../source/functions/isstringtype.cpp ../source/functions/isstringtype.h \
+		../source/functions/function.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/nodes/node.h \
+		../source/variables/variables.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/io/fileline.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isstringtype.o ../source/functions/isstringtype.cpp
+
+isint.o: ../source/functions/isint.cpp ../source/functions/isint.h \
+		../source/functions/function.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/nodes/node.h \
+		../source/variables/variables.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/io/fileline.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isint.o ../source/functions/isint.cpp
+
+isdouble.o: ../source/functions/isdouble.cpp ../source/functions/isdouble.h \
+		../source/functions/function.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/nodes/node.h \
+		../source/variables/variables.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/io/fileline.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isdouble.o ../source/functions/isdouble.cpp
+
+todouble.o: ../source/functions/todouble.cpp ../source/functions/todouble.h \
+		../source/functions/function.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/nodes/node.h \
+		../source/variables/variables.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/io/fileline.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o todouble.o ../source/functions/todouble.cpp
+
+toint.o: ../source/functions/toint.cpp ../source/functions/toint.h \
+		../source/functions/function.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/nodes/node.h \
+		../source/variables/variables.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/io/fileline.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o toint.o ../source/functions/toint.cpp
 
 abs.o: ../source/functions/abs.cpp ../source/functions/abs.h \
 		../source/functions/function.h \
@@ -1441,6 +2415,31 @@ instrrev.o: ../source/functions/instrrev.cpp ../source/functions/instrrev.h \
 		../source/variables/scope.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o instrrev.o ../source/functions/instrrev.cpp
+
+isnumber.o: ../source/functions/isnumber.cpp ../source/functions/isnumber.h \
+		../source/functions/function.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/nodes/node.h \
+		../source/variables/variables.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/io/fileline.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isnumber.o ../source/functions/isnumber.cpp
 
 left.o: ../source/functions/left.cpp ../source/functions/left.h \
 		../source/functions/function.h \
@@ -2269,11 +3268,368 @@ year.o: ../source/functions/year.cpp ../source/functions/year.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o year.o ../source/functions/year.cpp
 
-fileline.o: ../source/io/fileline.cpp ../source/io/fileline.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fileline.o ../source/io/fileline.cpp
+parser.o: ../source/parser/parser.cpp ../source/parser/parser.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/tokens/tokens.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/nodes/nodefactory.h \
+		../source/nodes/equalnode.h \
+		../source/nodes/setvarnode.h \
+		../source/nodes/ifequalnode.h \
+		../source/nodes/ifnotequalnode.h \
+		../source/nodes/ifundernode.h \
+		../source/nodes/ifunderorequalnode.h \
+		../source/nodes/ifovernode.h \
+		../source/nodes/ifoverorequalnode.h \
+		../source/nodes/ifnode.h \
+		../source/nodes/whilenode.h \
+		../source/nodes/ifandnode.h \
+		../source/nodes/ifornode.h \
+		../source/nodes/bitwiseandnode.h \
+		../source/nodes/bitwiseornode.h \
+		../source/nodes/getvarnode.h \
+		../source/nodes/addconstnode.h \
+		../source/nodes/addvarnode.h \
+		../source/nodes/getfuncnode.h \
+		../source/functions/function.h \
+		../source/io/fileline.h \
+		../source/functions/functions.h \
+		../source/functions/functionlist.h \
+		../source/functions/print.h \
+		../source/functions/scan.h \
+		../source/functions/command.h \
+		../source/functions/not.h \
+		../source/functions/str.h \
+		../source/functions/asc.h \
+		../source/functions/cha.h \
+		../source/functions/instr.h \
+		../source/functions/instrrev.h \
+		../source/functions/tolower.h \
+		../source/functions/left.h \
+		../source/functions/len.h \
+		../source/functions/ltrim.h \
+		../source/functions/mid.h \
+		../source/functions/replace.h \
+		../source/functions/right.h \
+		../source/functions/rtrim.h \
+		../source/functions/space.h \
+		../source/functions/strcomp.h \
+		../source/functions/strreverse.h \
+		../source/functions/trim.h \
+		../source/functions/toupper.h \
+		../source/functions/weekday.h \
+		../source/functions/weekdayname.h \
+		../source/functions/year.h \
+		../source/functions/now.h \
+		../source/functions/month.h \
+		../source/functions/monthname.h \
+		../source/functions/dateformat.h \
+		../source/functions/fileread.h \
+		../source/io/io.h \
+		../source/functions/filewrite.h \
+		../source/functions/abs.h \
+		../source/functions/acos.h \
+		../source/functions/asin.h \
+		../source/functions/atan.h \
+		../source/functions/atan2.h \
+		../source/functions/ceil.h \
+		../source/functions/cos.h \
+		../source/functions/exp.h \
+		../source/functions/floor.h \
+		../source/functions/log.h \
+		../source/functions/max.h \
+		../source/functions/min.h \
+		../source/functions/pow.h \
+		../source/functions/sin.h \
+		../source/functions/random.h \
+		../source/functions/round.h \
+		../source/functions/sqrt.h \
+		../source/functions/tan.h \
+		../source/functions/emptyfunction.h \
+		../source/functions/array.h \
+		../source/variables/hashtablevariable.h \
+		../source/functions/arrayget.h \
+		../source/functions/arrayset.h \
+		../source/functions/arrayunset.h \
+		../source/functions/count.h \
+		../source/functions/isinttype.h \
+		../source/functions/isdoubletype.h \
+		../source/functions/isnumbertype.h \
+		../source/functions/isstringtype.h \
+		../source/functions/isarraytype.h \
+		../source/functions/isint.h \
+		../source/functions/isdouble.h \
+		../source/functions/isnumber.h \
+		../source/functions/toint.h \
+		../source/functions/todouble.h \
+		../source/nodes/numbernode.h \
+		../source/nodes/textnode.h \
+		../source/nodes/runnode.h \
+		../source/nodes/addnode.h \
+		../source/nodes/subnode.h \
+		../source/nodes/mulnode.h \
+		../source/nodes/divnode.h \
+		../source/nodes/modnode.h \
+		../source/nodes/unaryminusnode.h \
+		../source/nodes/unarynotnode.h \
+		../source/nodes/setreturnnode.h \
+		../source/nodes/bracketnode.h \
+		../source/nodes/incrementnode.h \
+		../source/nodes/decrementnode.h \
+		../source/nodes/semicolonnode.h \
+		../source/functions/customfunction.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o parser.o ../source/parser/parser.cpp
 
-io.o: ../source/io/io.cpp ../source/io/io.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o io.o ../source/io/io.cpp
+filetokenmanager.o: ../source/tokens/filetokenmanager.cpp ../source/tokens/filetokenmanager.h \
+		../source/io/fileline.h \
+		../source/tokens/tokenmanager.h \
+		../source/types/tokentypes.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o filetokenmanager.o ../source/tokens/filetokenmanager.cpp
+
+lineinfo.o: ../source/tokens/lineinfo.cpp ../source/tokens/lineinfo.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o lineinfo.o ../source/tokens/lineinfo.cpp
+
+scanner.o: ../source/tokens/scanner.cpp ../source/tokens/scanner.h \
+		../source/errors/debug.h \
+		../source/types/typedetector.h \
+		../source/types/tokentypes.h \
+		../source/tokens/tokens.h \
+		../source/tokens/token.h \
+		../source/tokens/lineinfo.h \
+		../source/tokens/tokenmanager.h \
+		../source/io/fileline.h \
+		../source/tokens/unusabletokens.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scanner.o ../source/tokens/scanner.cpp
+
+texttokenmanager.o: ../source/tokens/texttokenmanager.cpp ../source/tokens/texttokenmanager.h \
+		../source/tokens/tokenmanager.h \
+		../source/io/fileline.h \
+		../source/types/tokentypes.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o texttokenmanager.o ../source/tokens/texttokenmanager.cpp
+
+token.o: ../source/tokens/token.cpp ../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o token.o ../source/tokens/token.cpp
+
+tokens.o: ../source/tokens/tokens.cpp ../source/tokens/tokens.h \
+		../source/types/tokentypes.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tokens.o ../source/tokens/tokens.cpp
+
+isnumeric.o: ../source/types/isnumeric.cpp ../source/types/isnumeric.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isnumeric.o ../source/types/isnumeric.cpp
+
+main.o: ../source/main.cpp ../source/parser/parser.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/tokens/tokens.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/nodes/nodefactory.h \
+		../source/nodes/equalnode.h \
+		../source/nodes/setvarnode.h \
+		../source/nodes/ifequalnode.h \
+		../source/nodes/ifnotequalnode.h \
+		../source/nodes/ifundernode.h \
+		../source/nodes/ifunderorequalnode.h \
+		../source/nodes/ifovernode.h \
+		../source/nodes/ifoverorequalnode.h \
+		../source/nodes/ifnode.h \
+		../source/nodes/whilenode.h \
+		../source/nodes/ifandnode.h \
+		../source/nodes/ifornode.h \
+		../source/nodes/bitwiseandnode.h \
+		../source/nodes/bitwiseornode.h \
+		../source/nodes/getvarnode.h \
+		../source/nodes/addconstnode.h \
+		../source/nodes/addvarnode.h \
+		../source/nodes/getfuncnode.h \
+		../source/functions/function.h \
+		../source/io/fileline.h \
+		../source/functions/functions.h \
+		../source/functions/functionlist.h \
+		../source/functions/print.h \
+		../source/functions/scan.h \
+		../source/functions/command.h \
+		../source/functions/not.h \
+		../source/functions/str.h \
+		../source/functions/asc.h \
+		../source/functions/cha.h \
+		../source/functions/instr.h \
+		../source/functions/instrrev.h \
+		../source/functions/tolower.h \
+		../source/functions/left.h \
+		../source/functions/len.h \
+		../source/functions/ltrim.h \
+		../source/functions/mid.h \
+		../source/functions/replace.h \
+		../source/functions/right.h \
+		../source/functions/rtrim.h \
+		../source/functions/space.h \
+		../source/functions/strcomp.h \
+		../source/functions/strreverse.h \
+		../source/functions/trim.h \
+		../source/functions/toupper.h \
+		../source/functions/weekday.h \
+		../source/functions/weekdayname.h \
+		../source/functions/year.h \
+		../source/functions/now.h \
+		../source/functions/month.h \
+		../source/functions/monthname.h \
+		../source/functions/dateformat.h \
+		../source/functions/fileread.h \
+		../source/io/io.h \
+		../source/functions/filewrite.h \
+		../source/functions/abs.h \
+		../source/functions/acos.h \
+		../source/functions/asin.h \
+		../source/functions/atan.h \
+		../source/functions/atan2.h \
+		../source/functions/ceil.h \
+		../source/functions/cos.h \
+		../source/functions/exp.h \
+		../source/functions/floor.h \
+		../source/functions/log.h \
+		../source/functions/max.h \
+		../source/functions/min.h \
+		../source/functions/pow.h \
+		../source/functions/sin.h \
+		../source/functions/random.h \
+		../source/functions/round.h \
+		../source/functions/sqrt.h \
+		../source/functions/tan.h \
+		../source/functions/emptyfunction.h \
+		../source/functions/array.h \
+		../source/variables/hashtablevariable.h \
+		../source/functions/arrayget.h \
+		../source/functions/arrayset.h \
+		../source/functions/arrayunset.h \
+		../source/functions/count.h \
+		../source/functions/isinttype.h \
+		../source/functions/isdoubletype.h \
+		../source/functions/isnumbertype.h \
+		../source/functions/isstringtype.h \
+		../source/functions/isarraytype.h \
+		../source/functions/isint.h \
+		../source/functions/isdouble.h \
+		../source/functions/isnumber.h \
+		../source/functions/toint.h \
+		../source/functions/todouble.h \
+		../source/nodes/numbernode.h \
+		../source/nodes/textnode.h \
+		../source/nodes/runnode.h \
+		../source/nodes/addnode.h \
+		../source/nodes/subnode.h \
+		../source/nodes/mulnode.h \
+		../source/nodes/divnode.h \
+		../source/nodes/modnode.h \
+		../source/nodes/unaryminusnode.h \
+		../source/nodes/unarynotnode.h \
+		../source/nodes/setreturnnode.h \
+		../source/nodes/bracketnode.h \
+		../source/nodes/incrementnode.h \
+		../source/nodes/decrementnode.h \
+		../source/nodes/semicolonnode.h \
+		../source/functions/customfunction.h \
+		../source/tokens/scanner.h \
+		../source/tokens/tokenmanager.h \
+		../source/tokens/unusabletokens.h \
+		../source/tokens/filetokenmanager.h \
+		../source/huwinterpreter.h \
+		../source/tokens/texttokenmanager.h \
+		../source/nodes/huwcodenodefactory.h \
+		../source/nodes/nodefactoryfactory.h \
+		../source/nodes/js/jsnodefactory.h \
+		../source/nodes/js/jsequalnode.h \
+		../source/nodes/js/jsifequalnode.h \
+		../source/nodes/js/jsifnotequalnode.h \
+		../source/nodes/js/jsifundernode.h \
+		../source/nodes/js/jsifunderorequalnode.h \
+		../source/nodes/js/jsifovernode.h \
+		../source/nodes/js/jsifoverorequalnode.h \
+		../source/nodes/js/jsifnode.h \
+		../source/nodes/js/jswhilenode.h \
+		../source/nodes/js/jsifandnode.h \
+		../source/nodes/js/jsifornode.h \
+		../source/nodes/js/jsbitwiseandnode.h \
+		../source/nodes/js/jsbitwiseornode.h \
+		../source/nodes/js/jsgetvarnode.h \
+		../source/nodes/js/jssetvarnode.h \
+		../source/nodes/js/jsaddconstnode.h \
+		../source/nodes/js/jsaddvarnode.h \
+		../source/nodes/js/jsgetfuncnode.h \
+		../source/nodes/js/jsnumbernode.h \
+		../source/nodes/js/jstextnode.h \
+		../source/nodes/js/jsrunnode.h \
+		../source/nodes/js/jsaddnode.h \
+		../source/nodes/js/jssubnode.h \
+		../source/nodes/js/jsmulnode.h \
+		../source/nodes/js/jsdivnode.h \
+		../source/nodes/js/jsmodnode.h \
+		../source/nodes/js/jsunaryminusnode.h \
+		../source/nodes/js/jsunarynotnode.h \
+		../source/nodes/js/jssetreturnnode.h \
+		../source/nodes/js/jsbracketnode.h \
+		../source/nodes/js/jsincrementnode.h \
+		../source/nodes/js/jsdecrementnode.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../source/main.cpp
+
+addconstnode.o: ../source/nodes/addconstnode.cpp ../source/nodes/addconstnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o addconstnode.o ../source/nodes/addconstnode.cpp
 
 addnode.o: ../source/nodes/addnode.cpp ../source/nodes/addnode.h \
 		../source/nodes/node.h \
@@ -2298,7 +3654,7 @@ addnode.o: ../source/nodes/addnode.cpp ../source/nodes/addnode.h \
 		../source/variables/scope.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o addnode.o ../source/nodes/addnode.cpp
 
-bracketnode.o: ../source/nodes/bracketnode.cpp ../source/nodes/bracketnode.h \
+addvarnode.o: ../source/nodes/addvarnode.cpp ../source/nodes/addvarnode.h \
 		../source/nodes/node.h \
 		../source/errors/debug.h \
 		../source/errors/errors.h \
@@ -2319,9 +3675,9 @@ bracketnode.o: ../source/nodes/bracketnode.cpp ../source/nodes/bracketnode.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bracketnode.o ../source/nodes/bracketnode.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o addvarnode.o ../source/nodes/addvarnode.cpp
 
-divnode.o: ../source/nodes/divnode.cpp ../source/nodes/divnode.h \
+bitwiseandnode.o: ../source/nodes/bitwiseandnode.cpp ../source/nodes/bitwiseandnode.h \
 		../source/nodes/node.h \
 		../source/errors/debug.h \
 		../source/errors/errors.h \
@@ -2342,9 +3698,9 @@ divnode.o: ../source/nodes/divnode.cpp ../source/nodes/divnode.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o divnode.o ../source/nodes/divnode.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bitwiseandnode.o ../source/nodes/bitwiseandnode.cpp
 
-equalnode.o: ../source/nodes/equalnode.cpp ../source/nodes/equalnode.h \
+bitwiseornode.o: ../source/nodes/bitwiseornode.cpp ../source/nodes/bitwiseornode.h \
 		../source/nodes/node.h \
 		../source/errors/debug.h \
 		../source/errors/errors.h \
@@ -2364,9 +3720,8 @@ equalnode.o: ../source/nodes/equalnode.cpp ../source/nodes/equalnode.h \
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h \
-		../source/nodes/setvarnode.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o equalnode.o ../source/nodes/equalnode.cpp
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bitwiseornode.o ../source/nodes/bitwiseornode.cpp
 
 getfuncnode.o: ../source/nodes/getfuncnode.cpp ../source/nodes/getfuncnode.h \
 		../source/nodes/node.h \
@@ -2462,7 +3817,7 @@ getfuncnode.o: ../source/nodes/getfuncnode.cpp ../source/nodes/getfuncnode.h \
 		../source/functions/todouble.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o getfuncnode.o ../source/nodes/getfuncnode.cpp
 
-getvarnode.o: ../source/nodes/getvarnode.cpp ../source/nodes/getvarnode.h \
+equalnode.o: ../source/nodes/equalnode.cpp ../source/nodes/equalnode.h \
 		../source/nodes/node.h \
 		../source/errors/debug.h \
 		../source/errors/errors.h \
@@ -2482,10 +3837,11 @@ getvarnode.o: ../source/nodes/getvarnode.cpp ../source/nodes/getvarnode.h \
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o getvarnode.o ../source/nodes/getvarnode.cpp
+		../source/variables/scope.h \
+		../source/nodes/setvarnode.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o equalnode.o ../source/nodes/equalnode.cpp
 
-ifandnode.o: ../source/nodes/ifandnode.cpp ../source/nodes/ifandnode.h \
+divnode.o: ../source/nodes/divnode.cpp ../source/nodes/divnode.h \
 		../source/nodes/node.h \
 		../source/errors/debug.h \
 		../source/errors/errors.h \
@@ -2506,7 +3862,53 @@ ifandnode.o: ../source/nodes/ifandnode.cpp ../source/nodes/ifandnode.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ifandnode.o ../source/nodes/ifandnode.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o divnode.o ../source/nodes/divnode.cpp
+
+decrementnode.o: ../source/nodes/decrementnode.cpp ../source/nodes/decrementnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o decrementnode.o ../source/nodes/decrementnode.cpp
+
+bracketnode.o: ../source/nodes/bracketnode.cpp ../source/nodes/bracketnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bracketnode.o ../source/nodes/bracketnode.cpp
 
 ifequalnode.o: ../source/nodes/ifequalnode.cpp ../source/nodes/ifequalnode.h \
 		../source/nodes/node.h \
@@ -2553,6 +3955,180 @@ ifnode.o: ../source/nodes/ifnode.cpp ../source/nodes/ifnode.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ifnode.o ../source/nodes/ifnode.cpp
+
+ifandnode.o: ../source/nodes/ifandnode.cpp ../source/nodes/ifandnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ifandnode.o ../source/nodes/ifandnode.cpp
+
+huwcodenodefactory.o: ../source/nodes/huwcodenodefactory.cpp ../source/nodes/huwcodenodefactory.h \
+		../source/nodes/nodefactory.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/nodes/equalnode.h \
+		../source/nodes/setvarnode.h \
+		../source/nodes/ifequalnode.h \
+		../source/nodes/ifnotequalnode.h \
+		../source/nodes/ifundernode.h \
+		../source/nodes/ifunderorequalnode.h \
+		../source/nodes/ifovernode.h \
+		../source/nodes/ifoverorequalnode.h \
+		../source/nodes/ifnode.h \
+		../source/nodes/whilenode.h \
+		../source/nodes/ifandnode.h \
+		../source/nodes/ifornode.h \
+		../source/nodes/bitwiseandnode.h \
+		../source/nodes/bitwiseornode.h \
+		../source/nodes/getvarnode.h \
+		../source/nodes/addconstnode.h \
+		../source/nodes/addvarnode.h \
+		../source/nodes/getfuncnode.h \
+		../source/functions/function.h \
+		../source/io/fileline.h \
+		../source/functions/functions.h \
+		../source/functions/functionlist.h \
+		../source/functions/print.h \
+		../source/functions/scan.h \
+		../source/functions/command.h \
+		../source/functions/not.h \
+		../source/functions/str.h \
+		../source/functions/asc.h \
+		../source/functions/cha.h \
+		../source/functions/instr.h \
+		../source/functions/instrrev.h \
+		../source/functions/tolower.h \
+		../source/functions/left.h \
+		../source/functions/len.h \
+		../source/functions/ltrim.h \
+		../source/functions/mid.h \
+		../source/functions/replace.h \
+		../source/functions/right.h \
+		../source/functions/rtrim.h \
+		../source/functions/space.h \
+		../source/functions/strcomp.h \
+		../source/functions/strreverse.h \
+		../source/functions/trim.h \
+		../source/functions/toupper.h \
+		../source/functions/weekday.h \
+		../source/functions/weekdayname.h \
+		../source/functions/year.h \
+		../source/functions/now.h \
+		../source/functions/month.h \
+		../source/functions/monthname.h \
+		../source/functions/dateformat.h \
+		../source/functions/fileread.h \
+		../source/io/io.h \
+		../source/functions/filewrite.h \
+		../source/functions/abs.h \
+		../source/functions/acos.h \
+		../source/functions/asin.h \
+		../source/functions/atan.h \
+		../source/functions/atan2.h \
+		../source/functions/ceil.h \
+		../source/functions/cos.h \
+		../source/functions/exp.h \
+		../source/functions/floor.h \
+		../source/functions/log.h \
+		../source/functions/max.h \
+		../source/functions/min.h \
+		../source/functions/pow.h \
+		../source/functions/sin.h \
+		../source/functions/random.h \
+		../source/functions/round.h \
+		../source/functions/sqrt.h \
+		../source/functions/tan.h \
+		../source/functions/emptyfunction.h \
+		../source/functions/array.h \
+		../source/variables/hashtablevariable.h \
+		../source/functions/arrayget.h \
+		../source/functions/arrayset.h \
+		../source/functions/arrayunset.h \
+		../source/functions/count.h \
+		../source/functions/isinttype.h \
+		../source/functions/isdoubletype.h \
+		../source/functions/isnumbertype.h \
+		../source/functions/isstringtype.h \
+		../source/functions/isarraytype.h \
+		../source/functions/isint.h \
+		../source/functions/isdouble.h \
+		../source/functions/isnumber.h \
+		../source/functions/toint.h \
+		../source/functions/todouble.h \
+		../source/nodes/numbernode.h \
+		../source/nodes/textnode.h \
+		../source/nodes/runnode.h \
+		../source/nodes/addnode.h \
+		../source/nodes/subnode.h \
+		../source/nodes/mulnode.h \
+		../source/nodes/divnode.h \
+		../source/nodes/modnode.h \
+		../source/nodes/unaryminusnode.h \
+		../source/nodes/unarynotnode.h \
+		../source/nodes/setreturnnode.h \
+		../source/nodes/bracketnode.h \
+		../source/nodes/incrementnode.h \
+		../source/nodes/decrementnode.h \
+		../source/nodes/semicolonnode.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o huwcodenodefactory.o ../source/nodes/huwcodenodefactory.cpp
+
+getvarnode.o: ../source/nodes/getvarnode.cpp ../source/nodes/getvarnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o getvarnode.o ../source/nodes/getvarnode.cpp
 
 ifnotequalnode.o: ../source/nodes/ifnotequalnode.cpp ../source/nodes/ifnotequalnode.h \
 		../source/nodes/node.h \
@@ -2692,7 +4268,7 @@ ifunderorequalnode.o: ../source/nodes/ifunderorequalnode.cpp ../source/nodes/ifu
 		../source/variables/scope.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ifunderorequalnode.o ../source/nodes/ifunderorequalnode.cpp
 
-modnode.o: ../source/nodes/modnode.cpp ../source/nodes/modnode.h \
+numbernode.o: ../source/nodes/numbernode.cpp ../source/nodes/numbernode.h \
 		../source/nodes/node.h \
 		../source/errors/debug.h \
 		../source/errors/errors.h \
@@ -2713,7 +4289,7 @@ modnode.o: ../source/nodes/modnode.cpp ../source/nodes/modnode.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o modnode.o ../source/nodes/modnode.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o numbernode.o ../source/nodes/numbernode.cpp
 
 mulnode.o: ../source/nodes/mulnode.cpp ../source/nodes/mulnode.h \
 		../source/nodes/node.h \
@@ -2738,7 +4314,7 @@ mulnode.o: ../source/nodes/mulnode.cpp ../source/nodes/mulnode.h \
 		../source/variables/scope.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mulnode.o ../source/nodes/mulnode.cpp
 
-numbernode.o: ../source/nodes/numbernode.cpp ../source/nodes/numbernode.h \
+modnode.o: ../source/nodes/modnode.cpp ../source/nodes/modnode.h \
 		../source/nodes/node.h \
 		../source/errors/debug.h \
 		../source/errors/errors.h \
@@ -2759,7 +4335,30 @@ numbernode.o: ../source/nodes/numbernode.cpp ../source/nodes/numbernode.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o numbernode.o ../source/nodes/numbernode.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o modnode.o ../source/nodes/modnode.cpp
+
+incrementnode.o: ../source/nodes/incrementnode.cpp ../source/nodes/incrementnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o incrementnode.o ../source/nodes/incrementnode.cpp
 
 runnode.o: ../source/nodes/runnode.cpp ../source/nodes/runnode.h \
 		../source/nodes/node.h \
@@ -2783,6 +4382,29 @@ runnode.o: ../source/nodes/runnode.cpp ../source/nodes/runnode.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o runnode.o ../source/nodes/runnode.cpp
+
+setreturnnode.o: ../source/nodes/setreturnnode.cpp ../source/nodes/setreturnnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o setreturnnode.o ../source/nodes/setreturnnode.cpp
 
 setvarnode.o: ../source/nodes/setvarnode.cpp ../source/nodes/setvarnode.h \
 		../source/nodes/node.h \
@@ -2853,906 +4475,6 @@ textnode.o: ../source/nodes/textnode.cpp ../source/nodes/textnode.h \
 		../source/variables/scope.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o textnode.o ../source/nodes/textnode.cpp
 
-whilenode.o: ../source/nodes/whilenode.cpp ../source/nodes/whilenode.h \
-		../source/nodes/node.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/types/tokentypes.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/variables/variables.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o whilenode.o ../source/nodes/whilenode.cpp
-
-parser.o: ../source/parser/parser.cpp ../source/parser/parser.h \
-		../source/tokens/token.h \
-		../source/types/tokentypes.h \
-		../source/tokens/lineinfo.h \
-		../source/tokens/tokens.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/nodes/node.h \
-		../source/errors/debug.h \
-		../source/variables/variables.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h \
-		../source/nodes/ifnode.h \
-		../source/nodes/whilenode.h \
-		../source/nodes/equalnode.h \
-		../source/nodes/setvarnode.h \
-		../source/nodes/ifequalnode.h \
-		../source/nodes/ifnotequalnode.h \
-		../source/nodes/ifundernode.h \
-		../source/nodes/ifunderorequalnode.h \
-		../source/nodes/ifovernode.h \
-		../source/nodes/ifoverorequalnode.h \
-		../source/nodes/ifandnode.h \
-		../source/nodes/ifornode.h \
-		../source/nodes/bitwiseandnode.h \
-		../source/nodes/bitwiseornode.h \
-		../source/nodes/getvarnode.h \
-		../source/nodes/getfuncnode.h \
-		../source/functions/function.h \
-		../source/io/fileline.h \
-		../source/functions/functions.h \
-		../source/functions/functionlist.h \
-		../source/functions/print.h \
-		../source/functions/scan.h \
-		../source/functions/command.h \
-		../source/functions/not.h \
-		../source/functions/str.h \
-		../source/functions/asc.h \
-		../source/functions/cha.h \
-		../source/functions/instr.h \
-		../source/functions/instrrev.h \
-		../source/functions/tolower.h \
-		../source/functions/left.h \
-		../source/functions/len.h \
-		../source/functions/ltrim.h \
-		../source/functions/mid.h \
-		../source/functions/replace.h \
-		../source/functions/right.h \
-		../source/functions/rtrim.h \
-		../source/functions/space.h \
-		../source/functions/strcomp.h \
-		../source/functions/strreverse.h \
-		../source/functions/trim.h \
-		../source/functions/toupper.h \
-		../source/functions/weekday.h \
-		../source/functions/weekdayname.h \
-		../source/functions/year.h \
-		../source/functions/now.h \
-		../source/functions/month.h \
-		../source/functions/monthname.h \
-		../source/functions/dateformat.h \
-		../source/functions/fileread.h \
-		../source/io/io.h \
-		../source/functions/filewrite.h \
-		../source/functions/abs.h \
-		../source/functions/acos.h \
-		../source/functions/asin.h \
-		../source/functions/atan.h \
-		../source/functions/atan2.h \
-		../source/functions/ceil.h \
-		../source/functions/cos.h \
-		../source/functions/exp.h \
-		../source/functions/floor.h \
-		../source/functions/log.h \
-		../source/functions/max.h \
-		../source/functions/min.h \
-		../source/functions/pow.h \
-		../source/functions/sin.h \
-		../source/functions/random.h \
-		../source/functions/round.h \
-		../source/functions/sqrt.h \
-		../source/functions/tan.h \
-		../source/functions/emptyfunction.h \
-		../source/functions/array.h \
-		../source/variables/hashtablevariable.h \
-		../source/functions/arrayget.h \
-		../source/functions/arrayset.h \
-		../source/functions/arrayunset.h \
-		../source/functions/count.h \
-		../source/functions/isinttype.h \
-		../source/functions/isdoubletype.h \
-		../source/functions/isnumbertype.h \
-		../source/functions/isstringtype.h \
-		../source/functions/isarraytype.h \
-		../source/functions/isint.h \
-		../source/functions/isdouble.h \
-		../source/functions/isnumber.h \
-		../source/functions/toint.h \
-		../source/functions/todouble.h \
-		../source/nodes/numbernode.h \
-		../source/nodes/textnode.h \
-		../source/nodes/runnode.h \
-		../source/nodes/addnode.h \
-		../source/nodes/subnode.h \
-		../source/nodes/mulnode.h \
-		../source/nodes/divnode.h \
-		../source/nodes/modnode.h \
-		../source/nodes/unaryminusnode.h \
-		../source/nodes/unarynotnode.h \
-		../source/nodes/setreturnnode.h \
-		../source/nodes/bracketnode.h \
-		../source/nodes/incrementnode.h \
-		../source/nodes/decrementnode.h \
-		../source/functions/customfunction.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o parser.o ../source/parser/parser.cpp
-
-filetokenmanager.o: ../source/tokens/filetokenmanager.cpp ../source/tokens/filetokenmanager.h \
-		../source/io/fileline.h \
-		../source/tokens/tokenmanager.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o filetokenmanager.o ../source/tokens/filetokenmanager.cpp
-
-lineinfo.o: ../source/tokens/lineinfo.cpp ../source/tokens/lineinfo.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o lineinfo.o ../source/tokens/lineinfo.cpp
-
-scanner.o: ../source/tokens/scanner.cpp ../source/tokens/scanner.h \
-		../source/errors/debug.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/tokens/tokens.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/tokens/tokenmanager.h \
-		../source/io/fileline.h \
-		../source/tokens/unusabletokens.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scanner.o ../source/tokens/scanner.cpp
-
-texttokenmanager.o: ../source/tokens/texttokenmanager.cpp ../source/tokens/texttokenmanager.h \
-		../source/tokens/tokenmanager.h \
-		../source/io/fileline.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o texttokenmanager.o ../source/tokens/texttokenmanager.cpp
-
-token.o: ../source/tokens/token.cpp ../source/tokens/token.h \
-		../source/types/tokentypes.h \
-		../source/tokens/lineinfo.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o token.o ../source/tokens/token.cpp
-
-isnumeric.o: ../source/types/isnumeric.cpp ../source/types/isnumeric.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isnumeric.o ../source/types/isnumeric.cpp
-
-typedetector.o: ../source/types/typedetector.cpp ../source/types/typedetector.h \
-		../source/types/tokentypes.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o typedetector.o ../source/types/typedetector.cpp
-
-precision.o: ../source/variables/precision.cpp ../source/variables/precision.h \
-		../source/types/tokentypes.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o precision.o ../source/variables/precision.cpp
-
-scope.o: ../source/variables/scope.cpp ../source/variables/scope.h \
-		../source/nodes/node.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/types/tokentypes.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/variables/variables.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scope.o ../source/variables/scope.cpp
-
-variable.o: ../source/variables/variable.cpp ../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o variable.o ../source/variables/variable.cpp
-
-variables.o: ../source/variables/variables.cpp ../source/variables/variables.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/nodes/node.h \
-		../source/variables/scope.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o variables.o ../source/variables/variables.cpp
-
-variabletypefactory.o: ../source/variables/variabletypefactory.cpp ../source/variables/variabletypefactory.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/precision.h \
-		../source/variables/stringvariable.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o variabletypefactory.o ../source/variables/variabletypefactory.cpp
-
-huwinterpreter.o: ../source/huwinterpreter.cpp ../source/huwinterpreter.h \
-		../source/parser/parser.h \
-		../source/tokens/token.h \
-		../source/types/tokentypes.h \
-		../source/tokens/lineinfo.h \
-		../source/tokens/tokens.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/nodes/node.h \
-		../source/errors/debug.h \
-		../source/variables/variables.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h \
-		../source/nodes/ifnode.h \
-		../source/nodes/whilenode.h \
-		../source/nodes/equalnode.h \
-		../source/nodes/setvarnode.h \
-		../source/nodes/ifequalnode.h \
-		../source/nodes/ifnotequalnode.h \
-		../source/nodes/ifundernode.h \
-		../source/nodes/ifunderorequalnode.h \
-		../source/nodes/ifovernode.h \
-		../source/nodes/ifoverorequalnode.h \
-		../source/nodes/ifandnode.h \
-		../source/nodes/ifornode.h \
-		../source/nodes/bitwiseandnode.h \
-		../source/nodes/bitwiseornode.h \
-		../source/nodes/getvarnode.h \
-		../source/nodes/getfuncnode.h \
-		../source/functions/function.h \
-		../source/io/fileline.h \
-		../source/functions/functions.h \
-		../source/functions/functionlist.h \
-		../source/functions/print.h \
-		../source/functions/scan.h \
-		../source/functions/command.h \
-		../source/functions/not.h \
-		../source/functions/str.h \
-		../source/functions/asc.h \
-		../source/functions/cha.h \
-		../source/functions/instr.h \
-		../source/functions/instrrev.h \
-		../source/functions/tolower.h \
-		../source/functions/left.h \
-		../source/functions/len.h \
-		../source/functions/ltrim.h \
-		../source/functions/mid.h \
-		../source/functions/replace.h \
-		../source/functions/right.h \
-		../source/functions/rtrim.h \
-		../source/functions/space.h \
-		../source/functions/strcomp.h \
-		../source/functions/strreverse.h \
-		../source/functions/trim.h \
-		../source/functions/toupper.h \
-		../source/functions/weekday.h \
-		../source/functions/weekdayname.h \
-		../source/functions/year.h \
-		../source/functions/now.h \
-		../source/functions/month.h \
-		../source/functions/monthname.h \
-		../source/functions/dateformat.h \
-		../source/functions/fileread.h \
-		../source/io/io.h \
-		../source/functions/filewrite.h \
-		../source/functions/abs.h \
-		../source/functions/acos.h \
-		../source/functions/asin.h \
-		../source/functions/atan.h \
-		../source/functions/atan2.h \
-		../source/functions/ceil.h \
-		../source/functions/cos.h \
-		../source/functions/exp.h \
-		../source/functions/floor.h \
-		../source/functions/log.h \
-		../source/functions/max.h \
-		../source/functions/min.h \
-		../source/functions/pow.h \
-		../source/functions/sin.h \
-		../source/functions/random.h \
-		../source/functions/round.h \
-		../source/functions/sqrt.h \
-		../source/functions/tan.h \
-		../source/functions/emptyfunction.h \
-		../source/functions/array.h \
-		../source/variables/hashtablevariable.h \
-		../source/functions/arrayget.h \
-		../source/functions/arrayset.h \
-		../source/functions/arrayunset.h \
-		../source/functions/count.h \
-		../source/functions/isinttype.h \
-		../source/functions/isdoubletype.h \
-		../source/functions/isnumbertype.h \
-		../source/functions/isstringtype.h \
-		../source/functions/isarraytype.h \
-		../source/functions/isint.h \
-		../source/functions/isdouble.h \
-		../source/functions/isnumber.h \
-		../source/functions/toint.h \
-		../source/functions/todouble.h \
-		../source/nodes/numbernode.h \
-		../source/nodes/textnode.h \
-		../source/nodes/runnode.h \
-		../source/nodes/addnode.h \
-		../source/nodes/subnode.h \
-		../source/nodes/mulnode.h \
-		../source/nodes/divnode.h \
-		../source/nodes/modnode.h \
-		../source/nodes/unaryminusnode.h \
-		../source/nodes/unarynotnode.h \
-		../source/nodes/setreturnnode.h \
-		../source/nodes/bracketnode.h \
-		../source/nodes/incrementnode.h \
-		../source/nodes/decrementnode.h \
-		../source/functions/customfunction.h \
-		../source/tokens/scanner.h \
-		../source/tokens/tokenmanager.h \
-		../source/tokens/unusabletokens.h \
-		../source/tokens/filetokenmanager.h \
-		../source/tokens/texttokenmanager.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o huwinterpreter.o ../source/huwinterpreter.cpp
-
-main.o: ../source/main.cpp ../source/parser/parser.h \
-		../source/tokens/token.h \
-		../source/types/tokentypes.h \
-		../source/tokens/lineinfo.h \
-		../source/tokens/tokens.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/nodes/node.h \
-		../source/errors/debug.h \
-		../source/variables/variables.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h \
-		../source/nodes/ifnode.h \
-		../source/nodes/whilenode.h \
-		../source/nodes/equalnode.h \
-		../source/nodes/setvarnode.h \
-		../source/nodes/ifequalnode.h \
-		../source/nodes/ifnotequalnode.h \
-		../source/nodes/ifundernode.h \
-		../source/nodes/ifunderorequalnode.h \
-		../source/nodes/ifovernode.h \
-		../source/nodes/ifoverorequalnode.h \
-		../source/nodes/ifandnode.h \
-		../source/nodes/ifornode.h \
-		../source/nodes/bitwiseandnode.h \
-		../source/nodes/bitwiseornode.h \
-		../source/nodes/getvarnode.h \
-		../source/nodes/getfuncnode.h \
-		../source/functions/function.h \
-		../source/io/fileline.h \
-		../source/functions/functions.h \
-		../source/functions/functionlist.h \
-		../source/functions/print.h \
-		../source/functions/scan.h \
-		../source/functions/command.h \
-		../source/functions/not.h \
-		../source/functions/str.h \
-		../source/functions/asc.h \
-		../source/functions/cha.h \
-		../source/functions/instr.h \
-		../source/functions/instrrev.h \
-		../source/functions/tolower.h \
-		../source/functions/left.h \
-		../source/functions/len.h \
-		../source/functions/ltrim.h \
-		../source/functions/mid.h \
-		../source/functions/replace.h \
-		../source/functions/right.h \
-		../source/functions/rtrim.h \
-		../source/functions/space.h \
-		../source/functions/strcomp.h \
-		../source/functions/strreverse.h \
-		../source/functions/trim.h \
-		../source/functions/toupper.h \
-		../source/functions/weekday.h \
-		../source/functions/weekdayname.h \
-		../source/functions/year.h \
-		../source/functions/now.h \
-		../source/functions/month.h \
-		../source/functions/monthname.h \
-		../source/functions/dateformat.h \
-		../source/functions/fileread.h \
-		../source/io/io.h \
-		../source/functions/filewrite.h \
-		../source/functions/abs.h \
-		../source/functions/acos.h \
-		../source/functions/asin.h \
-		../source/functions/atan.h \
-		../source/functions/atan2.h \
-		../source/functions/ceil.h \
-		../source/functions/cos.h \
-		../source/functions/exp.h \
-		../source/functions/floor.h \
-		../source/functions/log.h \
-		../source/functions/max.h \
-		../source/functions/min.h \
-		../source/functions/pow.h \
-		../source/functions/sin.h \
-		../source/functions/random.h \
-		../source/functions/round.h \
-		../source/functions/sqrt.h \
-		../source/functions/tan.h \
-		../source/functions/emptyfunction.h \
-		../source/functions/array.h \
-		../source/variables/hashtablevariable.h \
-		../source/functions/arrayget.h \
-		../source/functions/arrayset.h \
-		../source/functions/arrayunset.h \
-		../source/functions/count.h \
-		../source/functions/isinttype.h \
-		../source/functions/isdoubletype.h \
-		../source/functions/isnumbertype.h \
-		../source/functions/isstringtype.h \
-		../source/functions/isarraytype.h \
-		../source/functions/isint.h \
-		../source/functions/isdouble.h \
-		../source/functions/isnumber.h \
-		../source/functions/toint.h \
-		../source/functions/todouble.h \
-		../source/nodes/numbernode.h \
-		../source/nodes/textnode.h \
-		../source/nodes/runnode.h \
-		../source/nodes/addnode.h \
-		../source/nodes/subnode.h \
-		../source/nodes/mulnode.h \
-		../source/nodes/divnode.h \
-		../source/nodes/modnode.h \
-		../source/nodes/unaryminusnode.h \
-		../source/nodes/unarynotnode.h \
-		../source/nodes/setreturnnode.h \
-		../source/nodes/bracketnode.h \
-		../source/nodes/incrementnode.h \
-		../source/nodes/decrementnode.h \
-		../source/functions/customfunction.h \
-		../source/tokens/scanner.h \
-		../source/tokens/tokenmanager.h \
-		../source/tokens/unusabletokens.h \
-		../source/tokens/filetokenmanager.h \
-		../source/huwinterpreter.h \
-		../source/tokens/texttokenmanager.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../source/main.cpp
-
-customfunction.o: ../source/functions/customfunction.cpp ../source/functions/customfunction.h \
-		../source/functions/function.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/nodes/node.h \
-		../source/variables/variables.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h \
-		../source/io/fileline.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o customfunction.o ../source/functions/customfunction.cpp
-
-emptyfunction.o: ../source/functions/emptyfunction.cpp ../source/functions/emptyfunction.h \
-		../source/functions/function.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/nodes/node.h \
-		../source/variables/variables.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h \
-		../source/io/fileline.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o emptyfunction.o ../source/functions/emptyfunction.cpp
-
-setreturnnode.o: ../source/nodes/setreturnnode.cpp ../source/nodes/setreturnnode.h \
-		../source/nodes/node.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/types/tokentypes.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/variables/variables.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o setreturnnode.o ../source/nodes/setreturnnode.cpp
-
-incrementnode.o: ../source/nodes/incrementnode.cpp ../source/nodes/incrementnode.h \
-		../source/nodes/node.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/types/tokentypes.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/variables/variables.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o incrementnode.o ../source/nodes/incrementnode.cpp
-
-decrementnode.o: ../source/nodes/decrementnode.cpp ../source/nodes/decrementnode.h \
-		../source/nodes/node.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/types/tokentypes.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/variables/variables.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o decrementnode.o ../source/nodes/decrementnode.cpp
-
-doublevariable.o: ../source/variables/doublevariable.cpp ../source/variables/doublevariable.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o doublevariable.o ../source/variables/doublevariable.cpp
-
-integervariable.o: ../source/variables/integervariable.cpp ../source/variables/integervariable.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/variables/numbervariable.h \
-		../source/variables/doublevariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o integervariable.o ../source/variables/integervariable.cpp
-
-numbervariable.o: ../source/variables/numbervariable.cpp ../source/variables/numbervariable.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/variables/doublevariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o numbervariable.o ../source/variables/numbervariable.cpp
-
-stringvariable.o: ../source/variables/stringvariable.cpp ../source/variables/stringvariable.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/precision.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stringvariable.o ../source/variables/stringvariable.cpp
-
-hashtablevariable.o: ../source/variables/hashtablevariable.cpp ../source/variables/hashtablevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/variables/doublevariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o hashtablevariable.o ../source/variables/hashtablevariable.cpp
-
-arrayget.o: ../source/functions/arrayget.cpp ../source/functions/arrayget.h \
-		../source/functions/function.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/nodes/node.h \
-		../source/variables/variables.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h \
-		../source/io/fileline.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o arrayget.o ../source/functions/arrayget.cpp
-
-arrayset.o: ../source/functions/arrayset.cpp ../source/functions/arrayset.h \
-		../source/functions/function.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/nodes/node.h \
-		../source/variables/variables.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h \
-		../source/io/fileline.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o arrayset.o ../source/functions/arrayset.cpp
-
-array.o: ../source/functions/array.cpp ../source/functions/array.h \
-		../source/functions/function.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/nodes/node.h \
-		../source/variables/variables.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h \
-		../source/io/fileline.h \
-		../source/variables/hashtablevariable.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o array.o ../source/functions/array.cpp
-
-arrayunset.o: ../source/functions/arrayunset.cpp ../source/functions/arrayunset.h \
-		../source/functions/function.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/nodes/node.h \
-		../source/variables/variables.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h \
-		../source/io/fileline.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o arrayunset.o ../source/functions/arrayunset.cpp
-
-count.o: ../source/functions/count.cpp ../source/functions/count.h \
-		../source/functions/function.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/nodes/node.h \
-		../source/variables/variables.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h \
-		../source/io/fileline.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o count.o ../source/functions/count.cpp
-
-constantvariable.o: ../source/variables/constantvariable.cpp ../source/variables/constantvariable.h \
-		../source/nodes/node.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/types/tokentypes.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/variables/variables.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/scope.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o constantvariable.o ../source/variables/constantvariable.cpp
-
-unusabletokens.o: ../source/tokens/unusabletokens.cpp ../source/tokens/unusabletokens.h \
-		../source/types/tokentypes.h \
-		../source/tokens/tokens.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o unusabletokens.o ../source/tokens/unusabletokens.cpp
-
 unaryminusnode.o: ../source/nodes/unaryminusnode.cpp ../source/nodes/unaryminusnode.h \
 		../source/nodes/node.h \
 		../source/errors/debug.h \
@@ -3775,6 +4497,29 @@ unaryminusnode.o: ../source/nodes/unaryminusnode.cpp ../source/nodes/unaryminusn
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o unaryminusnode.o ../source/nodes/unaryminusnode.cpp
+
+whilenode.o: ../source/nodes/whilenode.cpp ../source/nodes/whilenode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o whilenode.o ../source/nodes/whilenode.cpp
 
 unarynotnode.o: ../source/nodes/unarynotnode.cpp ../source/nodes/unarynotnode.h \
 		../source/nodes/node.h \
@@ -3799,11 +4544,8 @@ unarynotnode.o: ../source/nodes/unarynotnode.cpp ../source/nodes/unarynotnode.h 
 		../source/variables/scope.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o unarynotnode.o ../source/nodes/unarynotnode.cpp
 
-tokens.o: ../source/tokens/tokens.cpp ../source/tokens/tokens.h \
-		../source/types/tokentypes.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tokens.o ../source/tokens/tokens.cpp
-
-bitwiseandnode.o: ../source/nodes/bitwiseandnode.cpp ../source/nodes/bitwiseandnode.h \
+jsaddconstnode.o: ../source/nodes/js/jsaddconstnode.cpp ../source/nodes/js/jsaddconstnode.h \
+		../source/nodes/addconstnode.h \
 		../source/nodes/node.h \
 		../source/errors/debug.h \
 		../source/errors/errors.h \
@@ -3824,9 +4566,10 @@ bitwiseandnode.o: ../source/nodes/bitwiseandnode.cpp ../source/nodes/bitwiseandn
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bitwiseandnode.o ../source/nodes/bitwiseandnode.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsaddconstnode.o ../source/nodes/js/jsaddconstnode.cpp
 
-bitwiseornode.o: ../source/nodes/bitwiseornode.cpp ../source/nodes/bitwiseornode.h \
+jsaddnode.o: ../source/nodes/js/jsaddnode.cpp ../source/nodes/js/jsaddnode.h \
+		../source/nodes/addnode.h \
 		../source/nodes/node.h \
 		../source/errors/debug.h \
 		../source/errors/errors.h \
@@ -3847,259 +4590,10 @@ bitwiseornode.o: ../source/nodes/bitwiseornode.cpp ../source/nodes/bitwiseornode
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bitwiseornode.o ../source/nodes/bitwiseornode.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsaddnode.o ../source/nodes/js/jsaddnode.cpp
 
-isarraytype.o: ../source/functions/isarraytype.cpp ../source/functions/isarraytype.h \
-		../source/functions/function.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/nodes/node.h \
-		../source/variables/variables.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h \
-		../source/io/fileline.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isarraytype.o ../source/functions/isarraytype.cpp
-
-isdoubletype.o: ../source/functions/isdoubletype.cpp ../source/functions/isdoubletype.h \
-		../source/functions/function.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/nodes/node.h \
-		../source/variables/variables.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h \
-		../source/io/fileline.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isdoubletype.o ../source/functions/isdoubletype.cpp
-
-isnumbertype.o: ../source/functions/isnumbertype.cpp ../source/functions/isnumbertype.h \
-		../source/functions/function.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/nodes/node.h \
-		../source/variables/variables.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h \
-		../source/io/fileline.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isnumbertype.o ../source/functions/isnumbertype.cpp
-
-isinttype.o: ../source/functions/isinttype.cpp ../source/functions/isinttype.h \
-		../source/functions/function.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/nodes/node.h \
-		../source/variables/variables.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h \
-		../source/io/fileline.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isinttype.o ../source/functions/isinttype.cpp
-
-isstringtype.o: ../source/functions/isstringtype.cpp ../source/functions/isstringtype.h \
-		../source/functions/function.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/nodes/node.h \
-		../source/variables/variables.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h \
-		../source/io/fileline.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isstringtype.o ../source/functions/isstringtype.cpp
-
-isint.o: ../source/functions/isint.cpp ../source/functions/isint.h \
-		../source/functions/function.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/nodes/node.h \
-		../source/variables/variables.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h \
-		../source/io/fileline.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isint.o ../source/functions/isint.cpp
-
-isdouble.o: ../source/functions/isdouble.cpp ../source/functions/isdouble.h \
-		../source/functions/function.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/nodes/node.h \
-		../source/variables/variables.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h \
-		../source/io/fileline.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isdouble.o ../source/functions/isdouble.cpp
-
-isnumber.o: ../source/functions/isnumber.cpp ../source/functions/isnumber.h \
-		../source/functions/function.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/nodes/node.h \
-		../source/variables/variables.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h \
-		../source/io/fileline.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isnumber.o ../source/functions/isnumber.cpp
-
-todouble.o: ../source/functions/todouble.cpp ../source/functions/todouble.h \
-		../source/functions/function.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/nodes/node.h \
-		../source/variables/variables.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h \
-		../source/io/fileline.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o todouble.o ../source/functions/todouble.cpp
-
-toint.o: ../source/functions/toint.cpp ../source/functions/toint.h \
-		../source/functions/function.h \
-		../source/variables/variable.h \
-		../source/types/typedetector.h \
-		../source/types/tokentypes.h \
-		../source/errors/debug.h \
-		../source/errors/errors.h \
-		../source/errors/error.h \
-		../source/tokens/token.h \
-		../source/tokens/lineinfo.h \
-		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h \
-		../source/nodes/node.h \
-		../source/variables/variables.h \
-		../source/variables/doublevariable.h \
-		../source/variables/numbervariable.h \
-		../source/variables/integervariable.h \
-		../source/variables/variabletypefactory.h \
-		../source/variables/stringvariable.h \
-		../source/variables/precision.h \
-		../source/variables/constantvariable.h \
-		../source/variables/scope.h \
-		../source/io/fileline.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o toint.o ../source/functions/toint.cpp
-
-addconstnode.o: ../source/nodes/addconstnode.cpp ../source/nodes/addconstnode.h \
+jsaddvarnode.o: ../source/nodes/js/jsaddvarnode.cpp ../source/nodes/js/jsaddvarnode.h \
+		../source/nodes/addvarnode.h \
 		../source/nodes/node.h \
 		../source/errors/debug.h \
 		../source/errors/errors.h \
@@ -4120,9 +4614,10 @@ addconstnode.o: ../source/nodes/addconstnode.cpp ../source/nodes/addconstnode.h 
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o addconstnode.o ../source/nodes/addconstnode.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsaddvarnode.o ../source/nodes/js/jsaddvarnode.cpp
 
-addvarnode.o: ../source/nodes/addvarnode.cpp ../source/nodes/addvarnode.h \
+jsbitwiseandnode.o: ../source/nodes/js/jsbitwiseandnode.cpp ../source/nodes/js/jsbitwiseandnode.h \
+		../source/nodes/bitwiseandnode.h \
 		../source/nodes/node.h \
 		../source/errors/debug.h \
 		../source/errors/errors.h \
@@ -4143,7 +4638,1120 @@ addvarnode.o: ../source/nodes/addvarnode.cpp ../source/nodes/addvarnode.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o addvarnode.o ../source/nodes/addvarnode.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsbitwiseandnode.o ../source/nodes/js/jsbitwiseandnode.cpp
+
+jsbitwiseornode.o: ../source/nodes/js/jsbitwiseornode.cpp ../source/nodes/js/jsbitwiseornode.h \
+		../source/nodes/bitwiseornode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsbitwiseornode.o ../source/nodes/js/jsbitwiseornode.cpp
+
+jsbracketnode.o: ../source/nodes/js/jsbracketnode.cpp ../source/nodes/js/jsbracketnode.h \
+		../source/nodes/bracketnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsbracketnode.o ../source/nodes/js/jsbracketnode.cpp
+
+jsdecrementnode.o: ../source/nodes/js/jsdecrementnode.cpp ../source/nodes/js/jsdecrementnode.h \
+		../source/nodes/decrementnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsdecrementnode.o ../source/nodes/js/jsdecrementnode.cpp
+
+jsdivnode.o: ../source/nodes/js/jsdivnode.cpp ../source/nodes/js/jsdivnode.h \
+		../source/nodes/divnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsdivnode.o ../source/nodes/js/jsdivnode.cpp
+
+jsequalnode.o: ../source/nodes/js/jsequalnode.cpp ../source/nodes/js/jsequalnode.h \
+		../source/nodes/equalnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/nodes/setvarnode.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsequalnode.o ../source/nodes/js/jsequalnode.cpp
+
+jsgetfuncnode.o: ../source/nodes/js/jsgetfuncnode.cpp ../source/nodes/js/jsgetfuncnode.h \
+		../source/nodes/getfuncnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/functions/function.h \
+		../source/io/fileline.h \
+		../source/functions/functions.h \
+		../source/functions/functionlist.h \
+		../source/functions/print.h \
+		../source/functions/scan.h \
+		../source/functions/command.h \
+		../source/functions/not.h \
+		../source/functions/str.h \
+		../source/functions/asc.h \
+		../source/functions/cha.h \
+		../source/functions/instr.h \
+		../source/functions/instrrev.h \
+		../source/functions/tolower.h \
+		../source/functions/left.h \
+		../source/functions/len.h \
+		../source/functions/ltrim.h \
+		../source/functions/mid.h \
+		../source/functions/replace.h \
+		../source/functions/right.h \
+		../source/functions/rtrim.h \
+		../source/functions/space.h \
+		../source/functions/strcomp.h \
+		../source/functions/strreverse.h \
+		../source/functions/trim.h \
+		../source/functions/toupper.h \
+		../source/functions/weekday.h \
+		../source/functions/weekdayname.h \
+		../source/functions/year.h \
+		../source/functions/now.h \
+		../source/functions/month.h \
+		../source/functions/monthname.h \
+		../source/functions/dateformat.h \
+		../source/functions/fileread.h \
+		../source/io/io.h \
+		../source/functions/filewrite.h \
+		../source/functions/abs.h \
+		../source/functions/acos.h \
+		../source/functions/asin.h \
+		../source/functions/atan.h \
+		../source/functions/atan2.h \
+		../source/functions/ceil.h \
+		../source/functions/cos.h \
+		../source/functions/exp.h \
+		../source/functions/floor.h \
+		../source/functions/log.h \
+		../source/functions/max.h \
+		../source/functions/min.h \
+		../source/functions/pow.h \
+		../source/functions/sin.h \
+		../source/functions/random.h \
+		../source/functions/round.h \
+		../source/functions/sqrt.h \
+		../source/functions/tan.h \
+		../source/functions/emptyfunction.h \
+		../source/functions/array.h \
+		../source/variables/hashtablevariable.h \
+		../source/functions/arrayget.h \
+		../source/functions/arrayset.h \
+		../source/functions/arrayunset.h \
+		../source/functions/count.h \
+		../source/functions/isinttype.h \
+		../source/functions/isdoubletype.h \
+		../source/functions/isnumbertype.h \
+		../source/functions/isstringtype.h \
+		../source/functions/isarraytype.h \
+		../source/functions/isint.h \
+		../source/functions/isdouble.h \
+		../source/functions/isnumber.h \
+		../source/functions/toint.h \
+		../source/functions/todouble.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsgetfuncnode.o ../source/nodes/js/jsgetfuncnode.cpp
+
+jsgetvarnode.o: ../source/nodes/js/jsgetvarnode.cpp ../source/nodes/js/jsgetvarnode.h \
+		../source/nodes/getvarnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsgetvarnode.o ../source/nodes/js/jsgetvarnode.cpp
+
+jsifandnode.o: ../source/nodes/js/jsifandnode.cpp ../source/nodes/js/jsifandnode.h \
+		../source/nodes/ifandnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsifandnode.o ../source/nodes/js/jsifandnode.cpp
+
+jsifequalnode.o: ../source/nodes/js/jsifequalnode.cpp ../source/nodes/js/jsifequalnode.h \
+		../source/nodes/ifequalnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsifequalnode.o ../source/nodes/js/jsifequalnode.cpp
+
+jsifnode.o: ../source/nodes/js/jsifnode.cpp ../source/nodes/js/jsifnode.h \
+		../source/nodes/ifnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsifnode.o ../source/nodes/js/jsifnode.cpp
+
+jsifnotequalnode.o: ../source/nodes/js/jsifnotequalnode.cpp ../source/nodes/js/jsifnotequalnode.h \
+		../source/nodes/ifnotequalnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsifnotequalnode.o ../source/nodes/js/jsifnotequalnode.cpp
+
+jsifornode.o: ../source/nodes/js/jsifornode.cpp ../source/nodes/js/jsifornode.h \
+		../source/nodes/ifornode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsifornode.o ../source/nodes/js/jsifornode.cpp
+
+jsifovernode.o: ../source/nodes/js/jsifovernode.cpp ../source/nodes/js/jsifovernode.h \
+		../source/nodes/ifovernode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsifovernode.o ../source/nodes/js/jsifovernode.cpp
+
+jsifoverorequalnod.o: ../source/nodes/js/jsifoverorequalnod.cpp ../source/nodes/js/jsifoverorequalnode.h \
+		../source/nodes/ifoverorequalnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsifoverorequalnod.o ../source/nodes/js/jsifoverorequalnod.cpp
+
+jsifundernode.o: ../source/nodes/js/jsifundernode.cpp ../source/nodes/js/jsifundernode.h \
+		../source/nodes/ifundernode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsifundernode.o ../source/nodes/js/jsifundernode.cpp
+
+jsifunderorequalnode.o: ../source/nodes/js/jsifunderorequalnode.cpp ../source/nodes/js/jsifunderorequalnode.h \
+		../source/nodes/ifunderorequalnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsifunderorequalnode.o ../source/nodes/js/jsifunderorequalnode.cpp
+
+jsincrementnode.o: ../source/nodes/js/jsincrementnode.cpp ../source/nodes/js/jsincrementnode.h \
+		../source/nodes/incrementnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsincrementnode.o ../source/nodes/js/jsincrementnode.cpp
+
+jsmodnode.o: ../source/nodes/js/jsmodnode.cpp ../source/nodes/js/jsmodnode.h \
+		../source/nodes/modnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsmodnode.o ../source/nodes/js/jsmodnode.cpp
+
+jsmulnode.o: ../source/nodes/js/jsmulnode.cpp ../source/nodes/js/jsmulnode.h \
+		../source/nodes/mulnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsmulnode.o ../source/nodes/js/jsmulnode.cpp
+
+jsnodefactory.o: ../source/nodes/js/jsnodefactory.cpp ../source/nodes/js/jsnodefactory.h \
+		../source/nodes/nodefactory.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/nodes/equalnode.h \
+		../source/nodes/setvarnode.h \
+		../source/nodes/ifequalnode.h \
+		../source/nodes/ifnotequalnode.h \
+		../source/nodes/ifundernode.h \
+		../source/nodes/ifunderorequalnode.h \
+		../source/nodes/ifovernode.h \
+		../source/nodes/ifoverorequalnode.h \
+		../source/nodes/ifnode.h \
+		../source/nodes/whilenode.h \
+		../source/nodes/ifandnode.h \
+		../source/nodes/ifornode.h \
+		../source/nodes/bitwiseandnode.h \
+		../source/nodes/bitwiseornode.h \
+		../source/nodes/getvarnode.h \
+		../source/nodes/addconstnode.h \
+		../source/nodes/addvarnode.h \
+		../source/nodes/getfuncnode.h \
+		../source/functions/function.h \
+		../source/io/fileline.h \
+		../source/functions/functions.h \
+		../source/functions/functionlist.h \
+		../source/functions/print.h \
+		../source/functions/scan.h \
+		../source/functions/command.h \
+		../source/functions/not.h \
+		../source/functions/str.h \
+		../source/functions/asc.h \
+		../source/functions/cha.h \
+		../source/functions/instr.h \
+		../source/functions/instrrev.h \
+		../source/functions/tolower.h \
+		../source/functions/left.h \
+		../source/functions/len.h \
+		../source/functions/ltrim.h \
+		../source/functions/mid.h \
+		../source/functions/replace.h \
+		../source/functions/right.h \
+		../source/functions/rtrim.h \
+		../source/functions/space.h \
+		../source/functions/strcomp.h \
+		../source/functions/strreverse.h \
+		../source/functions/trim.h \
+		../source/functions/toupper.h \
+		../source/functions/weekday.h \
+		../source/functions/weekdayname.h \
+		../source/functions/year.h \
+		../source/functions/now.h \
+		../source/functions/month.h \
+		../source/functions/monthname.h \
+		../source/functions/dateformat.h \
+		../source/functions/fileread.h \
+		../source/io/io.h \
+		../source/functions/filewrite.h \
+		../source/functions/abs.h \
+		../source/functions/acos.h \
+		../source/functions/asin.h \
+		../source/functions/atan.h \
+		../source/functions/atan2.h \
+		../source/functions/ceil.h \
+		../source/functions/cos.h \
+		../source/functions/exp.h \
+		../source/functions/floor.h \
+		../source/functions/log.h \
+		../source/functions/max.h \
+		../source/functions/min.h \
+		../source/functions/pow.h \
+		../source/functions/sin.h \
+		../source/functions/random.h \
+		../source/functions/round.h \
+		../source/functions/sqrt.h \
+		../source/functions/tan.h \
+		../source/functions/emptyfunction.h \
+		../source/functions/array.h \
+		../source/variables/hashtablevariable.h \
+		../source/functions/arrayget.h \
+		../source/functions/arrayset.h \
+		../source/functions/arrayunset.h \
+		../source/functions/count.h \
+		../source/functions/isinttype.h \
+		../source/functions/isdoubletype.h \
+		../source/functions/isnumbertype.h \
+		../source/functions/isstringtype.h \
+		../source/functions/isarraytype.h \
+		../source/functions/isint.h \
+		../source/functions/isdouble.h \
+		../source/functions/isnumber.h \
+		../source/functions/toint.h \
+		../source/functions/todouble.h \
+		../source/nodes/numbernode.h \
+		../source/nodes/textnode.h \
+		../source/nodes/runnode.h \
+		../source/nodes/addnode.h \
+		../source/nodes/subnode.h \
+		../source/nodes/mulnode.h \
+		../source/nodes/divnode.h \
+		../source/nodes/modnode.h \
+		../source/nodes/unaryminusnode.h \
+		../source/nodes/unarynotnode.h \
+		../source/nodes/setreturnnode.h \
+		../source/nodes/bracketnode.h \
+		../source/nodes/incrementnode.h \
+		../source/nodes/decrementnode.h \
+		../source/nodes/semicolonnode.h \
+		../source/nodes/js/jsequalnode.h \
+		../source/nodes/js/jsifequalnode.h \
+		../source/nodes/js/jsifnotequalnode.h \
+		../source/nodes/js/jsifundernode.h \
+		../source/nodes/js/jsifunderorequalnode.h \
+		../source/nodes/js/jsifovernode.h \
+		../source/nodes/js/jsifoverorequalnode.h \
+		../source/nodes/js/jsifnode.h \
+		../source/nodes/js/jswhilenode.h \
+		../source/nodes/js/jsifandnode.h \
+		../source/nodes/js/jsifornode.h \
+		../source/nodes/js/jsbitwiseandnode.h \
+		../source/nodes/js/jsbitwiseornode.h \
+		../source/nodes/js/jsgetvarnode.h \
+		../source/nodes/js/jssetvarnode.h \
+		../source/nodes/js/jsaddconstnode.h \
+		../source/nodes/js/jsaddvarnode.h \
+		../source/nodes/js/jsgetfuncnode.h \
+		../source/nodes/js/jsnumbernode.h \
+		../source/nodes/js/jstextnode.h \
+		../source/nodes/js/jsrunnode.h \
+		../source/nodes/js/jsaddnode.h \
+		../source/nodes/js/jssubnode.h \
+		../source/nodes/js/jsmulnode.h \
+		../source/nodes/js/jsdivnode.h \
+		../source/nodes/js/jsmodnode.h \
+		../source/nodes/js/jsunaryminusnode.h \
+		../source/nodes/js/jsunarynotnode.h \
+		../source/nodes/js/jssetreturnnode.h \
+		../source/nodes/js/jsbracketnode.h \
+		../source/nodes/js/jsincrementnode.h \
+		../source/nodes/js/jsdecrementnode.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsnodefactory.o ../source/nodes/js/jsnodefactory.cpp
+
+jsnumbernode.o: ../source/nodes/js/jsnumbernode.cpp ../source/nodes/js/jsnumbernode.h \
+		../source/nodes/numbernode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsnumbernode.o ../source/nodes/js/jsnumbernode.cpp
+
+jsrunnode.o: ../source/nodes/js/jsrunnode.cpp ../source/nodes/js/jsrunnode.h \
+		../source/nodes/runnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsrunnode.o ../source/nodes/js/jsrunnode.cpp
+
+jssetreturnnode.o: ../source/nodes/js/jssetreturnnode.cpp ../source/nodes/js/jssetreturnnode.h \
+		../source/nodes/setreturnnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jssetreturnnode.o ../source/nodes/js/jssetreturnnode.cpp
+
+jssetvarnode.o: ../source/nodes/js/jssetvarnode.cpp ../source/nodes/js/jssetvarnode.h \
+		../source/nodes/setvarnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jssetvarnode.o ../source/nodes/js/jssetvarnode.cpp
+
+jssubnode.o: ../source/nodes/js/jssubnode.cpp ../source/nodes/js/jssubnode.h \
+		../source/nodes/subnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jssubnode.o ../source/nodes/js/jssubnode.cpp
+
+jstextnode.o: ../source/nodes/js/jstextnode.cpp ../source/nodes/js/jstextnode.h \
+		../source/nodes/textnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jstextnode.o ../source/nodes/js/jstextnode.cpp
+
+jsunaryminusnode.o: ../source/nodes/js/jsunaryminusnode.cpp ../source/nodes/js/jsunaryminusnode.h \
+		../source/nodes/unaryminusnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsunaryminusnode.o ../source/nodes/js/jsunaryminusnode.cpp
+
+jsunarynotnode.o: ../source/nodes/js/jsunarynotnode.cpp ../source/nodes/js/jsunarynotnode.h \
+		../source/nodes/unarynotnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsunarynotnode.o ../source/nodes/js/jsunarynotnode.cpp
+
+jswhilenode.o: ../source/nodes/js/jswhilenode.cpp ../source/nodes/js/jswhilenode.h \
+		../source/nodes/whilenode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jswhilenode.o ../source/nodes/js/jswhilenode.cpp
+
+nodefactoryfactory.o: ../source/nodes/nodefactoryfactory.cpp ../source/nodes/nodefactoryfactory.h \
+		../source/nodes/nodefactory.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h \
+		../source/nodes/equalnode.h \
+		../source/nodes/setvarnode.h \
+		../source/nodes/ifequalnode.h \
+		../source/nodes/ifnotequalnode.h \
+		../source/nodes/ifundernode.h \
+		../source/nodes/ifunderorequalnode.h \
+		../source/nodes/ifovernode.h \
+		../source/nodes/ifoverorequalnode.h \
+		../source/nodes/ifnode.h \
+		../source/nodes/whilenode.h \
+		../source/nodes/ifandnode.h \
+		../source/nodes/ifornode.h \
+		../source/nodes/bitwiseandnode.h \
+		../source/nodes/bitwiseornode.h \
+		../source/nodes/getvarnode.h \
+		../source/nodes/addconstnode.h \
+		../source/nodes/addvarnode.h \
+		../source/nodes/getfuncnode.h \
+		../source/functions/function.h \
+		../source/io/fileline.h \
+		../source/functions/functions.h \
+		../source/functions/functionlist.h \
+		../source/functions/print.h \
+		../source/functions/scan.h \
+		../source/functions/command.h \
+		../source/functions/not.h \
+		../source/functions/str.h \
+		../source/functions/asc.h \
+		../source/functions/cha.h \
+		../source/functions/instr.h \
+		../source/functions/instrrev.h \
+		../source/functions/tolower.h \
+		../source/functions/left.h \
+		../source/functions/len.h \
+		../source/functions/ltrim.h \
+		../source/functions/mid.h \
+		../source/functions/replace.h \
+		../source/functions/right.h \
+		../source/functions/rtrim.h \
+		../source/functions/space.h \
+		../source/functions/strcomp.h \
+		../source/functions/strreverse.h \
+		../source/functions/trim.h \
+		../source/functions/toupper.h \
+		../source/functions/weekday.h \
+		../source/functions/weekdayname.h \
+		../source/functions/year.h \
+		../source/functions/now.h \
+		../source/functions/month.h \
+		../source/functions/monthname.h \
+		../source/functions/dateformat.h \
+		../source/functions/fileread.h \
+		../source/io/io.h \
+		../source/functions/filewrite.h \
+		../source/functions/abs.h \
+		../source/functions/acos.h \
+		../source/functions/asin.h \
+		../source/functions/atan.h \
+		../source/functions/atan2.h \
+		../source/functions/ceil.h \
+		../source/functions/cos.h \
+		../source/functions/exp.h \
+		../source/functions/floor.h \
+		../source/functions/log.h \
+		../source/functions/max.h \
+		../source/functions/min.h \
+		../source/functions/pow.h \
+		../source/functions/sin.h \
+		../source/functions/random.h \
+		../source/functions/round.h \
+		../source/functions/sqrt.h \
+		../source/functions/tan.h \
+		../source/functions/emptyfunction.h \
+		../source/functions/array.h \
+		../source/variables/hashtablevariable.h \
+		../source/functions/arrayget.h \
+		../source/functions/arrayset.h \
+		../source/functions/arrayunset.h \
+		../source/functions/count.h \
+		../source/functions/isinttype.h \
+		../source/functions/isdoubletype.h \
+		../source/functions/isnumbertype.h \
+		../source/functions/isstringtype.h \
+		../source/functions/isarraytype.h \
+		../source/functions/isint.h \
+		../source/functions/isdouble.h \
+		../source/functions/isnumber.h \
+		../source/functions/toint.h \
+		../source/functions/todouble.h \
+		../source/nodes/numbernode.h \
+		../source/nodes/textnode.h \
+		../source/nodes/runnode.h \
+		../source/nodes/addnode.h \
+		../source/nodes/subnode.h \
+		../source/nodes/mulnode.h \
+		../source/nodes/divnode.h \
+		../source/nodes/modnode.h \
+		../source/nodes/unaryminusnode.h \
+		../source/nodes/unarynotnode.h \
+		../source/nodes/setreturnnode.h \
+		../source/nodes/bracketnode.h \
+		../source/nodes/incrementnode.h \
+		../source/nodes/decrementnode.h \
+		../source/nodes/semicolonnode.h \
+		../source/nodes/huwcodenodefactory.h \
+		../source/nodes/js/jsnodefactory.h \
+		../source/nodes/js/jsequalnode.h \
+		../source/nodes/js/jsifequalnode.h \
+		../source/nodes/js/jsifnotequalnode.h \
+		../source/nodes/js/jsifundernode.h \
+		../source/nodes/js/jsifunderorequalnode.h \
+		../source/nodes/js/jsifovernode.h \
+		../source/nodes/js/jsifoverorequalnode.h \
+		../source/nodes/js/jsifnode.h \
+		../source/nodes/js/jswhilenode.h \
+		../source/nodes/js/jsifandnode.h \
+		../source/nodes/js/jsifornode.h \
+		../source/nodes/js/jsbitwiseandnode.h \
+		../source/nodes/js/jsbitwiseornode.h \
+		../source/nodes/js/jsgetvarnode.h \
+		../source/nodes/js/jssetvarnode.h \
+		../source/nodes/js/jsaddconstnode.h \
+		../source/nodes/js/jsaddvarnode.h \
+		../source/nodes/js/jsgetfuncnode.h \
+		../source/nodes/js/jsnumbernode.h \
+		../source/nodes/js/jstextnode.h \
+		../source/nodes/js/jsrunnode.h \
+		../source/nodes/js/jsaddnode.h \
+		../source/nodes/js/jssubnode.h \
+		../source/nodes/js/jsmulnode.h \
+		../source/nodes/js/jsdivnode.h \
+		../source/nodes/js/jsmodnode.h \
+		../source/nodes/js/jsunaryminusnode.h \
+		../source/nodes/js/jsunarynotnode.h \
+		../source/nodes/js/jssetreturnnode.h \
+		../source/nodes/js/jsbracketnode.h \
+		../source/nodes/js/jsincrementnode.h \
+		../source/nodes/js/jsdecrementnode.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o nodefactoryfactory.o ../source/nodes/nodefactoryfactory.cpp
+
+semicolonnode.o: ../source/nodes/semicolonnode.cpp ../source/nodes/semicolonnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o semicolonnode.o ../source/nodes/semicolonnode.cpp
+
+jssemicolonnode.o: ../source/nodes/js/jssemicolonnode.cpp ../source/nodes/js/jssemicolonnode.h \
+		../source/nodes/semicolonnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jssemicolonnode.o ../source/nodes/js/jssemicolonnode.cpp
 
 ####### Install
 
