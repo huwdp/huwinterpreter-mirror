@@ -25,7 +25,7 @@ std::string JSAddVarNode::toString()
     std::string output;
     if (value != nullptr)
     {
-        output.append("let ").append(name).append("=").append(value->toString()).append(";");
+        output.append("let ").append(name).append("=").append(value->toString());
     }
     if (next != nullptr)
     {

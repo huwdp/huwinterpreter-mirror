@@ -26,6 +26,7 @@ protected:
     std::shared_ptr<Variable> value;
 public:
     NumberNode(std::shared_ptr<Token> token, std::string value);
+    NodeType getType();
     std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
     std::string toString();
 };

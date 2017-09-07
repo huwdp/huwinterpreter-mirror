@@ -24,6 +24,11 @@ WhileNode::WhileNode(std::shared_ptr<Token> token, std::shared_ptr<Node> conditi
     Debug::print("WhileNode");
 }
 
+NodeType WhileNode::getType()
+{
+    return WHILENODETYPE;
+}
+
 std::shared_ptr<Variable> WhileNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("WhileNode");

@@ -23,6 +23,11 @@ NumberNode::NumberNode(std::shared_ptr<Token> token, std::string value)
     Debug::print("NumberNode");
 }
 
+NodeType NumberNode::getType()
+{
+    return NUMBERNODETYPE;
+}
+
 std::shared_ptr<Variable> NumberNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("NumberNode");

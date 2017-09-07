@@ -24,6 +24,11 @@ AddConstNode::AddConstNode(std::shared_ptr<Token> token, std::string name, std::
     Debug::print("AddConstNode");
 }
 
+NodeType AddConstNode::getType()
+{
+    return ADDCONSTNODETYPE;
+}
+
 std::shared_ptr<Variable> AddConstNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("AddConstNode");
@@ -62,9 +67,23 @@ std::shared_ptr<Variable> AddConstNode::execute(std::shared_ptr<Scope> scope)
 
 std::string AddConstNode::toString()
 {
-    if (value != nullptr)
+    std::string output;
+    if (value != nullptr && next != nullptr)
     {
-        return "const " + value->toString() + ";";
+        output.append("const ").append(name).append("=").append(value->toString());
+        std::string right = next->toString();
+        if (right.size() > 0)
+        {
+            output.append(";").append(next->toString());
+        }
     }
-    return "";
+    else if (value != nullptr)
+    {
+        output.append("let ").append(name).append("=").append(value->toString());
+    }
+    else if (next != nullptr)
+    {
+        output.append(next->toString());
+    }
+    return output;
 }

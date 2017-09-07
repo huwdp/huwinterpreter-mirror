@@ -23,6 +23,11 @@ IfUnderOrEqualNode::IfUnderOrEqualNode(std::shared_ptr<Token> token, std::shared
     Debug::print("UnderOrEqualNode");
 }
 
+NodeType IfUnderOrEqualNode::getType()
+{
+    return IFUNDERORRQUALNODETYPE;
+}
+
 std::shared_ptr<Variable> IfUnderOrEqualNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("UnderOrEqualNode");

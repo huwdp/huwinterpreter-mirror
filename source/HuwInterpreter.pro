@@ -5,7 +5,7 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 CONFIG += c++11
-CONFIG += j6
+CONFIG += j7
 CONFIG += Wunused-parameter
 
 QMAKE_CXXFLAGS_WARN_OFF += -Wunused-parameter

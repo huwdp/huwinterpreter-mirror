@@ -24,6 +24,11 @@ AddVarNode::AddVarNode(std::shared_ptr<Token> token, std::string name, std::shar
     Debug::print("AddVarNode");
 }
 
+NodeType AddVarNode::getType()
+{
+    return ADDVARNODETYPE;
+}
+
 std::shared_ptr<Variable> AddVarNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("AddVarNode");
@@ -63,11 +68,20 @@ std::shared_ptr<Variable> AddVarNode::execute(std::shared_ptr<Scope> scope)
 std::string AddVarNode::toString()
 {
     std::string output;
-    if (value != nullptr)
+    if (value != nullptr && next != nullptr)
     {
-        output.append("let ").append(name).append("=").append(value->toString()).append(";");
+        output.append("let ").append(name).append("=").append(value->toString());
+        std::string right = next->toString();
+        if (right.size() > 0)
+        {
+            output.append(";").append(next->toString());
+        }
     }
-    if (next != nullptr)
+    else if (value != nullptr)
+    {
+        output.append("let ").append(name).append("=").append(value->toString());
+    }
+    else if (next != nullptr)
     {
         output.append(next->toString());
     }

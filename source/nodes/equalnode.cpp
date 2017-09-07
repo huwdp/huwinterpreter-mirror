@@ -25,6 +25,11 @@ EqualNode::EqualNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, s
     Debug::print("Equals");
 }
 
+NodeType EqualNode::getType()
+{
+    return EQUALNODETYPE;
+}
+
 std::shared_ptr<Variable> EqualNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("Equals");

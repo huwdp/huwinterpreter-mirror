@@ -21,6 +21,11 @@ UnaryMinusNode::UnaryMinusNode(std::shared_ptr<Token> token, std::shared_ptr<Nod
     this->node = node;
 }
 
+NodeType UnaryMinusNode::getType()
+{
+    return UNARYMINUSNODETYPE;
+}
+
 std::shared_ptr<Variable> UnaryMinusNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("UnaryMinusNode");

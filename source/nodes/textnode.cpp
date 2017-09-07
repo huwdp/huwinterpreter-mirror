@@ -23,6 +23,11 @@ TextNode::TextNode(std::shared_ptr<Token> token, std::string value)
     Debug::print("TextNode");
 }
 
+NodeType TextNode::getType()
+{
+    return TEXTNODETYPE;
+}
+
 std::shared_ptr<Variable> TextNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("TextNode");

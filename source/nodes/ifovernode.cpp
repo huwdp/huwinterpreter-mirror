@@ -23,6 +23,11 @@ IfOverNode::IfOverNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left,
     Debug::print("OverNode");
 }
 
+NodeType IfOverNode::getType()
+{
+    return IFOVERNODETYPE;
+}
+
 std::shared_ptr<Variable> IfOverNode::execute(std::shared_ptr<Scope> scope)
 {
     

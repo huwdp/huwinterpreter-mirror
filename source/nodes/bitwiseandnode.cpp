@@ -22,6 +22,11 @@ BitwiseAndNode::BitwiseAndNode(std::shared_ptr<Token> token, std::shared_ptr<Nod
     this->right = right;
 }
 
+NodeType BitwiseAndNode::getType()
+{
+    return BITWISEANDNODETYPE;
+}
+
 std::shared_ptr<Variable> BitwiseAndNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("BitwiseAndNode");

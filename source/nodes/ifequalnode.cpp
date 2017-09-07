@@ -23,6 +23,11 @@ IfEqualNode::IfEqualNode(std::shared_ptr<Token> token, std::shared_ptr<Node> lef
     Debug::print("IfEqualNode");
 }
 
+NodeType IfEqualNode::getType()
+{
+    return IFEQUALNODETYPE;
+}
+
 std::shared_ptr<Variable> IfEqualNode::execute(std::shared_ptr<Scope> scope)
 {
     

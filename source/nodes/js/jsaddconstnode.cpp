@@ -24,7 +24,7 @@ std::string JSAddConstNode::toString()
 {
     if (value != nullptr)
     {
-        return "const " + value->toString() + ";";
+        return "const " + value->toString();
     }
     return "";
 }

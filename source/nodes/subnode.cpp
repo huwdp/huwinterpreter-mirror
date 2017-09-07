@@ -23,6 +23,11 @@ SubNode::SubNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::
     Debug::print("SubNode");
 }
 
+NodeType SubNode::getType()
+{
+    return SUBNODETYPE;
+}
+
 std::shared_ptr<Variable> SubNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("SubNode");

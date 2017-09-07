@@ -24,6 +24,11 @@ GetFuncNode::GetFuncNode(std::shared_ptr<Token> token, std::string name, std::sh
     Debug::print("GetFuncNode");
 }
 
+NodeType GetFuncNode::getType()
+{
+    return GETFUNCNODETYPE;
+}
+
 std::shared_ptr<Variable> GetFuncNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("GetFuncNode");

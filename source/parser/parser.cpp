@@ -464,7 +464,7 @@ std::shared_ptr<Node> Parser::assingment()
 
         if (tokenType == EQUALS)
         {
-            return nodeFactory->CreateSetVarNode(currentToken, word, expressionNode, blockNode);
+            return nodeFactory->CreateSemicolonNode(nodeFactory->CreateSetVarNode(currentToken, word, expressionNode, blockNode));
         }
         else if (tokenType == ADDITIONEQUAL)
         {

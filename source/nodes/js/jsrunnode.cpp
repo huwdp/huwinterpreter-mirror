@@ -25,7 +25,7 @@ std::string JSRunNode::toString()
     std::string output;
     if (left != nullptr && right != nullptr)
     {
-        output.append(left->toString()).append(";").append(right->toString()).append(";");
+        output.append(left->toString()).append(right->toString());
         return output;
     }
     if (left != nullptr)

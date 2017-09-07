@@ -21,6 +21,11 @@ UnaryNotNode::UnaryNotNode(std::shared_ptr<Token> token, std::shared_ptr<Node> n
     this->node = node;
 }
 
+NodeType UnaryNotNode::getType()
+{
+    return UNARYNOTNODETYPE;
+}
+
 std::shared_ptr<Variable> UnaryNotNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("UnaryNot");

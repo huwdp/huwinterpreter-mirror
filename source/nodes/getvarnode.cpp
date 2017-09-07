@@ -22,6 +22,11 @@ GetVarNode::GetVarNode(std::shared_ptr<Token> token, std::string name)
     Debug::print("GetVarNode");
 }
 
+NodeType GetVarNode::getType()
+{
+    return GETVARNODETYPE;
+}
+
 std::shared_ptr<Variable> GetVarNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("GetVarNode");

@@ -23,6 +23,11 @@ IfNotEqualNode::IfNotEqualNode(std::shared_ptr<Token> token, std::shared_ptr<Nod
     Debug::print("NotEqualNode");
 }
 
+NodeType IfNotEqualNode::getType()
+{
+    return IFNOTEQUALNODETYPE;
+}
+
 std::shared_ptr<Variable> IfNotEqualNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("NotEqualNode");

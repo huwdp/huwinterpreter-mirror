@@ -22,6 +22,11 @@ BracketNode::BracketNode(std::shared_ptr<Token> token, std::shared_ptr<Node> nod
     Debug::print("Bracket");
 }
 
+NodeType BracketNode::getType()
+{
+    return BRACKETNODETYPE;
+}
+
 std::shared_ptr<Variable> BracketNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("Bracket");

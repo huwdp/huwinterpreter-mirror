@@ -23,6 +23,11 @@ IfAndNode::IfAndNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, s
     Debug::print("And");
 }
 
+NodeType IfAndNode::getType()
+{
+    return IFANDNODETYPE;
+}
+
 std::shared_ptr<Variable> IfAndNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("And");

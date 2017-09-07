@@ -27,6 +27,40 @@
 #include "tokens/token.h"
 #include "variables/scope.h"
 
+enum NodeType {ADDCONSTNODETYPE,
+               ADDNODETYPE,
+               ADDVARNODETYPE,
+               BITWISEANDNODETYPE,
+               BITWISEORNODETYPE,
+               BRACKETNODETYPE,
+               DECREMENTNODETYPE,
+               DIVNODETYPE,
+               EQUALNODETYPE,
+               GETFUNCNODETYPE,
+               GETVARNODETYPE,
+               IFANDNODETYPE,
+               IFEQUALNODETYPE,
+               IFNODETYPE,
+               IFNOTEQUALNODETYPE,
+               IFORNODETYPE,
+               IFOVERNODETYPE,
+               IFOVEROREQUALNODETYPE,
+               IFUNDERNODETYPE,
+               IFUNDERORRQUALNODETYPE,
+               INCREMENTNODETYPE,
+               MODNODETYPE,
+               MULNODETYPE,
+               NUMBERNODETYPE,
+               RUNNODETYPE,
+               SEMICOLONNODETYPE,
+               SETRETURNNODETYPE,
+               SETVARNODETYPE,
+               SUBNODETYPE,
+               TEXTNODETYPE,
+               UNARYMINUSNODETYPE,
+               UNARYNOTNODETYPE,
+               WHILENODETYPE };
+
 class Scope;
 
 class Node
@@ -52,6 +86,7 @@ public:
 
     virtual std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope) = 0;
     virtual std::string toString() = 0;
+    virtual NodeType getType() = 0;
     virtual ~Node()
     {
 

@@ -23,6 +23,11 @@ RunNode::RunNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::
     Debug::print("RunNode");
 }
 
+NodeType RunNode::getType()
+{
+    return RUNNODETYPE;
+}
+
 std::shared_ptr<Variable> RunNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("RunNode");
@@ -54,7 +59,7 @@ std::string RunNode::toString()
     std::string output;
     if (left != nullptr && right != nullptr)
     {
-        output.append(left->toString()).append(";").append(right->toString()).append(";");
+        output.append(left->toString()).append(right->toString());
         return output;
     }
     if (left != nullptr)

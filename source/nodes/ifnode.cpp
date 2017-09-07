@@ -24,6 +24,11 @@ IfNode::IfNode(std::shared_ptr<Token> token, std::shared_ptr<Node> condition, st
     this->elseNode = elseNode;
 }
 
+NodeType IfNode::getType()
+{
+    return IFNODETYPE;
+}
+
 std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("IfNode");

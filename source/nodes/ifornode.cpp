@@ -23,6 +23,11 @@ IfOrNode::IfOrNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std
     Debug::print("Or");
 }
 
+NodeType IfOrNode::getType()
+{
+    return IFORNODETYPE;
+}
+
 std::shared_ptr<Variable> IfOrNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("Or");

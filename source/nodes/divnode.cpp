@@ -23,6 +23,11 @@ DivNode::DivNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::
     Debug::print("Div");
 }
 
+NodeType DivNode::getType()
+{
+    return DIVNODETYPE;
+}
+
 std::shared_ptr<Variable> DivNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("Div");

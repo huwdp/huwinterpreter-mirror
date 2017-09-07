@@ -23,6 +23,11 @@ AddNode::AddNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::
     Debug::print("Add");
 }
 
+NodeType AddNode::getType()
+{
+    return ADDNODETYPE;
+}
+
 std::shared_ptr<Variable> AddNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("Add");

@@ -16,9 +16,14 @@
 #include "semicolonnode.h"
 
 SemicolonNode::SemicolonNode(std::shared_ptr<Node> node)
-    : Node(nullptr)
+    : Node(token)
 {
     this->node = node;
+}
+
+NodeType SemicolonNode::getType()
+{
+    return SEMICOLONNODETYPE;
 }
 
 std::shared_ptr<Variable> SemicolonNode::execute(std::shared_ptr<Scope> scope)
@@ -36,7 +41,11 @@ std::string SemicolonNode::toString()
     std::string output;
     if (node != nullptr)
     {
-        output += node->toString() + ";";
+        output += node->toString();
+        if (node->getType() != SEMICOLONNODETYPE)
+        {
+            output += ";";
+        }
     }
     return output;
 }

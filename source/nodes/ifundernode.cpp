@@ -23,6 +23,11 @@ IfUnderNode::IfUnderNode(std::shared_ptr<Token> token, std::shared_ptr<Node> lef
     Debug::print("UnderNode");
 }
 
+NodeType IfUnderNode::getType()
+{
+    return IFUNDERNODETYPE;
+}
+
 std::shared_ptr<Variable> IfUnderNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("UnderNode");

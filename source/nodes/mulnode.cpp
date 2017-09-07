@@ -23,6 +23,11 @@ MulNode::MulNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::
     Debug::print("MulNode");
 }
 
+NodeType MulNode::getType()
+{
+    return MULNODETYPE;
+}
+
 std::shared_ptr<Variable> MulNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("MulNode");

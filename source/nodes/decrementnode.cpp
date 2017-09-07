@@ -22,6 +22,11 @@ DecrementNode::DecrementNode(std::shared_ptr<Token> token, std::shared_ptr<Node>
     Debug::print("Decrement");
 }
 
+NodeType DecrementNode::getType()
+{
+    return DECREMENTNODETYPE;
+}
+
 std::shared_ptr<Variable> DecrementNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("Decrement");

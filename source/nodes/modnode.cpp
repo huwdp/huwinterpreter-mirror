@@ -23,6 +23,11 @@ ModNode::ModNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::
     Debug::print("Mod");
 }
 
+NodeType ModNode::getType()
+{
+    return MODNODETYPE;
+}
+
 std::shared_ptr<Variable> ModNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("Mod");

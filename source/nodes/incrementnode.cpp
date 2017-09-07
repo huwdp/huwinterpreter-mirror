@@ -22,6 +22,11 @@ IncrementNode::IncrementNode(std::shared_ptr<Token> token, std::shared_ptr<Node>
     Debug::print("Increment");
 }
 
+NodeType IncrementNode::getType()
+{
+    return INCREMENTNODETYPE;
+}
+
 std::shared_ptr<Variable> IncrementNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("Increment");

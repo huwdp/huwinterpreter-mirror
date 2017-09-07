@@ -21,6 +21,11 @@ SetReturnNode::SetReturnNode(std::shared_ptr<Node> node)
     this->node = node;
 }
 
+NodeType SetReturnNode::getType()
+{
+    return SETRETURNNODETYPE;
+}
+
 std::shared_ptr<Variable> SetReturnNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("SetReturnNode");

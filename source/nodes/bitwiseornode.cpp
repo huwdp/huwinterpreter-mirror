@@ -22,6 +22,11 @@ BitwiseOrNode::BitwiseOrNode(std::shared_ptr<Token> token, std::shared_ptr<Node>
     this->right = right;
 }
 
+NodeType BitwiseOrNode::getType()
+{
+    return BITWISEORNODETYPE;
+}
+
 std::shared_ptr<Variable> BitwiseOrNode::execute(std::shared_ptr<Scope> scope)
 {
     Debug::print("BitwiseOrNode");

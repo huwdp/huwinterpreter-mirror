@@ -438,7 +438,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
-		../source/.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -900,7 +899,6 @@ Makefile: ../source/HuwInterpreter.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/lin
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -977,7 +975,6 @@ Makefile: ../source/HuwInterpreter.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/lin
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qmake.conf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf:
@@ -1350,7 +1347,8 @@ huwinterpreter.o: ../source/huwinterpreter.cpp ../source/huwinterpreter.h \
 		../source/nodes/js/jssetreturnnode.h \
 		../source/nodes/js/jsbracketnode.h \
 		../source/nodes/js/jsincrementnode.h \
-		../source/nodes/js/jsdecrementnode.h
+		../source/nodes/js/jsdecrementnode.h \
+		../source/nodes/js/jssemicolonnode.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o huwinterpreter.o ../source/huwinterpreter.cpp
 
 customfunction.o: ../source/functions/customfunction.cpp ../source/functions/customfunction.h \
@@ -3605,7 +3603,8 @@ main.o: ../source/main.cpp ../source/parser/parser.h \
 		../source/nodes/js/jssetreturnnode.h \
 		../source/nodes/js/jsbracketnode.h \
 		../source/nodes/js/jsincrementnode.h \
-		../source/nodes/js/jsdecrementnode.h
+		../source/nodes/js/jsdecrementnode.h \
+		../source/nodes/js/jssemicolonnode.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../source/main.cpp
 
 addconstnode.o: ../source/nodes/addconstnode.cpp ../source/nodes/addconstnode.h \
@@ -5325,7 +5324,8 @@ jsnodefactory.o: ../source/nodes/js/jsnodefactory.cpp ../source/nodes/js/jsnodef
 		../source/nodes/js/jssetreturnnode.h \
 		../source/nodes/js/jsbracketnode.h \
 		../source/nodes/js/jsincrementnode.h \
-		../source/nodes/js/jsdecrementnode.h
+		../source/nodes/js/jsdecrementnode.h \
+		../source/nodes/js/jssemicolonnode.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsnodefactory.o ../source/nodes/js/jsnodefactory.cpp
 
 jsnumbernode.o: ../source/nodes/js/jsnumbernode.cpp ../source/nodes/js/jsnumbernode.h \
@@ -5703,7 +5703,8 @@ nodefactoryfactory.o: ../source/nodes/nodefactoryfactory.cpp ../source/nodes/nod
 		../source/nodes/js/jssetreturnnode.h \
 		../source/nodes/js/jsbracketnode.h \
 		../source/nodes/js/jsincrementnode.h \
-		../source/nodes/js/jsdecrementnode.h
+		../source/nodes/js/jsdecrementnode.h \
+		../source/nodes/js/jssemicolonnode.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o nodefactoryfactory.o ../source/nodes/nodefactoryfactory.cpp
 
 semicolonnode.o: ../source/nodes/semicolonnode.cpp ../source/nodes/semicolonnode.h \
