@@ -24,7 +24,7 @@ std::shared_ptr<Variable> InStrRev::run(std::shared_ptr<Token> token,
     {
         std::shared_ptr<Node> node1 = variables.at(0);
         std::shared_ptr<Variable> var1 = node1->execute(scope);
-        std::shared_ptr<Node> node2 = variables.at(0);
+        std::shared_ptr<Node> node2 = variables.at(1);
         std::shared_ptr<Variable> var2 = node2->execute(scope);
         if (var1 != nullptr && var2 != nullptr)
         {
