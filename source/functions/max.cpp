@@ -26,28 +26,30 @@ std::shared_ptr<Variable> Max::run(std::shared_ptr<Token> token,
         for (std::vector<std::shared_ptr<Node>>::iterator it = variables.begin(); it != variables.end(); it++)
         {
             std::shared_ptr<Variable> var = (*it)->execute(scope);
-            try
+            if (var != nullptr)
             {
-                double temp = var->toDouble();
-                
-                if (temp > max)
+                try
                 {
-                    max = temp;
+                    double temp = var->toDouble();
+
+                    if (temp > max)
+                    {
+                        max = temp;
+                    }
+                }
+                catch (const std::invalid_argument ex)
+                {
+                    Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Max", token));
+                }
+                catch (const std::out_of_range ex)
+                {
+                    Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Max", token));
+                }
+                catch (const std::exception& ex)
+                {
+                    Errors::add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
                 }
             }
-            catch (const std::invalid_argument ex)
-            {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Max", token));
-            }
-            catch (const std::out_of_range ex)
-            {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Max", token));
-            }
-            catch (const std::exception& ex)
-            {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
-            }
-            
         }
         returnNode = std::make_shared<NumberVariable>(max);
     }

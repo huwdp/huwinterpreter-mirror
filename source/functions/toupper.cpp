@@ -23,15 +23,16 @@ std::shared_ptr<Variable> ToUpper::run(std::shared_ptr<Token> token,
     if (variables.size() == 1)
     {
         std::shared_ptr<Node> node = variables.at(0);
-        std::shared_ptr<Variable> var = node->execute(scope);
+        if (node == nullptr)
+        {
+            return null;
+        }
 
+        std::shared_ptr<Variable> var = node->execute(scope);
         if (var != nullptr)
         {
-            std::shared_ptr<Node> node = variables.at(0);
-            std::shared_ptr<Variable> var = node->execute(scope);
             std::string temp = var->toString();
             transform(temp.begin(), temp.end(), temp.begin(),::toupper);
-            
             returnNode = std::make_shared<StringVariable>("", temp);
         }
     }

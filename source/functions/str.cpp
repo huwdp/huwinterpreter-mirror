@@ -23,6 +23,11 @@ std::shared_ptr<Variable> Str::run(std::shared_ptr<Token> token,
     if (variables.size() == 1)
     {
         std::shared_ptr<Node> node1 = variables.at(0);
+        if (node1 == nullptr)
+        {
+            return null;
+        }
+
         std::shared_ptr<Variable> var = node1->execute(scope);
         if (var != nullptr)
         {

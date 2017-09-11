@@ -25,13 +25,16 @@ std::shared_ptr<Variable> Scan::run(std::shared_ptr<Token> token,
         if ((*it) != nullptr)
         {
             std::shared_ptr<Node> node = (*it);
-            std::shared_ptr<Variable> var = (*it)->execute(scope);
-            if (var != nullptr)
+            if (node != nullptr)
             {
-                std::shared_ptr<Variable> var = node->execute(scope);
-                std::string input;
-                std::cin >> input;
-                var->setValue(input);
+                std::shared_ptr<Variable> var = (*it)->execute(scope);
+                if (var != nullptr)
+                {
+                    std::shared_ptr<Variable> var = node->execute(scope);
+                    std::string input;
+                    std::cin >> input;
+                    var->setValue(input);
+                }
             }
         }
     }

@@ -24,9 +24,19 @@ std::shared_ptr<Variable> FileRead::run(std::shared_ptr<Token> token,
     {
         IO file;
         std::shared_ptr<Node> fileLocation = variables.at(0);
-        std::shared_ptr<Variable> var = fileLocation->execute(scope);
-        std::string stream = file.read(var->toString());
-        returnNode = std::make_shared<StringVariable>("",stream);
+        if (fileLocation != nullptr)
+        {
+            std::shared_ptr<Variable> var = fileLocation->execute(scope);
+            if (var != nullptr)
+            {
+                std::string stream = file.read(var->toString());
+                return std::make_shared<StringVariable>("",stream);
+            }
+            else
+            {
+                // Report error here
+            }
+        }
     }
     else
     {

@@ -24,7 +24,6 @@ std::shared_ptr<Variable> FileWrite::run(std::shared_ptr<Token> token,
     {
         std::shared_ptr<Node> node1 = variables.at(0);
         std::shared_ptr<Node> node2 = variables.at(1);
-
         if (node1 != nullptr && node2 != nullptr)
         {
             std::shared_ptr<Variable> var1 = node1->execute(scope);
