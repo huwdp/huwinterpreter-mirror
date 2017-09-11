@@ -17,6 +17,10 @@
 #define INSTRREV_H
 
 #include "function.h"
+#include <string>
+#include <algorithm>
+#include <iostream>
+
 
 class InStrRev : public Function
 {

@@ -33,7 +33,7 @@ std::shared_ptr<Variable> InStrRev::run(std::shared_ptr<Token> token,
             std::size_t found = str.find_last_of(str2);
             if (found != std::string::npos)
             {
-                returnNode = std::make_shared<NumberVariable>((double)found);
+                returnNode = std::make_shared<NumberVariable>((long long)found);
             }
             else
             {
@@ -43,7 +43,7 @@ std::shared_ptr<Variable> InStrRev::run(std::shared_ptr<Token> token,
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "InStrRev function requires two arguments", token));
+        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "InStr function requires two arguments", token));
     }
     return returnNode;
 }

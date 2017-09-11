@@ -36,6 +36,7 @@ public:
     virtual std::shared_ptr<Variable> run(std::shared_ptr<Token> token,
                                           std::shared_ptr<Scope> scope,
                                           std::vector<std::shared_ptr<Node>> variables) = 0;
+    virtual std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
 #endif // FUNCTION_H
