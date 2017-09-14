@@ -13,26 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef YEAR_H
-#define YEAR_H
+#ifndef JSYEAR_H
+#define JSYEAR_H
 
-#include "jsfunction.h"
-#include <vector>
-#include <string>
-#include <iostream>
-#include <ctime>
-#include <iomanip>
-#include <sstream>
+#include "../year.h"
 
-class JSYear : public Function
+class JSYear : public Year
 {
 public:
-    Year()
-    {
-        name = "year";
-    }
-
     std::string JSYeartoString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // YEAR_H
+#endif // JSYEAR_H

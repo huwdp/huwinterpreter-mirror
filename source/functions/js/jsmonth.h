@@ -13,26 +13,16 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MONTH_H
-#define MONTH_H
+#ifndef JSMONTH_H
+#define JSMONTH_H
 
-#include "jsfunction.h"
-#include <vector>
-#include <string>
-#include <iostream>
-#include <ctime>
-#include <iomanip>
+#include "../month.h"
 
 
-class JSMonth : public Function
+class JSMonth : public Month
 {
 public:
-    Month()
-    {
-        name = "month";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // MONTH_H
+#endif // JSMONTH_H

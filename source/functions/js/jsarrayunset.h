@@ -13,20 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ARRAYUNSET_H
-#define ARRAYUNSET_H
+#ifndef JSARRAYUNSET_H
+#define JSARRAYUNSET_H
 
-#include "jsfunctions/function.h"
+#include "../arrayunset.h"
 
-class JSArrayUnset : public Function
+class JSArrayUnset : public ArrayUnset
 {
 public:
-    ArrayUnset()
-    {
-        name = "arrayUnset";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // ARRAYUNSET_H
+#endif // JSARRAYUNSET_H

@@ -13,22 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CHA_H
-#define CHA_H
+#ifndef JSCHA_H
+#define JSCHA_H
 
-#include "jsfunction.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "../cha.h"
 
-class JSCha : public Function
+class JSCha : public Cha
 {
 public:
-    Cha()
-    {
-        name = "cha";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // CHA_H
+#endif // JSCHA_H

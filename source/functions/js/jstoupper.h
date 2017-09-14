@@ -13,21 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TOUPPER_H
-#define TOUPPER_H
+#ifndef JSTOUPPER_H
+#define JSTOUPPER_H
 
-#include "jsfunction.h"
-#include <algorithm>
+#include "../toupper.h"
 
-class JSToUpper : public Function
+class JSToUpper : public ToUpper
 {
 public:
-    ToUpper()
-    {
-        name = "toUpper";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // TOUPPER
+#endif // JSTOUPPER

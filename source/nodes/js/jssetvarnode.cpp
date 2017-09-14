@@ -15,8 +15,8 @@
 
 #include "jssetvarnode.h"
 
-JSSetVarNode::JSSetVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value, std::shared_ptr<Node> next)
-    : SetVarNode(token, name, value, next)
+JSSetVarNode::JSSetVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value)
+    : SetVarNode(token, name, value)
 {
 }
 
@@ -26,10 +26,6 @@ std::string JSSetVarNode::toString()
     if (value != nullptr)
     {
         output.append("let ").append(name).append("=").append(value->toString());
-    }
-    if (next != nullptr)
-    {
-        output.append(next->toString());
     }
     return output;
 }

@@ -13,19 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ACOS_H
-#define ACOS_H
+#ifndef JSACOS_H
+#define JSACOS_H
 
-#include "jsfunction.h"
+#include "../acos.h"
 
-class JSAcos : public Function
+class JSAcos : public Acos
 {
 public:
-    Acos()
-    {
-        name = "acos";
-    }
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // ACOS
+#endif // JSACOS

@@ -13,19 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ATAN2_H
-#define ATAN2_H
+#ifndef JSATAN2_H
+#define JSATAN2_H
 
-#include "jsfunction.h"
+#include "../atan.h"
 
-class JSAtan2 : public Function
+class JSAtan2 : public Atan2
 {
 public:
-    Atan2()
-    {
-        name = "atan2";
-    }
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // ATAN2
+#endif // JSATAN2

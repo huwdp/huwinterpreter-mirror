@@ -13,21 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef REPLACE_H
-#define REPLACE_H
+#ifndef JSREPLACE_H
+#define JSREPLACE_H
 
-#include "jsfunction.h"
-#include <algorithm>
+#include "../replace.h"
 
-class JSReplace : public Function
+class JSReplace : public Replace
 {
 public:
-    Replace()
-    {
-        name = "replace";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // REPLACE
+#endif // JSREPLACE

@@ -14,20 +14,15 @@
 */
 
 
-#ifndef ISNUMBERTYPE_H
-#define ISNUMBERTYPE_H
+#ifndef JSISNUMBERTYPE_H
+#define JSISNUMBERTYPE_H
 
-#include "jsfunction.h"
+#include "../isnumbertype.h"
 
-class JSIsNumberType : public Function
+class JSIsNumberType : public IsNumberType
 {
 public:
-    IsNumberType()
-    {
-        name = "isNumber";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // ISNUMBERTYPE_H
+#endif // JSISNUMBERTYPE_H

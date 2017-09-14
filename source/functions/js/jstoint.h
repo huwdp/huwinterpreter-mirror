@@ -13,16 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TOINT_H
-#define TOINT_H
+#ifndef JSTOINT_H
+#define JSTOINT_H
 
-#include "jsfunction.h"
+#include "../toint.h"
 
-class JSToInt : public Function
+class JSToInt : public ToInt
 {
 public:
-    ToInt();
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // TOINT_H
+#endif // JSTOINT_H

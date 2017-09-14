@@ -13,26 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef WEEKDAY_H
-#define WEEKDAY_H
+#ifndef JSWEEKDAY_H
+#define JSWEEKDAY_H
 
-#include "jsfunction.h"
-#include <vector>
-#include <string>
-#include <iostream>
-#include <sstream>
-#include <ctime>
-#include <iomanip>
+#include "../weekday.h"
 
-class JSWeekday : public Function
+class JSWeekday : public Weekday
 {
 public:
-    Weekday()
-    {
-        name = "weekday";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // WEEKDAY_H
+#endif // JSWEEKDAY_H

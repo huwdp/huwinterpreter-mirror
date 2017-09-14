@@ -17,5 +17,9 @@
 
 std::string JSToLower::toString(std::vector<std::shared_ptr<Node>> variables)   
 {
+    if (variables.size() == 1)
+    {
 
+    }
+    return "";
 }

@@ -13,23 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SCAN_H
-#define SCAN_H
+#ifndef JSSCAN_H
+#define JSSCAN_H
 
-#include "jsfunction.h"
-#include <vector>
-#include <string>
-#include <iostream>
+#include "../scan.h"
 
-class JSScan : public Function
+class JSScan : public Scan
 {
 public:
-    Scan()
-    {
-        name = "scan";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // SCAN_H
+#endif // JSSCAN_H

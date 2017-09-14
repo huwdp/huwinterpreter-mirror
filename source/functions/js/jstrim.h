@@ -13,24 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TRIM_H
-#define TRIM_H
+#ifndef JSTRIM_H
+#define JSTRIM_H
 
-#include "jsfunction.h"
+#include "../trim.h"
 
-#include "jstypes/typedetector.h"
-#include "jsltrim.h"
-#include "jsrtrim.h"
-
-class JSTrim : public Function
+class JSTrim : public Trim
 {
 public:
-    Trim()
-    {
-        name = "trim";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // TRIM
+#endif // JSTRIM

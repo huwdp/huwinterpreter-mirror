@@ -13,16 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TODOUBLE_H
-#define TODOUBLE_H
+#ifndef JSTODOUBLE_H
+#define JSTODOUBLE_H
 
-#include "jsfunction.h"
+#include "../todouble.h"
 
-class JSToDouble : public Function
+class JSToDouble : public ToDouble
 {
 public:
-    ToDouble();
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // TODOUBLE_H
+#endif // JSTODOUBLE_H

@@ -15,12 +15,11 @@
 
 #include "jstoint.h"
 
-ToInt::ToInt()
-{
-    name = "toInt";
-}
-
 std::string JSToInt::toString(std::vector<std::shared_ptr<Node>> variables)        
 {
+    if (variables.size() == 1)
+    {
 
+    }
+    return "";
 }

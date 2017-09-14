@@ -13,19 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SIN_H
-#define SIN_H
+#ifndef JSSIN_H
+#define JSSIN_H
 
-#include "jsfunction.h"
+#include "../sin.h"
 
-class JSSin : public Function
+class JSSin : public Sin
 {
 public:
-    Sin()
-    {
-        name = "sin";
-    }
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // SIN
+#endif // JSSIN

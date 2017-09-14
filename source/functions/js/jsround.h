@@ -13,20 +13,16 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ROUND_H
-#define ROUND_H
+#ifndef JSROUND_H
+#define JSROUND_H
 
-#include "jsfunction.h"
+#include "../round.h"
 
-class JSRound : public Function
+class JSRound : public Round
 {
 public:
-    Round()
-    {
-        name = "round";
-    }
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
 
-#endif // ROUND
+#endif // JSROUND

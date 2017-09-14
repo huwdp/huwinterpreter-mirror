@@ -13,19 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EMPTYFUNCTION_H
-#define EMPTYFUNCTION_H
+#ifndef JSEMPTYFUNCTION_H
+#define JSEMPTYFUNCTION_H
 
-#include "jsfunction.h"
+#include "../emptyfunction.h"
 
-class JSEmptyFunction : public Function
+class JSEmptyFunction : public EmptyFunction
 {
 public:
-    EmptyFunction()
-    {
-        name = "EmptyFunction";
-    }
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // EMPTYFUNCTION_H
+#endif // JSEMPTYFUNCTION_H

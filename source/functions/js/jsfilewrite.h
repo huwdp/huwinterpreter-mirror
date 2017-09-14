@@ -13,24 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FILEWRITE_H
-#define FILEWRITE_H
+#ifndef JSFILEWRITE_H
+#define JSFILEWRITE_H
 
-#include "jsfunction.h"
-#include "jsio/io.h"
-#include <vector>
-#include <string>
-#include <iostream>
+#include "../filewrite.h"
 
-class JSFileWrite : public Function
+class JSFileWrite : public FileWrite
 {
 public:
-    FileWrite()
-    {
-        name = "fileWrite";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // FILEWRITE_H
+#endif // JSFILEWRITE_H

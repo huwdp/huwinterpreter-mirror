@@ -177,7 +177,8 @@ SOURCES += \
     nodes/js/jswhilenode.cpp \
     nodes/nodefactoryfactory.cpp \
     nodes/semicolonnode.cpp \
-    nodes/js/jssemicolonnode.cpp
+    nodes/js/jssemicolonnode.cpp \
+    format/escapecharacteroutput.cpp
 
 
 
@@ -394,7 +395,8 @@ HEADERS += \
     nodes/js/jswhilenode.h \
     nodes/nodefactoryfactory.h \
     nodes/semicolonnode.h \
-    nodes/js/jssemicolonnode.h
+    nodes/js/jssemicolonnode.h \
+    format/escapecharacteroutput.h
 
 
 

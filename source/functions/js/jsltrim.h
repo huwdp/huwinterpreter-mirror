@@ -13,21 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LTRIM_H
-#define LTRIM_H
+#ifndef JSLTRIM_H
+#define JSLTRIM_H
 
-#include "jsfunctions/function.h"
-#include "jstypes/typedetector.h"
+#include "../ltrim.h"
 
-class JSLTrim : public Function
+class JSLTrim : public LTrim
 {
 public:
-    LTrim()
-    {
-        name = "lTrim";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // LTRIM
+#endif // JSLTRIM

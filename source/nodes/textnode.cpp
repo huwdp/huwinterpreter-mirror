@@ -40,10 +40,10 @@ std::shared_ptr<Variable> TextNode::execute(std::shared_ptr<Scope> scope)
 
 std::string TextNode::toString()
 {
-    std::string output;
     if (value != nullptr)
     {
-        output.append("\"").append(value->toString()).append("\"");
+        std::string output = escapedOutput->output(value->toString());
+        return "\"" + output + "\"";
     }
-    return output;
+    return "";
 }

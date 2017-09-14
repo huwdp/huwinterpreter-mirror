@@ -13,20 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MAX_H
-#define MAX_H
+#ifndef JSMAX_H
+#define JSMAX_H
 
-#include "jsfunction.h"
-#include <limits>
+#include "../max.h"
 
-class JSMax : public Function
+class JSMax : public Max
 {
 public:
-    Max()
-    {
-        name = "max";
-    }
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // MAX
+#endif // JSMAX

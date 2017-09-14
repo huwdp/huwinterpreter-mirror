@@ -13,21 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef STRREVERSE_H
-#define STRREVERSE_H
+#ifndef JSSTRREVERSE_H
+#define JSSTRREVERSE_H
 
-#include "jsfunction.h"
-#include <algorithm>
+#include "../strreverse.h"
 
-class JSStrReverse : public Function
+class JSStrReverse : public StrReverse
 {
 public:
-    StrReverse()
-    {
-        name = "strRev";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // STRREVERSE
+#endif // JSSTRREVERSE

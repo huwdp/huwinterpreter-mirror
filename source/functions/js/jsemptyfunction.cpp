@@ -19,5 +19,5 @@ std::string JSEmptyFunction::toString(std::vector<std::shared_ptr<Node>> variabl
 
 
 {
-    
+    return "";
 }

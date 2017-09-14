@@ -22,9 +22,9 @@ class HuwCodeNodeFactory : public NodeFactory
 {
 public:
     HuwCodeNodeFactory();
-    std::shared_ptr<Node> CreateAddConstNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value, std::shared_ptr<Node> next);
+    std::shared_ptr<Node> CreateAddConstNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value);
     std::shared_ptr<Node> CreateAddNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right);
-    std::shared_ptr<Node> CreateAddVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value, std::shared_ptr<Node> next);
+    std::shared_ptr<Node> CreateAddVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value);
     std::shared_ptr<Node> CreateBitwiseAndNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right);
     std::shared_ptr<Node> CreateBitwiseOrNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right);
     std::shared_ptr<Node> CreateBracketNode(std::shared_ptr<Token> token, std::shared_ptr<Node> node);
@@ -49,7 +49,7 @@ public:
     std::shared_ptr<Node> CreateRunNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right);
     std::shared_ptr<Node> CreateSemicolonNode(std::shared_ptr<Node> node);
     std::shared_ptr<Node> CreateSetReturnNode(std::shared_ptr<Node> node);
-    std::shared_ptr<Node> CreateSetVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value, std::shared_ptr<Node> next);
+    std::shared_ptr<Node> CreateSetVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value);
     std::shared_ptr<Node> CreateSubNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right);
     std::shared_ptr<Node> CreateTextNode(std::shared_ptr<Token> token, std::string value);
     std::shared_ptr<Node> CreateUnaryMinusNode(std::shared_ptr<Token> token, std::shared_ptr<Node> node);

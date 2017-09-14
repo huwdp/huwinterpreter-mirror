@@ -14,20 +14,15 @@
 */
 
 
-#ifndef ISARRAYTYPE_H
-#define ISARRAYTYPE_H
+#ifndef JSISARRAYTYPE_H
+#define JSISARRAYTYPE_H
 
-#include "jsfunction.h"
+#include "../isarraytype.h"
 
-class JSIsArrayType : public Function
+class JSIsArrayType : public IsArrayType
 {
 public:
-    IsArrayType()
-    {
-        name = "isArray";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // ISARRAYTYPE_H
+#endif // JSISARRAYTYPE_H

@@ -13,19 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef POW_H
-#define POW_H
+#ifndef JSPOW_H
+#define JSPOW_H
 
-#include "jsfunction.h"
+#include "../pow.h"
 
-class JSPow : public Function
+class JSPow : public Pow
 {
 public:
-    Pow()
-    {
-        name = "pow";
-    }
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // POW
+#endif // JSPOW

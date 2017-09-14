@@ -17,5 +17,9 @@
 
 std::string JSNow::toString(std::vector<std::shared_ptr<Node>> variables) 
 {
-
+    if (variables.size() == 0)
+    {
+        return "Date.now()";
+    }
+    return "";
 }

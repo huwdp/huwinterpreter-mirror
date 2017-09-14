@@ -17,5 +17,9 @@
 
 std::string JSCha::toString(std::vector<std::shared_ptr<Node>> variables)
 {
-    
+    if (variables.size() == 1)
+    {
+        return "Math.ceil(" + variables.at(1) + ")";
+    }
+    return "";
 }

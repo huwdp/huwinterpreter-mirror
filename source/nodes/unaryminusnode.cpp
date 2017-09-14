@@ -49,7 +49,7 @@ std::string UnaryMinusNode::toString()
     std::string output;
     if (node != nullptr)
     {
-        output.append("!").append(node->toString());
+        output.append("-").append(node->toString());
     }
     return output;
 }

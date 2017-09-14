@@ -13,19 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef EXP_H
-#define EXP_H
+#ifndef JSEXP_H
+#define JSEXP_H
 
-#include "jsfunction.h"
+#include "../exp.h"
 
-class JSExp : public Function
+class JSExp : public Exp
 {
 public:
-    Exp()
-    {
-        name = "exp";
-    }
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // EXP
+#endif // JSEXP

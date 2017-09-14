@@ -15,7 +15,11 @@
 
 #include "jsyear.h"
 
-std::string JSYear::toString(std::shared_ptr<Token> token,
+std::string JSYear::toString(std::vector<std::shared_ptr<Node>> variables)
 {
-
+    if (variables.size() == 1)
+    {
+        return "new Date(" + variables.at(0) + ").getUTCFullYear();";
+    }
+    return "";
 }

@@ -15,8 +15,8 @@
 
 #include "jsaddvarnode.h"
 
-JSAddVarNode::JSAddVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value, std::shared_ptr<Node> next)
-    : AddVarNode(token, name, value, next)
+JSAddVarNode::JSAddVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value)
+    : AddVarNode(token, name, value)
 {
 }
 
@@ -26,10 +26,6 @@ std::string JSAddVarNode::toString()
     if (value != nullptr)
     {
         output.append("let ").append(name).append("=").append(value->toString());
-    }
-    if (next != nullptr)
-    {
-        output.append(next->toString());
     }
     return output;
 }

@@ -13,21 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TOLOWER_H
-#define TOLOWER_H
+#ifndef JSTOLOWER_H
+#define JSTOLOWER_H
 
-#include "jsfunction.h"
-#include <algorithm>
+#include "../tolower.h"
 
-class JSToLower : public Function
+class JSToLower : public ToLower
 {
 public:
-    ToLower()
-    {
-        name = "toLower";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // TOLOWER
+#endif // JSTOLOWER

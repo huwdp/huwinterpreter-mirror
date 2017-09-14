@@ -13,23 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef TOSTRING_H
-#define TOSTRING_H
+#ifndef JSTOSTRING_H
+#define JSTOSTRING_H
 
-#include "jsfunction.h"
-#include <vector>
-#include <string>
-#include <iostream>
+#include "../tostring.h"
 
-class JSToString : public Function
+class JSToString : public ToString
 {
 public:
-    toString(std::vector<std::shared_ptr<Node>> variables)
-    {
-        name = "toString";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // TOSTRING_H
+#endif // JSTOSTRING_H

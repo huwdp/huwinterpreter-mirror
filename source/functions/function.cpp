@@ -32,6 +32,10 @@ std::string Function::toString(std::vector<std::shared_ptr<Node>> variables)    
     for (std::vector<std::shared_ptr<Node>>::iterator it = variables.begin(); it != variables.end(); ++it)
     {
         output.append((*it)->toString());
+        if (it != variables.end())
+        {
+            output.append(",");
+        }
     }
     output.append(")");
     return output;

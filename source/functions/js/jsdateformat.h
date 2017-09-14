@@ -13,26 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DATEFORMAT_H
-#define DATEFORMAT_H
+#ifndef JSDATEFORMAT_H
+#define JSDATEFORMAT_H
 
-#include "jsfunction.h"
-#include <vector>
-#include <string>
-#include <iostream>
-#include <sstream>
-#include <locale>
-#include <iomanip>
+#include "../dateformat.h"
 
-class JSDateFormat : public Function
+class JSDateFormat : public DateFormat
 {
 public:
-    DateFormat()
-    {
-        name = "dateFormat";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // DATEFORMAT_H
+#endif // JSDATEFORMAT_H

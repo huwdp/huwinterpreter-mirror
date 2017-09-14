@@ -22,5 +22,9 @@ ToDouble::ToDouble()
 
 std::string JSToDouble::toString(std::vector<std::shared_ptr<Node>> variables)      
 {
+    if (variables.size() == 1)
+    {
 
+    }
+    return "";
 }

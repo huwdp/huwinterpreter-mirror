@@ -13,19 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ISNUMBER_H
-#define ISNUMBER_H
+#ifndef JSISNUMBER_H
+#define JSISNUMBER_H
 
-#include "jsfunction.h"
+#include "../isnumber.h"
 
-class JSIsNumber : public Function
+class JSIsNumber : public IsNumber
 {
 public:
-    IsNumber()
-    {
-        name = "isNumber";
-    }
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // ISNUMBER_H
+#endif // JSISNUMBER_H

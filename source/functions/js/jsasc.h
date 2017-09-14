@@ -13,19 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ASC_H
-#define ASC_H
+#ifndef JSASC_H
+#define JSASC_H
 
-#include "jsfunction.h"
+#include "../asc.h"
 
-class JSAsc : public Function
+class JSAsc : public Asc
 {
 public:
-    Asc()
-    {
-        name = "asc";
-    }
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // ASC
+#endif // JSASC

@@ -13,19 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CEIL_H
-#define CEIL_H
+#ifndef JSCEIL_H
+#define JSCEIL_H
 
-#include "jsfunction.h"
+#include "../ceil.h"
 
-class JSCeil : public Function
+class JSCeil : public Ceil
 {
 public:
-    Ceil()
-    {
-        name = "ceil";
-    }
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // CEIL
+#endif // JSCEIL

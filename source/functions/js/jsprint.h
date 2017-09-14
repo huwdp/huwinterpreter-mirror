@@ -13,23 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef PRINT_H
-#define PRINT_H
+#ifndef JSPRINT_H
+#define JSPRINT_H
 
-#include "jsfunction.h"
-#include <vector>
-#include <string>
-#include <iostream>
+#include "../print.h"
 
-class JSPrint : public Function
+class JSPrint : public Print
 {
 public:
-    Print()
-    {
-        name = "print";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // PRINT_H
+#endif // JSPRINT_H

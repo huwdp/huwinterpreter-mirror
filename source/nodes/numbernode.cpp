@@ -40,6 +40,10 @@ std::shared_ptr<Variable> NumberNode::execute(std::shared_ptr<Scope> scope)
 
 std::string NumberNode::toString()
 {
+    if (value->getType() == STRING)
+    {
+        std::string output = escapedOutput->output(value->toString());
+        return "\"" + output + "\"";
+    }
     return value->toString();
 }
-

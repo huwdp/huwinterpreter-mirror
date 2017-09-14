@@ -13,19 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SQRT_H
-#define SQRT_H
+#ifndef JSSQRT_H
+#define JSSQRT_H
 
-#include "jsfunction.h"
+#include "../sqrt.h"
 
-class JSSqrt : public Function
+class JSSqrt : public Sqrt
 {
 public:
-    Sqrt()
-    {
-        name = "sqrt";
-    }
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // SQRT
+#endif // JSSQRT

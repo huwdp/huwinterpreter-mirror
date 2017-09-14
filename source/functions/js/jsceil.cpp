@@ -17,5 +17,9 @@
 
 std::string JSCeil::toString(std::vector<std::shared_ptr<Node>> variables)
 {
-    
+    if (variables.size() == 1)
+    {
+        return "Math.ceil(" + variables.at(0) + ")";
+    }
+    return "";
 }

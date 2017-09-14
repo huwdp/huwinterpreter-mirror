@@ -17,5 +17,5 @@
 
 std::string JSFileWrite::toString(std::vector<std::shared_ptr<Node>> variables)         
 {
-
+    return "";
 }

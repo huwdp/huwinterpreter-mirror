@@ -21,7 +21,7 @@
 class JSAddConstNode : public AddConstNode
 {
 public:
-    JSAddConstNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value, std::shared_ptr<Node> next);
+    JSAddConstNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value);
     std::string toString();
 };
 

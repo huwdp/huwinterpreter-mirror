@@ -17,5 +17,9 @@
 
 std::string JSArrayUnset::toString(std::vector<std::shared_ptr<Node>> variables)
 {
-    
+    if (variables.size() == 2)
+    {
+        return variables.at(0)->toString() + "[" + variables.at(1)->toString() + "]=null";
+    }
+    return "";
 }

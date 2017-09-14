@@ -13,20 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LEFT_H
-#define LEFT_H
+#ifndef JSLEFT_H
+#define JSLEFT_H
 
-#include "jsfunction.h"
+#include "../left.h"
 
-class JSLeft : public Function
+class JSLeft : public Left
 {
 public:
-    Left()
-    {
-        name = "left";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // LEFT
+#endif // JSLEFT

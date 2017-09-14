@@ -13,20 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MID_H
-#define MID_H
+#ifndef JSMID_H
+#define JSMID_H
 
-#include "jsfunction.h"
+#include "../mid.h"
 
-class JSMid : public Function
+class JSMid : public Mid
 {
 public:
-    Mid()
-    {
-        name = "mid";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // MID
+#endif // JSMID

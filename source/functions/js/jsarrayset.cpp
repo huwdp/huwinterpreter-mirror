@@ -17,5 +17,9 @@
 
 std::string JSArraySet::toString(std::vector<std::shared_ptr<Node>> variables)
 {
-    
+    if (variables.size() == 3)
+    {
+        return variables.at(0)->toString() + "[" + variables.at(1)->toString() + "]=" + variables.at(2);
+    }
+    return "";
 }

@@ -15,12 +15,11 @@
 
 #include "addvarnode.h"
 
-AddVarNode::AddVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value, std::shared_ptr<Node> next)
+AddVarNode::AddVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value)
     : Node(token)
 {
     this->name = name;
     this->value = value;
-    this->next = next;
     Debug::print("AddVarNode");
 }
 
@@ -58,32 +57,15 @@ std::shared_ptr<Variable> AddVarNode::execute(std::shared_ptr<Scope> scope)
             }
         }
     }
-    if (next != nullptr)
-    {
-        return next->execute(scope);
-    }
     return null;
 }
 
 std::string AddVarNode::toString()
 {
     std::string output;
-    if (value != nullptr && next != nullptr)
+    if (value != nullptr)
     {
         output.append("let ").append(name).append("=").append(value->toString());
-        std::string right = next->toString();
-        if (right.size() > 0)
-        {
-            output.append(";").append(next->toString());
-        }
-    }
-    else if (value != nullptr)
-    {
-        output.append("let ").append(name).append("=").append(value->toString());
-    }
-    else if (next != nullptr)
-    {
-        output.append(next->toString());
     }
     return output;
 }

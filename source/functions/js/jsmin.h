@@ -13,20 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MIN_H
-#define MIN_H
+#ifndef JSMIN_H
+#define JSMIN_H
 
-#include "jsfunction.h"
-#include <limits>
+#include "../min.h"
 
-class JSMin : public Function
+class JSMin : public Min
 {
 public:
-    Min()
-    {
-        name = "min";
-    }
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // MIN
+#endif // JSMIN

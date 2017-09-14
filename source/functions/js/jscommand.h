@@ -13,21 +13,14 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COMMAND_H
-#define COMMAND_H
+#ifndef JSCOMMAND_H
+#define JSCOMMAND_H
 
-#include "jsfunction.h"
-#include <vector>
-#include <string>
+#include "../command.h"
 
-class JSCommand : public Function
+class JSCommand : public Command
 {
 public:
-    Command()
-    {
-        name = "command";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
-#endif // COMMAND
+#endif // JSCOMMAND

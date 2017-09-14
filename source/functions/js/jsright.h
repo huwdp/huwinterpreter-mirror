@@ -13,20 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef RIGHT_H
-#define RIGHT_H
+#ifndef JSRIGHT_H
+#define JSRIGHT_H
 
-#include "jsfunction.h"
+#include "../right.h"
 
-class JSRight : public Function
+class JSRight : public Right
 {
 public:
-    Right()
-    {
-        name = "right";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // RIGHT
+#endif // JSRIGHT

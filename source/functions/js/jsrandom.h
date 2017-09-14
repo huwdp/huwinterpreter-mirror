@@ -13,21 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef RANDOM_H
-#define RANDOM_H
+#ifndef JSRANDOM_H
+#define JSRANDOM_H
 
-#include "jsfunction.h"
-#include <cstdlib>
-#include <ctime>
+#include "../random.h"
 
-class JSRandom : public Function
+class JSRandom : public Random
 {
 public:
-    Random()
-    {
-        name = "random";
-    }
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // RANDOM
+#endif // JSRANDOM

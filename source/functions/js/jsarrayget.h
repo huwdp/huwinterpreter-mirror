@@ -13,20 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ARRAYGET_H
-#define ARRAYGET_H
+#ifndef JSARRAYGET_H
+#define JSARRAYGET_H
 
-#include "jsfunctions/function.h"
+#include "../arrayget.h"
 
-class JSArrayGet : public Function
+class JSArrayGet : public ArrayGet
 {
 public:
-    ArrayGet()
-    {
-        name = "arrayGet";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // ARRAYGET_H
+#endif // JSARRAYGET_H

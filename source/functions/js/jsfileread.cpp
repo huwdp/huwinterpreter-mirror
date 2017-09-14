@@ -19,5 +19,5 @@ std::string JSFileRead::toString(std::vector<std::shared_ptr<Node>> variables)
 
 
 {
-    
+    return "";
 }

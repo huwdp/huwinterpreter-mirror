@@ -16,7 +16,7 @@
 #include "semicolonnode.h"
 
 SemicolonNode::SemicolonNode(std::shared_ptr<Node> node)
-    : Node(token)
+    : Node(nullptr)
 {
     this->node = node;
 }

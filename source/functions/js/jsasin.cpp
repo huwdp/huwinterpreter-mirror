@@ -17,5 +17,9 @@
 
 std::string JSAsin::toString(std::vector<std::shared_ptr<Node>> variables)
 {
-    
+    if (variables.size() == 1)
+    {
+        return "Math.asin(" + variables.at(0) + ")";
+    }
+    return "";
 }

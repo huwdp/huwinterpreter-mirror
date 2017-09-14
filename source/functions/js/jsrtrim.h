@@ -13,20 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef RTRIM_H
-#define RTRIM_H
+#ifndef JSRTRIM_H
+#define JSRTRIM_H
 
-#include "jsfunction.h"
+#include "../rtrim.h"
 
-class JSRTrim : public Function
+class JSRTrim : public RTrim
 {
 public:
-    RTrim()
-    {
-        name = "rTrim";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // RTRIM
+#endif // JSRTRIM

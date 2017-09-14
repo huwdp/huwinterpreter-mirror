@@ -13,20 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LEN_H
-#define LEN_H
+#ifndef JSLEN_H
+#define JSLEN_H
 
-#include "jsfunction.h"
+#include "../len.h"
 
-class JSLen : public Function
+class JSLen : public Len
 {
 public:
-    Len()
-    {
-        name = "len";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // LEN
+#endif // JSLEN

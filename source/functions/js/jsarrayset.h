@@ -13,20 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ARRAYSET_H
-#define ARRAYSET_H
+#ifndef JSARRAYSET_H
+#define JSARRAYSET_H
 
-#include "jsfunctions/function.h"
+#include "../arrayset.h"
 
-class JSArraySet : public Function
+class JSArraySet : public ArraySet
 {
 public:
-    ArraySet()
-    {
-        name = "arraySet";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // ARRAYSET_H
+#endif // JSARRAYSET_H

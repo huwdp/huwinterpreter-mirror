@@ -13,24 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FILEREAD_H
-#define FILEREAD_H
+#ifndef JSFILEREAD_H
+#define JSFILEREAD_H
 
-#include "jsfunction.h"
-#include "jsio/io.h"
-#include <vector>
-#include <string>
-#include <iostream>
+#include "../fileread.h"
 
-class JSFileRead : public Function
+class JSFileRead : public FileRead
 {
 public:
-    FileRead()
-    {
-        name = "fileRead";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // FILEREAD_H
+#endif // JSFILEREAD_H

@@ -13,19 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef STR_H
-#define STR_H
+#ifndef JSSTR_H
+#define JSSTR_H
 
-#include "jsfunction.h"
+#include "../str.h"
 
-class JSStr : public Function
+class JSStr : public Str
 {
 public:
-    Str()
-    {
-        name = "str";
-    }
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // STR_H
+#endif // JSSTR_H

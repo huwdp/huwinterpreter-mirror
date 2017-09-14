@@ -19,11 +19,15 @@
 #include "node.h"
 #include "variables/variabletypefactory.h"
 #include "types/typedetector.h"
+#include "../format/escapecharacteroutput.h"
 
 class NumberNode : public Node
 {
+private:
+    std::shared_ptr<EscapeCharacterOutput> escapedOutput;
 protected:
     std::shared_ptr<Variable> value;
+
 public:
     NumberNode(std::shared_ptr<Token> token, std::string value);
     NodeType getType();

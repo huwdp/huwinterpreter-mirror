@@ -21,7 +21,7 @@
 class JSAddVarNode : public AddVarNode
 {
 public:
-    JSAddVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value, std::shared_ptr<Node> next);
+    JSAddVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value);
     std::string toString();
 };
 

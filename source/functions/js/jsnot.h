@@ -13,23 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef NOT_H
-#define NOT_H
+#ifndef JSNOT_H
+#define JSNOT_H
 
-#include "jsfunction.h"
-#include <vector>
-#include <string>
-#include <iostream>
+#include "../not.h"
 
-class JSNot : public Function
+class JSNot : Not
 {
 public:
-    Not()
-    {
-        name = "not";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // NOT_H
+#endif // JSNOT_H

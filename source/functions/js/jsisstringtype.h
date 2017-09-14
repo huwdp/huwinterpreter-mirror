@@ -14,20 +14,15 @@
 */
 
 
-#ifndef ISSTRINGTYPE_H
-#define ISSTRINGTYPE_H
+#ifndef JSISSTRINGTYPE_H
+#define JSISSTRINGTYPE_H
 
-#include "jsfunction.h"
+#include "../isstringtype.h"
 
-class JSIsStringType : public Function
+class JSIsStringType : public IsStringType
 {
 public:
-    IsStringType()
-    {
-        name = "isString";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // ISSTRINGTYPE_H
+#endif // JSISSTRINGTYPE_H

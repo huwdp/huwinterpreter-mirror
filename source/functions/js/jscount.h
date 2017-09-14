@@ -13,20 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COUNT_H
-#define COUNT_H
+#ifndef JSCOUNT_H
+#define JSCOUNT_H
 
-#include "jsfunction.h"
+#include "../count.h"
 
-class JSCount : public Function
+class JSCount : public Count
 {
 public:
-    Count()
-    {
-        name = "count";
-    }
-
-    std::string toString(std::vector<std::shared_ptr<Node>> variables)
+    std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // COUNT_H
+#endif // JSCOUNT_H

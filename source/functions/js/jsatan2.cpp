@@ -17,5 +17,9 @@
 
 std::string JSAtan2::toString(std::vector<std::shared_ptr<Node>> variables)
 {
-    
+    if (variables.size() == 2)
+    {
+        return "Math.atan2(" + variables.at(0) + "," + variables.at(1) + ")";
+    }
+    return "";
 }

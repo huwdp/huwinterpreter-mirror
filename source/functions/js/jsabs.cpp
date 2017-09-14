@@ -17,8 +17,9 @@
 
 std::string JSAbs::toString(std::vector<std::shared_ptr<Node>> variables)
 {
-  if (variables->count > 0)
-  {
-    "Math.abs()" + variables + ")";
-  }
+    if (variables.size() == 1)
+    {
+        return "Math.abs()" + variables + ")";
+    }
+    return "";
 }

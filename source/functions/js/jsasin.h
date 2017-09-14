@@ -13,19 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ASIN_H
-#define ASIN_H
+#ifndef JSASIN_H
+#define JSASIN_H
 
-#include "jsfunction.h"
+#include "../asin.h"
 
-class JSAsin : public Function
+class JSAsin : public Asin
 {
 public:
-    Asin()
-    {
-        name = "asin";
-    }
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // ASIN
+#endif // JSASIN

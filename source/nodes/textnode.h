@@ -18,9 +18,12 @@
 
 #include "node.h"
 #include "variables/variabletypefactory.h"
+#include "../format/escapecharacteroutput.h"
 
 class TextNode : public Node
 {
+private:
+    std::shared_ptr<EscapeCharacterOutput> escapedOutput;
 protected:
     std::shared_ptr<Variable> value;
 public:

@@ -13,20 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ISINTTYPE_H
-#define ISINTTYPE_H
+#ifndef JSISINTTYPE_H
+#define JSISINTTYPE_H
 
-#include "jsfunction.h"
+#include "../isinttype.h"
 
-class JSIsIntType : public Function
+class JSIsIntType : public IsIntType
 {
 public:
-    IsIntType()
-    {
-        name = "isInt";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // ISINTTYPE_H
+#endif // JSISINTTYPE_H

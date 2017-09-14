@@ -38,7 +38,7 @@ std::shared_ptr<Variable> EqualNode::execute(std::shared_ptr<Scope> scope)
         return scope->getReturnValue();
     }
     std::shared_ptr<Variable> l = left->execute(scope);
-    std::shared_ptr<Node> left = std::make_shared<SetVarNode>(token, l->getName(), right, nullptr);
+    std::shared_ptr<Node> left = std::make_shared<SetVarNode>(token, l->getName(), right);
     this->left = left;
     if (next != nullptr)
     {

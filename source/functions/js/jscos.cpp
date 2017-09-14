@@ -17,5 +17,9 @@
 
 std::string JSCos::toString(std::vector<std::shared_ptr<Node>> variables) 
 {
-
+    if (variables.size() == 1)
+    {
+        return "Math.cos(" + variables.at(0) + ")";
+    }
+    return "";
 }

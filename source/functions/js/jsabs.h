@@ -13,19 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ABS_H
-#define ABS_H
+#ifndef JSABS_H
+#define JSABS_H
 
-#include "jsfunction.h"
+#include "../abs.h"
 
-class JSAbs : public Function
+class JSAbs : public Abs
 {
 public:
-    Abs()
-    {
-        name = "abs";
-    }
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // ABS
+#endif // JSABS

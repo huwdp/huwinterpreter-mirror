@@ -13,8 +13,8 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FUNCTIONLIST_H
-#define FUNCTIONLIST_H
+#ifndef JSFUNCTIONLIST_H
+#define JSFUNCTIONLIST_H
 
 // IO
 #include "jsprint.h"

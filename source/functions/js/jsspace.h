@@ -13,20 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef SPACE_H
-#define SPACE_H
+#ifndef JSSPACE_H
+#define JSSPACE_H
 
-#include "jsfunction.h"
+#include "../space.h"
 
-class JSSpace : public Function
+class JSSpace : public Space
 {
 public:
-    Space()
-    {
-        name = "space";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // SPACE
+#endif // JSSPACE

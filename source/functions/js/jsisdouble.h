@@ -13,20 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ISDOUBLE_H
-#define ISDOUBLE_H
+#ifndef JSISDOUBLE_H
+#define JSISDOUBLE_H
 
-#include "jsfunction.h"
+#include "../isdouble.h"
 
-class JSIsDouble : public Function
+class JSIsDouble : public IsDouble
 {
 public:
-    IsDouble()
-    {
-        name = "isDouble";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // ISDOUBLE_H
+#endif // JSISDOUBLE_H

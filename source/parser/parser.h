@@ -94,10 +94,12 @@ private:
     std::shared_ptr<Token> peakToken();
     void error(const std::string msg);
     void acceptIndentation();
+    void acceptSemiColon();
     bool accept(std::string s);
     bool accept(TokenType tokenType);
     bool expect(std::string s);
     bool expect(TokenType tokenType);
+    bool expectSemicolon();
     void errorMessage(std::string errorMsg, std::shared_ptr<Token> currentToken);
     std::shared_ptr<Node> value();
     std::shared_ptr<Node> factor();

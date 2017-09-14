@@ -13,19 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LOG_H
-#define LOG_H
+#ifndef JSLOG_H
+#define JSLOG_H
 
-#include "jsfunction.h"
+#include "../log.h"
 
-class JSLog : public Function
+class JSLog : public Log
 {
 public:
-    Log()
-    {
-        name = "log";
-    }
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // LOG
+#endif // JSLOG

@@ -22,10 +22,9 @@ HuwCodeNodeFactory::HuwCodeNodeFactory()
 
 std::shared_ptr<Node> HuwCodeNodeFactory::CreateAddConstNode(std::shared_ptr<Token> token,
                                                       std::string name,
-                                                      std::shared_ptr<Node> value,
-                                                      std::shared_ptr<Node> next)
+                                                      std::shared_ptr<Node> value)
 {
-    return std::make_shared<AddConstNode>(token,name,value, next);
+    return std::make_shared<AddConstNode>(token,name,value);
 }
 
 std::shared_ptr<Node> HuwCodeNodeFactory::CreateAddNode(std::shared_ptr<Token> token,
@@ -37,10 +36,9 @@ std::shared_ptr<Node> HuwCodeNodeFactory::CreateAddNode(std::shared_ptr<Token> t
 
 std::shared_ptr<Node> HuwCodeNodeFactory::CreateAddVarNode(std::shared_ptr<Token> token,
                                                     std::string name,
-                                                    std::shared_ptr<Node> value,
-                                                    std::shared_ptr<Node> next)
+                                                    std::shared_ptr<Node> value)
 {
-    return std::make_shared<AddVarNode>(token, name, value, next);
+    return std::make_shared<AddVarNode>(token, name, value);
 }
 
 std::shared_ptr<Node> HuwCodeNodeFactory::CreateBitwiseAndNode(std::shared_ptr<Token> token,
@@ -208,10 +206,9 @@ std::shared_ptr<Node> HuwCodeNodeFactory::CreateSetReturnNode(std::shared_ptr<No
 
 std::shared_ptr<Node> HuwCodeNodeFactory::CreateSetVarNode(std::shared_ptr<Token> token,
                                                     std::string name,
-                                                    std::shared_ptr<Node> value,
-                                                    std::shared_ptr<Node> next)
+                                                    std::shared_ptr<Node> value)
 {
-    return std::make_shared<SetVarNode>(token, name, value, next);
+    return std::make_shared<SetVarNode>(token, name, value);
 }
 
 std::shared_ptr<Node> HuwCodeNodeFactory::CreateSubNode(std::shared_ptr<Token> token,

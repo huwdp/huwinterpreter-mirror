@@ -13,24 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef NOW_H
-#define NOW_H
+#ifndef JSNOW_H
+#define JSNOW_H
 
-#include "jsfunction.h"
-#include <vector>
-#include <string>
-#include <iostream>
-#include <ctime>
+#include "../now.h"
 
-class JSNow : public Function
+class JSNow : Now
 {
 public:
-    Now()
-    {
-        name = "now";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // NOW_H
+#endif // JSNOW_H

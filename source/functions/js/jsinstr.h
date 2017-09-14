@@ -13,20 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef INSTR_H
-#define INSTR_H
+#ifndef JSINSTR_H
+#define JSINSTR_H
 
-#include "jsfunction.h"
+#include "../instr.h"
 
-class JSInStr : public Function
+class JSInStr : public InStr
 {
 public:
-    InStr()
-    {
-        name = "inStr";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // INSTR
+#endif // JSINSTR

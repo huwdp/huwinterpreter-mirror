@@ -13,21 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ARRAY_H
-#define ARRAY_H
+#ifndef JSARRAY_H
+#define JSARRAY_H
 
-#include "jsfunctions/function.h"
-#include "jsvariables/hashtablevariable.h"
+#include "../array.h"
 
-class JSArray : public Function
+class JSArray : public Array
 {
 public:
-    Array()
-    {
-        name = "array";
-    }
-
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // ARRAY_H
+#endif // JSARRAY_H

@@ -13,19 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef COS_H
-#define COS_H
+#ifndef JSCOS_H
+#define JSCOS_H
 
-#include "jsfunction.h"
+#include "../cos.h"
 
-class JSCos : public Function
+class JSCos : public Cos
 {
 public:
-    Cos()
-    {
-        name = "cos";
-    }
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // COS_H
+#endif // JSCOS_H

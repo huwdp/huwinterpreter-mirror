@@ -22,10 +22,9 @@ JSNodeFactory::JSNodeFactory()
 
 std::shared_ptr<Node> JSNodeFactory::CreateAddConstNode(std::shared_ptr<Token> token,
                                                       std::string name,
-                                                      std::shared_ptr<Node> value,
-                                                      std::shared_ptr<Node> next)
+                                                      std::shared_ptr<Node> value)
 {
-    return std::make_shared<JSAddConstNode>(token,name,value, next);
+    return std::make_shared<JSAddConstNode>(token,name,value);
 }
 
 std::shared_ptr<Node> JSNodeFactory::CreateAddNode(std::shared_ptr<Token> token,
@@ -37,10 +36,9 @@ std::shared_ptr<Node> JSNodeFactory::CreateAddNode(std::shared_ptr<Token> token,
 
 std::shared_ptr<Node> JSNodeFactory::CreateAddVarNode(std::shared_ptr<Token> token,
                                                     std::string name,
-                                                    std::shared_ptr<Node> value,
-                                                    std::shared_ptr<Node> next)
+                                                    std::shared_ptr<Node> value)
 {
-    return std::make_shared<JSAddVarNode>(token, name, value, next);
+    return std::make_shared<JSAddVarNode>(token, name, value);
 }
 
 std::shared_ptr<Node> JSNodeFactory::CreateBitwiseAndNode(std::shared_ptr<Token> token,
@@ -208,10 +206,9 @@ std::shared_ptr<Node> JSNodeFactory::CreateSemicolonNode(std::shared_ptr<Node> n
 
 std::shared_ptr<Node> JSNodeFactory::CreateSetVarNode(std::shared_ptr<Token> token,
                                                     std::string name,
-                                                    std::shared_ptr<Node> value,
-                                                    std::shared_ptr<Node> next)
+                                                    std::shared_ptr<Node> value)
 {
-    return std::make_shared<JSSetVarNode>(token, name, value, next);
+    return std::make_shared<JSSetVarNode>(token, name, value);
 }
 
 std::shared_ptr<Node> JSNodeFactory::CreateSubNode(std::shared_ptr<Token> token,

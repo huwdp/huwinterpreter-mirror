@@ -13,55 +13,9 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "jscustomfunction.h"
-
-CustomFunction::CustomFunction(std::shared_ptr<Token> token, std::vector<std::string> arguments, std::shared_ptr<Node> block)
-{
-    this->arguments = arguments;
-    this->block = block;
-}
+#include "../customfunction.h"
 
 std::string JSCustomFunction::toString(std::vector<std::shared_ptr<Node>> variables)              
 {
-
-    // New scope
-    std::shared_ptr<Scope> newScope = std::make_shared<Scope>();
-
-    if (arguments.size() != variables.size())
-    {
-        Errors::add(
-                    std::make_shared<Error>(
-                        RUNTIME_ERROR,
-                        "Unmatch specified number of arguments",
-                        token
-                        )
-                    );
-        return null;
-    }
-
-    // Clean code below: TODO
-    std::vector<std::shared_ptr<Node>>::iterator variableIt = variables.begin();
-    for (std::vector<std::string>::iterator argumentIt = arguments.begin(); argumentIt != arguments.end(); ++argumentIt)
-    {
-        std::string JSargument = (*variableIt)->execute(scope);
-        if (argument != nullptr)
-        {
-            newScope->getVariables()->addVariable((*argumentIt), argument->copy());
-        }
-        ++variableIt;
-    }
-
-    if (block != nullptr)
-    {
-        block->execute(newScope);
-        std::string JSoutput = newScope->getReturnValue();
-
-        // Remove arguments given from scope
-        for (std::vector<std::string>::iterator it1 = arguments.begin(); it1 != arguments.end(); ++it1)
-        {
-            newScope->getVariables()->removeVariable((*it1));
-        }
-        return output;
-    }
-    return null;
+    return
 }

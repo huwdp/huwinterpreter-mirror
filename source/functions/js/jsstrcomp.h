@@ -13,19 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef STRCOMP_H
-#define STRCOMP_H
+#ifndef JSSTRCOMP_H
+#define JSSTRCOMP_H
 
-#include "jsfunction.h"
+#include "../strcomp.h"
 
-class JSStrComp : public Function
+class JSStrComp : public StrComp
 {
 public:
-    StrComp()
-    {
-        name = "strCmp";
-    }
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // STRCOMP
+#endif // JSSTRCOMP

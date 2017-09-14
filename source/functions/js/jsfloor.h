@@ -13,19 +13,15 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef FLOOR_H
-#define FLOOR_H
+#ifndef JSFLOOR_H
+#define JSFLOOR_H
 
-#include "jsfunction.h"
+#include "../floor.h"
 
-class JSFloor : public Function
+class JSFloor : public Floor
 {
 public:
-    Floor()
-    {
-        name = "floor";
-    }
     std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
-#endif // FLOOR
+#endif // JSFLOOR
