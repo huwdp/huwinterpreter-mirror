@@ -15,9 +15,8 @@ std::string EscapeCharacterOutput::output(char value)
     {
         return "\\";
     }
-    //std::string character = std::string(1, value);
-    //return character;
-    return "";
+    std::string character = std::string(1, value);
+    return character;
 }
 
 std::string EscapeCharacterOutput::output(std::string value)
