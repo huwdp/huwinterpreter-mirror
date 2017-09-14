@@ -47,7 +47,7 @@ void Parser::acceptIndentation()
     }
 }
 
-void Parser::acceptSemiColon()
+void Parser::acceptSemicolon()
 {
     if (this->currentToken->getContent() == ";" && !tokens.empty())
     {
@@ -141,7 +141,7 @@ bool Parser::expectSemicolon()
       return false;
   }
   acceptIndentation();
-  acceptSemiColon();
+  acceptSemicolon();
   return true;
 }
 
@@ -455,7 +455,7 @@ std::shared_ptr<Node> Parser::assingment()
         if (accept(SEMICOLON))
         {
             acceptIndentation();
-            acceptSemiColon();
+            acceptSemicolon();
             return nodeFactory->CreateRunNode(currentToken, nodeFactory->CreateSemicolonNode(nodeFactory->CreateSetVarNode(currentToken, word, nullptr)), block());
         }
 
@@ -483,7 +483,7 @@ std::shared_ptr<Node> Parser::assingment()
             return null;
         }
         acceptIndentation();
-        acceptSemiColon();
+        acceptSemicolon();
         std::shared_ptr<Node> blockNode = block();
 
         if (tokenType == EQUALS)
@@ -540,7 +540,7 @@ std::shared_ptr<Node> Parser::decloration()
             if (accept(SEMICOLON))
             {
                 acceptIndentation();
-                acceptSemiColon();
+                acceptSemicolon();
                 return nodeFactory->CreateRunNode(currentToken, nodeFactory->CreateSemicolonNode(nodeFactory->CreateAddVarNode(currentToken, word, nullptr)), block());
             }
             if (tokenType != EQUALS &&
@@ -618,7 +618,7 @@ std::shared_ptr<Node> Parser::decloration()
             if (accept(SEMICOLON))
             {
                 acceptIndentation();
-                acceptSemiColon();
+                acceptSemicolon();
                 return nodeFactory->CreateRunNode(currentToken, nodeFactory->CreateSemicolonNode(nodeFactory->CreateAddVarNode(currentToken, word, nullptr)), block());
             }
             if (tokenType != EQUALS &&

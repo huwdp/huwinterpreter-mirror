@@ -94,7 +94,7 @@ private:
     std::shared_ptr<Token> peakToken();
     void error(const std::string msg);
     void acceptIndentation();
-    void acceptSemiColon();
+    void acceptSemicolon();
     bool accept(std::string s);
     bool accept(TokenType tokenType);
     bool expect(std::string s);
