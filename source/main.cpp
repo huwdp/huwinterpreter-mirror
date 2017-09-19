@@ -63,22 +63,19 @@ int main(int argc, char* argv[])
         std::getline (std::cin,text);
         while (text != "exit")
         {
-            interpreter->runText(text);
+            //interpreter->runText(text);
+            interpreter->execute(interpreter->parseText(text));
             std::cout << ">>>";
             std::getline (std::cin,text);
         }
     }
     else if (argument == "--hc" && argc == 3)
     {
-        std::shared_ptr<Node> node = interpreter->parseFile(argv[2]);
-        if (node != nullptr)
-        {
-            std::cout << node->toString() << std::endl;
-        }
+        std::cout << interpreter->toString(interpreter->parseFile(argv[2])) << std::endl;
     }
     else
     {
-        interpreter->runFile(argument);
+        interpreter->executeFile(argument);
     }
     std::exit(0);
 }

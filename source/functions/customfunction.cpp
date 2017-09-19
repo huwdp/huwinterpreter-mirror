@@ -15,8 +15,9 @@
 
 #include "customfunction.h"
 
-CustomFunction::CustomFunction(std::shared_ptr<Token> token, std::vector<std::string> arguments, std::shared_ptr<Node> block)
+CustomFunction::CustomFunction(std::shared_ptr<Token> token, std::string name, std::vector<std::string> arguments, std::shared_ptr<Node> block)
 {
+    this->name = name;
     this->arguments = arguments;
     this->block = block;
 }
@@ -66,5 +67,30 @@ std::shared_ptr<Variable> CustomFunction::run(std::shared_ptr<Token> token,
         return output;
     }
     return null;
+}
+
+std::string CustomFunction::toString(std::vector<std::shared_ptr<Node>> variables)
+{
+    std::string output;
+
+    output.append("function");
+    output.append(" ");
+    output.append(name);
+    output.append("(");
+    for (std::vector<std::string>::iterator it = arguments.begin(); it != arguments.end(); ++it)
+    {
+        output.append((*it));
+        it++;
+        if (it != arguments.end())
+        {
+            output.append(",");
+        }
+        it--;
+    }
+    output.append(")");
+    output.append("{");
+    output.append(block->toString());
+    output.append("}");
+    return output;
 }
 

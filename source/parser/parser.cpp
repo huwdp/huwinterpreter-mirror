@@ -22,6 +22,8 @@ Parser::Parser(std::vector<std::shared_ptr<Token>> tokens,
     this->compilation = true;
     this->tokens = tokens;
     this->functions = std::move(std::make_shared<Functions>());
+    functions->init();
+    customFunctions = std::move(std::make_shared<Functions>());
     if (!tokens.empty())
     {
         it = this->tokens.begin();
@@ -813,9 +815,9 @@ std::shared_ptr<Node> Parser::block()
             acceptIndentation();
             std::shared_ptr<Node> returnNode = nodeFactory->CreateSetReturnNode(boolean());
             if (!expectSemicolon())
-{
-    return null;
-}
+            {
+                return null;
+            }
             return nodeFactory->CreateSemicolonNode(returnNode);
         }
         std::shared_ptr<Node> dec = decloration();
@@ -870,11 +872,13 @@ std::shared_ptr<Node> Parser::block()
 
             // Here we add a hint that the function exists
             functions->addFunction(word);
+            customFunctions->addFunction(word);
             acceptIndentation();
 
             if (!expect(LEFTPARENTHESIS))
             {
                 functions->removeFunction(word);
+                customFunctions->removeFunction(word);
                 return null;
             }
             acceptIndentation();
@@ -896,6 +900,7 @@ std::shared_ptr<Node> Parser::block()
             if (!expect(RIGHTPARENTHESIS))
             {
                 functions->removeFunction(word);
+                customFunctions->removeFunction(word);
                 arguments.clear();
                 return null;
             }
@@ -904,6 +909,7 @@ std::shared_ptr<Node> Parser::block()
             if (!expect(LEFTBRACKET))
             {
                 functions->removeFunction(word);
+                customFunctions->removeFunction(word);
                 return false;
             }
             acceptIndentation();
@@ -914,9 +920,12 @@ std::shared_ptr<Node> Parser::block()
             if (!expect(RIGHTBRACKET))
             {
                 functions->removeFunction(word);
+                customFunctions->removeFunction(word);
                 return false;
             }
-            functions->addFunction(word, std::make_shared<CustomFunction>(currentToken, arguments, blockNode));
+            std::shared_ptr<Function> newFunction = std::make_shared<CustomFunction>(currentToken, word, arguments, blockNode);
+            functions->setFunction(word, newFunction);
+            customFunctions->setFunction(word, newFunction);
             return block();
         }
         else
@@ -935,6 +944,22 @@ std::shared_ptr<Node> Parser::parse()
         return block();
     }
     return null;
+}
+
+std::string Parser::toString()
+{
+    std::string output;
+    std::shared_ptr<Scope> scope = std::make_shared<Scope>();
+    if (!tokens.empty() && compilation)
+    {
+        std::shared_ptr<Node> node = parse();
+        output.append(customFunctions->toString());
+        if (node != nullptr)
+        {
+            output.append(node->toString());
+        }
+    }
+    return output;
 }
 
 bool Parser::execute()

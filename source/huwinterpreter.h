@@ -41,13 +41,11 @@ private:
     std::unique_ptr<Parser> parser;
 public:
     HuwInterpreter();
-    void runFile(std::string fileLocation);
-    void runText(std::string text);
-    void runTokens(std::vector<std::shared_ptr<Token>> tokens);
-
-    std::shared_ptr<Node> parseFile(std::string fileLocation);
-    std::shared_ptr<Node> parseText(std::string text);
-    std::shared_ptr<Node> parseTokens(std::vector<std::shared_ptr<Token>> tokens);
+    void executeFile(std::string fileLocation);
+    void execute(std::vector<std::shared_ptr<Token>> tokens);
+    std::string toString(std::vector<std::shared_ptr<Token>> tokens);
+    std::vector<std::shared_ptr<Token>> parseFile(std::string fileLocation);
+    std::vector<std::shared_ptr<Token> > parseText(std::string text);
 };
 
 #endif // HUWINTERPRETER_H

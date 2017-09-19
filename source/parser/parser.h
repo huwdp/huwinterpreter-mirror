@@ -84,6 +84,7 @@ private:
     std::vector<std::shared_ptr<Token>>::iterator it;
     std::shared_ptr<Token> currentToken;
     std::shared_ptr<Functions> functions;
+    std::shared_ptr<Functions> customFunctions;
     bool compilation;
     std::shared_ptr<Node> null;
     std::shared_ptr<NodeFactory> codeFactory;
@@ -119,6 +120,7 @@ public:
            std::shared_ptr<NodeFactory> nodeFactory);
     bool getCompilation();
     std::shared_ptr<Node> parse();
+    std::string toString();
     bool execute();
 };
 

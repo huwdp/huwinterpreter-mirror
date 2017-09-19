@@ -24,8 +24,9 @@ private:
     std::vector<std::string> arguments;
     std::shared_ptr<Node> block;
 public:
-    CustomFunction(std::shared_ptr<Token> token, std::vector<std::string> arguments, std::shared_ptr<Node> block);
+    CustomFunction(std::shared_ptr<Token> token, std::string name, std::vector<std::string> arguments, std::shared_ptr<Node> block);
     std::shared_ptr<Variable> run(std::shared_ptr<Token> token, std::shared_ptr<Scope> scope, std::vector<std::shared_ptr<Node>> variables);
+    std::string toString(std::vector<std::shared_ptr<Node>> variables);
 };
 
 #endif // CUSTOMFUNCTION_H

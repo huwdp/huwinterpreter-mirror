@@ -29,6 +29,7 @@ private:
     std::unordered_map<std::string, std::shared_ptr<Function>> functions;
 public:
     Functions();
+    void init();
     std::shared_ptr<Function> get(std::string name);
     std::shared_ptr<Function> set(std::string name, std::string value);
     bool exists(std::shared_ptr<Function> function);
@@ -36,8 +37,10 @@ public:
     bool addFunction(std::shared_ptr<Function> function);
     bool addFunction(std::string name);
     bool addFunction(std::string name, std::shared_ptr<Function> function);
+    bool setFunction(std::string name, std::shared_ptr<Function> function);
     bool removeFunction(std::shared_ptr<Function> function);
     bool removeFunction(std::string name);
+    std::string toString();
 };
 
 #endif // FUNCTIONS_H

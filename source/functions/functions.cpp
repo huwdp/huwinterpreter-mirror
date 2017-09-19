@@ -17,6 +17,11 @@
 
 Functions::Functions()
 {
+
+}
+
+void Functions::init()
+{
     functions["command"] = std::move(std::make_shared<Command>());
     functions["dateFormat"] = std::move(std::make_shared<DateFormat>());
     functions["fileRead"] = std::move(std::make_shared<FileRead>());
@@ -143,6 +148,18 @@ bool Functions::addFunction(std::string name, std::shared_ptr<Function> function
     return false;
 }
 
+bool Functions::setFunction(std::string name, std::shared_ptr<Function> function)
+{
+    std::shared_ptr<Function> e = get(function->getName());
+    if (e != nullptr)
+    {
+        function->setName(name);
+        functions[name] = function;
+        return true;
+    }
+    return false;
+}
+
 bool Functions::exists(std::string name)
 {
     std::unordered_map<std::string,std::shared_ptr<Function>>::const_iterator got = functions.find(name);
@@ -186,5 +203,15 @@ bool Functions::removeFunction(std::string name)
         return true;
     }
     return false;
+}
 
+std::string Functions::toString()
+{
+    std::string output;
+    for (std::unordered_map<std::string, std::shared_ptr<Function>>::iterator it = functions.begin(); it != functions.end(); ++it)
+    {
+        std::vector<std::shared_ptr<Node>> emptyVector;
+        output.append((*it).second->toString(emptyVector));
+    }
+    return output;
 }
