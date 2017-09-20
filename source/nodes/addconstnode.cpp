@@ -38,7 +38,7 @@ std::shared_ptr<Variable> AddConstNode::execute(std::shared_ptr<Scope> scope)
     if (scope->getVariables()->exists(name))
     {
         std::shared_ptr<Variable> v = value->execute(scope);
-        scope->getVariables()->set(name, v->toString());
+        scope->getVariables()->setVariable(name, v);
     }
     else
     {

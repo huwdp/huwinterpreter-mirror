@@ -36,12 +36,11 @@ public:
     ~Variables();
     void addDefaultVariables(bool isEmpty);
     std::shared_ptr<Variable> get(std::string name);
-    bool set(std::string name, std::string value);
+    bool set(std::string name, std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> exists(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> exists(std::string name);
     bool addVariable(std::shared_ptr<Variable> variable);
     bool addVariable(std::string name, std::shared_ptr<Variable> variable);
-    bool addVariable(std::string name, std::string value);
     bool removeVariable(std::shared_ptr<Variable> variable);
     bool removeVariable(std::string name);
     void setParent(std::shared_ptr<Variables> parent);

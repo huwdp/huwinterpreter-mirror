@@ -7,6 +7,7 @@ TEMPLATE = app
 CONFIG += c++11
 CONFIG += j7
 CONFIG += Wunused-parameter
+CONFIG += -O0
 
 QMAKE_CXXFLAGS_WARN_OFF += -Wunused-parameter
 

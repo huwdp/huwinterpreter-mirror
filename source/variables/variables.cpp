@@ -52,20 +52,6 @@ std::shared_ptr<Variable> Variables::get(std::string name)
     }
 }
 
-bool Variables::set(std::string name, std::string value)
-{
-    std::unordered_map<std::string,std::shared_ptr<Variable>>::const_iterator got = variables.find(name);
-    if (got == variables.end())
-    {
-        return false;
-    }
-    else
-    {
-        got->second->setValue(value);
-        return true;
-    }
-}
-
 std::shared_ptr<Variable> Variables::exists(std::string name)
 {
     std::unordered_map<std::string,std::shared_ptr<Variable>>::const_iterator got = variables.find(name);
@@ -119,27 +105,6 @@ bool Variables::addVariable(std::string name, std::shared_ptr<Variable> variable
             variables[name] = std::move(variable);
             return true;
         }
-    }
-    return false;
-}
-
-bool Variables::addVariable(std::string name, std::string value)
-{
-    std::shared_ptr<Variable> e = exists(name);
-    if (e == nullptr)
-    {
-        bool isNum = TypeDetector::isNumeric(value);
-        std::shared_ptr<Variable> var;
-        if (isNum)
-        {
-            var = std::make_shared<NumberVariable>(name, value);
-        }
-        else
-        {
-            var = std::make_shared<NumberVariable>(name, value);
-        }
-        variables[name] = std::move(var);
-        return true;
     }
     return false;
 }
