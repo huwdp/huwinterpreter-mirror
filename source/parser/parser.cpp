@@ -113,11 +113,9 @@ bool Parser::expect(std::string s)
     }
     compilation = false;
     std::string errorMsg;
-    std::stringstream ss;
-    ss << "Parse error: syntax error, unexpected \"";
-    ss << currentToken->getContent();
-    ss << "\"";
-    ss >> errorMsg;
+    errorMsg.append("Parse error: syntax error, unexpected \"")
+            .append(currentToken->getContent())
+            .append("\"");
     errorMessage(errorMsg, currentToken);
     return false;
 }
@@ -130,8 +128,8 @@ bool Parser::expect(TokenType tokenType)
     }
     compilation = false;
     std::string errorMsg = "Syntax error, unexpected \"";
-    errorMsg.append(currentToken->getContent());
-    errorMsg.append("\"");
+    errorMsg.append(currentToken->getContent())
+            .append("\"");
     errorMessage(errorMsg, currentToken);
     return false;
 }
@@ -159,8 +157,7 @@ std::shared_ptr<Node> Parser::value()
     {
         if (TypeDetector::isNumeric(currentToken->getContent()))
         {
-            std::string number = currentToken->getContent();
-            std::shared_ptr<Node> node = nodeFactory->CreateNumberNode(currentToken, number);
+            std::shared_ptr<Node> node = nodeFactory->CreateNumberNode(currentToken, currentToken->getContent());
             nextToken();
             acceptIndentation();
             return node;
@@ -196,25 +193,18 @@ std::shared_ptr<Node> Parser::value()
                 acceptIndentation();
                 return nodeFactory->CreateGetFuncNode(currentToken, word, functions, arguments);
             }
-            else
+            if (currentToken->getType() == TEXT)
             {
-                if (currentToken->getType() == TEXT)
-                {
-                    nextToken();
-                    return nodeFactory->CreateTextNode(currentToken, word);
-                }
-
-                std::shared_ptr<Node> var = nodeFactory->CreateGetVarNode(currentToken, word);
                 nextToken();
-                return var;
+                return nodeFactory->CreateTextNode(currentToken, word);
             }
-            Errors::add(std::make_shared<Error>(PARSER_ERROR, "Unidentified word", currentToken));
-        }
-        else
-        {
-            Errors::add(std::make_shared<Error>(PARSER_ERROR, "factor: syntax error", currentToken));
+
+            std::shared_ptr<Node> var = nodeFactory->CreateGetVarNode(currentToken, word);
             nextToken();
+            return var;
         }
+        Errors::add(std::make_shared<Error>(PARSER_ERROR, "factor: syntax error", currentToken));
+        nextToken();
     }
     return null;
 }
@@ -250,11 +240,7 @@ std::shared_ptr<Node> Parser::factor()
             nextToken();
             return nodeFactory->CreateUnaryNotNode(currentToken, factor());
         }
-
-        // Eventually implement other unary stuff here
-
-        value = this->value();
-        return value;
+        return this->value();
     }
     return null;
 }
@@ -448,9 +434,9 @@ std::shared_ptr<Node> Parser::assingment()
         {
             std::shared_ptr<Node> node = nodeFactory->CreateSemicolonNode(nodeFactory->CreateDecrementNode(currentToken, nodeFactory->CreateGetVarNode(currentToken, word)));
             if (!expectSemicolon())
-{
-    return null;
-}
+            {
+                return null;
+            }
             return nodeFactory->CreateSemicolonNode(nodeFactory->CreateRunNode(currentToken, node, block()));
         }
         acceptIndentation();
@@ -565,9 +551,9 @@ std::shared_ptr<Node> Parser::decloration()
             }
             acceptIndentation();
             if (!expectSemicolon())
-{
-    return null;
-}
+            {
+                return null;
+            }
             std::shared_ptr<Node> blockNode = block();
 
             if (tokenType == EQUALS)
@@ -643,9 +629,9 @@ std::shared_ptr<Node> Parser::decloration()
             }
             acceptIndentation();
             if (!expectSemicolon())
-{
-    return null;
-}
+            {
+                return null;
+            }
             std::shared_ptr<Node> blockNode = block();
 
             if (tokenType == EQUALS)
@@ -825,7 +811,7 @@ std::shared_ptr<Node> Parser::block()
         {
             return dec;
         }
-        if (functions->get(this->currentToken->getContent()) != nullptr)
+        else if (functions->get(this->currentToken->getContent()) != nullptr)
         {
             std::string word = this->currentToken->getContent();
             nextToken();
@@ -861,9 +847,6 @@ std::shared_ptr<Node> Parser::block()
             acceptIndentation();
             std::string word = currentToken->getContent();
             nextToken();
-
-            // Check if word is word
-            // Check if word already exists in functions list
             if (!TypeDetector::isWord(word) || functions->exists(word))
             {
                 compilation = false;
@@ -874,7 +857,6 @@ std::shared_ptr<Node> Parser::block()
             functions->addFunction(word);
             customFunctions->addFunction(word);
             acceptIndentation();
-
             if (!expect(LEFTPARENTHESIS))
             {
                 functions->removeFunction(word);
@@ -889,7 +871,6 @@ std::shared_ptr<Node> Parser::block()
                 do
                 {
                     acceptIndentation();
-                    // Check if argument is a set of char characters TODO
                     arguments.push_back(currentToken->getContent());
                     nextToken();
                 }
@@ -928,10 +909,7 @@ std::shared_ptr<Node> Parser::block()
             customFunctions->setFunction(word, newFunction);
             return block();
         }
-        else
-        {
-            return statement();
-        }
+        return statement();
     }
     return null;
 }
