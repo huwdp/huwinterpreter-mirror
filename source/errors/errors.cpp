@@ -58,6 +58,3 @@ void Errors::print()
         std::cout << value << std::endl;
     }
 }
-
-std::vector<std::shared_ptr<Error>> Errors::errorList;
-

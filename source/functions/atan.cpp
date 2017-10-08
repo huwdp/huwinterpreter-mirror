@@ -15,6 +15,12 @@
 
 #include "atan.h"
 
+Atan::Atan(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "atan";
+}
+
 std::shared_ptr<Variable> Atan::run(std::shared_ptr<Token> token,
                                     std::shared_ptr<Scope> scope,
                                     std::vector<std::shared_ptr<Node>> variables)
@@ -35,25 +41,25 @@ std::shared_ptr<Variable> Atan::run(std::shared_ptr<Token> token,
             {
                 double temp = var->toDouble();
                 double output = std::atan(temp);
-                returnNode = std::make_shared<NumberVariable>(output);
+                returnNode = std::make_shared<NumberVariable>(passible, output);
             }
             catch (const std::invalid_argument ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Atan", token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Atan", token));
             }
             catch (const std::out_of_range ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Atan", token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Atan", token));
             }
             catch (const std::exception& ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
             }
         }
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Atan function requires one argument", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Atan function requires one argument", token));
     }
     return returnNode;
 }

@@ -15,8 +15,8 @@
 
 #include "jsaddnode.h"
 
-JSAddNode::JSAddNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : AddNode(token, left, right)
+JSAddNode::JSAddNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+    : AddNode(passible, token, left, right)
 {
 }
 

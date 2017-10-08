@@ -26,9 +26,10 @@
 class Functions
 {
 private:
+    std::shared_ptr<Passible> passible;
     std::unordered_map<std::string, std::shared_ptr<Function>> functions;
 public:
-    Functions();
+    Functions(std::shared_ptr<Passible> passible);
     void init();
     std::shared_ptr<Function> get(std::string name);
     std::shared_ptr<Function> set(std::string name, std::string value);

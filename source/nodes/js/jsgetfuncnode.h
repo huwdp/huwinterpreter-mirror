@@ -23,7 +23,7 @@
 class JSGetFuncNode : public GetFuncNode
 {
 public:
-    JSGetFuncNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Functions> functions, std::vector<std::shared_ptr<Node>> arguments);
+    JSGetFuncNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::string name, std::shared_ptr<Functions> functions, std::vector<std::shared_ptr<Node>> arguments);
     std::string toString();
 };
 

@@ -15,8 +15,8 @@
 
 #include "bitwiseornode.h"
 
-BitwiseOrNode::BitwiseOrNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : Node(token)
+BitwiseOrNode::BitwiseOrNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+    : Node(passible, token)
 {
     this->left = left;
     this->right = right;
@@ -40,12 +40,12 @@ std::shared_ptr<Variable> BitwiseOrNode::execute(std::shared_ptr<Scope> scope)
         std::shared_ptr<Variable> r = right->execute(scope);
         if (l == nullptr)
         {
-            Errors::add(std::make_shared<Error>(ERROR, "Invalid expression", token));
+            passible->errors->add(std::make_shared<Error>(ERROR, "Invalid expression", token));
             return null;
         }
         if (r == nullptr)
         {
-            Errors::add(std::make_shared<Error>(ERROR, "Invalid expression", token));
+            passible->errors->add(std::make_shared<Error>(ERROR, "Invalid expression", token));
             return null;
         }
         return l->bitwiseOr(r);

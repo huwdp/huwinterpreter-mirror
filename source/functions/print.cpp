@@ -15,6 +15,12 @@
 
 #include "print.h"
 
+Print::Print(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "print";
+}
+
 std::shared_ptr<Variable> Print::run(std::shared_ptr<Token> token,
                                      std::shared_ptr<Scope> scope,
                                      std::vector<std::shared_ptr<Node>> variables)

@@ -15,8 +15,8 @@
 
 #include "jsbracketnode.h"
 
-JSBracketNode::JSBracketNode(std::shared_ptr<Token> token, std::shared_ptr<Node> node)
-    : BracketNode(token, node)
+JSBracketNode::JSBracketNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> node)
+    : BracketNode(passible, token, node)
 {
 }
 

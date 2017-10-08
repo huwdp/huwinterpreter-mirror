@@ -21,7 +21,7 @@
 class JSUnaryNotNode : public UnaryNotNode
 {
 public:
-    JSUnaryNotNode(std::shared_ptr<Token> token, std::shared_ptr<Node> node);
+    JSUnaryNotNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> node);
     std::string toString();
 };
 

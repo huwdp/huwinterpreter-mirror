@@ -21,7 +21,7 @@
 class JSSetVarNode : public SetVarNode
 {
 public:
-    JSSetVarNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value);
+    JSSetVarNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value);
     std::string toString();
 };
 

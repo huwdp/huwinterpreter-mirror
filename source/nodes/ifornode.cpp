@@ -15,8 +15,8 @@
 
 #include "ifornode.h"
 
-IfOrNode::IfOrNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : Node(token)
+IfOrNode::IfOrNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+    : Node(passible, token)
 {
     this->left = left;
     this->right = right;
@@ -40,25 +40,25 @@ std::shared_ptr<Variable> IfOrNode::execute(std::shared_ptr<Scope> scope)
         std::shared_ptr<Variable> l = left->execute(scope);
         if (l == nullptr)
         {
-            Errors::add(std::make_shared<Error>(ERROR, "Invalid expression", token));
+            passible->errors->add(std::make_shared<Error>(ERROR, "Invalid expression", token));
             return null;
         }
         if (l->toBool())
         {
-            return std::make_shared<NumberVariable>(true);
+            return std::make_shared<NumberVariable>(passible, true);
         }
 
         std::shared_ptr<Variable> r = right->execute(scope);
         if (r == nullptr)
         {
-            Errors::add(std::make_shared<Error>(ERROR, "Invalid expression", token));
+            passible->errors->add(std::make_shared<Error>(ERROR, "Invalid expression", token));
             return null;
         }
         if (r->toBool() || l->toBool())
         {
-            return std::make_shared<NumberVariable>(true);
+            return std::make_shared<NumberVariable>(passible, true);
         }
-        return std::make_shared<NumberVariable>(false);
+        return std::make_shared<NumberVariable>(passible, false);
     }
     Debug::print("Could not or.");
     return null;

@@ -15,6 +15,12 @@
 
 #include "tostring.h"
 
+ToString::ToString(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "toString";
+}
+
 std::shared_ptr<Variable> ToString::run(std::shared_ptr<Token> token,
                                         std::shared_ptr<Scope> scope,
                                         std::vector<std::shared_ptr<Node>> variables)
@@ -32,11 +38,11 @@ std::shared_ptr<Variable> ToString::run(std::shared_ptr<Token> token,
         std::shared_ptr<Variable> var = node->execute(scope);
         std::string temp = var->toString();
         
-        returnNode = std::make_shared<StringVariable>("", temp);
+        returnNode = std::make_shared<StringVariable>(passible, "", temp);
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "ToString requires 1 argument", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "ToString requires 1 argument", token));
     }
     
     return returnNode;

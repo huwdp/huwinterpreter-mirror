@@ -15,6 +15,12 @@
 
 #include "arrayset.h"
 
+ArraySet::ArraySet(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "arraySet";
+}
+
 std::shared_ptr<Variable> ArraySet::run(std::shared_ptr<Token> token,
                               std::shared_ptr<Scope> scope,
                               std::vector<std::shared_ptr<Node>> variables)
@@ -42,7 +48,7 @@ std::shared_ptr<Variable> ArraySet::run(std::shared_ptr<Token> token,
 
         if (var1->getType() != ARRAY)
         {
-            Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "First parameter is not a type of ARRAY"));
+            passible->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "First parameter is not a type of ARRAY"));
             return null;
         }
 
@@ -53,7 +59,7 @@ std::shared_ptr<Variable> ArraySet::run(std::shared_ptr<Token> token,
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "ArrayGet function requires three argument", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "ArrayGet function requires three argument", token));
     }
     return returnNode;
 }

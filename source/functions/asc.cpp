@@ -15,6 +15,12 @@
 
 #include "asc.h"
 
+Asc::Asc(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "asc";
+}
+
 std::shared_ptr<Variable> Asc::run(std::shared_ptr<Token> token,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)
@@ -36,14 +42,14 @@ std::shared_ptr<Variable> Asc::run(std::shared_ptr<Token> token,
             {
                 int temp2 = temp.at(0);
                 double ascii = (double)temp2;
-                returnNode = std::make_shared<NumberVariable>(ascii);
+                returnNode = std::make_shared<NumberVariable>(passible, ascii);
             }
         }
     }
     else
     {
-        returnNode = std::make_shared<StringVariable>();
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Asc function requires one argument", token));
+        returnNode = std::make_shared<StringVariable>(passible);
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Asc function requires one argument", token));
     }
     
     return returnNode;

@@ -15,6 +15,12 @@
 
 #include "arrayunset.h"
 
+ArrayUnset::ArrayUnset(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "arrayUnset";
+}
+
 std::shared_ptr<Variable> ArrayUnset::run(std::shared_ptr<Token> token,
                               std::shared_ptr<Scope> scope,
                               std::vector<std::shared_ptr<Node>> variables)
@@ -40,7 +46,7 @@ std::shared_ptr<Variable> ArrayUnset::run(std::shared_ptr<Token> token,
 
         if (var1->getType() != ARRAY)
         {
-            Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "First parameter is not a type of ARRAY"));
+            passible->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "First parameter is not a type of ARRAY"));
             return null;
         }
 
@@ -51,7 +57,7 @@ std::shared_ptr<Variable> ArrayUnset::run(std::shared_ptr<Token> token,
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "ArrayGet function requires two argument", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "ArrayGet function requires two argument", token));
     }
     return returnNode;
 }

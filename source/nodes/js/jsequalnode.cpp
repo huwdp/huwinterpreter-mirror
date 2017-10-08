@@ -15,8 +15,8 @@
 
 #include "jsequalnode.h"
 
-JSEqualNode::JSEqualNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right, std::shared_ptr<Node> next, std::shared_ptr<Scope> scope)
-    : EqualNode(token, left, right, next, scope)
+JSEqualNode::JSEqualNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right, std::shared_ptr<Node> next, std::shared_ptr<Scope> scope)
+    : EqualNode(passible, token, left, right, next, scope)
 {
 }
 

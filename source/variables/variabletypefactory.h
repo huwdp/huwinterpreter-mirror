@@ -24,9 +24,11 @@
 
 class VariableTypeFactory
 {
+private:
+    std::shared_ptr<Passible> passible;
 public:
-    VariableTypeFactory();
-    static std::shared_ptr<Variable> newVariable(VarType varType);
+    VariableTypeFactory(std::shared_ptr<Passible> passible);
+    std::shared_ptr<Variable> newVariable(VarType varType);
 };
 
 #endif // VARIABLETYPEFACTORY_H

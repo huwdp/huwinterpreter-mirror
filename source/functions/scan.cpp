@@ -15,6 +15,12 @@
 
 #include "scan.h"
 
+Scan::Scan(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "scan";
+}
+
 std::shared_ptr<Variable> Scan::run(std::shared_ptr<Token> token,
                                     std::shared_ptr<Scope> scope,
                                     std::vector<std::shared_ptr<Node>> variables)

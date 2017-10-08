@@ -15,6 +15,12 @@
 
 #include "fileread.h"
 
+FileRead::FileRead(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "fileRead";
+}
+
 std::shared_ptr<Variable> FileRead::run(std::shared_ptr<Token> token,
                                         std::shared_ptr<Scope> scope,
                                         std::vector<std::shared_ptr<Node>> variables)
@@ -30,7 +36,7 @@ std::shared_ptr<Variable> FileRead::run(std::shared_ptr<Token> token,
             if (var != nullptr)
             {
                 std::string stream = file.read(var->toString());
-                return std::make_shared<StringVariable>("",stream);
+                return std::make_shared<StringVariable>(passible, "",stream);
             }
             else
             {
@@ -40,7 +46,7 @@ std::shared_ptr<Variable> FileRead::run(std::shared_ptr<Token> token,
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Too many arguments in FileRead", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Too many arguments in FileRead", token));
     }
     return returnNode;
 }

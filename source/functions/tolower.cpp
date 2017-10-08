@@ -15,6 +15,12 @@
 
 #include "tolower.h"
 
+ToLower::ToLower(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "toLower";
+}
+
 std::shared_ptr<Variable> ToLower::run(std::shared_ptr<Token> token,
                                        std::shared_ptr<Scope> scope,
                                        std::vector<std::shared_ptr<Node>> variables)
@@ -34,12 +40,12 @@ std::shared_ptr<Variable> ToLower::run(std::shared_ptr<Token> token,
             std::string temp = var->toString();
             transform(temp.begin(), temp.end(), temp.begin(),::tolower);
             
-            returnNode = std::make_shared<StringVariable>("", temp);
+            returnNode = std::make_shared<StringVariable>(passible, "", temp);
         }
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "ToLower requires one at least argument", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "ToLower requires one at least argument", token));
     }
     
     return returnNode;

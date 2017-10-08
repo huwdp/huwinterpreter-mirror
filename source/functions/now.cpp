@@ -15,6 +15,12 @@
 
 #include "now.h"
 
+Now::Now(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "now";
+}
+
 std::shared_ptr<Variable> Now::run(std::shared_ptr<Token> token,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)
@@ -24,11 +30,11 @@ std::shared_ptr<Variable> Now::run(std::shared_ptr<Token> token,
     {
         time_t t = std::time(0);
         double now = static_cast<double> (t);
-        returnNode = std::make_shared<NumberVariable>(now);
+        returnNode = std::make_shared<NumberVariable>(passible, now);
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Too many arguments in Now.", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Too many arguments in Now.", token));
     }
 
     return returnNode;

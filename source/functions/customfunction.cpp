@@ -15,7 +15,11 @@
 
 #include "customfunction.h"
 
-CustomFunction::CustomFunction(std::shared_ptr<Token> token, std::string name, std::vector<std::string> arguments, std::shared_ptr<Node> block)
+CustomFunction::CustomFunction(std::shared_ptr<Passible> passible,
+                               std::shared_ptr<Token> token,
+                               std::string name, std::vector<std::string> arguments,
+                               std::shared_ptr<Node> block)
+    : Function(passible)
 {
     this->name = name;
     this->arguments = arguments;
@@ -28,11 +32,11 @@ std::shared_ptr<Variable> CustomFunction::run(std::shared_ptr<Token> token,
 {
 
     // New scope
-    std::shared_ptr<Scope> newScope = std::make_shared<Scope>();
+    std::shared_ptr<Scope> newScope = std::make_shared<Scope>(passible);
 
     if (arguments.size() != variables.size())
     {
-        Errors::add(
+        passible->errors->add(
                     std::make_shared<Error>(
                         RUNTIME_ERROR,
                         "Unmatch specified number of arguments",

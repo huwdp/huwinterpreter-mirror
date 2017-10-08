@@ -15,8 +15,8 @@
 
 #include "jsnumbernode.h"
 
-JSNumberNode::JSNumberNode(std::shared_ptr<Token> token, std::string value)
-    : NumberNode(token, value)
+JSNumberNode::JSNumberNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::string value)
+    : NumberNode(passible, token, value)
 {
 }
 

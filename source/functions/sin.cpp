@@ -15,6 +15,12 @@
 
 #include "sin.h"
 
+Sin::Sin(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "sin";
+}
+
 std::shared_ptr<Variable> Sin::run(std::shared_ptr<Token> token,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)
@@ -36,26 +42,26 @@ std::shared_ptr<Variable> Sin::run(std::shared_ptr<Token> token,
                 double temp = var->toDouble();
                 double output = std::sin(temp);
                 
-                return std::make_shared<NumberVariable>(output);
+                return std::make_shared<NumberVariable>(passible, output);
             }
             catch (const std::invalid_argument ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Sin", token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Sin", token));
             }
             catch (const std::out_of_range ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Sin", token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Sin", token));
             }
             catch (const std::exception& ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, ex.what()));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what()));
             }
         }
         
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Sin function requires one argument", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Sin function requires one argument", token));
     }
     
     return returnNode;

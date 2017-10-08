@@ -15,6 +15,12 @@
 
 #include "random.h"
 
+Random::Random(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "random";
+}
+
 std::shared_ptr<Variable> Random::run(std::shared_ptr<Token> token,
                                       std::shared_ptr<Scope> scope,
                                       std::vector<std::shared_ptr<Node>> variables)
@@ -25,11 +31,11 @@ std::shared_ptr<Variable> Random::run(std::shared_ptr<Token> token,
         std::srand(std::time(0));
         int number = std::rand();
         double value = (double)number;
-        returnNode = std::make_shared<NumberVariable>(value);
+        returnNode = std::make_shared<NumberVariable>(passible, value);
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Random requires 0 arguments", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Random requires 0 arguments", token));
     }
     
     return returnNode;

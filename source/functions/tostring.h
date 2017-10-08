@@ -24,11 +24,7 @@
 class ToString : public Function
 {
 public:
-    ToString()
-    {
-        name = "toString";
-    }
-
+    ToString(std::shared_ptr<Passible> passible);
     std::shared_ptr<Variable> run(std::shared_ptr<Token> token,
                                   std::shared_ptr<Scope> scope,
                                   std::vector<std::shared_ptr<Node>> variables);

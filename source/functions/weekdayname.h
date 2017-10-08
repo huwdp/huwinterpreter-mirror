@@ -28,11 +28,7 @@ class WeekdayName : public Function
 private:
     enum date {MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY, NONE};
 public:
-    WeekdayName()
-    {
-        name = "weekdayName";
-    }
-
+    WeekdayName(std::shared_ptr<Passible> passible);
     std::shared_ptr<Variable> run(std::shared_ptr<Token> token,
                                   std::shared_ptr<Scope> scope,
                                   std::vector<std::shared_ptr<Node>> variables);

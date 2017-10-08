@@ -15,8 +15,8 @@
 
 #include "bracketnode.h"
 
-BracketNode::BracketNode(std::shared_ptr<Token> token, std::shared_ptr<Node> node)
-    : Node(token)
+BracketNode::BracketNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> node)
+    : Node(passible, token)
 {
     this->node = node;
     Debug::print("Bracket");
@@ -39,7 +39,7 @@ std::shared_ptr<Variable> BracketNode::execute(std::shared_ptr<Scope> scope)
         std::shared_ptr<Variable> n = node->execute(scope);
         if (n == nullptr)
         {
-            Errors::add(std::make_shared<Error>(ERROR, "Invalid expression", token));
+            passible->errors->add(std::make_shared<Error>(ERROR, "Invalid expression", token));
             return null;
         }
         return n;

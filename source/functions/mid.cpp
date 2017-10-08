@@ -15,6 +15,12 @@
 
 #include "mid.h"
 
+Mid::Mid(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "mid";
+}
+
 std::shared_ptr<Variable> Mid::run(std::shared_ptr<Token> token,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)
@@ -46,22 +52,22 @@ std::shared_ptr<Variable> Mid::run(std::shared_ptr<Token> token,
             }
             catch (const std::invalid_argument ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Mid", token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Mid", token));
             }
             catch (const std::out_of_range ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Mid", token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Mid", token));
             }
             catch (const std::exception& ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
             }
-            returnNode = std::make_shared<StringVariable>("", temp);
+            returnNode = std::make_shared<StringVariable>(passible, "", temp);
         }
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Mid function requires three arguments"));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Mid function requires three arguments"));
     }
     
     return returnNode;

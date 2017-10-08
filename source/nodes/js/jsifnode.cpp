@@ -15,8 +15,8 @@
 
 #include "jsifnode.h"
 
-JSIfNode::JSIfNode(std::shared_ptr<Token> token, std::shared_ptr<Node> condition, std::shared_ptr<Node> body, std::shared_ptr<Node> elseNode)
-    : IfNode(token, condition, body, elseNode)
+JSIfNode::JSIfNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> condition, std::shared_ptr<Node> body, std::shared_ptr<Node> elseNode)
+    : IfNode(passible, token, condition, body, elseNode)
 {
 }
 

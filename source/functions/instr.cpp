@@ -15,6 +15,12 @@
 
 #include "instr.h"
 
+InStr::InStr(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "inStr";
+}
+
 std::shared_ptr<Variable> InStr::run(std::shared_ptr<Token> token,
                                      std::shared_ptr<Scope> scope,
                                      std::vector<std::shared_ptr<Node>> variables)
@@ -38,17 +44,17 @@ std::shared_ptr<Variable> InStr::run(std::shared_ptr<Token> token,
             std::size_t found = str.find(str2);
             if (found != std::string::npos)
             {
-                returnNode = std::make_shared<NumberVariable>((long long)found);
+                returnNode = std::make_shared<NumberVariable>(passible, (long long)found);
             }
             else
             {
-                returnNode = std::make_shared<NumberVariable>(-1.0);
+                returnNode = std::make_shared<NumberVariable>(passible, -1.0);
             }
         }
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "InStr function requires two arguments", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "InStr function requires two arguments", token));
     }
     return returnNode;
 }

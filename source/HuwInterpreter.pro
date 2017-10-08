@@ -6,10 +6,18 @@ TEMPLATE = app
 
 CONFIG += c++11
 CONFIG += j7
-CONFIG += Wunused-parameter
-CONFIG += -O0
+QMAKE_CXXFLAGS += -O0
+QMAKE_CXXFLAGS += -Wall
+QMAKE_CXXFLAGS += -Wextra
 
-QMAKE_CXXFLAGS_WARN_OFF += -Wunused-parameter
+QMAKE_CXXFLAGS += -Wlogical-op
+QMAKE_CXXFLAGS += -Wold-style-cast
+QMAKE_CXXFLAGS += -Wuseless-cast
+QMAKE_CXXFLAGS += -Wjump-misses-init
+QMAKE_CXXFLAGS += -Wdouble-promotion
+QMAKE_CXXFLAGS += -Wformat=2
+
+QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter
 
 SOURCES += \
     errors/debug.cpp \
@@ -179,7 +187,8 @@ SOURCES += \
     nodes/nodefactoryfactory.cpp \
     nodes/semicolonnode.cpp \
     nodes/js/jssemicolonnode.cpp \
-    format/escapecharacteroutput.cpp
+    format/escapecharacteroutput.cpp \
+    common/passible.cpp
 
 
 
@@ -397,7 +406,8 @@ HEADERS += \
     nodes/nodefactoryfactory.h \
     nodes/semicolonnode.h \
     nodes/js/jssemicolonnode.h \
-    format/escapecharacteroutput.h
+    format/escapecharacteroutput.h \
+    common/passible.h
 
 
 

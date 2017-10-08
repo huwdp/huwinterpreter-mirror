@@ -15,7 +15,8 @@
 
 #include "toint.h"
 
-ToInt::ToInt()
+ToInt::ToInt(std::shared_ptr<Passible> passible)
+    : Function(passible)
 {
     name = "toInt";
 }
@@ -43,13 +44,13 @@ std::shared_ptr<Variable> ToInt::run(std::shared_ptr<Token> token,
             }
             else if (var->isNumber() || TypeDetector::isNumeric(var->toInt()))
             {
-                return std::make_shared<NumberVariable>(var->toInt());
+                return std::make_shared<NumberVariable>(passible, var->toInt());
             }
         }
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "toInt function requires one argument", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "toInt function requires one argument", token));
     }
 
     return returnNode;

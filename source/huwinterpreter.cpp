@@ -40,8 +40,6 @@ void HuwInterpreter::execute(std::vector<std::shared_ptr<Token>> tokens)
 {
     std::unique_ptr<Parser> parser(new Parser(tokens, nodeFactory));
     parser->execute();
-    Errors::print();
-    Errors::removeAll();
 }
 
 std::string HuwInterpreter::toString(std::vector<std::shared_ptr<Token>> tokens)

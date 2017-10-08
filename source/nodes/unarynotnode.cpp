@@ -15,8 +15,8 @@
 
 #include "unarynotnode.h"
 
-UnaryNotNode::UnaryNotNode(std::shared_ptr<Token> token, std::shared_ptr<Node> node)
-    : Node(token)
+UnaryNotNode::UnaryNotNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> node)
+    : Node(passible, token)
 {
     this->node = node;
 }
@@ -40,11 +40,11 @@ std::shared_ptr<Variable> UnaryNotNode::execute(std::shared_ptr<Scope> scope)
         {
             if (var->toBool())
             {
-                return std::make_shared<NumberVariable>(0.0);
+                return std::make_shared<NumberVariable>(passible, 0.0);
             }
             else
             {
-                return std::make_shared<NumberVariable>(1.0);
+                return std::make_shared<NumberVariable>(passible, 1.0);
             }
         }
     }

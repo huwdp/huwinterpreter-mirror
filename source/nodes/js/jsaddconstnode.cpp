@@ -15,8 +15,8 @@
 
 #include "jsaddconstnode.h"
 
-JSAddConstNode::JSAddConstNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value)
-    : AddConstNode(token, name, value)
+JSAddConstNode::JSAddConstNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value)
+    : AddConstNode(passible, token, name, value)
 {
 }
 

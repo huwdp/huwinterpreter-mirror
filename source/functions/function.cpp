@@ -15,6 +15,11 @@
 
 #include "function.h"
 
+Function::Function(std::shared_ptr<Passible> passible)
+{
+    this->passible = passible;
+}
+
 std::string Function::getName()
 {
     return name;

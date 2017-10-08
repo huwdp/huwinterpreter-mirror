@@ -15,8 +15,8 @@
 
 #include "ifunderorequalnode.h"
 
-IfUnderOrEqualNode::IfUnderOrEqualNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : Node(token)
+IfUnderOrEqualNode::IfUnderOrEqualNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+    : Node(passible, token)
 {
     this->left = left;
     this->right = right;
@@ -42,12 +42,12 @@ std::shared_ptr<Variable> IfUnderOrEqualNode::execute(std::shared_ptr<Scope> sco
 
         if (l == nullptr)
         {
-            Errors::add(std::make_shared<Error>(ERROR, "Invalid expression", token));
+            passible->errors->add(std::make_shared<Error>(ERROR, "Invalid expression", token));
             return null;
         }
         if (r == nullptr)
         {
-            Errors::add(std::make_shared<Error>(ERROR, "Invalid expression", token));
+            passible->errors->add(std::make_shared<Error>(ERROR, "Invalid expression", token));
             return null;
         }
         std::shared_ptr<Variable> v = l->ifUnderOrEqual(r);

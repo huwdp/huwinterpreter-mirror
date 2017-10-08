@@ -23,7 +23,7 @@ class SemicolonNode : public Node
 protected:
     std::shared_ptr<Node> node;
 public:
-    SemicolonNode(std::shared_ptr<Node> node);
+    SemicolonNode(std::shared_ptr<Passible> passible, std::shared_ptr<Node> node);
     NodeType getType();
     std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
     std::string toString();

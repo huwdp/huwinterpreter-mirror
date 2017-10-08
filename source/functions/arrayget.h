@@ -21,11 +21,7 @@
 class ArrayGet : public Function
 {
 public:
-    ArrayGet()
-    {
-        name = "arrayGet";
-    }
-
+    ArrayGet(std::shared_ptr<Passible> passible);
     std::shared_ptr<Variable> run(std::shared_ptr<Token> token,
                                   std::shared_ptr<Scope> scope,
                                   std::vector<std::shared_ptr<Node>> variables);

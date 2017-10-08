@@ -15,7 +15,8 @@
 
 #include "todouble.h"
 
-ToDouble::ToDouble()
+ToDouble::ToDouble(std::shared_ptr<Passible> passible)
+    : Function(passible)
 {
     name = "toDouble";
 }
@@ -42,13 +43,13 @@ std::shared_ptr<Variable> ToDouble::run(std::shared_ptr<Token> token,
             }
             else if (var->isNumber() || TypeDetector::isNumeric(var->toString()))
             {
-                return std::make_shared<NumberVariable>(var->toDouble());
+                return std::make_shared<NumberVariable>(passible, var->toDouble());
             }
         }
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "toDouble function requires one argument", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "toDouble function requires one argument", token));
     }
 
     return returnNode;

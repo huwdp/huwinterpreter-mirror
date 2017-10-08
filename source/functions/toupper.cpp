@@ -15,6 +15,12 @@
 
 #include "toupper.h"
 
+ToUpper::ToUpper(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "toUpper";
+}
+
 std::shared_ptr<Variable> ToUpper::run(std::shared_ptr<Token> token,
                                        std::shared_ptr<Scope> scope,
                                        std::vector<std::shared_ptr<Node>> variables)
@@ -33,12 +39,12 @@ std::shared_ptr<Variable> ToUpper::run(std::shared_ptr<Token> token,
         {
             std::string temp = var->toString();
             transform(temp.begin(), temp.end(), temp.begin(),::toupper);
-            returnNode = std::make_shared<StringVariable>("", temp);
+            returnNode = std::make_shared<StringVariable>(passible, "", temp);
         }
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "ToUpper requires one at least argument", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "ToUpper requires one at least argument", token));
     }
     
     return returnNode;

@@ -15,6 +15,12 @@
 
 #include "pow.h"
 
+Pow::Pow(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "pow";
+}
+
 std::shared_ptr<Variable> Pow::run(std::shared_ptr<Token> token,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)
@@ -38,25 +44,25 @@ std::shared_ptr<Variable> Pow::run(std::shared_ptr<Token> token,
             {
                 double x = var1->toDouble();
                 double y = var2->toDouble();
-                returnNode = std::make_shared<NumberVariable>(std::pow(x,y));
+                returnNode = std::make_shared<NumberVariable>(passible, std::pow(x,y));
             }
             catch (const std::invalid_argument ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Pow", token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Pow", token));
             }
             catch (const std::out_of_range ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Pow", token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Pow", token));
             }
             catch (const std::exception& ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
             }
         }
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Abs function requires two arguments", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Abs function requires two arguments", token));
     }
     
     return returnNode;

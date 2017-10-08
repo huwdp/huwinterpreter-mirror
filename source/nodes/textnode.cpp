@@ -15,10 +15,11 @@
 
 #include "textnode.h"
 
-TextNode::TextNode(std::shared_ptr<Token> token, std::string value)
-    : Node(token)
+TextNode::TextNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::string value)
+    : Node(passible, token)
 {
-    this->value = VariableTypeFactory::newVariable(TypeDetector::getType(value));
+    this->variableTypeFactory = std::make_shared<VariableTypeFactory>(passible);
+    this->value = variableTypeFactory->newVariable(TypeDetector::getType(value));
     this->value->setValue(value);
     Debug::print("TextNode");
 }

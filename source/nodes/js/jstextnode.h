@@ -22,7 +22,7 @@
 class JSTextNode : public TextNode
 {
 public:
-    JSTextNode(std::shared_ptr<Token> token, std::string value);
+    JSTextNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::string value);
     std::string toString();
 };
 

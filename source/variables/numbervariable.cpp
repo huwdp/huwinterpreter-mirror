@@ -15,45 +15,47 @@
 
 #include "numbervariable.h"
 
-NumberVariable::NumberVariable(bool value)
+NumberVariable::NumberVariable(std::shared_ptr<Passible> passible, bool value)
+    : Variable(passible)
 {
-    this->variable = std::move(std::make_shared<IntegerVariable>((long long)(int)value));
+    this->variable = std::move(std::make_shared<IntegerVariable>(passible, (long long)(int)value));
 }
 
-NumberVariable::NumberVariable(std::shared_ptr<Variable> variable)
+NumberVariable::NumberVariable(std::shared_ptr<Passible> passible, std::shared_ptr<Variable> variable)
+    : Variable(passible)
 {
     this->variable = variable;
 }
 
-NumberVariable::NumberVariable(std::string name, double value)
-    : Variable(name)
+NumberVariable::NumberVariable(std::shared_ptr<Passible> passible, std::string name, double value)
+    : Variable(passible, name)
 {
     this->variable = std::move(toInternalValue(value));
 }
 
-NumberVariable::NumberVariable(double value)
-    : Variable("")
+NumberVariable::NumberVariable(std::shared_ptr<Passible> passible, double value)
+    : Variable(passible, "")
 {
     this->variable = std::move(toInternalValue(value));
 }
 
-NumberVariable::NumberVariable(long long value)
-    : Variable("")
+NumberVariable::NumberVariable(std::shared_ptr<Passible> passible, long long value)
+    : Variable(passible, "")
 {
     this->variable = std::move(toInternalValue(value));
 }
 
-NumberVariable::NumberVariable(std::string name, long long value)
-    : Variable(name)
+NumberVariable::NumberVariable(std::shared_ptr<Passible> passible, std::string name, long long value)
+    : Variable(passible, name)
 {
     this->variable = std::move(toInternalValue(value));
 }
 
-NumberVariable::NumberVariable(std::string name, std::string value)
-    : Variable(name)
+NumberVariable::NumberVariable(std::shared_ptr<Passible> passible, std::string name, std::string value)
+    : Variable(passible, name)
 {
-    VariableTypeFactory v;
-    std::shared_ptr<Variable> var = v.newVariable(TypeDetector::getType(value));
+    std::shared_ptr<VariableTypeFactory> v = std::make_shared<VariableTypeFactory>(passible);
+    std::shared_ptr<Variable> var = v->newVariable(TypeDetector::getType(value));
     var->setValue(value);
     variable = std::move(var);
 }
@@ -220,15 +222,15 @@ std::shared_ptr<Variable> NumberVariable::toInternalValue(double value)
 {
     if (precision.isSafeInteger(value))
     {
-        return std::move(std::make_shared<DoubleVariable>(value));
+        return std::move(std::make_shared<DoubleVariable>(passible, value));
     }
     else
     {
         if (precision.getType(value) == DOUBLE)
         {
-            return std::move(std::make_shared<DoubleVariable>(value));
+            return std::move(std::make_shared<DoubleVariable>(passible, value));
         }
-        return std::move(std::make_shared<IntegerVariable>(value));
+        return std::move(std::make_shared<IntegerVariable>(passible, value));
     }
 }
 
@@ -236,9 +238,9 @@ std::shared_ptr<Variable> NumberVariable::toInternalValue(long long value)
 {
     if (precision.isSafeInteger(value))
     {
-        return std::move(std::make_shared<DoubleVariable>(value));
+        return std::move(std::make_shared<DoubleVariable>(passible, value));
     }
-    return std::move(std::make_shared<DoubleVariable>(value));
+    return std::move(std::make_shared<DoubleVariable>(passible, value));
 }
 
 std::shared_ptr<Variable> NumberVariable::toValue(std::shared_ptr<Variable> variable)
@@ -251,7 +253,7 @@ std::shared_ptr<Variable> NumberVariable::toValue(std::shared_ptr<Variable> vari
     else if (precision.getType(value) == INTEGER)
     {
         long long intValue = (long long)value;
-        return std::make_shared<NumberVariable>(std::move(std::make_shared<IntegerVariable>(intValue)));
+        return std::make_shared<NumberVariable>(passible, std::move(std::make_shared<IntegerVariable>(passible, intValue)));
     }
     return std::move(variable);
 }

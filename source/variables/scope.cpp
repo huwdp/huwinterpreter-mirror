@@ -15,9 +15,9 @@
 
 #include "scope.h"
 
-Scope::Scope()
+Scope::Scope(std::shared_ptr<Passible> passible)
 {
-    variables = std::move(std::make_shared<Variables>(false));
+    variables = std::move(std::make_shared<Variables>(passible, false));
 }
 
 Scope::Scope(std::shared_ptr<Variables> variables)

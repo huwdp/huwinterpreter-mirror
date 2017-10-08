@@ -21,7 +21,7 @@
 class JSSemicolonNode : public SemicolonNode
 {
 public:
-    JSSemicolonNode(std::shared_ptr<Node> node);
+    JSSemicolonNode(std::shared_ptr<Passible> passible, std::shared_ptr<Node> node);
     std::string toString();
 };
 

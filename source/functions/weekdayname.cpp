@@ -15,6 +15,12 @@
 
 #include "weekdayname.h"
 
+WeekdayName::WeekdayName(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "weekdayName";
+}
+
 std::shared_ptr<Variable> WeekdayName::run(std::shared_ptr<Token> token,
                                            std::shared_ptr<Scope> scope,
                                            std::vector<std::shared_ptr<Node>> variables)
@@ -33,29 +39,29 @@ std::shared_ptr<Variable> WeekdayName::run(std::shared_ptr<Token> token,
         {
             double d = var->toDouble();
             int value = (int)d;
-            std::time_t t = (int)value;
+            std::time_t t = value;
             std::tm tm = *std::localtime(&t);
             std::stringstream ss;
             ss << std::put_time(&tm, "%A");
-            returnNode = std::make_shared<StringVariable>("", ss.str());
+            returnNode = std::make_shared<StringVariable>(passible, "", ss.str());
         }
         catch (const std::invalid_argument ex)
         {
-            Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in WeekdayName", token));
+            passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in WeekdayName", token));
         }
         catch (const std::out_of_range ex)
         {
-            Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in WeekdayName", token));
+            passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in WeekdayName", token));
         }
         catch (const std::exception& ex)
         {
-            Errors::add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+            passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
         }
         
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "WeekdayName requires 1 argument", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "WeekdayName requires 1 argument", token));
     }
     
     return returnNode;

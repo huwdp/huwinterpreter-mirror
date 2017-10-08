@@ -15,6 +15,12 @@
 
 #include "isint.h"
 
+IsInt::IsInt(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "isInt";
+}
+
 std::shared_ptr<Variable> IsInt::run(std::shared_ptr<Token> token,
                               std::shared_ptr<Scope> scope,
                               std::vector<std::shared_ptr<Node>> variables)
@@ -33,17 +39,17 @@ std::shared_ptr<Variable> IsInt::run(std::shared_ptr<Token> token,
         {
             if (var->getType() == INTEGER)
             {
-                returnNode = std::make_shared<NumberVariable>(true);
+                returnNode = std::make_shared<NumberVariable>(passible, true);
             }
             else
             {
-                returnNode = std::make_shared<NumberVariable>(TypeDetector::isInteger(var->toString()));
+                returnNode = std::make_shared<NumberVariable>(passible, TypeDetector::isInteger(var->toString()));
             }
         }
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "isInt function requires one arguments", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "isInt function requires one arguments", token));
     }
     return returnNode;
 }

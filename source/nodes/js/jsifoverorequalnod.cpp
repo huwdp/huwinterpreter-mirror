@@ -15,8 +15,8 @@
 
 #include "jsifoverorequalnode.h"
 
-JSIfOverOrEqualNode::JSIfOverOrEqualNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : IfOverOrEqualNode(token, left, right)
+JSIfOverOrEqualNode::JSIfOverOrEqualNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+    : IfOverOrEqualNode(passible, token, left, right)
 {
 }
 

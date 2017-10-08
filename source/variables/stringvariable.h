@@ -20,14 +20,17 @@
 #include "doublevariable.h"
 #include "variabletypefactory.h"
 
+class VariableTypeFactory;
+
 class StringVariable : public Variable
 {
 private:
     std::string value;
+    std::shared_ptr<VariableTypeFactory> variableTypeFactory;
 public:
-    StringVariable();
-    StringVariable(std::string value);
-    StringVariable(std::string name, std::string value);
+    StringVariable(std::shared_ptr<Passible> passible);
+    StringVariable(std::shared_ptr<Passible> passible, std::string value);
+    StringVariable(std::shared_ptr<Passible> passible, std::string name, std::string value);
     void setValue(double value);
     void setValue(std::string value);
     void setValue(long long value);

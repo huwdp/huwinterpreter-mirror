@@ -15,6 +15,12 @@
 
 #include "cha.h"
 
+Cha::Cha(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "cha";
+}
+
 std::shared_ptr<Variable> Cha::run(std::shared_ptr<Token> token,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)
@@ -38,25 +44,25 @@ std::shared_ptr<Variable> Cha::run(std::shared_ptr<Token> token,
                 std::string output;
                 char c = ascii;
                 output.append(1,c);
-                returnNode = std::make_shared<StringVariable>("",output);
+                returnNode = std::make_shared<StringVariable>(passible, "",output);
             }
             catch (const std::invalid_argument ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Cha", token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Cha", token));
             }
             catch (const std::out_of_range ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Cha", token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Cha", token));
             }
             catch (const std::exception& ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
             }
         }
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Cha function requires one argument", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Cha function requires one argument", token));
     }
     return returnNode;
 }

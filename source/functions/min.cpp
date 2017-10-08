@@ -15,6 +15,12 @@
 
 #include "min.h"
 
+Min::Min(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "min";
+}
+
 std::shared_ptr<Variable> Min::run(std::shared_ptr<Token> token,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)
@@ -36,23 +42,23 @@ std::shared_ptr<Variable> Min::run(std::shared_ptr<Token> token,
             }
             catch (const std::invalid_argument ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Min", token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Min", token));
             }
             catch (const std::out_of_range ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Min", token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Min", token));
             }
             catch (const std::exception& ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
             }
             
         }
-        returnNode = std::make_shared<NumberVariable>(min);
+        returnNode = std::make_shared<NumberVariable>(passible, min);
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Max function requires at least two arguments", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Max function requires at least two arguments", token));
     }
     
     return returnNode;

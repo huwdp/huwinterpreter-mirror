@@ -15,8 +15,8 @@
 
 #include "jsincrementnode.h"
 
-JSIncrementNode::JSIncrementNode(std::shared_ptr<Token> token, std::shared_ptr<Node> node)
-    : IncrementNode(token, node)
+JSIncrementNode::JSIncrementNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> node)
+    : IncrementNode(passible, token, node)
 {
 }
 

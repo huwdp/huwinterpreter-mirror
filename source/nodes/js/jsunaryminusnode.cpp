@@ -15,8 +15,8 @@
 
 #include "jsunaryminusnode.h"
 
-JSUnaryMinusNode::JSUnaryMinusNode(std::shared_ptr<Token> token, std::shared_ptr<Node> node)
-    : UnaryMinusNode(token, node)
+JSUnaryMinusNode::JSUnaryMinusNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> node)
+    : UnaryMinusNode(passible, token, node)
 {
 }
 

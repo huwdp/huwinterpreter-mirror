@@ -15,6 +15,12 @@
 
 #include "weekday.h"
 
+Weekday::Weekday(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    this->name = "weekday";
+}
+
 std::shared_ptr<Variable> Weekday::run(std::shared_ptr<Token> token,
                                        std::shared_ptr<Scope> scope,
                                        std::vector<std::shared_ptr<Node>> variables)
@@ -33,29 +39,29 @@ std::shared_ptr<Variable> Weekday::run(std::shared_ptr<Token> token,
         {
             double d = var->toDouble();
             int value = (int)d;
-            std::time_t t = (int)value;
+            std::time_t t = value;
             std::tm tm = *std::localtime(&t);
             std::stringstream ss;
             ss << std::put_time(&tm, "%w");
-            returnNode = std::make_shared<StringVariable>("", ss.str());
+            returnNode = std::make_shared<StringVariable>(passible, "", ss.str());
         }
         catch (const std::invalid_argument ex)
         {
-            Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Weekday", token));
+            passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Weekday", token));
         }
         catch (const std::out_of_range ex)
         {
-            Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Weekday", token));
+            passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Weekday", token));
         }
         catch (const std::exception& ex)
         {
-            Errors::add(std::make_shared<Error>(FUNCTION_ERROR, ex.what()));
+            passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what()));
         }
         
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Weekday function needs 1 argument", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Weekday function needs 1 argument", token));
     }
     
     return returnNode;

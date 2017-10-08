@@ -15,8 +15,8 @@
 
 #include "jswhilenode.h"
 
-JSWhileNode::JSWhileNode(std::shared_ptr<Token> token, std::shared_ptr<Node> condition, std::shared_ptr<Node> body, std::shared_ptr<Node> next)
-    : WhileNode(token, condition, body, next)
+JSWhileNode::JSWhileNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> condition, std::shared_ptr<Node> body, std::shared_ptr<Node> next)
+    : WhileNode(passible, token, condition, body, next)
 {
 }
 

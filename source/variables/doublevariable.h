@@ -32,8 +32,8 @@ private:
     const int numberPrecision = 15;
     double value;
 public:
-    DoubleVariable();
-    DoubleVariable(double value);
+    DoubleVariable(std::shared_ptr<Passible> passible);
+    DoubleVariable(std::shared_ptr<Passible> passible, double value);
     DoubleVariable(std::string name, double value);
     void setValue(double value);
     void setValue(std::string value);

@@ -15,84 +15,84 @@
 
 #include "functions.h"
 
-Functions::Functions()
+Functions::Functions(std::shared_ptr<Passible> passible)
 {
-
+    this->passible = passible;
 }
 
 void Functions::init()
 {
-    functions["command"] = std::move(std::make_shared<Command>());
-    functions["dateFormat"] = std::move(std::make_shared<DateFormat>());
-    functions["fileRead"] = std::move(std::make_shared<FileRead>());
-    functions["fileWrite"] = std::move(std::make_shared<FileWrite>());
-    functions["month"] = std::move(std::make_shared<Month>());
-    functions["monthName"] = std::move(std::make_shared<MonthName>());
-    functions["not"] = std::move(std::make_shared<Not>());
-    functions["now"] = std::move(std::make_shared<Now>());
-    functions["print"] = std::move(std::make_shared<Print>());
-    functions["scan"] = std::move(std::make_shared<Scan>());
-    functions["weekday"] = std::move(std::make_shared<Weekday>());
-    functions["weekdayName"] = std::move(std::make_shared<WeekdayName>());
-    functions["year"] = std::move(std::make_shared<Year>());
+    functions["command"] = std::move(std::make_shared<Command>(passible));
+    functions["dateFormat"] = std::move(std::make_shared<DateFormat>(passible));
+    functions["fileRead"] = std::move(std::make_shared<FileRead>(passible));
+    functions["fileWrite"] = std::move(std::make_shared<FileWrite>(passible));
+    functions["month"] = std::move(std::make_shared<Month>(passible));
+    functions["monthName"] = std::move(std::make_shared<MonthName>(passible));
+    functions["not"] = std::move(std::make_shared<Not>(passible));
+    functions["now"] = std::move(std::make_shared<Now>(passible));
+    functions["print"] = std::move(std::make_shared<Print>(passible));
+    functions["scan"] = std::move(std::make_shared<Scan>(passible));
+    functions["weekday"] = std::move(std::make_shared<Weekday>(passible));
+    functions["weekdayName"] = std::move(std::make_shared<WeekdayName>(passible));
+    functions["year"] = std::move(std::make_shared<Year>(passible));
 
 
-    functions["abs"] = std::move(std::make_shared<Abs>());
-    functions["acos"] = std::move(std::make_shared<Acos>());
-    functions["asin"] = std::move(std::make_shared<Asin>());
-    functions["atan"] = std::move(std::make_shared<Atan>());
-    functions["atan2"] = std::move(std::make_shared<Atan2>());
-    functions["ceil"] = std::move(std::make_shared<Ceil>());
-    functions["cos"] = std::move(std::make_shared<Cos>());
-    functions["exp"] = std::move(std::make_shared<Exp>());
-    functions["sin"] = std::move(std::make_shared<Sin>());
-    functions["sqrt"] = std::move(std::make_shared<Sqrt>());
-    functions["tan"] = std::move(std::make_shared<Tan>());
-    functions["pow"] = std::move(std::make_shared<Pow>());
-    functions["min"] = std::move(std::make_shared<Min>());
-    functions["max"] = std::move(std::make_shared<Max>());
+    functions["abs"] = std::move(std::make_shared<Abs>(passible));
+    functions["acos"] = std::move(std::make_shared<Acos>(passible));
+    functions["asin"] = std::move(std::make_shared<Asin>(passible));
+    functions["atan"] = std::move(std::make_shared<Atan>(passible));
+    functions["atan2"] = std::move(std::make_shared<Atan2>(passible));
+    functions["ceil"] = std::move(std::make_shared<Ceil>(passible));
+    functions["cos"] = std::move(std::make_shared<Cos>(passible));
+    functions["exp"] = std::move(std::make_shared<Exp>(passible));
+    functions["sin"] = std::move(std::make_shared<Sin>(passible));
+    functions["sqrt"] = std::move(std::make_shared<Sqrt>(passible));
+    functions["tan"] = std::move(std::make_shared<Tan>(passible));
+    functions["pow"] = std::move(std::make_shared<Pow>(passible));
+    functions["min"] = std::move(std::make_shared<Min>(passible));
+    functions["max"] = std::move(std::make_shared<Max>(passible));
 
 
-    functions["inStr"] = std::move(std::make_shared<InStr>());
-    functions["inStrRev"] = std::move(std::make_shared<InStrRev>());
-    functions["toLower"] = std::move(std::make_shared<ToLower>());
-    functions["left"] = std::move(std::make_shared<Left>());
-    functions["len"] = std::move(std::make_shared<Len>());
-    functions["lTrim"] = std::move(std::make_shared<LTrim>());
-    functions["mid"] = std::move(std::make_shared<Mid>());
-    functions["right"] = std::move(std::make_shared<Right>());
-    functions["rTrim"] = std::move(std::make_shared<RTrim>());
-    functions["space"] = std::move(std::make_shared<Space>());
-    functions["strCmp"] = std::move(std::make_shared<StrComp>());
-    functions["strRev"] = std::move(std::make_shared<StrReverse>());
-    functions["trim"] = std::move(std::make_shared<Trim>());
-    functions["toUpper"] = std::move(std::make_shared<ToUpper>());
-    functions["random"] = std::move(std::make_shared<Random>());
+    functions["inStr"] = std::move(std::make_shared<InStr>(passible));
+    functions["inStrRev"] = std::move(std::make_shared<InStrRev>(passible));
+    functions["toLower"] = std::move(std::make_shared<ToLower>(passible));
+    functions["left"] = std::move(std::make_shared<Left>(passible));
+    functions["len"] = std::move(std::make_shared<Len>(passible));
+    functions["lTrim"] = std::move(std::make_shared<LTrim>(passible));
+    functions["mid"] = std::move(std::make_shared<Mid>(passible));
+    functions["right"] = std::move(std::make_shared<Right>(passible));
+    functions["rTrim"] = std::move(std::make_shared<RTrim>(passible));
+    functions["space"] = std::move(std::make_shared<Space>(passible));
+    functions["strCmp"] = std::move(std::make_shared<StrComp>(passible));
+    functions["strRev"] = std::move(std::make_shared<StrReverse>(passible));
+    functions["trim"] = std::move(std::make_shared<Trim>(passible));
+    functions["toUpper"] = std::move(std::make_shared<ToUpper>(passible));
+    functions["random"] = std::move(std::make_shared<Random>(passible));
 
 
-    functions["asc"] = std::move(std::make_shared<Asc>());
-    functions["cha"] = std::move(std::make_shared<Cha>());
-    functions["str"] = std::move(std::make_shared<Str>());
+    functions["asc"] = std::move(std::make_shared<Asc>(passible));
+    functions["cha"] = std::move(std::make_shared<Cha>(passible));
+    functions["str"] = std::move(std::make_shared<Str>(passible));
 
-    functions["array"] = std::move(std::make_shared<Array>());
-    functions["arrayGet"] = std::move(std::make_shared<ArrayGet>());
-    functions["arraySet"] = std::move(std::make_shared<ArraySet>());
-    functions["arrayUnset"] = std::move(std::make_shared<ArrayUnset>());
+    functions["array"] = std::move(std::make_shared<Array>(passible));
+    functions["arrayGet"] = std::move(std::make_shared<ArrayGet>(passible));
+    functions["arraySet"] = std::move(std::make_shared<ArraySet>(passible));
+    functions["arrayUnset"] = std::move(std::make_shared<ArrayUnset>(passible));
 
-    functions["count"] = std::move(std::make_shared<Count>());
+    functions["count"] = std::move(std::make_shared<Count>(passible));
 
-    functions["isIntType"] = std::move(std::make_shared<IsIntType>());
-    functions["isDoubleType"] = std::move(std::make_shared<IsDoubleType>());
-    functions["isStringType"] = std::move(std::make_shared<IsStringType>());
-    functions["isArrayType"] = std::move(std::make_shared<IsArrayType>());
-    functions["isNumberType"] = std::move(std::make_shared<IsNumberType>());
+    functions["isIntType"] = std::move(std::make_shared<IsIntType>(passible));
+    functions["isDoubleType"] = std::move(std::make_shared<IsDoubleType>(passible));
+    functions["isStringType"] = std::move(std::make_shared<IsStringType>(passible));
+    functions["isArrayType"] = std::move(std::make_shared<IsArrayType>(passible));
+    functions["isNumberType"] = std::move(std::make_shared<IsNumberType>(passible));
 
-    functions["isInt"] = std::move(std::make_shared<IsInt>());
-    functions["isDouble"] = std::move(std::make_shared<IsDouble>());
-    functions["isNumber"] = std::move(std::make_shared<IsNumber>());
+    functions["isInt"] = std::move(std::make_shared<IsInt>(passible));
+    functions["isDouble"] = std::move(std::make_shared<IsDouble>(passible));
+    functions["isNumber"] = std::move(std::make_shared<IsNumber>(passible));
 
-    functions["toInt"] = std::move(std::make_shared<ToInt>());
-    functions["toDouble"] = std::move(std::make_shared<ToDouble>());
+    functions["toInt"] = std::move(std::make_shared<ToInt>(passible));
+    functions["toDouble"] = std::move(std::make_shared<ToDouble>(passible));
 }
 
 std::shared_ptr<Function> Functions::get(std::string name)
@@ -129,7 +129,7 @@ bool Functions::addFunction(std::string name)
         //std::shared_ptr<Function> newFunction = std::make_shared<Function>();
         //newFunction->setName(name);
 
-        std::shared_ptr<EmptyFunction> empty = std::make_shared<EmptyFunction>();
+        std::shared_ptr<EmptyFunction> empty = std::make_shared<EmptyFunction>(passible);
         functions[name] = empty;
         return true;
     }

@@ -15,8 +15,8 @@
 
 #include "jsgetfuncnode.h"
 
-JSGetFuncNode::JSGetFuncNode(std::shared_ptr<Token> token, std::string name, std::shared_ptr<Functions> functions, std::vector<std::shared_ptr<Node>> arguments)
-    : GetFuncNode(token, name, functions, arguments)
+JSGetFuncNode::JSGetFuncNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::string name, std::shared_ptr<Functions> functions, std::vector<std::shared_ptr<Node>> arguments)
+    : GetFuncNode(passible, token, name, functions, arguments)
 {
 }
 

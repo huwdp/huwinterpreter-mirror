@@ -15,6 +15,12 @@
 
 #include "str.h"
 
+Str::Str(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "str";
+}
+
 std::shared_ptr<Variable> Str::run(std::shared_ptr<Token> token,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)
@@ -31,12 +37,12 @@ std::shared_ptr<Variable> Str::run(std::shared_ptr<Token> token,
         std::shared_ptr<Variable> var = node1->execute(scope);
         if (var != nullptr)
         {
-            returnNode = std::make_shared<StringVariable>("", var->toString());
+            returnNode = std::make_shared<StringVariable>(passible, "", var->toString());
         }
     }
     else
     {
-        Errors::add("Str requires one argument");
+        passible->errors->add("Str requires one argument");
     }
 
     return returnNode;

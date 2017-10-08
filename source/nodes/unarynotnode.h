@@ -23,7 +23,7 @@ class UnaryNotNode : public Node
 protected:
     std::shared_ptr<Node> node;
 public:
-    UnaryNotNode(std::shared_ptr<Token> token, std::shared_ptr<Node> node);
+    UnaryNotNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> node);
     NodeType getType();
     std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
     std::string toString();

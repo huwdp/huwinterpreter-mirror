@@ -15,8 +15,8 @@
 
 #include "jssetreturnnode.h"
 
-JSSetReturnNode::JSSetReturnNode(std::shared_ptr<Node> node)
-    : SetReturnNode(node)
+JSSetReturnNode::JSSetReturnNode(std::shared_ptr<Passible> passible, std::shared_ptr<Node> node)
+    : SetReturnNode(passible, node)
 {
 }
 

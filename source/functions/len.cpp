@@ -15,6 +15,12 @@
 
 #include "len.h"
 
+Len::Len(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "len";
+}
+
 std::shared_ptr<Variable> Len::run(std::shared_ptr<Token> token,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)
@@ -33,12 +39,12 @@ std::shared_ptr<Variable> Len::run(std::shared_ptr<Token> token,
         {
             std::string temp = var->toString();
             double length = temp.length();
-            returnNode = std::make_shared<NumberVariable>(length);
+            returnNode = std::make_shared<NumberVariable>(passible, length);
         }
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Len function requires one argument", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Len function requires one argument", token));
     }
     
     return returnNode;

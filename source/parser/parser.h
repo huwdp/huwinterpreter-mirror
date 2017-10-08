@@ -88,6 +88,7 @@ private:
     bool compilation;
     std::shared_ptr<Node> null;
     std::shared_ptr<NodeFactory> codeFactory;
+    std::shared_ptr<Passible> passible;
 
     void setCompilation(bool compilation);
     void nextToken();

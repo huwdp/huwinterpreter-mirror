@@ -15,10 +15,11 @@
 
 #include "numbernode.h"
 
-NumberNode::NumberNode(std::shared_ptr<Token> token, std::string value)
-    : Node(token)
+NumberNode::NumberNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::string value)
+    : Node(passible, token)
 {
-    this->value = VariableTypeFactory::newVariable(TypeDetector::getType(value));
+    variableTypeFactory = std::make_shared<VariableTypeFactory>(passible);
+    this->value = variableTypeFactory->newVariable(TypeDetector::getType(value));
     this->value->setValue(value);
     Debug::print("NumberNode");
 }

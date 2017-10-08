@@ -15,6 +15,12 @@
 
 #include "ceil.h"
 
+Ceil::Ceil(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "ceil";
+}
+
 std::shared_ptr<Variable> Ceil::run(std::shared_ptr<Token> token,
                                     std::shared_ptr<Scope> scope,
                                     std::vector<std::shared_ptr<Node>> variables)
@@ -36,25 +42,25 @@ std::shared_ptr<Variable> Ceil::run(std::shared_ptr<Token> token,
             {
                 double temp = var->toDouble();
                 double output = std::ceil(temp);
-                returnNode = std::make_shared<NumberVariable>(output);
+                returnNode = std::make_shared<NumberVariable>(passible, output);
             }
             catch (const std::invalid_argument ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Ceil", token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Ceil", token));
             }
             catch (const std::out_of_range ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Ceil", token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Ceil", token));
             }
             catch (const std::exception& ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
             }
         }
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Ceil function requires one argument", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Ceil function requires one argument", token));
     }
     return returnNode;
 }

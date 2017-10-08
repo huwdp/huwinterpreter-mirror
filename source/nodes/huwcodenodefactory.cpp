@@ -20,228 +20,228 @@ HuwCodeNodeFactory::HuwCodeNodeFactory()
 
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateAddConstNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateAddConstNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                       std::string name,
                                                       std::shared_ptr<Node> value)
 {
-    return std::make_shared<AddConstNode>(token,name,value);
+    return std::make_shared<AddConstNode>(passible, token, name,value);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateAddNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateAddNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                  std::shared_ptr<Node> left,
                                                  std::shared_ptr<Node> right)
 {
-    return std::make_shared<AddNode>(token, left, right);
+    return std::make_shared<AddNode>(passible, token, left, right);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateAddVarNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateAddVarNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                     std::string name,
                                                     std::shared_ptr<Node> value)
 {
-    return std::make_shared<AddVarNode>(token, name, value);
+    return std::make_shared<AddVarNode>(passible, token, name, value);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateBitwiseAndNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateBitwiseAndNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                         std::shared_ptr<Node> left,
                                                         std::shared_ptr<Node> right)
 {
-    return std::make_shared<BitwiseAndNode>(token, left, right);
+    return std::make_shared<BitwiseAndNode>(passible, token, left, right);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateBitwiseOrNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateBitwiseOrNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                        std::shared_ptr<Node> left,
                                                        std::shared_ptr<Node> right)
 {
-    return std::make_shared<BitwiseOrNode>(token, left, right);
+    return std::make_shared<BitwiseOrNode>(passible, token, left, right);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateBracketNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateBracketNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                      std::shared_ptr<Node> node)
 {
-    return std::make_shared<BracketNode>(token, node);
+    return std::make_shared<BracketNode>(passible, token, node);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateDecrementNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateDecrementNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                        std::shared_ptr<Node> node)
 {
-    return std::make_shared<DecrementNode>(token, node);
+    return std::make_shared<DecrementNode>(passible, token, node);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateDivNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateDivNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                  std::shared_ptr<Node> left,
                                                  std::shared_ptr<Node> right)
 {
-    return std::make_shared<DivNode>(token, left, right);
+    return std::make_shared<DivNode>(passible, token, left, right);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateEqualNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateEqualNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                    std::shared_ptr<Node> left,
                                                    std::shared_ptr<Node> right,
                                                    std::shared_ptr<Node> next,
                                                    std::shared_ptr<Scope> scope)
 {
-    return std::make_shared<EqualNode>(token, left, right, next, scope);
+    return std::make_shared<EqualNode>(passible, token, left, right, next, scope);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateGetFuncNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateGetFuncNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                      std::string name,
                                                      std::shared_ptr<Functions> functions,
                                                      std::vector<std::shared_ptr<Node>> arguments)
 {
-    return std::make_shared<GetFuncNode>(token, name, functions, arguments);
+    return std::make_shared<GetFuncNode>(passible, token, name, functions, arguments);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateGetVarNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateGetVarNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                     std::string name)
 {
-    return std::make_shared<GetVarNode>(token, name);
+    return std::make_shared<GetVarNode>(passible, token, name);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateIfAndNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateIfAndNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                    std::shared_ptr<Node> left,
                                                    std::shared_ptr<Node> right)
 {
-    return std::make_shared<IfAndNode>(token, left, right);
+    return std::make_shared<IfAndNode>(passible, token, left, right);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateIfEqualNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateIfEqualNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                      std::shared_ptr<Node> left,
                                                      std::shared_ptr<Node> right)
 {
-    return std::make_shared<IfEqualNode>(token, left, right);
+    return std::make_shared<IfEqualNode>(passible, token, left, right);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateIfNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateIfNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                 std::shared_ptr<Node> condition,
                                                 std::shared_ptr<Node> body,
                                                 std::shared_ptr<Node> elseNode)
 {
-    return std::make_shared<IfNode>(token, condition, body, elseNode);
+    return std::make_shared<IfNode>(passible, token, condition, body, elseNode);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateIfNotEqualNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateIfNotEqualNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                         std::shared_ptr<Node> left,
                                                         std::shared_ptr<Node> right)
 {
-    return std::make_shared<IfNotEqualNode>(token, left, right);
+    return std::make_shared<IfNotEqualNode>(passible, token, left, right);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateIfOrNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateIfOrNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                   std::shared_ptr<Node> left,
                                                   std::shared_ptr<Node> right)
 {
-    return std::make_shared<IfOrNode>(token, left, right);
+    return std::make_shared<IfOrNode>(passible, token, left, right);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateIfOverNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateIfOverNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                     std::shared_ptr<Node> left,
                                                     std::shared_ptr<Node> right)
 {
-    return std::make_shared<IfOverNode>(token, left, right);
+    return std::make_shared<IfOverNode>(passible, token, left, right);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateIfOverOrEqualNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateIfOverOrEqualNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                            std::shared_ptr<Node> left,
                                                            std::shared_ptr<Node> right)
 {
-    return std::make_shared<IfOverOrEqualNode>(token, left, right);
+    return std::make_shared<IfOverOrEqualNode>(passible, token, left, right);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateIfUnderNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateIfUnderNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                      std::shared_ptr<Node> left,
                                                      std::shared_ptr<Node> right)
 {
-    return std::make_shared<IfUnderNode>(token, left, right);
+    return std::make_shared<IfUnderNode>(passible, token, left, right);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateIfUnderOrEqualNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateIfUnderOrEqualNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                             std::shared_ptr<Node> left,
                                                             std::shared_ptr<Node> right)
 {
-    return std::make_shared<IfUnderOrEqualNode>(token, left, right);
+    return std::make_shared<IfUnderOrEqualNode>(passible, token, left, right);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateIncrementNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateIncrementNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                        std::shared_ptr<Node> node)
 {
-    return std::make_shared<IncrementNode>(token, node);
+    return std::make_shared<IncrementNode>(passible, token, node);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateModNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateModNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                  std::shared_ptr<Node> left,
                                                  std::shared_ptr<Node> right)
 {
-    return std::make_shared<ModNode>(token, left, right);
+    return std::make_shared<ModNode>(passible, token, left, right);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateMulNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateMulNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                  std::shared_ptr<Node> left,
                                                  std::shared_ptr<Node> right)
 {
-    return std::make_shared<MulNode>(token, left, right);
+    return std::make_shared<MulNode>(passible, token, left, right);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateNumberNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateNumberNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                     std::string value)
 {
-    return std::make_shared<NumberNode>(token, value);
+    return std::make_shared<NumberNode>(passible, token, value);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateRunNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateRunNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                  std::shared_ptr<Node> left,
                                                  std::shared_ptr<Node> right)
 {
-    return std::make_shared<RunNode>(token, left, right);
+    return std::make_shared<RunNode>(passible, token, left, right);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateSemicolonNode(std::shared_ptr<Node> node)
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateSemicolonNode(std::shared_ptr<Passible> passible, std::shared_ptr<Node> node)
 {
-    return std::make_shared<SemicolonNode>(node);
+    return std::make_shared<SemicolonNode>(passible, node);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateSetReturnNode(std::shared_ptr<Node> node)
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateSetReturnNode(std::shared_ptr<Passible> passible, std::shared_ptr<Node> node)
 {
-    return std::make_shared<SetReturnNode>(node);
+    return std::make_shared<SetReturnNode>(passible, node);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateSetVarNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateSetVarNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                     std::string name,
                                                     std::shared_ptr<Node> value)
 {
-    return std::make_shared<SetVarNode>(token, name, value);
+    return std::make_shared<SetVarNode>(passible, token, name, value);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateSubNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateSubNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                  std::shared_ptr<Node> left,
                                                  std::shared_ptr<Node> right)
 {
-    return std::make_shared<SubNode>(token, left, right);
+    return std::make_shared<SubNode>(passible, token, left, right);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateTextNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateTextNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                   std::string value)
 {
-    return std::make_shared<TextNode>(token, value);
+    return std::make_shared<TextNode>(passible, token, value);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateUnaryMinusNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateUnaryMinusNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                         std::shared_ptr<Node> node)
 {
-    return std::make_shared<UnaryMinusNode>(token, node);
+    return std::make_shared<UnaryMinusNode>(passible, token, node);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateUnaryNotNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateUnaryNotNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                       std::shared_ptr<Node> node)
 {
-    return std::make_shared<UnaryNotNode>(token, node);
+    return std::make_shared<UnaryNotNode>(passible, token, node);
 }
 
-std::shared_ptr<Node> HuwCodeNodeFactory::CreateWhileNode(std::shared_ptr<Token> token,
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateWhileNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token,
                                                    std::shared_ptr<Node> condition,
                                                    std::shared_ptr<Node> body,
                                                    std::shared_ptr<Node> next)
 {
-    return std::make_shared<WhileNode>(token, std::move(condition), std::move(body), next);
+    return std::make_shared<WhileNode>(passible, token, std::move(condition), std::move(body), next);
 }
 
 

@@ -15,8 +15,8 @@
 
 #include "ifovernode.h"
 
-IfOverNode::IfOverNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : Node(token)
+IfOverNode::IfOverNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+    : Node(passible, token)
 {
     this->left = left;
     this->right = right;
@@ -43,12 +43,12 @@ std::shared_ptr<Variable> IfOverNode::execute(std::shared_ptr<Scope> scope)
 
         if (l == nullptr)
         {
-            Errors::add(std::make_shared<Error>(ERROR, "Invalid expression", token));
+            passible->errors->add(std::make_shared<Error>(ERROR, "Invalid expression", token));
             return null;
         }
         if (r == nullptr)
         {
-            Errors::add(std::make_shared<Error>(ERROR, "Invalid expression", token));
+            passible->errors->add(std::make_shared<Error>(ERROR, "Invalid expression", token));
             return null;
         }
         std::shared_ptr<Variable> v = l->ifOver(r);

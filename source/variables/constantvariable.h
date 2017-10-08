@@ -24,7 +24,7 @@ private:
     bool isSet;
     std::shared_ptr<Variable> variable;
 public:
-    ConstantVariable(std::shared_ptr<Variable> variable);
+    ConstantVariable(std::shared_ptr<Passible> passible, std::shared_ptr<Variable> variable);
     void setValue(double value);
     void setValue(std::string value);
     void setValue(long long value);

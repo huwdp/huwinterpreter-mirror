@@ -15,6 +15,12 @@
 
 #include "replace.h"
 
+Replace::Replace(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "replace";
+}
+
 std::shared_ptr<Variable> Replace::run(std::shared_ptr<Token> token,
                                        std::shared_ptr<Scope> scope,
                                        std::vector<std::shared_ptr<Node>> variables)
@@ -40,12 +46,12 @@ std::shared_ptr<Variable> Replace::run(std::shared_ptr<Token> token,
             std::string temp2 = var2->toString();
             std::string temp3 = var3->toString();
             temp1.replace(temp1.find(temp2),temp2.length(),temp3);
-            returnNode = std::make_shared<StringVariable>("", temp1);
+            returnNode = std::make_shared<StringVariable>(passible, "", temp1);
         }
     }
     else
     {
-        Errors::add("Replace requires three argument");
+        passible->errors->add("Replace requires three argument");
     }
 
     return returnNode;

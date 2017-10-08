@@ -15,8 +15,8 @@
 
 #include "jsdivnode.h"
 
-JSDivNode::JSDivNode(std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : DivNode(token, left, right)
+JSDivNode::JSDivNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+    : DivNode(passible, token, left, right)
 {
 }
 

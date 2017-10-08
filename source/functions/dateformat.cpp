@@ -15,6 +15,12 @@
 
 #include "dateformat.h"
 
+DateFormat::DateFormat(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "dateFormat";
+}
+
 std::shared_ptr<Variable> DateFormat::run(std::shared_ptr<Token> token,
                                           std::shared_ptr<Scope> scope,
                                           std::vector<std::shared_ptr<Node>> variables)
@@ -45,29 +51,29 @@ std::shared_ptr<Variable> DateFormat::run(std::shared_ptr<Token> token,
             ss << std::put_time(&tm, format.c_str());
             if (ss.fail())
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Could not parse time in DateFormat\n", token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Could not parse time in DateFormat\n", token));
             }
             else
             {
-                returnNode = std::make_shared<StringVariable>("",ss.str());
+                returnNode = std::make_shared<StringVariable>(passible, "", ss.str());
             }
         }
         catch (const std::invalid_argument ex)
         {
-            Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in DateFormat", token));
+            passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in DateFormat", token));
         }
         catch (const std::out_of_range ex)
         {
-            Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in DateFormat", token));
+            passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in DateFormat", token));
         }
         catch (const std::exception& ex)
         {
-            Errors::add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+            passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
         }
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Too many arguments in DateFormat", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Too many arguments in DateFormat", token));
     }
 
     return returnNode;

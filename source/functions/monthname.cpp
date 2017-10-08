@@ -15,6 +15,12 @@
 
 #include "monthname.h"
 
+MonthName::MonthName(std::shared_ptr<Passible> passible)
+    : Function(passible)
+{
+    name = "monthName";
+}
+
 std::shared_ptr<Variable> MonthName::run(std::shared_ptr<Token> token,
                                          std::shared_ptr<Scope> scope,
                                          std::vector<std::shared_ptr<Node>> variables)
@@ -39,26 +45,26 @@ std::shared_ptr<Variable> MonthName::run(std::shared_ptr<Token> token,
                 std::tm tm = *std::localtime(&t);
                 std::stringstream ss;
                 ss << std::put_time(&tm, "%B");
-                returnNode = std::make_shared<StringVariable>("", ss.str());
+                returnNode = std::make_shared<StringVariable>(passible, "", ss.str());
             }
             catch (const std::invalid_argument ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in MonthName", token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in MonthName", token));
             }
             catch (const std::out_of_range ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in MonthName", token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in MonthName", token));
             }
             catch (const std::exception& ex)
             {
-                Errors::add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
             }
             
         }
     }
     else
     {
-        Errors::add(std::make_shared<Error>(FUNCTION_ERROR, "MonthName requires 1 argument", token));
+        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "MonthName requires 1 argument", token));
     }
     
     return returnNode;

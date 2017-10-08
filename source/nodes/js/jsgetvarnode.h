@@ -21,7 +21,7 @@
 class JSGetVarNode : public GetVarNode
 {
 public:
-    JSGetVarNode(std::shared_ptr<Token> token, std::string name);
+    JSGetVarNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::string name);
     std::string toString();
 };
 

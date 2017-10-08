@@ -22,17 +22,17 @@
 class Errors
 {
 private:
-    static std::vector<std::shared_ptr<Error>> errorList;
+    std::vector<std::shared_ptr<Error>> errorList;
 public:
     Errors();
     ~Errors();
-    void static add(std::string error);
-    void static add(std::shared_ptr<Error> error);
-    void static remove(std::shared_ptr<Error> error);
-    void static removeAll();
-    static std::vector<std::shared_ptr<Error>> get();
-    void static set(std::vector<std::shared_ptr<Error>> errors);
-    void static print();
+    void add(std::string error);
+    void add(std::shared_ptr<Error> error);
+    void remove(std::shared_ptr<Error> error);
+    void removeAll();
+    std::vector<std::shared_ptr<Error>> get();
+    void set(std::vector<std::shared_ptr<Error>> errors);
+    void print();
 };
 
 #endif // ERROR_H

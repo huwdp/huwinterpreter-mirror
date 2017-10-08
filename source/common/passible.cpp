@@ -13,21 +13,4 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef OVERNODE_H
-#define OVERNODE_H
-
-#include "node.h"
-
-class IfOverNode : public Node
-{
-protected:
-    std::shared_ptr<Node> left;
-    std::shared_ptr<Node> right;
-public:
-    IfOverNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right);
-    NodeType getType();
-    std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
-    std::string toString();
-};
-
-#endif // OVERNODE_H
+#include "passible.h"

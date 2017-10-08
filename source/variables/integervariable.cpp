@@ -15,19 +15,20 @@
 
 #include "integervariable.h"
 
-IntegerVariable::IntegerVariable()
+IntegerVariable::IntegerVariable(std::shared_ptr<Passible> passible)
+    : Variable(passible)
 {
     value = 0;
 }
 
-IntegerVariable::IntegerVariable(long long value)
-    : Variable("")
+IntegerVariable::IntegerVariable(std::shared_ptr<Passible> passible, long long value)
+    : Variable(passible, "")
 {
     this->value = value;
 }
 
 IntegerVariable::IntegerVariable(std::string name, long long value)
-    : Variable(name)
+    : Variable(passible, name)
 {
     this->value = value;
 }
@@ -45,7 +46,7 @@ void IntegerVariable::setValue(std::string value)
     }
     catch (const std::exception& e)
     {
-        Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Could not convert string to integer"));
+        passible->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Could not convert string to integer"));
     }
 }
 
@@ -99,7 +100,7 @@ std::shared_ptr<Variable> IntegerVariable::pow(std::shared_ptr<Variable> variabl
     {
         return null;
     }
-    return std::move(std::make_shared<NumberVariable>(std::pow(this->toDouble(),variable->toDouble())));
+    return std::move(std::make_shared<NumberVariable>(passible, std::pow(this->toDouble(),variable->toDouble())));
 }
 
 std::shared_ptr<Variable> IntegerVariable::mul(std::shared_ptr<Variable> variable)
@@ -108,7 +109,7 @@ std::shared_ptr<Variable> IntegerVariable::mul(std::shared_ptr<Variable> variabl
     {
         return null;
     }
-    return std::move(std::make_shared<NumberVariable>(this->toDouble() * variable->toDouble()));
+    return std::move(std::make_shared<NumberVariable>(passible, this->toDouble() * variable->toDouble()));
 }
 
 std::shared_ptr<Variable> IntegerVariable::div(std::shared_ptr<Variable> variable)
@@ -117,7 +118,7 @@ std::shared_ptr<Variable> IntegerVariable::div(std::shared_ptr<Variable> variabl
     {
         return null;
     }
-    return std::move(std::make_shared<NumberVariable>(this->toDouble() / variable->toDouble()));
+    return std::move(std::make_shared<NumberVariable>(passible, this->toDouble() / variable->toDouble()));
 }
 
 std::shared_ptr<Variable> IntegerVariable::mod(std::shared_ptr<Variable> variable)
@@ -127,7 +128,7 @@ std::shared_ptr<Variable> IntegerVariable::mod(std::shared_ptr<Variable> variabl
         
         return null;
     }
-    return std::make_shared<NumberVariable>(fmod(this->toDouble(), variable->toDouble()));
+    return std::make_shared<NumberVariable>(passible, fmod(this->toDouble(), variable->toDouble()));
 }
 
 std::shared_ptr<Variable> IntegerVariable::add(std::shared_ptr<Variable> variable)
@@ -136,7 +137,7 @@ std::shared_ptr<Variable> IntegerVariable::add(std::shared_ptr<Variable> variabl
     {
         return null;
     }
-    return std::move(std::make_shared<NumberVariable>(this->toDouble() + variable->toDouble()));
+    return std::move(std::make_shared<NumberVariable>(passible, this->toDouble() + variable->toDouble()));
 }
 
 std::shared_ptr<Variable> IntegerVariable::sub(std::shared_ptr<Variable> variable)
@@ -145,7 +146,7 @@ std::shared_ptr<Variable> IntegerVariable::sub(std::shared_ptr<Variable> variabl
     {
         return null;
     }
-    return std::move(std::make_shared<NumberVariable>(this->toDouble() - variable->toDouble()));
+    return std::move(std::make_shared<NumberVariable>(passible, this->toDouble() - variable->toDouble()));
 }
 
 std::shared_ptr<Variable> IntegerVariable::ifUnder(std::shared_ptr<Variable> variable)
@@ -154,7 +155,7 @@ std::shared_ptr<Variable> IntegerVariable::ifUnder(std::shared_ptr<Variable> var
     {
         return null;
     }
-    return std::move(std::make_shared<NumberVariable>(this->toDouble() < variable->toDouble()));
+    return std::move(std::make_shared<NumberVariable>(passible, this->toDouble() < variable->toDouble()));
 }
 
 std::shared_ptr<Variable> IntegerVariable::ifUnderOrEqual(std::shared_ptr<Variable> variable)
@@ -163,7 +164,7 @@ std::shared_ptr<Variable> IntegerVariable::ifUnderOrEqual(std::shared_ptr<Variab
     {
         return null;
     }
-    return std::move(std::make_shared<NumberVariable>(this->toDouble() <= variable->toDouble()));
+    return std::move(std::make_shared<NumberVariable>(passible, this->toDouble() <= variable->toDouble()));
 }
 
 std::shared_ptr<Variable> IntegerVariable::ifOver(std::shared_ptr<Variable> variable)
@@ -172,7 +173,7 @@ std::shared_ptr<Variable> IntegerVariable::ifOver(std::shared_ptr<Variable> vari
     {
         return null;
     }
-    return std::move(std::make_shared<NumberVariable>(this->toDouble() > variable->toDouble()));
+    return std::move(std::make_shared<NumberVariable>(passible, this->toDouble() > variable->toDouble()));
 }
 
 std::shared_ptr<Variable> IntegerVariable::ifOverOrEqual(std::shared_ptr<Variable> variable)
@@ -181,7 +182,7 @@ std::shared_ptr<Variable> IntegerVariable::ifOverOrEqual(std::shared_ptr<Variabl
     {
         return null;
     }
-    return std::move(std::make_shared<NumberVariable>(this->toDouble() >= variable->toDouble()));
+    return std::move(std::make_shared<NumberVariable>(passible, this->toDouble() >= variable->toDouble()));
 }
 
 std::shared_ptr<Variable> IntegerVariable::ifEqual(std::shared_ptr<Variable> variable)
@@ -190,7 +191,7 @@ std::shared_ptr<Variable> IntegerVariable::ifEqual(std::shared_ptr<Variable> var
     {
         return null;
     }
-    return std::move(std::make_shared<NumberVariable>(this->toDouble() == variable->toDouble()));
+    return std::move(std::make_shared<NumberVariable>(passible, this->toDouble() == variable->toDouble()));
 }
 
 std::shared_ptr<Variable> IntegerVariable::ifNotEqual(std::shared_ptr<Variable> variable)
@@ -199,46 +200,46 @@ std::shared_ptr<Variable> IntegerVariable::ifNotEqual(std::shared_ptr<Variable> 
     {
         return null;
     }
-    return std::move(std::make_shared<NumberVariable>(std::make_shared<DoubleVariable>(this->toDouble() != variable->toDouble())));
+    return std::move(std::make_shared<NumberVariable>(passible, std::make_shared<DoubleVariable>(passible, this->toDouble() != variable->toDouble())));
 }
 
 std::shared_ptr<Variable> IntegerVariable::increment()
 {
     this->value++;
-    return std::move(std::make_shared<NumberVariable>(this->toDouble()));
+    return std::move(std::make_shared<NumberVariable>(passible, this->toDouble()));
 }
 
 std::shared_ptr<Variable> IntegerVariable::decrement()
 {
     this->value--;
-    return std::move(std::make_shared<NumberVariable>(this->toDouble()));
+    return std::move(std::make_shared<NumberVariable>(passible, this->toDouble()));
 }
 
 std::shared_ptr<Variable> IntegerVariable::count()
 {
-    Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call count method on integer"));
+    passible->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call count method on integer"));
     return null;
 }
 
 void IntegerVariable::set(std::string index, std::shared_ptr<Variable> value)
 {
-    Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call set method on integer type. Integer is not an array"));
+    passible->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call set method on integer type. Integer is not an array"));
 }
 
 std::shared_ptr<Variable> IntegerVariable::get(std::string value)
 {
-    Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call get method on integer type. Integer is not an array"));
+    passible->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call get method on integer type. Integer is not an array"));
     return null;
 }
 
 void IntegerVariable::unset(std::string index)
 {
-    Errors::add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call unset method on integer type. Integer is not an array"));
+    passible->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call unset method on integer type. Integer is not an array"));
 }
 
 std::shared_ptr<Variable> IntegerVariable::copy()
 {
-    return std::move(std::make_shared<IntegerVariable>(value));
+    return std::move(std::make_shared<IntegerVariable>(passible, value));
 }
 
 std::shared_ptr<Variable> IntegerVariable::bitwiseAnd(std::shared_ptr<Variable> variable)
@@ -247,8 +248,8 @@ std::shared_ptr<Variable> IntegerVariable::bitwiseAnd(std::shared_ptr<Variable> 
     {
         return null;
     }
-    long long value = (long long)(this->value & variable->toInt());
-    return std::move(std::make_shared<NumberVariable>(value));
+    long long value = (this->value & variable->toInt());
+    return std::move(std::make_shared<NumberVariable>(passible, value));
 }
 
 std::shared_ptr<Variable> IntegerVariable::bitwiseOr(std::shared_ptr<Variable> variable)
@@ -261,6 +262,6 @@ std::shared_ptr<Variable> IntegerVariable::bitwiseOr(std::shared_ptr<Variable> v
     {
         return null;
     }
-    long long value = (long long)(this->value | variable->toInt());
-    return std::move(std::make_shared<NumberVariable>(value));
+    long long value = this->value | variable->toInt();
+    return std::move(std::make_shared<NumberVariable>(passible, value));
 }

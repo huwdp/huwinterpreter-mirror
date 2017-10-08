@@ -15,8 +15,8 @@
 
 #include "jsunarynotnode.h"
 
-JSUnaryNotNode::JSUnaryNotNode(std::shared_ptr<Token> token, std::shared_ptr<Node> node)
-    : UnaryNotNode(token, node)
+JSUnaryNotNode::JSUnaryNotNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> node)
+    : UnaryNotNode(passible, token, node)
 {
 }
 
