@@ -18,5 +18,5 @@ while (i < maxNumber)
     {
         print(i);
     }
-    let i = i + 1;
+    i++;
 }

@@ -7,14 +7,14 @@ while (c < n)
 {
 	if ( c <= 1 )
 	{
- 		let next = c;
+ 		next = c;
 	}
 	else
 	{
-		let next = first + second;
-		let first = second;
-		let second = next;
+		next = first + second;
+		first = second;
+		second = next;
 	}
 	print(next);
-	let c = c + 1;
+	c = c + 1;
 }

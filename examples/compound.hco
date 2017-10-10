@@ -1,15 +1,15 @@
 let a = 10;
-let a += 2;
+a += 2;
 print(a);
 
-let a = 10;
-let a -= 2;
+a = 10;
+a -= 2;
 print(a);
 
-let a = 10;
-let a *= 2;
+a = 10;
+a *= 2;
 print(a);
 
-let a = 10;
-let a /= 2;
+a = 10;
+a /= 2;
 print(a);
