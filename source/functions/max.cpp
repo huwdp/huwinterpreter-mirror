@@ -15,8 +15,8 @@
 
 #include "max.h"
 
-Max::Max(std::shared_ptr<Passible> passible)
-    : Function(passible)
+Max::Max(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "max";
 }
@@ -45,23 +45,23 @@ std::shared_ptr<Variable> Max::run(std::shared_ptr<Token> token,
                 }
                 catch (const std::invalid_argument ex)
                 {
-                    passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Max", token));
+                    passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Max", token));
                 }
                 catch (const std::out_of_range ex)
                 {
-                    passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Max", token));
+                    passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Max", token));
                 }
                 catch (const std::exception& ex)
                 {
-                    passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+                    passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
                 }
             }
         }
-        returnNode = std::make_shared<NumberVariable>(passible, max);
+        returnNode = std::make_shared<NumberVariable>(passable, max);
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Max function requires at least two arguments", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Max function requires at least two arguments", token));
     }
 
     return returnNode;

@@ -15,8 +15,8 @@
 
 #include "jsifunderorequalnode.h"
 
-JSIfUnderOrEqualNode::JSIfUnderOrEqualNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : IfUnderOrEqualNode(passible, token, left, right)
+JSIfUnderOrEqualNode::JSIfUnderOrEqualNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+    : IfUnderOrEqualNode(passable, token, left, right)
 {
 }
 

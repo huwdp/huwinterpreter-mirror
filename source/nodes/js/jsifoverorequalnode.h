@@ -21,7 +21,7 @@
 class JSIfOverOrEqualNode : public IfOverOrEqualNode
 {
 public:
-    JSIfOverOrEqualNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right);
+    JSIfOverOrEqualNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right);
     std::string toString();
 };
 

@@ -15,8 +15,8 @@
 
 #include "setreturnnode.h"
 
-SetReturnNode::SetReturnNode(std::shared_ptr<Passible> passible, std::shared_ptr<Node> node)
-    : Node(passible, nullptr)
+SetReturnNode::SetReturnNode(std::shared_ptr<Passable> passable, std::shared_ptr<Node> node)
+    : Node(passable, nullptr)
 {
     this->node = node;
 }

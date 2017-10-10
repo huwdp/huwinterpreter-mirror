@@ -15,8 +15,8 @@
 
 #include "equalnode.h"
 
-EqualNode::EqualNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right, std::shared_ptr<Node> next, std::shared_ptr<Scope> scope)
-    : Node(passible, token)
+EqualNode::EqualNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right, std::shared_ptr<Node> next, std::shared_ptr<Scope> scope)
+    : Node(passable, token)
 {
     this->left = left;
     this->right = right;
@@ -38,7 +38,7 @@ std::shared_ptr<Variable> EqualNode::execute(std::shared_ptr<Scope> scope)
         return scope->getReturnValue();
     }
     std::shared_ptr<Variable> l = left->execute(scope);
-    std::shared_ptr<Node> left = std::make_shared<SetVarNode>(passible, token, l->getName(), right);
+    std::shared_ptr<Node> left = std::make_shared<SetVarNode>(passable, token, l->getName(), right);
     this->left = left;
     if (next != nullptr)
     {

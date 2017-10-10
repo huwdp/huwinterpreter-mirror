@@ -15,8 +15,8 @@
 
 #include "rtrim.h"
 
-RTrim::RTrim(std::shared_ptr<Passible> passible)
-    : Function(passible)
+RTrim::RTrim(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "rTrim";
 }
@@ -55,12 +55,12 @@ std::shared_ptr<Variable> RTrim::run(std::shared_ptr<Token> token,
                     --it;
                 }
             }
-            returnNode = std::make_shared<StringVariable>(passible, "", temp);
+            returnNode = std::make_shared<StringVariable>(passable, "", temp);
         }
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "RTrim function requires one argument", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "RTrim function requires one argument", token));
     }
 
     return returnNode;

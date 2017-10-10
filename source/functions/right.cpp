@@ -15,8 +15,8 @@
 
 #include "right.h"
 
-Right::Right(std::shared_ptr<Passible> passible)
-    : Function(passible)
+Right::Right(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "right";
 }
@@ -44,25 +44,25 @@ std::shared_ptr<Variable> Right::run(std::shared_ptr<Token> token,
             {
                 int position = std::round(var2->toDouble());
                 temp = temp.substr(temp.length()-position, position);
-                returnNode = std::make_shared<StringVariable>(passible, "", temp);
+                returnNode = std::make_shared<StringVariable>(passable, "", temp);
             }
             catch (const std::invalid_argument ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Right", token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Right", token));
             }
             catch (const std::out_of_range ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Right", token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Right", token));
             }
             catch (const std::exception& ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
             }
         }
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Right function requires two arguments", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Right function requires two arguments", token));
     }
     
     return returnNode;

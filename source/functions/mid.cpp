@@ -15,8 +15,8 @@
 
 #include "mid.h"
 
-Mid::Mid(std::shared_ptr<Passible> passible)
-    : Function(passible)
+Mid::Mid(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "mid";
 }
@@ -52,22 +52,22 @@ std::shared_ptr<Variable> Mid::run(std::shared_ptr<Token> token,
             }
             catch (const std::invalid_argument ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Mid", token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Mid", token));
             }
             catch (const std::out_of_range ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Mid", token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Mid", token));
             }
             catch (const std::exception& ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
             }
-            returnNode = std::make_shared<StringVariable>(passible, "", temp);
+            returnNode = std::make_shared<StringVariable>(passable, "", temp);
         }
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Mid function requires three arguments"));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Mid function requires three arguments"));
     }
     
     return returnNode;

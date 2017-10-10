@@ -15,8 +15,8 @@
 
 #include "jsifandnode.h"
 
-JSIfAndNode::JSIfAndNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : IfAndNode(passible, token, left, right)
+JSIfAndNode::JSIfAndNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+    : IfAndNode(passable, token, left, right)
 {
 }
 

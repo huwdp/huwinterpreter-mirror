@@ -15,8 +15,8 @@
 
 #include "ifnode.h"
 
-IfNode::IfNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> condition, std::shared_ptr<Node> body, std::shared_ptr<Node> elseNode)
-    : Node(passible, token)
+IfNode::IfNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> condition, std::shared_ptr<Node> body, std::shared_ptr<Node> elseNode)
+    : Node(passable, token)
 {
     Debug::print("IfNode");
     this->condition = condition;
@@ -64,7 +64,7 @@ std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> scope)
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(STATEMENT_ERROR, "Could not compare."));
+        passable->errors->add(std::make_shared<Error>(STATEMENT_ERROR, "Could not compare."));
     }
     return null;
 }

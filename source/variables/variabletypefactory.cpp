@@ -15,9 +15,9 @@
 
 #include "variabletypefactory.h"
 
-VariableTypeFactory::VariableTypeFactory(std::shared_ptr<Passible> passible)
+VariableTypeFactory::VariableTypeFactory(std::shared_ptr<Passable> passable)
 {
-    this->passible = passible;
+    this->passable = passable;
 }
 
 std::shared_ptr<Variable> VariableTypeFactory::newVariable(VarType varType)
@@ -25,15 +25,15 @@ std::shared_ptr<Variable> VariableTypeFactory::newVariable(VarType varType)
     std::shared_ptr<Variable> null;
     if (varType == STRING)
     {
-        return std::make_shared<StringVariable>(passible);
+        return std::make_shared<StringVariable>(passable);
     }
     else if (varType == INTEGER)
     {
-        return std::make_shared<NumberVariable>(passible, (long long)0);
+        return std::make_shared<NumberVariable>(passable, (long long)0);
     }
     else if (varType == DOUBLE)
     {
-        return std::make_shared<NumberVariable>(passible, 0.0);
+        return std::make_shared<NumberVariable>(passable, 0.0);
     }
     return null;
 }

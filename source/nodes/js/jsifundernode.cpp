@@ -15,8 +15,8 @@
 
 #include "jsifundernode.h"
 
-JSIfUnderNode::JSIfUnderNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : IfUnderNode(passible, token, left, right)
+JSIfUnderNode::JSIfUnderNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+    : IfUnderNode(passable, token, left, right)
 {
 }
 

@@ -15,8 +15,8 @@
 
 #include "jsaddvarnode.h"
 
-JSAddVarNode::JSAddVarNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value)
-    : AddVarNode(passible, token, name, value)
+JSAddVarNode::JSAddVarNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value)
+    : AddVarNode(passable, token, name, value)
 {
 }
 

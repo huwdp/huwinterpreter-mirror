@@ -15,8 +15,8 @@
 
 #include "scan.h"
 
-Scan::Scan(std::shared_ptr<Passible> passible)
-    : Function(passible)
+Scan::Scan(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "scan";
 }

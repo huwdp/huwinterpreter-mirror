@@ -24,16 +24,16 @@
 #include "errors/errors.h"
 #include "errors/error.h"
 #include "io/fileline.h"
-#include "../common/passible.h"
+#include "../common/passable.h"
 
 class Function
 {
 protected:
     std::string name;
     std::shared_ptr<Variable> null;
-    std::shared_ptr<Passible> passible;
+    std::shared_ptr<Passable> passable;
 public:
-    Function(std::shared_ptr<Passible> passible);
+    Function(std::shared_ptr<Passable> passable);
     std::string getName();
     void setName(std::string name);
     virtual std::shared_ptr<Variable> run(std::shared_ptr<Token> token,

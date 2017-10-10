@@ -15,8 +15,8 @@
 
 #include "print.h"
 
-Print::Print(std::shared_ptr<Passible> passible)
-    : Function(passible)
+Print::Print(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "print";
 }

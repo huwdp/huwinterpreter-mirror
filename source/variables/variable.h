@@ -25,17 +25,17 @@
 #include "types/typedetector.h"
 #include "errors/debug.h"
 #include "errors/errors.h"
-#include "common/passible.h"
+#include "common/passable.h"
 
 class Variable
 {
 private:
     std::string name;
 public:
-    std::shared_ptr<Passible> passible;
+    std::shared_ptr<Passable> passable;
     std::shared_ptr<Variable> null;
-    Variable(std::shared_ptr<Passible> passible);
-    Variable(std::shared_ptr<Passible> passible, std::string name);
+    Variable(std::shared_ptr<Passable> passable);
+    Variable(std::shared_ptr<Passable> passable, std::string name);
     std::string getName();
     void setName(std::string name);
     virtual void setValue(double value) = 0;

@@ -26,7 +26,7 @@
 #include "variables/stringvariable.h"
 #include "tokens/token.h"
 #include "variables/scope.h"
-#include "common/passible.h"
+#include "common/passable.h"
 
 enum NodeType {ADDCONSTNODETYPE,
                ADDNODETYPE,
@@ -69,11 +69,11 @@ class Node
 protected:
     std::shared_ptr<Variable> null;
     std::shared_ptr<Token> token;
-    std::shared_ptr<Passible> passible;
+    std::shared_ptr<Passable> passable;
 public:
-    Node(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token)
+    Node(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token)
     {
-        this->passible = passible;
+        this->passable = passable;
         this->token = token;
     }
 

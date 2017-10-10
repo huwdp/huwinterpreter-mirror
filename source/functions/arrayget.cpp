@@ -15,8 +15,8 @@
 
 #include "arrayget.h"
 
-ArrayGet::ArrayGet(std::shared_ptr<Passible> passible)
-    : Function(passible)
+ArrayGet::ArrayGet(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "arrayGet";
 }
@@ -46,7 +46,7 @@ std::shared_ptr<Variable> ArrayGet::run(std::shared_ptr<Token> token,
 
         if (var1->getType() != ARRAY)
         {
-            passible->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "First parameter is not a type of ARRAY"));
+            passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "First parameter is not a type of ARRAY"));
             return null;
         }
 
@@ -54,7 +54,7 @@ std::shared_ptr<Variable> ArrayGet::run(std::shared_ptr<Token> token,
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "ArrayGet function requires two argument", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "ArrayGet function requires two argument", token));
     }
     return returnNode;
 }

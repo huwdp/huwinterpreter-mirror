@@ -21,7 +21,7 @@
 class JSSetReturnNode : public SetReturnNode
 {
 public:
-    JSSetReturnNode(std::shared_ptr<Passible> passible, std::shared_ptr<Node> node);
+    JSSetReturnNode(std::shared_ptr<Passable> passable, std::shared_ptr<Node> node);
     std::string toString();
 };
 

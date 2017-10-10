@@ -21,7 +21,7 @@
 class JSIfAndNode : public IfAndNode
 {
 public:
-    JSIfAndNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right);
+    JSIfAndNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right);
     std::string toString();
 };
 

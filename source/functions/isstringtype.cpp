@@ -16,8 +16,8 @@
 
 #include "isstringtype.h"
 
-IsStringType::IsStringType(std::shared_ptr<Passible> passible)
-    : Function(passible)
+IsStringType::IsStringType(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "isString";
 }
@@ -40,17 +40,17 @@ std::shared_ptr<Variable> IsStringType::run(std::shared_ptr<Token> token,
         {
             if (var->getType() == STRING)
             {
-                returnNode = std::make_shared<NumberVariable>(passible, true);
+                returnNode = std::make_shared<NumberVariable>(passable, true);
             }
             else
             {
-                returnNode = std::make_shared<NumberVariable>(passible, false);
+                returnNode = std::make_shared<NumberVariable>(passable, false);
             }
         }
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "isStringType function requires one arguments", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "isStringType function requires one arguments", token));
     }
     return returnNode;
 }

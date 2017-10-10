@@ -15,8 +15,8 @@
 
 #include "whilenode.h"
 
-WhileNode::WhileNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> condition, std::shared_ptr<Node> body, std::shared_ptr<Node> next)
-    : Node(passible, token)
+WhileNode::WhileNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> condition, std::shared_ptr<Node> body, std::shared_ptr<Node> next)
+    : Node(passable, token)
 {
     this->condition = condition;
     this->body = body;
@@ -53,7 +53,7 @@ std::shared_ptr<Variable> WhileNode::execute(std::shared_ptr<Scope> scope)
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(STATEMENT_ERROR, "Could not compare."));
+        passable->errors->add(std::make_shared<Error>(STATEMENT_ERROR, "Could not compare."));
         return null;
     }
     if (next != nullptr)

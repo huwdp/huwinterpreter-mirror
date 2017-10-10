@@ -15,8 +15,8 @@
 
 #include "array.h"
 
-Array::Array(std::shared_ptr<Passible> passible)
-    : Function(passible)
+Array::Array(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "array";
 }
@@ -25,5 +25,5 @@ std::shared_ptr<Variable> Array::run(std::shared_ptr<Token> token,
                               std::shared_ptr<Scope> scope,
                               std::vector<std::shared_ptr<Node>> variables)
 {
-    return std::make_shared<HashTableVariable>(passible);
+    return std::make_shared<HashTableVariable>(passable);
 }

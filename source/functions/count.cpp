@@ -15,8 +15,8 @@
 
 #include "count.h"
 
-Count::Count(std::shared_ptr<Passible> passible)
-    : Function(passible)
+Count::Count(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "count";
 }
@@ -42,7 +42,7 @@ std::shared_ptr<Variable> Count::run(std::shared_ptr<Token> token,
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Count function requires one argument", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Count function requires one argument", token));
     }
 
     return returnNode;

@@ -15,8 +15,8 @@
 
 #include "instrrev.h"
 
-InStrRev::InStrRev(std::shared_ptr<Passible> passible)
-    : Function(passible)
+InStrRev::InStrRev(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "inStrRev";
 }
@@ -45,17 +45,17 @@ std::shared_ptr<Variable> InStrRev::run(std::shared_ptr<Token> token,
             std::size_t found = str.find_last_of(str2);
             if (found != std::string::npos)
             {
-                returnNode = std::make_shared<NumberVariable>(passible, (long long)found);
+                returnNode = std::make_shared<NumberVariable>(passable, (long long)found);
             }
             else
             {
-                returnNode = std::make_shared<NumberVariable>(passible, -1.0);
+                returnNode = std::make_shared<NumberVariable>(passable, -1.0);
             }
         }
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "InStr function requires two arguments", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "InStr function requires two arguments", token));
     }
     return returnNode;
 }

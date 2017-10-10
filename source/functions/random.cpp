@@ -15,8 +15,8 @@
 
 #include "random.h"
 
-Random::Random(std::shared_ptr<Passible> passible)
-    : Function(passible)
+Random::Random(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "random";
 }
@@ -31,11 +31,11 @@ std::shared_ptr<Variable> Random::run(std::shared_ptr<Token> token,
         std::srand(std::time(0));
         int number = std::rand();
         double value = (double)number;
-        returnNode = std::make_shared<NumberVariable>(passible, value);
+        returnNode = std::make_shared<NumberVariable>(passable, value);
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Random requires 0 arguments", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Random requires 0 arguments", token));
     }
     
     return returnNode;

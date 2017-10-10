@@ -15,8 +15,8 @@
 
 #include "runnode.h"
 
-RunNode::RunNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : Node(passible, token)
+RunNode::RunNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+    : Node(passable, token)
 {
     this->left = left;
     this->right = right;

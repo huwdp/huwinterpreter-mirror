@@ -21,7 +21,7 @@
 class IsIntType : public Function
 {
 public:
-    IsIntType(std::shared_ptr<Passible> passible);
+    IsIntType(std::shared_ptr<Passable> passable);
     std::shared_ptr<Variable> run(std::shared_ptr<Token> token,
                                   std::shared_ptr<Scope> scope,
                                   std::vector<std::shared_ptr<Node>> variables);

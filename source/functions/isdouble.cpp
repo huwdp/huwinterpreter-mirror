@@ -15,8 +15,8 @@
 
 #include "isdouble.h"
 
-IsDouble::IsDouble(std::shared_ptr<Passible> passible)
-    : Function(passible)
+IsDouble::IsDouble(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "isDouble";
 }
@@ -39,17 +39,17 @@ std::shared_ptr<Variable> IsDouble::run(std::shared_ptr<Token> token,
         {
             if (!TypeDetector::isInteger(var->toString()) && TypeDetector::isNumeric(var->toString()))
             {
-                returnNode = std::make_shared<NumberVariable>(passible, true);
+                returnNode = std::make_shared<NumberVariable>(passable, true);
             }
             else
             {
-                returnNode = std::make_shared<NumberVariable>(passible, false);
+                returnNode = std::make_shared<NumberVariable>(passable, false);
             }
         }
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "isDouble function requires one arguments", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "isDouble function requires one arguments", token));
     }
     return returnNode;
 }

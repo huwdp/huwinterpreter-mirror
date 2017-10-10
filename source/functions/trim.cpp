@@ -15,8 +15,8 @@
 
 #include "trim.h"
 
-Trim::Trim(std::shared_ptr<Passible> passible)
-    : Function(passible)
+Trim::Trim(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "trim";
 }
@@ -72,12 +72,12 @@ std::shared_ptr<Variable> Trim::run(std::shared_ptr<Token> token,
                     --it;
                 }
             }
-            returnNode = std::make_shared<StringVariable>(passible, "", temp);
+            returnNode = std::make_shared<StringVariable>(passable, "", temp);
         }
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Trim function requires one argument", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Trim function requires one argument", token));
     }
     return returnNode;
 }

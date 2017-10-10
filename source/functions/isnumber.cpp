@@ -15,8 +15,8 @@
 
 #include "isnumber.h"
 
-IsNumber::IsNumber(std::shared_ptr<Passible> passible)
-    : Function(passible)
+IsNumber::IsNumber(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "isNumber";
 }
@@ -37,12 +37,12 @@ std::shared_ptr<Variable> IsNumber::run(std::shared_ptr<Token> token,
         std::shared_ptr<Variable> var = node->execute(scope);
         if (node != nullptr)
         {
-            returnNode = std::make_shared<NumberVariable>(passible, TypeDetector::isNumeric(var->toString()));
+            returnNode = std::make_shared<NumberVariable>(passable, TypeDetector::isNumeric(var->toString()));
         }
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "isNumber function requires one arguments", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "isNumber function requires one arguments", token));
     }
     return returnNode;
 }

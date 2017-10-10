@@ -26,8 +26,8 @@ class IntegerVariable : public Variable
 private:
     long long value;
 public:
-    IntegerVariable(std::shared_ptr<Passible> passible);
-    IntegerVariable(std::shared_ptr<Passible> passible, long long value);
+    IntegerVariable(std::shared_ptr<Passable> passable);
+    IntegerVariable(std::shared_ptr<Passable> passable, long long value);
     IntegerVariable(std::string name, long long value);
     void setValue(double value);
     void setValue(std::string value);

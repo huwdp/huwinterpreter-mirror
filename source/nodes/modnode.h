@@ -24,7 +24,7 @@ protected:
     std::shared_ptr<Node> left;
     std::shared_ptr<Node> right;
 public:
-    ModNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right);
+    ModNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right);
     NodeType getType();
     std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
     std::string toString();

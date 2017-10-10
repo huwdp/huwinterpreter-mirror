@@ -15,8 +15,8 @@
 
 #include "space.h"
 
-Space::Space(std::shared_ptr<Passible> passible)
-    : Function(passible)
+Space::Space(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "space";
 }
@@ -45,26 +45,26 @@ std::shared_ptr<Variable> Space::run(std::shared_ptr<Token> token,
                 {
                     output.append(" ");
                 }
-                returnNode = std::make_shared<StringVariable>(passible, "", output);
+                returnNode = std::make_shared<StringVariable>(passable, "", output);
             }
             catch (const std::invalid_argument ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Space", token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Space", token));
             }
             catch (const std::out_of_range ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Space", token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Space", token));
             }
             catch (const std::exception& ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
             }
             
         }
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Space function requires one argument", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Space function requires one argument", token));
     }
     
     return returnNode;

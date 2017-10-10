@@ -15,8 +15,8 @@
 
 #include "modnode.h"
 
-ModNode::ModNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : Node(passible, token)
+ModNode::ModNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+    : Node(passable, token)
 {
     this->left = left;
     this->right = right;
@@ -42,12 +42,12 @@ std::shared_ptr<Variable> ModNode::execute(std::shared_ptr<Scope> scope)
 
         if (l == nullptr)
         {
-            passible->errors->add(std::make_shared<Error>(ERROR, "Invalid expression", token));
+            passable->errors->add(std::make_shared<Error>(ERROR, "Invalid expression", token));
             return null;
         }
         if (r == nullptr)
         {
-            passible->errors->add(std::make_shared<Error>(ERROR, "Invalid expression", token));
+            passable->errors->add(std::make_shared<Error>(ERROR, "Invalid expression", token));
             return null;
         }
         std::shared_ptr<Variable> v = l->mod(r);

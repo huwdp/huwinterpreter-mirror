@@ -15,46 +15,46 @@
 
 #include "numbervariable.h"
 
-NumberVariable::NumberVariable(std::shared_ptr<Passible> passible, bool value)
-    : Variable(passible)
+NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, bool value)
+    : Variable(passable)
 {
-    this->variable = std::move(std::make_shared<IntegerVariable>(passible, (long long)(int)value));
+    this->variable = std::move(std::make_shared<IntegerVariable>(passable, (long long)(int)value));
 }
 
-NumberVariable::NumberVariable(std::shared_ptr<Passible> passible, std::shared_ptr<Variable> variable)
-    : Variable(passible)
+NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, std::shared_ptr<Variable> variable)
+    : Variable(passable)
 {
     this->variable = variable;
 }
 
-NumberVariable::NumberVariable(std::shared_ptr<Passible> passible, std::string name, double value)
-    : Variable(passible, name)
+NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, std::string name, double value)
+    : Variable(passable, name)
 {
     this->variable = std::move(toInternalValue(value));
 }
 
-NumberVariable::NumberVariable(std::shared_ptr<Passible> passible, double value)
-    : Variable(passible, "")
+NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, double value)
+    : Variable(passable, "")
 {
     this->variable = std::move(toInternalValue(value));
 }
 
-NumberVariable::NumberVariable(std::shared_ptr<Passible> passible, long long value)
-    : Variable(passible, "")
+NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, long long value)
+    : Variable(passable, "")
 {
     this->variable = std::move(toInternalValue(value));
 }
 
-NumberVariable::NumberVariable(std::shared_ptr<Passible> passible, std::string name, long long value)
-    : Variable(passible, name)
+NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, std::string name, long long value)
+    : Variable(passable, name)
 {
     this->variable = std::move(toInternalValue(value));
 }
 
-NumberVariable::NumberVariable(std::shared_ptr<Passible> passible, std::string name, std::string value)
-    : Variable(passible, name)
+NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, std::string name, std::string value)
+    : Variable(passable, name)
 {
-    std::shared_ptr<VariableTypeFactory> v = std::make_shared<VariableTypeFactory>(passible);
+    std::shared_ptr<VariableTypeFactory> v = std::make_shared<VariableTypeFactory>(passable);
     std::shared_ptr<Variable> var = v->newVariable(TypeDetector::getType(value));
     var->setValue(value);
     variable = std::move(var);
@@ -222,15 +222,15 @@ std::shared_ptr<Variable> NumberVariable::toInternalValue(double value)
 {
     if (precision.isSafeInteger(value))
     {
-        return std::move(std::make_shared<DoubleVariable>(passible, value));
+        return std::move(std::make_shared<DoubleVariable>(passable, value));
     }
     else
     {
         if (precision.getType(value) == DOUBLE)
         {
-            return std::move(std::make_shared<DoubleVariable>(passible, value));
+            return std::move(std::make_shared<DoubleVariable>(passable, value));
         }
-        return std::move(std::make_shared<IntegerVariable>(passible, value));
+        return std::move(std::make_shared<IntegerVariable>(passable, value));
     }
 }
 
@@ -238,9 +238,9 @@ std::shared_ptr<Variable> NumberVariable::toInternalValue(long long value)
 {
     if (precision.isSafeInteger(value))
     {
-        return std::move(std::make_shared<DoubleVariable>(passible, value));
+        return std::move(std::make_shared<DoubleVariable>(passable, value));
     }
-    return std::move(std::make_shared<DoubleVariable>(passible, value));
+    return std::move(std::make_shared<DoubleVariable>(passable, value));
 }
 
 std::shared_ptr<Variable> NumberVariable::toValue(std::shared_ptr<Variable> variable)
@@ -253,7 +253,7 @@ std::shared_ptr<Variable> NumberVariable::toValue(std::shared_ptr<Variable> vari
     else if (precision.getType(value) == INTEGER)
     {
         long long intValue = (long long)value;
-        return std::make_shared<NumberVariable>(passible, std::move(std::make_shared<IntegerVariable>(passible, intValue)));
+        return std::make_shared<NumberVariable>(passable, std::move(std::make_shared<IntegerVariable>(passable, intValue)));
     }
     return std::move(variable);
 }

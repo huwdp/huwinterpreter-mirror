@@ -15,8 +15,8 @@
 
 #include "arrayunset.h"
 
-ArrayUnset::ArrayUnset(std::shared_ptr<Passible> passible)
-    : Function(passible)
+ArrayUnset::ArrayUnset(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "arrayUnset";
 }
@@ -46,7 +46,7 @@ std::shared_ptr<Variable> ArrayUnset::run(std::shared_ptr<Token> token,
 
         if (var1->getType() != ARRAY)
         {
-            passible->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "First parameter is not a type of ARRAY"));
+            passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "First parameter is not a type of ARRAY"));
             return null;
         }
 
@@ -57,7 +57,7 @@ std::shared_ptr<Variable> ArrayUnset::run(std::shared_ptr<Token> token,
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "ArrayGet function requires two argument", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "ArrayGet function requires two argument", token));
     }
     return returnNode;
 }

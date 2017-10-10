@@ -15,8 +15,8 @@
 
 #include "jsdecrementnode.h"
 
-JSDecrementNode::JSDecrementNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> node)
-    : DecrementNode(passible, token, node)
+JSDecrementNode::JSDecrementNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> node)
+    : DecrementNode(passable, token, node)
 {
 }
 

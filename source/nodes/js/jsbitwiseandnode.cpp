@@ -15,8 +15,8 @@
 
 #include "jsbitwiseandnode.h"
 
-JSBitwiseAndNode::JSBitwiseAndNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : BitwiseAndNode(passible, token, left, right)
+JSBitwiseAndNode::JSBitwiseAndNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+    : BitwiseAndNode(passable, token, left, right)
 {
 }
 

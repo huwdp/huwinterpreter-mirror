@@ -16,8 +16,8 @@
 
 #include "isarraytype.h"
 
-IsArrayType::IsArrayType(std::shared_ptr<Passible> passible)
-    : Function(passible)
+IsArrayType::IsArrayType(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "isArray";
 }
@@ -40,17 +40,17 @@ std::shared_ptr<Variable> IsArrayType::run(std::shared_ptr<Token> token,
         {
             if (var->getType() == ARRAY)
             {
-                returnNode = std::make_shared<NumberVariable>(passible, true);
+                returnNode = std::make_shared<NumberVariable>(passable, true);
             }
             else
             {
-                returnNode = std::make_shared<NumberVariable>(passible, false);
+                returnNode = std::make_shared<NumberVariable>(passable, false);
             }
         }
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "isIntType function requires one arguments", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "isIntType function requires one arguments", token));
     }
     return returnNode;
 }

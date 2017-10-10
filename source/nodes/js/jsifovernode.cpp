@@ -15,8 +15,8 @@
 
 #include "jsifovernode.h"
 
-JSIfOverNode::JSIfOverNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : IfOverNode(passible, token, left, right)
+JSIfOverNode::JSIfOverNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+    : IfOverNode(passable, token, left, right)
 {
 }
 

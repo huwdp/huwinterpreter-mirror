@@ -15,8 +15,8 @@
 
 #include "year.h"
 
-Year::Year(std::shared_ptr<Passible> passible)
-    : Function(passible)
+Year::Year(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "year";
 }
@@ -43,25 +43,25 @@ std::shared_ptr<Variable> Year::run(std::shared_ptr<Token> token,
             std::tm tm = *std::localtime(&t);
             std::stringstream ss;
             ss << std::put_time(&tm, "%Y");
-            returnNode = std::make_shared<StringVariable>(passible, "", ss.str());
+            returnNode = std::make_shared<StringVariable>(passable, "", ss.str());
         }
         catch (const std::invalid_argument ex)
         {
-            passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Year", token));
+            passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Year", token));
         }
         catch (const std::out_of_range ex)
         {
-            passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Year", token));
+            passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Year", token));
         }
         catch (const std::exception& ex)
         {
-            passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+            passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
         }
         
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Year function requires 1 argument", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Year function requires 1 argument", token));
     }
     
     return returnNode;

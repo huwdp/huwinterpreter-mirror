@@ -15,8 +15,8 @@
 
 #include "constantvariable.h"
 
-ConstantVariable::ConstantVariable(std::shared_ptr<Passible> passible, std::shared_ptr<Variable> variable)
-    : Variable(passible, variable->getName())
+ConstantVariable::ConstantVariable(std::shared_ptr<Passable> passable, std::shared_ptr<Variable> variable)
+    : Variable(passable, variable->getName())
 {
     this->variable = std::move(variable);
 }

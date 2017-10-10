@@ -30,7 +30,7 @@ private:
     std::shared_ptr<Variable> returnValue;
     std::shared_ptr<Variables> variables;
 public:
-    Scope(std::shared_ptr<Passible> passible);
+    Scope(std::shared_ptr<Passable> passable);
     Scope(std::shared_ptr<Variables> variables);
     std::shared_ptr<Variables> getVariables();
     void setVariables(std::shared_ptr<Variables> variables);

@@ -15,14 +15,14 @@
 
 #include "variable.h"
 
-Variable::Variable(std::shared_ptr<Passible> passible)
+Variable::Variable(std::shared_ptr<Passable> passable)
 {
-    this->passible = passible;
+    this->passable = passable;
 }
 
-Variable::Variable(std::shared_ptr<Passible> passible, std::string name)
+Variable::Variable(std::shared_ptr<Passable> passable, std::string name)
 {
-    this->passible = passible;
+    this->passable = passable;
     this->name = name;
 }
 

@@ -19,13 +19,13 @@ Parser::Parser(std::vector<std::shared_ptr<Token>> tokens,
                std::shared_ptr<NodeFactory> nodeFactory)
 {
     this->nodeFactory = nodeFactory;
-    this->passible = std::make_shared<Passible>();
-    this->passible->errors = std::make_shared<Errors>();
+    this->passable = std::make_shared<Passable>();
+    this->passable->errors = std::make_shared<Errors>();
     this->compilation = true;
     this->tokens = tokens;
-    this->functions = std::move(std::make_shared<Functions>(passible));
+    this->functions = std::move(std::make_shared<Functions>(passable));
     functions->init();
-    customFunctions = std::move(std::make_shared<Functions>(passible));
+    customFunctions = std::move(std::make_shared<Functions>(passable));
     if (!tokens.empty())
     {
         it = this->tokens.begin();
@@ -149,7 +149,7 @@ bool Parser::expectSemicolon()
 
 void Parser::errorMessage(std::string errorMsg, std::shared_ptr<Token> currentToken)
 {
-    passible->errors->add(std::make_shared<Error>(PARSER_ERROR, errorMsg, currentToken));
+    passable->errors->add(std::make_shared<Error>(PARSER_ERROR, errorMsg, currentToken));
 }
 
 std::shared_ptr<Node> Parser::value()
@@ -159,7 +159,7 @@ std::shared_ptr<Node> Parser::value()
     {
         if (TypeDetector::isNumeric(currentToken->getContent()))
         {
-            std::shared_ptr<Node> node = nodeFactory->CreateNumberNode(passible, currentToken, currentToken->getContent());
+            std::shared_ptr<Node> node = nodeFactory->CreateNumberNode(passable, currentToken, currentToken->getContent());
             nextToken();
             acceptIndentation();
             return node;
@@ -193,19 +193,19 @@ std::shared_ptr<Node> Parser::value()
                     return null;
                 }
                 acceptIndentation();
-                return nodeFactory->CreateGetFuncNode(passible, currentToken, word, functions, arguments);
+                return nodeFactory->CreateGetFuncNode(passable, currentToken, word, functions, arguments);
             }
             if (currentToken->getType() == TEXT)
             {
                 nextToken();
-                return nodeFactory->CreateTextNode(passible, currentToken, word);
+                return nodeFactory->CreateTextNode(passable, currentToken, word);
             }
 
-            std::shared_ptr<Node> var = nodeFactory->CreateGetVarNode(passible, currentToken, word);
+            std::shared_ptr<Node> var = nodeFactory->CreateGetVarNode(passable, currentToken, word);
             nextToken();
             return var;
         }
-        passible->errors->add(std::make_shared<Error>(PARSER_ERROR, "factor: syntax error", currentToken));
+        passable->errors->add(std::make_shared<Error>(PARSER_ERROR, "factor: syntax error", currentToken));
         nextToken();
     }
     return null;
@@ -225,7 +225,7 @@ std::shared_ptr<Node> Parser::factor()
             {
                 return null;
             }
-            return nodeFactory->CreateBracketNode(passible, currentToken, value);
+            return nodeFactory->CreateBracketNode(passable, currentToken, value);
         }
         else if (currentToken->getType() == ADDITION)
         {
@@ -235,12 +235,12 @@ std::shared_ptr<Node> Parser::factor()
         else if (currentToken->getType() == SUBTRACTION)
         {
             nextToken();
-            return nodeFactory->CreateUnaryMinusNode(passible, currentToken, factor());
+            return nodeFactory->CreateUnaryMinusNode(passable, currentToken, factor());
         }
         else if (currentToken->getType() == NOT)
         {
             nextToken();
-            return nodeFactory->CreateUnaryNotNode(passible, currentToken, factor());
+            return nodeFactory->CreateUnaryNotNode(passable, currentToken, factor());
         }
         return this->value();
     }
@@ -264,15 +264,15 @@ std::shared_ptr<Node> Parser::term()
             acceptIndentation();
             if (type == MULTIPLICATION)
             {
-                node = nodeFactory->CreateMulNode(passible, currentToken, node, factor());
+                node = nodeFactory->CreateMulNode(passable, currentToken, node, factor());
             }
             else if (type == DIVISION)
             {
-                node = nodeFactory->CreateDivNode(passible, currentToken, node, factor());
+                node = nodeFactory->CreateDivNode(passable, currentToken, node, factor());
             }
             else if (type == MOD)
             {
-                node = nodeFactory->CreateModNode(passible, currentToken, node, factor());
+                node = nodeFactory->CreateModNode(passable, currentToken, node, factor());
             }
         }
         return node;
@@ -295,11 +295,11 @@ std::shared_ptr<Node> Parser::expression()
             acceptIndentation();
             if (type == ADDITION)
             {
-                node = nodeFactory->CreateAddNode(passible, currentToken, node, term());
+                node = nodeFactory->CreateAddNode(passable, currentToken, node, term());
             }
             else
             {
-                node = nodeFactory->CreateSubNode(passible, currentToken, node, term());
+                node = nodeFactory->CreateSubNode(passable, currentToken, node, term());
             }
         }
         return node;
@@ -328,37 +328,37 @@ std::shared_ptr<Node> Parser::condition()
                 {
                     nextToken();
                     std::shared_ptr<Node> next = expression();
-                    node = nodeFactory->CreateIfEqualNode(passible, currentToken, node, next);
+                    node = nodeFactory->CreateIfEqualNode(passable, currentToken, node, next);
                 }
                 else if (type == IFNOTEQUALS)
                 {
                     nextToken();
                     std::shared_ptr<Node> next = expression();
-                    node = nodeFactory->CreateIfNotEqualNode(passible, currentToken, node, next);
+                    node = nodeFactory->CreateIfNotEqualNode(passable, currentToken, node, next);
                 }
                 else if (type == IFLESSTHAN)
                 {
                     nextToken();
                     std::shared_ptr<Node> next = expression();
-                    node = nodeFactory->CreateIfUnderNode(passible, currentToken, node, next);
+                    node = nodeFactory->CreateIfUnderNode(passable, currentToken, node, next);
                 }
                 else if (type == IFLESSTHANOREQUAL)
                 {
                     nextToken();
                     std::shared_ptr<Node> next = expression();
-                    node = nodeFactory->CreateIfUnderOrEqualNode(passible, currentToken, node, next);
+                    node = nodeFactory->CreateIfUnderOrEqualNode(passable, currentToken, node, next);
                 }
                 else if (type == IFGREATER)
                 {
                     nextToken();
                     std::shared_ptr<Node> next = expression();
-                    node = nodeFactory->CreateIfOverNode(passible, currentToken, node, next);
+                    node = nodeFactory->CreateIfOverNode(passable, currentToken, node, next);
                 }
                 else if (type == IFGREATERTHANOREQUAL)
                 {
                     nextToken();
                     std::shared_ptr<Node> next = expression();
-                    node = nodeFactory->CreateIfOverOrEqualNode(passible, currentToken, node, next);
+                    node = nodeFactory->CreateIfOverOrEqualNode(passable, currentToken, node, next);
                 }
             }
             return node;
@@ -381,25 +381,25 @@ std::shared_ptr<Node> Parser::boolean()
             {
                 nextToken();
                 std::shared_ptr<Node> next = condition();
-                node = nodeFactory->CreateIfAndNode(passible, currentToken, node, next);
+                node = nodeFactory->CreateIfAndNode(passable, currentToken, node, next);
             }
             else if (type == OR)
             {
                 nextToken();
                 std::shared_ptr<Node> next = condition();
-                node = nodeFactory->CreateIfOrNode(passible, currentToken, node, next);
+                node = nodeFactory->CreateIfOrNode(passable, currentToken, node, next);
             }
             else if (type == BITWISEAND)
             {
                 nextToken();
                 std::shared_ptr<Node> next = condition();
-                node = nodeFactory->CreateBitwiseAndNode(passible, currentToken, node, next);
+                node = nodeFactory->CreateBitwiseAndNode(passable, currentToken, node, next);
             }
             else if (type == BITWISEOR)
             {
                 nextToken();
                 std::shared_ptr<Node> next = condition();
-                node = nodeFactory->CreateBitwiseOrNode(passible, currentToken, node, next);
+                node = nodeFactory->CreateBitwiseOrNode(passable, currentToken, node, next);
             }
         }
         return node;
@@ -425,28 +425,28 @@ std::shared_ptr<Node> Parser::assingment()
         acceptIndentation();
         if (accept(INCREMENT))
         {
-            std::shared_ptr<Node> node = nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateIncrementNode(passible, currentToken, nodeFactory->CreateGetVarNode(passible, currentToken, word)));
+            std::shared_ptr<Node> node = nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateIncrementNode(passable, currentToken, nodeFactory->CreateGetVarNode(passable, currentToken, word)));
             if (!expectSemicolon())
             {
                 return null;
             }
-            return nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateRunNode(passible, currentToken, (node), block()));
+            return nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateRunNode(passable, currentToken, (node), block()));
         }
         if (accept(DECREMENT))
         {
-            std::shared_ptr<Node> node = nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateDecrementNode(passible, currentToken, nodeFactory->CreateGetVarNode(passible, currentToken, word)));
+            std::shared_ptr<Node> node = nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateDecrementNode(passable, currentToken, nodeFactory->CreateGetVarNode(passable, currentToken, word)));
             if (!expectSemicolon())
             {
                 return null;
             }
-            return nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateRunNode(passible, currentToken, node, block()));
+            return nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateRunNode(passable, currentToken, node, block()));
         }
         acceptIndentation();
         if (accept(SEMICOLON))
         {
             acceptIndentation();
             acceptSemicolon();
-            return nodeFactory->CreateRunNode(passible, currentToken, nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateSetVarNode(passible, currentToken, word, nullptr)), block());
+            return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateSetVarNode(passable, currentToken, word, nullptr)), block());
         }
 
         if (tokenType != EQUALS &&
@@ -478,31 +478,31 @@ std::shared_ptr<Node> Parser::assingment()
 
         if (tokenType == EQUALS)
         {
-            return nodeFactory->CreateRunNode(passible, currentToken, nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateSetVarNode(passible, currentToken, word, expressionNode)), blockNode);
+            return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateSetVarNode(passable, currentToken, word, expressionNode)), blockNode);
         }
         else if (tokenType == ADDITIONEQUAL)
         {
-            std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passible, currentToken, word);
-            std::shared_ptr<Node> addNode = nodeFactory->CreateAddNode(passible, currentToken, getNode, expressionNode);
-            return nodeFactory->CreateRunNode(passible, currentToken, nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateSetVarNode(passible, currentToken, word, addNode)), blockNode);
+            std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passable, currentToken, word);
+            std::shared_ptr<Node> addNode = nodeFactory->CreateAddNode(passable, currentToken, getNode, expressionNode);
+            return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateSetVarNode(passable, currentToken, word, addNode)), blockNode);
         }
         else if (tokenType == SUBTRACTIONEQUAL)
         {
-            std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passible, currentToken, word);
-            std::shared_ptr<Node> subNode = nodeFactory->CreateSubNode(passible, currentToken, getNode, expressionNode);
-            return nodeFactory->CreateRunNode(passible, currentToken, nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateSetVarNode(passible, currentToken, word, subNode)), blockNode);
+            std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passable, currentToken, word);
+            std::shared_ptr<Node> subNode = nodeFactory->CreateSubNode(passable, currentToken, getNode, expressionNode);
+            return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateSetVarNode(passable, currentToken, word, subNode)), blockNode);
         }
         else if (tokenType == MULTIPLICATIONEQUAL)
         {
-            std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passible, currentToken, word);
-            std::shared_ptr<Node> mulNode = nodeFactory->CreateMulNode(passible, currentToken, getNode, expressionNode);
-            return nodeFactory->CreateRunNode(passible, currentToken, nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateSetVarNode(passible, currentToken, word, mulNode)), blockNode);
+            std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passable, currentToken, word);
+            std::shared_ptr<Node> mulNode = nodeFactory->CreateMulNode(passable, currentToken, getNode, expressionNode);
+            return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateSetVarNode(passable, currentToken, word, mulNode)), blockNode);
         }
         else if (tokenType == DIVISIONEQUAL)
         {
-            std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passible, currentToken, word);
-            std::shared_ptr<Node> divNode = nodeFactory->CreateDivNode(passible, currentToken, getNode, expressionNode);
-            return nodeFactory->CreateRunNode(passible, currentToken, nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateSetVarNode(passible, currentToken, word, divNode)), blockNode);
+            std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passable, currentToken, word);
+            std::shared_ptr<Node> divNode = nodeFactory->CreateDivNode(passable, currentToken, getNode, expressionNode);
+            return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateSetVarNode(passable, currentToken, word, divNode)), blockNode);
         }
     }
     return null;
@@ -531,7 +531,7 @@ std::shared_ptr<Node> Parser::decloration()
             {
                 acceptIndentation();
                 acceptSemicolon();
-                return nodeFactory->CreateRunNode(passible, currentToken, nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateAddVarNode(passible, currentToken, word, nullptr)), block());
+                return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateAddVarNode(passable, currentToken, word, nullptr)), block());
             }
             if (tokenType != EQUALS &&
                     tokenType != ADDITIONEQUAL &&
@@ -560,31 +560,31 @@ std::shared_ptr<Node> Parser::decloration()
 
             if (tokenType == EQUALS)
             {
-                return nodeFactory->CreateRunNode(passible, currentToken, nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateAddVarNode(passible, currentToken, word, expressionNode)), blockNode);
+                return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateAddVarNode(passable, currentToken, word, expressionNode)), blockNode);
             }
             else if (tokenType == ADDITIONEQUAL)
             {
-                std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passible, currentToken, word);
-                std::shared_ptr<Node> addNode = nodeFactory->CreateAddNode(passible, currentToken, getNode, expressionNode);
-                return nodeFactory->CreateRunNode(passible, currentToken, nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateAddVarNode(passible, currentToken, word, addNode)), blockNode);
+                std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passable, currentToken, word);
+                std::shared_ptr<Node> addNode = nodeFactory->CreateAddNode(passable, currentToken, getNode, expressionNode);
+                return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateAddVarNode(passable, currentToken, word, addNode)), blockNode);
             }
             else if (tokenType == SUBTRACTIONEQUAL)
             {
-                std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passible, currentToken, word);
-                std::shared_ptr<Node> subNode = nodeFactory->CreateSubNode(passible, currentToken, getNode, expressionNode);
-                return nodeFactory->CreateRunNode(passible, currentToken, nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateAddVarNode(passible, currentToken, word, subNode)), blockNode);
+                std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passable, currentToken, word);
+                std::shared_ptr<Node> subNode = nodeFactory->CreateSubNode(passable, currentToken, getNode, expressionNode);
+                return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateAddVarNode(passable, currentToken, word, subNode)), blockNode);
             }
             else if (tokenType == MULTIPLICATIONEQUAL)
             {
-                std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passible, currentToken, word);
-                std::shared_ptr<Node> mulNode = nodeFactory->CreateMulNode(passible, currentToken, getNode, expressionNode);
-                return nodeFactory->CreateRunNode(passible, currentToken, nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateAddVarNode(passible, currentToken, word, mulNode)), blockNode);
+                std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passable, currentToken, word);
+                std::shared_ptr<Node> mulNode = nodeFactory->CreateMulNode(passable, currentToken, getNode, expressionNode);
+                return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateAddVarNode(passable, currentToken, word, mulNode)), blockNode);
             }
             else if (tokenType == DIVISIONEQUAL)
             {
-                std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passible, currentToken, word);
-                std::shared_ptr<Node> divNode = nodeFactory->CreateDivNode(passible, currentToken, getNode, expressionNode);
-                return nodeFactory->CreateRunNode(passible, currentToken, nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateAddVarNode(passible, currentToken, word, divNode)), blockNode);
+                std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passable, currentToken, word);
+                std::shared_ptr<Node> divNode = nodeFactory->CreateDivNode(passable, currentToken, getNode, expressionNode);
+                return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateAddVarNode(passable, currentToken, word, divNode)), blockNode);
             }
         }
         return null;
@@ -609,7 +609,7 @@ std::shared_ptr<Node> Parser::decloration()
             {
                 acceptIndentation();
                 acceptSemicolon();
-                return nodeFactory->CreateRunNode(passible, currentToken, nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateAddVarNode(passible, currentToken, word, nullptr)), block());
+                return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateAddVarNode(passable, currentToken, word, nullptr)), block());
             }
             if (tokenType != EQUALS &&
                     tokenType != ADDITIONEQUAL &&
@@ -638,31 +638,31 @@ std::shared_ptr<Node> Parser::decloration()
 
             if (tokenType == EQUALS)
             {
-                return nodeFactory->CreateRunNode(passible, currentToken, nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateAddConstNode(passible, currentToken, word, expressionNode)), blockNode);
+                return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateAddConstNode(passable, currentToken, word, expressionNode)), blockNode);
             }
             else if (tokenType == ADDITIONEQUAL)
             {
-                std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passible, currentToken, word);
-                std::shared_ptr<Node> addNode = nodeFactory->CreateAddNode(passible, currentToken, getNode, expressionNode);
-                return nodeFactory->CreateRunNode(passible, currentToken, nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateAddConstNode(passible, currentToken, word, addNode)), blockNode);
+                std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passable, currentToken, word);
+                std::shared_ptr<Node> addNode = nodeFactory->CreateAddNode(passable, currentToken, getNode, expressionNode);
+                return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateAddConstNode(passable, currentToken, word, addNode)), blockNode);
             }
             else if (tokenType == SUBTRACTIONEQUAL)
             {
-                std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passible, currentToken, word);
-                std::shared_ptr<Node> subNode = nodeFactory->CreateSubNode(passible, currentToken, getNode, expressionNode);
-                return nodeFactory->CreateRunNode(passible, currentToken, nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateAddConstNode(passible, currentToken, word, subNode)), blockNode);
+                std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passable, currentToken, word);
+                std::shared_ptr<Node> subNode = nodeFactory->CreateSubNode(passable, currentToken, getNode, expressionNode);
+                return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateAddConstNode(passable, currentToken, word, subNode)), blockNode);
             }
             else if (tokenType == MULTIPLICATIONEQUAL)
             {
-                std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passible, currentToken, word);
-                std::shared_ptr<Node> mulNode = nodeFactory->CreateMulNode(passible, currentToken, getNode, expressionNode);
-                return nodeFactory->CreateRunNode(passible, currentToken, nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateAddConstNode(passible, currentToken, word, mulNode)), blockNode);
+                std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passable, currentToken, word);
+                std::shared_ptr<Node> mulNode = nodeFactory->CreateMulNode(passable, currentToken, getNode, expressionNode);
+                return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateAddConstNode(passable, currentToken, word, mulNode)), blockNode);
             }
             else if (tokenType == DIVISIONEQUAL)
             {
-                std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passible, currentToken, word);
-                std::shared_ptr<Node> divNode = nodeFactory->CreateDivNode(passible, currentToken, getNode, expressionNode);
-                return nodeFactory->CreateRunNode(passible, currentToken, nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateAddConstNode(passible, currentToken, word, divNode)), blockNode);
+                std::shared_ptr<Node> getNode = nodeFactory->CreateGetVarNode(passable, currentToken, word);
+                std::shared_ptr<Node> divNode = nodeFactory->CreateDivNode(passable, currentToken, getNode, expressionNode);
+                return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateAddConstNode(passable, currentToken, word, divNode)), blockNode);
             }
         }
         return null;
@@ -726,7 +726,7 @@ std::shared_ptr<Node> Parser::elseStatement()
             acceptIndentation();
             return node;
         }
-        returnNode = nodeFactory->CreateIfNode(passible, currentToken, conditionNode, statementNode, elseNode);
+        returnNode = nodeFactory->CreateIfNode(passable, currentToken, conditionNode, statementNode, elseNode);
     }
     return returnNode;
 }
@@ -768,8 +768,8 @@ std::shared_ptr<Node> Parser::statement()
 
             acceptIndentation();
             std::shared_ptr<Node> next = block();
-            std::shared_ptr<Node> returnNode = nodeFactory->CreateIfNode(passible, currentToken, conditionNode, statementNode, elseNode);
-            return nodeFactory->CreateRunNode(passible, this->currentToken, returnNode, next);
+            std::shared_ptr<Node> returnNode = nodeFactory->CreateIfNode(passable, currentToken, conditionNode, statementNode, elseNode);
+            return nodeFactory->CreateRunNode(passable, this->currentToken, returnNode, next);
         }
         else if (accept("while"))
         {
@@ -786,7 +786,7 @@ std::shared_ptr<Node> Parser::statement()
             expect(RIGHTBRACKET);
             acceptIndentation();
             std::shared_ptr<Node> next = block();
-            return nodeFactory->CreateWhileNode(passible, currentToken, conditionNode, statementNode, next);
+            return nodeFactory->CreateWhileNode(passable, currentToken, conditionNode, statementNode, next);
         }
         return assingment();
     }
@@ -801,12 +801,12 @@ std::shared_ptr<Node> Parser::block()
         if (accept("return"))
         {
             acceptIndentation();
-            std::shared_ptr<Node> returnNode = nodeFactory->CreateSetReturnNode(passible, boolean());
+            std::shared_ptr<Node> returnNode = nodeFactory->CreateSetReturnNode(passable, boolean());
             if (!expectSemicolon())
             {
                 return null;
             }
-            return nodeFactory->CreateSemicolonNode(passible, returnNode);
+            return nodeFactory->CreateSemicolonNode(passable, returnNode);
         }
         std::shared_ptr<Node> dec = decloration();
         if (dec != nullptr)
@@ -841,8 +841,8 @@ std::shared_ptr<Node> Parser::block()
                 return null;
             }
             std::shared_ptr<Node> blockNode = block();
-            std::shared_ptr<Node> functions = nodeFactory->CreateSemicolonNode(passible, nodeFactory->CreateGetFuncNode(passible, currentToken, word, this->functions, arguments));
-            return nodeFactory->CreateRunNode(passible, currentToken, (functions), blockNode);
+            std::shared_ptr<Node> functions = nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateGetFuncNode(passable, currentToken, word, this->functions, arguments));
+            return nodeFactory->CreateRunNode(passable, currentToken, (functions), blockNode);
         }
         else if (accept("function"))
         {
@@ -906,7 +906,7 @@ std::shared_ptr<Node> Parser::block()
                 customFunctions->removeFunction(word);
                 return false;
             }
-            std::shared_ptr<Function> newFunction = std::make_shared<CustomFunction>(passible, currentToken, word, arguments, blockNode);
+            std::shared_ptr<Function> newFunction = std::make_shared<CustomFunction>(passable, currentToken, word, arguments, blockNode);
             functions->setFunction(word, newFunction);
             customFunctions->setFunction(word, newFunction);
             return block();
@@ -929,7 +929,7 @@ std::shared_ptr<Node> Parser::parse()
 std::string Parser::toString()
 {
     std::string output;
-    std::shared_ptr<Scope> scope = std::make_shared<Scope>(passible);
+    std::shared_ptr<Scope> scope = std::make_shared<Scope>(passable);
     if (!tokens.empty() && compilation)
     {
         std::shared_ptr<Node> node = parse();
@@ -944,7 +944,7 @@ std::string Parser::toString()
 
 bool Parser::execute()
 {
-    std::shared_ptr<Scope> scope = std::make_shared<Scope>(passible);
+    std::shared_ptr<Scope> scope = std::make_shared<Scope>(passable);
     if (!tokens.empty() && compilation)
     {
         std::shared_ptr<Node> done = parse();
@@ -955,10 +955,10 @@ bool Parser::execute()
             {
                 std::cout << output->toString() << std::endl;
             }
-            passible->errors->print();
+            passable->errors->print();
             return true;
         }
     }
-    passible->errors->print();
+    passable->errors->print();
     return false;
 }

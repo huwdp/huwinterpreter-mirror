@@ -15,8 +15,8 @@
 
 #include "tolower.h"
 
-ToLower::ToLower(std::shared_ptr<Passible> passible)
-    : Function(passible)
+ToLower::ToLower(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "toLower";
 }
@@ -40,12 +40,12 @@ std::shared_ptr<Variable> ToLower::run(std::shared_ptr<Token> token,
             std::string temp = var->toString();
             transform(temp.begin(), temp.end(), temp.begin(),::tolower);
             
-            returnNode = std::make_shared<StringVariable>(passible, "", temp);
+            returnNode = std::make_shared<StringVariable>(passable, "", temp);
         }
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "ToLower requires one at least argument", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "ToLower requires one at least argument", token));
     }
     
     return returnNode;

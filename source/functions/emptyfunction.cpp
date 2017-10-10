@@ -15,8 +15,8 @@
 
 #include "emptyfunction.h"
 
-EmptyFunction::EmptyFunction(std::shared_ptr<Passible> passible)
-    : Function(passible)
+EmptyFunction::EmptyFunction(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "EmptyFunction";
 }
@@ -25,6 +25,6 @@ std::shared_ptr<Variable> EmptyFunction::run(std::shared_ptr<Token> token,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)
 {
-    passible->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot find function", token));
+    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot find function", token));
     return null;
 }

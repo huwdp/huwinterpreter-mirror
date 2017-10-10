@@ -15,8 +15,8 @@
 
 #include "now.h"
 
-Now::Now(std::shared_ptr<Passible> passible)
-    : Function(passible)
+Now::Now(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "now";
 }
@@ -30,11 +30,11 @@ std::shared_ptr<Variable> Now::run(std::shared_ptr<Token> token,
     {
         time_t t = std::time(0);
         double now = static_cast<double> (t);
-        returnNode = std::make_shared<NumberVariable>(passible, now);
+        returnNode = std::make_shared<NumberVariable>(passable, now);
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Too many arguments in Now.", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Too many arguments in Now.", token));
     }
 
     return returnNode;

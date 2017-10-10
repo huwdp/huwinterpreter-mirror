@@ -25,9 +25,9 @@
 class VariableTypeFactory
 {
 private:
-    std::shared_ptr<Passible> passible;
+    std::shared_ptr<Passable> passable;
 public:
-    VariableTypeFactory(std::shared_ptr<Passible> passible);
+    VariableTypeFactory(std::shared_ptr<Passable> passable);
     std::shared_ptr<Variable> newVariable(VarType varType);
 };
 

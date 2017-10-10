@@ -25,7 +25,7 @@ protected:
     std::shared_ptr<Node> value;
     std::shared_ptr<Scope> scope;
 public:
-    AddConstNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value);
+    AddConstNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value);
     NodeType getType();
     std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
     std::string toString();

@@ -15,8 +15,8 @@
 
 #include "unaryminusnode.h"
 
-UnaryMinusNode::UnaryMinusNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> node)
-    : Node(passible, token)
+UnaryMinusNode::UnaryMinusNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> node)
+    : Node(passable, token)
 {
     this->node = node;
 }
@@ -38,7 +38,7 @@ std::shared_ptr<Variable> UnaryMinusNode::execute(std::shared_ptr<Scope> scope)
         std::shared_ptr<Variable> value = node->execute(scope);
         if (value != nullptr)
         {
-            return value->mul(std::make_shared<IntegerVariable>(passible, -1));
+            return value->mul(std::make_shared<IntegerVariable>(passable, -1));
         }
     }
     return null;

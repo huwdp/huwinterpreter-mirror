@@ -15,8 +15,8 @@
 
 #include "ifandnode.h"
 
-IfAndNode::IfAndNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : Node(passible, token)
+IfAndNode::IfAndNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+    : Node(passable, token)
 {
     this->left = left;
     this->right = right;
@@ -40,26 +40,26 @@ std::shared_ptr<Variable> IfAndNode::execute(std::shared_ptr<Scope> scope)
         std::shared_ptr<Variable> l = left->execute(scope);
         if (l == nullptr)
         {
-            passible->errors->add(std::make_shared<Error>(ERROR, "Invalid expression", token));
+            passable->errors->add(std::make_shared<Error>(ERROR, "Invalid expression", token));
             return null;
         }
         if (!l->toBool())
         {
-            return std::make_shared<NumberVariable>(passible, false);
+            return std::make_shared<NumberVariable>(passable, false);
         }
 
         std::shared_ptr<Variable> r = right->execute(scope);
         if (r == nullptr)
         {
-            passible->errors->add(std::make_shared<Error>(ERROR, "Invalid expression", token));
+            passable->errors->add(std::make_shared<Error>(ERROR, "Invalid expression", token));
             return null;
         }
 
         if (r->toBool() && l->toBool())
         {
-            return std::make_shared<NumberVariable>(passible, true);
+            return std::make_shared<NumberVariable>(passable, true);
         }
-        return std::make_shared<NumberVariable>(passible, false);
+        return std::make_shared<NumberVariable>(passable, false);
     }
     Debug::print("Could not and");
     return null;

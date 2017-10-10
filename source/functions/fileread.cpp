@@ -15,8 +15,8 @@
 
 #include "fileread.h"
 
-FileRead::FileRead(std::shared_ptr<Passible> passible)
-    : Function(passible)
+FileRead::FileRead(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "fileRead";
 }
@@ -36,7 +36,7 @@ std::shared_ptr<Variable> FileRead::run(std::shared_ptr<Token> token,
             if (var != nullptr)
             {
                 std::string stream = file.read(var->toString());
-                return std::make_shared<StringVariable>(passible, "",stream);
+                return std::make_shared<StringVariable>(passable, "",stream);
             }
             else
             {
@@ -46,7 +46,7 @@ std::shared_ptr<Variable> FileRead::run(std::shared_ptr<Token> token,
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Too many arguments in FileRead", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Too many arguments in FileRead", token));
     }
     return returnNode;
 }

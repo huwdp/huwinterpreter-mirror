@@ -15,8 +15,8 @@
 
 #include "abs.h"
 
-Abs::Abs(std::shared_ptr<Passible> passible)
-    : Function(passible)
+Abs::Abs(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "abs";
 }
@@ -41,25 +41,25 @@ std::shared_ptr<Variable> Abs::run(std::shared_ptr<Token> token,
             {
                 double temp = var->toDouble();
                 double output = std::abs(temp);
-                returnNode = std::make_shared<NumberVariable>(passible, output);
+                returnNode = std::make_shared<NumberVariable>(passable, output);
             }
             catch (const std::invalid_argument ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Abs", token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Abs", token));
             }
             catch (const std::out_of_range ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Abs", token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Abs", token));
             }
             catch (const std::exception& ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
             }
         }
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Error: Abs function requires one argument", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Error: Abs function requires one argument", token));
     }
     return returnNode;
 }

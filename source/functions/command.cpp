@@ -15,8 +15,8 @@
 
 #include "command.h"
 
-Command::Command(std::shared_ptr<Passible> passible)
-    : Function(passible)
+Command::Command(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "command";
 }
@@ -29,7 +29,7 @@ std::shared_ptr<Variable> Command::run(std::shared_ptr<Token> token,
     if (variables.size() == 0)
     {
         Debug::print("Command function requires at least 1 argument");
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Commands function requires at least one argument", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Commands function requires at least one argument", token));
 
         return null;
     }

@@ -15,8 +15,8 @@
 
 #include "getvarnode.h"
 
-GetVarNode::GetVarNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::string name)
-    : Node(passible, token)
+GetVarNode::GetVarNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::string name)
+    : Node(passable, token)
 {
     this->name = name;
     Debug::print("GetVarNode");

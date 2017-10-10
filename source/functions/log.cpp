@@ -15,8 +15,8 @@
 
 #include "log.h"
 
-Log::Log(std::shared_ptr<Passible> passible)
-    : Function(passible)
+Log::Log(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "log";
 }
@@ -41,26 +41,26 @@ std::shared_ptr<Variable> Log::run(std::shared_ptr<Token> token,
             {
                 double temp = var->toDouble();
                 double output = std::log(temp);
-                returnNode = std::make_shared<NumberVariable>(passible, output);
+                returnNode = std::make_shared<NumberVariable>(passable, output);
             }
             catch (const std::invalid_argument ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Log", token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Log", token));
             }
             catch (const std::out_of_range ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Log", token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Log", token));
             }
             catch (const std::exception& ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
             }
         }
 
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Log function requires one argument", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Log function requires one argument", token));
     }
 
     return returnNode;

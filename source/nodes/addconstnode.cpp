@@ -15,8 +15,8 @@
 
 #include "addconstnode.h"
 
-AddConstNode::AddConstNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value)
-    : Node(passible, token)
+AddConstNode::AddConstNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value)
+    : Node(passable, token)
 {
     this->name = name;
     this->value = value;
@@ -53,7 +53,7 @@ std::shared_ptr<Variable> AddConstNode::execute(std::shared_ptr<Scope> scope)
         {
             if (!scope->getVariables()->addVariable(name, var))
             {
-                passible->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Constant not declared", token));
+                passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Constant not declared", token));
             }
         }
     }

@@ -15,8 +15,8 @@
 
 #include "jsifequalnode.h"
 
-JSIfEqualNode::JSIfEqualNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : IfEqualNode(passible, token, left, right)
+JSIfEqualNode::JSIfEqualNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+    : IfEqualNode(passable, token, left, right)
 {
 }
 

@@ -15,8 +15,8 @@
 
 #include "strcomp.h"
 
-StrComp::StrComp(std::shared_ptr<Passible> passible)
-    : Function(passible)
+StrComp::StrComp(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "strCmp";
 }
@@ -42,12 +42,12 @@ std::shared_ptr<Variable> StrComp::run(std::shared_ptr<Token> token,
             std::string str1 = var1->toString();
             std::string str2 = var2->toString();
             double diff = double(str1.compare(str2));
-            returnNode = std::make_shared<NumberVariable>(passible, diff);
+            returnNode = std::make_shared<NumberVariable>(passable, diff);
         }
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "StrComp function requires two arguments", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "StrComp function requires two arguments", token));
     }
     
     return returnNode;

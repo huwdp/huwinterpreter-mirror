@@ -15,8 +15,8 @@
 
 #include "isnumbertype.h"
 
-IsNumberType::IsNumberType(std::shared_ptr<Passible> passible)
-    : Function(passible)
+IsNumberType::IsNumberType(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "isNumber";
 }
@@ -39,17 +39,17 @@ std::shared_ptr<Variable> IsNumberType::run(std::shared_ptr<Token> token,
         {
             if (var->isNumber())
             {
-                returnNode = std::make_shared<NumberVariable>(passible, true);
+                returnNode = std::make_shared<NumberVariable>(passable, true);
             }
             else
             {
-                returnNode = std::make_shared<NumberVariable>(passible, false);
+                returnNode = std::make_shared<NumberVariable>(passable, false);
             }
         }
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "isNumberType function requires one arguments", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "isNumberType function requires one arguments", token));
     }
     return returnNode;
 }

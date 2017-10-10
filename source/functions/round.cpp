@@ -15,8 +15,8 @@
 
 #include "round.h"
 
-Round::Round(std::shared_ptr<Passible> passible)
-    : Function(passible)
+Round::Round(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "round";
 }
@@ -42,26 +42,26 @@ std::shared_ptr<Variable> Round::run(std::shared_ptr<Token> token,
                 double temp = var->toDouble();
                 double output = std::round(temp);
                 
-                returnNode = std::make_shared<NumberVariable>(passible, output);
+                returnNode = std::make_shared<NumberVariable>(passable, output);
             }
             catch (const std::invalid_argument ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Could not round", token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Could not round", token));
             }
             catch (const std::out_of_range ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Round", token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Round", token));
             }
             catch (const std::exception& ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
             }
         }
         
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Round function requires one argument", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Round function requires one argument", token));
 
     }
     

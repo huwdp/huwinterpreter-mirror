@@ -15,8 +15,8 @@
 
 #include "jsgetvarnode.h"
 
-JSGetVarNode::JSGetVarNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::string name)
-    : GetVarNode(passible, token, name)
+JSGetVarNode::JSGetVarNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::string name)
+    : GetVarNode(passable, token, name)
 {
 }
 

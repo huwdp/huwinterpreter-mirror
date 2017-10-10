@@ -15,8 +15,8 @@
 
 #include "jsmodnode.h"
 
-JSModNode::JSModNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : ModNode(passible, token, left, right)
+JSModNode::JSModNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+    : ModNode(passable, token, left, right)
 {
 }
 

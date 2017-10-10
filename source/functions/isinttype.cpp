@@ -15,8 +15,8 @@
 
 #include "isinttype.h"
 
-IsIntType::IsIntType(std::shared_ptr<Passible> passible)
-    : Function(passible)
+IsIntType::IsIntType(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "isInt";
 }
@@ -39,17 +39,17 @@ std::shared_ptr<Variable> IsIntType::run(std::shared_ptr<Token> token,
         {
             if (var->getType() == INTEGER)
             {
-                returnNode = std::make_shared<NumberVariable>(passible, true);
+                returnNode = std::make_shared<NumberVariable>(passable, true);
             }
             else
             {
-                returnNode = std::make_shared<NumberVariable>(passible, false);
+                returnNode = std::make_shared<NumberVariable>(passable, false);
             }
         }
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "isIntType function requires one arguments", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "isIntType function requires one arguments", token));
     }
     return returnNode;
 }

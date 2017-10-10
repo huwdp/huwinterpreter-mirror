@@ -30,13 +30,13 @@ private:
     std::shared_ptr<Variable> variable;
     Precision precision;
 public:
-    NumberVariable(std::shared_ptr<Passible> passible, bool value);
-    NumberVariable(std::shared_ptr<Passible> passible, std::shared_ptr<Variable> variable);
-    NumberVariable(std::shared_ptr<Passible> passible, double value);
-    NumberVariable(std::shared_ptr<Passible> passible, long long value);
-    NumberVariable(std::shared_ptr<Passible> passible, std::string name, double value);
-    NumberVariable(std::shared_ptr<Passible> passible, std::string name, long long value);
-    NumberVariable(std::shared_ptr<Passible> passible, std::string name, std::string value);
+    NumberVariable(std::shared_ptr<Passable> passable, bool value);
+    NumberVariable(std::shared_ptr<Passable> passable, std::shared_ptr<Variable> variable);
+    NumberVariable(std::shared_ptr<Passable> passable, double value);
+    NumberVariable(std::shared_ptr<Passable> passable, long long value);
+    NumberVariable(std::shared_ptr<Passable> passable, std::string name, double value);
+    NumberVariable(std::shared_ptr<Passable> passable, std::string name, long long value);
+    NumberVariable(std::shared_ptr<Passable> passable, std::string name, std::string value);
 
     void setValue(double value);
     void setValue(std::string value);

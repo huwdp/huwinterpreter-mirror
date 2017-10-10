@@ -188,7 +188,7 @@ SOURCES += \
     nodes/semicolonnode.cpp \
     nodes/js/jssemicolonnode.cpp \
     format/escapecharacteroutput.cpp \
-    common/passible.cpp
+    common/passable.cpp
 
 
 
@@ -407,7 +407,7 @@ HEADERS += \
     nodes/semicolonnode.h \
     nodes/js/jssemicolonnode.h \
     format/escapecharacteroutput.h \
-    common/passible.h
+    common/passable.h
 
 
 

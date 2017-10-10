@@ -15,8 +15,8 @@
 
 #include "dateformat.h"
 
-DateFormat::DateFormat(std::shared_ptr<Passible> passible)
-    : Function(passible)
+DateFormat::DateFormat(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "dateFormat";
 }
@@ -51,29 +51,29 @@ std::shared_ptr<Variable> DateFormat::run(std::shared_ptr<Token> token,
             ss << std::put_time(&tm, format.c_str());
             if (ss.fail())
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Could not parse time in DateFormat\n", token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Could not parse time in DateFormat\n", token));
             }
             else
             {
-                returnNode = std::make_shared<StringVariable>(passible, "", ss.str());
+                returnNode = std::make_shared<StringVariable>(passable, "", ss.str());
             }
         }
         catch (const std::invalid_argument ex)
         {
-            passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in DateFormat", token));
+            passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in DateFormat", token));
         }
         catch (const std::out_of_range ex)
         {
-            passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in DateFormat", token));
+            passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in DateFormat", token));
         }
         catch (const std::exception& ex)
         {
-            passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+            passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
         }
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Too many arguments in DateFormat", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Too many arguments in DateFormat", token));
     }
 
     return returnNode;

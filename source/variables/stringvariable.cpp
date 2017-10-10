@@ -15,24 +15,24 @@
 
 #include "stringvariable.h"
 
-StringVariable::StringVariable(std::shared_ptr<Passible> passible)
-    : Variable(passible)
+StringVariable::StringVariable(std::shared_ptr<Passable> passable)
+    : Variable(passable)
 {
-    variableTypeFactory = std::make_shared<VariableTypeFactory>(passible);
+    variableTypeFactory = std::make_shared<VariableTypeFactory>(passable);
 }
 
-StringVariable::StringVariable(std::shared_ptr<Passible> passible, std::string value)
-    : Variable(passible, "")
+StringVariable::StringVariable(std::shared_ptr<Passable> passable, std::string value)
+    : Variable(passable, "")
 {
     this->value = value;
-    variableTypeFactory = std::make_shared<VariableTypeFactory>(passible);
+    variableTypeFactory = std::make_shared<VariableTypeFactory>(passable);
 }
 
-StringVariable::StringVariable(std::shared_ptr<Passible> passible, std::string name, std::string value)
-    : Variable(passible, name)
+StringVariable::StringVariable(std::shared_ptr<Passable> passable, std::string name, std::string value)
+    : Variable(passable, name)
 {
     this->value = value;
-    variableTypeFactory = std::make_shared<VariableTypeFactory>(passible);
+    variableTypeFactory = std::make_shared<VariableTypeFactory>(passable);
 }
 
 void StringVariable::setValue(double value)
@@ -131,7 +131,7 @@ std::shared_ptr<Variable> StringVariable::add(std::shared_ptr<Variable> variable
     {
         return null;
     }
-    return std::make_shared<StringVariable>(passible, this->toString() + variable->toString());
+    return std::make_shared<StringVariable>(passable, this->toString() + variable->toString());
 }
 
 std::shared_ptr<Variable> StringVariable::sub(std::shared_ptr<Variable> variable)
@@ -152,7 +152,7 @@ std::shared_ptr<Variable> StringVariable::ifUnder(std::shared_ptr<Variable> vari
         var->setValue(toString());
         return var->ifUnder(variable);
     }
-    std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passible);
+    std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passable);
     if (this->toString().compare(variable->toString()) < 0)
     {
         temp->setValue(double(1));
@@ -176,7 +176,7 @@ std::shared_ptr<Variable> StringVariable::ifUnderOrEqual(std::shared_ptr<Variabl
         var->setValue(toString());
         return var->ifUnderOrEqual(variable);
     }
-    std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passible);
+    std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passable);
     if (this->toString().compare(variable->toString()) <= 0)
     {
         temp->setValue(double(1));
@@ -200,7 +200,7 @@ std::shared_ptr<Variable> StringVariable::ifOver(std::shared_ptr<Variable> varia
         var->setValue(toString());
         return var->ifOver(variable);
     }
-    std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passible);
+    std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passable);
     if (this->toString().compare(variable->toString()) > 0)
     {
         temp->setValue(double(1));
@@ -224,7 +224,7 @@ std::shared_ptr<Variable> StringVariable::ifOverOrEqual(std::shared_ptr<Variable
         var->setValue(toString());
         return var->ifOverOrEqual(variable);
     }
-    std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passible);
+    std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passable);
     if (this->toString().compare(variable->toString()) >= 0)
     {
         temp->setValue(double(1));
@@ -248,7 +248,7 @@ std::shared_ptr<Variable> StringVariable::ifEqual(std::shared_ptr<Variable> vari
         var->setValue(toString());
         return var->ifEqual(variable);
     }
-    std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passible);
+    std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passable);
     if (this->toString().compare(variable->toString()) == 0)
     {
         temp->setValue(double(1));
@@ -272,7 +272,7 @@ std::shared_ptr<Variable> StringVariable::ifNotEqual(std::shared_ptr<Variable> v
         var->setValue(toString());
         return var->ifNotEqual(variable);
     }
-    std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passible);
+    std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passable);
     if (this->toString().compare(variable->toString()) != 0)
     {
         temp->setValue(double(1));
@@ -292,7 +292,7 @@ std::shared_ptr<Variable> StringVariable::addEqual(std::shared_ptr<Variable> var
     }
     std::string value = this->value;
     value.append(variable->toString());
-    return std::make_shared<StringVariable>(passible, value);
+    return std::make_shared<StringVariable>(passable, value);
 }
 
 std::shared_ptr<Variable> StringVariable::subEqual(std::shared_ptr<Variable> variable)
@@ -302,7 +302,7 @@ std::shared_ptr<Variable> StringVariable::subEqual(std::shared_ptr<Variable> var
         return null;
     }
     return null;
-    passible->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call subtract method on a string"));
+    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call subtract method on a string"));
 }
 
 std::shared_ptr<Variable> StringVariable::mulEqual(std::shared_ptr<Variable> variable)
@@ -311,7 +311,7 @@ std::shared_ptr<Variable> StringVariable::mulEqual(std::shared_ptr<Variable> var
     {
         return null;
     }
-    passible->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call multiply method on a string"));
+    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call multiply method on a string"));
     return null;
 }
 
@@ -321,7 +321,7 @@ std::shared_ptr<Variable> StringVariable::divEqual(std::shared_ptr<Variable> var
     {
         return null;
     }
-    passible->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call divide method on a string"));
+    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call divide method on a string"));
     return null;
 }
 
@@ -333,57 +333,57 @@ std::shared_ptr<Variable> StringVariable::equal(std::shared_ptr<Variable> variab
     }
     if (value.compare(variable->toString()) == 0)
     {
-        return std::make_shared<NumberVariable>(passible, true);
+        return std::make_shared<NumberVariable>(passable, true);
     }
-    return std::make_shared<NumberVariable>(passible, false);
+    return std::make_shared<NumberVariable>(passable, false);
 }
 
 std::shared_ptr<Variable> StringVariable::increment()
 {
-    passible->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call increment method on a string"));
+    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call increment method on a string"));
     return null;
 }
 
 std::shared_ptr<Variable> StringVariable::decrement()
 {
-    passible->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call decrement method on a string"));
+    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call decrement method on a string"));
     return null;
 }
 
 std::shared_ptr<Variable> StringVariable::count()
 {
-    return std::make_shared<NumberVariable>(passible, (long long)value.size());
+    return std::make_shared<NumberVariable>(passable, (long long)value.size());
 }
 
 void StringVariable::set(std::string index, std::shared_ptr<Variable> value)
 {
-    passible->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call set method in string. String is not an array"));
+    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call set method in string. String is not an array"));
 }
 
 std::shared_ptr<Variable> StringVariable::get(std::string value)
 {
-    passible->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call get method in string. String is not an array"));
+    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call get method in string. String is not an array"));
     return null;
 }
 
 void StringVariable::unset(std::string index)
 {
-    passible->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call unset method in string. String is not an array"));
+    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call unset method in string. String is not an array"));
 }
 
 std::shared_ptr<Variable> StringVariable::copy()
 {
-    return std::make_shared<StringVariable>(passible, value);
+    return std::make_shared<StringVariable>(passable, value);
 }
 
 std::shared_ptr<Variable> StringVariable::bitwiseAnd(std::shared_ptr<Variable> variable)
 {
-    passible->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call bitwiseAnd method in string"));
+    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call bitwiseAnd method in string"));
     return null;
 }
 
 std::shared_ptr<Variable> StringVariable::bitwiseOr(std::shared_ptr<Variable> variable)
 {
-    passible->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call bitwiseOR method in string"));
+    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call bitwiseOR method in string"));
     return null;
 }

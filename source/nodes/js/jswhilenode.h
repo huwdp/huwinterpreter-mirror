@@ -21,7 +21,7 @@
 class JSWhileNode : public WhileNode
 {
 public:
-    JSWhileNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> condition, std::shared_ptr<Node> body, std::shared_ptr<Node> next);
+    JSWhileNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> condition, std::shared_ptr<Node> body, std::shared_ptr<Node> next);
     std::string toString();
 };
 

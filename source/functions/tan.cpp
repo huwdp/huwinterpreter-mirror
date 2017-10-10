@@ -15,8 +15,8 @@
 
 #include "tan.h"
 
-Tan::Tan(std::shared_ptr<Passible> passible)
-    : Function(passible)
+Tan::Tan(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "tan";
 }
@@ -41,26 +41,26 @@ std::shared_ptr<Variable> Tan::run(std::shared_ptr<Token> token,
             {
                 double temp = var->toDouble();
                 double output = std::tan(temp);
-                returnNode = std::make_shared<NumberVariable>(passible, output);
+                returnNode = std::make_shared<NumberVariable>(passable, output);
             }
             catch (const std::invalid_argument ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Tan", token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Tan", token));
             }
             catch (const std::out_of_range ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Tan", token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Tan", token));
             }
             catch (const std::exception& ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
             }
             
         }
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Tan function requires one argument", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Tan function requires one argument", token));
     }
     
     return returnNode;

@@ -29,11 +29,11 @@
 class Variables
 {
 private:
-    std::shared_ptr<Passible> passible;
+    std::shared_ptr<Passable> passable;
     std::unordered_map<std::string, std::shared_ptr<Variable>> variables;
 public:
     std::shared_ptr<Variable> null;
-    Variables(std::shared_ptr<Passible> passible, bool isEmpty);
+    Variables(std::shared_ptr<Passable> passable, bool isEmpty);
     ~Variables();
     void addDefaultVariables(bool isEmpty);
     std::shared_ptr<Variable> get(std::string name);

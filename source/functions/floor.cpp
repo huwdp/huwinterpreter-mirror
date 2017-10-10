@@ -15,8 +15,8 @@
 
 #include "floor.h"
 
-Floor::Floor(std::shared_ptr<Passible> passible)
-    : Function(passible)
+Floor::Floor(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "floor";
 }
@@ -41,19 +41,19 @@ std::shared_ptr<Variable> Floor::run(std::shared_ptr<Token> token,
             {
                 double temp = var->toDouble();
                 double output = std::floor(temp);
-                returnNode = std::make_shared<NumberVariable>(passible, output);
+                returnNode = std::make_shared<NumberVariable>(passable, output);
             }
             catch (const std::invalid_argument ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Floor", token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Floor", token));
             }
             catch (const std::out_of_range ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Floor", token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Floor", token));
             }
             catch (const std::exception& ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
             }
         }
         
@@ -61,7 +61,7 @@ std::shared_ptr<Variable> Floor::run(std::shared_ptr<Token> token,
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Floor function requires one argument", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Floor function requires one argument", token));
     }
     return returnNode;
 }

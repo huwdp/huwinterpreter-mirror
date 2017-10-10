@@ -15,8 +15,8 @@
 
 #include "cos.h"
 
-Cos::Cos(std::shared_ptr<Passible> passible)
-    : Function(passible)
+Cos::Cos(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "cos";
 }
@@ -41,25 +41,25 @@ std::shared_ptr<Variable> Cos::run(std::shared_ptr<Token> token,
             {
                 double temp = var->toDouble();
                 double output = std::cos(temp);
-                returnNode = std::make_shared<NumberVariable>(passible, output);
+                returnNode = std::make_shared<NumberVariable>(passable, output);
             }
             catch (const std::invalid_argument ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Cos", token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Cos", token));
             }
             catch (const std::out_of_range ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Cos", token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Cos", token));
             }
             catch (const std::exception& ex)
             {
-                passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
             }
         }
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Cos function requires one argument", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Cos function requires one argument", token));
     }
     
     return returnNode;

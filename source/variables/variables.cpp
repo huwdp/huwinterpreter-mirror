@@ -15,9 +15,9 @@
 
 #include "variables.h"
 
-Variables::Variables(std::shared_ptr<Passible> passible, bool isEmpty)
+Variables::Variables(std::shared_ptr<Passable> passable, bool isEmpty)
 {
-    this->passible = passible;
+    this->passable = passable;
     addDefaultVariables(isEmpty);
 }
 
@@ -30,13 +30,13 @@ void Variables::addDefaultVariables(bool isEmpty)
 {
     if (!isEmpty)
     {
-        addVariable(std::move(std::make_shared<ConstantVariable>(passible, std::make_shared<NumberVariable>(passible, "PI", 3.14159265358979))));
-        addVariable(std::move(std::make_shared<ConstantVariable>(passible, std::make_shared<NumberVariable>(passible, "e", 2.718281828459045))));
-        addVariable(std::move(std::make_shared<ConstantVariable>(passible, std::make_shared<NumberVariable>(passible, "y", 0.577215664901532))));
-        addVariable(std::move(std::make_shared<ConstantVariable>(passible, std::make_shared<NumberVariable>(passible, "Φ", 1.618033988749894))));
-        addVariable(std::move(std::make_shared<ConstantVariable>(passible, std::make_shared<NumberVariable>(passible, "φ", 0.618033988749894))));
-        addVariable(std::move(std::make_shared<ConstantVariable>(passible, std::make_shared<NumberVariable>(passible, "δs", 2.41421356237309))));
-        addVariable(std::move(std::make_shared<ConstantVariable>(passible, std::make_shared<NumberVariable>(passible, "ρ", 1.324717957244746))));
+        addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "PI", 3.14159265358979))));
+        addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "e", 2.718281828459045))));
+        addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "y", 0.577215664901532))));
+        addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "Φ", 1.618033988749894))));
+        addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "φ", 0.618033988749894))));
+        addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "δs", 2.41421356237309))));
+        addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "ρ", 1.324717957244746))));
     }
 }
 

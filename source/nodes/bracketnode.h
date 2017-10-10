@@ -24,7 +24,7 @@ class BracketNode : public Node
 protected:
     std::shared_ptr<Node> node;
 public:
-    BracketNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::shared_ptr<Node> node);
+    BracketNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> node);
     NodeType getType();
     std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
     std::string toString();

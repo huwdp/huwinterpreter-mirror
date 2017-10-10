@@ -15,8 +15,8 @@
 
 #include "jstextnode.h"
 
-JSTextNode::JSTextNode(std::shared_ptr<Passible> passible, std::shared_ptr<Token> token, std::string value)
-    : TextNode(passible, token, value)
+JSTextNode::JSTextNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::string value)
+    : TextNode(passable, token, value)
 {
 }
 

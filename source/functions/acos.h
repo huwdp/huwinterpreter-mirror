@@ -21,7 +21,7 @@
 class Acos : public Function
 {
 public:
-    Acos(std::shared_ptr<Passible> passible);
+    Acos(std::shared_ptr<Passable> passable);
     std::shared_ptr<Variable> run(std::shared_ptr<Token> token,
                                   std::shared_ptr<Scope> scope,
                                   std::vector<std::shared_ptr<Node>> variables);

@@ -15,8 +15,8 @@
 
 #include "not.h"
 
-Not::Not(std::shared_ptr<Passible> passible)
-    : Function(passible)
+Not::Not(std::shared_ptr<Passable> passable)
+    : Function(passable)
 {
     name = "not";
 }
@@ -39,17 +39,17 @@ std::shared_ptr<Variable> Not::run(std::shared_ptr<Token> token,
         {
             if (var->toBool())
             {
-                returnNode = std::make_shared<NumberVariable>(passible, 0.0);
+                returnNode = std::make_shared<NumberVariable>(passable, 0.0);
             }
             else
             {
-                returnNode = std::make_shared<NumberVariable>(passible, 1.0);
+                returnNode = std::make_shared<NumberVariable>(passable, 1.0);
             }
         }
     }
     else
     {
-        passible->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Not requires 1 argument", token));
+        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Not requires 1 argument", token));
     }
     return returnNode;
 }
