@@ -49,7 +49,7 @@ std::shared_ptr<Variable> Asc::run(std::shared_ptr<Token> token,
     else
     {
         returnNode = std::make_shared<StringVariable>(passable);
-        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Asc function requires one argument", token));
+        passable->errors->add(passable->errorFactory->requiresArguments(token, name, "", 1));
     }
     
     return returnNode;

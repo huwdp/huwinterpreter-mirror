@@ -18,7 +18,7 @@
 IsNumberType::IsNumberType(std::shared_ptr<Passable> passable)
     : Function(passable)
 {
-    name = "isNumber";
+    name = "isNumberType";
 }
 
 std::shared_ptr<Variable> IsNumberType::run(std::shared_ptr<Token> token,
@@ -49,7 +49,7 @@ std::shared_ptr<Variable> IsNumberType::run(std::shared_ptr<Token> token,
     }
     else
     {
-        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "isNumberType function requires one arguments", token));
+        passable->errors->add(passable->errorFactory->requiresArguments(token, name, "", 1));
     }
     return returnNode;
 }

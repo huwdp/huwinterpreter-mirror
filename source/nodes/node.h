@@ -67,12 +67,14 @@ class Scope;
 class Node
 {
 protected:
+    std::string internalName;
     std::shared_ptr<Variable> null;
     std::shared_ptr<Token> token;
     std::shared_ptr<Passable> passable;
 public:
-    Node(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token)
+    Node(std::string internalName, std::shared_ptr<Passable> passable, std::shared_ptr<Token> token)
     {
+        this->internalName = internalName;
         this->passable = passable;
         this->token = token;
     }

@@ -16,7 +16,7 @@
 #include "ifundernode.h"
 
 IfUnderNode::IfUnderNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : Node(passable, token)
+    : Node("IfUnderNode", passable, token)
 {
     this->left = left;
     this->right = right;
@@ -42,12 +42,12 @@ std::shared_ptr<Variable> IfUnderNode::execute(std::shared_ptr<Scope> scope)
 
         if (l == nullptr)
         {
-            passable->errors->add(std::make_shared<Error>(ERROR, "Invalid expression", token));
+            passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
             return null;
         }
         if (r == nullptr)
         {
-            passable->errors->add(std::make_shared<Error>(ERROR, "Invalid expression", token));
+            passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
             return null;
         }
         std::shared_ptr<Variable> v = l->ifUnder(r);

@@ -57,7 +57,7 @@ std::shared_ptr<Variable> FileWrite::run(std::shared_ptr<Token> token,
     }
     else
     {
-        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "FileWrite requires two arguments", token));
+        passable->errors->add(passable->errorFactory->requiresArguments(token, name, "", 2));
     }
     return returnNode;
 }

@@ -16,7 +16,7 @@
 #include "unarynotnode.h"
 
 UnaryNotNode::UnaryNotNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> node)
-    : Node(passable, token)
+    : Node("UnaryNotNode", passable, token)
 {
     this->node = node;
 }

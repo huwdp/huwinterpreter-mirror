@@ -302,7 +302,7 @@ std::shared_ptr<Variable> StringVariable::subEqual(std::shared_ptr<Variable> var
         return null;
     }
     return null;
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call subtract method on a string"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "subEqual", ""));
 }
 
 std::shared_ptr<Variable> StringVariable::mulEqual(std::shared_ptr<Variable> variable)
@@ -311,7 +311,7 @@ std::shared_ptr<Variable> StringVariable::mulEqual(std::shared_ptr<Variable> var
     {
         return null;
     }
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call multiply method on a string"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "mulEqual", ""));
     return null;
 }
 
@@ -321,7 +321,7 @@ std::shared_ptr<Variable> StringVariable::divEqual(std::shared_ptr<Variable> var
     {
         return null;
     }
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call divide method on a string"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "divEqual", ""));
     return null;
 }
 
@@ -340,13 +340,13 @@ std::shared_ptr<Variable> StringVariable::equal(std::shared_ptr<Variable> variab
 
 std::shared_ptr<Variable> StringVariable::increment()
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call increment method on a string"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "increment", ""));
     return null;
 }
 
 std::shared_ptr<Variable> StringVariable::decrement()
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call decrement method on a string"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "decrement", ""));
     return null;
 }
 
@@ -357,18 +357,18 @@ std::shared_ptr<Variable> StringVariable::count()
 
 void StringVariable::set(std::string index, std::shared_ptr<Variable> value)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call set method in string. String is not an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "set", "String is not an array"));
 }
 
 std::shared_ptr<Variable> StringVariable::get(std::string value)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call get method in string. String is not an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "get", "String is not an array"));
     return null;
 }
 
 void StringVariable::unset(std::string index)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call unset method in string. String is not an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "unset", "String is not an array"));
 }
 
 std::shared_ptr<Variable> StringVariable::copy()
@@ -378,12 +378,12 @@ std::shared_ptr<Variable> StringVariable::copy()
 
 std::shared_ptr<Variable> StringVariable::bitwiseAnd(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call bitwiseAnd method in string"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseAnd", "String is not an array"));
     return null;
 }
 
 std::shared_ptr<Variable> StringVariable::bitwiseOr(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call bitwiseOR method in string"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseOr", "String is not an array"));
     return null;
 }

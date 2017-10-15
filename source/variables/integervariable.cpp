@@ -46,7 +46,7 @@ void IntegerVariable::setValue(std::string value)
     }
     catch (const std::exception& e)
     {
-        passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Could not convert string to integer"));
+        passable->errors->add(passable->errorFactory->couldNotConvertStringToNumber(name, "setValue", e.what()));
     }
 }
 
@@ -217,24 +217,24 @@ std::shared_ptr<Variable> IntegerVariable::decrement()
 
 std::shared_ptr<Variable> IntegerVariable::count()
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call count method on integer"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "count", "Integer is not an array"));
     return null;
 }
 
 void IntegerVariable::set(std::string index, std::shared_ptr<Variable> value)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call set method on integer type. Integer is not an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "set", "Integer is not an array"));
 }
 
 std::shared_ptr<Variable> IntegerVariable::get(std::string value)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call get method on integer type. Integer is not an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "get", "Integer is not an array"));
     return null;
 }
 
 void IntegerVariable::unset(std::string index)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call unset method on integer type. Integer is not an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "unset", "Integer is not an array"));
 }
 
 std::shared_ptr<Variable> IntegerVariable::copy()

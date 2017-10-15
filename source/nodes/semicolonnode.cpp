@@ -16,7 +16,7 @@
 #include "semicolonnode.h"
 
 SemicolonNode::SemicolonNode(std::shared_ptr<Passable> passable, std::shared_ptr<Node> node)
-    : Node(passable, nullptr)
+    : Node("SemicolonNode", passable, nullptr)
 {
     this->node = node;
 }

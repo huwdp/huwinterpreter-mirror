@@ -35,7 +35,7 @@ std::shared_ptr<Variable> Random::run(std::shared_ptr<Token> token,
     }
     else
     {
-        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Random requires 0 arguments", token));
+        passable->errors->add(passable->errorFactory->requiresArguments(token, name, "", 0));
     }
     
     return returnNode;

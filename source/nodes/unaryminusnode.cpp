@@ -16,7 +16,7 @@
 #include "unaryminusnode.h"
 
 UnaryMinusNode::UnaryMinusNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> node)
-    : Node(passable, token)
+    : Node("UnaryMinusNode", passable, token)
 {
     this->node = node;
 }

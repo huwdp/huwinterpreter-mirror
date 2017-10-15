@@ -25,6 +25,6 @@ std::shared_ptr<Variable> EmptyFunction::run(std::shared_ptr<Token> token,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot find function", token));
+    passable->errors->add(passable->errorFactory->functionNotDeclared(token, name));
     return null;
 }

@@ -29,7 +29,8 @@
 
 class Variable
 {
-private:
+protected:
+    std::string internalName;
     std::string name;
 public:
     std::shared_ptr<Passable> passable;

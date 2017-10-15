@@ -49,21 +49,21 @@ std::shared_ptr<Variable> Atan2::run(std::shared_ptr<Token> token,
             }
             catch (const std::invalid_argument ex)
             {
-                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Atan2", token));
+                passable->errors->add(passable->errorFactory->invalidArgument(FUNCTION_ERROR, token, name, ex.what()));
             }
             catch (const std::out_of_range ex)
             {
-                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Atan2", token));
+                passable->errors->add(passable->errorFactory->outOfRange(token, name, ex.what()));
             }
             catch (const std::exception& ex)
             {
-                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+                passable->errors->add(passable->errorFactory->otherFunctionError(token, name, "", ex.what()));
             }
         }
     }
     else
     {
-        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Abs function requires one argument", token));
+        passable->errors->add(passable->errorFactory->requiresArguments(token, name, "", 1));
     }
     return returnNode;
 }

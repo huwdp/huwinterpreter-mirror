@@ -21,6 +21,7 @@ Parser::Parser(std::vector<std::shared_ptr<Token>> tokens,
     this->nodeFactory = nodeFactory;
     this->passable = std::make_shared<Passable>();
     this->passable->errors = std::make_shared<Errors>();
+    this->passable->errorFactory = std::make_shared<ErrorFactory>();
     this->compilation = true;
     this->tokens = tokens;
     this->functions = std::move(std::make_shared<Functions>(passable));
@@ -138,18 +139,18 @@ bool Parser::expect(TokenType tokenType)
 
 bool Parser::expectSemicolon()
 {
-  if (!expect(SEMICOLON))
-  {
+    if (!expect(SEMICOLON))
+    {
       return false;
-  }
-  acceptIndentation();
-  acceptSemicolon();
-  return true;
+    }
+    acceptIndentation();
+    acceptSemicolon();
+    return true;
 }
 
 void Parser::errorMessage(std::string errorMsg, std::shared_ptr<Token> currentToken)
 {
-    passable->errors->add(std::make_shared<Error>(PARSER_ERROR, errorMsg, currentToken));
+    passable->errors->add(passable->errorFactory->syntaxError(currentToken, errorMsg));
 }
 
 std::shared_ptr<Node> Parser::value()
@@ -205,7 +206,7 @@ std::shared_ptr<Node> Parser::value()
             nextToken();
             return var;
         }
-        passable->errors->add(std::make_shared<Error>(PARSER_ERROR, "factor: syntax error", currentToken));
+        errorMessage("", currentToken);
         nextToken();
     }
     return null;

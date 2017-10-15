@@ -42,15 +42,15 @@ std::shared_ptr<Variable> Min::run(std::shared_ptr<Token> token,
             }
             catch (const std::invalid_argument ex)
             {
-                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Min", token));
+                passable->errors->add(passable->errorFactory->invalidArgument(FUNCTION_ERROR, token, name, ex.what()));
             }
             catch (const std::out_of_range ex)
             {
-                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Min", token));
+                passable->errors->add(passable->errorFactory->outOfRange(token, name, ex.what()));
             }
             catch (const std::exception& ex)
             {
-                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+                passable->errors->add(passable->errorFactory->otherFunctionError(token, name, "", ex.what()));
             }
             
         }
@@ -58,7 +58,7 @@ std::shared_ptr<Variable> Min::run(std::shared_ptr<Token> token,
     }
     else
     {
-        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Max function requires at least two arguments", token));
+        passable->errors->add(passable->errorFactory->requiresAtLeastXArguments(token, name, 2));
     }
     
     return returnNode;

@@ -42,7 +42,7 @@ std::shared_ptr<Variable> Str::run(std::shared_ptr<Token> token,
     }
     else
     {
-        passable->errors->add("Str requires one argument");
+        passable->errors->add(passable->errorFactory->requiresArguments(token, name, "", 1));
     }
 
     return returnNode;

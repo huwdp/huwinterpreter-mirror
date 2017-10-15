@@ -16,7 +16,7 @@
 #include "incrementnode.h"
 
 IncrementNode::IncrementNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> node)
-    : Node(passable, token)
+    : Node("IncrementNode", passable, token)
 {
     this->node = node;
     Debug::print("Increment");
@@ -39,7 +39,7 @@ std::shared_ptr<Variable> IncrementNode::execute(std::shared_ptr<Scope> scope)
         std::shared_ptr<Variable> n = node->execute(scope);
         if (n == nullptr)
         {
-            passable->errors->add(std::make_shared<Error>(ERROR, "Invalid expression", token));
+            passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
             return null;
         }
         return n->increment();

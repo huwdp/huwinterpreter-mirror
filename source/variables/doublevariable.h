@@ -34,7 +34,7 @@ private:
 public:
     DoubleVariable(std::shared_ptr<Passable> passable);
     DoubleVariable(std::shared_ptr<Passable> passable, double value);
-    DoubleVariable(std::string name, double value);
+    DoubleVariable(std::shared_ptr<Passable> passable, std::string name, double value);
     void setValue(double value);
     void setValue(std::string value);
     void setValue(long long value);

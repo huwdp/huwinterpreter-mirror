@@ -5,17 +5,21 @@ CONFIG -= app_bundle
 TEMPLATE = app
 
 CONFIG += c++11
-CONFIG += j7
-QMAKE_CXXFLAGS += -O0
+CONFIG += -j6
+
+QMAKE_CXXFLAGS += -O2
 QMAKE_CXXFLAGS += -Wall
 QMAKE_CXXFLAGS += -Wextra
 
 QMAKE_CXXFLAGS += -Wlogical-op
 QMAKE_CXXFLAGS += -Wold-style-cast
 QMAKE_CXXFLAGS += -Wuseless-cast
-QMAKE_CXXFLAGS += -Wjump-misses-init
 QMAKE_CXXFLAGS += -Wdouble-promotion
 QMAKE_CXXFLAGS += -Wformat=2
+
+QMAKE_CXXFLAGS_RELEASE += -fno-rtti
+QMAKE_CXXFLAGS_RELEASE += -fmerge-all-constants
+QMAKE_CXXFLAGS_RELEASE += -O2
 
 QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter
 
@@ -188,7 +192,8 @@ SOURCES += \
     nodes/semicolonnode.cpp \
     nodes/js/jssemicolonnode.cpp \
     format/escapecharacteroutput.cpp \
-    common/passable.cpp
+    common/passable.cpp \
+    errors/errorfactory.cpp
 
 
 
@@ -407,7 +412,8 @@ HEADERS += \
     nodes/semicolonnode.h \
     nodes/js/jssemicolonnode.h \
     format/escapecharacteroutput.h \
-    common/passable.h
+    common/passable.h \
+    errors/errorfactory.h
 
 
 

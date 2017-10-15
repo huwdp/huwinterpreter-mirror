@@ -42,7 +42,7 @@ std::shared_ptr<Variable> Count::run(std::shared_ptr<Token> token,
     }
     else
     {
-        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Count function requires one argument", token));
+        passable->errors->add(passable->errorFactory->requiresArguments(token, name, "", 1));
     }
 
     return returnNode;

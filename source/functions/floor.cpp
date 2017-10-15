@@ -45,15 +45,15 @@ std::shared_ptr<Variable> Floor::run(std::shared_ptr<Token> token,
             }
             catch (const std::invalid_argument ex)
             {
-                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in Floor", token));
+                passable->errors->add(passable->errorFactory->invalidArgument(FUNCTION_ERROR, token, name, ex.what()));
             }
             catch (const std::out_of_range ex)
             {
-                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Floor", token));
+                passable->errors->add(passable->errorFactory->outOfRange(token, name, ex.what()));
             }
             catch (const std::exception& ex)
             {
-                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+                passable->errors->add(passable->errorFactory->otherFunctionError(token, name, "", ex.what()));
             }
         }
         
@@ -61,7 +61,7 @@ std::shared_ptr<Variable> Floor::run(std::shared_ptr<Token> token,
     }
     else
     {
-        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Floor function requires one argument", token));
+        passable->errors->add(passable->errorFactory->requiresArguments(token, name, "", 1));
     }
     return returnNode;
 }

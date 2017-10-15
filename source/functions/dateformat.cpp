@@ -51,7 +51,7 @@ std::shared_ptr<Variable> DateFormat::run(std::shared_ptr<Token> token,
             ss << std::put_time(&tm, format.c_str());
             if (ss.fail())
             {
-                passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Could not parse time in DateFormat\n", token));
+                passable->errors->add(passable->errorFactory->couldNotParseTime(token, name));
             }
             else
             {
@@ -60,20 +60,20 @@ std::shared_ptr<Variable> DateFormat::run(std::shared_ptr<Token> token,
         }
         catch (const std::invalid_argument ex)
         {
-            passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Invalid argument in DateFormat", token));
+            passable->errors->add(passable->errorFactory->invalidArgument(FUNCTION_ERROR, token, name, ex.what()));
         }
         catch (const std::out_of_range ex)
         {
-            passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Out of range in DateFormat", token));
+            passable->errors->add(passable->errorFactory->outOfRange(token, name, ex.what()));
         }
         catch (const std::exception& ex)
         {
-            passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, ex.what(), token));
+            passable->errors->add(passable->errorFactory->otherFunctionError(token, name, "", ex.what()));
         }
     }
     else
     {
-        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Too many arguments in DateFormat", token));
+        passable->errors->add(passable->errorFactory->requiresArguments(token, name, "", 2));
     }
 
     return returnNode;

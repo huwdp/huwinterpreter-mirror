@@ -29,8 +29,7 @@ std::shared_ptr<Variable> Command::run(std::shared_ptr<Token> token,
     if (variables.size() == 0)
     {
         Debug::print("Command function requires at least 1 argument");
-        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Commands function requires at least one argument", token));
-
+        passable->errors->add(passable->errorFactory->requiresAtLeastXArguments(token, name, 1));
         return null;
     }
     for (std::vector<std::shared_ptr<Node>>::iterator it = variables.begin(); it != variables.end(); ++it)

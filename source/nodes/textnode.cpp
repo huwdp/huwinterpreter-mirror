@@ -16,7 +16,7 @@
 #include "textnode.h"
 
 TextNode::TextNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::string value)
-    : Node(passable, token)
+    : Node("TextNode", passable, token)
 {
     this->variableTypeFactory = std::make_shared<VariableTypeFactory>(passable);
     this->value = variableTypeFactory->newVariable(TypeDetector::getType(value));

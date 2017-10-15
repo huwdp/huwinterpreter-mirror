@@ -13,15 +13,17 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef passable_H
-#define passable_H
+#ifndef PASSABLE_H
+#define PASSABLE_H
 
 #include "errors/errors.h"
+#include "errors/errorfactory.h"
 
 class Passable
 {
 public:
     std::shared_ptr<Errors> errors;
+    std::shared_ptr<ErrorFactory> errorFactory;
 };
 
-#endif // passable_H
+#endif // PASSABLE_H

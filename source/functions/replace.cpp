@@ -51,7 +51,7 @@ std::shared_ptr<Variable> Replace::run(std::shared_ptr<Token> token,
     }
     else
     {
-        passable->errors->add("Replace requires three argument");
+        passable->errors->add(passable->errorFactory->requiresArguments(token, name, "", 3));
     }
 
     return returnNode;

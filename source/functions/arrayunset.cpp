@@ -46,7 +46,7 @@ std::shared_ptr<Variable> ArrayUnset::run(std::shared_ptr<Token> token,
 
         if (var1->getType() != ARRAY)
         {
-            passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "First parameter is not a type of ARRAY"));
+            passable->errors->add(passable->errorFactory->firstParameterIsNotTypeOfArray(token, name, "ARRAY"));
             return null;
         }
 
@@ -57,7 +57,7 @@ std::shared_ptr<Variable> ArrayUnset::run(std::shared_ptr<Token> token,
     }
     else
     {
-        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "ArrayGet function requires two argument", token));
+        passable->errors->add(passable->errorFactory->requiresArguments(token, name, "", 2));
     }
     return returnNode;
 }

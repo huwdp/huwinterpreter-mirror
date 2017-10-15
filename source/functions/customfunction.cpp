@@ -30,19 +30,12 @@ std::shared_ptr<Variable> CustomFunction::run(std::shared_ptr<Token> token,
                                               std::shared_ptr<Scope> scope,
                                               std::vector<std::shared_ptr<Node>> variables)
 {
-
     // New scope
     std::shared_ptr<Scope> newScope = std::make_shared<Scope>(passable);
 
     if (arguments.size() != variables.size())
     {
-        passable->errors->add(
-                    std::make_shared<Error>(
-                        RUNTIME_ERROR,
-                        "Unmatch specified number of arguments",
-                        token
-                        )
-                    );
+        passable->errors->add(passable->errorFactory->unmatchedSpecifiedNumberOfArguments(token));
         return null;
     }
 

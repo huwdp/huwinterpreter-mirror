@@ -34,7 +34,7 @@ std::shared_ptr<Variable> Now::run(std::shared_ptr<Token> token,
     }
     else
     {
-        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "Too many arguments in Now.", token));
+        passable->errors->add(passable->errorFactory->requiresArguments(token, name, "", 0));
     }
 
     return returnNode;

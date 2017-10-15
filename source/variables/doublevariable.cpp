@@ -27,7 +27,7 @@ DoubleVariable::DoubleVariable(std::shared_ptr<Passable> passable, double value)
     this->value = value;
 }
 
-DoubleVariable::DoubleVariable(std::string name, double value)
+DoubleVariable::DoubleVariable(std::shared_ptr<Passable> passable, std::string name, double value)
     : Variable(passable, name)
 {
     this->value = value;
@@ -46,7 +46,7 @@ void DoubleVariable::setValue(std::string value)
     }
     catch (const std::exception& e)
     {
-        passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Could not convert string to double"));
+        passable->errors->add(passable->errorFactory->couldNotConvertStringToNumber(name, "setValue", e.what()));
     }
 }
 
@@ -58,7 +58,7 @@ void DoubleVariable::setValue(long long value)
     }
     catch (const std::exception& e)
     {
-        passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Could not convert integer to double"));
+        passable->errors->add(passable->errorFactory->couldNotConvertStringToNumber(name, "setValue", e.what()));
     }
 }
 
@@ -234,7 +234,7 @@ std::shared_ptr<Variable> DoubleVariable::increment()
 
 std::shared_ptr<Variable> DoubleVariable::count()
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call count method on double"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "count", "Double is not an array"));
     return null;
 }
 
@@ -246,18 +246,18 @@ std::shared_ptr<Variable> DoubleVariable::decrement()
 
 void DoubleVariable::set(std::string index, std::shared_ptr<Variable> value)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call set method on double type"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "set", "Double is not an array"));
 }
 
 std::shared_ptr<Variable> DoubleVariable::get(std::string value)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call get method on double type. Double is not an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "get", "Double is not an array"));
     return null;
 }
 
 void DoubleVariable::unset(std::string index)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call unset method on double type. Double is not an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "unset", "Double is not an array"));
 }
 
 std::shared_ptr<Variable> DoubleVariable::copy()

@@ -73,25 +73,25 @@ bool HashTableVariable::isNumber()
 
 std::shared_ptr<Variable> HashTableVariable::pow(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call pow method on an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "pow", ""));
     return null;
 }
 
 std::shared_ptr<Variable> HashTableVariable::mul(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call mul method on an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "multiply", ""));
     return null;
 }
 
 std::shared_ptr<Variable> HashTableVariable::div(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call div method on an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "divide", ""));
     return null;
 }
 
 std::shared_ptr<Variable> HashTableVariable::mod(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call mod method on an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "mod", ""));
     return null;
 }
 
@@ -103,43 +103,43 @@ std::shared_ptr<Variable> HashTableVariable::add(std::shared_ptr<Variable> varia
 
 std::shared_ptr<Variable> HashTableVariable::sub(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call sub method on an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "subtract", ""));
     return null;
 }
 
 std::shared_ptr<Variable> HashTableVariable::ifUnder(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call ifUnder method on an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "ifUnder", ""));
     return null;
 }
 
 std::shared_ptr<Variable> HashTableVariable::ifUnderOrEqual(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call ifUnderOrEqual method on an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "ifUnderOrEqual", ""));
     return null;
 }
 
 std::shared_ptr<Variable> HashTableVariable::ifOver(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call ifOver method on an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "ifOver", ""));
     return null;
 }
 
 std::shared_ptr<Variable> HashTableVariable::ifOverOrEqual(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call ifOverOrEqual method on an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "ifOverOrEqual", ""));
     return null;
 }
 
 std::shared_ptr<Variable> HashTableVariable::ifEqual(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call ifEqual method on an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "ifEqual", ""));
     return null;
 }
 
 std::shared_ptr<Variable> HashTableVariable::ifNotEqual(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call ifNotEqual method on an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "ifNotEqual", ""));
     return null;
 }
 
@@ -151,19 +151,19 @@ std::shared_ptr<Variable> HashTableVariable::addEqual(std::shared_ptr<Variable> 
 
 std::shared_ptr<Variable> HashTableVariable::subEqual(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot substract an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "subequal", ""));
     return null;
 }
 
 std::shared_ptr<Variable> HashTableVariable::mulEqual(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot multiply an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "mulequal", ""));
     return null;
 }
 
 std::shared_ptr<Variable> HashTableVariable::divEqual(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot divide an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "divequal", ""));
     return null;
 }
 
@@ -183,13 +183,13 @@ std::shared_ptr<Variable> HashTableVariable::count()
 
 std::shared_ptr<Variable> HashTableVariable::increment()
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot decrement an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "decrement", ""));
     return null;
 }
 
 std::shared_ptr<Variable> HashTableVariable::decrement()
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot increment an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "increment", ""));
     return null;
 }
 
@@ -220,12 +220,12 @@ std::shared_ptr<Variable> HashTableVariable::copy()
 
 std::shared_ptr<Variable> HashTableVariable::bitwiseAnd(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call bitwiseAnd on an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseAnd", ""));
     return null;
 }
 
 std::shared_ptr<Variable> HashTableVariable::bitwiseOr(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(std::make_shared<Error>(RUNTIME_ERROR, "Cannot call biteiseOR on an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseOr", ""));
     return null;
 }

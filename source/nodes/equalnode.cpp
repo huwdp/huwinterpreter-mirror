@@ -16,7 +16,7 @@
 #include "equalnode.h"
 
 EqualNode::EqualNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right, std::shared_ptr<Node> next, std::shared_ptr<Scope> scope)
-    : Node(passable, token)
+    : Node("EqualNode", passable, token)
 {
     this->left = left;
     this->right = right;

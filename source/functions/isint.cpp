@@ -49,7 +49,7 @@ std::shared_ptr<Variable> IsInt::run(std::shared_ptr<Token> token,
     }
     else
     {
-        passable->errors->add(std::make_shared<Error>(FUNCTION_ERROR, "isInt function requires one arguments", token));
+        passable->errors->add(passable->errorFactory->requiresArguments(token, name, "", 1));
     }
     return returnNode;
 }
