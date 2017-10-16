@@ -71,7 +71,16 @@ std::string StringVariable::toString()
 
 long long StringVariable::toInt()
 {
-    return 0;
+    int value = 0.0;
+    try
+    {
+        value = stol(this->value);
+    }
+    catch (const std::exception& ex)
+    {
+
+    }
+    return value;
 }
 
 bool StringVariable::toBool()
@@ -80,10 +89,7 @@ bool StringVariable::toBool()
     {
         return true;
     }
-    else
-    {
-        return false;
-    }
+    return false;
 }
 
 VarType StringVariable::getType()

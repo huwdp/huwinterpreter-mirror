@@ -11,10 +11,6 @@ std::string EscapeCharacterOutput::output(char value)
     {
         return "\\\"";
     }
-    else if (value == '\\')
-    {
-        return "\\";
-    }
     std::string character = std::string(1, value);
     return character;
 }
