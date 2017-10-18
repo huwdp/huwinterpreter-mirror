@@ -52,10 +52,24 @@ bool TypeDetector::isInteger(char value)
 bool TypeDetector::isNumeric(std::string value)
 {
     std::string::iterator it = value.begin();
+    bool dot = false;
+
+    if (!std::isdigit((*it)) && (*it) != '.' && (*it) != '+' && (*it) != '-')
+    {
+        return false;
+    }
 
     while (it != value.end())
     {
-        if (!std::isdigit((*it)) && (*it) != '.' && (*it) != '+' && (*it) != '-')
+        if ((*it) == '.' && dot)
+        {
+            return false;
+        }
+        if ((*it) == '.')
+        {
+            dot = true;
+        }
+        if (!std::isdigit((*it)) && (*it) != '.')
         {
             return false;
         }
