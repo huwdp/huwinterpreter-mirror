@@ -7,7 +7,7 @@ TEMPLATE = app
 CONFIG += c++11
 CONFIG += -j6
 
-QMAKE_CXXFLAGS += -O2
+
 QMAKE_CXXFLAGS += -Wall
 QMAKE_CXXFLAGS += -Wextra
 
