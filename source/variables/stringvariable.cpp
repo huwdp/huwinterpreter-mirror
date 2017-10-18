@@ -28,10 +28,24 @@ StringVariable::StringVariable(std::shared_ptr<Passable> passable, std::string v
     variableTypeFactory = std::make_shared<VariableTypeFactory>(passable);
 }
 
+StringVariable::StringVariable(std::shared_ptr<Passable> passable, char value)
+    : Variable(passable, "")
+{
+    this->value = std::to_string(value);
+    variableTypeFactory = std::make_shared<VariableTypeFactory>(passable);
+}
+
 StringVariable::StringVariable(std::shared_ptr<Passable> passable, std::string name, std::string value)
     : Variable(passable, name)
 {
     this->value = value;
+    variableTypeFactory = std::make_shared<VariableTypeFactory>(passable);
+}
+
+StringVariable::StringVariable(std::shared_ptr<Passable> passable, std::string name, char value)
+    : Variable(passable, name)
+{
+    this->value = std::to_string(value);
     variableTypeFactory = std::make_shared<VariableTypeFactory>(passable);
 }
 
@@ -368,7 +382,23 @@ void StringVariable::set(std::string index, std::shared_ptr<Variable> value)
 
 std::shared_ptr<Variable> StringVariable::get(std::string value)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "get", "String is not an array"));
+    long index = 0;
+    try
+    {
+        index = stol(value);
+    }
+    catch (const std::exception& e)
+    {
+        passable->errors->add(passable->errorFactory->couldNotConvertStringToNumber(name, "get", e.what()));
+    }
+
+    if (this->value.length() >= index)
+    {
+        std::string character;
+        character.append(1, (char)this->value.at(index));
+        return std::make_shared<StringVariable>(passable, character);
+    }
+    passable->errors->add(passable->errorFactory->outOfBounds(name));
     return null;
 }
 

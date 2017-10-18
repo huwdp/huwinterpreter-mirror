@@ -33,6 +33,7 @@ std::shared_ptr<Variable> ArrayGet::run(std::shared_ptr<Token> token,
 
         if (node1 == nullptr || node2 == nullptr)
         {
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
             return null;
         }
 
@@ -41,14 +42,10 @@ std::shared_ptr<Variable> ArrayGet::run(std::shared_ptr<Token> token,
 
         if (var1 == nullptr || var2 == nullptr )
         {
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
             return null;
         }
 
-        if (var1->getType() != ARRAY)
-        {
-            passable->errors->add(passable->errorFactory->firstParameterIsNotTypeOfArray(token, name, "ARRAY"));
-            return null;
-        }
         return var1->get(var2->toString());
     }
     else

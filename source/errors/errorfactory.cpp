@@ -123,3 +123,8 @@ std::shared_ptr<Error> ErrorFactory::unmatchedSpecifiedNumberOfArguments(std::sh
         token
         );
 }
+
+std::shared_ptr<Error> ErrorFactory::outOfBounds(std::string name)
+{
+    return std::make_shared<Error>(RUNTIME_ERROR, "Out of bounds error in " + name);
+}

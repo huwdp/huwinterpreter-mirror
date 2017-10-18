@@ -30,7 +30,9 @@ private:
 public:
     StringVariable(std::shared_ptr<Passable> passable);
     StringVariable(std::shared_ptr<Passable> passable, std::string value);
+    StringVariable(std::shared_ptr<Passable> passable, char value);
     StringVariable(std::shared_ptr<Passable> passable, std::string name, std::string value);
+    StringVariable(std::shared_ptr<Passable> passable, std::string name, char value);
     void setValue(double value);
     void setValue(std::string value);
     void setValue(long long value);
