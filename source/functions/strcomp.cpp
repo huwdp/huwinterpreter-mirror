@@ -32,18 +32,22 @@ std::shared_ptr<Variable> StrComp::run(std::shared_ptr<Token> token,
         std::shared_ptr<Node> node2 = variables.at(1);
         if (node1 == nullptr || node2 == nullptr)
         {
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
             return null;
         }
 
         std::shared_ptr<Variable> var1 = node1->execute(scope);
         std::shared_ptr<Variable> var2 = node2->execute(scope);
-        if (var1 != nullptr && var2 != nullptr)
+        if (var1 == nullptr || var2 == nullptr)
         {
-            std::string str1 = var1->toString();
-            std::string str2 = var2->toString();
-            double diff = double(str1.compare(str2));
-            returnNode = std::make_shared<NumberVariable>(passable, diff);
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            return null;
         }
+
+        std::string str1 = var1->toString();
+        std::string str2 = var2->toString();
+        double diff = double(str1.compare(str2));
+        returnNode = std::make_shared<NumberVariable>(passable, diff);
     }
     else
     {

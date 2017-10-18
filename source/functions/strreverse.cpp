@@ -31,17 +31,20 @@ std::shared_ptr<Variable> StrReverse::run(std::shared_ptr<Token> token,
         std::shared_ptr<Node> node = variables.at(0);
         if (node == nullptr)
         {
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
             return null;
         }
 
         std::shared_ptr<Variable> var = node->execute(scope);
-        if (var != nullptr)
+        if (var == nullptr)
         {
-            std::string temp = var->toString();
-            std::reverse(temp.begin(), temp.end());
-            returnNode = std::make_shared<StringVariable>(passable, "", temp);
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            return null;
         }
-        
+
+        std::string temp = var->toString();
+        std::reverse(temp.begin(), temp.end());
+        returnNode = std::make_shared<StringVariable>(passable, "", temp);
     }
     else
     {

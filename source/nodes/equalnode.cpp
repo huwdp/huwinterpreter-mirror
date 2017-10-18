@@ -47,6 +47,7 @@ std::shared_ptr<Variable> EqualNode::execute(std::shared_ptr<Scope> scope)
         {
             return value->copy();
         }
+        passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
     }
     return null;
 }

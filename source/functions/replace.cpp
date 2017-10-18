@@ -33,6 +33,7 @@ std::shared_ptr<Variable> Replace::run(std::shared_ptr<Token> token,
         std::shared_ptr<Node> node3 = variables.at(2);
         if (node1 == nullptr || node2 == nullptr || node3 == nullptr)
         {
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
             return null;
         }
 
@@ -40,14 +41,17 @@ std::shared_ptr<Variable> Replace::run(std::shared_ptr<Token> token,
         std::shared_ptr<Variable> var2 = node2->execute(scope);
         std::shared_ptr<Variable> var3 = node3->execute(scope);
 
-        if (var1 != nullptr && var2 != nullptr && var3 != nullptr)
+        if (var1 == nullptr || var2 == nullptr || var3 == nullptr)
         {
-            std::string temp1 = var1->toString();
-            std::string temp2 = var2->toString();
-            std::string temp3 = var3->toString();
-            temp1.replace(temp1.find(temp2),temp2.length(),temp3);
-            returnNode = std::make_shared<StringVariable>(passable, "", temp1);
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            return null;
         }
+
+        std::string temp1 = var1->toString();
+        std::string temp2 = var2->toString();
+        std::string temp3 = var3->toString();
+        temp1.replace(temp1.find(temp2),temp2.length(),temp3);
+        returnNode = std::make_shared<StringVariable>(passable, "", temp1);
     }
     else
     {

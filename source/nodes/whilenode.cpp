@@ -39,6 +39,12 @@ std::shared_ptr<Variable> WhileNode::execute(std::shared_ptr<Scope> scope)
     if (condition != nullptr)
     {
         std::shared_ptr<Variable> c = this->condition->execute(scope);
+
+        if (c == null)
+        {
+            passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
+            return null;
+        }
         bool loop = c->toBool();
         while (loop)
         {
@@ -49,6 +55,11 @@ std::shared_ptr<Variable> WhileNode::execute(std::shared_ptr<Scope> scope)
             body->execute(scope);
             c = condition->execute(scope);
             loop = c->toBool();
+            if (c == null)
+            {
+                passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
+                return null;
+            }
         }
     }
     else

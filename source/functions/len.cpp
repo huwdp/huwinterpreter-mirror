@@ -31,16 +31,19 @@ std::shared_ptr<Variable> Len::run(std::shared_ptr<Token> token,
         std::shared_ptr<Node> node = variables.at(0);
         if (node == nullptr)
         {
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
             return null;
         }
 
         std::shared_ptr<Variable> var = node->execute(scope);
-        if (var != nullptr)
+        if (var == nullptr)
         {
-            std::string temp = var->toString();
-            double length = temp.length();
-            returnNode = std::make_shared<NumberVariable>(passable, length);
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            return null;
         }
+
+        long long length = var->toString().length();
+        returnNode = std::make_shared<NumberVariable>(passable, length);
     }
     else
     {

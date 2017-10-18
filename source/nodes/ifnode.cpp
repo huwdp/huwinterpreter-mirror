@@ -49,6 +49,10 @@ std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> scope)
                     return scope->getReturnValue();
                 }
             }
+            else
+            {
+                passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
+            }
         }
         else
         {

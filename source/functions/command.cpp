@@ -37,10 +37,13 @@ std::shared_ptr<Variable> Command::run(std::shared_ptr<Token> token,
         if ((*it) != nullptr)
         {
             std::shared_ptr<Variable> var = (*it)->execute(scope);
-            if (var != nullptr)
+            if (var == nullptr)
             {
-                system(var->toString().c_str());
+                passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+                return null;
             }
+
+            system(var->toString().c_str());
         }
     }
     return returnNode;

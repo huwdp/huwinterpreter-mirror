@@ -31,17 +31,40 @@ std::shared_ptr<Variable> Trim::run(std::shared_ptr<Token> token,
         std::shared_ptr<Node> node = variables.at(0);
         if (node == nullptr)
         {
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
             return null;
         }
 
         std::shared_ptr<Variable> var = node->execute(scope);
-        if (var != nullptr)
+        if (var == nullptr)
         {
-            std::string temp = var->toString();
-            
-            // LTrim
-            std::string::iterator it = temp.begin();
-            while(it != temp.end())
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            return null;
+        }
+
+        std::string temp = var->toString();
+
+        // LTrim
+        std::string::iterator it = temp.begin();
+        while(it != temp.end())
+        {
+            if ((*it) != ' ' && (*it) != '\t')
+            {
+                break;
+            }
+            else
+            {
+                temp.erase(it);
+                it--;
+            }
+            ++it;
+        }
+        // RTrim
+        it = temp.end();
+        if (it != temp.begin())
+        {
+            it--;
+            while(it != temp.begin())
             {
                 if ((*it) != ' ' && (*it) != '\t')
                 {
@@ -50,30 +73,11 @@ std::shared_ptr<Variable> Trim::run(std::shared_ptr<Token> token,
                 else
                 {
                     temp.erase(it);
-                    it--;
                 }
-                ++it;
+                --it;
             }
-            // RTrim
-            it = temp.end();
-            if (it != temp.begin())
-            {
-                it--;
-                while(it != temp.begin())
-                {
-                    if ((*it) != ' ' && (*it) != '\t')
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        temp.erase(it);
-                    }
-                    --it;
-                }
-            }
-            returnNode = std::make_shared<StringVariable>(passable, "", temp);
         }
+        returnNode = std::make_shared<StringVariable>(passable, "", temp);
     }
     else
     {

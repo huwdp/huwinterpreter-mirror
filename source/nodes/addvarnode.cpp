@@ -56,6 +56,10 @@ std::shared_ptr<Variable> AddVarNode::execute(std::shared_ptr<Scope> scope)
                 passable->errors->add(passable->errorFactory->variableNotDeclared(token, internalName));
             }
         }
+        else
+        {
+            passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
+        }
     }
     return null;
 }

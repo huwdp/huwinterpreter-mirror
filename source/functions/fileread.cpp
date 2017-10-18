@@ -33,15 +33,19 @@ std::shared_ptr<Variable> FileRead::run(std::shared_ptr<Token> token,
         if (fileLocation != nullptr)
         {
             std::shared_ptr<Variable> var = fileLocation->execute(scope);
-            if (var != nullptr)
+            if (var == nullptr)
             {
-                std::string stream = file.read(var->toString());
-                return std::make_shared<StringVariable>(passable, "",stream);
+                passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+                return null;
             }
-            else
-            {
-                // Report error here
-            }
+
+            std::string stream = file.read(var->toString());
+            return std::make_shared<StringVariable>(passable, "",stream);
+        }
+        else
+        {
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            return null;
         }
     }
     else

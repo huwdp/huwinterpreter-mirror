@@ -34,13 +34,20 @@ std::shared_ptr<Variable> Scan::run(std::shared_ptr<Token> token,
             if (node != nullptr)
             {
                 std::shared_ptr<Variable> var = (*it)->execute(scope);
-                if (var != nullptr)
+                if (var == nullptr)
                 {
-                    std::shared_ptr<Variable> var = node->execute(scope);
-                    std::string input;
-                    std::cin >> input;
-                    var->setValue(input);
+                    passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+                    return null;
                 }
+
+                std::string input;
+                std::cin >> input;
+                var->setValue(input);
+            }
+            else
+            {
+                passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+                return null;
             }
         }
     }

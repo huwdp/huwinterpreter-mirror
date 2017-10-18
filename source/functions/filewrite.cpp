@@ -35,24 +35,24 @@ std::shared_ptr<Variable> FileWrite::run(std::shared_ptr<Token> token,
             std::shared_ptr<Variable> var1 = node1->execute(scope);
             std::shared_ptr<Variable> var2 = node2->execute(scope);
 
-            if (var1 != nullptr && var2 != nullptr)
+            if (var1 == nullptr || var2 == nullptr)
             {
-                std::string fileLocation = var1->toString();
-                std::string output = var2->toString();
-                IO file;
-                if (file.write(fileLocation, output))
-                {
-                    returnNode = std::make_shared<NumberVariable>(passable, 1.0);
-                }
-            }
-            else
-            {
+                passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
                 returnNode = std::make_shared<NumberVariable>(passable, 0.0);
+            }
+
+            std::string fileLocation = var1->toString();
+            std::string output = var2->toString();
+            IO file;
+            if (file.write(fileLocation, output))
+            {
+                returnNode = std::make_shared<NumberVariable>(passable, 1.0);
             }
         }
         else
         {
-           returnNode = std::make_shared<NumberVariable>(passable, 0.0);
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            returnNode = std::make_shared<NumberVariable>(passable, 0.0);
         }
     }
     else

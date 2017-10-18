@@ -33,6 +33,7 @@ std::shared_ptr<Variable> ArrayUnset::run(std::shared_ptr<Token> token,
 
         if (node1 == nullptr || node2 == nullptr)
         {
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
             return null;
         }
 
@@ -41,6 +42,7 @@ std::shared_ptr<Variable> ArrayUnset::run(std::shared_ptr<Token> token,
 
         if (var1 == nullptr || var2 == nullptr )
         {
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
             return null;
         }
 

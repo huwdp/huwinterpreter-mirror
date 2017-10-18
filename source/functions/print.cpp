@@ -36,6 +36,11 @@ std::shared_ptr<Variable> Print::run(std::shared_ptr<Token> token,
                 std::cout << var->toString() << std::endl;
             }
         }
+        else
+        {
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            return null;
+        }
     }
     
     return returnNode;

@@ -31,14 +31,18 @@ std::shared_ptr<Variable> Str::run(std::shared_ptr<Token> token,
         std::shared_ptr<Node> node1 = variables.at(0);
         if (node1 == nullptr)
         {
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
             return null;
         }
 
         std::shared_ptr<Variable> var = node1->execute(scope);
-        if (var != nullptr)
+        if (var == nullptr)
         {
-            returnNode = std::make_shared<StringVariable>(passable, "", var->toString());
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            return null;
         }
+
+        returnNode = std::make_shared<StringVariable>(passable, "", var->toString());
     }
     else
     {

@@ -31,20 +31,24 @@ std::shared_ptr<Variable> IsDouble::run(std::shared_ptr<Token> token,
         std::shared_ptr<Node> node = variables.at(0);
         if (node == nullptr)
         {
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
             return null;
         }
 
         std::shared_ptr<Variable> var = node->execute(scope);
-        if (node != nullptr)
+        if (var == nullptr)
         {
-            if (!TypeDetector::isInteger(var->toString()) && TypeDetector::isNumeric(var->toString()))
-            {
-                returnNode = std::make_shared<NumberVariable>(passable, true);
-            }
-            else
-            {
-                returnNode = std::make_shared<NumberVariable>(passable, false);
-            }
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            return null;
+        }
+
+        if (!TypeDetector::isInteger(var->toString()) && TypeDetector::isNumeric(var->toString()))
+        {
+            returnNode = std::make_shared<NumberVariable>(passable, true);
+        }
+        else
+        {
+            returnNode = std::make_shared<NumberVariable>(passable, false);
         }
     }
     else

@@ -36,13 +36,16 @@ std::string Function::toString(std::vector<std::shared_ptr<Node>> variables)    
     output.append(name).append("(");
     for (std::vector<std::shared_ptr<Node>>::iterator it = variables.begin(); it != variables.end(); ++it)
     {
-        output.append((*it)->toString());
-        it++;
-        if (it != variables.end())
+        if ((*it) = nullptr)
         {
-            output.append(",");
+            output.append((*it)->toString());
+            it++;
+            if (it != variables.end())
+            {
+                output.append(",");
+            }
+            it--;
         }
-        it--;
     }
     output.append(")");
     return output;

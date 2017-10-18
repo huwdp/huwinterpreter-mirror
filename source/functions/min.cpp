@@ -31,28 +31,37 @@ std::shared_ptr<Variable> Min::run(std::shared_ptr<Token> token,
         double min = std::numeric_limits<double>::max();
         for (std::vector<std::shared_ptr<Node>>::iterator it = variables.begin(); it != variables.end(); ++it)
         {
-            std::shared_ptr<Variable> var = (*it)->execute(scope);
-            try
+            if ((*it) != nullptr)
             {
-                double temp = var->toDouble();
-                if (temp < min)
+
+                std::shared_ptr<Variable> var = (*it)->execute(scope);
+                if (var == nullptr)
                 {
-                    min = temp;
+                    passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+                    return null;
+                }
+
+                try
+                {
+                    double temp = var->toDouble();
+                    if (temp < min)
+                    {
+                        min = temp;
+                    }
+                }
+                catch (const std::invalid_argument ex)
+                {
+                    passable->errors->add(passable->errorFactory->invalidArgument(FUNCTION_ERROR, token, name, ex.what()));
+                }
+                catch (const std::out_of_range ex)
+                {
+                    passable->errors->add(passable->errorFactory->outOfRange(token, name, ex.what()));
+                }
+                catch (const std::exception& ex)
+                {
+                    passable->errors->add(passable->errorFactory->otherFunctionError(token, name, "", ex.what()));
                 }
             }
-            catch (const std::invalid_argument ex)
-            {
-                passable->errors->add(passable->errorFactory->invalidArgument(FUNCTION_ERROR, token, name, ex.what()));
-            }
-            catch (const std::out_of_range ex)
-            {
-                passable->errors->add(passable->errorFactory->outOfRange(token, name, ex.what()));
-            }
-            catch (const std::exception& ex)
-            {
-                passable->errors->add(passable->errorFactory->otherFunctionError(token, name, "", ex.what()));
-            }
-            
         }
         returnNode = std::make_shared<NumberVariable>(passable, min);
     }
@@ -60,7 +69,6 @@ std::shared_ptr<Variable> Min::run(std::shared_ptr<Token> token,
     {
         passable->errors->add(passable->errorFactory->requiresAtLeastXArguments(token, name, 2));
     }
-    
     return returnNode;
 }
 

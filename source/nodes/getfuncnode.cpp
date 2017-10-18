@@ -51,15 +51,18 @@ std::string GetFuncNode::toString()
     output.append(name).append("(");
     for (std::vector<std::shared_ptr<Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
     {
-        output.append((*it)->toString());
-        if (it != arguments.end())
+        if ((*it) != nullptr)
         {
-            ++it;
+            output.append((*it)->toString());
             if (it != arguments.end())
             {
-                output.append(",");
+                ++it;
+                if (it != arguments.end())
+                {
+                    output.append(",");
+                }
+                --it;
             }
-            --it;
         }
     }
     return output.append(")");

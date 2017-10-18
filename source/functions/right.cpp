@@ -32,32 +32,37 @@ std::shared_ptr<Variable> Right::run(std::shared_ptr<Token> token,
         std::shared_ptr<Node> node2 = variables.at(1);
         if (node1 == nullptr || node2 == nullptr)
         {
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
             return null;
         }
 
         std::shared_ptr<Variable> var1 = node1->execute(scope);
         std::shared_ptr<Variable> var2 = node2->execute(scope);
-        if (var1 != nullptr && var2 != nullptr)
+
+        if (var1 == nullptr || var2 == nullptr)
         {
-            std::string temp = var1->toString();
-            try
-            {
-                int position = std::round(var2->toDouble());
-                temp = temp.substr(temp.length()-position, position);
-                returnNode = std::make_shared<StringVariable>(passable, "", temp);
-            }
-            catch (const std::invalid_argument ex)
-            {
-                passable->errors->add(passable->errorFactory->invalidArgument(FUNCTION_ERROR, token, name, ex.what()));
-            }
-            catch (const std::out_of_range ex)
-            {
-                passable->errors->add(passable->errorFactory->outOfRange(token, name, ex.what()));
-            }
-            catch (const std::exception& ex)
-            {
-                passable->errors->add(passable->errorFactory->otherFunctionError(token, name, "", ex.what()));
-            }
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            return null;
+        }
+
+        std::string temp = var1->toString();
+        try
+        {
+            int position = std::round(var2->toDouble());
+            temp = temp.substr(temp.length()-position, position);
+            returnNode = std::make_shared<StringVariable>(passable, "", temp);
+        }
+        catch (const std::invalid_argument ex)
+        {
+            passable->errors->add(passable->errorFactory->invalidArgument(FUNCTION_ERROR, token, name, ex.what()));
+        }
+        catch (const std::out_of_range ex)
+        {
+            passable->errors->add(passable->errorFactory->outOfRange(token, name, ex.what()));
+        }
+        catch (const std::exception& ex)
+        {
+            passable->errors->add(passable->errorFactory->otherFunctionError(token, name, "", ex.what()));
         }
     }
     else

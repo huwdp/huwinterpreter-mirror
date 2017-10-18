@@ -31,20 +31,24 @@ std::shared_ptr<Variable> Not::run(std::shared_ptr<Token> token,
         std::shared_ptr<Node> node = variables.at(0);
         if (node == nullptr)
         {
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
             return null;
         }
 
         std::shared_ptr<Variable> var = node->execute(scope);
-        if (var != nullptr)
+        if (var == nullptr)
         {
-            if (var->toBool())
-            {
-                returnNode = std::make_shared<NumberVariable>(passable, 0.0);
-            }
-            else
-            {
-                returnNode = std::make_shared<NumberVariable>(passable, 1.0);
-            }
+            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            return null;
+        }
+
+        if (var->toBool())
+        {
+            returnNode = std::make_shared<NumberVariable>(passable, 0.0);
+        }
+        else
+        {
+            returnNode = std::make_shared<NumberVariable>(passable, 1.0);
         }
     }
     else

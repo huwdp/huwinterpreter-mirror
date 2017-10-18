@@ -40,6 +40,10 @@ std::shared_ptr<Variable> UnaryMinusNode::execute(std::shared_ptr<Scope> scope)
         {
             return value->mul(std::make_shared<IntegerVariable>(passable, -1));
         }
+        else
+        {
+            passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
+        }
     }
     return null;
 }

@@ -39,6 +39,11 @@ std::shared_ptr<Variable> GetVarNode::execute(std::shared_ptr<Scope> scope)
     {
         return var;
     }
+    else
+    {
+        passable->errors->add(passable->errorFactory->variableNotDeclared(token, name));
+        return null;
+    }
     Debug::print("Could not find variable.");
     return null;
 }

@@ -31,9 +31,15 @@ std::shared_ptr<Variable> Max::run(std::shared_ptr<Token> token,
         double max = std::numeric_limits<double>::min();
         for (std::vector<std::shared_ptr<Node>>::iterator it = variables.begin(); it != variables.end(); it++)
         {
-            std::shared_ptr<Variable> var = (*it)->execute(scope);
-            if (var != nullptr)
+            if ((*it) != nullptr)
             {
+                std::shared_ptr<Variable> var = (*it)->execute(scope);
+                if (var == nullptr)
+                {
+                    passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+                    return null;
+                }
+
                 try
                 {
                     double temp = var->toDouble();
@@ -57,6 +63,7 @@ std::shared_ptr<Variable> Max::run(std::shared_ptr<Token> token,
                 }
             }
         }
+
         returnNode = std::make_shared<NumberVariable>(passable, max);
     }
     else
