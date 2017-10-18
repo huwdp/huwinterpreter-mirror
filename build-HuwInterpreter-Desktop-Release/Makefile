@@ -14,7 +14,7 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -m64 -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-CXXFLAGS      = -m64 -pipe -O2 -Wall -Wextra -Wlogical-op -Wold-style-cast -Wuseless-cast -Wdouble-promotion -Wformat=2 -O2 -fno-rtti -fmerge-all-constants -O2 -std=gnu++11 -Wall -W -Wno-unused-parameter -D_REENTRANT -fPIC $(DEFINES)
+CXXFLAGS      = -m64 -pipe -Wall -Wextra -Wlogical-op -Wold-style-cast -Wuseless-cast -Wdouble-promotion -Wformat=2 -O2 -fno-rtti -fmerge-all-constants -O2 -std=gnu++11 -Wall -W -Wno-unused-parameter -D_REENTRANT -fPIC $(DEFINES)
 INCPATH       = -I../source -I. -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -isystem /usr/include/libdrm -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64
 QMAKE         = /usr/lib/x86_64-linux-gnu/qt5/bin/qmake
 DEL_FILE      = rm -f
@@ -1054,7 +1054,7 @@ compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
-	g++ -m64 -pipe -O2 -Wall -Wextra -Wlogical-op -Wold-style-cast -Wuseless-cast -Wdouble-promotion -Wformat=2 -O2 -fno-rtti -fmerge-all-constants -O2 -std=gnu++11 -Wall -W -Wno-unused-parameter -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
+	g++ -m64 -pipe -Wall -Wextra -Wlogical-op -Wold-style-cast -Wuseless-cast -Wdouble-promotion -Wformat=2 -O2 -fno-rtti -fmerge-all-constants -O2 -std=gnu++11 -Wall -W -Wno-unused-parameter -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
 compiler_moc_header_make_all:
 compiler_moc_header_clean:
