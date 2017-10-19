@@ -115,11 +115,7 @@ bool Parser::expect(std::string s)
         return true;
     }
     compilation = false;
-    std::string errorMsg;
-    errorMsg.append("Parse error: syntax error, unexpected \"")
-            .append(currentToken->getContent())
-            .append("\"");
-    errorMessage(errorMsg, currentToken);
+    errorMessage(syntaxError(currentToken->getContent()), currentToken);
     return false;
 }
 
@@ -130,11 +126,18 @@ bool Parser::expect(TokenType tokenType)
         return true;
     }
     compilation = false;
-    std::string errorMsg = "Syntax error, unexpected \"";
-    errorMsg.append(currentToken->getContent())
+    errorMessage(syntaxError(currentToken->getContent()), currentToken);
+    return false;
+}
+
+std::string Parser::syntaxError(std::string content)
+{
+    std::string errorMsg;
+    errorMsg.append("Parse error: syntax error, unexpected \"")
+            .append(content)
             .append("\"");
     errorMessage(errorMsg, currentToken);
-    return false;
+    return errorMsg;
 }
 
 bool Parser::expectSemicolon()
@@ -196,7 +199,7 @@ std::shared_ptr<Node> Parser::value()
                 acceptIndentation();
                 return nodeFactory->CreateGetFuncNode(passable, currentToken, word, functions, arguments);
             }
-            if (currentToken->getType() == TEXT)
+            else if (currentToken->getType() == TEXT)
             {
                 nextToken();
                 return nodeFactory->CreateTextNode(passable, currentToken, word);
@@ -253,14 +256,13 @@ std::shared_ptr<Node> Parser::term()
     acceptIndentation();
     if (!tokens.empty() && compilation)
     {
-        std::shared_ptr<Node> value = factor();
+        std::shared_ptr<Node> node = factor();
         acceptIndentation();
-        std::shared_ptr<Node> node = value;
+        TokenType type = currentToken->getType();
         while (!tokens.empty() && (currentToken->getType() == MULTIPLICATION ||
                currentToken->getType() == DIVISION ||
                currentToken->getType() == MOD))
         {
-            TokenType type = currentToken->getType();
             nextToken();
             acceptIndentation();
             if (type == MULTIPLICATION)
@@ -275,6 +277,7 @@ std::shared_ptr<Node> Parser::term()
             {
                 node = nodeFactory->CreateModNode(passable, currentToken, node, factor());
             }
+            type = currentToken->getType();
         }
         return node;
     }
@@ -286,12 +289,12 @@ std::shared_ptr<Node> Parser::expression()
     acceptIndentation();
     if (!tokens.empty() && compilation)
     {
-        std::shared_ptr<Node> value = term();
+        std::shared_ptr<Node> node = term();
         acceptIndentation();
-        std::shared_ptr<Node> node = value;
-        while (!tokens.empty() && (currentToken->getType() == ADDITION || currentToken->getType() == SUBTRACTION))
+        TokenType type = currentToken->getType();
+        while (!tokens.empty() && (type == ADDITION || type == SUBTRACTION))
         {
-            TokenType type = currentToken->getType();
+            
             nextToken();
             acceptIndentation();
             if (type == ADDITION)
@@ -302,6 +305,7 @@ std::shared_ptr<Node> Parser::expression()
             {
                 node = nodeFactory->CreateSubNode(passable, currentToken, node, term());
             }
+            type = currentToken->getType();
         }
         return node;
     }
@@ -313,17 +317,17 @@ std::shared_ptr<Node> Parser::condition()
     acceptIndentation();
     if (!tokens.empty() && compilation)
     {
-        std::shared_ptr<Node> value = expression();
-        if (value != nullptr)
+        std::shared_ptr<Node> node = expression();
+        if (node != nullptr)
         {
             TokenType type = currentToken->getType();
-            std::shared_ptr<Node> node = value;
-            while (!tokens.empty() && (currentToken->getType() == IFEQUALS ||
-                   currentToken->getType() == IFNOTEQUALS ||
-                   currentToken->getType() == IFLESSTHAN ||
-                   currentToken->getType() == IFLESSTHANOREQUAL ||
-                   currentToken->getType() == IFGREATER ||
-                   currentToken->getType() == IFGREATERTHANOREQUAL))
+            while (!tokens.empty() &&
+                   (type == IFEQUALS ||
+                   type == IFNOTEQUALS ||
+                   type == IFLESSTHAN ||
+                   type == IFLESSTHANOREQUAL ||
+                   type == IFGREATER ||
+                   type == IFGREATERTHANOREQUAL))
             {
                 if (type == IFEQUALS)
                 {
@@ -361,6 +365,7 @@ std::shared_ptr<Node> Parser::condition()
                     std::shared_ptr<Node> next = expression();
                     node = nodeFactory->CreateIfOverOrEqualNode(passable, currentToken, node, next);
                 }
+                type = currentToken->getType();
             }
             return node;
         }
@@ -373,10 +378,13 @@ std::shared_ptr<Node> Parser::boolean()
     acceptIndentation();
     if (!tokens.empty() && compilation)
     {
-        std::shared_ptr<Node> value = condition();
+        std::shared_ptr<Node> node = condition();
         TokenType type = currentToken->getType();
-        std::shared_ptr<Node> node = value;
-        while (currentToken->getType() == AND || currentToken->getType() == OR)
+        while (!tokens.empty() &&
+               (type == AND ||
+               type == OR ||
+               type == BITWISEAND ||
+               type == BITWISEOR))
         {
             if (type == AND)
             {
@@ -402,6 +410,7 @@ std::shared_ptr<Node> Parser::boolean()
                 std::shared_ptr<Node> next = condition();
                 node = nodeFactory->CreateBitwiseOrNode(passable, currentToken, node, next);
             }
+            type = currentToken->getType();
         }
         return node;
     }

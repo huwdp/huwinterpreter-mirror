@@ -101,6 +101,7 @@ private:
     bool accept(TokenType tokenType);
     bool expect(std::string s);
     bool expect(TokenType tokenType);
+    std::string syntaxError(std::string content);
     bool expectSemicolon();
     void errorMessage(std::string errorMsg, std::shared_ptr<Token> currentToken);
     std::shared_ptr<Node> value();
