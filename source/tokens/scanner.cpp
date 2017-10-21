@@ -265,6 +265,7 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                     else
                     {
                         AddToken(BITWISEAND, lineInfo);
+                        fileReader->prev();
                     }
                 }
             }
@@ -279,6 +280,7 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                     else
                     {
                         AddToken(BITWISEOR, lineInfo);
+                        fileReader->prev();
                     }
                 }
             }
