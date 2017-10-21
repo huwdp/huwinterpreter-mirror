@@ -27,9 +27,6 @@ std::shared_ptr<NodeFactory> NodeFactoryFactory::build(NodeFactoryType type)
     case HUWCODE:
         nodeFactory = std::make_shared<HuwCodeNodeFactory>();
         break;
-    case JAVASCRIPT:
-        nodeFactory = std::make_shared<JSNodeFactory>();
-        break;
     }
     return nodeFactory;
 }

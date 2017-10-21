@@ -18,9 +18,8 @@
 
 #include "nodefactory.h"
 #include "huwcodenodefactory.h"
-#include "js/jsnodefactory.h"
 
-enum NodeFactoryType {HUWCODE, JAVASCRIPT };
+enum NodeFactoryType { HUWCODE };
 
 class NodeFactoryFactory
 {
