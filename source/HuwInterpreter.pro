@@ -120,7 +120,6 @@ SOURCES += \
     tokens/texttokenmanager.cpp \
     tokens/token.cpp \
     tokens/tokens.cpp \
-    types/isnumeric.cpp \
     main.cpp \
     nodes/addconstnode.cpp \
     nodes/addnode.cpp \
@@ -155,45 +154,12 @@ SOURCES += \
     nodes/unaryminusnode.cpp \
     nodes/whilenode.cpp \
     nodes/unarynotnode.cpp \
-    nodes/js/jsaddconstnode.cpp \
-    nodes/js/jsaddnode.cpp \
-    nodes/js/jsaddvarnode.cpp \
-    nodes/js/jsbitwiseandnode.cpp \
-    nodes/js/jsbitwiseornode.cpp \
-    nodes/js/jsbracketnode.cpp \
-    nodes/js/jsdecrementnode.cpp \
-    nodes/js/jsdivnode.cpp \
-    nodes/js/jsequalnode.cpp \
-    nodes/js/jsgetfuncnode.cpp \
-    nodes/js/jsgetvarnode.cpp \
-    nodes/js/jsifandnode.cpp \
-    nodes/js/jsifequalnode.cpp \
-    nodes/js/jsifnode.cpp \
-    nodes/js/jsifnotequalnode.cpp \
-    nodes/js/jsifornode.cpp \
-    nodes/js/jsifovernode.cpp \
-    nodes/js/jsifoverorequalnod.cpp \
-    nodes/js/jsifundernode.cpp \
-    nodes/js/jsifunderorequalnode.cpp \
-    nodes/js/jsincrementnode.cpp \
-    nodes/js/jsmodnode.cpp \
-    nodes/js/jsmulnode.cpp \
-    nodes/js/jsnodefactory.cpp \
-    nodes/js/jsnumbernode.cpp \
-    nodes/js/jsrunnode.cpp \
-    nodes/js/jssetreturnnode.cpp \
-    nodes/js/jssetvarnode.cpp \
-    nodes/js/jssubnode.cpp \
-    nodes/js/jstextnode.cpp \
-    nodes/js/jsunaryminusnode.cpp \
-    nodes/js/jsunarynotnode.cpp \
-    nodes/js/jswhilenode.cpp \
     nodes/nodefactoryfactory.cpp \
     nodes/semicolonnode.cpp \
-    nodes/js/jssemicolonnode.cpp \
     format/escapecharacteroutput.cpp \
     common/passable.cpp \
-    errors/errorfactory.cpp
+    errors/errorfactory.cpp \
+    functions/fileexists.cpp
 
 
 
@@ -375,45 +341,12 @@ HEADERS += \
     parser/parser.h \
     types/isnumeric.h \
     types/tokentypes.h \
-    nodes/js/jsaddconstnode.h \
-    nodes/js/jsaddnode.h \
-    nodes/js/jsaddvarnode.h \
-    nodes/js/jsbitwiseandnode.h \
-    nodes/js/jsbitwiseornode.h \
-    nodes/js/jsbracketnode.h \
-    nodes/js/jsdecrementnode.h \
-    nodes/js/jsdivnode.h \
-    nodes/js/jsequalnode.h \
-    nodes/js/jsgetfuncnode.h \
-    nodes/js/jsgetvarnode.h \
-    nodes/js/jsifandnode.h \
-    nodes/js/jsifequalnode.h \
-    nodes/js/jsifnode.h \
-    nodes/js/jsifnotequalnode.h \
-    nodes/js/jsifornode.h \
-    nodes/js/jsifovernode.h \
-    nodes/js/jsifoverorequalnode.h \
-    nodes/js/jsifundernode.h \
-    nodes/js/jsifunderorequalnode.h \
-    nodes/js/jsincrementnode.h \
-    nodes/js/jsmodnode.h \
-    nodes/js/jsmulnode.h \
-    nodes/js/jsnodefactory.h \
-    nodes/js/jsnumbernode.h \
-    nodes/js/jsrunnode.h \
-    nodes/js/jssetreturnnode.h \
-    nodes/js/jssetvarnode.h \
-    nodes/js/jssubnode.h \
-    nodes/js/jstextnode.h \
-    nodes/js/jsunaryminusnode.h \
-    nodes/js/jsunarynotnode.h \
-    nodes/js/jswhilenode.h \
     nodes/nodefactoryfactory.h \
     nodes/semicolonnode.h \
-    nodes/js/jssemicolonnode.h \
     format/escapecharacteroutput.h \
     common/passable.h \
-    errors/errorfactory.h
+    errors/errorfactory.h \
+    functions/fileexists.h
 
 
 

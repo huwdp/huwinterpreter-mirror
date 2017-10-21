@@ -24,8 +24,11 @@ void Functions::init()
 {
     functions["command"] = std::move(std::make_shared<Command>(passable));
     functions["dateFormat"] = std::move(std::make_shared<DateFormat>(passable));
+
     functions["fileRead"] = std::move(std::make_shared<FileRead>(passable));
     functions["fileWrite"] = std::move(std::make_shared<FileWrite>(passable));
+    functions["fileExists"] = std::move(std::make_shared<FileExists>(passable));
+
     functions["month"] = std::move(std::make_shared<Month>(passable));
     functions["monthName"] = std::move(std::make_shared<MonthName>(passable));
     functions["not"] = std::move(std::make_shared<Not>(passable));

@@ -55,6 +55,7 @@
 // File and directories
 #include "fileread.h"
 #include "filewrite.h"
+#include "fileexists.h"
 
 // Math
 #include "abs.h"
