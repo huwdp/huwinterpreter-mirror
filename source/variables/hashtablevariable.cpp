@@ -97,7 +97,7 @@ std::shared_ptr<Variable> HashTableVariable::mod(std::shared_ptr<Variable> varia
 
 std::shared_ptr<Variable> HashTableVariable::add(std::shared_ptr<Variable> variable)
 {
-    // Todo
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "add", ""));
     return null;
 }
 
