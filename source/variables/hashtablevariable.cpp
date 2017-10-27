@@ -48,7 +48,13 @@ long long HashTableVariable::toInt()
 
 std::string HashTableVariable::toString()
 {
-    return "";
+    std::string output = "[";
+    for (std::unordered_map<std::string, std::shared_ptr<Variable>>::iterator it = map.begin(); it != map.end(); ++it)
+    {
+        output.append("Key:" + (*it).first + " Value:" + (*it).second->toString());
+    }
+    output.append("]");
+    return output;
 }
 
 bool HashTableVariable::toBool()
