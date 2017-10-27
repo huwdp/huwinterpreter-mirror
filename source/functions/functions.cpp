@@ -96,6 +96,10 @@ void Functions::init()
 
     functions["toInt"] = std::move(std::make_shared<ToInt>(passable));
     functions["toDouble"] = std::move(std::make_shared<ToDouble>(passable));
+
+    functions["regexSearch"] = std::move(std::make_shared<RegexSearch>(passable));
+    functions["regexReplace"] = std::move(std::make_shared<RegexReplace>(passable));
+    functions["regexMatch"] = std::move(std::make_shared<RegexMatch>(passable));
 }
 
 std::shared_ptr<Function> Functions::get(std::string name)

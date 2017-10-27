@@ -105,5 +105,9 @@
 #include "toint.h"
 #include "todouble.h"
 
+#include "regexsearch.h"
+#include "regexreplace.h"
+#include"regexmatch.h"
+
 #endif  //FUNCTIONLIST_H
 
