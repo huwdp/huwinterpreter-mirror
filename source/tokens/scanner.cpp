@@ -108,9 +108,12 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                             {
                                 temp.push_back(fileReader->getCurrent()->getContent());
                                 fileReader->next();
+                            }
+                            else
+                            {
+                                temp.push_back(fileReader->getCurrent()->getContent());
                                 fileReader->next();
                             }
-                            fileReader->prev();
                         }
                         else
                         {
