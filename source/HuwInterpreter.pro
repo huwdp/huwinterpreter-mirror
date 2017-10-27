@@ -159,7 +159,10 @@ SOURCES += \
     format/escapecharacteroutput.cpp \
     common/passable.cpp \
     errors/errorfactory.cpp \
-    functions/fileexists.cpp
+    functions/fileexists.cpp \
+    functions/regexsearch.cpp \
+    functions/regexmatch.cpp \
+    functions/regexreplace.cpp
 
 
 
@@ -346,7 +349,10 @@ HEADERS += \
     format/escapecharacteroutput.h \
     common/passable.h \
     errors/errorfactory.h \
-    functions/fileexists.h
+    functions/fileexists.h \
+    functions/regexsearch.h \
+    functions/regexmatch.h \
+    functions/regexreplace.h
 
 
 
