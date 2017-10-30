@@ -4,7 +4,7 @@
 array()
 Array funciton returns an array. Array funciton requires 0 arguments.
 
-Associative Array is an abstact collection of key, value pais. The internal implementation of the array within HuwCode is implemented with std::unordered_map.
+Associative Array is an abstact collection of key, value pairs. The internal implementation of the array within HuwCode is implemented with std::unordered_map.
 
 ## ArrayGet
 arrayGet(array, key)
@@ -19,7 +19,7 @@ arrayUnset(array, key)
 ArrayUnset funciton removes the value in the associative array by the key.
 
 ## Example
-'''
+```
 let i = 0;
 let list = array();
 
@@ -39,4 +39,4 @@ while (i < 10)
 }
 
 print("Array count: " + count(list));
-'''
+```
