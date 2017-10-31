@@ -51,7 +51,16 @@ std::shared_ptr<Variable> RegexReplace::run(std::shared_ptr<Token> token, std::s
         std::string str2 = var2->toString();
         std::string str3 = var3->toString();
         std::regex arg2(str2);
-        std::string result = std::regex_replace(str, arg2, str3);
+        std::string result;
+        try
+        {
+            result = std::regex_replace(str, arg2, str3);
+        }
+        catch (std::regex_error ex)
+        {
+            passable->errors->add(passable->errorFactory->otherFunctionError(token, name, "", ex.what()));
+            return null;
+        }
         return std::make_shared<StringVariable>(passable, result);
     }
     else
