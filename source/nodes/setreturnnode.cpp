@@ -26,14 +26,14 @@ NodeType SetReturnNode::getType()
     return SETRETURNNODETYPE;
 }
 
-std::shared_ptr<Variable> SetReturnNode::execute(std::shared_ptr<Scope> scope)
+std::shared_ptr<Variable> SetReturnNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("SetReturnNode");
     if (scope->getReturnValue() != nullptr)
     {
         return scope->getReturnValue();
     }
-    scope->setReturnValue(node->execute(scope));
+    scope->setReturnValue(node->execute(globalScope, scope));
     return scope->getReturnValue();
     return null;
 }

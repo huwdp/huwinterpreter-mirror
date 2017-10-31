@@ -25,7 +25,7 @@ protected:
 public:
     GetVarNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::string name);
     NodeType getType();
-    std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope);
+    std::shared_ptr<Variable> execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope);
     std::string toString();
 };
 

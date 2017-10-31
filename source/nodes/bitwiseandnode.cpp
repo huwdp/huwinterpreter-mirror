@@ -27,7 +27,7 @@ NodeType BitwiseAndNode::getType()
     return BITWISEANDNODETYPE;
 }
 
-std::shared_ptr<Variable> BitwiseAndNode::execute(std::shared_ptr<Scope> scope)
+std::shared_ptr<Variable> BitwiseAndNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("BitwiseAndNode");
     if (scope->getReturnValue() != nullptr)
@@ -36,8 +36,8 @@ std::shared_ptr<Variable> BitwiseAndNode::execute(std::shared_ptr<Scope> scope)
     }
     if (left != nullptr && right != nullptr)
     {
-        std::shared_ptr<Variable> l = left->execute(scope);
-        std::shared_ptr<Variable> r = right->execute(scope);
+        std::shared_ptr<Variable> l = left->execute(globalScope, scope);
+        std::shared_ptr<Variable> r = right->execute(globalScope, scope);
         if (l == nullptr)
         {
             passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));

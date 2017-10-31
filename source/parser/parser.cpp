@@ -939,7 +939,6 @@ std::shared_ptr<Node> Parser::parse()
 std::string Parser::toString()
 {
     std::string output;
-    std::shared_ptr<Scope> scope = std::make_shared<Scope>(passable);
     if (!tokens.empty() && compilation)
     {
         std::shared_ptr<Node> node = parse();
@@ -954,13 +953,13 @@ std::string Parser::toString()
 
 bool Parser::execute()
 {
-    std::shared_ptr<Scope> scope = std::make_shared<Scope>(passable);
+    std::shared_ptr<Scope> globalScope = std::make_shared<Scope>(passable);
     if (!tokens.empty() && compilation)
     {
         std::shared_ptr<Node> done = parse();
         if (done != nullptr && compilation)
         {
-            std::shared_ptr<Variable> output = done->execute(scope);
+            std::shared_ptr<Variable> output = done->execute(globalScope, globalScope);
             if (output != nullptr)
             {
                 std::cout << output->toString() << std::endl;

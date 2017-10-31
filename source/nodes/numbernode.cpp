@@ -29,7 +29,7 @@ NodeType NumberNode::getType()
     return NUMBERNODETYPE;
 }
 
-std::shared_ptr<Variable> NumberNode::execute(std::shared_ptr<Scope> scope)
+std::shared_ptr<Variable> NumberNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("NumberNode");
     if (scope->getReturnValue() != nullptr)

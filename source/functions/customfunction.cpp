@@ -26,7 +26,7 @@ CustomFunction::CustomFunction(std::shared_ptr<Passable> passable,
     this->block = block;
 }
 
-std::shared_ptr<Variable> CustomFunction::run(std::shared_ptr<Token> token,
+std::shared_ptr<Variable> CustomFunction::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                               std::shared_ptr<Scope> scope,
                                               std::vector<std::shared_ptr<Node>> variables)
 {
@@ -43,7 +43,7 @@ std::shared_ptr<Variable> CustomFunction::run(std::shared_ptr<Token> token,
     std::vector<std::shared_ptr<Node>>::iterator variableIt = variables.begin();
     for (std::vector<std::string>::iterator argumentIt = arguments.begin(); argumentIt != arguments.end(); ++argumentIt)
     {
-        std::shared_ptr<Variable> argument = (*variableIt)->execute(scope);
+        std::shared_ptr<Variable> argument = (*variableIt)->execute(globalScope, scope);
         if (argument != nullptr)
         {
             newScope->getVariables()->addVariable((*argumentIt), argument->copy());
@@ -53,7 +53,7 @@ std::shared_ptr<Variable> CustomFunction::run(std::shared_ptr<Token> token,
 
     if (block != nullptr)
     {
-        block->execute(newScope);
+        block->execute(globalScope, newScope);
         std::shared_ptr<Variable> output = newScope->getReturnValue();
 
         // Remove arguments given from scope

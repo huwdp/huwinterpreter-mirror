@@ -29,21 +29,21 @@ NodeType IfNode::getType()
     return IFNODETYPE;
 }
 
-std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> scope)
+std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("IfNode");
     if (scope->getReturnValue() != nullptr)
     {
         return scope->getReturnValue();
     }
-    std::shared_ptr<Variable> c = condition->execute(scope);
+    std::shared_ptr<Variable> c = condition->execute(globalScope, scope);
     if (c != nullptr)
     {
         if (c->toBool())
         {
             if (body != nullptr)
             {
-                body->execute(scope);
+                body->execute(globalScope, scope);
                 if (scope->getReturnValue() != nullptr)
                 {
                     return scope->getReturnValue();
@@ -58,7 +58,7 @@ std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> scope)
         {
             if (elseNode != nullptr)
             {
-                elseNode->execute(scope);
+                elseNode->execute(globalScope, scope);
                 if (scope->getReturnValue() != nullptr)
                 {
                     return scope->getReturnValue();

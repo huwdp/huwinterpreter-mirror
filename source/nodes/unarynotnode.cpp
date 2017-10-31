@@ -26,7 +26,7 @@ NodeType UnaryNotNode::getType()
     return UNARYNOTNODETYPE;
 }
 
-std::shared_ptr<Variable> UnaryNotNode::execute(std::shared_ptr<Scope> scope)
+std::shared_ptr<Variable> UnaryNotNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("UnaryNot");
     if (scope->getReturnValue() != null)
@@ -35,7 +35,7 @@ std::shared_ptr<Variable> UnaryNotNode::execute(std::shared_ptr<Scope> scope)
     }
     if (node != nullptr)
     {
-        std::shared_ptr<Variable> var = node->execute(scope);
+        std::shared_ptr<Variable> var = node->execute(globalScope, scope);
         if (var != nullptr)
         {
             if (var->toBool())

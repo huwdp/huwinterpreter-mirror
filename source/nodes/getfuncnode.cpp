@@ -29,7 +29,7 @@ NodeType GetFuncNode::getType()
     return GETFUNCNODETYPE;
 }
 
-std::shared_ptr<Variable> GetFuncNode::execute(std::shared_ptr<Scope> scope)
+std::shared_ptr<Variable> GetFuncNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("GetFuncNode");
     if (scope->getReturnValue() != nullptr)
@@ -39,7 +39,7 @@ std::shared_ptr<Variable> GetFuncNode::execute(std::shared_ptr<Scope> scope)
     std::shared_ptr<Function> func = functions->get(name);
     if (func != nullptr)
     {
-        return func->run(token, scope, arguments);
+        return func->run(token, globalScope, scope, arguments);
         return scope->getReturnValue();
     }
     return null;

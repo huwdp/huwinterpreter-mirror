@@ -21,7 +21,7 @@ Max::Max(std::shared_ptr<Passable> passable)
     name = "max";
 }
 
-std::shared_ptr<Variable> Max::run(std::shared_ptr<Token> token,
+std::shared_ptr<Variable> Max::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)
 {
@@ -33,7 +33,7 @@ std::shared_ptr<Variable> Max::run(std::shared_ptr<Token> token,
         {
             if ((*it) != nullptr)
             {
-                std::shared_ptr<Variable> var = (*it)->execute(scope);
+                std::shared_ptr<Variable> var = (*it)->execute(globalScope, scope);
                 if (var == nullptr)
                 {
                     passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));

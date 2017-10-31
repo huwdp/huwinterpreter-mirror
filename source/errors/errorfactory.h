@@ -44,6 +44,8 @@ public:
     std::shared_ptr<Error> otherFunctionError(std::shared_ptr<Token> token, std::string className, std::string method, std::string other);
     std::shared_ptr<Error> unmatchedSpecifiedNumberOfArguments(std::shared_ptr<Token> token);
     std::shared_ptr<Error> outOfBounds(std::string name);
+    std::shared_ptr<Error> variableDeclared(std::shared_ptr<Token> token, std::string className, std::string name);
+    std::shared_ptr<Error> constantDeclared(std::shared_ptr<Token> token, std::string className, std::string name);
 };
 
 #endif // ERRORFACTORY_H

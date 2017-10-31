@@ -28,7 +28,7 @@ NodeType IfEqualNode::getType()
     return IFEQUALNODETYPE;
 }
 
-std::shared_ptr<Variable> IfEqualNode::execute(std::shared_ptr<Scope> scope)
+std::shared_ptr<Variable> IfEqualNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     
     Debug::print("IfEqualNode");
@@ -38,8 +38,8 @@ std::shared_ptr<Variable> IfEqualNode::execute(std::shared_ptr<Scope> scope)
     }
     if (left != nullptr && right != nullptr)
     {
-        std::shared_ptr<Variable> l = left->execute(scope);
-        std::shared_ptr<Variable> r = right->execute(scope);
+        std::shared_ptr<Variable> l = left->execute(globalScope, scope);
+        std::shared_ptr<Variable> r = right->execute(globalScope, scope);
 
         if (l == nullptr)
         {

@@ -21,7 +21,7 @@ Print::Print(std::shared_ptr<Passable> passable)
     name = "print";
 }
 
-std::shared_ptr<Variable> Print::run(std::shared_ptr<Token> token,
+std::shared_ptr<Variable> Print::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                      std::shared_ptr<Scope> scope,
                                      std::vector<std::shared_ptr<Node>> variables)
 {
@@ -30,7 +30,7 @@ std::shared_ptr<Variable> Print::run(std::shared_ptr<Token> token,
     {
         if ((*it) != nullptr)
         {
-            std::shared_ptr<Variable> var = (*it)->execute(scope);
+            std::shared_ptr<Variable> var = (*it)->execute(globalScope, scope);
             if (var != nullptr)
             {
                 std::cout << var->toString() << std::endl;

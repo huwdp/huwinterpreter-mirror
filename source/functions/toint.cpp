@@ -21,7 +21,7 @@ ToInt::ToInt(std::shared_ptr<Passable> passable)
     name = "toInt";
 }
 
-std::shared_ptr<Variable> ToInt::run(std::shared_ptr<Token> token,
+std::shared_ptr<Variable> ToInt::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                           std::shared_ptr<Scope> scope,
                                           std::vector<std::shared_ptr<Node>> variables)
 {
@@ -36,7 +36,7 @@ std::shared_ptr<Variable> ToInt::run(std::shared_ptr<Token> token,
         }
 
 
-        std::shared_ptr<Variable> var = node->execute(scope);
+        std::shared_ptr<Variable> var = node->execute(globalScope, scope);
         if (var == nullptr)
         {
             passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));

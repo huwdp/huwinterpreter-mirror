@@ -26,7 +26,7 @@ NodeType UnaryMinusNode::getType()
     return UNARYMINUSNODETYPE;
 }
 
-std::shared_ptr<Variable> UnaryMinusNode::execute(std::shared_ptr<Scope> scope)
+std::shared_ptr<Variable> UnaryMinusNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("UnaryMinusNode");
     if (scope->getReturnValue() != nullptr)
@@ -35,7 +35,7 @@ std::shared_ptr<Variable> UnaryMinusNode::execute(std::shared_ptr<Scope> scope)
     }
     if (node != nullptr)
     {
-        std::shared_ptr<Variable> value = node->execute(scope);
+        std::shared_ptr<Variable> value = node->execute(globalScope, scope);
         if (value != nullptr)
         {
             return value->mul(std::make_shared<IntegerVariable>(passable, -1));

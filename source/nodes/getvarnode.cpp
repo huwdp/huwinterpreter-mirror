@@ -27,17 +27,24 @@ NodeType GetVarNode::getType()
     return GETVARNODETYPE;
 }
 
-std::shared_ptr<Variable> GetVarNode::execute(std::shared_ptr<Scope> scope)
+std::shared_ptr<Variable> GetVarNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("GetVarNode");
     if (scope->getReturnValue() != nullptr)
     {
         return scope->getReturnValue();
     }
-    std::shared_ptr<Variable> var = scope->getVariables()->get(name);
-    if (var != nullptr)
+
+    std::shared_ptr<Variable> var1 = globalScope->getVariables()->get(name);
+    if (var1 != nullptr)
     {
-        return var;
+        return var1;
+    }
+
+    std::shared_ptr<Variable> var2 = scope->getVariables()->get(name);
+    if (var2 != nullptr)
+    {
+        return var2;
     }
     else
     {

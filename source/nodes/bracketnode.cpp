@@ -27,7 +27,7 @@ NodeType BracketNode::getType()
     return BRACKETNODETYPE;
 }
 
-std::shared_ptr<Variable> BracketNode::execute(std::shared_ptr<Scope> scope)
+std::shared_ptr<Variable> BracketNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("Bracket");
     if (scope->getReturnValue() != nullptr)
@@ -36,7 +36,7 @@ std::shared_ptr<Variable> BracketNode::execute(std::shared_ptr<Scope> scope)
     }
     if (node != nullptr)
     {
-        std::shared_ptr<Variable> n = node->execute(scope);
+        std::shared_ptr<Variable> n = node->execute(globalScope, scope);
         if (n == nullptr)
         {
             passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));

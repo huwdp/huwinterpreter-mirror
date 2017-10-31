@@ -27,7 +27,7 @@ NodeType DecrementNode::getType()
     return DECREMENTNODETYPE;
 }
 
-std::shared_ptr<Variable> DecrementNode::execute(std::shared_ptr<Scope> scope)
+std::shared_ptr<Variable> DecrementNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("Decrement");
     if (scope->getReturnValue() != nullptr)
@@ -36,7 +36,7 @@ std::shared_ptr<Variable> DecrementNode::execute(std::shared_ptr<Scope> scope)
     }
     if (node != nullptr)
     {
-        std::shared_ptr<Variable> n = node->execute(scope);
+        std::shared_ptr<Variable> n = node->execute(globalScope, scope);
         if (n == nullptr)
         {
             passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));

@@ -128,3 +128,13 @@ std::shared_ptr<Error> ErrorFactory::outOfBounds(std::string name)
 {
     return std::make_shared<Error>(RUNTIME_ERROR, "Out of bounds error in " + name);
 }
+
+std::shared_ptr<Error> ErrorFactory::variableDeclared(std::shared_ptr<Token> token, std::string className, std::string name)
+{
+    return std::make_shared<Error>(RUNTIME_ERROR, "Variable " + name + " already declared" + " in " + className, token);
+}
+
+std::shared_ptr<Error> ErrorFactory::constantDeclared(std::shared_ptr<Token> token, std::string className, std::string name)
+{
+    return std::make_shared<Error>(RUNTIME_ERROR, "Constant " + name + " already declared" + " in " + className, token);
+}

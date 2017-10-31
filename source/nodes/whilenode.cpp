@@ -29,7 +29,7 @@ NodeType WhileNode::getType()
     return WHILENODETYPE;
 }
 
-std::shared_ptr<Variable> WhileNode::execute(std::shared_ptr<Scope> scope)
+std::shared_ptr<Variable> WhileNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("WhileNode");
     if (scope->getReturnValue() != nullptr)
@@ -38,7 +38,7 @@ std::shared_ptr<Variable> WhileNode::execute(std::shared_ptr<Scope> scope)
     }
     if (condition != nullptr)
     {
-        std::shared_ptr<Variable> c = this->condition->execute(scope);
+        std::shared_ptr<Variable> c = this->condition->execute(globalScope, scope);
 
         if (c == null)
         {
@@ -52,8 +52,8 @@ std::shared_ptr<Variable> WhileNode::execute(std::shared_ptr<Scope> scope)
             {
                 return scope->getReturnValue();
             }
-            body->execute(scope);
-            c = condition->execute(scope);
+            body->execute(globalScope, scope);
+            c = condition->execute(globalScope, scope);
             loop = c->toBool();
             if (c == null)
             {
@@ -69,7 +69,7 @@ std::shared_ptr<Variable> WhileNode::execute(std::shared_ptr<Scope> scope)
     }
     if (next != nullptr)
     {
-        return next->execute(scope);
+        return next->execute(globalScope, scope);
     }
     return null;
 }

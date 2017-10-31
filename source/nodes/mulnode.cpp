@@ -28,7 +28,7 @@ NodeType MulNode::getType()
     return MULNODETYPE;
 }
 
-std::shared_ptr<Variable> MulNode::execute(std::shared_ptr<Scope> scope)
+std::shared_ptr<Variable> MulNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("MulNode");
     if (scope->getReturnValue() != null)
@@ -37,8 +37,8 @@ std::shared_ptr<Variable> MulNode::execute(std::shared_ptr<Scope> scope)
     }
     if (left != nullptr && right != nullptr)
     {
-        std::shared_ptr<Variable> l = left->execute(scope);
-        std::shared_ptr<Variable> r = right->execute(scope);
+        std::shared_ptr<Variable> l = left->execute(globalScope, scope);
+        std::shared_ptr<Variable> r = right->execute(globalScope, scope);
 
         if (l == nullptr)
         {

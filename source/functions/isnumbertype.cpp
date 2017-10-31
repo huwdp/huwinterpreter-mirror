@@ -22,8 +22,9 @@ IsNumberType::IsNumberType(std::shared_ptr<Passable> passable)
 }
 
 std::shared_ptr<Variable> IsNumberType::run(std::shared_ptr<Token> token,
-                              std::shared_ptr<Scope> scope,
-                              std::vector<std::shared_ptr<Node>> variables)
+                                            std::shared_ptr<Scope> globalScope,
+                                            std::shared_ptr<Scope> scope,
+                                            std::vector<std::shared_ptr<Node>> variables)
 {
     std::shared_ptr<Variable> returnNode;
     if (variables.size() == 1)
@@ -35,7 +36,7 @@ std::shared_ptr<Variable> IsNumberType::run(std::shared_ptr<Token> token,
             return null;
         }
 
-        std::shared_ptr<Variable> var = node->execute(scope);
+        std::shared_ptr<Variable> var = node->execute(globalScope, scope);
         if (var == nullptr)
         {
             passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));

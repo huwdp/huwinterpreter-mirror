@@ -89,7 +89,7 @@ public:
         this->token = token;
     }
 
-    virtual std::shared_ptr<Variable> execute(std::shared_ptr<Scope> scope) = 0;
+    virtual std::shared_ptr<Variable> execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope) = 0;
     virtual std::string toString() = 0;
     virtual NodeType getType() = 0;
     virtual ~Node()

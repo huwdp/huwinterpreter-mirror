@@ -28,7 +28,7 @@ NodeType IfAndNode::getType()
     return IFANDNODETYPE;
 }
 
-std::shared_ptr<Variable> IfAndNode::execute(std::shared_ptr<Scope> scope)
+std::shared_ptr<Variable> IfAndNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("And");
     if (scope->getReturnValue() != nullptr)
@@ -37,7 +37,7 @@ std::shared_ptr<Variable> IfAndNode::execute(std::shared_ptr<Scope> scope)
     }
     if (left != nullptr && right != nullptr)
     {
-        std::shared_ptr<Variable> l = left->execute(scope);
+        std::shared_ptr<Variable> l = left->execute(globalScope, scope);
         if (l == nullptr)
         {
             passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
@@ -48,7 +48,7 @@ std::shared_ptr<Variable> IfAndNode::execute(std::shared_ptr<Scope> scope)
             return std::make_shared<NumberVariable>(passable, false);
         }
 
-        std::shared_ptr<Variable> r = right->execute(scope);
+        std::shared_ptr<Variable> r = right->execute(globalScope, scope);
         if (r == nullptr)
         {
             passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));

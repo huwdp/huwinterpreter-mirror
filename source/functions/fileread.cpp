@@ -21,7 +21,7 @@ FileRead::FileRead(std::shared_ptr<Passable> passable)
     name = "fileRead";
 }
 
-std::shared_ptr<Variable> FileRead::run(std::shared_ptr<Token> token,
+std::shared_ptr<Variable> FileRead::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                         std::shared_ptr<Scope> scope,
                                         std::vector<std::shared_ptr<Node>> variables)
 {
@@ -32,7 +32,7 @@ std::shared_ptr<Variable> FileRead::run(std::shared_ptr<Token> token,
         std::shared_ptr<Node> fileLocation = variables.at(0);
         if (fileLocation != nullptr)
         {
-            std::shared_ptr<Variable> var = fileLocation->execute(scope);
+            std::shared_ptr<Variable> var = fileLocation->execute(globalScope, scope);
             if (var == nullptr)
             {
                 passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));

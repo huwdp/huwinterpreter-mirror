@@ -28,7 +28,7 @@ NodeType SetVarNode::getType()
     return SETVARNODETYPE;
 }
 
-std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> scope)
+std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("SetVarNode");
     if (scope->getReturnValue() != nullptr)
@@ -37,13 +37,13 @@ std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> scope)
     }
     if (scope->getVariables()->exists(name))
     {
-        std::shared_ptr<Variable> v = value->execute(scope);
+        std::shared_ptr<Variable> v = value->execute(globalScope, scope);
         scope->getVariables()->setVariable(name, v);
     }
     else
     {
         std::shared_ptr<Variable> var;
-        var = value->execute(scope);
+        var = value->execute(globalScope, scope);
         if (scope->getReturnValue() != nullptr)
         {
             return scope->getReturnValue();
@@ -51,7 +51,14 @@ std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> scope)
 
         if (var != nullptr)
         {
-            if (!scope->getVariables()->setVariable(name, var))
+            if (globalScope->getVariables()->exists(name))
+            {
+                if (!globalScope->getVariables()->setVariable(name, var))
+                {
+                    passable->errors->add(passable->errorFactory->variableNotDeclared(token, internalName));
+                }
+            }
+            else if (!scope->getVariables()->setVariable(name, var))
             {
                 passable->errors->add(passable->errorFactory->variableNotDeclared(token, internalName));
             }
