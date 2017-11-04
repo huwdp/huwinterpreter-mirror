@@ -28,20 +28,20 @@ CustomFunction::CustomFunction(std::shared_ptr<Passable> passable,
 
 std::shared_ptr<Variable> CustomFunction::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                               std::shared_ptr<Scope> scope,
-                                              std::vector<std::shared_ptr<Node>> variables)
+                                              std::vector<std::shared_ptr<Node>> arguments)
 {
     // New scope
     std::shared_ptr<Scope> newScope = std::make_shared<Scope>(passable);
 
-    if (arguments.size() != variables.size())
+    if (this->arguments.size() != arguments.size())
     {
         passable->errors->add(passable->errorFactory->unmatchedSpecifiedNumberOfArguments(token));
         return null;
     }
 
     // Clean code below: TODO
-    std::vector<std::shared_ptr<Node>>::iterator variableIt = variables.begin();
-    for (std::vector<std::string>::iterator argumentIt = arguments.begin(); argumentIt != arguments.end(); ++argumentIt)
+    std::vector<std::shared_ptr<Node>>::iterator variableIt = arguments.begin();
+    for (std::vector<std::string>::iterator argumentIt = this->arguments.begin(); argumentIt != this->arguments.end(); ++argumentIt)
     {
         std::shared_ptr<Variable> argument = (*variableIt)->execute(globalScope, scope);
         if (argument != nullptr)
@@ -57,7 +57,7 @@ std::shared_ptr<Variable> CustomFunction::execute(std::shared_ptr<Token> token, 
         std::shared_ptr<Variable> output = newScope->getReturnValue();
 
         // Remove arguments given from scope
-        for (std::vector<std::string>::iterator it1 = arguments.begin(); it1 != arguments.end(); ++it1)
+        for (std::vector<std::string>::iterator it1 = this->arguments.begin(); it1 != this->arguments.end(); ++it1)
         {
             newScope->getVariables()->removeVariable((*it1));
         }
@@ -66,7 +66,7 @@ std::shared_ptr<Variable> CustomFunction::execute(std::shared_ptr<Token> token, 
     return null;
 }
 
-std::string CustomFunction::toString(std::vector<std::shared_ptr<Node>> variables)
+std::string CustomFunction::toString(std::vector<std::shared_ptr<Node>> arguments)
 {
     std::string output;
 
@@ -74,11 +74,11 @@ std::string CustomFunction::toString(std::vector<std::shared_ptr<Node>> variable
     output.append(" ");
     output.append(name);
     output.append("(");
-    for (std::vector<std::string>::iterator it = arguments.begin(); it != arguments.end(); ++it)
+    for (std::vector<std::string>::iterator it = this->arguments.begin(); it != this->arguments.end(); ++it)
     {
         output.append((*it));
         it++;
-        if (it != arguments.end())
+        if (it != this->arguments.end())
         {
             output.append(",");
         }

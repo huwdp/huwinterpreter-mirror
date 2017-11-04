@@ -23,13 +23,13 @@ Min::Min(std::shared_ptr<Passable> passable)
 
 std::shared_ptr<Variable> Min::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                    std::shared_ptr<Scope> scope,
-                                   std::vector<std::shared_ptr<Node>> variables)
+                                   std::vector<std::shared_ptr<Node>> arguments)
 {
     std::shared_ptr<Variable> returnNode;
-    if (variables.size() > 1)
+    if (arguments.size() > 1)
     {
         double min = std::numeric_limits<double>::max();
-        for (std::vector<std::shared_ptr<Node>>::iterator it = variables.begin(); it != variables.end(); ++it)
+        for (std::vector<std::shared_ptr<Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
         {
             if ((*it) != nullptr)
             {

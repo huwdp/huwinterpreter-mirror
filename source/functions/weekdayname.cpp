@@ -23,12 +23,12 @@ WeekdayName::WeekdayName(std::shared_ptr<Passable> passable)
 
 std::shared_ptr<Variable> WeekdayName::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                            std::shared_ptr<Scope> scope,
-                                           std::vector<std::shared_ptr<Node>> variables)
+                                           std::vector<std::shared_ptr<Node>> arguments)
 {
     std::shared_ptr<Variable> returnNode;
-    if (variables.size() == 1)
+    if (arguments.size() == 1)
     {
-        std::shared_ptr<Node> node = variables.at(0);
+        std::shared_ptr<Node> node = arguments.at(0);
         if (node == nullptr)
         {
             passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));

@@ -23,13 +23,13 @@ FileRead::FileRead(std::shared_ptr<Passable> passable)
 
 std::shared_ptr<Variable> FileRead::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                         std::shared_ptr<Scope> scope,
-                                        std::vector<std::shared_ptr<Node>> variables)
+                                        std::vector<std::shared_ptr<Node>> arguments)
 {
     std::shared_ptr<Variable> returnNode;
-    if (variables.size() == 1)
+    if (arguments.size() == 1)
     {
         IO file;
-        std::shared_ptr<Node> fileLocation = variables.at(0);
+        std::shared_ptr<Node> fileLocation = arguments.at(0);
         if (fileLocation != nullptr)
         {
             std::shared_ptr<Variable> var = fileLocation->execute(globalScope, scope);

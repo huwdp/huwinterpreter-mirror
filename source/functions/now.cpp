@@ -23,10 +23,10 @@ Now::Now(std::shared_ptr<Passable> passable)
 
 std::shared_ptr<Variable> Now::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                    std::shared_ptr<Scope> scope,
-                                   std::vector<std::shared_ptr<Node>> variables)
+                                   std::vector<std::shared_ptr<Node>> arguments)
 {
     std::shared_ptr<Variable> returnNode;
-    if (variables.size() == 0)
+    if (arguments.size() == 0)
     {
         time_t t = std::time(0);
         double now = static_cast<double> (t);

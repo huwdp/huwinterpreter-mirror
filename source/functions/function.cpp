@@ -30,17 +30,17 @@ void Function::setName(std::string name)
     this->name = name;
 }
 
-std::string Function::toString(std::vector<std::shared_ptr<Node>> variables)    // Rename variables to arguments TODO
+std::string Function::toString(std::vector<std::shared_ptr<Node>> arguments)
 {
     std::string output;
     output.append(name).append("(");
-    for (std::vector<std::shared_ptr<Node>>::iterator it = variables.begin(); it != variables.end(); ++it)
+    for (std::vector<std::shared_ptr<Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
     {
         if ((*it) = nullptr)
         {
             output.append((*it)->toString());
             it++;
-            if (it != variables.end())
+            if (it != arguments.end())
             {
                 output.append(",");
             }

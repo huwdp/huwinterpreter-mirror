@@ -23,7 +23,7 @@ Array::Array(std::shared_ptr<Passable> passable)
 
 std::shared_ptr<Variable> Array::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                               std::shared_ptr<Scope> scope,
-                              std::vector<std::shared_ptr<Node>> variables)
+                              std::vector<std::shared_ptr<Node>> arguments)
 {
     return std::make_shared<HashTableVariable>(passable);
 }

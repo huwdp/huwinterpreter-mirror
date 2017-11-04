@@ -23,10 +23,10 @@ Random::Random(std::shared_ptr<Passable> passable)
 
 std::shared_ptr<Variable> Random::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                       std::shared_ptr<Scope> scope,
-                                      std::vector<std::shared_ptr<Node>> variables)
+                                      std::vector<std::shared_ptr<Node>> arguments)
 {
     std::shared_ptr<Variable> returnNode;
-    if (variables.size() == 0)
+    if (arguments.size() == 0)
     {
         std::srand(std::time(0));
         int number = std::rand();

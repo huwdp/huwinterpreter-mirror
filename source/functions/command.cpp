@@ -23,16 +23,16 @@ Command::Command(std::shared_ptr<Passable> passable)
 
 std::shared_ptr<Variable> Command::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                        std::shared_ptr<Scope> scope,
-                                       std::vector<std::shared_ptr<Node>> variables)
+                                       std::vector<std::shared_ptr<Node>> arguments)
 {
     std::shared_ptr<Variable> returnNode;
-    if (variables.size() == 0)
+    if (arguments.size() == 0)
     {
         Debug::print("Command function requires at least 1 argument");
         passable->errors->add(passable->errorFactory->requiresAtLeastXArguments(token, name, 1));
         return null;
     }
-    for (std::vector<std::shared_ptr<Node>>::iterator it = variables.begin(); it != variables.end(); ++it)
+    for (std::vector<std::shared_ptr<Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
     {
         if ((*it) != nullptr)
         {

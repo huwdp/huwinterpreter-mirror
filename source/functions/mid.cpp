@@ -23,14 +23,14 @@ Mid::Mid(std::shared_ptr<Passable> passable)
 
 std::shared_ptr<Variable> Mid::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                    std::shared_ptr<Scope> scope,
-                                   std::vector<std::shared_ptr<Node>> variables)
+                                   std::vector<std::shared_ptr<Node>> arguments)
 {
     std::shared_ptr<Variable> returnNode;
-    if (variables.size() == 3)
+    if (arguments.size() == 3)
     {
-        std::shared_ptr<Node> node1 = variables.at(0);
-        std::shared_ptr<Node> node2 = variables.at(1);
-        std::shared_ptr<Node> node3 = variables.at(2);
+        std::shared_ptr<Node> node1 = arguments.at(0);
+        std::shared_ptr<Node> node2 = arguments.at(1);
+        std::shared_ptr<Node> node3 = arguments.at(2);
 
         if (node1 == nullptr || node2 == nullptr || node3 == nullptr)
         {
