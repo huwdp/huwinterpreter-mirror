@@ -21,7 +21,7 @@ FileRead::FileRead(std::shared_ptr<Passable> passable)
     name = "fileRead";
 }
 
-std::shared_ptr<Variable> FileRead::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> FileRead::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                         std::shared_ptr<Scope> scope,
                                         std::vector<std::shared_ptr<Node>> variables)
 {

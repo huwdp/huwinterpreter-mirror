@@ -21,7 +21,7 @@ Right::Right(std::shared_ptr<Passable> passable)
     name = "right";
 }
 
-std::shared_ptr<Variable> Right::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> Right::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                      std::shared_ptr<Scope> scope,
                                      std::vector<std::shared_ptr<Node>> variables)
 {

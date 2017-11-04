@@ -21,7 +21,7 @@ Ceil::Ceil(std::shared_ptr<Passable> passable)
     name = "ceil";
 }
 
-std::shared_ptr<Variable> Ceil::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> Ceil::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                     std::shared_ptr<Scope> scope,
                                     std::vector<std::shared_ptr<Node>> variables)
 {

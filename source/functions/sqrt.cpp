@@ -21,7 +21,7 @@ Sqrt::Sqrt(std::shared_ptr<Passable> passable)
     name = "sqrt";
 }
 
-std::shared_ptr<Variable> Sqrt::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> Sqrt::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                     std::shared_ptr<Scope> scope,
                                     std::vector<std::shared_ptr<Node>> variables)
 {

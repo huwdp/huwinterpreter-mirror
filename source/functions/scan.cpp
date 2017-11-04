@@ -21,7 +21,7 @@ Scan::Scan(std::shared_ptr<Passable> passable)
     name = "scan";
 }
 
-std::shared_ptr<Variable> Scan::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> Scan::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                     std::shared_ptr<Scope> scope,
                                     std::vector<std::shared_ptr<Node>> variables)
 {

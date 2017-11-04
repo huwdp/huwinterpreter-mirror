@@ -21,7 +21,7 @@ RTrim::RTrim(std::shared_ptr<Passable> passable)
     name = "rTrim";
 }
 
-std::shared_ptr<Variable> RTrim::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> RTrim::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                      std::shared_ptr<Scope> scope,
                                      std::vector<std::shared_ptr<Node>> variables)
 {

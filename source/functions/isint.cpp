@@ -21,7 +21,7 @@ IsInt::IsInt(std::shared_ptr<Passable> passable)
     name = "isInt";
 }
 
-std::shared_ptr<Variable> IsInt::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> IsInt::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                               std::shared_ptr<Scope> scope,
                               std::vector<std::shared_ptr<Node>> variables)
 {

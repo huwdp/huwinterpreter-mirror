@@ -21,7 +21,7 @@ IsDouble::IsDouble(std::shared_ptr<Passable> passable)
     name = "isDouble";
 }
 
-std::shared_ptr<Variable> IsDouble::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> IsDouble::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                         std::shared_ptr<Scope> scope,
                                         std::vector<std::shared_ptr<Node>> variables)
 {

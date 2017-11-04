@@ -29,7 +29,7 @@ private:
     enum date {MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY, NONE};
 public:
     WeekdayName(std::shared_ptr<Passable> passable);
-    std::shared_ptr<Variable> run(std::shared_ptr<Token> token,
+    std::shared_ptr<Variable> execute(std::shared_ptr<Token> token,
                                   std::shared_ptr<Scope> globalScope,
                                   std::shared_ptr<Scope> scope,
                                   std::vector<std::shared_ptr<Node>> variables);

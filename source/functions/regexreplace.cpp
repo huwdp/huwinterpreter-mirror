@@ -21,7 +21,7 @@ RegexReplace::RegexReplace(std::shared_ptr<Passable> passable)
     name = "regexReplace";
 }
 
-std::shared_ptr<Variable> RegexReplace::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> RegexReplace::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                               std::shared_ptr<Scope> scope,
                               std::vector<std::shared_ptr<Node>> variables)
 {

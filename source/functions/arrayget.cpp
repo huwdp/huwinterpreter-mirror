@@ -21,7 +21,7 @@ ArrayGet::ArrayGet(std::shared_ptr<Passable> passable)
     name = "arrayGet";
 }
 
-std::shared_ptr<Variable> ArrayGet::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> ArrayGet::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                               std::shared_ptr<Scope> scope,
                               std::vector<std::shared_ptr<Node>> variables)
 {

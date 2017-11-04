@@ -21,7 +21,7 @@ RegexMatch::RegexMatch(std::shared_ptr<Passable> passable)
     name = "regexMatch";
 }
 
-std::shared_ptr<Variable> RegexMatch::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> RegexMatch::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                               std::shared_ptr<Scope> scope,
                               std::vector<std::shared_ptr<Node>> variables)
 {

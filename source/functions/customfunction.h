@@ -29,7 +29,7 @@ public:
                    std::string name,
                    std::vector<std::string> arguments,
                    std::shared_ptr<Node> block);
-    std::shared_ptr<Variable> run(std::shared_ptr<Token> token,
+    std::shared_ptr<Variable> execute(std::shared_ptr<Token> token,
                                   std::shared_ptr<Scope> globalScope,
                                   std::shared_ptr<Scope> scope,
                                   std::vector<std::shared_ptr<Node>> variables);

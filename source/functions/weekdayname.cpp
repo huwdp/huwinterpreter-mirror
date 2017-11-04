@@ -21,7 +21,7 @@ WeekdayName::WeekdayName(std::shared_ptr<Passable> passable)
     name = "weekdayName";
 }
 
-std::shared_ptr<Variable> WeekdayName::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> WeekdayName::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                            std::shared_ptr<Scope> scope,
                                            std::vector<std::shared_ptr<Node>> variables)
 {

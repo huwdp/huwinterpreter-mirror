@@ -21,7 +21,7 @@ Min::Min(std::shared_ptr<Passable> passable)
     name = "min";
 }
 
-std::shared_ptr<Variable> Min::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> Min::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)
 {

@@ -21,7 +21,7 @@ Asin::Asin(std::shared_ptr<Passable> passable)
     name = "asin";
 }
 
-std::shared_ptr<Variable> Asin::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> Asin::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                     std::shared_ptr<Scope> scope,
                                     std::vector<std::shared_ptr<Node>> variables)
 {

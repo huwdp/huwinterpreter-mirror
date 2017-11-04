@@ -21,7 +21,7 @@ Random::Random(std::shared_ptr<Passable> passable)
     name = "random";
 }
 
-std::shared_ptr<Variable> Random::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> Random::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                       std::shared_ptr<Scope> scope,
                                       std::vector<std::shared_ptr<Node>> variables)
 {

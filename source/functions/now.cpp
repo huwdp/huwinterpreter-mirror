@@ -21,7 +21,7 @@ Now::Now(std::shared_ptr<Passable> passable)
     name = "now";
 }
 
-std::shared_ptr<Variable> Now::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> Now::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)
 {

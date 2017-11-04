@@ -21,7 +21,7 @@ StrReverse::StrReverse(std::shared_ptr<Passable> passable)
     name = "strRev";
 }
 
-std::shared_ptr<Variable> StrReverse::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> StrReverse::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                           std::shared_ptr<Scope> scope,
                                           std::vector<std::shared_ptr<Node>> variables)
 {

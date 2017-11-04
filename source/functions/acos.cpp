@@ -21,7 +21,7 @@ Acos::Acos(std::shared_ptr<Passable> passable)
     name = "acos";
 }
 
-std::shared_ptr<Variable> Acos::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> Acos::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                     std::shared_ptr<Scope> scope,
                                     std::vector<std::shared_ptr<Node>> variables)
 {

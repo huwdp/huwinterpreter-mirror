@@ -21,7 +21,7 @@ ArrayUnset::ArrayUnset(std::shared_ptr<Passable> passable)
     name = "arrayUnset";
 }
 
-std::shared_ptr<Variable> ArrayUnset::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> ArrayUnset::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                               std::shared_ptr<Scope> scope,
                               std::vector<std::shared_ptr<Node>> variables)
 {

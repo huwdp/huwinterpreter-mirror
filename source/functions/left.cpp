@@ -21,7 +21,7 @@ Left::Left(std::shared_ptr<Passable> passable)
     name = "left";
 }
 
-std::shared_ptr<Variable> Left::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> Left::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                     std::shared_ptr<Scope> scope,
                                     std::vector<std::shared_ptr<Node>> variables)
 {

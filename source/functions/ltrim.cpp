@@ -21,7 +21,7 @@ LTrim::LTrim(std::shared_ptr<Passable> passable)
     name = "lTrim";
 }
 
-std::shared_ptr<Variable> LTrim::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> LTrim::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                      std::shared_ptr<Scope> scope,
                                      std::vector<std::shared_ptr<Node>> variables)
 {

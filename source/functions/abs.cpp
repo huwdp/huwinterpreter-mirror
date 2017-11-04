@@ -21,7 +21,7 @@ Abs::Abs(std::shared_ptr<Passable> passable)
     name = "abs";
 }
 
-std::shared_ptr<Variable> Abs::run(std::shared_ptr<Token> token,
+std::shared_ptr<Variable> Abs::execute(std::shared_ptr<Token> token,
                                    std::shared_ptr<Scope> globalScope,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)

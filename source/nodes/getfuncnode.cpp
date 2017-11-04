@@ -39,7 +39,7 @@ std::shared_ptr<Variable> GetFuncNode::execute(std::shared_ptr<Scope> globalScop
     std::shared_ptr<Function> func = functions->get(name);
     if (func != nullptr)
     {
-        return func->run(token, globalScope, scope, arguments);
+        return func->execute(token, globalScope, scope, arguments);
         return scope->getReturnValue();
     }
     return null;

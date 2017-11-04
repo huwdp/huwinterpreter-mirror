@@ -21,7 +21,7 @@ IsIntType::IsIntType(std::shared_ptr<Passable> passable)
     name = "isIntType";
 }
 
-std::shared_ptr<Variable> IsIntType::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> IsIntType::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                               std::shared_ptr<Scope> scope,
                               std::vector<std::shared_ptr<Node>> variables)
 {

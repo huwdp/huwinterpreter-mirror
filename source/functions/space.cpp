@@ -21,7 +21,7 @@ Space::Space(std::shared_ptr<Passable> passable)
     name = "space";
 }
 
-std::shared_ptr<Variable> Space::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> Space::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                      std::shared_ptr<Scope> scope,
                                      std::vector<std::shared_ptr<Node>> variables)
 {

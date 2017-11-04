@@ -21,7 +21,7 @@ Atan2::Atan2(std::shared_ptr<Passable> passable)
     name = "atan2";
 }
 
-std::shared_ptr<Variable> Atan2::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> Atan2::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                      std::shared_ptr<Scope> scope,
                                      std::vector<std::shared_ptr<Node>> variables)
 {

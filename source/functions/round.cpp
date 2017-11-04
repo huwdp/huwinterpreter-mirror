@@ -21,7 +21,7 @@ Round::Round(std::shared_ptr<Passable> passable)
     name = "round";
 }
 
-std::shared_ptr<Variable> Round::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> Round::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                      std::shared_ptr<Scope> scope,
                                      std::vector<std::shared_ptr<Node>> variables)
 {

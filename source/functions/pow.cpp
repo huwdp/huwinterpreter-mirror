@@ -21,7 +21,7 @@ Pow::Pow(std::shared_ptr<Passable> passable)
     name = "pow";
 }
 
-std::shared_ptr<Variable> Pow::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> Pow::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)
 {

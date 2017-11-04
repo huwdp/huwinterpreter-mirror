@@ -21,7 +21,7 @@ ToDouble::ToDouble(std::shared_ptr<Passable> passable)
     name = "toDouble";
 }
 
-std::shared_ptr<Variable> ToDouble::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> ToDouble::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                         std::shared_ptr<Scope> scope,
                                         std::vector<std::shared_ptr<Node>> variables)
 {

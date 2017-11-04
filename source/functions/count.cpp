@@ -21,7 +21,7 @@ Count::Count(std::shared_ptr<Passable> passable)
     name = "count";
 }
 
-std::shared_ptr<Variable> Count::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> Count::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                               std::shared_ptr<Scope> scope,
                               std::vector<std::shared_ptr<Node>> variables)
 {

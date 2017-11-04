@@ -21,7 +21,7 @@ Exp::Exp(std::shared_ptr<Passable> passable)
     name = "exp";
 }
 
-std::shared_ptr<Variable> Exp::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> Exp::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                    std::shared_ptr<Scope> scope,
                                    std::vector<std::shared_ptr<Node>> variables)
 {

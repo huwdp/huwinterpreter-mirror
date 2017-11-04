@@ -26,7 +26,7 @@ CustomFunction::CustomFunction(std::shared_ptr<Passable> passable,
     this->block = block;
 }
 
-std::shared_ptr<Variable> CustomFunction::run(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
+std::shared_ptr<Variable> CustomFunction::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
                                               std::shared_ptr<Scope> scope,
                                               std::vector<std::shared_ptr<Node>> variables)
 {
