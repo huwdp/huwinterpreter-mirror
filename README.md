@@ -1,4 +1,4 @@
-# HuwCode
+# HuwInterpreter
 HuwInterpreter is a hand written interpreter designed to parse and execute HuwCode script.
 ## Code Example
 ```
