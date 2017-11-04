@@ -1,7 +1,7 @@
 # Conversion functions
 ## Asc
 asc(character)
-Convert a character to an ASCII number. Asc function requires one arguments.
+Converts a character to an ASCII number. Asc function requires one arguments.
 ### Example
 ```
 asc("a") /* Answer is 97 */
