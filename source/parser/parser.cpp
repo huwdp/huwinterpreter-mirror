@@ -246,6 +246,11 @@ std::shared_ptr<Node> Parser::factor()
             nextToken();
             return nodeFactory->CreateUnaryNotNode(passable, currentToken, factor());
         }
+        else if (currentToken->getType() == BITWISECOMPLEMENT)
+        {
+            nextToken();
+            return nodeFactory->CreateBitwiseComplement(passable, currentToken, factor());
+        }
         return this->value();
     }
     return null;

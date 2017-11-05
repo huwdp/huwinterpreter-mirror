@@ -241,3 +241,9 @@ std::shared_ptr<Variable> HashTableVariable::bitwiseXOR(std::shared_ptr<Variable
     passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseXOR", "Cannot bitwsieXOR array type"));
     return null;
 }
+
+std::shared_ptr<Variable> HashTableVariable::bitwiseComplement()
+{
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseXOR", "Cannot bitwiseComplement array type"));
+    return null;
+}

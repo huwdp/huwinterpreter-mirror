@@ -344,6 +344,10 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                     AddToken(IFGREATER, lineInfo);
                 }
             }
+            else if (tokens->compare(fileReader->getCurrent()->getContent(), BITWISECOMPLEMENT))
+            {
+                AddToken(BITWISECOMPLEMENT, lineInfo);
+            }
             else if (tokens->compare(fileReader->getCurrent()->getContent(), SEMICOLON))
             {
                 AddToken(SEMICOLON, lineInfo);

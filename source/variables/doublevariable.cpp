@@ -295,4 +295,7 @@ std::shared_ptr<Variable> DoubleVariable::bitwiseXOR(std::shared_ptr<Variable> v
     return std::move(std::make_shared<NumberVariable>(passable, value));
 }
 
-
+std::shared_ptr<Variable> DoubleVariable::bitwiseComplement()
+{
+    return std::make_shared<NumberVariable>(passable, ~toInt());
+}

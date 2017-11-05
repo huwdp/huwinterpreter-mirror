@@ -33,6 +33,7 @@
 
 #include  "ifandnode.h"
 #include  "ifornode.h"
+#include "bitwisecomplementnode.h"
 #include  "bitwiseandnode.h"
 #include  "bitwiseornode.h"
 #include "bitwisexornode.h"
@@ -69,6 +70,7 @@ public:
     virtual std::shared_ptr<Node> CreateAddConstNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value) = 0;
     virtual std::shared_ptr<Node> CreateAddNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right) = 0;
     virtual std::shared_ptr<Node> CreateAddVarNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value) = 0;
+    virtual std::shared_ptr<Node> CreateBitwiseComplement(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> node) = 0;
     virtual std::shared_ptr<Node> CreateBitwiseAndNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right) = 0;
     virtual std::shared_ptr<Node> CreateBitwiseOrNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right) = 0;
     virtual std::shared_ptr<Node> CreateBitwiseXORNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right) = 0;

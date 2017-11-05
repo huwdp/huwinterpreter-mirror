@@ -31,6 +31,7 @@
 enum NodeType {ADDCONSTNODETYPE,
                ADDNODETYPE,
                ADDVARNODETYPE,
+               BITWISECOMPLEMENTNODETYPE,
                BITWISEANDNODETYPE,
                BITWISEORNODETYPE,
                BITWISEXORNODETYPE,

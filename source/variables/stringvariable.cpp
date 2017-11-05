@@ -429,3 +429,9 @@ std::shared_ptr<Variable> StringVariable::bitwiseXOR(std::shared_ptr<Variable> v
     passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseOr", "Cannot bitwiseXOR string type"));
     return null;
 }
+
+std::shared_ptr<Variable> StringVariable::bitwiseComplement()
+{
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseXOR", "Cannot bitwiseComplement string type"));
+    return null;
+}

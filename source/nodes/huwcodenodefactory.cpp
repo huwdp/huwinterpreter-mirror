@@ -41,6 +41,12 @@ std::shared_ptr<Node> HuwCodeNodeFactory::CreateAddVarNode(std::shared_ptr<Passa
     return std::make_shared<AddVarNode>(passable, token, name, value);
 }
 
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateBitwiseComplement(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token,
+                                                      std::shared_ptr<Node> node)
+{
+    return std::make_shared<BitwiseComplementNode>(passable, token, node);
+}
+
 std::shared_ptr<Node> HuwCodeNodeFactory::CreateBitwiseAndNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token,
                                                         std::shared_ptr<Node> left,
                                                         std::shared_ptr<Node> right)

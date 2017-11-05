@@ -163,7 +163,8 @@ SOURCES += \
     functions/regexsearch.cpp \
     functions/regexmatch.cpp \
     functions/regexreplace.cpp \
-    nodes/bitwisexornode.cpp
+    nodes/bitwisexornode.cpp \
+    nodes/bitwisecomplementnode.cpp
 
 
 
@@ -354,7 +355,8 @@ HEADERS += \
     functions/regexsearch.h \
     functions/regexmatch.h \
     functions/regexreplace.h \
-    nodes/bitwisexornode.h
+    nodes/bitwisexornode.h \
+    nodes/bitwisecomplementnode.h
 
 
 

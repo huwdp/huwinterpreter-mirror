@@ -279,3 +279,8 @@ std::shared_ptr<Variable> IntegerVariable::bitwiseXOR(std::shared_ptr<Variable> 
     long long value = this->value ^ variable->toInt();
     return std::move(std::make_shared<NumberVariable>(passable, value));
 }
+
+std::shared_ptr<Variable> IntegerVariable::bitwiseComplement()
+{
+    return std::make_shared<NumberVariable>(passable, ~toInt());
+}

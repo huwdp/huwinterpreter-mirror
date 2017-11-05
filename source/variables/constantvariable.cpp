@@ -299,3 +299,12 @@ std::shared_ptr<Variable> ConstantVariable::bitwiseXOR(std::shared_ptr<Variable>
     }
     return this->variable->bitwiseXOR(variable);
 }
+
+std::shared_ptr<Variable> ConstantVariable::bitwiseComplement()
+{
+    if (variable == null)
+    {
+        return null;
+    }
+    return variable->bitwiseComplement();
+}
