@@ -317,3 +317,11 @@ std::shared_ptr<Variable> NumberVariable::bitwiseOr(std::shared_ptr<Variable> va
     return this->variable->bitwiseOr(variable);
 }
 
+std::shared_ptr<Variable> NumberVariable::bitwiseXOR(std::shared_ptr<Variable> variable)
+{
+    if (variable == nullptr || this->variable == nullptr)
+    {
+        return null;
+    }
+    return this->variable->bitwiseXOR(variable);
+}

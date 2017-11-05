@@ -290,3 +290,12 @@ std::shared_ptr<Variable> ConstantVariable::bitwiseOr(std::shared_ptr<Variable> 
     }
     return this->variable->bitwiseOr(variable);
 }
+
+std::shared_ptr<Variable> ConstantVariable::bitwiseXOR(std::shared_ptr<Variable> variable)
+{
+    if (!isSet && this->variable == null && variable == nullptr)
+    {
+        return null;
+    }
+    return this->variable->bitwiseXOR(variable);
+}

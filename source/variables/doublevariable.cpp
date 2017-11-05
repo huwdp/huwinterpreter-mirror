@@ -285,4 +285,14 @@ std::shared_ptr<Variable> DoubleVariable::bitwiseOr(std::shared_ptr<Variable> va
     return std::move(std::make_shared<NumberVariable>(passable, value));
 }
 
+std::shared_ptr<Variable> DoubleVariable::bitwiseXOR(std::shared_ptr<Variable> variable)
+{
+    if (variable == nullptr)
+    {
+        return null;
+    }
+    long long value = (long long)((long long)this->value ^ variable->toInt());
+    return std::move(std::make_shared<NumberVariable>(passable, value));
+}
+
 

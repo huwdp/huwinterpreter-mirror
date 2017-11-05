@@ -56,6 +56,7 @@ void Tokens::init()
     types[DECREMENT] = "--";
     types[TABINDENTATION] = "\t";
     types[INDENTATION] = " ";
+    types[BITWISEXOR] = "^";
 }
 
 std::string Tokens::get(TokenType value)

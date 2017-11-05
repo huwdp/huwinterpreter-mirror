@@ -151,10 +151,7 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
             {
                 AddToken(SEMICOLON, lineInfo);
             }
-            else if (tokens->compare(fileReader->getCurrent()->getContent(), NOT))
-            {
-                AddToken(NOT, lineInfo);
-            }
+
             else if (fileReader->getCurrent()->getContent() == ' ' || fileReader->getCurrent()->getContent() == '\t')
             {
                 // Do nothing here as recording indentation is kinda pointless.
@@ -287,14 +284,26 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                     }
                 }
             }
+            if (tokens->compare(fileReader->getCurrent()->getContent(), BITWISEXOR))
+            {
+                AddToken(BITWISEXOR, lineInfo);
+            }
             else if (tokens->compare(fileReader->getCurrent()->getContent(), NOT))
             {
                 if (!fileReader->isEnd())
                 {
-                    if (tokens->compare(fileReader->getNext()->getContent(), EQUALS))
+                    if (tokens->compare(fileReader->peak()->getContent(), EQUALS))
                     {
                         AddToken(IFNOTEQUALS, lineInfo);
                     }
+                    else
+                    {
+                        AddToken(NOT, lineInfo);
+                    }
+                }
+                else
+                {
+                    AddToken(NOT, lineInfo);
                 }
             }
             else if (tokens->compare(fileReader->getCurrent()->getContent(), IFLESSTHAN))

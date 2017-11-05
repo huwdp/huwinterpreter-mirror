@@ -55,6 +55,13 @@ std::shared_ptr<Node> HuwCodeNodeFactory::CreateBitwiseOrNode(std::shared_ptr<Pa
     return std::make_shared<BitwiseOrNode>(passable, token, left, right);
 }
 
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateBitwiseXORNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token,
+                                                       std::shared_ptr<Node> left,
+                                                       std::shared_ptr<Node> right)
+{
+    return std::make_shared<BitwiseXORNode>(passable, token, left, right);
+}
+
 std::shared_ptr<Node> HuwCodeNodeFactory::CreateBracketNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token,
                                                      std::shared_ptr<Node> node)
 {

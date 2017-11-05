@@ -69,6 +69,7 @@ public:
     std::shared_ptr<Variable> copy();
     std::shared_ptr<Variable> bitwiseAnd(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> bitwiseOr(std::shared_ptr<Variable> variable);
+    std::shared_ptr<Variable> bitwiseXOR(std::shared_ptr<Variable> variable);
 };
 
 #endif // StringVariable

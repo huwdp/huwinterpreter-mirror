@@ -51,6 +51,7 @@ void UnusableTokens::init()
     items.push_back(OR);
     items.push_back(BITWISEAND);
     items.push_back(BITWISEOR);
+    items.push_back(BITWISEXOR);
     items.push_back(DOT);
     items.push_back(MULTIPLICATIONEQUAL);
     items.push_back(DIVISIONEQUAL);

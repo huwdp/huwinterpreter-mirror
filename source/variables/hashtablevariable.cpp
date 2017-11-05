@@ -235,3 +235,9 @@ std::shared_ptr<Variable> HashTableVariable::bitwiseOr(std::shared_ptr<Variable>
     passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseOr", ""));
     return null;
 }
+
+std::shared_ptr<Variable> HashTableVariable::bitwiseXOR(std::shared_ptr<Variable> variable)
+{
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseXOR", ""));
+    return null;
+}

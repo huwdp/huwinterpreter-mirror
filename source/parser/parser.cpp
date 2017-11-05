@@ -384,7 +384,8 @@ std::shared_ptr<Node> Parser::boolean()
                (type == AND ||
                type == OR ||
                type == BITWISEAND ||
-               type == BITWISEOR))
+               type == BITWISEOR ||
+               type == BITWISEXOR))
         {
             if (type == AND)
             {
@@ -409,6 +410,12 @@ std::shared_ptr<Node> Parser::boolean()
                 nextToken();
                 std::shared_ptr<Node> next = condition();
                 node = nodeFactory->CreateBitwiseOrNode(passable, currentToken, node, next);
+            }
+            else if (type == BITWISEXOR)
+            {
+                nextToken();
+                std::shared_ptr<Node> next = condition();
+                node = nodeFactory->CreateBitwiseXORNode(passable, currentToken, node, next);
             }
             type = currentToken->getType();
         }

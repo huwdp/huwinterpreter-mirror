@@ -162,7 +162,8 @@ SOURCES += \
     functions/fileexists.cpp \
     functions/regexsearch.cpp \
     functions/regexmatch.cpp \
-    functions/regexreplace.cpp
+    functions/regexreplace.cpp \
+    nodes/bitwisexornode.cpp
 
 
 
@@ -352,7 +353,8 @@ HEADERS += \
     functions/fileexists.h \
     functions/regexsearch.h \
     functions/regexmatch.h \
-    functions/regexreplace.h
+    functions/regexreplace.h \
+    nodes/bitwisexornode.h
 
 
 

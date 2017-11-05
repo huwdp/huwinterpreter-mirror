@@ -423,3 +423,9 @@ std::shared_ptr<Variable> StringVariable::bitwiseOr(std::shared_ptr<Variable> va
     passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseOr", "String is not an array"));
     return null;
 }
+
+std::shared_ptr<Variable> StringVariable::bitwiseXOR(std::shared_ptr<Variable> variable)
+{
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseOr", "String is not an array"));
+    return null;
+}
