@@ -414,18 +414,18 @@ std::shared_ptr<Variable> StringVariable::copy()
 
 std::shared_ptr<Variable> StringVariable::bitwiseAnd(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseAnd", "String is not an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseAnd", "Cannot bitwiseAND string type"));
     return null;
 }
 
 std::shared_ptr<Variable> StringVariable::bitwiseOr(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseOr", "String is not an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseOr", "Cannot bitwiseOR string type"));
     return null;
 }
 
 std::shared_ptr<Variable> StringVariable::bitwiseXOR(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseOr", "String is not an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseOr", "Cannot bitwiseXOR string type"));
     return null;
 }

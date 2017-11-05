@@ -226,18 +226,18 @@ std::shared_ptr<Variable> HashTableVariable::copy()
 
 std::shared_ptr<Variable> HashTableVariable::bitwiseAnd(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseAnd", ""));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseAnd", "Cannot bitwsieAND array type"));
     return null;
 }
 
 std::shared_ptr<Variable> HashTableVariable::bitwiseOr(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseOr", ""));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseOr", "Cannot bitwiseOR array type"));
     return null;
 }
 
 std::shared_ptr<Variable> HashTableVariable::bitwiseXOR(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseXOR", ""));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseXOR", "Cannot bitwsieXOR array type"));
     return null;
 }
