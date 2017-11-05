@@ -1235,6 +1235,7 @@ huwinterpreter.o: ../source/huwinterpreter.cpp ../source/huwinterpreter.h \
 		../source/nodes/decrementnode.h \
 		../source/nodes/semicolonnode.h \
 		../source/nodes/leftshiftnode.h \
+		../source/nodes/rightshiftnode.h \
 		../source/functions/customfunction.h \
 		../source/tokens/scanner.h \
 		../source/tokens/tokenmanager.h \
@@ -3451,6 +3452,7 @@ parser.o: ../source/parser/parser.cpp ../source/parser/parser.h \
 		../source/nodes/decrementnode.h \
 		../source/nodes/semicolonnode.h \
 		../source/nodes/leftshiftnode.h \
+		../source/nodes/rightshiftnode.h \
 		../source/functions/customfunction.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o parser.o ../source/parser/parser.cpp
 
@@ -3627,6 +3629,7 @@ main.o: ../source/main.cpp ../source/parser/parser.h \
 		../source/nodes/decrementnode.h \
 		../source/nodes/semicolonnode.h \
 		../source/nodes/leftshiftnode.h \
+		../source/nodes/rightshiftnode.h \
 		../source/functions/customfunction.h \
 		../source/tokens/scanner.h \
 		../source/tokens/tokenmanager.h \
@@ -4174,7 +4177,8 @@ huwcodenodefactory.o: ../source/nodes/huwcodenodefactory.cpp ../source/nodes/huw
 		../source/nodes/incrementnode.h \
 		../source/nodes/decrementnode.h \
 		../source/nodes/semicolonnode.h \
-		../source/nodes/leftshiftnode.h
+		../source/nodes/leftshiftnode.h \
+		../source/nodes/rightshiftnode.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o huwcodenodefactory.o ../source/nodes/huwcodenodefactory.cpp
 
 getvarnode.o: ../source/nodes/getvarnode.cpp ../source/nodes/getvarnode.h \
@@ -4790,6 +4794,7 @@ nodefactoryfactory.o: ../source/nodes/nodefactoryfactory.cpp ../source/nodes/nod
 		../source/nodes/decrementnode.h \
 		../source/nodes/semicolonnode.h \
 		../source/nodes/leftshiftnode.h \
+		../source/nodes/rightshiftnode.h \
 		../source/nodes/huwcodenodefactory.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o nodefactoryfactory.o ../source/nodes/nodefactoryfactory.cpp
 
