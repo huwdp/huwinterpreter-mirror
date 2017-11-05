@@ -310,14 +310,20 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
             {
                 if (!fileReader->isEnd())
                 {
-                    if (tokens->compare(fileReader->getNext()->getContent(), EQUALS))
+                    if (tokens->compare(fileReader->peak()->getContent(), EQUALS))
                     {
+                        fileReader->next();
                         AddToken(IFLESSTHANOREQUAL, lineInfo);
+                    }
+                    else if (tokens->compare(fileReader->peak()->getContent(), IFLESSTHAN))
+                    {
+                        fileReader->next();
+                        AddToken(LEFTSHIFT, lineInfo);
                     }
                     else
                     {
                         AddToken(IFLESSTHAN, lineInfo);
-                        fileReader->prev();
+
                     }
                 }
                 else

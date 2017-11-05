@@ -64,6 +64,8 @@
 
 #include "semicolonnode.h"
 
+#include "leftshiftnode.h"
+
 class NodeFactory
 {
 public:
@@ -102,6 +104,8 @@ public:
     virtual std::shared_ptr<Node> CreateUnaryMinusNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> node) = 0;
     virtual std::shared_ptr<Node> CreateUnaryNotNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> node) = 0;
     virtual std::shared_ptr<Node> CreateWhileNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> condition, std::shared_ptr<Node> body, std::shared_ptr<Node> next) = 0;
+
+    virtual std::shared_ptr<Node> CreateLeftShiftNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right) = 0;
 };
 
 #endif // NODEFACTORY_H

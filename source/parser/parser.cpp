@@ -297,18 +297,23 @@ std::shared_ptr<Node> Parser::expression()
         std::shared_ptr<Node> node = term();
         acceptIndentation();
         TokenType type = currentToken->getType();
-        while (!tokens.empty() && (type == ADDITION || type == SUBTRACTION))
+        while (!tokens.empty() && (type == ADDITION ||
+                                   type == SUBTRACTION ||
+                                   type == LEFTSHIFT))
         {
-            
             nextToken();
             acceptIndentation();
             if (type == ADDITION)
             {
                 node = nodeFactory->CreateAddNode(passable, currentToken, node, term());
             }
-            else
+            else if (type == SUBTRACTION)
             {
                 node = nodeFactory->CreateSubNode(passable, currentToken, node, term());
+            }
+            else if (type == LEFTSHIFT)
+            {
+                node = nodeFactory->CreateLeftShiftNode(passable, currentToken, node, term());
             }
             type = currentToken->getType();
         }

@@ -308,3 +308,12 @@ std::shared_ptr<Variable> ConstantVariable::bitwiseComplement()
     }
     return variable->bitwiseComplement();
 }
+
+std::shared_ptr<Variable> ConstantVariable::leftShift(std::shared_ptr<Variable> variable)
+{
+    if (variable == null)
+    {
+        return null;
+    }
+    return this->variable->leftShift(variable);
+}

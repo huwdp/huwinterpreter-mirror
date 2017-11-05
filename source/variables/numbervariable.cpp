@@ -334,3 +334,13 @@ std::shared_ptr<Variable> NumberVariable::bitwiseComplement()
     }
     return this->variable->bitwiseComplement();
 }
+
+std::shared_ptr<Variable> NumberVariable::leftShift(std::shared_ptr<Variable> variable)
+{
+    if (variable == null)
+    {
+        return null;
+    }
+    return this->variable->leftShift(variable);
+}
+

@@ -426,12 +426,18 @@ std::shared_ptr<Variable> StringVariable::bitwiseOr(std::shared_ptr<Variable> va
 
 std::shared_ptr<Variable> StringVariable::bitwiseXOR(std::shared_ptr<Variable> variable)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseOr", "Cannot bitwiseXOR string type"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseXOR", "Cannot bitwiseXOR string type"));
     return null;
 }
 
 std::shared_ptr<Variable> StringVariable::bitwiseComplement()
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseXOR", "Cannot bitwiseComplement string type"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseComplement", "Cannot bitwiseComplement string type"));
+    return null;
+}
+
+std::shared_ptr<Variable> StringVariable::leftShift(std::shared_ptr<Variable> variable)
+{
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "leftShift", "Cannot leftShift string type"));
     return null;
 }

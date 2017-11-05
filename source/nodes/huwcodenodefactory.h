@@ -57,6 +57,8 @@ public:
     std::shared_ptr<Node> CreateUnaryMinusNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> node);
     std::shared_ptr<Node> CreateUnaryNotNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> node);
     std::shared_ptr<Node> CreateWhileNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> condition, std::shared_ptr<Node> body, std::shared_ptr<Node> next);
+
+    std::shared_ptr<Node> CreateLeftShiftNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right);
 };
 
 #endif // HUWCODENODEFACTORY_H

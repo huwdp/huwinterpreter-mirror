@@ -299,3 +299,12 @@ std::shared_ptr<Variable> DoubleVariable::bitwiseComplement()
 {
     return std::make_shared<NumberVariable>(passable, ~toInt());
 }
+
+std::shared_ptr<Variable> DoubleVariable::leftShift(std::shared_ptr<Variable> variable)
+{
+    if (variable == null)
+    {
+        return null;
+    }
+    return std::make_shared<NumberVariable>(passable, toInt() << variable->toInt());
+}

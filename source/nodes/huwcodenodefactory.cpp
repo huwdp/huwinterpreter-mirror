@@ -257,4 +257,9 @@ std::shared_ptr<Node> HuwCodeNodeFactory::CreateWhileNode(std::shared_ptr<Passab
     return std::make_shared<WhileNode>(passable, token, std::move(condition), std::move(body), next);
 }
 
+std::shared_ptr<Node> HuwCodeNodeFactory::CreateLeftShiftNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+{
+    return std::make_shared<LeftShiftNode>(passable, token, left, right);
+}
+
 

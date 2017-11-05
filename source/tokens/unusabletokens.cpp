@@ -60,6 +60,7 @@ void UnusableTokens::init()
     items.push_back(INCREMENT);
     items.push_back(DECREMENT);
     items.push_back(BITWISECOMPLEMENT);
+    items.push_back(LEFTSHIFT);
 }
 
 bool UnusableTokens::tokenExists(TokenType tokenType)

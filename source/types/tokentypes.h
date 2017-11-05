@@ -53,7 +53,8 @@ enum TokenType {RIGHTPARENTHESIS,
                  SUBTRACTIONEQUAL,
                  INCREMENT,
                  DECREMENT,
-                 NOT
+                 NOT,
+                 LEFTSHIFT
 };
 
 
