@@ -294,3 +294,12 @@ std::shared_ptr<Variable> IntegerVariable::leftShift(std::shared_ptr<Variable> v
     return std::make_shared<NumberVariable>(passable, (long long)(value << variable->toInt()));
 }
 
+std::shared_ptr<Variable> IntegerVariable::rightShift(std::shared_ptr<Variable> variable)
+{
+    if (variable == null)
+    {
+        return null;
+    }
+    return std::make_shared<NumberVariable>(passable, (long long)(value >> variable->toInt()));
+}
+

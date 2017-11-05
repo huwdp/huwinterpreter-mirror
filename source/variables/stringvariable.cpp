@@ -441,3 +441,9 @@ std::shared_ptr<Variable> StringVariable::leftShift(std::shared_ptr<Variable> va
     passable->errors->add(passable->errorFactory->cannotCallFunction(name, "leftShift", "Cannot leftShift string type"));
     return null;
 }
+
+std::shared_ptr<Variable> StringVariable::rightShift(std::shared_ptr<Variable> variable)
+{
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "rightShift", "Cannot leftShift string type"));
+    return null;
+}

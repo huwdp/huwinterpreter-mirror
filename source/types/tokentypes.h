@@ -54,7 +54,8 @@ enum TokenType {RIGHTPARENTHESIS,
                  INCREMENT,
                  DECREMENT,
                  NOT,
-                 LEFTSHIFT
+                 LEFTSHIFT,
+                 RIGHTSHIFT
 };
 
 

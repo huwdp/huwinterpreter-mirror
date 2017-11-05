@@ -13,23 +13,23 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "leftshiftnode.h"
+#include "rightshiftnode.h"
 
-LeftShiftNode::LeftShiftNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : Node("LeftShiftNode", passable, token)
+RightShiftNode::RightShiftNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
+    : Node("RightShiftNode", passable, token)
 {
     this->left = left;
     this->right = right;
 }
 
-NodeType LeftShiftNode::getType()
+NodeType RightShiftNode::getType()
 {
-    return LEFTSHIFTNODETYPE;
+    return RIGHTSHIFTNODETYPE;
 }
 
-std::shared_ptr<Variable> LeftShiftNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
+std::shared_ptr<Variable> RightShiftNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
-    Debug::print("LeftShift");
+    Debug::print("RightShift");
     if (scope->getReturnValue() != nullptr)
     {
         return scope->getReturnValue();
@@ -48,18 +48,20 @@ std::shared_ptr<Variable> LeftShiftNode::execute(std::shared_ptr<Scope> globalSc
             passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
             return null;
         }
-        return l->leftShift(r);
+        return l->rightShift(r);
     }
-    Debug::print("Could not left shift");
+    Debug::print("Could not right shift");
     return null;
 }
 
-std::string LeftShiftNode::toString()
+std::string RightShiftNode::toString()
 {
     std::string output;
     if (left != nullptr && right != nullptr)
     {
-        output.append(left->toString()).append("<<").append(right->toString());
+        output.append(left->toString()).append(">>").append(right->toString());
     }
     return output;
 }
+
+

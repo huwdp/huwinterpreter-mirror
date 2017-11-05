@@ -308,3 +308,12 @@ std::shared_ptr<Variable> DoubleVariable::leftShift(std::shared_ptr<Variable> va
     }
     return std::make_shared<NumberVariable>(passable, toInt() << variable->toInt());
 }
+
+std::shared_ptr<Variable> DoubleVariable::rightShift(std::shared_ptr<Variable> variable)
+{
+    if (variable == null)
+    {
+        return null;
+    }
+    return std::make_shared<NumberVariable>(passable, toInt() >> variable->toInt());
+}

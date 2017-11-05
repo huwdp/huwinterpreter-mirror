@@ -72,6 +72,7 @@ public:
     std::shared_ptr<Variable> bitwiseXOR(std::shared_ptr<Variable> variable);
     std::shared_ptr<Variable> bitwiseComplement();
     std::shared_ptr<Variable> leftShift(std::shared_ptr<Variable> variable);
+    std::shared_ptr<Variable> rightShift(std::shared_ptr<Variable> variable);
 };
 
 #endif // StringVariable

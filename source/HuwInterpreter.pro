@@ -165,7 +165,8 @@ SOURCES += \
     functions/regexreplace.cpp \
     nodes/bitwisexornode.cpp \
     nodes/bitwisecomplementnode.cpp \
-    nodes/leftshiftnode.cpp
+    nodes/leftshiftnode.cpp \
+    nodes/rightshiftnode.cpp
 
 
 
@@ -358,7 +359,8 @@ HEADERS += \
     functions/regexreplace.h \
     nodes/bitwisexornode.h \
     nodes/bitwisecomplementnode.h \
-    nodes/leftshiftnode.h
+    nodes/leftshiftnode.h \
+    nodes/rightshiftnode.h
 
 
 

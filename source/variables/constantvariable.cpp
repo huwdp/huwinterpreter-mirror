@@ -317,3 +317,12 @@ std::shared_ptr<Variable> ConstantVariable::leftShift(std::shared_ptr<Variable> 
     }
     return this->variable->leftShift(variable);
 }
+
+std::shared_ptr<Variable> ConstantVariable::rightShift(std::shared_ptr<Variable> variable)
+{
+    if (variable == null)
+    {
+        return null;
+    }
+    return this->variable->rightShift(variable);
+}

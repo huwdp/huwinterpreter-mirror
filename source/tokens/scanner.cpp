@@ -335,14 +335,19 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
             {
                 if (!fileReader->isEnd())
                 {
-                    if (tokens->compare(fileReader->getNext()->getContent(), EQUALS))
+                    if (tokens->compare(fileReader->peak()->getContent(), EQUALS))
                     {
+                        fileReader->next();
                         AddToken(IFGREATERTHANOREQUAL, lineInfo);
+                    }
+                    else if (tokens->compare(fileReader->peak()->getContent(), IFGREATER))
+                    {
+                        fileReader->next();
+                        AddToken(RIGHTSHIFT, lineInfo);
                     }
                     else
                     {
                         AddToken(IFGREATER, lineInfo);
-                        fileReader->prev();
                     }
                 }
                 else

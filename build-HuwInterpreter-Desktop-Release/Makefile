@@ -190,7 +190,9 @@ SOURCES       = ../source/errors/debug.cpp \
 		../source/functions/regexmatch.cpp \
 		../source/functions/regexreplace.cpp \
 		../source/nodes/bitwisexornode.cpp \
-		../source/nodes/bitwisecomplement.cpp 
+		../source/nodes/bitwisecomplementnode.cpp \
+		../source/nodes/leftshiftnode.cpp \
+		../source/nodes/rightshiftnode.cpp 
 OBJECTS       = debug.o \
 		error.o \
 		errors.o \
@@ -331,7 +333,9 @@ OBJECTS       = debug.o \
 		regexmatch.o \
 		regexreplace.o \
 		bitwisexornode.o \
-		bitwisecomplement.o
+		bitwisecomplementnode.o \
+		leftshiftnode.o \
+		rightshiftnode.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -590,7 +594,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../source/functions/regexmatch.h \
 		../source/functions/regexreplace.h \
 		../source/nodes/bitwisexornode.h \
-		../source/nodes/bitwisecomplement.h ../source/errors/debug.cpp \
+		../source/nodes/bitwisecomplementnode.h \
+		../source/nodes/leftshiftnode.h \
+		../source/nodes/rightshiftnode.h ../source/errors/debug.cpp \
 		../source/errors/error.cpp \
 		../source/errors/errors.cpp \
 		../source/errors/errortypestringfactory.cpp \
@@ -730,7 +736,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../source/functions/regexmatch.cpp \
 		../source/functions/regexreplace.cpp \
 		../source/nodes/bitwisexornode.cpp \
-		../source/nodes/bitwisecomplement.cpp
+		../source/nodes/bitwisecomplementnode.cpp \
+		../source/nodes/leftshiftnode.cpp \
+		../source/nodes/rightshiftnode.cpp
 QMAKE_TARGET  = HuwInterpreter
 DESTDIR       = 
 TARGET        = HuwInterpreter
@@ -908,8 +916,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../source/errors/debug.h ../source/errors/error.h ../source/errors/errors.h ../source/errors/errortypes.h ../source/errors/errortypestringfactory.h ../source/errors/ierrors.h ../source/io/fileline.h ../source/io/io.h ../source/nodes/addnode.h ../source/nodes/bracketnode.h ../source/nodes/divnode.h ../source/nodes/equalnode.h ../source/nodes/getfuncnode.h ../source/nodes/getvarnode.h ../source/nodes/ifandnode.h ../source/nodes/ifequalnode.h ../source/nodes/ifnode.h ../source/nodes/ifnotequalnode.h ../source/nodes/ifornode.h ../source/nodes/ifovernode.h ../source/nodes/ifoverorequalnode.h ../source/nodes/ifundernode.h ../source/nodes/ifunderorequalnode.h ../source/nodes/modnode.h ../source/nodes/mulnode.h ../source/nodes/node.h ../source/nodes/numbernode.h ../source/nodes/runnode.h ../source/nodes/setvarnode.h ../source/nodes/subnode.h ../source/nodes/textnode.h ../source/nodes/whilenode.h ../source/parser/parser.h ../source/tokens/filetokenmanager.h ../source/tokens/lineinfo.h ../source/tokens/scanner.h ../source/tokens/texttokenmanager.h ../source/tokens/token.h ../source/tokens/tokenmanager.h ../source/types/isnumeric.h ../source/types/tokentypes.h ../source/types/typedetector.h ../source/variables/precision.h ../source/variables/scope.h ../source/variables/variable.h ../source/variables/variables.h ../source/variables/variabletypefactory.h ../source/huwinterpreter.h ../source/nodes/setreturnnode.h ../source/nodes/incrementnode.h ../source/nodes/decrementnode.h ../source/variables/doublevariable.h ../source/variables/hashtablevariable.h ../source/variables/stringvariable.h ../source/variables/numbervariable.h ../source/variables/integervariable.h ../source/functions/arrayget.h ../source/functions/array.h ../source/variables/constantvariable.h ../source/tokens/tokenmanager.h ../source/tokens/unusabletokens.h ../source/nodes/unaryminusnode.h ../source/nodes/unarynotnode.h ../source/tokens/tokens.h ../source/nodes/bitwiseandnode.h ../source/nodes/bitwiseornode.h ../source/functions/isdoubletype.h ../source/functions/isinttype.h ../source/functions/isnumbertype.h ../source/functions/isint.h ../source/functions/isdouble.h ../source/functions/isnumber.h ../source/nodes/addconstnode.h ../source/nodes/addvarnode.h ../source/nodes/huwcodenodefactory.h ../source/nodes/nodefactory.h ../source/functions/abs.h ../source/functions/acos.h ../source/functions/arrayset.h ../source/functions/arrayunset.h ../source/functions/asc.h ../source/functions/asin.h ../source/functions/atan.h ../source/functions/atan2.h ../source/functions/ceil.h ../source/functions/cha.h ../source/functions/command.h ../source/functions/cos.h ../source/functions/count.h ../source/functions/customfunction.h ../source/functions/dateformat.h ../source/functions/emptyfunction.h ../source/functions/exp.h ../source/functions/fileread.h ../source/functions/filewrite.h ../source/functions/floor.h ../source/functions/function.h ../source/functions/functionlist.h ../source/functions/functions.h ../source/functions/instr.h ../source/functions/instrrev.h ../source/functions/isarraytype.h ../source/functions/isstringtype.h ../source/functions/left.h ../source/functions/len.h ../source/functions/log.h ../source/functions/ltrim.h ../source/functions/max.h ../source/functions/mid.h ../source/functions/min.h ../source/functions/month.h ../source/functions/monthname.h ../source/functions/not.h ../source/functions/now.h ../source/functions/pow.h ../source/functions/print.h ../source/functions/random.h ../source/functions/replace.h ../source/functions/right.h ../source/functions/round.h ../source/functions/rtrim.h ../source/functions/scan.h ../source/functions/sin.h ../source/functions/space.h ../source/functions/sqrt.h ../source/functions/str.h ../source/functions/strcomp.h ../source/functions/strreverse.h ../source/functions/tan.h ../source/functions/todouble.h ../source/functions/toint.h ../source/functions/tolower.h ../source/functions/tostring.h ../source/functions/toupper.h ../source/functions/trim.h ../source/functions/weekday.h ../source/functions/weekdayname.h ../source/functions/year.h ../source/nodes/addconstnode.h ../source/nodes/addnode.h ../source/nodes/addvarnode.h ../source/nodes/bitwiseandnode.h ../source/nodes/bitwiseornode.h ../source/nodes/bracketnode.h ../source/nodes/decrementnode.h ../source/nodes/divnode.h ../source/nodes/equalnode.h ../source/nodes/getfuncnode.h ../source/nodes/getvarnode.h ../source/nodes/huwcodenodefactory.h ../source/nodes/ifandnode.h ../source/nodes/ifequalnode.h ../source/nodes/ifnode.h ../source/nodes/ifnotequalnode.h ../source/nodes/ifornode.h ../source/nodes/ifovernode.h ../source/nodes/ifoverorequalnode.h ../source/nodes/ifundernode.h ../source/nodes/ifunderorequalnode.h ../source/nodes/incrementnode.h ../source/nodes/modnode.h ../source/nodes/mulnode.h ../source/nodes/node.h ../source/nodes/nodefactory.h ../source/nodes/numbernode.h ../source/nodes/runnode.h ../source/nodes/setreturnnode.h ../source/nodes/setvarnode.h ../source/nodes/subnode.h ../source/nodes/textnode.h ../source/nodes/unaryminusnode.h ../source/nodes/unarynotnode.h ../source/nodes/whilenode.h ../source/parser/parser.h ../source/types/isnumeric.h ../source/types/tokentypes.h ../source/nodes/nodefactoryfactory.h ../source/nodes/semicolonnode.h ../source/format/escapecharacteroutput.h ../source/common/passable.h ../source/errors/errorfactory.h ../source/functions/fileexists.h ../source/functions/regexsearch.h ../source/functions/regexmatch.h ../source/functions/regexreplace.h ../source/nodes/bitwisexornode.h ../source/nodes/bitwisecomplement.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../source/errors/debug.cpp ../source/errors/error.cpp ../source/errors/errors.cpp ../source/errors/errortypestringfactory.cpp ../source/io/fileline.cpp ../source/io/io.cpp ../source/types/typedetector.cpp ../source/variables/precision.cpp ../source/variables/scope.cpp ../source/variables/variable.cpp ../source/variables/variables.cpp ../source/variables/variabletypefactory.cpp ../source/huwinterpreter.cpp ../source/functions/customfunction.cpp ../source/functions/emptyfunction.cpp ../source/variables/doublevariable.cpp ../source/variables/integervariable.cpp ../source/variables/numbervariable.cpp ../source/variables/stringvariable.cpp ../source/variables/hashtablevariable.cpp ../source/functions/arrayget.cpp ../source/functions/arrayset.cpp ../source/functions/array.cpp ../source/functions/arrayunset.cpp ../source/functions/count.cpp ../source/variables/constantvariable.cpp ../source/tokens/unusabletokens.cpp ../source/functions/isarraytype.cpp ../source/functions/isdoubletype.cpp ../source/functions/isnumbertype.cpp ../source/functions/isinttype.cpp ../source/functions/isstringtype.cpp ../source/functions/isint.cpp ../source/functions/isdouble.cpp ../source/functions/todouble.cpp ../source/functions/toint.cpp ../source/functions/abs.cpp ../source/functions/acos.cpp ../source/functions/asc.cpp ../source/functions/asin.cpp ../source/functions/atan.cpp ../source/functions/atan2.cpp ../source/functions/ceil.cpp ../source/functions/cha.cpp ../source/functions/command.cpp ../source/functions/cos.cpp ../source/functions/dateformat.cpp ../source/functions/exp.cpp ../source/functions/fileread.cpp ../source/functions/filewrite.cpp ../source/functions/floor.cpp ../source/functions/function.cpp ../source/functions/functions.cpp ../source/functions/instr.cpp ../source/functions/instrrev.cpp ../source/functions/isnumber.cpp ../source/functions/left.cpp ../source/functions/len.cpp ../source/functions/log.cpp ../source/functions/ltrim.cpp ../source/functions/max.cpp ../source/functions/mid.cpp ../source/functions/min.cpp ../source/functions/month.cpp ../source/functions/monthname.cpp ../source/functions/not.cpp ../source/functions/now.cpp ../source/functions/pow.cpp ../source/functions/print.cpp ../source/functions/random.cpp ../source/functions/replace.cpp ../source/functions/right.cpp ../source/functions/round.cpp ../source/functions/rtrim.cpp ../source/functions/scan.cpp ../source/functions/sin.cpp ../source/functions/space.cpp ../source/functions/sqrt.cpp ../source/functions/str.cpp ../source/functions/strcomp.cpp ../source/functions/strreverse.cpp ../source/functions/tan.cpp ../source/functions/tolower.cpp ../source/functions/tostring.cpp ../source/functions/toupper.cpp ../source/functions/trim.cpp ../source/functions/weekday.cpp ../source/functions/weekdayname.cpp ../source/functions/year.cpp ../source/parser/parser.cpp ../source/tokens/filetokenmanager.cpp ../source/tokens/lineinfo.cpp ../source/tokens/scanner.cpp ../source/tokens/texttokenmanager.cpp ../source/tokens/token.cpp ../source/tokens/tokens.cpp ../source/main.cpp ../source/nodes/addconstnode.cpp ../source/nodes/addnode.cpp ../source/nodes/addvarnode.cpp ../source/nodes/bitwiseandnode.cpp ../source/nodes/bitwiseornode.cpp ../source/nodes/getfuncnode.cpp ../source/nodes/equalnode.cpp ../source/nodes/divnode.cpp ../source/nodes/decrementnode.cpp ../source/nodes/bracketnode.cpp ../source/nodes/ifequalnode.cpp ../source/nodes/ifnode.cpp ../source/nodes/ifandnode.cpp ../source/nodes/huwcodenodefactory.cpp ../source/nodes/getvarnode.cpp ../source/nodes/ifnotequalnode.cpp ../source/nodes/ifornode.cpp ../source/nodes/ifovernode.cpp ../source/nodes/ifoverorequalnode.cpp ../source/nodes/ifundernode.cpp ../source/nodes/ifunderorequalnode.cpp ../source/nodes/numbernode.cpp ../source/nodes/mulnode.cpp ../source/nodes/modnode.cpp ../source/nodes/incrementnode.cpp ../source/nodes/runnode.cpp ../source/nodes/setreturnnode.cpp ../source/nodes/setvarnode.cpp ../source/nodes/subnode.cpp ../source/nodes/textnode.cpp ../source/nodes/unaryminusnode.cpp ../source/nodes/whilenode.cpp ../source/nodes/unarynotnode.cpp ../source/nodes/nodefactoryfactory.cpp ../source/nodes/semicolonnode.cpp ../source/format/escapecharacteroutput.cpp ../source/common/passable.cpp ../source/errors/errorfactory.cpp ../source/functions/fileexists.cpp ../source/functions/regexsearch.cpp ../source/functions/regexmatch.cpp ../source/functions/regexreplace.cpp ../source/nodes/bitwisexornode.cpp ../source/nodes/bitwisecomplement.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../source/errors/debug.h ../source/errors/error.h ../source/errors/errors.h ../source/errors/errortypes.h ../source/errors/errortypestringfactory.h ../source/errors/ierrors.h ../source/io/fileline.h ../source/io/io.h ../source/nodes/addnode.h ../source/nodes/bracketnode.h ../source/nodes/divnode.h ../source/nodes/equalnode.h ../source/nodes/getfuncnode.h ../source/nodes/getvarnode.h ../source/nodes/ifandnode.h ../source/nodes/ifequalnode.h ../source/nodes/ifnode.h ../source/nodes/ifnotequalnode.h ../source/nodes/ifornode.h ../source/nodes/ifovernode.h ../source/nodes/ifoverorequalnode.h ../source/nodes/ifundernode.h ../source/nodes/ifunderorequalnode.h ../source/nodes/modnode.h ../source/nodes/mulnode.h ../source/nodes/node.h ../source/nodes/numbernode.h ../source/nodes/runnode.h ../source/nodes/setvarnode.h ../source/nodes/subnode.h ../source/nodes/textnode.h ../source/nodes/whilenode.h ../source/parser/parser.h ../source/tokens/filetokenmanager.h ../source/tokens/lineinfo.h ../source/tokens/scanner.h ../source/tokens/texttokenmanager.h ../source/tokens/token.h ../source/tokens/tokenmanager.h ../source/types/isnumeric.h ../source/types/tokentypes.h ../source/types/typedetector.h ../source/variables/precision.h ../source/variables/scope.h ../source/variables/variable.h ../source/variables/variables.h ../source/variables/variabletypefactory.h ../source/huwinterpreter.h ../source/nodes/setreturnnode.h ../source/nodes/incrementnode.h ../source/nodes/decrementnode.h ../source/variables/doublevariable.h ../source/variables/hashtablevariable.h ../source/variables/stringvariable.h ../source/variables/numbervariable.h ../source/variables/integervariable.h ../source/functions/arrayget.h ../source/functions/array.h ../source/variables/constantvariable.h ../source/tokens/tokenmanager.h ../source/tokens/unusabletokens.h ../source/nodes/unaryminusnode.h ../source/nodes/unarynotnode.h ../source/tokens/tokens.h ../source/nodes/bitwiseandnode.h ../source/nodes/bitwiseornode.h ../source/functions/isdoubletype.h ../source/functions/isinttype.h ../source/functions/isnumbertype.h ../source/functions/isint.h ../source/functions/isdouble.h ../source/functions/isnumber.h ../source/nodes/addconstnode.h ../source/nodes/addvarnode.h ../source/nodes/huwcodenodefactory.h ../source/nodes/nodefactory.h ../source/functions/abs.h ../source/functions/acos.h ../source/functions/arrayset.h ../source/functions/arrayunset.h ../source/functions/asc.h ../source/functions/asin.h ../source/functions/atan.h ../source/functions/atan2.h ../source/functions/ceil.h ../source/functions/cha.h ../source/functions/command.h ../source/functions/cos.h ../source/functions/count.h ../source/functions/customfunction.h ../source/functions/dateformat.h ../source/functions/emptyfunction.h ../source/functions/exp.h ../source/functions/fileread.h ../source/functions/filewrite.h ../source/functions/floor.h ../source/functions/function.h ../source/functions/functionlist.h ../source/functions/functions.h ../source/functions/instr.h ../source/functions/instrrev.h ../source/functions/isarraytype.h ../source/functions/isstringtype.h ../source/functions/left.h ../source/functions/len.h ../source/functions/log.h ../source/functions/ltrim.h ../source/functions/max.h ../source/functions/mid.h ../source/functions/min.h ../source/functions/month.h ../source/functions/monthname.h ../source/functions/not.h ../source/functions/now.h ../source/functions/pow.h ../source/functions/print.h ../source/functions/random.h ../source/functions/replace.h ../source/functions/right.h ../source/functions/round.h ../source/functions/rtrim.h ../source/functions/scan.h ../source/functions/sin.h ../source/functions/space.h ../source/functions/sqrt.h ../source/functions/str.h ../source/functions/strcomp.h ../source/functions/strreverse.h ../source/functions/tan.h ../source/functions/todouble.h ../source/functions/toint.h ../source/functions/tolower.h ../source/functions/tostring.h ../source/functions/toupper.h ../source/functions/trim.h ../source/functions/weekday.h ../source/functions/weekdayname.h ../source/functions/year.h ../source/nodes/addconstnode.h ../source/nodes/addnode.h ../source/nodes/addvarnode.h ../source/nodes/bitwiseandnode.h ../source/nodes/bitwiseornode.h ../source/nodes/bracketnode.h ../source/nodes/decrementnode.h ../source/nodes/divnode.h ../source/nodes/equalnode.h ../source/nodes/getfuncnode.h ../source/nodes/getvarnode.h ../source/nodes/huwcodenodefactory.h ../source/nodes/ifandnode.h ../source/nodes/ifequalnode.h ../source/nodes/ifnode.h ../source/nodes/ifnotequalnode.h ../source/nodes/ifornode.h ../source/nodes/ifovernode.h ../source/nodes/ifoverorequalnode.h ../source/nodes/ifundernode.h ../source/nodes/ifunderorequalnode.h ../source/nodes/incrementnode.h ../source/nodes/modnode.h ../source/nodes/mulnode.h ../source/nodes/node.h ../source/nodes/nodefactory.h ../source/nodes/numbernode.h ../source/nodes/runnode.h ../source/nodes/setreturnnode.h ../source/nodes/setvarnode.h ../source/nodes/subnode.h ../source/nodes/textnode.h ../source/nodes/unaryminusnode.h ../source/nodes/unarynotnode.h ../source/nodes/whilenode.h ../source/parser/parser.h ../source/types/isnumeric.h ../source/types/tokentypes.h ../source/nodes/nodefactoryfactory.h ../source/nodes/semicolonnode.h ../source/format/escapecharacteroutput.h ../source/common/passable.h ../source/errors/errorfactory.h ../source/functions/fileexists.h ../source/functions/regexsearch.h ../source/functions/regexmatch.h ../source/functions/regexreplace.h ../source/nodes/bitwisexornode.h ../source/nodes/bitwisecomplementnode.h ../source/nodes/leftshiftnode.h ../source/nodes/rightshiftnode.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../source/errors/debug.cpp ../source/errors/error.cpp ../source/errors/errors.cpp ../source/errors/errortypestringfactory.cpp ../source/io/fileline.cpp ../source/io/io.cpp ../source/types/typedetector.cpp ../source/variables/precision.cpp ../source/variables/scope.cpp ../source/variables/variable.cpp ../source/variables/variables.cpp ../source/variables/variabletypefactory.cpp ../source/huwinterpreter.cpp ../source/functions/customfunction.cpp ../source/functions/emptyfunction.cpp ../source/variables/doublevariable.cpp ../source/variables/integervariable.cpp ../source/variables/numbervariable.cpp ../source/variables/stringvariable.cpp ../source/variables/hashtablevariable.cpp ../source/functions/arrayget.cpp ../source/functions/arrayset.cpp ../source/functions/array.cpp ../source/functions/arrayunset.cpp ../source/functions/count.cpp ../source/variables/constantvariable.cpp ../source/tokens/unusabletokens.cpp ../source/functions/isarraytype.cpp ../source/functions/isdoubletype.cpp ../source/functions/isnumbertype.cpp ../source/functions/isinttype.cpp ../source/functions/isstringtype.cpp ../source/functions/isint.cpp ../source/functions/isdouble.cpp ../source/functions/todouble.cpp ../source/functions/toint.cpp ../source/functions/abs.cpp ../source/functions/acos.cpp ../source/functions/asc.cpp ../source/functions/asin.cpp ../source/functions/atan.cpp ../source/functions/atan2.cpp ../source/functions/ceil.cpp ../source/functions/cha.cpp ../source/functions/command.cpp ../source/functions/cos.cpp ../source/functions/dateformat.cpp ../source/functions/exp.cpp ../source/functions/fileread.cpp ../source/functions/filewrite.cpp ../source/functions/floor.cpp ../source/functions/function.cpp ../source/functions/functions.cpp ../source/functions/instr.cpp ../source/functions/instrrev.cpp ../source/functions/isnumber.cpp ../source/functions/left.cpp ../source/functions/len.cpp ../source/functions/log.cpp ../source/functions/ltrim.cpp ../source/functions/max.cpp ../source/functions/mid.cpp ../source/functions/min.cpp ../source/functions/month.cpp ../source/functions/monthname.cpp ../source/functions/not.cpp ../source/functions/now.cpp ../source/functions/pow.cpp ../source/functions/print.cpp ../source/functions/random.cpp ../source/functions/replace.cpp ../source/functions/right.cpp ../source/functions/round.cpp ../source/functions/rtrim.cpp ../source/functions/scan.cpp ../source/functions/sin.cpp ../source/functions/space.cpp ../source/functions/sqrt.cpp ../source/functions/str.cpp ../source/functions/strcomp.cpp ../source/functions/strreverse.cpp ../source/functions/tan.cpp ../source/functions/tolower.cpp ../source/functions/tostring.cpp ../source/functions/toupper.cpp ../source/functions/trim.cpp ../source/functions/weekday.cpp ../source/functions/weekdayname.cpp ../source/functions/year.cpp ../source/parser/parser.cpp ../source/tokens/filetokenmanager.cpp ../source/tokens/lineinfo.cpp ../source/tokens/scanner.cpp ../source/tokens/texttokenmanager.cpp ../source/tokens/token.cpp ../source/tokens/tokens.cpp ../source/main.cpp ../source/nodes/addconstnode.cpp ../source/nodes/addnode.cpp ../source/nodes/addvarnode.cpp ../source/nodes/bitwiseandnode.cpp ../source/nodes/bitwiseornode.cpp ../source/nodes/getfuncnode.cpp ../source/nodes/equalnode.cpp ../source/nodes/divnode.cpp ../source/nodes/decrementnode.cpp ../source/nodes/bracketnode.cpp ../source/nodes/ifequalnode.cpp ../source/nodes/ifnode.cpp ../source/nodes/ifandnode.cpp ../source/nodes/huwcodenodefactory.cpp ../source/nodes/getvarnode.cpp ../source/nodes/ifnotequalnode.cpp ../source/nodes/ifornode.cpp ../source/nodes/ifovernode.cpp ../source/nodes/ifoverorequalnode.cpp ../source/nodes/ifundernode.cpp ../source/nodes/ifunderorequalnode.cpp ../source/nodes/numbernode.cpp ../source/nodes/mulnode.cpp ../source/nodes/modnode.cpp ../source/nodes/incrementnode.cpp ../source/nodes/runnode.cpp ../source/nodes/setreturnnode.cpp ../source/nodes/setvarnode.cpp ../source/nodes/subnode.cpp ../source/nodes/textnode.cpp ../source/nodes/unaryminusnode.cpp ../source/nodes/whilenode.cpp ../source/nodes/unarynotnode.cpp ../source/nodes/nodefactoryfactory.cpp ../source/nodes/semicolonnode.cpp ../source/format/escapecharacteroutput.cpp ../source/common/passable.cpp ../source/errors/errorfactory.cpp ../source/functions/fileexists.cpp ../source/functions/regexsearch.cpp ../source/functions/regexmatch.cpp ../source/functions/regexreplace.cpp ../source/nodes/bitwisexornode.cpp ../source/nodes/bitwisecomplementnode.cpp ../source/nodes/leftshiftnode.cpp ../source/nodes/rightshiftnode.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -1124,7 +1132,7 @@ huwinterpreter.o: ../source/huwinterpreter.cpp ../source/huwinterpreter.h \
 		../source/nodes/whilenode.h \
 		../source/nodes/ifandnode.h \
 		../source/nodes/ifornode.h \
-		../source/nodes/bitwisecomplement.h \
+		../source/nodes/bitwisecomplementnode.h \
 		../source/nodes/bitwiseandnode.h \
 		../source/nodes/bitwiseornode.h \
 		../source/nodes/bitwisexornode.h \
@@ -1223,6 +1231,8 @@ huwinterpreter.o: ../source/huwinterpreter.cpp ../source/huwinterpreter.h \
 		../source/nodes/incrementnode.h \
 		../source/nodes/decrementnode.h \
 		../source/nodes/semicolonnode.h \
+		../source/nodes/leftshiftnode.h \
+		../source/nodes/rightshiftnode.h \
 		../source/functions/customfunction.h \
 		../source/tokens/scanner.h \
 		../source/tokens/tokenmanager.h \
@@ -3339,7 +3349,7 @@ parser.o: ../source/parser/parser.cpp ../source/parser/parser.h \
 		../source/nodes/whilenode.h \
 		../source/nodes/ifandnode.h \
 		../source/nodes/ifornode.h \
-		../source/nodes/bitwisecomplement.h \
+		../source/nodes/bitwisecomplementnode.h \
 		../source/nodes/bitwiseandnode.h \
 		../source/nodes/bitwiseornode.h \
 		../source/nodes/bitwisexornode.h \
@@ -3438,6 +3448,8 @@ parser.o: ../source/parser/parser.cpp ../source/parser/parser.h \
 		../source/nodes/incrementnode.h \
 		../source/nodes/decrementnode.h \
 		../source/nodes/semicolonnode.h \
+		../source/nodes/leftshiftnode.h \
+		../source/nodes/rightshiftnode.h \
 		../source/functions/customfunction.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o parser.o ../source/parser/parser.cpp
 
@@ -3514,7 +3526,7 @@ main.o: ../source/main.cpp ../source/parser/parser.h \
 		../source/nodes/whilenode.h \
 		../source/nodes/ifandnode.h \
 		../source/nodes/ifornode.h \
-		../source/nodes/bitwisecomplement.h \
+		../source/nodes/bitwisecomplementnode.h \
 		../source/nodes/bitwiseandnode.h \
 		../source/nodes/bitwiseornode.h \
 		../source/nodes/bitwisexornode.h \
@@ -3613,6 +3625,8 @@ main.o: ../source/main.cpp ../source/parser/parser.h \
 		../source/nodes/incrementnode.h \
 		../source/nodes/decrementnode.h \
 		../source/nodes/semicolonnode.h \
+		../source/nodes/leftshiftnode.h \
+		../source/nodes/rightshiftnode.h \
 		../source/functions/customfunction.h \
 		../source/tokens/scanner.h \
 		../source/tokens/tokenmanager.h \
@@ -4061,7 +4075,7 @@ huwcodenodefactory.o: ../source/nodes/huwcodenodefactory.cpp ../source/nodes/huw
 		../source/nodes/whilenode.h \
 		../source/nodes/ifandnode.h \
 		../source/nodes/ifornode.h \
-		../source/nodes/bitwisecomplement.h \
+		../source/nodes/bitwisecomplementnode.h \
 		../source/nodes/bitwiseandnode.h \
 		../source/nodes/bitwiseornode.h \
 		../source/nodes/bitwisexornode.h \
@@ -4159,7 +4173,9 @@ huwcodenodefactory.o: ../source/nodes/huwcodenodefactory.cpp ../source/nodes/huw
 		../source/nodes/bracketnode.h \
 		../source/nodes/incrementnode.h \
 		../source/nodes/decrementnode.h \
-		../source/nodes/semicolonnode.h
+		../source/nodes/semicolonnode.h \
+		../source/nodes/leftshiftnode.h \
+		../source/nodes/rightshiftnode.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o huwcodenodefactory.o ../source/nodes/huwcodenodefactory.cpp
 
 getvarnode.o: ../source/nodes/getvarnode.cpp ../source/nodes/getvarnode.h \
@@ -4675,7 +4691,7 @@ nodefactoryfactory.o: ../source/nodes/nodefactoryfactory.cpp ../source/nodes/nod
 		../source/nodes/whilenode.h \
 		../source/nodes/ifandnode.h \
 		../source/nodes/ifornode.h \
-		../source/nodes/bitwisecomplement.h \
+		../source/nodes/bitwisecomplementnode.h \
 		../source/nodes/bitwiseandnode.h \
 		../source/nodes/bitwiseornode.h \
 		../source/nodes/bitwisexornode.h \
@@ -4774,6 +4790,8 @@ nodefactoryfactory.o: ../source/nodes/nodefactoryfactory.cpp ../source/nodes/nod
 		../source/nodes/incrementnode.h \
 		../source/nodes/decrementnode.h \
 		../source/nodes/semicolonnode.h \
+		../source/nodes/leftshiftnode.h \
+		../source/nodes/rightshiftnode.h \
 		../source/nodes/huwcodenodefactory.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o nodefactoryfactory.o ../source/nodes/nodefactoryfactory.cpp
 
@@ -4960,7 +4978,7 @@ bitwisexornode.o: ../source/nodes/bitwisexornode.cpp ../source/nodes/bitwisexorn
 		../source/variables/scope.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bitwisexornode.o ../source/nodes/bitwisexornode.cpp
 
-bitwisecomplement.o: ../source/nodes/bitwisecomplement.cpp ../source/nodes/bitwisecomplement.h \
+bitwisecomplementnode.o: ../source/nodes/bitwisecomplementnode.cpp ../source/nodes/bitwisecomplementnode.h \
 		../source/nodes/node.h \
 		../source/errors/debug.h \
 		../source/errors/errors.h \
@@ -4983,7 +5001,57 @@ bitwisecomplement.o: ../source/nodes/bitwisecomplement.cpp ../source/nodes/bitwi
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bitwisecomplement.o ../source/nodes/bitwisecomplement.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bitwisecomplementnode.o ../source/nodes/bitwisecomplementnode.cpp
+
+leftshiftnode.o: ../source/nodes/leftshiftnode.cpp ../source/nodes/leftshiftnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/common/passable.h \
+		../source/errors/errorfactory.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o leftshiftnode.o ../source/nodes/leftshiftnode.cpp
+
+rightshiftnode.o: ../source/nodes/rightshiftnode.cpp ../source/nodes/rightshiftnode.h \
+		../source/nodes/node.h \
+		../source/errors/debug.h \
+		../source/errors/errors.h \
+		../source/errors/error.h \
+		../source/tokens/token.h \
+		../source/types/tokentypes.h \
+		../source/tokens/lineinfo.h \
+		../source/errors/errortypes.h \
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variables.h \
+		../source/variables/variable.h \
+		../source/types/typedetector.h \
+		../source/common/passable.h \
+		../source/errors/errorfactory.h \
+		../source/variables/doublevariable.h \
+		../source/variables/numbervariable.h \
+		../source/variables/integervariable.h \
+		../source/variables/variabletypefactory.h \
+		../source/variables/stringvariable.h \
+		../source/variables/precision.h \
+		../source/variables/constantvariable.h \
+		../source/variables/scope.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rightshiftnode.o ../source/nodes/rightshiftnode.cpp
 
 ####### Install
 

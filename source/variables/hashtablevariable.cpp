@@ -254,3 +254,8 @@ std::shared_ptr<Variable> HashTableVariable::leftShift(std::shared_ptr<Variable>
     return null;
 }
 
+std::shared_ptr<Variable> HashTableVariable::rightShift(std::shared_ptr<Variable> variable)
+{
+    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "rightShift", "Cannot rightShift array type"));
+    return null;
+}

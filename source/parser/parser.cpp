@@ -299,7 +299,8 @@ std::shared_ptr<Node> Parser::expression()
         TokenType type = currentToken->getType();
         while (!tokens.empty() && (type == ADDITION ||
                                    type == SUBTRACTION ||
-                                   type == LEFTSHIFT))
+                                   type == LEFTSHIFT ||
+                                   type == RIGHTSHIFT))
         {
             nextToken();
             acceptIndentation();
@@ -314,6 +315,10 @@ std::shared_ptr<Node> Parser::expression()
             else if (type == LEFTSHIFT)
             {
                 node = nodeFactory->CreateLeftShiftNode(passable, currentToken, node, term());
+            }
+            else if (type == RIGHTSHIFT)
+            {
+                node = nodeFactory->CreateRightShiftNode(passable, currentToken, node, term());
             }
             type = currentToken->getType();
         }

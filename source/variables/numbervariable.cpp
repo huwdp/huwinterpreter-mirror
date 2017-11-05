@@ -344,3 +344,12 @@ std::shared_ptr<Variable> NumberVariable::leftShift(std::shared_ptr<Variable> va
     return this->variable->leftShift(variable);
 }
 
+std::shared_ptr<Variable> NumberVariable::rightShift(std::shared_ptr<Variable> variable)
+{
+    if (variable == null)
+    {
+        return null;
+    }
+    return this->variable->rightShift(variable);
+}
+

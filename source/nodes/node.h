@@ -63,7 +63,9 @@ enum NodeType {ADDCONSTNODETYPE,
                UNARYMINUSNODETYPE,
                UNARYNOTNODETYPE,
                WHILENODETYPE,
-               LEFTSHIFTNODETYPE};
+               LEFTSHIFTNODETYPE,
+               RIGHTSHIFTNODETYPE
+              };
 
 class Scope;
 
