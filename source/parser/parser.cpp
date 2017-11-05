@@ -249,7 +249,7 @@ std::shared_ptr<Node> Parser::factor()
         else if (currentToken->getType() == BITWISECOMPLEMENT)
         {
             nextToken();
-            return nodeFactory->CreateBitwiseComplement(passable, currentToken, factor());
+            return nodeFactory->CreateBitwiseComplementNode(passable, currentToken, factor());
         }
         return this->value();
     }

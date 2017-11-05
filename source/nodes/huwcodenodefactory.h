@@ -25,7 +25,7 @@ public:
     std::shared_ptr<Node> CreateAddConstNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value);
     std::shared_ptr<Node> CreateAddNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right);
     std::shared_ptr<Node> CreateAddVarNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value);
-    std::shared_ptr<Node> CreateBitwiseComplement(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> node);
+    std::shared_ptr<Node> CreateBitwiseComplementNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> node);
     std::shared_ptr<Node> CreateBitwiseAndNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right);
     std::shared_ptr<Node> CreateBitwiseOrNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right);
     std::shared_ptr<Node> CreateBitwiseXORNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right);
