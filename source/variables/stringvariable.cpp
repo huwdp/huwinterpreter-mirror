@@ -392,7 +392,7 @@ std::shared_ptr<Variable> StringVariable::get(std::string value)
         passable->errors->add(passable->errorFactory->couldNotConvertStringToNumber(name, "get", e.what()));
     }
 
-    if (this->value.length() >= index)
+    if (index >= 0 && index < this->value.length())
     {
         std::string character;
         character.append(1, (char)this->value.at(index));
