@@ -1,0 +1,81 @@
+let i = 0;
+let list = "";
+
+function valueOfFactor()
+{
+    let value = 0;
+    if (i < count(list)-1)
+    {
+        if ((arrayGet(list, i) == "("))
+        {
+            i++;
+            value = valueOfExpr();
+        }
+        else
+        {
+            value = toDouble(arrayGet(list, i));
+            i++;
+        }
+    }
+    else
+    {
+        value = toDouble(arrayGet(list, i));
+    }
+    return value;
+}
+
+function valueOfTerm()
+{
+    let value = 0;
+    value = valueOfFactor();
+    while (i < count(list) && arrayGet(list, i) == "*" || arrayGet(list, i) == "/")
+    {
+        let op = arrayGet(list, i);
+        i++;
+        if (op == "*")
+        {
+            value = value * valueOfTerm();
+        }
+        else
+        {
+            value = value / valueOfTerm();
+        }
+    }
+    return value;
+}
+
+function valueOfExpr()
+{
+    let value = 0;
+    value = valueOfTerm();
+    while (i < count(list) && (arrayGet(list, i) == "+" || arrayGet(list, i) == "-"))
+    {
+        let op = arrayGet(list, i);
+        i++;
+        if (op == "+")
+        {
+            value = value + valueOfTerm();
+        }
+        else
+        {
+            value = value - valueOfTerm();
+        }
+    }
+    return value;
+}
+
+i = 0;
+list = "1+2*5";
+print(valueOfExpr());
+
+i = 0;
+list = "1+2*5+2/2";
+print(valueOfExpr());
+
+i = 0;
+list = "5*(4+4+1)";
+print(valueOfExpr());
+
+i = 0;
+list = "1+(2*2)";
+print(valueOfExpr());
