@@ -35,7 +35,7 @@ std::shared_ptr<Variable> CustomFunction::execute(std::shared_ptr<Token> token, 
 
     if (this->arguments.size() != arguments.size())
     {
-        passable->errors->add(passable->errorFactory->unmatchedSpecifiedNumberOfArguments(token));
+        passable->errors->add(passable->errorFactory->unmatchedSpecifiedNumberOfArguments(token, name));
         return null;
     }
 
@@ -46,7 +46,7 @@ std::shared_ptr<Variable> CustomFunction::execute(std::shared_ptr<Token> token, 
         std::shared_ptr<Variable> argument = (*variableIt)->execute(globalScope, scope);
         if (argument != nullptr)
         {
-            newScope->getVariables()->addVariable((*argumentIt), argument->copy());
+            newScope->getVariables()->addVariable((*argumentIt), argument->copy(token));
         }
         ++variableIt;
     }

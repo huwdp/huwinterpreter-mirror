@@ -166,7 +166,8 @@ SOURCES += \
     nodes/bitwisexornode.cpp \
     nodes/bitwisecomplementnode.cpp \
     nodes/leftshiftnode.cpp \
-    nodes/rightshiftnode.cpp
+    nodes/rightshiftnode.cpp \
+    variables/variablestringfactory.cpp
 
 
 
@@ -360,7 +361,8 @@ HEADERS += \
     nodes/bitwisexornode.h \
     nodes/bitwisecomplementnode.h \
     nodes/leftshiftnode.h \
-    nodes/rightshiftnode.h
+    nodes/rightshiftnode.h \
+    variables/variablestringfactory.h
 
 
 

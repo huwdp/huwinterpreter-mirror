@@ -42,7 +42,7 @@ std::shared_ptr<Variable> DecrementNode::execute(std::shared_ptr<Scope> globalSc
             passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
             return null;
         }
-        return n->decrement();
+        return n->decrement(token);
     }
     Debug::print("Could not increment.");
     return null;

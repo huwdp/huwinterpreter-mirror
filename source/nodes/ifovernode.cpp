@@ -51,7 +51,7 @@ std::shared_ptr<Variable> IfOverNode::execute(std::shared_ptr<Scope> globalScope
             passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
             return null;
         }
-        std::shared_ptr<Variable> v = l->ifOver(r);
+        std::shared_ptr<Variable> v = l->ifOver(r, token);
         return v;
     }
     Debug::print("Could not compare.");

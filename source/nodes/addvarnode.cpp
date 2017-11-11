@@ -53,12 +53,12 @@ std::shared_ptr<Variable> AddVarNode::execute(std::shared_ptr<Scope> globalScope
         {
             if (globalScope->getVariables()->exists(name))
             {
-                passable->errors->add(passable->errorFactory->variableDeclared(token, internalName, name));
+                passable->errors->add(passable->errorFactory->variableDeclared(token, name));
                 return null;
             }
             else if (!scope->getVariables()->addVariable(name, var))
             {
-                passable->errors->add(passable->errorFactory->variableNotDeclared(token, internalName));
+                passable->errors->add(passable->errorFactory->variableNotDeclared(token, name));
             }
         }
         else

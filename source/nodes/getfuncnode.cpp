@@ -42,6 +42,7 @@ std::shared_ptr<Variable> GetFuncNode::execute(std::shared_ptr<Scope> globalScop
         return func->execute(token, globalScope, scope, arguments);
         return scope->getReturnValue();
     }
+    passable->errors->add(passable->errorFactory->functionNotDeclared(token, name));
     return null;
 }
 

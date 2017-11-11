@@ -15,64 +15,87 @@
 
 #include "errorfactory.h"
 
-std::shared_ptr<Error> ErrorFactory::invalidArgument(ErrorTypes errorTypes, std::shared_ptr<Token> token, std::string className, std::string other)
+ErrorFactory::ErrorFactory()
 {
-    return std::make_shared<Error>(errorTypes, "Invalid argument in " + className + "." + other, token);
+    variableStringFactory = std::make_shared<VariableStringFactory>();
 }
 
-std::shared_ptr<Error> ErrorFactory::invalidArgument(ErrorTypes errorTypes, std::shared_ptr<Token> token, std::string className)
+std::shared_ptr<Error> ErrorFactory::invalidArgument(std::shared_ptr<Token> token, ErrorTypes errorTypes, std::string name, std::string other)
 {
-    return std::make_shared<Error>(errorTypes, "Invalid argument in " + className, token);
+    if (other.empty())
+    {
+        return std::make_shared<Error>(errorTypes, "Invalid argument in " + name + ".", token);
+    }
+    return std::make_shared<Error>(errorTypes, "Invalid argument in " + name + "." + other, token);
 }
 
-std::shared_ptr<Error> ErrorFactory::outOfRange(std::shared_ptr<Token> token, std::string className, std::string other)
+std::shared_ptr<Error> ErrorFactory::invalidArgument(std::shared_ptr<Token> token, ErrorTypes errorTypes, std::string name)
 {
-    return std::make_shared<Error>(FUNCTION_ERROR, "Out of range in Abs. " + other, token);
+    return std::make_shared<Error>(errorTypes, "Invalid argument in " + name, token);
 }
 
-std::shared_ptr<Error> ErrorFactory::requiresArguments(std::shared_ptr<Token> token, std::string className, std::string method, ulong arguments)
+std::shared_ptr<Error> ErrorFactory::outOfRange(std::shared_ptr<Token> token, std::string name, std::string other)
 {
-    return std::make_shared<Error>(FUNCTION_ERROR, className + "function requires " + std::to_string(arguments) + " argument", token);
+    if (other.empty())
+    {
+        return std::make_shared<Error>(FUNCTION_ERROR, "Out of range in " + name, token);
+    }
+    return std::make_shared<Error>(FUNCTION_ERROR, "Out of range in  " + name + ". " + other, token);
 }
 
-std::shared_ptr<Error> ErrorFactory::firstParameterIsNotTypeOfArray(std::shared_ptr<Token> token, std::string className, std::string method)
+std::shared_ptr<Error> ErrorFactory::requiresArguments(std::shared_ptr<Token> token, std::string name, std::string method, ulong arguments)
 {
-    return std::make_shared<Error>(FUNCTION_ERROR, "Invalid expression in " + className + " in " + method, token);
+    return std::make_shared<Error>(FUNCTION_ERROR, name + " function requires " + std::to_string(arguments) + " argument", token);
 }
 
-std::shared_ptr<Error> ErrorFactory::requiresAtLeastXArguments(std::shared_ptr<Token> token, std::string className, ulong arguments)
+std::shared_ptr<Error> ErrorFactory::firstParameterIsNotTypeOfArray(std::shared_ptr<Token> token, std::string varName, std::string funcName)
 {
-    return std::make_shared<Error>(FUNCTION_ERROR, className + " function requires " + std::to_string(arguments) + " argument", token);
+    return std::make_shared<Error>(FUNCTION_ERROR, varName + " variable is not an array" + " in " + funcName, token);
 }
 
-std::shared_ptr<Error> ErrorFactory::couldNotParseTime(std::shared_ptr<Token> token, std::string className)
+std::shared_ptr<Error> ErrorFactory::requiresAtLeastXArguments(std::shared_ptr<Token> token, std::string name, ulong arguments)
 {
-    return std::make_shared<Error>(FUNCTION_ERROR, "Could not parse time in " + className, token);
+    return std::make_shared<Error>(FUNCTION_ERROR, name + " function requires " + std::to_string(arguments) + " argument", token);
 }
 
-std::shared_ptr<Error> ErrorFactory::functionNotDeclared(std::shared_ptr<Token> token, std::string className)
+std::shared_ptr<Error> ErrorFactory::couldNotParseTime(std::shared_ptr<Token> token, std::string name)
 {
-    return std::make_shared<Error>(RUNTIME_ERROR, "Function " + className + "not declared", token);
+    return std::make_shared<Error>(FUNCTION_ERROR, "Could not parse time in " + name, token);
 }
 
-std::shared_ptr<Error> ErrorFactory::invalidExpression(ErrorTypes errorTypes, std::shared_ptr<Token> token, std::string className)
+std::shared_ptr<Error> ErrorFactory::functionNotDeclared(std::shared_ptr<Token> token, std::string name)
 {
-    return std::make_shared<Error>(RUNTIME_ERROR, "", token);
+    return std::make_shared<Error>(RUNTIME_ERROR, "Function " + name + "not declared", token);
 }
 
-std::shared_ptr<Error> ErrorFactory::variableNotDeclared(std::shared_ptr<Token> token, std::string className)
+std::shared_ptr<Error> ErrorFactory::invalidExpression(ErrorTypes errorTypes, std::shared_ptr<Token> token, std::string name)
 {
-    return std::make_shared<Error>(RUNTIME_ERROR, "Variable not declared in " + className, token);
+    return std::make_shared<Error>(RUNTIME_ERROR, "Invalid expression in " + name, token);
 }
 
-std::shared_ptr<Error> ErrorFactory::constantNotDeclared(std::shared_ptr<Token> token, std::string className)
+std::shared_ptr<Error> ErrorFactory::variableNotDeclared(std::shared_ptr<Token> token, std::string name)
 {
-    return std::make_shared<Error>(RUNTIME_ERROR, "Variable not declared", token);
+    return std::make_shared<Error>(RUNTIME_ERROR, "Variable " + name + " not declared", token);
 }
 
-std::shared_ptr<Error> ErrorFactory::failedToCompare(std::shared_ptr<Token> token, std::string className)
+std::shared_ptr<Error> ErrorFactory::constantNotDeclared(std::shared_ptr<Token> token, std::string name)
 {
-    return std::make_shared<Error>(RUNTIME_ERROR, "Failed to compare", token);
+    return std::make_shared<Error>(RUNTIME_ERROR, "Variable " + name + " not declared", token);
+}
+
+std::shared_ptr<Error> ErrorFactory::failedToCompare(std::shared_ptr<Token> token, std::string method)
+{
+    return std::make_shared<Error>(RUNTIME_ERROR, "Failed to compare in " + method,token);
+}
+
+std::shared_ptr<Error> ErrorFactory::failedToCompare(std::shared_ptr<Token> token, std::string method, std::string name, VarType type1)
+{
+    return std::make_shared<Error>(RUNTIME_ERROR, "Cannot compare variable " + name + " type of " + variableStringFactory->toString(type1) + " to null variable", token);
+}
+
+std::shared_ptr<Error> ErrorFactory::failedToCompare(std::shared_ptr<Token> token, std::string method, std::string name, VarType type1, VarType type2)
+{
+    return std::make_shared<Error>(RUNTIME_ERROR, method + " : Cannot compare variable "+ name + " type of " + variableStringFactory->toString(type1) + " to " + variableStringFactory->toString(type2), token);
 }
 
 std::shared_ptr<Error> ErrorFactory::syntaxError(std::shared_ptr<Token> token, std::string info)
@@ -80,42 +103,39 @@ std::shared_ptr<Error> ErrorFactory::syntaxError(std::shared_ptr<Token> token, s
     return std::make_shared<Error>(PARSER_ERROR, "Syntax error: " + info, token);
 }
 
-std::shared_ptr<Error> ErrorFactory::couldNotConvertStringToNumber(std::shared_ptr<Token> token, std::string className, std::string method, std::string other)
+std::shared_ptr<Error> ErrorFactory::couldNotConvertStringToNumber(std::shared_ptr<Token> token, std::string name, std::string method, std::string other)
 {
-    return std::make_shared<Error>(RUNTIME_ERROR, "Could not convert string to number", token);
+    if (name.empty())
+    {
+        return std::make_shared<Error>(RUNTIME_ERROR, "Could not convert variable string to number", token);
+    }
+    return std::make_shared<Error>(RUNTIME_ERROR, "Could not convert variable " + name + " string to number", token);
 }
 
-std::shared_ptr<Error> ErrorFactory::couldNotConvertStringToNumber(std::string className, std::string method, std::string other)
+std::shared_ptr<Error> ErrorFactory::couldNotConvert(std::shared_ptr<Token> token, std::string name, std::string methodName, VarType varType, std::string other)
 {
-    return std::make_shared<Error>(RUNTIME_ERROR, "Could not convert string to number. " + other);
+    if (other.empty())
+    {
+        return std::make_shared<Error>(RUNTIME_ERROR, methodName + " could not convert variable " + name + " to " + variableStringFactory->toString(varType), token);
+    }
+    return std::make_shared<Error>(RUNTIME_ERROR, methodName + " could not convert variable " + name + " to " + variableStringFactory->toString(varType) + "." + other, token);
 }
 
-std::shared_ptr<Error> ErrorFactory::couldNotconvertNumberToInteger(std::string className, std::string method, std::string other)
+std::shared_ptr<Error> ErrorFactory::cannotCallFunction(std::shared_ptr<Token> token, std::string className, VarType varType, std::string method, std::string other)
 {
-    return std::make_shared<Error>(RUNTIME_ERROR, "Could not convert number to integer");
+    if (other.empty())
+    {
+        return std::make_shared<Error>(RUNTIME_ERROR, "Cannot call " + method + " method in " + className + variableStringFactory->toString(varType) + " variable", token);
+    }
+    return std::make_shared<Error>(RUNTIME_ERROR, "Cannot call " + method + " method in " + className + variableStringFactory->toString(varType) + " variable. " + other, token);
 }
 
-std::shared_ptr<Error> ErrorFactory::couldNotConvert(std::shared_ptr<Token> token, std::string className, std::string method, std::string other)
+std::shared_ptr<Error> ErrorFactory::otherFunctionError(std::shared_ptr<Token> token, std::string name, std::string other)
 {
-    return std::make_shared<Error>(RUNTIME_ERROR, "", token);
+    return std::make_shared<Error>(FUNCTION_ERROR, name + ":" + other, token);
 }
 
-std::shared_ptr<Error> ErrorFactory::cannotCallFunction(std::shared_ptr<Token> token, std::string className, std::string method, std::string other)
-{
-    return std::make_shared<Error>(RUNTIME_ERROR, "Cannot call " + method + " method in " + className, token);
-}
-
-std::shared_ptr<Error> ErrorFactory::cannotCallFunction(std::string className, std::string method, std::string other)
-{
-    return std::make_shared<Error>(RUNTIME_ERROR, "Cannot call " + method + " method in " + className);
-}
-
-std::shared_ptr<Error> ErrorFactory::otherFunctionError(std::shared_ptr<Token> token, std::string className, std::string method, std::string other)
-{
-    return std::make_shared<Error>(FUNCTION_ERROR, other, token);
-}
-
-std::shared_ptr<Error> ErrorFactory::unmatchedSpecifiedNumberOfArguments(std::shared_ptr<Token> token)
+std::shared_ptr<Error> ErrorFactory::unmatchedSpecifiedNumberOfArguments(std::shared_ptr<Token> token, std::string name)
 {
     return std::make_shared<Error>(
         RUNTIME_ERROR,
@@ -124,17 +144,17 @@ std::shared_ptr<Error> ErrorFactory::unmatchedSpecifiedNumberOfArguments(std::sh
         );
 }
 
-std::shared_ptr<Error> ErrorFactory::outOfBounds(std::string name)
+std::shared_ptr<Error> ErrorFactory::outOfBounds(std::shared_ptr<Token> token, std::string name)
 {
-    return std::make_shared<Error>(RUNTIME_ERROR, "Out of bounds error in " + name);
+    return std::make_shared<Error>(RUNTIME_ERROR, "Out of bounds error in " + name, token);
 }
 
-std::shared_ptr<Error> ErrorFactory::variableDeclared(std::shared_ptr<Token> token, std::string className, std::string name)
+std::shared_ptr<Error> ErrorFactory::variableDeclared(std::shared_ptr<Token> token, std::string name)
 {
-    return std::make_shared<Error>(RUNTIME_ERROR, "Variable " + name + " already declared" + " in " + className, token);
+    return std::make_shared<Error>(RUNTIME_ERROR, "Variable " + name + " already declared", token);
 }
 
-std::shared_ptr<Error> ErrorFactory::constantDeclared(std::shared_ptr<Token> token, std::string className, std::string name)
+std::shared_ptr<Error> ErrorFactory::constantDeclared(std::shared_ptr<Token> token, std::string name)
 {
-    return std::make_shared<Error>(RUNTIME_ERROR, "Constant " + name + " already declared" + " in " + className, token);
+    return std::make_shared<Error>(RUNTIME_ERROR, "Constant " + name + " already declared", token);
 }

@@ -49,6 +49,46 @@ StringVariable::StringVariable(std::shared_ptr<Passable> passable, std::string n
     variableTypeFactory = std::make_shared<VariableTypeFactory>(passable);
 }
 
+
+
+
+StringVariable::StringVariable(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token)
+    : Variable(passable)
+{
+    variableTypeFactory = std::make_shared<VariableTypeFactory>(passable);
+}
+
+StringVariable::StringVariable(std::shared_ptr<Passable> passable, std::string value, std::shared_ptr<Token> token)
+    : Variable(passable, "")
+{
+    this->value = value;
+    variableTypeFactory = std::make_shared<VariableTypeFactory>(passable);
+}
+
+StringVariable::StringVariable(std::shared_ptr<Passable> passable, char value, std::shared_ptr<Token> token)
+    : Variable(passable, "")
+{
+    this->value = std::to_string(value);
+    variableTypeFactory = std::make_shared<VariableTypeFactory>(passable);
+}
+
+StringVariable::StringVariable(std::shared_ptr<Passable> passable, std::string name, std::string value, std::shared_ptr<Token> token)
+    : Variable(passable, name)
+{
+    this->value = value;
+    variableTypeFactory = std::make_shared<VariableTypeFactory>(passable);
+}
+
+StringVariable::StringVariable(std::shared_ptr<Passable> passable, std::string name, char value, std::shared_ptr<Token> token)
+    : Variable(passable, name)
+{
+    this->value = std::to_string(value);
+    variableTypeFactory = std::make_shared<VariableTypeFactory>(passable);
+}
+
+
+
+
 void StringVariable::setValue(double value)
 {
     this->value = std::to_string(value);
@@ -121,31 +161,31 @@ bool StringVariable::isNumber()
     return false;
 }
 
-std::shared_ptr<Variable> StringVariable::pow(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::pow(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     Debug::print("Cannot call power method on string");
     return null;
 }
 
-std::shared_ptr<Variable> StringVariable::mul(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::mul(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     Debug::print("Cannot call multiple method on string");
     return null;
 }
 
-std::shared_ptr<Variable> StringVariable::div(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::div(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     Debug::print("Cannot call divide method on string");
     return null;
 }
 
-std::shared_ptr<Variable> StringVariable::mod(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::mod(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     Debug::print("Cannot call mod method on string");
     return null;
 }
 
-std::shared_ptr<Variable> StringVariable::add(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::add(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
@@ -154,23 +194,24 @@ std::shared_ptr<Variable> StringVariable::add(std::shared_ptr<Variable> variable
     return std::make_shared<StringVariable>(passable, this->toString() + variable->toString());
 }
 
-std::shared_ptr<Variable> StringVariable::sub(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::sub(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     Debug::print("Cannot call subtract method on string");
     return null;
 }
 
-std::shared_ptr<Variable> StringVariable::ifUnder(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::ifUnder(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifUnder", name, getType()));
         return null;
     }
     if (TypeDetector::isNumeric(toString()))
     {
         std::shared_ptr<Variable> var = variableTypeFactory->newVariable(TypeDetector::getType(value));
         var->setValue(toString());
-        return var->ifUnder(variable);
+        return var->ifUnder(variable, token);
     }
     std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passable);
     if (this->toString().compare(variable->toString()) < 0)
@@ -184,17 +225,18 @@ std::shared_ptr<Variable> StringVariable::ifUnder(std::shared_ptr<Variable> vari
     return temp;
 }
 
-std::shared_ptr<Variable> StringVariable::ifUnderOrEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::ifUnderOrEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifUnderOrEqual", name, getType()));
         return null;
     }
     if (TypeDetector::isNumeric(toString()))
     {
         std::shared_ptr<Variable> var = variableTypeFactory->newVariable(TypeDetector::getType(value));
         var->setValue(toString());
-        return var->ifUnderOrEqual(variable);
+        return var->ifUnderOrEqual(variable, token);
     }
     std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passable);
     if (this->toString().compare(variable->toString()) <= 0)
@@ -208,17 +250,18 @@ std::shared_ptr<Variable> StringVariable::ifUnderOrEqual(std::shared_ptr<Variabl
     return temp;
 }
 
-std::shared_ptr<Variable> StringVariable::ifOver(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::ifOver(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifOver", name, getType()));
         return null;
     }
     if (TypeDetector::isNumeric(toString()))
     {
         std::shared_ptr<Variable> var = variableTypeFactory->newVariable(TypeDetector::getType(value));
         var->setValue(toString());
-        return var->ifOver(variable);
+        return var->ifOver(variable, token);
     }
     std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passable);
     if (this->toString().compare(variable->toString()) > 0)
@@ -232,17 +275,18 @@ std::shared_ptr<Variable> StringVariable::ifOver(std::shared_ptr<Variable> varia
     return temp;
 }
 
-std::shared_ptr<Variable> StringVariable::ifOverOrEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::ifOverOrEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifOverOrEqual", name, getType()));
         return null;
     }
     if (TypeDetector::isNumeric(toString()))
     {
         std::shared_ptr<Variable> var = variableTypeFactory->newVariable(TypeDetector::getType(value));
         var->setValue(toString());
-        return var->ifOverOrEqual(variable);
+        return var->ifOverOrEqual(variable, token);
     }
     std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passable);
     if (this->toString().compare(variable->toString()) >= 0)
@@ -256,17 +300,18 @@ std::shared_ptr<Variable> StringVariable::ifOverOrEqual(std::shared_ptr<Variable
     return temp;
 }
 
-std::shared_ptr<Variable> StringVariable::ifEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::ifEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifEqual", name, getType()));
         return null;
     }
     if (TypeDetector::isNumeric(toString()))
     {
         std::shared_ptr<Variable> var = variableTypeFactory->newVariable(TypeDetector::getType(value));
         var->setValue(toString());
-        return var->ifEqual(variable);
+        return var->ifEqual(variable, token);
     }
     std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passable);
     if (this->toString().compare(variable->toString()) == 0)
@@ -280,17 +325,18 @@ std::shared_ptr<Variable> StringVariable::ifEqual(std::shared_ptr<Variable> vari
     return temp;
 }
 
-std::shared_ptr<Variable> StringVariable::ifNotEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::ifNotEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifNotEqual", name, getType()));
         return null;
     }
     if (TypeDetector::isNumeric(toString()))
     {
         std::shared_ptr<Variable> var = variableTypeFactory->newVariable(TypeDetector::getType(value));
         var->setValue(toString());
-        return var->ifNotEqual(variable);
+        return var->ifNotEqual(variable, token);
     }
     std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passable);
     if (this->toString().compare(variable->toString()) != 0)
@@ -304,7 +350,7 @@ std::shared_ptr<Variable> StringVariable::ifNotEqual(std::shared_ptr<Variable> v
     return temp;
 }
 
-std::shared_ptr<Variable> StringVariable::addEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::addEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
@@ -315,37 +361,37 @@ std::shared_ptr<Variable> StringVariable::addEqual(std::shared_ptr<Variable> var
     return std::make_shared<StringVariable>(passable, value);
 }
 
-std::shared_ptr<Variable> StringVariable::subEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::subEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
         return null;
     }
     return null;
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "subEqual", ""));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "subEqual", ""));
 }
 
-std::shared_ptr<Variable> StringVariable::mulEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::mulEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
         return null;
     }
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "mulEqual", ""));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "mulEqual", ""));
     return null;
 }
 
-std::shared_ptr<Variable> StringVariable::divEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::divEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
         return null;
     }
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "divEqual", ""));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "divEqual", ""));
     return null;
 }
 
-std::shared_ptr<Variable> StringVariable::equal(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::equal(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
@@ -358,29 +404,29 @@ std::shared_ptr<Variable> StringVariable::equal(std::shared_ptr<Variable> variab
     return std::make_shared<NumberVariable>(passable, false);
 }
 
-std::shared_ptr<Variable> StringVariable::increment()
+std::shared_ptr<Variable> StringVariable::increment(std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "increment", ""));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "increment", ""));
     return null;
 }
 
-std::shared_ptr<Variable> StringVariable::decrement()
+std::shared_ptr<Variable> StringVariable::decrement(std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "decrement", ""));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "decrement", ""));
     return null;
 }
 
-std::shared_ptr<Variable> StringVariable::count()
+std::shared_ptr<Variable> StringVariable::count(std::shared_ptr<Token> token)
 {
     return std::make_shared<NumberVariable>(passable, (long long)value.size());
 }
 
-void StringVariable::set(std::string index, std::shared_ptr<Variable> value)
+void StringVariable::set(std::string index, std::shared_ptr<Variable> value, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "set", "String is not an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "set", "String is not an array"));
 }
 
-std::shared_ptr<Variable> StringVariable::get(std::string value)
+std::shared_ptr<Variable> StringVariable::get(std::string value, std::shared_ptr<Token> token)
 {
     long index = 0;
     try
@@ -389,7 +435,7 @@ std::shared_ptr<Variable> StringVariable::get(std::string value)
     }
     catch (const std::exception& e)
     {
-        passable->errors->add(passable->errorFactory->couldNotConvertStringToNumber(name, "get", e.what()));
+        passable->errors->add(passable->errorFactory->couldNotConvertStringToNumber(token, name, "get", e.what()));
     }
 
     if (index >= 0 && index < this->value.length())
@@ -398,52 +444,52 @@ std::shared_ptr<Variable> StringVariable::get(std::string value)
         character.append(1, (char)this->value.at(index));
         return std::make_shared<StringVariable>(passable, character);
     }
-    passable->errors->add(passable->errorFactory->outOfBounds(name));
+    passable->errors->add(passable->errorFactory->outOfBounds(token, name));
     return null;
 }
 
-void StringVariable::unset(std::string index)
+void StringVariable::unset(std::string index, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "unset", "String is not an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "unset", "String is not an array"));
 }
 
-std::shared_ptr<Variable> StringVariable::copy()
+std::shared_ptr<Variable> StringVariable::copy(std::shared_ptr<Token> token)
 {
     return std::make_shared<StringVariable>(passable, value);
 }
 
-std::shared_ptr<Variable> StringVariable::bitwiseAnd(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::bitwiseAnd(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseAnd", "Cannot bitwiseAND string type"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "bitwiseAnd", "Cannot bitwiseAND string type"));
     return null;
 }
 
-std::shared_ptr<Variable> StringVariable::bitwiseOr(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::bitwiseOr(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseOr", "Cannot bitwiseOR string type"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "bitwiseOr", "Cannot bitwiseOR string type"));
     return null;
 }
 
-std::shared_ptr<Variable> StringVariable::bitwiseXOR(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::bitwiseXOR(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseXOR", "Cannot bitwiseXOR string type"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "bitwiseXOR", "Cannot bitwiseXOR string type"));
     return null;
 }
 
-std::shared_ptr<Variable> StringVariable::bitwiseComplement()
+std::shared_ptr<Variable> StringVariable::bitwiseComplement(std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseComplement", "Cannot bitwiseComplement string type"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "bitwiseComplement", "Cannot bitwiseComplement string type"));
     return null;
 }
 
-std::shared_ptr<Variable> StringVariable::leftShift(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::leftShift(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "leftShift", "Cannot leftShift string type"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "leftShift", "Cannot leftShift string type"));
     return null;
 }
 
-std::shared_ptr<Variable> StringVariable::rightShift(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> StringVariable::rightShift(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "rightShift", "Cannot leftShift string type"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "rightShift", "Cannot leftShift string type"));
     return null;
 }

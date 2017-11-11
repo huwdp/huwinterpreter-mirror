@@ -38,7 +38,7 @@ std::shared_ptr<Variable> BitwiseComplementNode::execute(std::shared_ptr<Scope> 
         std::shared_ptr<Variable> var = node->execute(globalScope, scope);
         if (var != nullptr)
         {
-            return var->bitwiseComplement();
+            return var->bitwiseComplement(token);
         }
         passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
     }

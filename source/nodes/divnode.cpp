@@ -49,7 +49,7 @@ std::shared_ptr<Variable> DivNode::execute(std::shared_ptr<Scope> globalScope, s
             passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
             return null;
         }
-        return l->div(r);
+        return l->div(r, token);
     }
     Debug::print("Could not div.");
     return null;

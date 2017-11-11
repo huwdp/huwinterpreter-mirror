@@ -49,7 +49,7 @@ std::shared_ptr<Variable> AddNode::execute(std::shared_ptr<Scope> globalScope, s
             passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
             return null;
         }
-        return l->add(r);
+        return l->add(r, token);
     }
     Debug::print("Could not add.");
     return null;

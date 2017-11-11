@@ -50,7 +50,7 @@ std::shared_ptr<Variable> MulNode::execute(std::shared_ptr<Scope> globalScope, s
             passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
             return null;
         }
-        std::shared_ptr<Variable> v = l->mul(r);
+        std::shared_ptr<Variable> v = l->mul(r, token);
         return v;
     }
     Debug::print("Could not mul.");

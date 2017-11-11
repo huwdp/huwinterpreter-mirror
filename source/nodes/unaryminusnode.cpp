@@ -38,7 +38,7 @@ std::shared_ptr<Variable> UnaryMinusNode::execute(std::shared_ptr<Scope> globalS
         std::shared_ptr<Variable> value = node->execute(globalScope, scope);
         if (value != nullptr)
         {
-            return value->mul(std::make_shared<IntegerVariable>(passable, -1));
+            return value->mul(std::make_shared<IntegerVariable>(passable, -1), token);
         }
         else
         {

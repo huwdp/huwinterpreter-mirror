@@ -53,12 +53,12 @@ std::shared_ptr<Variable> AddConstNode::execute(std::shared_ptr<Scope> globalSco
         {
             if (globalScope->getVariables()->exists(name))
             {
-                passable->errors->add(passable->errorFactory->constantDeclared(token, internalName, name));
+                passable->errors->add(passable->errorFactory->constantDeclared(token, name));
                 return null;
             }
             else if (!scope->getVariables()->addVariable(name, var))
             {
-                passable->errors->add(passable->errorFactory->constantNotDeclared(token, internalName));
+                passable->errors->add(passable->errorFactory->constantNotDeclared(token, name));
             }
         }
         else

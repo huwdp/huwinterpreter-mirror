@@ -32,7 +32,7 @@ std::shared_ptr<Variable> RegexMatch::execute(std::shared_ptr<Token> token, std:
         std::shared_ptr<Node> node2 = arguments.at(1);
         if (node1 == nullptr || node2 == nullptr)
         {
-            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
             return null;
         }
 
@@ -41,7 +41,7 @@ std::shared_ptr<Variable> RegexMatch::execute(std::shared_ptr<Token> token, std:
 
         if (var1 == nullptr || var2 == nullptr)
         {
-            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
             return null;
         }
 
@@ -58,7 +58,7 @@ std::shared_ptr<Variable> RegexMatch::execute(std::shared_ptr<Token> token, std:
             {
                 std::ssub_match sub_match = pieces_match[i];
                 std::string piece = sub_match.str();
-                result->set(std::to_string(i), std::make_shared<StringVariable>(passable, piece));
+                result->set(std::to_string(i), std::make_shared<StringVariable>(passable, piece), token);
             }
         }
         return result;

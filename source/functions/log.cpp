@@ -31,14 +31,14 @@ std::shared_ptr<Variable> Log::execute(std::shared_ptr<Token> token, std::shared
         std::shared_ptr<Node> node = arguments.at(0);
         if (node == nullptr)
         {
-            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
             return null;
         }
 
         std::shared_ptr<Variable> var = node->execute(globalScope, scope);
         if (var == nullptr)
         {
-            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
             return null;
         }
 
@@ -50,7 +50,7 @@ std::shared_ptr<Variable> Log::execute(std::shared_ptr<Token> token, std::shared
         }
         catch (const std::invalid_argument ex)
         {
-            passable->errors->add(passable->errorFactory->invalidArgument(FUNCTION_ERROR, token, name, ex.what()));
+            passable->errors->add(passable->errorFactory->invalidArgument(token, FUNCTION_ERROR, name, ex.what()));
         }
         catch (const std::out_of_range ex)
         {
@@ -58,7 +58,7 @@ std::shared_ptr<Variable> Log::execute(std::shared_ptr<Token> token, std::shared
         }
         catch (const std::exception& ex)
         {
-            passable->errors->add(passable->errorFactory->otherFunctionError(token, name, "", ex.what()));
+            passable->errors->add(passable->errorFactory->otherFunctionError(token, name, ex.what()));
         }
 
     }

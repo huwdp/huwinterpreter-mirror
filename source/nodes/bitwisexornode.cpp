@@ -48,7 +48,7 @@ std::shared_ptr<Variable> BitwiseXORNode::execute(std::shared_ptr<Scope> globalS
             passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
             return null;
         }
-        return l->bitwiseXOR(r);
+        return l->bitwiseXOR(r, token);
     }
     Debug::print("Could not bitwiseXOR");
     return null;

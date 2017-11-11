@@ -38,7 +38,7 @@ std::shared_ptr<Variable> Print::execute(std::shared_ptr<Token> token, std::shar
         }
         else
         {
-            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
             return null;
         }
     }

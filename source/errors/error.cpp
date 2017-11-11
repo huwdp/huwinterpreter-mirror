@@ -39,7 +39,15 @@ Error::Error(ErrorTypes errorType, std::string error, std::shared_ptr<Token> tok
     this->error = error;
     this->token = token;
     this->internalFile = "";
-    this->internalLine = 0;
+
+    if (token != nullptr && token->getLineInfo() != nullptr)
+    {
+        internalLine = token->getLineInfo()->getCharNumber();
+    }
+    else
+    {
+        internalLine = 0;
+    }
 }
 
 Error::Error(ErrorTypes errorType, std::string error, std::shared_ptr<Token> token, std::__cxx11::string internalFile, int internalLine)
@@ -77,7 +85,7 @@ std::string Error::getMessage()
         {
             if (lineInfo->getLineNumber() >= 0)
             {
-                message.append(" on line ");
+                message.append(" at line number ");
                 message.append(std::to_string(lineInfo->getLineNumber()));
             }
             if (lineInfo->getCharNumber() > 0)

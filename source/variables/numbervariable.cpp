@@ -60,6 +60,58 @@ NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, std::string n
     variable = std::move(var);
 }
 
+
+
+
+
+NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, bool value, std::shared_ptr<Token> token)
+    : Variable(passable, token)
+{
+    this->variable = std::move(std::make_shared<IntegerVariable>(passable, (long long)(int)value));
+}
+
+NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
+    : Variable(passable, token)
+{
+    this->variable = variable;
+}
+
+NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, std::string name, double value, std::shared_ptr<Token> token)
+    : Variable(passable, name, token)
+{
+    this->variable = std::move(toInternalValue(value));
+}
+
+NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, double value, std::shared_ptr<Token> token)
+    : Variable(passable, "", token)
+{
+    this->variable = std::move(toInternalValue(value));
+}
+
+NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, long long value, std::shared_ptr<Token> token)
+    : Variable(passable, "", token)
+{
+    this->variable = std::move(toInternalValue(value));
+}
+
+NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, std::string name, long long value, std::shared_ptr<Token> token)
+    : Variable(passable, name, token)
+{
+    this->variable = std::move(toInternalValue(value));
+}
+
+NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, std::string name, std::string value, std::shared_ptr<Token> token)
+    : Variable(passable, name, token)
+{
+    std::shared_ptr<VariableTypeFactory> v = std::make_shared<VariableTypeFactory>(passable);
+    std::shared_ptr<Variable> var = v->newVariable(TypeDetector::getType(value));
+    var->setValue(value);
+    variable = std::move(var);
+}
+
+
+
+
 void NumberVariable::setValue(double value)
 {
     this->variable->setValue(value);
@@ -110,112 +162,118 @@ bool NumberVariable::isNumber()
     return true;
 }
 
-std::shared_ptr<Variable> NumberVariable::pow(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> NumberVariable::pow(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    if (variable == nullptr || this->variable == nullptr)
+    if (variable == nullptr)
     {
         return null;
     }
-    return std::move(toValue(std::move(this->variable->pow(variable))));
+    return std::move(toValue(std::move(this->variable->pow(variable, token))));
 }
 
-std::shared_ptr<Variable> NumberVariable::mul(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> NumberVariable::mul(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    if (variable == nullptr || this->variable == nullptr)
+    if (variable == nullptr)
     {
         return null;
     }
-    return std::move(toValue(std::move(this->variable->mul(variable))));
+    return std::move(toValue(std::move(this->variable->mul(variable, token))));
 }
 
-std::shared_ptr<Variable> NumberVariable::div(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> NumberVariable::div(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    if (variable == nullptr || this->variable == nullptr)
+    if (variable == nullptr)
     {
         return null;
     }
-    return std::move(toValue(std::move(this->variable->div(variable))));
+    return std::move(toValue(std::move(this->variable->div(variable, token))));
 }
 
-std::shared_ptr<Variable> NumberVariable::mod(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> NumberVariable::mod(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    if (variable == nullptr || this->variable == nullptr)
+    if (variable == nullptr)
     {
         return null;
     }
-    return std::move(toValue(std::move(this->variable->mod(variable))));
+    return std::move(toValue(std::move(this->variable->mod(variable, token))));
 }
 
-std::shared_ptr<Variable> NumberVariable::add(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> NumberVariable::add(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    if (variable == nullptr || this->variable == nullptr)
+    if (variable == nullptr)
     {
         return null;
     }
-    return std::move(toValue(std::move(this->variable->add(variable))));
+    return std::move(toValue(std::move(this->variable->add(variable, token))));
 }
 
-std::shared_ptr<Variable> NumberVariable::sub(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> NumberVariable::sub(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    if (variable == nullptr || this->variable == nullptr)
+    if (variable == nullptr)
     {
         return null;
     }
-    return std::move(toValue(std::move(this->variable->sub(variable))));
+    return std::move(toValue(std::move(this->variable->sub(variable, token))));
 }
 
-std::shared_ptr<Variable> NumberVariable::ifUnder(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> NumberVariable::ifUnder(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    if (variable == nullptr || this->variable == nullptr)
+    if (variable == nullptr)
     {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifUnder", name, getType()));
         return null;
     }
-    return std::move(toValue(this->variable->ifUnder(variable)));
+    return std::move(toValue(this->variable->ifUnder(variable, token)));
 }
 
-std::shared_ptr<Variable> NumberVariable::ifUnderOrEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> NumberVariable::ifUnderOrEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    if (variable == nullptr || this->variable == nullptr)
+    if (variable == nullptr)
     {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifUnderOrEqual", name, getType()));
         return null;
     }
-    return std::move(toValue(std::move(this->variable->ifUnderOrEqual(variable))));
+    return std::move(toValue(std::move(this->variable->ifUnderOrEqual(variable, token))));
 }
 
-std::shared_ptr<Variable> NumberVariable::ifOver(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> NumberVariable::ifOver(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    if (variable == nullptr || this->variable == nullptr)
+    if (variable == nullptr)
     {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifOver", name, getType()));
         return null;
     }
-    return std::move(toValue(std::move(this->variable->ifOver(variable))));
+    return std::move(toValue(std::move(this->variable->ifOver(variable, token))));
 }
 
-std::shared_ptr<Variable> NumberVariable::ifOverOrEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> NumberVariable::ifOverOrEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    if (variable == nullptr || this->variable == nullptr)
+    if (variable == nullptr)
     {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifOverOrEqual", name, getType()));
         return null;
     }
-    return std::move(toValue(std::move(this->variable->ifOverOrEqual(variable))));
+    return std::move(toValue(std::move(this->variable->ifOverOrEqual(variable, token))));
 }
 
-std::shared_ptr<Variable> NumberVariable::ifEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> NumberVariable::ifEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    if (variable == nullptr || this->variable == nullptr)
+    if (variable == nullptr)
     {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifEqual", name, getType()));
         return null;
     }
-    return std::move(toValue(std::move(this->variable->ifEqual(variable))));
+    return std::move(toValue(std::move(this->variable->ifEqual(variable, token))));
 }
 
-std::shared_ptr<Variable> NumberVariable::ifNotEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> NumberVariable::ifNotEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    if (variable == nullptr || this->variable == nullptr)
+    if (variable == nullptr)
     {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifNotEqual", name, getType()));
         return null;
     }
-    return toValue(std::move(this->variable->ifNotEqual(variable)));
+    return toValue(std::move(this->variable->ifNotEqual(variable, token)));
 }
 
 std::shared_ptr<Variable> NumberVariable::toInternalValue(double value)
@@ -258,98 +316,98 @@ std::shared_ptr<Variable> NumberVariable::toValue(std::shared_ptr<Variable> vari
     return std::move(variable);
 }
 
-std::shared_ptr<Variable> NumberVariable::increment()
+std::shared_ptr<Variable> NumberVariable::increment(std::shared_ptr<Token> token)
 {
-    variable->increment();
+    variable->increment(token);
     return variable;
 }
 
-std::shared_ptr<Variable> NumberVariable::decrement()
+std::shared_ptr<Variable> NumberVariable::decrement(std::shared_ptr<Token> token)
 {
-    variable->decrement();
+    variable->decrement(token);
     return variable;
 }
 
-std::shared_ptr<Variable> NumberVariable::count()
+std::shared_ptr<Variable> NumberVariable::count(std::shared_ptr<Token> token)
 {
-    return variable->count();
+    return variable->count(token);
 }
 
-void NumberVariable::set(std::string index, std::shared_ptr<Variable> value)
+void NumberVariable::set(std::string index, std::shared_ptr<Variable> value, std::shared_ptr<Token> token)
 {
-    variable->set(index, value);
+    variable->set(index, value, token);
 }
 
-std::shared_ptr<Variable> NumberVariable::get(std::string index)
+std::shared_ptr<Variable> NumberVariable::get(std::string index, std::shared_ptr<Token> token)
 {
-    return variable->get(index);
+    return variable->get(index, token);
 }
 
-void NumberVariable::unset(std::string index)
+void NumberVariable::unset(std::string index, std::shared_ptr<Token> token)
 {
-    variable->unset(index);
+    variable->unset(index, token);
 }
 
-std::shared_ptr<Variable> NumberVariable::copy()
+std::shared_ptr<Variable> NumberVariable::copy(std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
         return null;
     }
-    return variable->copy();
+    return variable->copy(token);
 }
 
-std::shared_ptr<Variable> NumberVariable::bitwiseAnd(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> NumberVariable::bitwiseAnd(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    if (variable == nullptr || this->variable == nullptr)
+    if (variable == nullptr)
     {
         return null;
     }
-    return this->variable->bitwiseAnd(variable);
+    return this->variable->bitwiseAnd(variable, token);
 }
 
-std::shared_ptr<Variable> NumberVariable::bitwiseOr(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> NumberVariable::bitwiseOr(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    if (variable == nullptr || this->variable == nullptr)
+    if (variable == nullptr)
     {
         return null;
     }
-    return this->variable->bitwiseOr(variable);
+    return this->variable->bitwiseOr(variable, token);
 }
 
-std::shared_ptr<Variable> NumberVariable::bitwiseXOR(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> NumberVariable::bitwiseXOR(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    if (variable == nullptr || this->variable == nullptr)
+    if (variable == nullptr)
     {
         return null;
     }
-    return this->variable->bitwiseXOR(variable);
+    return this->variable->bitwiseXOR(variable, token);
 }
 
-std::shared_ptr<Variable> NumberVariable::bitwiseComplement()
+std::shared_ptr<Variable> NumberVariable::bitwiseComplement(std::shared_ptr<Token> token)
 {
-    if (variable == nullptr || this->variable == nullptr)
+    if (variable == nullptr)
     {
         return null;
     }
-    return this->variable->bitwiseComplement();
+    return this->variable->bitwiseComplement(token);
 }
 
-std::shared_ptr<Variable> NumberVariable::leftShift(std::shared_ptr<Variable> variable)
-{
-    if (variable == null)
-    {
-        return null;
-    }
-    return this->variable->leftShift(variable);
-}
-
-std::shared_ptr<Variable> NumberVariable::rightShift(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> NumberVariable::leftShift(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == null)
     {
         return null;
     }
-    return this->variable->rightShift(variable);
+    return this->variable->leftShift(variable, token);
+}
+
+std::shared_ptr<Variable> NumberVariable::rightShift(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
+{
+    if (variable == null)
+    {
+        return null;
+    }
+    return this->variable->rightShift(variable, token);
 }
 

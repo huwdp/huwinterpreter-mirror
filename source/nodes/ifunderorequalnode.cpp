@@ -50,7 +50,7 @@ std::shared_ptr<Variable> IfUnderOrEqualNode::execute(std::shared_ptr<Scope> glo
             passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
             return null;
         }
-        std::shared_ptr<Variable> v = l->ifUnderOrEqual(r);
+        std::shared_ptr<Variable> v = l->ifUnderOrEqual(r, token);
         return v;
     }
     Debug::print("Could not compare.");

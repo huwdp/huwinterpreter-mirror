@@ -21,6 +21,12 @@ HashTableVariable::HashTableVariable(std::shared_ptr<Passable> passable)
 
 }
 
+HashTableVariable::HashTableVariable(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token)
+    : Variable(passable, token)
+{
+
+}
+
 void HashTableVariable::setValue(double value)
 {
 
@@ -38,11 +44,13 @@ void HashTableVariable::setValue(long long value)
 
 double HashTableVariable::toDouble()
 {
+    passable->errors->add(passable->errorFactory->couldNotConvert(token, name, "toDouble", getType(), "Cannot convert array to number."));
     return 0.0;
 }
 
 long long HashTableVariable::toInt()
 {
+    passable->errors->add(passable->errorFactory->couldNotConvert(token, name, "toDouble", getType(), "Cannot convert array to number."));
     return 0;
 }
 
@@ -77,103 +85,133 @@ bool HashTableVariable::isNumber()
     return false;
 }
 
-std::shared_ptr<Variable> HashTableVariable::pow(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::pow(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "pow", ""));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "pow", ""));
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::mul(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::mul(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "multiply", ""));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "multiply", ""));
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::div(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::div(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "divide", ""));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "divide", ""));
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::mod(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::mod(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "mod", ""));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "mod", ""));
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::add(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::add(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "add", ""));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "add", ""));
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::sub(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::sub(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "subtract", ""));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "subtract", ""));
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::ifUnder(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::ifUnder(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "ifUnder", ""));
+    if (variable == nullptr)
+    {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifUnder", name, getType()));
+        return null;
+    }
+    passable->errors->add(passable->errorFactory->failedToCompare(token, "ifUnder", name, getType(), variable->getType()));
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::ifUnderOrEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::ifUnderOrEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "ifUnderOrEqual", ""));
+    if (variable == nullptr)
+    {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifUnderOrEqual", name, getType()));
+        return null;
+    }
+    passable->errors->add(passable->errorFactory->failedToCompare(token, "ifUnderOrEqual", name, getType(), variable->getType()));
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::ifOver(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::ifOver(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "ifOver", ""));
+    if (variable == nullptr)
+    {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifOver", name, getType()));
+        return null;
+    }
+    passable->errors->add(passable->errorFactory->failedToCompare(token, "ifOver", name, getType(), variable->getType()));
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::ifOverOrEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::ifOverOrEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "ifOverOrEqual", ""));
+    if (variable == nullptr)
+    {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifOverOrEqual", name, getType()));
+        return null;
+    }
+    passable->errors->add(passable->errorFactory->failedToCompare(token, "ifOverOrEqual", name, getType(), variable->getType()));
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::ifEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::ifEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "ifEqual", ""));
+    if (variable == nullptr)
+    {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifEqual", name, getType()));
+        return null;
+    }
+    passable->errors->add(passable->errorFactory->failedToCompare(token, "ifEqual", name, getType(), variable->getType()));
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::ifNotEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::ifNotEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "ifNotEqual", ""));
+    if (variable == nullptr)
+    {
+        passable->errors->add(passable->errorFactory->failedToCompare(token,"ifNotEqual", name, getType()));
+        return null;
+    }
+    passable->errors->add(passable->errorFactory->failedToCompare(token,"ifNotEqual", name, getType(), variable->getType()));
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::addEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::addEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     // Todo
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::subEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::subEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "subequal", ""));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "subequal", ""));
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::mulEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::mulEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "mulequal", ""));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "mulequal", ""));
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::divEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::divEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "divequal", ""));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "divequal", ""));
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::equal(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::equal(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
@@ -182,80 +220,80 @@ std::shared_ptr<Variable> HashTableVariable::equal(std::shared_ptr<Variable> var
     return std::move(std::make_shared<NumberVariable>(passable, toString() == variable->toString()));
 }
 
-std::shared_ptr<Variable> HashTableVariable::count()
+std::shared_ptr<Variable> HashTableVariable::count(std::shared_ptr<Token> token)
 {
     return std::make_shared<NumberVariable>(passable, (long long)this->map.size());
 }
 
-std::shared_ptr<Variable> HashTableVariable::increment()
+std::shared_ptr<Variable> HashTableVariable::increment(std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "decrement", ""));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "decrement", ""));
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::decrement()
+std::shared_ptr<Variable> HashTableVariable::decrement(std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "increment", ""));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "increment", ""));
     return null;
 }
 
-void HashTableVariable::set(std::string index, std::shared_ptr<Variable> value)
+void HashTableVariable::set(std::string index, std::shared_ptr<Variable> value, std::shared_ptr<Token> token)
 {
     map[index] = std::move(value);
 }
 
-std::shared_ptr<Variable> HashTableVariable::get(std::string index)
+std::shared_ptr<Variable> HashTableVariable::get(std::string index, std::shared_ptr<Token> token)
 {
     return map[index];
 }
 
-void HashTableVariable::unset(std::string index)
+void HashTableVariable::unset(std::string index, std::shared_ptr<Token> token)
 {
     map.erase(index);
 }
 
-std::shared_ptr<Variable> HashTableVariable::copy()
+std::shared_ptr<Variable> HashTableVariable::copy(std::shared_ptr<Token> token)
 {
     std::shared_ptr<HashTableVariable> map = std::make_shared<HashTableVariable>(passable);
     for (std::unordered_map<std::string, std::shared_ptr<Variable>>::iterator it = this->map.begin(); it != this->map.end(); ++it)
     {
-        map->set((*it).first, (*it).second->copy());
+        map->set((*it).first, (*it).second->copy(token), token);
     }
     return map;
 }
 
-std::shared_ptr<Variable> HashTableVariable::bitwiseAnd(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::bitwiseAnd(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseAnd", "Cannot bitwsieAND array type"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "bitwiseAnd", "Cannot bitwsieAND array type"));
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::bitwiseOr(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::bitwiseOr(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseOr", "Cannot bitwiseOR array type"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "bitwiseOr", "Cannot bitwiseOR array type"));
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::bitwiseXOR(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::bitwiseXOR(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseXOR", "Cannot bitwsieXOR array type"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "bitwiseXOR", "Cannot bitwsieXOR array type"));
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::bitwiseComplement()
+std::shared_ptr<Variable> HashTableVariable::bitwiseComplement(std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "bitwiseXOR", "Cannot bitwiseComplement array type"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "bitwiseXOR", "Cannot bitwiseComplement array type"));
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::leftShift(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::leftShift(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "leftShift", "Cannot leftShift array type"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "leftShift", "Cannot leftShift array type"));
     return null;
 }
 
-std::shared_ptr<Variable> HashTableVariable::rightShift(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> HashTableVariable::rightShift(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "rightShift", "Cannot rightShift array type"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "rightShift", "Cannot rightShift array type"));
     return null;
 }

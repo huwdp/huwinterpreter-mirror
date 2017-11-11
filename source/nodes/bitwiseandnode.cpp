@@ -48,7 +48,7 @@ std::shared_ptr<Variable> BitwiseAndNode::execute(std::shared_ptr<Scope> globalS
             passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
             return null;
         }
-        return l->bitwiseAnd(r);
+        return l->bitwiseAnd(r, token);
     }
     Debug::print("Could not bitwiseAnd");
     return null;

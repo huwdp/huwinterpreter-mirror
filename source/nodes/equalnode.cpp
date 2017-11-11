@@ -45,7 +45,7 @@ std::shared_ptr<Variable> EqualNode::execute(std::shared_ptr<Scope> globalScope,
         std::shared_ptr<Variable> value = next->execute(globalScope, scope);
         if (value != nullptr)
         {
-            return value->copy();
+            return value->copy(token);
         }
         passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
     }

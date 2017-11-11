@@ -33,6 +33,24 @@ IntegerVariable::IntegerVariable(std::string name, long long value)
     this->value = value;
 }
 
+IntegerVariable::IntegerVariable(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token)
+    : Variable(passable, token)
+{
+    value = 0;
+}
+
+IntegerVariable::IntegerVariable(std::shared_ptr<Passable> passable, long long value, std::shared_ptr<Token> token)
+    : Variable(passable, "", token)
+{
+    this->value = value;
+}
+
+IntegerVariable::IntegerVariable(std::string name, long long value, std::shared_ptr<Token> token)
+    : Variable(passable, name, token)
+{
+    this->value = value;
+}
+
 void IntegerVariable::setValue(double value)
 {
     this->value = (long long)value;
@@ -46,7 +64,7 @@ void IntegerVariable::setValue(std::string value)
     }
     catch (const std::exception& e)
     {
-        passable->errors->add(passable->errorFactory->couldNotConvertStringToNumber(name, "setValue", e.what()));
+        passable->errors->add(passable->errorFactory->couldNotConvertStringToNumber(token, name, "setValue", e.what()));
     }
 }
 
@@ -94,7 +112,7 @@ bool IntegerVariable::isNumber()
     return true;
 }
 
-std::shared_ptr<Variable> IntegerVariable::pow(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> IntegerVariable::pow(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
@@ -103,7 +121,7 @@ std::shared_ptr<Variable> IntegerVariable::pow(std::shared_ptr<Variable> variabl
     return std::move(std::make_shared<NumberVariable>(passable, std::pow(this->toDouble(),variable->toDouble())));
 }
 
-std::shared_ptr<Variable> IntegerVariable::mul(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> IntegerVariable::mul(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
@@ -112,7 +130,7 @@ std::shared_ptr<Variable> IntegerVariable::mul(std::shared_ptr<Variable> variabl
     return std::move(std::make_shared<NumberVariable>(passable, this->toDouble() * variable->toDouble()));
 }
 
-std::shared_ptr<Variable> IntegerVariable::div(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> IntegerVariable::div(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
@@ -121,7 +139,7 @@ std::shared_ptr<Variable> IntegerVariable::div(std::shared_ptr<Variable> variabl
     return std::move(std::make_shared<NumberVariable>(passable, this->toDouble() / variable->toDouble()));
 }
 
-std::shared_ptr<Variable> IntegerVariable::mod(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> IntegerVariable::mod(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
@@ -131,7 +149,7 @@ std::shared_ptr<Variable> IntegerVariable::mod(std::shared_ptr<Variable> variabl
     return std::make_shared<NumberVariable>(passable, fmod(this->toDouble(), variable->toDouble()));
 }
 
-std::shared_ptr<Variable> IntegerVariable::add(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> IntegerVariable::add(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
@@ -140,7 +158,7 @@ std::shared_ptr<Variable> IntegerVariable::add(std::shared_ptr<Variable> variabl
     return std::move(std::make_shared<NumberVariable>(passable, this->toDouble() + variable->toDouble()));
 }
 
-std::shared_ptr<Variable> IntegerVariable::sub(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> IntegerVariable::sub(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
@@ -149,100 +167,106 @@ std::shared_ptr<Variable> IntegerVariable::sub(std::shared_ptr<Variable> variabl
     return std::move(std::make_shared<NumberVariable>(passable, this->toDouble() - variable->toDouble()));
 }
 
-std::shared_ptr<Variable> IntegerVariable::ifUnder(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> IntegerVariable::ifUnder(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifUnder", name, getType()));
         return null;
     }
     return std::move(std::make_shared<NumberVariable>(passable, this->toDouble() < variable->toDouble()));
 }
 
-std::shared_ptr<Variable> IntegerVariable::ifUnderOrEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> IntegerVariable::ifUnderOrEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifUnderOrEqual", name, getType()));
         return null;
     }
     return std::move(std::make_shared<NumberVariable>(passable, this->toDouble() <= variable->toDouble()));
 }
 
-std::shared_ptr<Variable> IntegerVariable::ifOver(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> IntegerVariable::ifOver(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifOver", name, getType()));
         return null;
     }
     return std::move(std::make_shared<NumberVariable>(passable, this->toDouble() > variable->toDouble()));
 }
 
-std::shared_ptr<Variable> IntegerVariable::ifOverOrEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> IntegerVariable::ifOverOrEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifOverOrEqual", name, getType()));
         return null;
     }
     return std::move(std::make_shared<NumberVariable>(passable, this->toDouble() >= variable->toDouble()));
 }
 
-std::shared_ptr<Variable> IntegerVariable::ifEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> IntegerVariable::ifEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifEqual", name, getType()));
         return null;
     }
     return std::move(std::make_shared<NumberVariable>(passable, this->toDouble() == variable->toDouble()));
 }
 
-std::shared_ptr<Variable> IntegerVariable::ifNotEqual(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> IntegerVariable::ifNotEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
+        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifNotEqual", name, getType()));
         return null;
     }
     return std::move(std::make_shared<NumberVariable>(passable, std::make_shared<DoubleVariable>(passable, this->toDouble() != variable->toDouble())));
 }
 
-std::shared_ptr<Variable> IntegerVariable::increment()
+std::shared_ptr<Variable> IntegerVariable::increment(std::shared_ptr<Token> token)
 {
     this->value++;
     return std::move(std::make_shared<NumberVariable>(passable, this->toDouble()));
 }
 
-std::shared_ptr<Variable> IntegerVariable::decrement()
+std::shared_ptr<Variable> IntegerVariable::decrement(std::shared_ptr<Token> token)
 {
     this->value--;
     return std::move(std::make_shared<NumberVariable>(passable, this->toDouble()));
 }
 
-std::shared_ptr<Variable> IntegerVariable::count()
+std::shared_ptr<Variable> IntegerVariable::count(std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "count", "Integer is not an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "count", "Integer is not an array"));
     return null;
 }
 
-void IntegerVariable::set(std::string index, std::shared_ptr<Variable> value)
+void IntegerVariable::set(std::string index, std::shared_ptr<Variable> value, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "set", "Integer is not an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "set", "Integer is not an array"));
 }
 
-std::shared_ptr<Variable> IntegerVariable::get(std::string value)
+std::shared_ptr<Variable> IntegerVariable::get(std::string value, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "get", "Integer is not an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "get", "Integer is not an array"));
     return null;
 }
 
-void IntegerVariable::unset(std::string index)
+void IntegerVariable::unset(std::string index, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(name, "unset", "Integer is not an array"));
+    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "unset", "Integer is not an array"));
 }
 
-std::shared_ptr<Variable> IntegerVariable::copy()
+std::shared_ptr<Variable> IntegerVariable::copy(std::shared_ptr<Token> token)
 {
     return std::move(std::make_shared<IntegerVariable>(passable, value));
 }
 
-std::shared_ptr<Variable> IntegerVariable::bitwiseAnd(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> IntegerVariable::bitwiseAnd(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
@@ -252,7 +276,7 @@ std::shared_ptr<Variable> IntegerVariable::bitwiseAnd(std::shared_ptr<Variable> 
     return std::move(std::make_shared<NumberVariable>(passable, value));
 }
 
-std::shared_ptr<Variable> IntegerVariable::bitwiseOr(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> IntegerVariable::bitwiseOr(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
@@ -266,7 +290,7 @@ std::shared_ptr<Variable> IntegerVariable::bitwiseOr(std::shared_ptr<Variable> v
     return std::move(std::make_shared<NumberVariable>(passable, value));
 }
 
-std::shared_ptr<Variable> IntegerVariable::bitwiseXOR(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> IntegerVariable::bitwiseXOR(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)
     {
@@ -280,12 +304,12 @@ std::shared_ptr<Variable> IntegerVariable::bitwiseXOR(std::shared_ptr<Variable> 
     return std::move(std::make_shared<NumberVariable>(passable, value));
 }
 
-std::shared_ptr<Variable> IntegerVariable::bitwiseComplement()
+std::shared_ptr<Variable> IntegerVariable::bitwiseComplement(std::shared_ptr<Token> token)
 {
     return std::make_shared<NumberVariable>(passable, ~toInt());
 }
 
-std::shared_ptr<Variable> IntegerVariable::leftShift(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> IntegerVariable::leftShift(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == null)
     {
@@ -294,7 +318,7 @@ std::shared_ptr<Variable> IntegerVariable::leftShift(std::shared_ptr<Variable> v
     return std::make_shared<NumberVariable>(passable, (long long)(value << variable->toInt()));
 }
 
-std::shared_ptr<Variable> IntegerVariable::rightShift(std::shared_ptr<Variable> variable)
+std::shared_ptr<Variable> IntegerVariable::rightShift(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == null)
     {

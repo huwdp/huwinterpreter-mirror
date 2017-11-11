@@ -33,7 +33,7 @@ std::shared_ptr<Variable> ArrayUnset::execute(std::shared_ptr<Token> token, std:
 
         if (node1 == nullptr || node2 == nullptr)
         {
-            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
             return null;
         }
 
@@ -42,17 +42,17 @@ std::shared_ptr<Variable> ArrayUnset::execute(std::shared_ptr<Token> token, std:
 
         if (var1 == nullptr || var2 == nullptr )
         {
-            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
             return null;
         }
 
         if (var1->getType() != ARRAY)
         {
-            passable->errors->add(passable->errorFactory->firstParameterIsNotTypeOfArray(token, name, "ARRAY"));
+            passable->errors->add(passable->errorFactory->firstParameterIsNotTypeOfArray(token, var1->getName(), name));
             return null;
         }
 
-        var1->unset(var2->toString());
+        var1->unset(var2->toString(), token);
 
         // Todo
         // Maybe turn true here

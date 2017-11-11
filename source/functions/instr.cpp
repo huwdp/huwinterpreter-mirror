@@ -32,7 +32,7 @@ std::shared_ptr<Variable> InStr::execute(std::shared_ptr<Token> token, std::shar
         std::shared_ptr<Node> node2 = arguments.at(1);
         if (node1 == nullptr || node2 == nullptr)
         {
-            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
             return null;
         }
 
@@ -41,7 +41,7 @@ std::shared_ptr<Variable> InStr::execute(std::shared_ptr<Token> token, std::shar
 
         if (var1 == nullptr || var2 == nullptr)
         {
-            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
             return null;
         }
 

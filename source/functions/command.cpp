@@ -39,7 +39,7 @@ std::shared_ptr<Variable> Command::execute(std::shared_ptr<Token> token, std::sh
             std::shared_ptr<Variable> var = (*it)->execute(globalScope, scope);
             if (var == nullptr)
             {
-                passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+                passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
                 return null;
             }
 

@@ -48,7 +48,7 @@ std::shared_ptr<Variable> RightShiftNode::execute(std::shared_ptr<Scope> globalS
             passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
             return null;
         }
-        return l->rightShift(r);
+        return l->rightShift(r, token);
     }
     Debug::print("Could not right shift");
     return null;

@@ -50,7 +50,7 @@ std::shared_ptr<Variable> IfOverOrEqualNode::execute(std::shared_ptr<Scope> glob
             passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
             return null;
         }
-        std::shared_ptr<Variable> v = l->ifOverOrEqual(r);
+        std::shared_ptr<Variable> v = l->ifOverOrEqual(r, token);
         return v;
     }
     Debug::print("Could not compare.");

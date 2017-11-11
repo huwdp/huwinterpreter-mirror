@@ -48,7 +48,7 @@ std::shared_ptr<Variable> LeftShiftNode::execute(std::shared_ptr<Scope> globalSc
             passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
             return null;
         }
-        return l->leftShift(r);
+        return l->leftShift(r, token);
     }
     Debug::print("Could not left shift");
     return null;

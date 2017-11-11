@@ -50,7 +50,7 @@ std::shared_ptr<Variable> IfNotEqualNode::execute(std::shared_ptr<Scope> globalS
             passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
             return null;
         }
-        std::shared_ptr<Variable> v = l->ifNotEqual(r);
+        std::shared_ptr<Variable> v = l->ifNotEqual(r, token);
         return v;
     }
     Debug::print("Could not compare.");

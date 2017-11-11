@@ -35,7 +35,7 @@ std::shared_ptr<Variable> FileExists::execute(std::shared_ptr<Token> token, std:
             std::shared_ptr<Variable> var = fileLocation->execute(globalScope, scope);
             if (var == nullptr)
             {
-                passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+                passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
                 return null;
             }
 
@@ -46,7 +46,7 @@ std::shared_ptr<Variable> FileExists::execute(std::shared_ptr<Token> token, std:
         }
         else
         {
-            passable->errors->add(passable->errorFactory->invalidArgument(RUNTIME_ERROR, token, name));
+            passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
             return null;
         }
     }
