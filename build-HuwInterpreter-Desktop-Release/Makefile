@@ -14,7 +14,7 @@ CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -m64 -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-CXXFLAGS      = -m64 -pipe -Wall -Wextra -Wlogical-op -Wold-style-cast -Wuseless-cast -Wdouble-promotion -Wformat=2 -O2 -fno-rtti -fmerge-all-constants -O2 -std=gnu++11 -Wall -W -Wno-unused-parameter -D_REENTRANT -fPIC $(DEFINES)
+CXXFLAGS      = -m64 -pipe -Wall -Wextra -Wlogical-op -Wuseless-cast -Wdouble-promotion -Wformat=2 -O2 -fno-rtti -fmerge-all-constants -O2 -std=gnu++11 -Wall -W -Wno-unused-parameter -D_REENTRANT -fPIC $(DEFINES)
 INCPATH       = -I../source -I. -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -isystem /usr/include/libdrm -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64
 QMAKE         = /usr/lib/x86_64-linux-gnu/qt5/bin/qmake
 DEL_FILE      = rm -f
@@ -192,7 +192,8 @@ SOURCES       = ../source/errors/debug.cpp \
 		../source/nodes/bitwisexornode.cpp \
 		../source/nodes/bitwisecomplementnode.cpp \
 		../source/nodes/leftshiftnode.cpp \
-		../source/nodes/rightshiftnode.cpp 
+		../source/nodes/rightshiftnode.cpp \
+		../source/variables/variablestringfactory.cpp 
 OBJECTS       = debug.o \
 		error.o \
 		errors.o \
@@ -335,7 +336,8 @@ OBJECTS       = debug.o \
 		bitwisexornode.o \
 		bitwisecomplementnode.o \
 		leftshiftnode.o \
-		rightshiftnode.o
+		rightshiftnode.o \
+		variablestringfactory.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -596,7 +598,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../source/nodes/bitwisexornode.h \
 		../source/nodes/bitwisecomplementnode.h \
 		../source/nodes/leftshiftnode.h \
-		../source/nodes/rightshiftnode.h ../source/errors/debug.cpp \
+		../source/nodes/rightshiftnode.h \
+		../source/variables/variablestringfactory.h ../source/errors/debug.cpp \
 		../source/errors/error.cpp \
 		../source/errors/errors.cpp \
 		../source/errors/errortypestringfactory.cpp \
@@ -738,7 +741,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../source/nodes/bitwisexornode.cpp \
 		../source/nodes/bitwisecomplementnode.cpp \
 		../source/nodes/leftshiftnode.cpp \
-		../source/nodes/rightshiftnode.cpp
+		../source/nodes/rightshiftnode.cpp \
+		../source/variables/variablestringfactory.cpp
 QMAKE_TARGET  = HuwInterpreter
 DESTDIR       = 
 TARGET        = HuwInterpreter
@@ -916,8 +920,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../source/errors/debug.h ../source/errors/error.h ../source/errors/errors.h ../source/errors/errortypes.h ../source/errors/errortypestringfactory.h ../source/errors/ierrors.h ../source/io/fileline.h ../source/io/io.h ../source/nodes/addnode.h ../source/nodes/bracketnode.h ../source/nodes/divnode.h ../source/nodes/equalnode.h ../source/nodes/getfuncnode.h ../source/nodes/getvarnode.h ../source/nodes/ifandnode.h ../source/nodes/ifequalnode.h ../source/nodes/ifnode.h ../source/nodes/ifnotequalnode.h ../source/nodes/ifornode.h ../source/nodes/ifovernode.h ../source/nodes/ifoverorequalnode.h ../source/nodes/ifundernode.h ../source/nodes/ifunderorequalnode.h ../source/nodes/modnode.h ../source/nodes/mulnode.h ../source/nodes/node.h ../source/nodes/numbernode.h ../source/nodes/runnode.h ../source/nodes/setvarnode.h ../source/nodes/subnode.h ../source/nodes/textnode.h ../source/nodes/whilenode.h ../source/parser/parser.h ../source/tokens/filetokenmanager.h ../source/tokens/lineinfo.h ../source/tokens/scanner.h ../source/tokens/texttokenmanager.h ../source/tokens/token.h ../source/tokens/tokenmanager.h ../source/types/isnumeric.h ../source/types/tokentypes.h ../source/types/typedetector.h ../source/variables/precision.h ../source/variables/scope.h ../source/variables/variable.h ../source/variables/variables.h ../source/variables/variabletypefactory.h ../source/huwinterpreter.h ../source/nodes/setreturnnode.h ../source/nodes/incrementnode.h ../source/nodes/decrementnode.h ../source/variables/doublevariable.h ../source/variables/hashtablevariable.h ../source/variables/stringvariable.h ../source/variables/numbervariable.h ../source/variables/integervariable.h ../source/functions/arrayget.h ../source/functions/array.h ../source/variables/constantvariable.h ../source/tokens/tokenmanager.h ../source/tokens/unusabletokens.h ../source/nodes/unaryminusnode.h ../source/nodes/unarynotnode.h ../source/tokens/tokens.h ../source/nodes/bitwiseandnode.h ../source/nodes/bitwiseornode.h ../source/functions/isdoubletype.h ../source/functions/isinttype.h ../source/functions/isnumbertype.h ../source/functions/isint.h ../source/functions/isdouble.h ../source/functions/isnumber.h ../source/nodes/addconstnode.h ../source/nodes/addvarnode.h ../source/nodes/huwcodenodefactory.h ../source/nodes/nodefactory.h ../source/functions/abs.h ../source/functions/acos.h ../source/functions/arrayset.h ../source/functions/arrayunset.h ../source/functions/asc.h ../source/functions/asin.h ../source/functions/atan.h ../source/functions/atan2.h ../source/functions/ceil.h ../source/functions/cha.h ../source/functions/command.h ../source/functions/cos.h ../source/functions/count.h ../source/functions/customfunction.h ../source/functions/dateformat.h ../source/functions/emptyfunction.h ../source/functions/exp.h ../source/functions/fileread.h ../source/functions/filewrite.h ../source/functions/floor.h ../source/functions/function.h ../source/functions/functionlist.h ../source/functions/functions.h ../source/functions/instr.h ../source/functions/instrrev.h ../source/functions/isarraytype.h ../source/functions/isstringtype.h ../source/functions/left.h ../source/functions/len.h ../source/functions/log.h ../source/functions/ltrim.h ../source/functions/max.h ../source/functions/mid.h ../source/functions/min.h ../source/functions/month.h ../source/functions/monthname.h ../source/functions/not.h ../source/functions/now.h ../source/functions/pow.h ../source/functions/print.h ../source/functions/random.h ../source/functions/replace.h ../source/functions/right.h ../source/functions/round.h ../source/functions/rtrim.h ../source/functions/scan.h ../source/functions/sin.h ../source/functions/space.h ../source/functions/sqrt.h ../source/functions/str.h ../source/functions/strcomp.h ../source/functions/strreverse.h ../source/functions/tan.h ../source/functions/todouble.h ../source/functions/toint.h ../source/functions/tolower.h ../source/functions/tostring.h ../source/functions/toupper.h ../source/functions/trim.h ../source/functions/weekday.h ../source/functions/weekdayname.h ../source/functions/year.h ../source/nodes/addconstnode.h ../source/nodes/addnode.h ../source/nodes/addvarnode.h ../source/nodes/bitwiseandnode.h ../source/nodes/bitwiseornode.h ../source/nodes/bracketnode.h ../source/nodes/decrementnode.h ../source/nodes/divnode.h ../source/nodes/equalnode.h ../source/nodes/getfuncnode.h ../source/nodes/getvarnode.h ../source/nodes/huwcodenodefactory.h ../source/nodes/ifandnode.h ../source/nodes/ifequalnode.h ../source/nodes/ifnode.h ../source/nodes/ifnotequalnode.h ../source/nodes/ifornode.h ../source/nodes/ifovernode.h ../source/nodes/ifoverorequalnode.h ../source/nodes/ifundernode.h ../source/nodes/ifunderorequalnode.h ../source/nodes/incrementnode.h ../source/nodes/modnode.h ../source/nodes/mulnode.h ../source/nodes/node.h ../source/nodes/nodefactory.h ../source/nodes/numbernode.h ../source/nodes/runnode.h ../source/nodes/setreturnnode.h ../source/nodes/setvarnode.h ../source/nodes/subnode.h ../source/nodes/textnode.h ../source/nodes/unaryminusnode.h ../source/nodes/unarynotnode.h ../source/nodes/whilenode.h ../source/parser/parser.h ../source/types/isnumeric.h ../source/types/tokentypes.h ../source/nodes/nodefactoryfactory.h ../source/nodes/semicolonnode.h ../source/format/escapecharacteroutput.h ../source/common/passable.h ../source/errors/errorfactory.h ../source/functions/fileexists.h ../source/functions/regexsearch.h ../source/functions/regexmatch.h ../source/functions/regexreplace.h ../source/nodes/bitwisexornode.h ../source/nodes/bitwisecomplementnode.h ../source/nodes/leftshiftnode.h ../source/nodes/rightshiftnode.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../source/errors/debug.cpp ../source/errors/error.cpp ../source/errors/errors.cpp ../source/errors/errortypestringfactory.cpp ../source/io/fileline.cpp ../source/io/io.cpp ../source/types/typedetector.cpp ../source/variables/precision.cpp ../source/variables/scope.cpp ../source/variables/variable.cpp ../source/variables/variables.cpp ../source/variables/variabletypefactory.cpp ../source/huwinterpreter.cpp ../source/functions/customfunction.cpp ../source/functions/emptyfunction.cpp ../source/variables/doublevariable.cpp ../source/variables/integervariable.cpp ../source/variables/numbervariable.cpp ../source/variables/stringvariable.cpp ../source/variables/hashtablevariable.cpp ../source/functions/arrayget.cpp ../source/functions/arrayset.cpp ../source/functions/array.cpp ../source/functions/arrayunset.cpp ../source/functions/count.cpp ../source/variables/constantvariable.cpp ../source/tokens/unusabletokens.cpp ../source/functions/isarraytype.cpp ../source/functions/isdoubletype.cpp ../source/functions/isnumbertype.cpp ../source/functions/isinttype.cpp ../source/functions/isstringtype.cpp ../source/functions/isint.cpp ../source/functions/isdouble.cpp ../source/functions/todouble.cpp ../source/functions/toint.cpp ../source/functions/abs.cpp ../source/functions/acos.cpp ../source/functions/asc.cpp ../source/functions/asin.cpp ../source/functions/atan.cpp ../source/functions/atan2.cpp ../source/functions/ceil.cpp ../source/functions/cha.cpp ../source/functions/command.cpp ../source/functions/cos.cpp ../source/functions/dateformat.cpp ../source/functions/exp.cpp ../source/functions/fileread.cpp ../source/functions/filewrite.cpp ../source/functions/floor.cpp ../source/functions/function.cpp ../source/functions/functions.cpp ../source/functions/instr.cpp ../source/functions/instrrev.cpp ../source/functions/isnumber.cpp ../source/functions/left.cpp ../source/functions/len.cpp ../source/functions/log.cpp ../source/functions/ltrim.cpp ../source/functions/max.cpp ../source/functions/mid.cpp ../source/functions/min.cpp ../source/functions/month.cpp ../source/functions/monthname.cpp ../source/functions/not.cpp ../source/functions/now.cpp ../source/functions/pow.cpp ../source/functions/print.cpp ../source/functions/random.cpp ../source/functions/replace.cpp ../source/functions/right.cpp ../source/functions/round.cpp ../source/functions/rtrim.cpp ../source/functions/scan.cpp ../source/functions/sin.cpp ../source/functions/space.cpp ../source/functions/sqrt.cpp ../source/functions/str.cpp ../source/functions/strcomp.cpp ../source/functions/strreverse.cpp ../source/functions/tan.cpp ../source/functions/tolower.cpp ../source/functions/tostring.cpp ../source/functions/toupper.cpp ../source/functions/trim.cpp ../source/functions/weekday.cpp ../source/functions/weekdayname.cpp ../source/functions/year.cpp ../source/parser/parser.cpp ../source/tokens/filetokenmanager.cpp ../source/tokens/lineinfo.cpp ../source/tokens/scanner.cpp ../source/tokens/texttokenmanager.cpp ../source/tokens/token.cpp ../source/tokens/tokens.cpp ../source/main.cpp ../source/nodes/addconstnode.cpp ../source/nodes/addnode.cpp ../source/nodes/addvarnode.cpp ../source/nodes/bitwiseandnode.cpp ../source/nodes/bitwiseornode.cpp ../source/nodes/getfuncnode.cpp ../source/nodes/equalnode.cpp ../source/nodes/divnode.cpp ../source/nodes/decrementnode.cpp ../source/nodes/bracketnode.cpp ../source/nodes/ifequalnode.cpp ../source/nodes/ifnode.cpp ../source/nodes/ifandnode.cpp ../source/nodes/huwcodenodefactory.cpp ../source/nodes/getvarnode.cpp ../source/nodes/ifnotequalnode.cpp ../source/nodes/ifornode.cpp ../source/nodes/ifovernode.cpp ../source/nodes/ifoverorequalnode.cpp ../source/nodes/ifundernode.cpp ../source/nodes/ifunderorequalnode.cpp ../source/nodes/numbernode.cpp ../source/nodes/mulnode.cpp ../source/nodes/modnode.cpp ../source/nodes/incrementnode.cpp ../source/nodes/runnode.cpp ../source/nodes/setreturnnode.cpp ../source/nodes/setvarnode.cpp ../source/nodes/subnode.cpp ../source/nodes/textnode.cpp ../source/nodes/unaryminusnode.cpp ../source/nodes/whilenode.cpp ../source/nodes/unarynotnode.cpp ../source/nodes/nodefactoryfactory.cpp ../source/nodes/semicolonnode.cpp ../source/format/escapecharacteroutput.cpp ../source/common/passable.cpp ../source/errors/errorfactory.cpp ../source/functions/fileexists.cpp ../source/functions/regexsearch.cpp ../source/functions/regexmatch.cpp ../source/functions/regexreplace.cpp ../source/nodes/bitwisexornode.cpp ../source/nodes/bitwisecomplementnode.cpp ../source/nodes/leftshiftnode.cpp ../source/nodes/rightshiftnode.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../source/errors/debug.h ../source/errors/error.h ../source/errors/errors.h ../source/errors/errortypes.h ../source/errors/errortypestringfactory.h ../source/errors/ierrors.h ../source/io/fileline.h ../source/io/io.h ../source/nodes/addnode.h ../source/nodes/bracketnode.h ../source/nodes/divnode.h ../source/nodes/equalnode.h ../source/nodes/getfuncnode.h ../source/nodes/getvarnode.h ../source/nodes/ifandnode.h ../source/nodes/ifequalnode.h ../source/nodes/ifnode.h ../source/nodes/ifnotequalnode.h ../source/nodes/ifornode.h ../source/nodes/ifovernode.h ../source/nodes/ifoverorequalnode.h ../source/nodes/ifundernode.h ../source/nodes/ifunderorequalnode.h ../source/nodes/modnode.h ../source/nodes/mulnode.h ../source/nodes/node.h ../source/nodes/numbernode.h ../source/nodes/runnode.h ../source/nodes/setvarnode.h ../source/nodes/subnode.h ../source/nodes/textnode.h ../source/nodes/whilenode.h ../source/parser/parser.h ../source/tokens/filetokenmanager.h ../source/tokens/lineinfo.h ../source/tokens/scanner.h ../source/tokens/texttokenmanager.h ../source/tokens/token.h ../source/tokens/tokenmanager.h ../source/types/isnumeric.h ../source/types/tokentypes.h ../source/types/typedetector.h ../source/variables/precision.h ../source/variables/scope.h ../source/variables/variable.h ../source/variables/variables.h ../source/variables/variabletypefactory.h ../source/huwinterpreter.h ../source/nodes/setreturnnode.h ../source/nodes/incrementnode.h ../source/nodes/decrementnode.h ../source/variables/doublevariable.h ../source/variables/hashtablevariable.h ../source/variables/stringvariable.h ../source/variables/numbervariable.h ../source/variables/integervariable.h ../source/functions/arrayget.h ../source/functions/array.h ../source/variables/constantvariable.h ../source/tokens/tokenmanager.h ../source/tokens/unusabletokens.h ../source/nodes/unaryminusnode.h ../source/nodes/unarynotnode.h ../source/tokens/tokens.h ../source/nodes/bitwiseandnode.h ../source/nodes/bitwiseornode.h ../source/functions/isdoubletype.h ../source/functions/isinttype.h ../source/functions/isnumbertype.h ../source/functions/isint.h ../source/functions/isdouble.h ../source/functions/isnumber.h ../source/nodes/addconstnode.h ../source/nodes/addvarnode.h ../source/nodes/huwcodenodefactory.h ../source/nodes/nodefactory.h ../source/functions/abs.h ../source/functions/acos.h ../source/functions/arrayset.h ../source/functions/arrayunset.h ../source/functions/asc.h ../source/functions/asin.h ../source/functions/atan.h ../source/functions/atan2.h ../source/functions/ceil.h ../source/functions/cha.h ../source/functions/command.h ../source/functions/cos.h ../source/functions/count.h ../source/functions/customfunction.h ../source/functions/dateformat.h ../source/functions/emptyfunction.h ../source/functions/exp.h ../source/functions/fileread.h ../source/functions/filewrite.h ../source/functions/floor.h ../source/functions/function.h ../source/functions/functionlist.h ../source/functions/functions.h ../source/functions/instr.h ../source/functions/instrrev.h ../source/functions/isarraytype.h ../source/functions/isstringtype.h ../source/functions/left.h ../source/functions/len.h ../source/functions/log.h ../source/functions/ltrim.h ../source/functions/max.h ../source/functions/mid.h ../source/functions/min.h ../source/functions/month.h ../source/functions/monthname.h ../source/functions/not.h ../source/functions/now.h ../source/functions/pow.h ../source/functions/print.h ../source/functions/random.h ../source/functions/replace.h ../source/functions/right.h ../source/functions/round.h ../source/functions/rtrim.h ../source/functions/scan.h ../source/functions/sin.h ../source/functions/space.h ../source/functions/sqrt.h ../source/functions/str.h ../source/functions/strcomp.h ../source/functions/strreverse.h ../source/functions/tan.h ../source/functions/todouble.h ../source/functions/toint.h ../source/functions/tolower.h ../source/functions/tostring.h ../source/functions/toupper.h ../source/functions/trim.h ../source/functions/weekday.h ../source/functions/weekdayname.h ../source/functions/year.h ../source/nodes/addconstnode.h ../source/nodes/addnode.h ../source/nodes/addvarnode.h ../source/nodes/bitwiseandnode.h ../source/nodes/bitwiseornode.h ../source/nodes/bracketnode.h ../source/nodes/decrementnode.h ../source/nodes/divnode.h ../source/nodes/equalnode.h ../source/nodes/getfuncnode.h ../source/nodes/getvarnode.h ../source/nodes/huwcodenodefactory.h ../source/nodes/ifandnode.h ../source/nodes/ifequalnode.h ../source/nodes/ifnode.h ../source/nodes/ifnotequalnode.h ../source/nodes/ifornode.h ../source/nodes/ifovernode.h ../source/nodes/ifoverorequalnode.h ../source/nodes/ifundernode.h ../source/nodes/ifunderorequalnode.h ../source/nodes/incrementnode.h ../source/nodes/modnode.h ../source/nodes/mulnode.h ../source/nodes/node.h ../source/nodes/nodefactory.h ../source/nodes/numbernode.h ../source/nodes/runnode.h ../source/nodes/setreturnnode.h ../source/nodes/setvarnode.h ../source/nodes/subnode.h ../source/nodes/textnode.h ../source/nodes/unaryminusnode.h ../source/nodes/unarynotnode.h ../source/nodes/whilenode.h ../source/parser/parser.h ../source/types/isnumeric.h ../source/types/tokentypes.h ../source/nodes/nodefactoryfactory.h ../source/nodes/semicolonnode.h ../source/format/escapecharacteroutput.h ../source/common/passable.h ../source/errors/errorfactory.h ../source/functions/fileexists.h ../source/functions/regexsearch.h ../source/functions/regexmatch.h ../source/functions/regexreplace.h ../source/nodes/bitwisexornode.h ../source/nodes/bitwisecomplementnode.h ../source/nodes/leftshiftnode.h ../source/nodes/rightshiftnode.h ../source/variables/variablestringfactory.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../source/errors/debug.cpp ../source/errors/error.cpp ../source/errors/errors.cpp ../source/errors/errortypestringfactory.cpp ../source/io/fileline.cpp ../source/io/io.cpp ../source/types/typedetector.cpp ../source/variables/precision.cpp ../source/variables/scope.cpp ../source/variables/variable.cpp ../source/variables/variables.cpp ../source/variables/variabletypefactory.cpp ../source/huwinterpreter.cpp ../source/functions/customfunction.cpp ../source/functions/emptyfunction.cpp ../source/variables/doublevariable.cpp ../source/variables/integervariable.cpp ../source/variables/numbervariable.cpp ../source/variables/stringvariable.cpp ../source/variables/hashtablevariable.cpp ../source/functions/arrayget.cpp ../source/functions/arrayset.cpp ../source/functions/array.cpp ../source/functions/arrayunset.cpp ../source/functions/count.cpp ../source/variables/constantvariable.cpp ../source/tokens/unusabletokens.cpp ../source/functions/isarraytype.cpp ../source/functions/isdoubletype.cpp ../source/functions/isnumbertype.cpp ../source/functions/isinttype.cpp ../source/functions/isstringtype.cpp ../source/functions/isint.cpp ../source/functions/isdouble.cpp ../source/functions/todouble.cpp ../source/functions/toint.cpp ../source/functions/abs.cpp ../source/functions/acos.cpp ../source/functions/asc.cpp ../source/functions/asin.cpp ../source/functions/atan.cpp ../source/functions/atan2.cpp ../source/functions/ceil.cpp ../source/functions/cha.cpp ../source/functions/command.cpp ../source/functions/cos.cpp ../source/functions/dateformat.cpp ../source/functions/exp.cpp ../source/functions/fileread.cpp ../source/functions/filewrite.cpp ../source/functions/floor.cpp ../source/functions/function.cpp ../source/functions/functions.cpp ../source/functions/instr.cpp ../source/functions/instrrev.cpp ../source/functions/isnumber.cpp ../source/functions/left.cpp ../source/functions/len.cpp ../source/functions/log.cpp ../source/functions/ltrim.cpp ../source/functions/max.cpp ../source/functions/mid.cpp ../source/functions/min.cpp ../source/functions/month.cpp ../source/functions/monthname.cpp ../source/functions/not.cpp ../source/functions/now.cpp ../source/functions/pow.cpp ../source/functions/print.cpp ../source/functions/random.cpp ../source/functions/replace.cpp ../source/functions/right.cpp ../source/functions/round.cpp ../source/functions/rtrim.cpp ../source/functions/scan.cpp ../source/functions/sin.cpp ../source/functions/space.cpp ../source/functions/sqrt.cpp ../source/functions/str.cpp ../source/functions/strcomp.cpp ../source/functions/strreverse.cpp ../source/functions/tan.cpp ../source/functions/tolower.cpp ../source/functions/tostring.cpp ../source/functions/toupper.cpp ../source/functions/trim.cpp ../source/functions/weekday.cpp ../source/functions/weekdayname.cpp ../source/functions/year.cpp ../source/parser/parser.cpp ../source/tokens/filetokenmanager.cpp ../source/tokens/lineinfo.cpp ../source/tokens/scanner.cpp ../source/tokens/texttokenmanager.cpp ../source/tokens/token.cpp ../source/tokens/tokens.cpp ../source/main.cpp ../source/nodes/addconstnode.cpp ../source/nodes/addnode.cpp ../source/nodes/addvarnode.cpp ../source/nodes/bitwiseandnode.cpp ../source/nodes/bitwiseornode.cpp ../source/nodes/getfuncnode.cpp ../source/nodes/equalnode.cpp ../source/nodes/divnode.cpp ../source/nodes/decrementnode.cpp ../source/nodes/bracketnode.cpp ../source/nodes/ifequalnode.cpp ../source/nodes/ifnode.cpp ../source/nodes/ifandnode.cpp ../source/nodes/huwcodenodefactory.cpp ../source/nodes/getvarnode.cpp ../source/nodes/ifnotequalnode.cpp ../source/nodes/ifornode.cpp ../source/nodes/ifovernode.cpp ../source/nodes/ifoverorequalnode.cpp ../source/nodes/ifundernode.cpp ../source/nodes/ifunderorequalnode.cpp ../source/nodes/numbernode.cpp ../source/nodes/mulnode.cpp ../source/nodes/modnode.cpp ../source/nodes/incrementnode.cpp ../source/nodes/runnode.cpp ../source/nodes/setreturnnode.cpp ../source/nodes/setvarnode.cpp ../source/nodes/subnode.cpp ../source/nodes/textnode.cpp ../source/nodes/unaryminusnode.cpp ../source/nodes/whilenode.cpp ../source/nodes/unarynotnode.cpp ../source/nodes/nodefactoryfactory.cpp ../source/nodes/semicolonnode.cpp ../source/format/escapecharacteroutput.cpp ../source/common/passable.cpp ../source/errors/errorfactory.cpp ../source/functions/fileexists.cpp ../source/functions/regexsearch.cpp ../source/functions/regexmatch.cpp ../source/functions/regexreplace.cpp ../source/nodes/bitwisexornode.cpp ../source/nodes/bitwisecomplementnode.cpp ../source/nodes/leftshiftnode.cpp ../source/nodes/rightshiftnode.cpp ../source/variables/variablestringfactory.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -947,7 +951,7 @@ compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
-	g++ -m64 -pipe -Wall -Wextra -Wlogical-op -Wold-style-cast -Wuseless-cast -Wdouble-promotion -Wformat=2 -O2 -fno-rtti -fmerge-all-constants -O2 -std=gnu++11 -Wall -W -Wno-unused-parameter -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
+	g++ -m64 -pipe -Wall -Wextra -Wlogical-op -Wuseless-cast -Wdouble-promotion -Wformat=2 -O2 -fno-rtti -fmerge-all-constants -O2 -std=gnu++11 -Wall -W -Wno-unused-parameter -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
 compiler_moc_header_make_all:
 compiler_moc_header_clean:
@@ -1009,7 +1013,8 @@ precision.o: ../source/variables/precision.cpp ../source/variables/precision.h \
 		../source/errors/errortypes.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
-		../source/errors/errorfactory.h
+		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o precision.o ../source/variables/precision.cpp
 
 scope.o: ../source/variables/scope.cpp ../source/variables/scope.h \
@@ -1027,6 +1032,7 @@ scope.o: ../source/variables/scope.cpp ../source/variables/scope.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -1047,7 +1053,8 @@ variable.o: ../source/variables/variable.cpp ../source/variables/variable.h \
 		../source/errors/errortypes.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
-		../source/errors/errorfactory.h
+		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o variable.o ../source/variables/variable.cpp
 
 variables.o: ../source/variables/variables.cpp ../source/variables/variables.h \
@@ -1063,6 +1070,7 @@ variables.o: ../source/variables/variables.cpp ../source/variables/variables.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -1087,6 +1095,7 @@ variabletypefactory.o: ../source/variables/variabletypefactory.cpp ../source/var
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -1111,6 +1120,7 @@ huwinterpreter.o: ../source/huwinterpreter.cpp ../source/huwinterpreter.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -1257,6 +1267,7 @@ customfunction.o: ../source/functions/customfunction.cpp ../source/functions/cus
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1284,6 +1295,7 @@ emptyfunction.o: ../source/functions/emptyfunction.cpp ../source/functions/empty
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1310,6 +1322,7 @@ doublevariable.o: ../source/variables/doublevariable.cpp ../source/variables/dou
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
 		../source/variables/variabletypefactory.h \
@@ -1330,6 +1343,7 @@ integervariable.o: ../source/variables/integervariable.cpp ../source/variables/i
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/numbervariable.h \
 		../source/variables/doublevariable.h \
 		../source/variables/variabletypefactory.h \
@@ -1350,6 +1364,7 @@ numbervariable.o: ../source/variables/numbervariable.cpp ../source/variables/num
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/integervariable.h \
 		../source/variables/variabletypefactory.h \
@@ -1370,6 +1385,7 @@ stringvariable.o: ../source/variables/stringvariable.cpp ../source/variables/str
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -1391,6 +1407,7 @@ hashtablevariable.o: ../source/variables/hashtablevariable.cpp ../source/variabl
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/integervariable.h \
 		../source/variables/variabletypefactory.h \
@@ -1412,6 +1429,7 @@ arrayget.o: ../source/functions/arrayget.cpp ../source/functions/arrayget.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1439,6 +1457,7 @@ arrayset.o: ../source/functions/arrayset.cpp ../source/functions/arrayset.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1466,6 +1485,7 @@ array.o: ../source/functions/array.cpp ../source/functions/array.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1494,6 +1514,7 @@ arrayunset.o: ../source/functions/arrayunset.cpp ../source/functions/arrayunset.
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1521,6 +1542,7 @@ count.o: ../source/functions/count.cpp ../source/functions/count.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1549,6 +1571,7 @@ constantvariable.o: ../source/variables/constantvariable.cpp ../source/variables
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -1577,6 +1600,7 @@ isarraytype.o: ../source/functions/isarraytype.cpp ../source/functions/isarrayty
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1604,6 +1628,7 @@ isdoubletype.o: ../source/functions/isdoubletype.cpp ../source/functions/isdoubl
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1631,6 +1656,7 @@ isnumbertype.o: ../source/functions/isnumbertype.cpp ../source/functions/isnumbe
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1658,6 +1684,7 @@ isinttype.o: ../source/functions/isinttype.cpp ../source/functions/isinttype.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1685,6 +1712,7 @@ isstringtype.o: ../source/functions/isstringtype.cpp ../source/functions/isstrin
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1712,6 +1740,7 @@ isint.o: ../source/functions/isint.cpp ../source/functions/isint.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1739,6 +1768,7 @@ isdouble.o: ../source/functions/isdouble.cpp ../source/functions/isdouble.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1766,6 +1796,7 @@ todouble.o: ../source/functions/todouble.cpp ../source/functions/todouble.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1793,6 +1824,7 @@ toint.o: ../source/functions/toint.cpp ../source/functions/toint.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1820,6 +1852,7 @@ abs.o: ../source/functions/abs.cpp ../source/functions/abs.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1847,6 +1880,7 @@ acos.o: ../source/functions/acos.cpp ../source/functions/acos.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1874,6 +1908,7 @@ asc.o: ../source/functions/asc.cpp ../source/functions/asc.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1901,6 +1936,7 @@ asin.o: ../source/functions/asin.cpp ../source/functions/asin.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1928,6 +1964,7 @@ atan.o: ../source/functions/atan.cpp ../source/functions/atan.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1955,6 +1992,7 @@ atan2.o: ../source/functions/atan2.cpp ../source/functions/atan2.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1982,6 +2020,7 @@ ceil.o: ../source/functions/ceil.cpp ../source/functions/ceil.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2009,6 +2048,7 @@ cha.o: ../source/functions/cha.cpp ../source/functions/cha.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2036,6 +2076,7 @@ command.o: ../source/functions/command.cpp ../source/functions/command.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2063,6 +2104,7 @@ cos.o: ../source/functions/cos.cpp ../source/functions/cos.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2090,6 +2132,7 @@ dateformat.o: ../source/functions/dateformat.cpp ../source/functions/dateformat.
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2117,6 +2160,7 @@ exp.o: ../source/functions/exp.cpp ../source/functions/exp.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2144,6 +2188,7 @@ fileread.o: ../source/functions/fileread.cpp ../source/functions/fileread.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2172,6 +2217,7 @@ filewrite.o: ../source/functions/filewrite.cpp ../source/functions/filewrite.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2200,6 +2246,7 @@ floor.o: ../source/functions/floor.cpp ../source/functions/floor.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2226,6 +2273,7 @@ function.o: ../source/functions/function.cpp ../source/functions/function.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2253,6 +2301,7 @@ functions.o: ../source/functions/functions.cpp ../source/functions/functions.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2352,6 +2401,7 @@ instr.o: ../source/functions/instr.cpp ../source/functions/instr.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2379,6 +2429,7 @@ instrrev.o: ../source/functions/instrrev.cpp ../source/functions/instrrev.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2406,6 +2457,7 @@ isnumber.o: ../source/functions/isnumber.cpp ../source/functions/isnumber.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2433,6 +2485,7 @@ left.o: ../source/functions/left.cpp ../source/functions/left.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2460,6 +2513,7 @@ len.o: ../source/functions/len.cpp ../source/functions/len.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2487,6 +2541,7 @@ log.o: ../source/functions/log.cpp ../source/functions/log.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2514,6 +2569,7 @@ ltrim.o: ../source/functions/ltrim.cpp ../source/functions/ltrim.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2541,6 +2597,7 @@ max.o: ../source/functions/max.cpp ../source/functions/max.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2568,6 +2625,7 @@ mid.o: ../source/functions/mid.cpp ../source/functions/mid.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2595,6 +2653,7 @@ min.o: ../source/functions/min.cpp ../source/functions/min.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2622,6 +2681,7 @@ month.o: ../source/functions/month.cpp ../source/functions/month.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2649,6 +2709,7 @@ monthname.o: ../source/functions/monthname.cpp ../source/functions/monthname.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2676,6 +2737,7 @@ not.o: ../source/functions/not.cpp ../source/functions/not.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2703,6 +2765,7 @@ now.o: ../source/functions/now.cpp ../source/functions/now.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2730,6 +2793,7 @@ pow.o: ../source/functions/pow.cpp ../source/functions/pow.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2757,6 +2821,7 @@ print.o: ../source/functions/print.cpp ../source/functions/print.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2784,6 +2849,7 @@ random.o: ../source/functions/random.cpp ../source/functions/random.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2811,6 +2877,7 @@ replace.o: ../source/functions/replace.cpp ../source/functions/replace.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2838,6 +2905,7 @@ right.o: ../source/functions/right.cpp ../source/functions/right.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2865,6 +2933,7 @@ round.o: ../source/functions/round.cpp ../source/functions/round.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2892,6 +2961,7 @@ rtrim.o: ../source/functions/rtrim.cpp ../source/functions/rtrim.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2919,6 +2989,7 @@ scan.o: ../source/functions/scan.cpp ../source/functions/scan.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2946,6 +3017,7 @@ sin.o: ../source/functions/sin.cpp ../source/functions/sin.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2973,6 +3045,7 @@ space.o: ../source/functions/space.cpp ../source/functions/space.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3000,6 +3073,7 @@ sqrt.o: ../source/functions/sqrt.cpp ../source/functions/sqrt.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3027,6 +3101,7 @@ str.o: ../source/functions/str.cpp ../source/functions/str.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3054,6 +3129,7 @@ strcomp.o: ../source/functions/strcomp.cpp ../source/functions/strcomp.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3081,6 +3157,7 @@ strreverse.o: ../source/functions/strreverse.cpp ../source/functions/strreverse.
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3108,6 +3185,7 @@ tan.o: ../source/functions/tan.cpp ../source/functions/tan.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3135,6 +3213,7 @@ tolower.o: ../source/functions/tolower.cpp ../source/functions/tolower.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3162,6 +3241,7 @@ tostring.o: ../source/functions/tostring.cpp ../source/functions/tostring.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3189,6 +3269,7 @@ toupper.o: ../source/functions/toupper.cpp ../source/functions/toupper.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3216,6 +3297,7 @@ trim.o: ../source/functions/trim.cpp ../source/functions/trim.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3245,6 +3327,7 @@ weekday.o: ../source/functions/weekday.cpp ../source/functions/weekday.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3272,6 +3355,7 @@ weekdayname.o: ../source/functions/weekdayname.cpp ../source/functions/weekdayna
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3299,6 +3383,7 @@ year.o: ../source/functions/year.cpp ../source/functions/year.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3328,6 +3413,7 @@ parser.o: ../source/parser/parser.cpp ../source/parser/parser.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -3505,6 +3591,7 @@ main.o: ../source/main.cpp ../source/parser/parser.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -3653,6 +3740,7 @@ addconstnode.o: ../source/nodes/addconstnode.cpp ../source/nodes/addconstnode.h 
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -3678,6 +3766,7 @@ addnode.o: ../source/nodes/addnode.cpp ../source/nodes/addnode.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -3703,6 +3792,7 @@ addvarnode.o: ../source/nodes/addvarnode.cpp ../source/nodes/addvarnode.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -3728,6 +3818,7 @@ bitwiseandnode.o: ../source/nodes/bitwiseandnode.cpp ../source/nodes/bitwiseandn
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -3753,6 +3844,7 @@ bitwiseornode.o: ../source/nodes/bitwiseornode.cpp ../source/nodes/bitwiseornode
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -3778,6 +3870,7 @@ getfuncnode.o: ../source/nodes/getfuncnode.cpp ../source/nodes/getfuncnode.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -3878,6 +3971,7 @@ equalnode.o: ../source/nodes/equalnode.cpp ../source/nodes/equalnode.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -3904,6 +3998,7 @@ divnode.o: ../source/nodes/divnode.cpp ../source/nodes/divnode.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -3929,6 +4024,7 @@ decrementnode.o: ../source/nodes/decrementnode.cpp ../source/nodes/decrementnode
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -3954,6 +4050,7 @@ bracketnode.o: ../source/nodes/bracketnode.cpp ../source/nodes/bracketnode.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -3979,6 +4076,7 @@ ifequalnode.o: ../source/nodes/ifequalnode.cpp ../source/nodes/ifequalnode.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4004,6 +4102,7 @@ ifnode.o: ../source/nodes/ifnode.cpp ../source/nodes/ifnode.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4029,6 +4128,7 @@ ifandnode.o: ../source/nodes/ifandnode.cpp ../source/nodes/ifandnode.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4055,6 +4155,7 @@ huwcodenodefactory.o: ../source/nodes/huwcodenodefactory.cpp ../source/nodes/huw
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4193,6 +4294,7 @@ getvarnode.o: ../source/nodes/getvarnode.cpp ../source/nodes/getvarnode.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4218,6 +4320,7 @@ ifnotequalnode.o: ../source/nodes/ifnotequalnode.cpp ../source/nodes/ifnotequaln
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4243,6 +4346,7 @@ ifornode.o: ../source/nodes/ifornode.cpp ../source/nodes/ifornode.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4268,6 +4372,7 @@ ifovernode.o: ../source/nodes/ifovernode.cpp ../source/nodes/ifovernode.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4293,6 +4398,7 @@ ifoverorequalnode.o: ../source/nodes/ifoverorequalnode.cpp ../source/nodes/ifove
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4318,6 +4424,7 @@ ifundernode.o: ../source/nodes/ifundernode.cpp ../source/nodes/ifundernode.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4343,6 +4450,7 @@ ifunderorequalnode.o: ../source/nodes/ifunderorequalnode.cpp ../source/nodes/ifu
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4368,6 +4476,7 @@ numbernode.o: ../source/nodes/numbernode.cpp ../source/nodes/numbernode.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4394,6 +4503,7 @@ mulnode.o: ../source/nodes/mulnode.cpp ../source/nodes/mulnode.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4419,6 +4529,7 @@ modnode.o: ../source/nodes/modnode.cpp ../source/nodes/modnode.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4444,6 +4555,7 @@ incrementnode.o: ../source/nodes/incrementnode.cpp ../source/nodes/incrementnode
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4469,6 +4581,7 @@ runnode.o: ../source/nodes/runnode.cpp ../source/nodes/runnode.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4494,6 +4607,7 @@ setreturnnode.o: ../source/nodes/setreturnnode.cpp ../source/nodes/setreturnnode
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4519,6 +4633,7 @@ setvarnode.o: ../source/nodes/setvarnode.cpp ../source/nodes/setvarnode.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4544,6 +4659,7 @@ subnode.o: ../source/nodes/subnode.cpp ../source/nodes/subnode.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4569,6 +4685,7 @@ textnode.o: ../source/nodes/textnode.cpp ../source/nodes/textnode.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4595,6 +4712,7 @@ unaryminusnode.o: ../source/nodes/unaryminusnode.cpp ../source/nodes/unaryminusn
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4620,6 +4738,7 @@ whilenode.o: ../source/nodes/whilenode.cpp ../source/nodes/whilenode.h \
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4645,6 +4764,7 @@ unarynotnode.o: ../source/nodes/unarynotnode.cpp ../source/nodes/unarynotnode.h 
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4671,6 +4791,7 @@ nodefactoryfactory.o: ../source/nodes/nodefactoryfactory.cpp ../source/nodes/nod
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4810,6 +4931,7 @@ semicolonnode.o: ../source/nodes/semicolonnode.cpp ../source/nodes/semicolonnode
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4831,7 +4953,8 @@ passable.o: ../source/common/passable.cpp ../source/common/passable.h \
 		../source/tokens/lineinfo.h \
 		../source/errors/errortypes.h \
 		../source/errors/errortypestringfactory.h \
-		../source/errors/errorfactory.h
+		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o passable.o ../source/common/passable.cpp
 
 errorfactory.o: ../source/errors/errorfactory.cpp ../source/errors/errorfactory.h \
@@ -4840,7 +4963,8 @@ errorfactory.o: ../source/errors/errorfactory.cpp ../source/errors/errorfactory.
 		../source/types/tokentypes.h \
 		../source/tokens/lineinfo.h \
 		../source/errors/errortypes.h \
-		../source/errors/errortypestringfactory.h
+		../source/errors/errortypestringfactory.h \
+		../source/variables/variablestringfactory.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o errorfactory.o ../source/errors/errorfactory.cpp
 
 fileexists.o: ../source/functions/fileexists.cpp ../source/functions/fileexists.h \
@@ -4857,6 +4981,7 @@ fileexists.o: ../source/functions/fileexists.cpp ../source/functions/fileexists.
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -4885,6 +5010,7 @@ regexsearch.o: ../source/functions/regexsearch.cpp ../source/functions/regexsear
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -4912,6 +5038,7 @@ regexmatch.o: ../source/functions/regexmatch.cpp ../source/functions/regexmatch.
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -4940,6 +5067,7 @@ regexreplace.o: ../source/functions/regexreplace.cpp ../source/functions/regexre
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -4968,6 +5096,7 @@ bitwisexornode.o: ../source/nodes/bitwisexornode.cpp ../source/nodes/bitwisexorn
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4993,6 +5122,7 @@ bitwisecomplementnode.o: ../source/nodes/bitwisecomplementnode.cpp ../source/nod
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -5018,6 +5148,7 @@ leftshiftnode.o: ../source/nodes/leftshiftnode.cpp ../source/nodes/leftshiftnode
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -5043,6 +5174,7 @@ rightshiftnode.o: ../source/nodes/rightshiftnode.cpp ../source/nodes/rightshiftn
 		../source/types/typedetector.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
+		../source/variables/variablestringfactory.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -5052,6 +5184,10 @@ rightshiftnode.o: ../source/nodes/rightshiftnode.cpp ../source/nodes/rightshiftn
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rightshiftnode.o ../source/nodes/rightshiftnode.cpp
+
+variablestringfactory.o: ../source/variables/variablestringfactory.cpp ../source/variables/variablestringfactory.h \
+		../source/types/tokentypes.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o variablestringfactory.o ../source/variables/variablestringfactory.cpp
 
 ####### Install
 

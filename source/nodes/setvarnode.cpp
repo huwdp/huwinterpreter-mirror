@@ -38,13 +38,27 @@ std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> globalScope
     else if (globalScope->getVariables()->exists(name))
     {
         std::shared_ptr<Variable> v = value->execute(globalScope, scope);
-        globalScope->getVariables()->setVariable(name, v->copy(token));
+        if (v != nullptr)
+        {
+            globalScope->getVariables()->setVariable(name, v->copy(token));
+        }
+        else
+        {
+            globalScope->getVariables()->setVariable(name, null);
+        }
         return null;
     }
     if (scope->getVariables()->exists(name))
     {
         std::shared_ptr<Variable> v = value->execute(globalScope, scope);
-        scope->getVariables()->setVariable(name, v->copy(token));
+        if (v != nullptr)
+        {
+            scope->getVariables()->setVariable(name, v->copy(token));
+        }
+        else
+        {
+            scope->getVariables()->setVariable(name, null);
+        }
         return null;
     }
     else
