@@ -62,6 +62,11 @@ std::shared_ptr<Variable> WhileNode::execute(std::shared_ptr<Scope> globalScope,
             }
             body->execute(globalScope, scope);
             c = condition->execute(globalScope, scope);
+            if (c == null)
+            {
+                // Most likely an error here so return null
+                return null;
+            }
             loop = c->toBool();
             if (c == null)
             {
