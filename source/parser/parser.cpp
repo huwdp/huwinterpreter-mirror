@@ -838,8 +838,16 @@ std::shared_ptr<Node> Parser::block()
             {
                 return null;
             }
-            return nodeFactory->CreateSemicolonNode(passable, returnNode);
+
+            std::shared_ptr<Node> blockNode = block();
+
+            return nodeFactory->CreateRunNode(passable,
+                                              currentToken,
+                                              nodeFactory->CreateSemicolonNode(passable, returnNode),
+                                              blockNode
+                                              );
         }
+
         std::shared_ptr<Node> dec = decloration();
         if (dec != nullptr)
         {
