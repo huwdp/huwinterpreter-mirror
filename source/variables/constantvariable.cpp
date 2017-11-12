@@ -56,52 +56,37 @@ void ConstantVariable::setValue(long long value)
 
 long long ConstantVariable::toInt()
 {
-    if (variable != null)
-    {
-        return (long long)0;
-    }
     return variable->toInt();
 }
 
 double ConstantVariable::toDouble()
 {
-    if (variable != null)
-    {
-        return 0.0;
-    }
     return variable->toDouble();
 }
 
 std::string ConstantVariable::toString()
 {
-    if (variable != null)
-    {
-        return "";
-    }
     return variable->toString();
 }
 
 bool ConstantVariable::toBool()
 {
-    if (variable != null)
-    {
-        return false;
-    }
     return variable->toBool();
 }
 
 VarType ConstantVariable::getType()
 {
-    if (variable != null)
-    {
-        return NONE;
-    }
     return variable->getType();
 }
 
 bool ConstantVariable::isNumber()
 {
     return variable->isNumber();
+}
+
+bool ConstantVariable::isConst()
+{
+    return true;
 }
 
 std::shared_ptr<Variable> ConstantVariable::pow(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)

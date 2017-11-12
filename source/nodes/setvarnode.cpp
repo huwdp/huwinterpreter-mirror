@@ -35,9 +35,20 @@ std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> globalScope
     {
         return scope->getReturnValue();
     }
-    else if (globalScope->getVariables()->exists(name))
+    std::shared_ptr<Variable> v = value->execute(globalScope, scope);
+
+    std::shared_ptr<Variable> globalVar = globalScope->getVariables()->get(name);
+    std::shared_ptr<Variable> localVar = globalScope->getVariables()->get(name);
+
+    if (globalScope->getVariables()->exists(name))
     {
-        std::shared_ptr<Variable> v = value->execute(globalScope, scope);
+
+        if (globalVar != nullptr && globalVar->isConst())
+        {
+            passable->errors->add(passable->errorFactory->cannotChangeConstant(token, name));
+            return null;
+        }
+
         if (v != nullptr)
         {
             globalScope->getVariables()->setVariable(name, v->copy(token));
@@ -46,11 +57,15 @@ std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> globalScope
         {
             globalScope->getVariables()->setVariable(name, null);
         }
-        return null;
     }
-    if (scope->getVariables()->exists(name))
+    else if (scope->getVariables()->exists(name))
     {
-        std::shared_ptr<Variable> v = value->execute(globalScope, scope);
+        if (localVar != nullptr && localVar->isConst())
+        {
+            passable->errors->add(passable->errorFactory->cannotChangeConstant(token, name));
+            return null;
+        }
+
         if (v != nullptr)
         {
             scope->getVariables()->setVariable(name, v->copy(token));
@@ -59,31 +74,20 @@ std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> globalScope
         {
             scope->getVariables()->setVariable(name, null);
         }
-        return null;
     }
     else
     {
-        std::shared_ptr<Variable> var;
-        var = value->execute(globalScope, scope);
-        if (scope->getReturnValue() != nullptr)
+        if (globalVar != nullptr && globalVar->isConst())
         {
-            return scope->getReturnValue();
+            passable->errors->add(passable->errorFactory->cannotChangeConstant(token, name));
         }
-
-        if (var != nullptr)
+        else if (localVar != nullptr && localVar->isConst())
         {
-            if (globalScope->getVariables()->exists(name))
-            {
-                globalScope->getVariables()->setVariable(name, var->copy(token));
-            }
-            else if (!scope->getVariables()->setVariable(name, var->copy(token)))
-            {
-                passable->errors->add(passable->errorFactory->variableNotDeclared(token, internalName));
-            }
+            passable->errors->add(passable->errorFactory->cannotChangeConstant(token, name));
         }
         else
         {
-            passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
+            passable->errors->add(passable->errorFactory->variableDeclared(token, name));
         }
     }
     return null;

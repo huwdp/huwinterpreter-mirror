@@ -50,6 +50,8 @@ public:
     std::shared_ptr<Error> outOfBounds(std::shared_ptr<Token> token, std::string name);
     std::shared_ptr<Error> variableDeclared(std::shared_ptr<Token> token, std::string name);
     std::shared_ptr<Error> constantDeclared(std::shared_ptr<Token> token, std::string name);
+
+    std::shared_ptr<Error> cannotChangeConstant(std::shared_ptr<Token> token, std::string name);
 };
 
 #endif // ERRORFACTORY_H

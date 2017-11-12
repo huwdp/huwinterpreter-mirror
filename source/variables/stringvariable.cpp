@@ -161,6 +161,11 @@ bool StringVariable::isNumber()
     return false;
 }
 
+bool StringVariable::isConst()
+{
+    return false;
+}
+
 std::shared_ptr<Variable> StringVariable::pow(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     Debug::print("Cannot call power method on string");

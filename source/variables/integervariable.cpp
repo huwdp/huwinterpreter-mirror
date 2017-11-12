@@ -112,6 +112,11 @@ bool IntegerVariable::isNumber()
     return true;
 }
 
+bool IntegerVariable::isConst()
+{
+    return false;
+}
+
 std::shared_ptr<Variable> IntegerVariable::pow(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     if (variable == nullptr)

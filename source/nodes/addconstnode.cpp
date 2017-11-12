@@ -35,27 +35,13 @@ std::shared_ptr<Variable> AddConstNode::execute(std::shared_ptr<Scope> globalSco
     {
         return scope->getReturnValue();
     }
-    if (scope->getVariables()->exists(name))
+    if (!scope->getVariables()->exists(name))
     {
-        std::shared_ptr<Variable> v = value->execute(globalScope, scope);
-        if (v != nullptr)
-        {
-            scope->getVariables()->setVariable(name, v->copy(token));
-        }
-        else
-        {
-            scope->getVariables()->setVariable(name, null);
-        }
-    }
-    else
-    {
-        std::shared_ptr<Variable> var;
-        var = value->execute(globalScope, scope);
+        std::shared_ptr<Variable> var = value->execute(globalScope, scope);
         if (scope->getReturnValue() != nullptr)
         {
             return scope->getReturnValue();
         }
-
         if (var != nullptr)
         {
             if (globalScope->getVariables()->exists(name))
@@ -63,16 +49,18 @@ std::shared_ptr<Variable> AddConstNode::execute(std::shared_ptr<Scope> globalSco
                 passable->errors->add(passable->errorFactory->constantDeclared(token, name));
                 return null;
             }
-            else if (!scope->getVariables()->addVariable(name, var))
+            else if (!scope->getVariables()->addVariable(name, std::make_shared<ConstantVariable>(passable, var)))
             {
-                passable->errors->add(passable->errorFactory->constantNotDeclared(token, name));
+                passable->errors->add(passable->errorFactory->constantDeclared(token, name));
             }
         }
         else
         {
             passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
         }
+        return null;
     }
+    passable->errors->add(passable->errorFactory->constantDeclared(token, name));
     return null;
 }
 

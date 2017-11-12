@@ -51,6 +51,7 @@ public:
     VarType getType();
     std::string getValue();
     bool isNumber();
+    bool isConst();
     std::shared_ptr<Variable> pow(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token);
     std::shared_ptr<Variable> mul(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token);
     std::shared_ptr<Variable> div(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token);

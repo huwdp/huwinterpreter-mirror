@@ -85,6 +85,11 @@ bool HashTableVariable::isNumber()
     return false;
 }
 
+bool HashTableVariable::isConst()
+{
+    return false;
+}
+
 std::shared_ptr<Variable> HashTableVariable::pow(std::shared_ptr<Variable> variable, std::shared_ptr<Token> token)
 {
     passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "pow", ""));
