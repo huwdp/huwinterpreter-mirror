@@ -35,10 +35,17 @@ std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> globalScope
     {
         return scope->getReturnValue();
     }
+    else if (globalScope->getVariables()->exists(name))
+    {
+        std::shared_ptr<Variable> v = value->execute(globalScope, scope);
+        globalScope->getVariables()->setVariable(name, v->copy(token));
+        return null;
+    }
     if (scope->getVariables()->exists(name))
     {
         std::shared_ptr<Variable> v = value->execute(globalScope, scope);
-        scope->getVariables()->setVariable(name, v);
+        scope->getVariables()->setVariable(name, v->copy(token));
+        return null;
     }
     else
     {
@@ -53,12 +60,9 @@ std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> globalScope
         {
             if (globalScope->getVariables()->exists(name))
             {
-                if (!globalScope->getVariables()->setVariable(name, var))
-                {
-                    passable->errors->add(passable->errorFactory->variableNotDeclared(token, internalName));
-                }
+                globalScope->getVariables()->setVariable(name, var->copy(token));
             }
-            else if (!scope->getVariables()->setVariable(name, var))
+            else if (!scope->getVariables()->setVariable(name, var->copy(token)))
             {
                 passable->errors->add(passable->errorFactory->variableNotDeclared(token, internalName));
             }

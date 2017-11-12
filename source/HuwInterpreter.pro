@@ -12,7 +12,6 @@ QMAKE_CXXFLAGS += -Wall
 QMAKE_CXXFLAGS += -Wextra
 
 QMAKE_CXXFLAGS += -Wlogical-op
-QMAKE_CXXFLAGS += -Wold-style-cast
 QMAKE_CXXFLAGS += -Wuseless-cast
 QMAKE_CXXFLAGS += -Wdouble-promotion
 QMAKE_CXXFLAGS += -Wformat=2
