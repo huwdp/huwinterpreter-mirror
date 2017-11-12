@@ -29,6 +29,10 @@ NodeType SemicolonNode::getType()
 std::shared_ptr<Variable> SemicolonNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("SemicolonNode");
+    if (passable->errors->count() > 0)
+    {
+        return null;
+    }
     if (node != nullptr)
     {
         return node->execute(globalScope, scope);

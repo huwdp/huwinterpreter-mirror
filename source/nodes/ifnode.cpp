@@ -32,6 +32,10 @@ NodeType IfNode::getType()
 std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("IfNode");
+    if (passable->errors->count() > 0)
+    {
+        return null;
+    }
     if (scope->getReturnValue() != nullptr)
     {
         return scope->getReturnValue();
@@ -44,6 +48,10 @@ std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> globalScope, st
             if (body != nullptr)
             {
                 body->execute(globalScope, scope);
+                if (passable->errors->count() > 0)
+                {
+                    return null;
+                }
                 if (scope->getReturnValue() != nullptr)
                 {
                     return scope->getReturnValue();
@@ -59,6 +67,10 @@ std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> globalScope, st
             if (elseNode != nullptr)
             {
                 elseNode->execute(globalScope, scope);
+                if (passable->errors->count() > 0)
+                {
+                    return null;
+                }
                 if (scope->getReturnValue() != nullptr)
                 {
                     return scope->getReturnValue();

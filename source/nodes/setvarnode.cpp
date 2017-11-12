@@ -31,6 +31,10 @@ NodeType SetVarNode::getType()
 std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("SetVarNode");
+    if (passable->errors->count() > 0)
+    {
+        return null;
+    }
     if (scope->getReturnValue() != nullptr)
     {
         return scope->getReturnValue();

@@ -30,6 +30,10 @@ NodeType BitwiseXORNode::getType()
 std::shared_ptr<Variable> BitwiseXORNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("BitwiseXOrNode");
+    if (passable->errors->count() > 0)
+    {
+        return null;
+    }
     if (scope->getReturnValue() != nullptr)
     {
         return scope->getReturnValue();

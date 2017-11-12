@@ -32,6 +32,10 @@ NodeType WhileNode::getType()
 std::shared_ptr<Variable> WhileNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("WhileNode");
+    if (passable->errors->count() > 0)
+    {
+        return null;
+    }
     if (scope->getReturnValue() != nullptr)
     {
         return scope->getReturnValue();
@@ -48,6 +52,10 @@ std::shared_ptr<Variable> WhileNode::execute(std::shared_ptr<Scope> globalScope,
         bool loop = c->toBool();
         while (loop)
         {
+            if (passable->errors->count() > 0)
+            {
+                return null;
+            }
             if (scope->getReturnValue() != nullptr)
             {
                 return scope->getReturnValue();

@@ -31,6 +31,10 @@ NodeType AddConstNode::getType()
 std::shared_ptr<Variable> AddConstNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("AddConstNode");
+    if (passable->errors->count() > 0)
+    {
+        return null;
+    }
     if (scope->getReturnValue() != nullptr)
     {
         return scope->getReturnValue();
@@ -38,6 +42,10 @@ std::shared_ptr<Variable> AddConstNode::execute(std::shared_ptr<Scope> globalSco
     if (!scope->getVariables()->exists(name))
     {
         std::shared_ptr<Variable> var = value->execute(globalScope, scope);
+        if (passable->errors->count() > 0)
+        {
+            return null;
+        }
         if (scope->getReturnValue() != nullptr)
         {
             return scope->getReturnValue();

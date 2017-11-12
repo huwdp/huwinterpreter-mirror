@@ -58,3 +58,8 @@ void Errors::print()
         std::cout << value << std::endl;
     }
 }
+
+long long Errors::count()
+{
+    return errorList.size();
+}

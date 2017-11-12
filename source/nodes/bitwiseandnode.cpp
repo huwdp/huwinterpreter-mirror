@@ -30,6 +30,10 @@ NodeType BitwiseAndNode::getType()
 std::shared_ptr<Variable> BitwiseAndNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("BitwiseAndNode");
+    if (passable->errors->count() > 0)
+    {
+        return null;
+    }
     if (scope->getReturnValue() != nullptr)
     {
         return scope->getReturnValue();

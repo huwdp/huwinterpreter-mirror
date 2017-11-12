@@ -29,6 +29,10 @@ NodeType BitwiseComplementNode::getType()
 std::shared_ptr<Variable> BitwiseComplementNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("BitwiseComplementNode");
+    if (passable->errors->count() > 0)
+    {
+        return null;
+    }
     if (scope->getReturnValue() != null)
     {
         return scope->getReturnValue();

@@ -31,6 +31,10 @@ NodeType IfNotEqualNode::getType()
 std::shared_ptr<Variable> IfNotEqualNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("NotEqualNode");
+    if (passable->errors->count() > 0)
+    {
+        return null;
+    }
     if (scope->getReturnValue() != nullptr)
     {
         return scope->getReturnValue();
