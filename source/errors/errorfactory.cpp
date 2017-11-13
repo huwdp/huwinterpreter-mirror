@@ -65,7 +65,7 @@ std::shared_ptr<Error> ErrorFactory::couldNotParseTime(std::shared_ptr<Token> to
 
 std::shared_ptr<Error> ErrorFactory::functionNotDeclared(std::shared_ptr<Token> token, std::string name)
 {
-    return std::make_shared<Error>(RUNTIME_ERROR, "Function " + name + "not declared", token);
+    return std::make_shared<Error>(RUNTIME_ERROR, "Function " + name + " not declared", token);
 }
 
 std::shared_ptr<Error> ErrorFactory::invalidExpression(ErrorTypes errorTypes, std::shared_ptr<Token> token, std::string name)

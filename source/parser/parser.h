@@ -113,6 +113,7 @@ private:
     std::shared_ptr<Node> compound();
     std::shared_ptr<Node> bracket();
     std::shared_ptr<Node> assingment();
+    std::shared_ptr<Node> function2();
     std::shared_ptr<Node> decloration();
     std::shared_ptr<Node> elseStatement();
     std::shared_ptr<Node> statement();

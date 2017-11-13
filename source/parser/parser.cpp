@@ -763,6 +763,52 @@ std::shared_ptr<Node> Parser::elseStatement()
     return returnNode;
 }
 
+std::shared_ptr<Node> Parser::function2()
+{
+    acceptIndentation();
+    if (!tokens.empty() && compilation)
+    {
+        if (TypeDetector::isWord(this->currentToken->getContent()) && peakToken() != nullptr && peakToken()->getType() == LEFTPARENTHESIS)
+        {
+            std::string word = this->currentToken->getContent();
+            if (functions->get(word) == nullptr)
+            {
+                passable->errors->add(passable->errorFactory->functionNotDeclared(currentToken, word));
+                compilation = false;
+                return null;
+            }
+            nextToken();
+            if (!expect(LEFTPARENTHESIS))
+            {
+                return null;
+            }
+            std::vector<std::shared_ptr<Node>> arguments;
+            if (currentToken->getType() != RIGHTPARENTHESIS)
+            {
+                do
+                {
+                    acceptIndentation();
+                    arguments.push_back(boolean());
+                    acceptIndentation();
+                }
+                while (accept(COMMA) && !accept(RIGHTPARENTHESIS) && !tokens.empty());
+            }
+            if (!expect(RIGHTPARENTHESIS))
+            {
+                return null;
+            }
+            if (!expectSemicolon())
+            {
+                return null;
+            }
+            std::shared_ptr<Node> blockNode = block();
+            std::shared_ptr<Node> functions = nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateGetFuncNode(passable, currentToken, word, this->functions, arguments));
+            return nodeFactory->CreateRunNode(passable, currentToken, (functions), blockNode);
+        }
+    }
+    return assingment();
+}
+
 std::shared_ptr<Node> Parser::statement()
 {
     acceptIndentation();
@@ -820,7 +866,7 @@ std::shared_ptr<Node> Parser::statement()
             std::shared_ptr<Node> next = block();
             return nodeFactory->CreateWhileNode(passable, currentToken, conditionNode, statementNode, next);
         }
-        return assingment();
+        return function2();
     }
     return null;
 }
@@ -852,37 +898,6 @@ std::shared_ptr<Node> Parser::block()
         if (dec != nullptr)
         {
             return dec;
-        }
-        else if (functions->get(this->currentToken->getContent()) != nullptr)
-        {
-            std::string word = this->currentToken->getContent();
-            nextToken();
-            if (!expect(LEFTPARENTHESIS))
-            {
-                return null;
-            }
-            std::vector<std::shared_ptr<Node>> arguments;
-            if (currentToken->getType() != RIGHTPARENTHESIS)
-            {
-                do
-                {
-                    acceptIndentation();
-                    arguments.push_back(boolean());
-                    acceptIndentation();
-                }
-                while (accept(COMMA) && !accept(RIGHTPARENTHESIS) && !tokens.empty());
-            }
-            if (!expect(RIGHTPARENTHESIS))
-            {
-                return null;
-            }
-            if (!expectSemicolon())
-            {
-                return null;
-            }
-            std::shared_ptr<Node> blockNode = block();
-            std::shared_ptr<Node> functions = nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateGetFuncNode(passable, currentToken, word, this->functions, arguments));
-            return nodeFactory->CreateRunNode(passable, currentToken, (functions), blockNode);
         }
         else if (accept("function"))
         {
