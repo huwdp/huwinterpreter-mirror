@@ -104,20 +104,20 @@ private:
     std::string syntaxError(std::string content);
     bool expectSemicolon();
     void errorMessage(std::string errorMsg, std::shared_ptr<Token> currentToken);
-    std::shared_ptr<Node> value();
-    std::shared_ptr<Node> factor();
-    std::shared_ptr<Node> term();
-    std::shared_ptr<Node> expression();
-    std::shared_ptr<Node> condition();
-    std::shared_ptr<Node> boolean();
-    std::shared_ptr<Node> compound();
-    std::shared_ptr<Node> bracket();
-    std::shared_ptr<Node> assingment();
-    std::shared_ptr<Node> function2();
-    std::shared_ptr<Node> decloration();
-    std::shared_ptr<Node> elseStatement();
-    std::shared_ptr<Node> statement();
-    std::shared_ptr<Node> block();
+    std::shared_ptr<Node> parseValue();
+    std::shared_ptr<Node> parseFactor();
+    std::shared_ptr<Node> parseTerm();
+    std::shared_ptr<Node> parseExpression();
+    std::shared_ptr<Node> parseCondition();
+    std::shared_ptr<Node> parseBoolean();
+    std::shared_ptr<Node> parseCompound();
+    std::shared_ptr<Node> parseBracket();
+    std::shared_ptr<Node> parseAssingment();
+    std::shared_ptr<Node> parseFunction();
+    std::shared_ptr<Node> parseDecloration();
+    std::shared_ptr<Node> parseElseStatement();
+    std::shared_ptr<Node> parseStatement();
+    std::shared_ptr<Node> parseBlock();
 public:
     Parser(std::vector<std::shared_ptr<Token>> tokens,
            std::shared_ptr<NodeFactory> nodeFactory);
