@@ -161,5 +161,5 @@ std::shared_ptr<Error> ErrorFactory::constantDeclared(std::shared_ptr<Token> tok
 
 std::shared_ptr<Error> ErrorFactory::cannotChangeConstant(std::shared_ptr<Token> token, std::string name)
 {
-    return std::make_shared<Error>(RUNTIME_ERROR, "Invalid assignment to const '" + name + "'", token);
+    return std::make_shared<Error>(RUNTIME_ERROR, "Cannot reassign constant '" + name + "'", token);
 }
