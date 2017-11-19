@@ -151,7 +151,7 @@ std::shared_ptr<Error> ErrorFactory::outOfBounds(std::shared_ptr<Token> token, s
 
 std::shared_ptr<Error> ErrorFactory::variableDeclared(std::shared_ptr<Token> token, std::string name)
 {
-    return std::make_shared<Error>(RUNTIME_ERROR, "Variable '" + name + "' already declared", token);
+    return std::make_shared<Error>(RUNTIME_ERROR, "Cannot redeclare variable '" + name + "'", token);
 }
 
 std::shared_ptr<Error> ErrorFactory::constantDeclared(std::shared_ptr<Token> token, std::string name)
