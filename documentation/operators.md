@@ -1,0 +1,30 @@
+# Operator precedence description
+| Operator | Description          |
+|----------|----------------------|
+| +=       | ADDITIONALEQUAL      |
+| -=       | SUBTRACTIONEQUAL     |
+| +=       | MULTIPLICATIONEQUAL  |
+| /=       | DIVISIONEQUAL        |
+| ++       | INCRMENT             |
+| --       | DECREMENT            |
+| &&       | AND                  |
+| \|\|     | OR                   |
+| &        | BITWISEAND           |
+| \|       | BITWISEOR            |
+| ^        | BITWISEXOR           |
+| ==       | IFEQUALS             |
+| !=       | IFNOTEQUALS          |
+| <        | IFLESSTHAN           |
+| >=       | IFLESSTHANOREQUAL    |
+| >        | IFGREATER            |
+| >=       | IFGREATERTHANOREQUAL |
+| +        | ADDITION             |
+| -        | SUBTRACTION          |
+| <<       | LEFTSHIFT            |
+| >>       | RIGHTSHIFT           |
+| *        | MULTIPLICATION       |
+| /        | DIVISION             |
+| ^        | MOD                  |
+| -        | UnaryMinus           |
+| !        | NOT                  |
+| ~        | BITWISECOMPLEMENT    |
