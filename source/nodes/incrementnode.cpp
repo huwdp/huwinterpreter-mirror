@@ -30,7 +30,7 @@ NodeType IncrementNode::getType()
 std::shared_ptr<Variable> IncrementNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("Increment");
-    if (passable->errors->count() > 0)
+    if (passable->getErrors()->count() > 0)
     {
         return null;
     }
@@ -43,7 +43,7 @@ std::shared_ptr<Variable> IncrementNode::execute(std::shared_ptr<Scope> globalSc
         std::shared_ptr<Variable> n = node->execute(globalScope, scope);
         if (n == nullptr)
         {
-            passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
+            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
             return null;
         }
         return n->increment(token);

@@ -30,7 +30,7 @@ NodeType BitwiseXORNode::getType()
 std::shared_ptr<Variable> BitwiseXORNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("BitwiseXOrNode");
-    if (passable->errors->count() > 0)
+    if (passable->getErrors()->count() > 0)
     {
         return null;
     }
@@ -44,12 +44,12 @@ std::shared_ptr<Variable> BitwiseXORNode::execute(std::shared_ptr<Scope> globalS
         std::shared_ptr<Variable> r = right->execute(globalScope, scope);
         if (l == nullptr)
         {
-            passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
+            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
             return null;
         }
         if (r == nullptr)
         {
-            passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
+            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
             return null;
         }
         return l->bitwiseXOR(r, token);

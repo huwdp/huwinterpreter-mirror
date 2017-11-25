@@ -34,7 +34,7 @@ std::shared_ptr<Variable> Now::execute(std::shared_ptr<Token> token, std::shared
     }
     else
     {
-        passable->errors->add(passable->errorFactory->requiresArguments(token, name, "", 0));
+        passable->getErrors()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 0));
     }
 
     return returnNode;

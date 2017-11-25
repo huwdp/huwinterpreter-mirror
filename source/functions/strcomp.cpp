@@ -32,7 +32,7 @@ std::shared_ptr<Variable> StrComp::execute(std::shared_ptr<Token> token, std::sh
         std::shared_ptr<Node> node2 = arguments.at(1);
         if (node1 == nullptr || node2 == nullptr)
         {
-            passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
+            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
             return null;
         }
 
@@ -40,7 +40,7 @@ std::shared_ptr<Variable> StrComp::execute(std::shared_ptr<Token> token, std::sh
         std::shared_ptr<Variable> var2 = node2->execute(globalScope, scope);
         if (var1 == nullptr || var2 == nullptr)
         {
-            passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
+            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
             return null;
         }
 
@@ -51,7 +51,7 @@ std::shared_ptr<Variable> StrComp::execute(std::shared_ptr<Token> token, std::sh
     }
     else
     {
-        passable->errors->add(passable->errorFactory->requiresArguments(token, name, "", 2));
+        passable->getErrors()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 2));
     }
     
     return returnNode;

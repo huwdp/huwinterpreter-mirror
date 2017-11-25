@@ -33,7 +33,7 @@ NodeType EqualNode::getType()
 std::shared_ptr<Variable> EqualNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("Equals");
-    if (passable->errors->count() > 0)
+    if (passable->getErrors()->count() > 0)
     {
         return null;
     }
@@ -51,7 +51,7 @@ std::shared_ptr<Variable> EqualNode::execute(std::shared_ptr<Scope> globalScope,
         {
             return value->copy(token);
         }
-        passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
+        passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
     }
     return null;
 }

@@ -33,7 +33,7 @@ std::shared_ptr<Variable> RegexReplace::execute(std::shared_ptr<Token> token, st
         std::shared_ptr<Node> node3 = arguments.at(2);
         if (node1 == nullptr || node2 == nullptr || node3 == nullptr)
         {
-           passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
+           passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
            return null;
         }
 
@@ -43,7 +43,7 @@ std::shared_ptr<Variable> RegexReplace::execute(std::shared_ptr<Token> token, st
 
         if (var1 == nullptr || var2 == nullptr || var3 == nullptr)
         {
-           passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
+           passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
            return null;
         }
 
@@ -58,14 +58,14 @@ std::shared_ptr<Variable> RegexReplace::execute(std::shared_ptr<Token> token, st
         }
         catch (std::regex_error ex)
         {
-            passable->errors->add(passable->errorFactory->otherFunctionError(token, name, ex.what()));
+            passable->getErrors()->add(passable->getErrorFactory()->otherFunctionError(token, name, ex.what()));
             return null;
         }
         return std::make_shared<StringVariable>(passable, result);
     }
     else
     {
-       passable->errors->add(passable->errorFactory->requiresArguments(token, name, "", 2));
+       passable->getErrors()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 2));
     }
     return returnNode;
 }

@@ -225,7 +225,7 @@ std::shared_ptr<Variable> NumberVariable::ifUnder(std::shared_ptr<Variable> vari
 {
     if (variable == nullptr)
     {
-        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifUnder", name, getType()));
+        passable->getErrors()->add(passable->getErrorFactory()->failedToCompare(token, "ifUnder", name, getType()));
         return null;
     }
     return std::move(toValue(this->variable->ifUnder(variable, token)));
@@ -235,7 +235,7 @@ std::shared_ptr<Variable> NumberVariable::ifUnderOrEqual(std::shared_ptr<Variabl
 {
     if (variable == nullptr)
     {
-        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifUnderOrEqual", name, getType()));
+        passable->getErrors()->add(passable->getErrorFactory()->failedToCompare(token, "ifUnderOrEqual", name, getType()));
         return null;
     }
     return std::move(toValue(std::move(this->variable->ifUnderOrEqual(variable, token))));
@@ -245,7 +245,7 @@ std::shared_ptr<Variable> NumberVariable::ifOver(std::shared_ptr<Variable> varia
 {
     if (variable == nullptr)
     {
-        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifOver", name, getType()));
+        passable->getErrors()->add(passable->getErrorFactory()->failedToCompare(token, "ifOver", name, getType()));
         return null;
     }
     return std::move(toValue(std::move(this->variable->ifOver(variable, token))));
@@ -255,7 +255,7 @@ std::shared_ptr<Variable> NumberVariable::ifOverOrEqual(std::shared_ptr<Variable
 {
     if (variable == nullptr)
     {
-        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifOverOrEqual", name, getType()));
+        passable->getErrors()->add(passable->getErrorFactory()->failedToCompare(token, "ifOverOrEqual", name, getType()));
         return null;
     }
     return std::move(toValue(std::move(this->variable->ifOverOrEqual(variable, token))));
@@ -265,7 +265,7 @@ std::shared_ptr<Variable> NumberVariable::ifEqual(std::shared_ptr<Variable> vari
 {
     if (variable == nullptr)
     {
-        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifEqual", name, getType()));
+        passable->getErrors()->add(passable->getErrorFactory()->failedToCompare(token, "ifEqual", name, getType()));
         return null;
     }
     return std::move(toValue(std::move(this->variable->ifEqual(variable, token))));
@@ -275,7 +275,7 @@ std::shared_ptr<Variable> NumberVariable::ifNotEqual(std::shared_ptr<Variable> v
 {
     if (variable == nullptr)
     {
-        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifNotEqual", name, getType()));
+        passable->getErrors()->add(passable->getErrorFactory()->failedToCompare(token, "ifNotEqual", name, getType()));
         return null;
     }
     return toValue(std::move(this->variable->ifNotEqual(variable, token)));

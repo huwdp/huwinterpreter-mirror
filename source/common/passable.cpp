@@ -14,3 +14,29 @@
 */
 
 #include "passable.h"
+
+Passable::Passable()
+{
+    this->errors = std::make_shared<Errors>();
+    this->errorFactory = std::make_shared<ErrorFactory>();
+}
+
+std::shared_ptr<Errors> Passable::getErrors()
+{
+    return errors;
+}
+
+void Passable::setErrors(std::shared_ptr<Errors> errors)
+{
+    this->errors = std::move(errors);
+}
+
+std::shared_ptr<ErrorFactory> Passable::getErrorFactory()
+{
+    return errorFactory;
+}
+
+void Passable::setErrorFactory(std::shared_ptr<ErrorFactory> errorFactory)
+{
+    this->errorFactory = std::move(errorFactory);
+}

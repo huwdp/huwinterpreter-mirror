@@ -34,7 +34,7 @@ std::shared_ptr<Variable> ArraySet::execute(std::shared_ptr<Token> token, std::s
 
         if (node1 == nullptr || node2 == nullptr || node3 == nullptr)
         {
-            passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
+            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
             return null;
         }
 
@@ -44,13 +44,13 @@ std::shared_ptr<Variable> ArraySet::execute(std::shared_ptr<Token> token, std::s
 
         if (var1 == nullptr || var2 == nullptr || var3 == nullptr)
         {
-            passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
+            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
             return null;
         }
 
         if (var1->getType() != ARRAY)
         {
-            passable->errors->add(passable->errorFactory->firstParameterIsNotTypeOfArray(token, var1->getName(), name));
+            passable->getErrors()->add(passable->getErrorFactory()->firstParameterIsNotTypeOfArray(token, var1->getName(), name));
             return null;
         }
 
@@ -61,7 +61,7 @@ std::shared_ptr<Variable> ArraySet::execute(std::shared_ptr<Token> token, std::s
     }
     else
     {
-        passable->errors->add(passable->errorFactory->requiresArguments(token, name, "", 3));
+        passable->getErrors()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 3));
     }
     return returnNode;
 }

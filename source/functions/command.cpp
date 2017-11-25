@@ -29,7 +29,7 @@ std::shared_ptr<Variable> Command::execute(std::shared_ptr<Token> token, std::sh
     if (arguments.size() == 0)
     {
         Debug::print("Command function requires at least 1 argument");
-        passable->errors->add(passable->errorFactory->requiresAtLeastXArguments(token, name, 1));
+        passable->getErrors()->add(passable->getErrorFactory()->requiresAtLeastXArguments(token, name, 1));
         return null;
     }
     for (std::vector<std::shared_ptr<Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
@@ -39,7 +39,7 @@ std::shared_ptr<Variable> Command::execute(std::shared_ptr<Token> token, std::sh
             std::shared_ptr<Variable> var = (*it)->execute(globalScope, scope);
             if (var == nullptr)
             {
-                passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
+                passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
                 return null;
             }
 

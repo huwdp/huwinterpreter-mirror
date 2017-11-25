@@ -31,7 +31,7 @@ NodeType SetVarNode::getType()
 std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("SetVarNode");
-    if (passable->errors->count() > 0)
+    if (passable->getErrors()->count() > 0)
     {
         return null;
     }
@@ -49,7 +49,7 @@ std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> globalScope
 
         if (globalVar != nullptr && globalVar->isConst())
         {
-            passable->errors->add(passable->errorFactory->cannotChangeConstant(token, name));
+            passable->getErrors()->add(passable->getErrorFactory()->cannotChangeConstant(token, name));
             return null;
         }
 
@@ -66,7 +66,7 @@ std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> globalScope
     {
         if (localVar != nullptr && localVar->isConst())
         {
-            passable->errors->add(passable->errorFactory->cannotChangeConstant(token, name));
+            passable->getErrors()->add(passable->getErrorFactory()->cannotChangeConstant(token, name));
             return null;
         }
 
@@ -83,15 +83,15 @@ std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> globalScope
     {
         if (globalVar != nullptr && globalVar->isConst())
         {
-            passable->errors->add(passable->errorFactory->cannotChangeConstant(token, name));
+            passable->getErrors()->add(passable->getErrorFactory()->cannotChangeConstant(token, name));
         }
         else if (localVar != nullptr && localVar->isConst())
         {
-            passable->errors->add(passable->errorFactory->cannotChangeConstant(token, name));
+            passable->getErrors()->add(passable->getErrorFactory()->cannotChangeConstant(token, name));
         }
         else
         {
-            passable->errors->add(passable->errorFactory->variableDeclared(token, name));
+            passable->getErrors()->add(passable->getErrorFactory()->variableDeclared(token, name));
         }
     }
     return null;

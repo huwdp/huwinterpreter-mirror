@@ -26,6 +26,6 @@ std::shared_ptr<Variable> EmptyFunction::execute(std::shared_ptr<Token> token,
                                              std::shared_ptr<Scope> scope,
                                              std::vector<std::shared_ptr<Node>> arguments)
 {
-    passable->errors->add(passable->errorFactory->functionNotDeclared(token, name));
+    passable->getErrors()->add(passable->getErrorFactory()->functionNotDeclared(token, name));
     return null;
 }

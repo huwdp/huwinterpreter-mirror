@@ -147,7 +147,7 @@ std::shared_ptr<Variable> ConstantVariable::ifUnder(std::shared_ptr<Variable> va
 {
     if (this->variable == null)
     {
-        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifUnder", name, getType()));
+        passable->getErrors()->add(passable->getErrorFactory()->failedToCompare(token, "ifUnder", name, getType()));
         return null;
     }
     return this->variable->sub(variable, token);
@@ -157,7 +157,7 @@ std::shared_ptr<Variable> ConstantVariable::ifUnderOrEqual(std::shared_ptr<Varia
 {
     if (this->variable)
     {
-        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifUnderOrEqual", name, getType()));
+        passable->getErrors()->add(passable->getErrorFactory()->failedToCompare(token, "ifUnderOrEqual", name, getType()));
         return null;
     }
     return this->variable->ifUnderOrEqual(variable, token);
@@ -167,7 +167,7 @@ std::shared_ptr<Variable> ConstantVariable::ifOver(std::shared_ptr<Variable> var
 {
     if (this->variable == null)
     {
-        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifOver", name, getType()));
+        passable->getErrors()->add(passable->getErrorFactory()->failedToCompare(token, "ifOver", name, getType()));
         return null;
     }
     return this->variable->ifOver(variable, token);
@@ -177,7 +177,7 @@ std::shared_ptr<Variable> ConstantVariable::ifOverOrEqual(std::shared_ptr<Variab
 {
     if (this->variable == null)
     {
-        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifOverOrEqual", name, getType()));
+        passable->getErrors()->add(passable->getErrorFactory()->failedToCompare(token, "ifOverOrEqual", name, getType()));
         return null;
     }
     return this->ifOverOrEqual(variable, token);
@@ -187,7 +187,7 @@ std::shared_ptr<Variable> ConstantVariable::ifEqual(std::shared_ptr<Variable> va
 {
     if (this->variable == null)
     {
-        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifEqual", name, getType()));
+        passable->getErrors()->add(passable->getErrorFactory()->failedToCompare(token, "ifEqual", name, getType()));
         return null;
     }
     return this->variable->ifEqual(variable, token);
@@ -197,7 +197,7 @@ std::shared_ptr<Variable> ConstantVariable::ifNotEqual(std::shared_ptr<Variable>
 {
     if (this->variable == null)
     {
-        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifNotEqual", name, getType()));
+        passable->getErrors()->add(passable->getErrorFactory()->failedToCompare(token, "ifNotEqual", name, getType()));
         return null;
     }
     return this->variable->ifNotEqual(variable, token);

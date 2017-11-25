@@ -31,7 +31,7 @@ NodeType AddVarNode::getType()
 std::shared_ptr<Variable> AddVarNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("AddVarNode");
-    if (passable->errors->count() > 0)
+    if (passable->getErrors()->count() > 0)
     {
         return null;
     }
@@ -55,7 +55,7 @@ std::shared_ptr<Variable> AddVarNode::execute(std::shared_ptr<Scope> globalScope
     {
         std::shared_ptr<Variable> var;
         var = value->execute(globalScope, scope);
-        if (passable->errors->count() > 0)
+        if (passable->getErrors()->count() > 0)
         {
             return null;
         }
@@ -68,17 +68,17 @@ std::shared_ptr<Variable> AddVarNode::execute(std::shared_ptr<Scope> globalScope
         {
             if (globalScope->getVariables()->exists(name))
             {
-                passable->errors->add(passable->errorFactory->variableDeclared(token, name));
+                passable->getErrors()->add(passable->getErrorFactory()->variableDeclared(token, name));
                 return null;
             }
             else if (!scope->getVariables()->addVariable(name, var))
             {
-                passable->errors->add(passable->errorFactory->variableNotDeclared(token, name));
+                passable->getErrors()->add(passable->getErrorFactory()->variableNotDeclared(token, name));
             }
         }
         else
         {
-            passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
+            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
         }
     }
     return null;

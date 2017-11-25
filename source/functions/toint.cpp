@@ -31,7 +31,7 @@ std::shared_ptr<Variable> ToInt::execute(std::shared_ptr<Token> token, std::shar
         std::shared_ptr<Node> node = arguments.at(0);
         if (node == nullptr)
         {
-            passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
+            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
             return null;
         }
 
@@ -39,7 +39,7 @@ std::shared_ptr<Variable> ToInt::execute(std::shared_ptr<Token> token, std::shar
         std::shared_ptr<Variable> var = node->execute(globalScope, scope);
         if (var == nullptr)
         {
-            passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
+            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
             return null;
         }
 
@@ -54,7 +54,7 @@ std::shared_ptr<Variable> ToInt::execute(std::shared_ptr<Token> token, std::shar
     }
     else
     {
-        passable->errors->add(passable->errorFactory->requiresArguments(token, name, "", 1));
+        passable->getErrors()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 1));
     }
 
     return returnNode;

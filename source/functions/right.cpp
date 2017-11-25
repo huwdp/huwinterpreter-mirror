@@ -32,7 +32,7 @@ std::shared_ptr<Variable> Right::execute(std::shared_ptr<Token> token, std::shar
         std::shared_ptr<Node> node2 = arguments.at(1);
         if (node1 == nullptr || node2 == nullptr)
         {
-            passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
+            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
             return null;
         }
 
@@ -41,7 +41,7 @@ std::shared_ptr<Variable> Right::execute(std::shared_ptr<Token> token, std::shar
 
         if (var1 == nullptr || var2 == nullptr)
         {
-            passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
+            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
             return null;
         }
 
@@ -54,20 +54,20 @@ std::shared_ptr<Variable> Right::execute(std::shared_ptr<Token> token, std::shar
         }
         catch (const std::invalid_argument ex)
         {
-            passable->errors->add(passable->errorFactory->invalidArgument(token, FUNCTION_ERROR, name, ex.what()));
+            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, FUNCTION_ERROR, name, ex.what()));
         }
         catch (const std::out_of_range ex)
         {
-            passable->errors->add(passable->errorFactory->outOfRange(token, name, ex.what()));
+            passable->getErrors()->add(passable->getErrorFactory()->outOfRange(token, name, ex.what()));
         }
         catch (const std::exception& ex)
         {
-            passable->errors->add(passable->errorFactory->otherFunctionError(token, name, ex.what()));
+            passable->getErrors()->add(passable->getErrorFactory()->otherFunctionError(token, name, ex.what()));
         }
     }
     else
     {
-        passable->errors->add(passable->errorFactory->requiresArguments(token, name, "", 2));
+        passable->getErrors()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 2));
     }
     
     return returnNode;

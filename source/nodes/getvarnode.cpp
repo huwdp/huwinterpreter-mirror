@@ -30,7 +30,7 @@ NodeType GetVarNode::getType()
 std::shared_ptr<Variable> GetVarNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("GetVarNode");
-    if (passable->errors->count() > 0)
+    if (passable->getErrors()->count() > 0)
     {
         return null;
     }
@@ -52,7 +52,7 @@ std::shared_ptr<Variable> GetVarNode::execute(std::shared_ptr<Scope> globalScope
     }
     else
     {
-        passable->errors->add(passable->errorFactory->variableNotDeclared(token, name));
+        passable->getErrors()->add(passable->getErrorFactory()->variableNotDeclared(token, name));
         return null;
     }
     Debug::print("Could not find variable.");

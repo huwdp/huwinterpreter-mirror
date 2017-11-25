@@ -64,7 +64,7 @@ void DoubleVariable::setValue(std::string value)
     }
     catch (const std::exception& e)
     {
-        passable->errors->add(passable->errorFactory->couldNotConvertStringToNumber(token, name, "setValue", e.what()));
+        passable->getErrors()->add(passable->getErrorFactory()->couldNotConvertStringToNumber(token, name, "setValue", e.what()));
     }
 }
 
@@ -76,7 +76,7 @@ void DoubleVariable::setValue(long long value)
     }
     catch (const std::exception& e)
     {
-        passable->errors->add(passable->errorFactory->couldNotConvertStringToNumber(token, name, "setValue", e.what()));
+        passable->getErrors()->add(passable->getErrorFactory()->couldNotConvertStringToNumber(token, name, "setValue", e.what()));
     }
 }
 
@@ -199,7 +199,7 @@ std::shared_ptr<Variable> DoubleVariable::ifUnder(std::shared_ptr<Variable> vari
 {
     if (variable == nullptr)
     {
-        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifUnder", name, getType()));
+        passable->getErrors()->add(passable->getErrorFactory()->failedToCompare(token, "ifUnder", name, getType()));
         return null;
     }
     return std::move(std::make_shared<NumberVariable>(passable, this->toDouble() < variable->toDouble()));
@@ -209,7 +209,7 @@ std::shared_ptr<Variable> DoubleVariable::ifUnderOrEqual(std::shared_ptr<Variabl
 {
     if (variable == nullptr)
     {
-        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifUnderOrEqual", name, getType()));
+        passable->getErrors()->add(passable->getErrorFactory()->failedToCompare(token, "ifUnderOrEqual", name, getType()));
         return null;
     }
     return std::move(std::make_shared<NumberVariable>(passable, this->toDouble() <= variable->toDouble()));
@@ -219,7 +219,7 @@ std::shared_ptr<Variable> DoubleVariable::ifOver(std::shared_ptr<Variable> varia
 {
     if (variable == nullptr)
     {
-        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifOver", name, getType()));
+        passable->getErrors()->add(passable->getErrorFactory()->failedToCompare(token, "ifOver", name, getType()));
         return null;
     }
     return std::move(std::make_shared<NumberVariable>(passable, this->toDouble() > variable->toDouble()));
@@ -229,7 +229,7 @@ std::shared_ptr<Variable> DoubleVariable::ifOverOrEqual(std::shared_ptr<Variable
 {
     if (variable == nullptr)
     {
-        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifOverOrEqual", name, getType()));
+        passable->getErrors()->add(passable->getErrorFactory()->failedToCompare(token, "ifOverOrEqual", name, getType()));
         return null;
     }
     return std::move(std::make_shared<NumberVariable>(passable, this->toDouble() >= variable->toDouble()));
@@ -239,7 +239,7 @@ std::shared_ptr<Variable> DoubleVariable::ifEqual(std::shared_ptr<Variable> vari
 {
     if (variable == nullptr)
     {
-        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifEqual", name, getType()));
+        passable->getErrors()->add(passable->getErrorFactory()->failedToCompare(token, "ifEqual", name, getType()));
         return null;
     }
     return std::move(std::make_shared<NumberVariable>(passable, this->toDouble() == variable->toDouble()));
@@ -249,7 +249,7 @@ std::shared_ptr<Variable> DoubleVariable::ifNotEqual(std::shared_ptr<Variable> v
 {
     if (variable == nullptr)
     {
-        passable->errors->add(passable->errorFactory->failedToCompare(token, "ifNotEqual", name, getType()));
+        passable->getErrors()->add(passable->getErrorFactory()->failedToCompare(token, "ifNotEqual", name, getType()));
         return null;
     }
     return std::move(std::make_shared<NumberVariable>(passable, this->toDouble() != variable->toDouble()));
@@ -263,7 +263,7 @@ std::shared_ptr<Variable> DoubleVariable::increment(std::shared_ptr<Token> token
 
 std::shared_ptr<Variable> DoubleVariable::count(std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "count", "Double is not an array"));
+    passable->getErrors()->add(passable->getErrorFactory()->cannotCallFunction(token, name, getType(), "count", "Double is not an array"));
     return null;
 }
 
@@ -275,18 +275,18 @@ std::shared_ptr<Variable> DoubleVariable::decrement(std::shared_ptr<Token> token
 
 void DoubleVariable::set(std::string index, std::shared_ptr<Variable> value, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "set", "Double is not an array"));
+    passable->getErrors()->add(passable->getErrorFactory()->cannotCallFunction(token, name, getType(), "set", "Double is not an array"));
 }
 
 std::shared_ptr<Variable> DoubleVariable::get(std::string value, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "get", "Double is not an array"));
+    passable->getErrors()->add(passable->getErrorFactory()->cannotCallFunction(token, name, getType(), "get", "Double is not an array"));
     return null;
 }
 
 void DoubleVariable::unset(std::string index, std::shared_ptr<Token> token)
 {
-    passable->errors->add(passable->errorFactory->cannotCallFunction(token, name, getType(), "unset", "Double is not an array"));
+    passable->getErrors()->add(passable->getErrorFactory()->cannotCallFunction(token, name, getType(), "unset", "Double is not an array"));
 }
 
 std::shared_ptr<Variable> DoubleVariable::copy(std::shared_ptr<Token> token)

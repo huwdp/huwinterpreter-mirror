@@ -32,7 +32,7 @@ NodeType IfNode::getType()
 std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("IfNode");
-    if (passable->errors->count() > 0)
+    if (passable->getErrors()->count() > 0)
     {
         return null;
     }
@@ -48,7 +48,7 @@ std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> globalScope, st
             if (body != nullptr)
             {
                 body->execute(globalScope, scope);
-                if (passable->errors->count() > 0)
+                if (passable->getErrors()->count() > 0)
                 {
                     return null;
                 }
@@ -59,7 +59,7 @@ std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> globalScope, st
             }
             else
             {
-                passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
+                passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
             }
         }
         else
@@ -67,7 +67,7 @@ std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> globalScope, st
             if (elseNode != nullptr)
             {
                 elseNode->execute(globalScope, scope);
-                if (passable->errors->count() > 0)
+                if (passable->getErrors()->count() > 0)
                 {
                     return null;
                 }
@@ -80,7 +80,7 @@ std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> globalScope, st
     }
     else
     {
-        passable->errors->add(passable->errorFactory->failedToCompare(token, internalName));
+        passable->getErrors()->add(passable->getErrorFactory()->failedToCompare(token, internalName));
     }
     return null;
 }

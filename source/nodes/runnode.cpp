@@ -31,7 +31,7 @@ NodeType RunNode::getType()
 std::shared_ptr<Variable> RunNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("RunNode");
-    if (passable->errors->count() > 0)
+    if (passable->getErrors()->count() > 0)
     {
         return null;
     }
@@ -42,7 +42,7 @@ std::shared_ptr<Variable> RunNode::execute(std::shared_ptr<Scope> globalScope, s
     if (left != nullptr)
     {
         left->execute(globalScope, scope);
-        if (passable->errors->count() > 0)
+        if (passable->getErrors()->count() > 0)
         {
             return null;
         }
@@ -54,7 +54,7 @@ std::shared_ptr<Variable> RunNode::execute(std::shared_ptr<Scope> globalScope, s
     if (right != nullptr)
     {
         right->execute(globalScope, scope);
-        if (passable->errors->count() > 0)
+        if (passable->getErrors()->count() > 0)
         {
             return null;
         }

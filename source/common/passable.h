@@ -21,9 +21,15 @@
 
 class Passable
 {
-public:
+private:
     std::shared_ptr<Errors> errors;
     std::shared_ptr<ErrorFactory> errorFactory;
+public:
+    Passable();
+    std::shared_ptr<Errors> getErrors();
+    void setErrors(std::shared_ptr<Errors> errors);
+    std::shared_ptr<ErrorFactory> getErrorFactory();
+    void setErrorFactory(std::shared_ptr<ErrorFactory> errorFactory);
 };
 
 #endif // PASSABLE_H

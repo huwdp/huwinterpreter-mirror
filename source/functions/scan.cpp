@@ -36,7 +36,7 @@ std::shared_ptr<Variable> Scan::execute(std::shared_ptr<Token> token, std::share
                 std::shared_ptr<Variable> var = (*it)->execute(globalScope, scope);
                 if (var == nullptr)
                 {
-                    passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
+                    passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
                     return null;
                 }
 
@@ -46,7 +46,7 @@ std::shared_ptr<Variable> Scan::execute(std::shared_ptr<Token> token, std::share
             }
             else
             {
-                passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
+                passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
                 return null;
             }
         }

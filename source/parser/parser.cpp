@@ -20,8 +20,6 @@ Parser::Parser(std::vector<std::shared_ptr<Token>> tokens,
 {
     this->nodeFactory = nodeFactory;
     this->passable = std::make_shared<Passable>();
-    this->passable->errors = std::make_shared<Errors>();
-    this->passable->errorFactory = std::make_shared<ErrorFactory>();
     this->compilation = true;
     this->tokens = tokens;
     this->functions = std::move(std::make_shared<Functions>(passable));
@@ -153,7 +151,7 @@ bool Parser::expectSemicolon()
 
 void Parser::errorMessage(std::string errorMsg, std::shared_ptr<Token> currentToken)
 {
-    passable->errors->add(passable->errorFactory->syntaxError(currentToken, errorMsg));
+    passable->getErrors()->add(passable->getErrorFactory()->syntaxError(currentToken, errorMsg));
 }
 
 std::shared_ptr<Node> Parser::parseValue()
@@ -773,7 +771,7 @@ std::shared_ptr<Node> Parser::parseFunction()
             std::string word = this->currentToken->getContent();
             if (functions->get(word) == nullptr)
             {
-                passable->errors->add(passable->errorFactory->functionNotDeclared(currentToken, word));
+                passable->getErrors()->add(passable->getErrorFactory()->functionNotDeclared(currentToken, word));
                 compilation = false;
                 return null;
             }
@@ -1009,10 +1007,10 @@ bool Parser::execute()
             {
                 std::cout << output->toString() << std::endl;
             }
-            passable->errors->print();
+            passable->getErrors()->print();
             return true;
         }
     }
-    passable->errors->print();
+    passable->getErrors()->print();
     return false;
 }

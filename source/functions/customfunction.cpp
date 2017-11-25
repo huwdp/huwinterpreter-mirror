@@ -35,7 +35,7 @@ std::shared_ptr<Variable> CustomFunction::execute(std::shared_ptr<Token> token, 
 
     if (this->arguments.size() != arguments.size())
     {
-        passable->errors->add(passable->errorFactory->unmatchedSpecifiedNumberOfArguments(token, name));
+        passable->getErrors()->add(passable->getErrorFactory()->unmatchedSpecifiedNumberOfArguments(token, name));
         return null;
     }
 

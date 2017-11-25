@@ -29,7 +29,7 @@ NodeType SetReturnNode::getType()
 std::shared_ptr<Variable> SetReturnNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("SetReturnNode");
-    if (passable->errors->count() > 0)
+    if (passable->getErrors()->count() > 0)
     {
         return null;
     }

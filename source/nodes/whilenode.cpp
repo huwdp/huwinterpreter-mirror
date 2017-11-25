@@ -32,7 +32,7 @@ NodeType WhileNode::getType()
 std::shared_ptr<Variable> WhileNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
 {
     Debug::print("WhileNode");
-    if (passable->errors->count() > 0)
+    if (passable->getErrors()->count() > 0)
     {
         return null;
     }
@@ -46,13 +46,13 @@ std::shared_ptr<Variable> WhileNode::execute(std::shared_ptr<Scope> globalScope,
 
         if (c == null)
         {
-            passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
+            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
             return null;
         }
         bool loop = c->toBool();
         while (loop)
         {
-            if (passable->errors->count() > 0)
+            if (passable->getErrors()->count() > 0)
             {
                 return null;
             }
@@ -70,14 +70,14 @@ std::shared_ptr<Variable> WhileNode::execute(std::shared_ptr<Scope> globalScope,
             loop = c->toBool();
             if (c == null)
             {
-                passable->errors->add(passable->errorFactory->invalidExpression(RUNTIME_ERROR, token, internalName));
+                passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
                 return null;
             }
         }
     }
     else
     {
-        passable->errors->add(passable->errorFactory->failedToCompare(token, internalName));
+        passable->getErrors()->add(passable->getErrorFactory()->failedToCompare(token, internalName));
         return null;
     }
     if (next != nullptr)

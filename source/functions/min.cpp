@@ -37,7 +37,7 @@ std::shared_ptr<Variable> Min::execute(std::shared_ptr<Token> token, std::shared
                 std::shared_ptr<Variable> var = (*it)->execute(globalScope, scope);
                 if (var == nullptr)
                 {
-                    passable->errors->add(passable->errorFactory->invalidArgument(token, RUNTIME_ERROR, name));
+                    passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
                     return null;
                 }
 
@@ -51,15 +51,15 @@ std::shared_ptr<Variable> Min::execute(std::shared_ptr<Token> token, std::shared
                 }
                 catch (const std::invalid_argument ex)
                 {
-                    passable->errors->add(passable->errorFactory->invalidArgument(token, FUNCTION_ERROR, name, ex.what()));
+                    passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, FUNCTION_ERROR, name, ex.what()));
                 }
                 catch (const std::out_of_range ex)
                 {
-                    passable->errors->add(passable->errorFactory->outOfRange(token, name, ex.what()));
+                    passable->getErrors()->add(passable->getErrorFactory()->outOfRange(token, name, ex.what()));
                 }
                 catch (const std::exception& ex)
                 {
-                    passable->errors->add(passable->errorFactory->otherFunctionError(token, name, ex.what()));
+                    passable->getErrors()->add(passable->getErrorFactory()->otherFunctionError(token, name, ex.what()));
                 }
             }
         }
@@ -67,7 +67,7 @@ std::shared_ptr<Variable> Min::execute(std::shared_ptr<Token> token, std::shared
     }
     else
     {
-        passable->errors->add(passable->errorFactory->requiresAtLeastXArguments(token, name, 2));
+        passable->getErrors()->add(passable->getErrorFactory()->requiresAtLeastXArguments(token, name, 2));
     }
     return returnNode;
 }

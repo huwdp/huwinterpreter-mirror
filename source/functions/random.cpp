@@ -35,7 +35,7 @@ std::shared_ptr<Variable> Random::execute(std::shared_ptr<Token> token, std::sha
     }
     else
     {
-        passable->errors->add(passable->errorFactory->requiresArguments(token, name, "", 0));
+        passable->getErrors()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 0));
     }
     
     return returnNode;
