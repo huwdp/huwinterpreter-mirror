@@ -897,7 +897,9 @@ std::shared_ptr<Node> Parser::parseFunction()
                 compilation = false;
                 return null;
             }
+            acceptIndentation();
             nextToken();
+            acceptIndentation();
             if (!expect(LEFTPARENTHESIS))
             {
                 return null;
