@@ -21,6 +21,12 @@ Passable::Passable()
     this->errorFactory = std::make_shared<ErrorFactory>();
 }
 
+Passable::Passable(std::shared_ptr<Errors> errors, std::shared_ptr<ErrorFactory> errorFactory)
+{
+    this->errors = errors;
+    this->errorFactory = errorFactory;
+}
+
 std::shared_ptr<Errors> Passable::getErrors()
 {
     return errors;

@@ -26,6 +26,7 @@ private:
     std::shared_ptr<ErrorFactory> errorFactory;
 public:
     Passable();
+    Passable(std::shared_ptr<Errors> errors, std::shared_ptr<ErrorFactory> errorFactory);
     std::shared_ptr<Errors> getErrors();
     void setErrors(std::shared_ptr<Errors> errors);
     std::shared_ptr<ErrorFactory> getErrorFactory();
