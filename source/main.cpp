@@ -44,7 +44,7 @@ void printHelp(int argc, char* argv[])
 
 int main(int argc, char* argv[])
 {
-    std::shared_ptr<HuwInterpreter> interpreter = std::make_shared<HuwInterpreter>();
+    std::shared_ptr<HuwInterpreter::Interpreter> interpreter = std::make_shared<HuwInterpreter::Interpreter>();
     if (argc < 2)
     {
         printHelp(argc, argv);

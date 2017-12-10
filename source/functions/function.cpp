@@ -15,38 +15,42 @@
 
 #include "function.h"
 
-Function::Function(std::shared_ptr<Passable> passable)
-{
-    this->passable = passable;
-}
-
-std::string Function::getName()
-{
-    return name;
-}
-
-void Function::setName(std::string name)
-{
-    this->name = name;
-}
-
-std::string Function::toString(std::vector<std::shared_ptr<Node>> arguments)
-{
-    std::string output;
-    output.append(name).append("(");
-    for (std::vector<std::shared_ptr<Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
-    {
-        if ((*it) = nullptr)
+namespace HuwInterpreter {
+    namespace Functions {
+        Function::Function(std::shared_ptr<Passable> passable)
         {
-            output.append((*it)->toString());
-            it++;
-            if (it != arguments.end())
+            this->passable = passable;
+        }
+
+        std::string Function::getName()
+        {
+            return name;
+        }
+
+        void Function::setName(std::string name)
+        {
+            this->name = name;
+        }
+
+        std::string Function::toString(std::vector<std::shared_ptr<Nodes::Node>> arguments)
+        {
+            std::string output;
+            output.append(name).append("(");
+            for (std::vector<std::shared_ptr<Nodes::Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
             {
-                output.append(",");
+                if ((*it) = nullptr)
+                {
+                    output.append((*it)->toString());
+                    it++;
+                    if (it != arguments.end())
+                    {
+                        output.append(",");
+                    }
+                    it--;
+                }
             }
-            it--;
+            output.append(")");
+            return output;
         }
     }
-    output.append(")");
-    return output;
 }

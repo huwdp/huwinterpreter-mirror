@@ -15,73 +15,76 @@
 
 #include "runnode.h"
 
-RunNode::RunNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : Node("RunNode", passable, token)
-{
-    this->left = left;
-    this->right = right;
-    Debug::print("RunNode");
-}
-
-NodeType RunNode::getType()
-{
-    return RUNNODETYPE;
-}
-
-std::shared_ptr<Variable> RunNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("RunNode");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (scope->getReturnValue() != nullptr)
-    {
-        return scope->getReturnValue();
-    }
-    if (left != nullptr)
-    {
-        left->execute(globalScope, scope);
-        if (passable->getErrors()->count() > 0)
+namespace HuwInterpreter {
+    namespace Nodes {
+        RunNode::RunNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> left, std::shared_ptr<Nodes::Node> right)
+            : Node("RunNode", passable, token)
         {
+            this->left = left;
+            this->right = right;
+            ErrorReporting::Debug::print("RunNode");
+        }
+
+        NodeType RunNode::getType()
+        {
+            return RUNNODETYPE;
+        }
+
+        std::shared_ptr<Variables::Variable> RunNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
+        {
+            ErrorReporting::Debug::print("RunNode");
+            if (passable->getErrorManager()->count() > 0)
+            {
+                return null;
+            }
+            if (scope->getReturnValue() != nullptr)
+            {
+                return scope->getReturnValue();
+            }
+            if (left != nullptr)
+            {
+                left->execute(globalScope, scope);
+                if (passable->getErrorManager()->count() > 0)
+                {
+                    return null;
+                }
+                if (scope->getReturnValue() != nullptr)
+                {
+                    return scope->getReturnValue();
+                }
+            }
+            if (right != nullptr)
+            {
+                right->execute(globalScope, scope);
+                if (passable->getErrorManager()->count() > 0)
+                {
+                    return null;
+                }
+                if (scope->getReturnValue() != nullptr)
+                {
+                    return scope->getReturnValue();
+                }
+            }
             return null;
         }
-        if (scope->getReturnValue() != nullptr)
-        {
-            return scope->getReturnValue();
-        }
-    }
-    if (right != nullptr)
-    {
-        right->execute(globalScope, scope);
-        if (passable->getErrors()->count() > 0)
-        {
-            return null;
-        }
-        if (scope->getReturnValue() != nullptr)
-        {
-            return scope->getReturnValue();
-        }
-    }
-    return null;
-}
 
-std::string RunNode::toString()
-{
-    std::string output;
-    if (left != nullptr && right != nullptr)
-    {
-        output.append(left->toString()).append(right->toString());
-        return output;
+        std::string RunNode::toString()
+        {
+            std::string output;
+            if (left != nullptr && right != nullptr)
+            {
+                output.append(left->toString()).append(right->toString());
+                return output;
+            }
+            if (left != nullptr)
+            {
+                output.append(left->toString());
+            }
+            if (right != nullptr)
+            {
+                output.append(right->toString());
+            }
+            return output;
+        }
     }
-    if (left != nullptr)
-    {
-        output.append(left->toString());
-    }
-    if (right != nullptr)
-    {
-        output.append(right->toString());
-    }
-    return output;
 }
-

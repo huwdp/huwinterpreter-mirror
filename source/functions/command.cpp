@@ -15,36 +15,40 @@
 
 #include "command.h"
 
-Command::Command(std::shared_ptr<Passable> passable)
-    : Function(passable)
-{
-    name = "command";
-}
-
-std::shared_ptr<Variable> Command::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
-                                       std::shared_ptr<Scope> scope,
-                                       std::vector<std::shared_ptr<Node>> arguments)
-{
-    std::shared_ptr<Variable> returnNode;
-    if (arguments.size() == 0)
-    {
-        Debug::print("Command function requires at least 1 argument");
-        passable->getErrors()->add(passable->getErrorFactory()->requiresAtLeastXArguments(token, name, 1));
-        return null;
-    }
-    for (std::vector<std::shared_ptr<Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
-    {
-        if ((*it) != nullptr)
+namespace HuwInterpreter {
+    namespace Functions {
+        Command::Command(std::shared_ptr<Passable> passable)
+            : Function(passable)
         {
-            std::shared_ptr<Variable> var = (*it)->execute(globalScope, scope);
-            if (var == nullptr)
+            name = "command";
+        }
+
+        std::shared_ptr<Variable> Command::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,
+                                               std::shared_ptr<Scope> scope,
+                                               std::vector<std::shared_ptr<Nodes::Node>> arguments)
+        {
+            std::shared_ptr<Variable> returnNode;
+            if (arguments.size() == 0)
             {
-                passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                ErrorReporting::Debug::print("Command function requires at least 1 argument");
+                passable->getErrorManager()->add(passable->getErrorFactory()->requiresAtLeastXArguments(token, name, 1));
                 return null;
             }
+            for (std::vector<std::shared_ptr<Nodes::Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
+            {
+                if ((*it) != nullptr)
+                {
+                    std::shared_ptr<Variable> var = (*it)->execute(globalScope, scope);
+                    if (var == nullptr)
+                    {
+                        passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                        return null;
+                    }
 
-            system(var->toString().c_str());
+                    system(var->toString().c_str());
+                }
+            }
+            return returnNode;
         }
     }
-    return returnNode;
 }

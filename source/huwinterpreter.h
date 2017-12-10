@@ -30,22 +30,28 @@
 #include "nodes/huwcodenodefactory.h"
 #include "nodes/nodefactoryfactory.h"
 
-class HuwInterpreter
-{
-private:
-    std::shared_ptr<NodeFactory> nodeFactory;
-    std::shared_ptr<Node> null;
-    std::shared_ptr<Scanner> scanner;
-    std::shared_ptr<FileTokenManager> fileTokenManager;
-    std::vector<std::shared_ptr<Token>> tokens;
-    std::unique_ptr<Parser> parser;
-public:
-    HuwInterpreter();
-    void executeFile(std::string fileLocation);
-    void execute(std::vector<std::shared_ptr<Token>> tokens);
-    std::string toString(std::vector<std::shared_ptr<Token>> tokens);
-    std::vector<std::shared_ptr<Token>> parseFile(std::string fileLocation);
-    std::vector<std::shared_ptr<Token> > parseText(std::string text);
-};
+using namespace HuwInterpreter::Tokens;
+using namespace HuwInterpreter::Nodes;
+
+namespace  HuwInterpreter {
+
+    class Interpreter
+    {
+    private:
+        std::shared_ptr<NodeFactory> nodeFactory;
+        std::shared_ptr<Nodes::Node> null;
+        std::shared_ptr<Scanner> scanner;
+        std::shared_ptr<FileTokenManager> fileTokenManager;
+        std::vector<std::shared_ptr<Token>> tokens;
+        std::unique_ptr<Parser> parser;
+    public:
+        Interpreter();
+        void executeFile(std::string fileLocation);
+        void execute(std::vector<std::shared_ptr<Token>> tokens);
+        std::string toString(std::vector<std::shared_ptr<Token>> tokens);
+        std::vector<std::shared_ptr<Token>> parseFile(std::string fileLocation);
+        std::vector<std::shared_ptr<Token> > parseText(std::string text);
+    };
+}
 
 #endif // HUWINTERPRETER_H

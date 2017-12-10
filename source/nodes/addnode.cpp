@@ -15,56 +15,60 @@
 
 #include "addnode.h"
 
-AddNode::AddNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : Node("AddNode", passable, token)
-{
-    this->left = left;
-    this->right = right;
-    Debug::print("Add");
-}
-
-NodeType AddNode::getType()
-{
-    return ADDNODETYPE;
-}
-
-std::shared_ptr<Variable> AddNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("Add");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (scope->getReturnValue() != nullptr)
-    {
-        return scope->getReturnValue();
-    }
-    if (left != nullptr && right != nullptr)
-    {
-        std::shared_ptr<Variable> l = left->execute(globalScope, scope);
-        std::shared_ptr<Variable> r = right->execute(globalScope, scope);
-        if (l == nullptr)
+namespace HuwInterpreter {
+    namespace Nodes {
+        AddNode::AddNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> left, std::shared_ptr<Nodes::Node> right)
+            : Node("AddNode", passable, token)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+            this->left = left;
+            this->right = right;
+            ErrorReporting::Debug::print("Add");
+        }
+
+        NodeType AddNode::getType()
+        {
+            return ADDNODETYPE;
+        }
+
+        std::shared_ptr<Variables::Variable> AddNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
+        {
+            ErrorReporting::Debug::print("Add");
+            if (passable->getErrorManager()->count() > 0)
+            {
+                return null;
+            }
+            if (scope->getReturnValue() != nullptr)
+            {
+                return scope->getReturnValue();
+            }
+            if (left != nullptr && right != nullptr)
+            {
+                std::shared_ptr<Variables::Variable> l = left->execute(globalScope, scope);
+                std::shared_ptr<Variables::Variable> r = right->execute(globalScope, scope);
+                if (l == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+                    return null;
+                }
+                if (r == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+                    return null;
+                }
+                return l->add(r, token);
+            }
+            ErrorReporting::Debug::print("Could not add.");
             return null;
         }
-        if (r == nullptr)
-        {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
-            return null;
-        }
-        return l->add(r, token);
-    }
-    Debug::print("Could not add.");
-    return null;
-}
 
-std::string AddNode::toString()
-{
-    std::string output;
-    if (left != nullptr && right != nullptr)
-    {
-        output.append(left->toString()).append("+").append(right->toString());
+        std::string AddNode::toString()
+        {
+            std::string output;
+            if (left != nullptr && right != nullptr)
+            {
+                output.append(left->toString()).append("+").append(right->toString());
+            }
+            return output;
+        }
     }
-    return output;
 }

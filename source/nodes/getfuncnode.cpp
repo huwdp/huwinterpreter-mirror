@@ -15,64 +15,68 @@
 
 #include "getfuncnode.h"
 
-GetFuncNode::GetFuncNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::string name, std::shared_ptr<Functions> functions, std::vector<std::shared_ptr<Node>> arguments)
-    : Node("GetFuncNode", passable, token)
-{
-    this->name = name;
-    this->functions = functions;
-    this->arguments = arguments;
-    Debug::print("GetFuncNode");
-}
-
-NodeType GetFuncNode::getType()
-{
-    return GETFUNCNODETYPE;
-}
-
-std::shared_ptr<Variable> GetFuncNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("GetFuncNode");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (scope->getReturnValue() != nullptr)
-    {
-        return scope->getReturnValue();
-    }
-    std::shared_ptr<Function> func = functions->get(name);
-    if (func != nullptr)
-    {
-        return func->execute(token, globalScope, scope, arguments);
-        if (passable->getErrors()->count() > 0)
+namespace HuwInterpreter {
+    namespace Nodes {
+        GetFuncNode::GetFuncNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::string name, std::shared_ptr<Functions::FunctionManager> functionManager, std::vector<std::shared_ptr<Nodes::Node>> arguments)
+            : Node("GetFuncNode", passable, token)
         {
+            this->name = name;
+            this->functionManager = functionManager;
+            this->arguments = arguments;
+            ErrorReporting::Debug::print("GetFuncNode");
+        }
+
+        NodeType GetFuncNode::getType()
+        {
+            return GETFUNCNODETYPE;
+        }
+
+        std::shared_ptr<Variables::Variable> GetFuncNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
+        {
+            ErrorReporting::Debug::print("GetFuncNode");
+            if (passable->getErrorManager()->count() > 0)
+            {
+                return null;
+            }
+            if (scope->getReturnValue() != nullptr)
+            {
+                return scope->getReturnValue();
+            }
+            std::shared_ptr<Functions::Function> func = functionManager->get(name);
+            if (func != nullptr)
+            {
+                return func->execute(token, globalScope, scope, arguments);
+                if (passable->getErrorManager()->count() > 0)
+                {
+                    return null;
+                }
+                return scope->getReturnValue();
+            }
+            passable->getErrorManager()->add(passable->getErrorFactory()->functionNotDeclared(token, name));
             return null;
         }
-        return scope->getReturnValue();
-    }
-    passable->getErrors()->add(passable->getErrorFactory()->functionNotDeclared(token, name));
-    return null;
-}
 
-std::string GetFuncNode::toString()
-{
-    std::string output;
-    output.append(name).append("(");
-    for (std::vector<std::shared_ptr<Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
-    {
-        if ((*it) != nullptr)
+        std::string GetFuncNode::toString()
         {
-            output.append((*it)->toString());
-            if (it != arguments.end())
+            std::string output;
+            output.append(name).append("(");
+            for (std::vector<std::shared_ptr<Nodes::Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
             {
-                ++it;
-                if (it != arguments.end())
+                if ((*it) != nullptr)
                 {
-                    output.append(",");
+                    output.append((*it)->toString());
+                    if (it != arguments.end())
+                    {
+                        ++it;
+                        if (it != arguments.end())
+                        {
+                            output.append(",");
+                        }
+                        --it;
+                    }
                 }
-                --it;
             }
+            return output.append(")");
         }
     }
-    return output.append(")");
 }

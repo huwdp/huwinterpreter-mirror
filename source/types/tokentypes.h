@@ -16,57 +16,61 @@
 #ifndef TOKENTYPES
 #define TOKENTYPES
 
-enum TokenType {RIGHTPARENTHESIS,
-                 LEFTPARENTHESIS,
-                 MULTIPLICATION,
-                 DIVISION,
-                 ADDITION,
-                 SUBTRACTION,
-                 MOD,
-                 EQUALS,
-                 IFEQUALS,
-                 IFNOTEQUALS,
-                 IFLESSTHAN,
-                 IFLESSTHANOREQUAL,
-                 IFGREATER,
-                 IFGREATERTHANOREQUAL,
-                 LEFTBRACKET,
-                 RIGHTBRACKET,
-                 SEMICOLON,
-                 COMMA,
-                 WORD,
-                 NUMBER,
-                 INDENTATION,
-                 TABINDENTATION,
-                 TEXT,
-                 QUOTE,
-                 AND,
-                 OR,
-                 BITWISECOMPLEMENT,
-                 BITWISEAND,
-                 BITWISEOR,
-                 BITWISEXOR,
-                 DOT,
-                 MULTIPLICATIONEQUAL,
-                 DIVISIONEQUAL,
-                 ADDITIONEQUAL,
-                 SUBTRACTIONEQUAL,
-                 INCREMENT,
-                 DECREMENT,
-                 NOT,
-                 LEFTSHIFT,
-                 RIGHTSHIFT
-};
+namespace HuwInterpreter {
+    namespace Types {
+        enum TokenType {RIGHTPARENTHESIS,
+                         LEFTPARENTHESIS,
+                         MULTIPLICATION,
+                         DIVISION,
+                         ADDITION,
+                         SUBTRACTION,
+                         MOD,
+                         EQUALS,
+                         IFEQUALS,
+                         IFNOTEQUALS,
+                         IFLESSTHAN,
+                         IFLESSTHANOREQUAL,
+                         IFGREATER,
+                         IFGREATERTHANOREQUAL,
+                         LEFTBRACKET,
+                         RIGHTBRACKET,
+                         SEMICOLON,
+                         COMMA,
+                         WORD,
+                         NUMBER,
+                         INDENTATION,
+                         TABINDENTATION,
+                         TEXT,
+                         QUOTE,
+                         AND,
+                         OR,
+                         BITWISECOMPLEMENT,
+                         BITWISEAND,
+                         BITWISEOR,
+                         BITWISEXOR,
+                         DOT,
+                         MULTIPLICATIONEQUAL,
+                         DIVISIONEQUAL,
+                         ADDITIONEQUAL,
+                         SUBTRACTIONEQUAL,
+                         INCREMENT,
+                         DECREMENT,
+                         NOT,
+                         LEFTSHIFT,
+                         RIGHTSHIFT
+        };
 
 
-enum VarType
-{
-    INTEGER,
-    DOUBLE,
-    STRING,
-    ARRAY,
-    NUMBERA,
-    NONE
-};
+        enum VarType
+        {
+            INTEGER,
+            DOUBLE,
+            STRING,
+            ARRAY,
+            NUMBERA,
+            NONE
+        };
+    }
+}
 
 #endif // TOKENTYPES

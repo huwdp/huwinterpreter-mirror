@@ -15,93 +15,97 @@
 
 #include "ifnode.h"
 
-IfNode::IfNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> condition, std::shared_ptr<Node> body, std::shared_ptr<Node> elseNode)
-    : Node("IfNode", passable, token)
-{
-    Debug::print("IfNode");
-    this->condition = condition;
-    this->body = body;
-    this->elseNode = elseNode;
-}
-
-NodeType IfNode::getType()
-{
-    return IFNODETYPE;
-}
-
-std::shared_ptr<Variable> IfNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("IfNode");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (scope->getReturnValue() != nullptr)
-    {
-        return scope->getReturnValue();
-    }
-    std::shared_ptr<Variable> c = condition->execute(globalScope, scope);
-    if (c != nullptr)
-    {
-        if (c->toBool())
+namespace HuwInterpreter {
+    namespace Nodes {
+        IfNode::IfNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> condition, std::shared_ptr<Nodes::Node> body, std::shared_ptr<Nodes::Node> elseNode)
+            : Node("IfNode", passable, token)
         {
-            if (body != nullptr)
+            ErrorReporting::Debug::print("IfNode");
+            this->condition = condition;
+            this->body = body;
+            this->elseNode = elseNode;
+        }
+
+        NodeType IfNode::getType()
+        {
+            return IFNODETYPE;
+        }
+
+        std::shared_ptr<Variables::Variable> IfNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
+        {
+            ErrorReporting::Debug::print("IfNode");
+            if (passable->getErrorManager()->count() > 0)
             {
-                body->execute(globalScope, scope);
-                if (passable->getErrors()->count() > 0)
+                return null;
+            }
+            if (scope->getReturnValue() != nullptr)
+            {
+                return scope->getReturnValue();
+            }
+            std::shared_ptr<Variables::Variable> c = condition->execute(globalScope, scope);
+            if (c != nullptr)
+            {
+                if (c->toBool())
                 {
-                    return null;
+                    if (body != nullptr)
+                    {
+                        body->execute(globalScope, scope);
+                        if (passable->getErrorManager()->count() > 0)
+                        {
+                            return null;
+                        }
+                        if (scope->getReturnValue() != nullptr)
+                        {
+                            return scope->getReturnValue();
+                        }
+                    }
+                    else
+                    {
+                        passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+                    }
                 }
-                if (scope->getReturnValue() != nullptr)
+                else
                 {
-                    return scope->getReturnValue();
+                    if (elseNode != nullptr)
+                    {
+                        elseNode->execute(globalScope, scope);
+                        if (passable->getErrorManager()->count() > 0)
+                        {
+                            return null;
+                        }
+                        if (scope->getReturnValue() != nullptr)
+                        {
+                            return scope->getReturnValue();
+                        }
+                    }
                 }
             }
             else
             {
-                passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+                passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, internalName));
             }
+            return null;
         }
-        else
+
+        std::string IfNode::toString()
         {
+            std::string output;
+            output.append("if (");
+            if (condition != nullptr)
+            {
+                output.append(condition->toString());
+            }
+            output.append("){");
+            if (body != nullptr)
+            {
+                output.append(body->toString());
+            }
+            output.append("}");
             if (elseNode != nullptr)
             {
-                elseNode->execute(globalScope, scope);
-                if (passable->getErrors()->count() > 0)
-                {
-                    return null;
-                }
-                if (scope->getReturnValue() != nullptr)
-                {
-                    return scope->getReturnValue();
-                }
+                output.append("else").append("{").append(elseNode->toString()).append("}");
             }
+            return output;
         }
     }
-    else
-    {
-        passable->getErrors()->add(passable->getErrorFactory()->failedToCompare(token, internalName));
-    }
-    return null;
-}
-
-std::string IfNode::toString()
-{
-    std::string output;
-    output.append("if (");
-    if (condition != nullptr)
-    {
-        output.append(condition->toString());
-    }
-    output.append("){");
-    if (body != nullptr)
-    {
-        output.append(body->toString());
-    }
-    output.append("}");
-    if (elseNode != nullptr)
-    {
-        output.append("else").append("{").append(elseNode->toString()).append("}");
-    }
-    return output;
 }

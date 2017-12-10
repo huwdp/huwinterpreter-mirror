@@ -15,51 +15,55 @@
 
 #include "getvarnode.h"
 
-GetVarNode::GetVarNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::string name)
-    : Node("GetVarNode", passable, token)
-{
-    this->name = name;
-    Debug::print("GetVarNode");
-}
+namespace HuwInterpreter {
+    namespace Nodes {
+        GetVarNode::GetVarNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::string name)
+            : Node("GetVarNode", passable, token)
+        {
+            this->name = name;
+            ErrorReporting::Debug::print("GetVarNode");
+        }
 
-NodeType GetVarNode::getType()
-{
-    return GETVARNODETYPE;
-}
+        NodeType GetVarNode::getType()
+        {
+            return GETVARNODETYPE;
+        }
 
-std::shared_ptr<Variable> GetVarNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("GetVarNode");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (scope->getReturnValue() != nullptr)
-    {
-        return scope->getReturnValue();
-    }
+        std::shared_ptr<Variables::Variable> GetVarNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
+        {
+            ErrorReporting::Debug::print("GetVarNode");
+            if (passable->getErrorManager()->count() > 0)
+            {
+                return null;
+            }
+            if (scope->getReturnValue() != nullptr)
+            {
+                return scope->getReturnValue();
+            }
 
-    std::shared_ptr<Variable> var1 = globalScope->getVariables()->get(name);
-    if (var1 != nullptr)
-    {
-        return var1;
-    }
+            std::shared_ptr<Variables::Variable> var1 = globalScope->getVariableManager()->get(name);
+            if (var1 != nullptr)
+            {
+                return var1;
+            }
 
-    std::shared_ptr<Variable> var2 = scope->getVariables()->get(name);
-    if (var2 != nullptr)
-    {
-        return var2;
-    }
-    else
-    {
-        passable->getErrors()->add(passable->getErrorFactory()->variableNotDeclared(token, name));
-        return null;
-    }
-    Debug::print("Could not find variable.");
-    return null;
-}
+            std::shared_ptr<Variables::Variable> var2 = scope->getVariableManager()->get(name);
+            if (var2 != nullptr)
+            {
+                return var2;
+            }
+            else
+            {
+                passable->getErrorManager()->add(passable->getErrorFactory()->variableNotDeclared(token, name));
+                return null;
+            }
+            ErrorReporting::Debug::print("Could not find variable.");
+            return null;
+        }
 
-std::string GetVarNode::toString()
-{
-    return name;
+        std::string GetVarNode::toString()
+        {
+            return name;
+        }
+    }
 }

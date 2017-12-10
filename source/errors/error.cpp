@@ -15,86 +15,90 @@
 
 #include "error.h"
 
-Error::Error()
-{
-    this->errorType = INFO;
-    error = "";
-    this->token = nullptr;
-    this->internalFile = "";
-    this->internalLine = 0;
-}
-
-Error::Error(ErrorTypes errorType, std::string error)
-{
-    this->errorType = errorType;
-    this->error = error;
-    this->token = nullptr;
-    this->internalFile = "";
-    this->internalLine = 0;
-}
-
-Error::Error(ErrorTypes errorType, std::string error, std::shared_ptr<Token> token)
-{
-    this->errorType = errorType;
-    this->error = error;
-    this->token = token;
-    this->internalFile = "";
-
-    if (token != nullptr && token->getLineInfo() != nullptr)
-    {
-        internalLine = token->getLineInfo()->getCharNumber();
-    }
-    else
-    {
-        internalLine = 0;
-    }
-}
-
-Error::Error(ErrorTypes errorType, std::string error, std::shared_ptr<Token> token, std::__cxx11::string internalFile, int internalLine)
-{
-    this->errorType = errorType;
-    this->error = error;
-    this->token = token;
-    this->internalFile = internalFile;
-    this->internalLine = internalLine;
-}
-
-std::string Error::getError()
-{
-    return error;
-}
-
-void Error::setError(std::string error)
-{
-    this->error = error;
-}
-
-std::string Error::getMessage()
-{
-    ErrorTypeStringFactory errorTypeStringFactory;
-    std::string message = errorTypeStringFactory.createErrorString(errorType);
-    message.append(": ");
-    if (error != "")
-    {
-        message.append(error);
-    }
-    if (token != nullptr)
-    {
-        std::shared_ptr<LineInfo> lineInfo = token->getLineInfo();
-        if (lineInfo != nullptr)
+namespace HuwInterpreter {
+    namespace ErrorReporting {
+        Error::Error()
         {
-            if (lineInfo->getLineNumber() >= 0)
+            this->errorType = INFO;
+            error = "";
+            this->token = nullptr;
+            this->internalFile = "";
+            this->internalLine = 0;
+        }
+
+        Error::Error(ErrorTypes errorType, std::string error)
+        {
+            this->errorType = errorType;
+            this->error = error;
+            this->token = nullptr;
+            this->internalFile = "";
+            this->internalLine = 0;
+        }
+
+        Error::Error(ErrorTypes errorType, std::string error, std::shared_ptr<Token> token)
+        {
+            this->errorType = errorType;
+            this->error = error;
+            this->token = token;
+            this->internalFile = "";
+
+            if (token != nullptr && token->getLineInfo() != nullptr)
             {
-                message.append(" at line number ");
-                message.append(std::to_string(lineInfo->getLineNumber()));
+                internalLine = token->getLineInfo()->getCharNumber();
             }
-            if (lineInfo->getCharNumber() > 0)
+            else
             {
-                message.append(" on character");
-                message.append(std::to_string(lineInfo->getCharNumber()));
+                internalLine = 0;
             }
         }
+
+        Error::Error(ErrorTypes errorType, std::string error, std::shared_ptr<Token> token, std::__cxx11::string internalFile, int internalLine)
+        {
+            this->errorType = errorType;
+            this->error = error;
+            this->token = token;
+            this->internalFile = internalFile;
+            this->internalLine = internalLine;
+        }
+
+        std::string Error::getError()
+        {
+            return error;
+        }
+
+        void Error::setError(std::string error)
+        {
+            this->error = error;
+        }
+
+        std::string Error::getMessage()
+        {
+            ErrorTypeStringFactory errorTypeStringFactory;
+            std::string message = errorTypeStringFactory.createErrorString(errorType);
+            message.append(": ");
+            if (error != "")
+            {
+                message.append(error);
+            }
+            if (token != nullptr)
+            {
+                std::shared_ptr<LineInfo> lineInfo = token->getLineInfo();
+                if (lineInfo != nullptr)
+                {
+                    if (lineInfo->getLineNumber() >= 0)
+                    {
+                        message.append(" at line number ");
+                        message.append(std::to_string(lineInfo->getLineNumber()));
+                    }
+                    if (lineInfo->getCharNumber() > 0)
+                    {
+                        message.append(" on character");
+                        message.append(std::to_string(lineInfo->getCharNumber()));
+                    }
+                }
+            }
+            message.append(".");
+            return message;
+        }
     }
-    message.append(".");
-    return message;
 }

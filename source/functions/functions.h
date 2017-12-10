@@ -23,25 +23,29 @@
 
 #include "print.h"
 
-class Functions
-{
-private:
-    std::shared_ptr<Passable> passable;
-    std::unordered_map<std::string, std::shared_ptr<Function>> functions;
-public:
-    Functions(std::shared_ptr<Passable> passable);
-    void init();
-    std::shared_ptr<Function> get(std::string name);
-    std::shared_ptr<Function> set(std::string name, std::string value);
-    bool exists(std::shared_ptr<Function> function);
-    bool exists(std::string name);
-    bool addFunction(std::shared_ptr<Function> function);
-    bool addFunction(std::string name);
-    bool addFunction(std::string name, std::shared_ptr<Function> function);
-    bool setFunction(std::string name, std::shared_ptr<Function> function);
-    bool removeFunction(std::shared_ptr<Function> function);
-    bool removeFunction(std::string name);
-    std::string toString();
-};
+namespace HuwInterpreter {
+    namespace Functions {
+        class FunctionManager
+        {
+        private:
+            std::shared_ptr<Passable> passable;
+            std::unordered_map<std::string, std::shared_ptr<Functions::Function>> functions;
+        public:
+            FunctionManager(std::shared_ptr<Passable> passable);
+            void init();
+            std::shared_ptr<Functions::Function> get(std::string name);
+            std::shared_ptr<Functions::Function> set(std::string name, std::string value);
+            bool exists(std::shared_ptr<Functions::Function> function);
+            bool exists(std::string name);
+            bool addFunction(std::shared_ptr<Functions::Function> function);
+            bool addFunction(std::string name);
+            bool addFunction(std::string name, std::shared_ptr<Functions::Function> function);
+            bool setFunction(std::string name, std::shared_ptr<Functions::Function> function);
+            bool removeFunction(std::shared_ptr<Functions::Function> function);
+            bool removeFunction(std::string name);
+            std::string toString();
+        };
+    }
+}
 
 #endif // FUNCTIONS_H

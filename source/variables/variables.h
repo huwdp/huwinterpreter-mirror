@@ -26,26 +26,30 @@
 #include "constantvariable.h"
 #include "types/typedetector.h"
 
-class Variables
-{
-private:
-    std::shared_ptr<Passable> passable;
-    std::unordered_map<std::string, std::shared_ptr<Variable>> variables;
-public:
-    std::shared_ptr<Variable> null;
-    Variables(std::shared_ptr<Passable> passable, bool isEmpty);
-    ~Variables();
-    void addDefaultVariables(bool isEmpty);
-    std::shared_ptr<Variable> get(std::string name);
-    bool set(std::string name, std::shared_ptr<Variable> variable);
-    std::shared_ptr<Variable> exists(std::shared_ptr<Variable> variable);
-    std::shared_ptr<Variable> exists(std::string name);
-    bool addVariable(std::shared_ptr<Variable> variable);
-    bool addVariable(std::string name, std::shared_ptr<Variable> variable);
-    bool removeVariable(std::shared_ptr<Variable> variable);
-    bool removeVariable(std::string name);
-    void setParent(std::shared_ptr<Variables> parent);
-    bool setVariable(std::string name, std::shared_ptr<Variable> variable);
-};
+namespace HuwInterpreter {
+    namespace Variables {
+        class VariableManager
+        {
+        private:
+            std::shared_ptr<Passable> passable;
+            std::unordered_map<std::string, std::shared_ptr<Variable>> variables;
+        public:
+            std::shared_ptr<Variable> null;
+            VariableManager(std::shared_ptr<Passable> passable, bool isEmpty);
+            ~VariableManager();
+            void addDefaultVariables(bool isEmpty);
+            std::shared_ptr<Variable> get(std::string name);
+            bool set(std::string name, std::shared_ptr<Variable> variable);
+            std::shared_ptr<Variable> exists(std::shared_ptr<Variable> variable);
+            std::shared_ptr<Variable> exists(std::string name);
+            bool addVariable(std::shared_ptr<Variable> variable);
+            bool addVariable(std::string name, std::shared_ptr<Variable> variable);
+            bool removeVariable(std::shared_ptr<Variable> variable);
+            bool removeVariable(std::string name);
+            void setParent(std::shared_ptr<VariableManager> parent);
+            bool setVariable(std::string name, std::shared_ptr<Variable> variable);
+        };
+    }
+}
 
 #endif // VARIABLES_H

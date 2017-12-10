@@ -15,53 +15,58 @@
 
 #include "arrayset.h"
 
-ArraySet::ArraySet(std::shared_ptr<Passable> passable)
-    : Function(passable)
-{
-    name = "arraySet";
-}
+namespace HuwInterpreter {
+    namespace Functions {
 
-std::shared_ptr<Variable> ArraySet::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
-                              std::shared_ptr<Scope> scope,
-                              std::vector<std::shared_ptr<Node>> arguments)
-{
-    std::shared_ptr<Variable> returnNode;
-    if (arguments.size() == 3)
-    {
-        std::shared_ptr<Node> node1 = arguments.at(0);
-        std::shared_ptr<Node> node2 = arguments.at(1);
-        std::shared_ptr<Node> node3 = arguments.at(2);
-
-        if (node1 == nullptr || node2 == nullptr || node3 == nullptr)
+        ArraySet::ArraySet(std::shared_ptr<Passable> passable)
+            : Function(passable)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-            return null;
+            name = "arraySet";
         }
 
-        std::shared_ptr<Variable> var1 = node1->execute(globalScope, scope);
-        std::shared_ptr<Variable> var2 = node2->execute(globalScope, scope);
-        std::shared_ptr<Variable> var3 = node3->execute(globalScope, scope);
-
-        if (var1 == nullptr || var2 == nullptr || var3 == nullptr)
+        std::shared_ptr<Variable> ArraySet::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,
+                                      std::shared_ptr<Scope> scope,
+                                      std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-            return null;
+            std::shared_ptr<Variable> returnNode;
+            if (arguments.size() == 3)
+            {
+                std::shared_ptr<Nodes::Node> node1 = arguments.at(0);
+                std::shared_ptr<Nodes::Node> node2 = arguments.at(1);
+                std::shared_ptr<Nodes::Node> node3 = arguments.at(2);
+
+                if (node1 == nullptr || node2 == nullptr || node3 == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                    return null;
+                }
+
+                std::shared_ptr<Variable> var1 = node1->execute(globalScope, scope);
+                std::shared_ptr<Variable> var2 = node2->execute(globalScope, scope);
+                std::shared_ptr<Variable> var3 = node3->execute(globalScope, scope);
+
+                if (var1 == nullptr || var2 == nullptr || var3 == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                    return null;
+                }
+
+                if (var1->getType() != Types::ARRAY)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->firstParameterIsNotTypeOfArray(token, var1->getName(), name));
+                    return null;
+                }
+
+                var1->set(var2->toString(), var3, token);
+
+                // Todo
+                // Maybe return true here
+            }
+            else
+            {
+                passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 3));
+            }
+            return returnNode;
         }
-
-        if (var1->getType() != ARRAY)
-        {
-            passable->getErrors()->add(passable->getErrorFactory()->firstParameterIsNotTypeOfArray(token, var1->getName(), name));
-            return null;
-        }
-
-        var1->set(var2->toString(), var3, token);
-
-        // Todo
-        // Maybe return true here
     }
-    else
-    {
-        passable->getErrors()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 3));
-    }
-    return returnNode;
 }

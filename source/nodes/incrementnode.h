@@ -18,15 +18,19 @@
 
 #include "node.h"
 
-class IncrementNode : public Node
-{
-protected:
-    std::shared_ptr<Node> node;
-public:
-    IncrementNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> node);
-    NodeType getType();
-    std::shared_ptr<Variable> execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope);
-    std::string toString();
-};
+namespace HuwInterpreter {
+    namespace Nodes {
+        class IncrementNode : public Node
+        {
+        protected:
+            std::shared_ptr<Nodes::Node> node;
+        public:
+            IncrementNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> node);
+            NodeType getType();
+            std::shared_ptr<Variables::Variable> execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope);
+            std::string toString();
+        };
+    }
+}
 
 #endif // INCREMENTNODE_H

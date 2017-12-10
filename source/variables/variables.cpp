@@ -15,133 +15,137 @@
 
 #include "variables.h"
 
-Variables::Variables(std::shared_ptr<Passable> passable, bool isEmpty)
-{
-    this->passable = passable;
-    addDefaultVariables(isEmpty);
-}
-
-Variables::~Variables()
-{
-    variables.clear();
-}
-
-void Variables::addDefaultVariables(bool isEmpty)
-{
-    if (!isEmpty)
-    {
-        addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "PI", 3.14159265358979))));
-        addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "e", 2.718281828459045))));
-        addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "y", 0.577215664901532))));
-        addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "Φ", 1.618033988749894))));
-        addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "φ", 0.618033988749894))));
-        addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "δs", 2.41421356237309))));
-        addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "ρ", 1.324717957244746))));
-    }
-}
-
-std::shared_ptr<Variable> Variables::get(std::string name)
-{
-    std::unordered_map<std::string,std::shared_ptr<Variable>>::const_iterator got = variables.find(name);
-    if (got == variables.end())
-    {
-        return null;
-    }
-    else
-    {
-        return std::move(got->second);
-    }
-}
-
-std::shared_ptr<Variable> Variables::exists(std::string name)
-{
-    std::unordered_map<std::string,std::shared_ptr<Variable>>::const_iterator got = variables.find(name);
-    if (got == variables.end())
-    {
-        return null;
-    }
-    else
-    {
-        return got->second;
-    }
-}
-
-std::shared_ptr<Variable> Variables::exists(std::shared_ptr<Variable> variable)
-{
-    if (variable == nullptr)
-    {
-        return null;
-    }
-    std::shared_ptr<Variable> e = exists(variable->getName());
-    if (e != nullptr)
-    {
-        return e;
-    }
-    return null;
-}
-
-bool Variables::addVariable(std::shared_ptr<Variable> variable)
-{
-    if (variable != nullptr)
-    {
-        std::shared_ptr<Variable> e = exists(variable->getName());
-        if (e == nullptr)
+namespace HuwInterpreter {
+    namespace Variables {
+        VariableManager::VariableManager(std::shared_ptr<Passable> passable, bool isEmpty)
         {
-            std::string name = variable->getName();
-            variables[name] = std::move(variable);
+            this->passable = passable;
+            addDefaultVariables(isEmpty);
+        }
+
+        VariableManager::~VariableManager()
+        {
+            variables.clear();
+        }
+
+        void VariableManager::addDefaultVariables(bool isEmpty)
+        {
+            if (!isEmpty)
+            {
+                addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "PI", 3.14159265358979))));
+                addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "e", 2.718281828459045))));
+                addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "y", 0.577215664901532))));
+                addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "Φ", 1.618033988749894))));
+                addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "φ", 0.618033988749894))));
+                addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "δs", 2.41421356237309))));
+                addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "ρ", 1.324717957244746))));
+            }
+        }
+
+        std::shared_ptr<Variable> VariableManager::get(std::string name)
+        {
+            std::unordered_map<std::string,std::shared_ptr<Variable>>::const_iterator got = variables.find(name);
+            if (got == variables.end())
+            {
+                return null;
+            }
+            else
+            {
+                return std::move(got->second);
+            }
+        }
+
+        std::shared_ptr<Variable> VariableManager::exists(std::string name)
+        {
+            std::unordered_map<std::string,std::shared_ptr<Variable>>::const_iterator got = variables.find(name);
+            if (got == variables.end())
+            {
+                return null;
+            }
+            else
+            {
+                return got->second;
+            }
+        }
+
+        std::shared_ptr<Variable> VariableManager::exists(std::shared_ptr<Variable> variable)
+        {
+            if (variable == nullptr)
+            {
+                return null;
+            }
+            std::shared_ptr<Variable> e = exists(variable->getName());
+            if (e != nullptr)
+            {
+                return e;
+            }
+            return null;
+        }
+
+        bool VariableManager::addVariable(std::shared_ptr<Variable> variable)
+        {
+            if (variable != nullptr)
+            {
+                std::shared_ptr<Variable> e = exists(variable->getName());
+                if (e == nullptr)
+                {
+                    std::string name = variable->getName();
+                    variables[name] = std::move(variable);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        bool VariableManager::addVariable(std::string name, std::shared_ptr<Variable> variable)
+        {
+            if (variable != nullptr)
+            {
+                std::shared_ptr<Variable> e = exists(name);
+                if (e == nullptr)
+                {
+                    variable->setName(name);
+                    variables[name] = std::move(variable);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        bool VariableManager::removeVariable(std::shared_ptr<Variable> variable)
+        {
+            if (variable != nullptr)
+            {
+                std::shared_ptr<Variable> e = exists(variable->getName());
+                if (e != nullptr)
+                {
+                    this->variables.erase(variable->getName());
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        bool VariableManager::removeVariable(std::string name)
+        {
+            std::shared_ptr<Variable> e = exists(name);
+            if (e != nullptr)
+            {
+                this->variables.erase(name);
+                return true;
+            }
+            return false;
+        }
+
+        bool VariableManager::setVariable(std::string name, std::shared_ptr<Variable> variable)
+        {
+            std::shared_ptr<Variable> e = exists(name);
+            if (e == nullptr)
+            {
+                return false;
+            }
+            this->variables[name] = std::move(variable);
             return true;
         }
     }
-    return false;
-}
-
-bool Variables::addVariable(std::string name, std::shared_ptr<Variable> variable)
-{
-    if (variable != nullptr)
-    {
-        std::shared_ptr<Variable> e = exists(name);
-        if (e == nullptr)
-        {
-            variable->setName(name);
-            variables[name] = std::move(variable);
-            return true;
-        }
-    }
-    return false;
-}
-
-bool Variables::removeVariable(std::shared_ptr<Variable> variable)
-{
-    if (variable != nullptr)
-    {
-        std::shared_ptr<Variable> e = exists(variable->getName());
-        if (e != nullptr)
-        {
-            this->variables.erase(variable->getName());
-            return true;
-        }
-    }
-    return false;
-}
-
-bool Variables::removeVariable(std::string name)
-{
-    std::shared_ptr<Variable> e = exists(name);
-    if (e != nullptr)
-    {
-        this->variables.erase(name);
-        return true;
-    }
-    return false;
-}
-
-bool Variables::setVariable(std::string name, std::shared_ptr<Variable> variable)
-{
-    std::shared_ptr<Variable> e = exists(name);
-    if (e == nullptr)
-    {
-        return false;
-    }
-    this->variables[name] = std::move(variable);
-    return true;
 }

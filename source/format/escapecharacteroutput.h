@@ -3,12 +3,16 @@
 
 #include <string>
 
-class EscapeCharacterOutput
-{
-public:
-    EscapeCharacterOutput();
-    std::string output(char value);
-    std::string output(std::string value);
-};
+namespace HuwInterpreter {
+    namespace Helpers {
+        class EscapeCharacterOutput
+        {
+        public:
+            EscapeCharacterOutput();
+            std::string output(char value);
+            std::string output(std::string value);
+        };
+    }
+}
 
 #endif // ESCAPECHARACTEROUTPUT_H

@@ -21,21 +21,25 @@
 #include <sstream>
 #include "tokentypes.h"
 
+namespace  HuwInterpreter {
 
+    using namespace Types;
 
-class TypeDetector
-{
-public:
-    TypeDetector();
-    static bool isInteger(std::string value);
-    static bool isInteger(char value);
-    static bool isNumeric(std::string value);
-    static bool isNumeric(char value);
-    static bool isWord(std::string value);
-    static bool isWord(char value);
-    static VarType getType(std::string value);
-    static VarType getToken(std::string value);
-    static bool compare(std::string value1, TokenType value2);
-};
+    namespace  Helpers {
+        class TypeDetector
+        {
+        public:
+            static bool isInteger(std::string value);
+            static bool isInteger(char value);
+            static bool isNumeric(std::string value);
+            static bool isNumeric(char value);
+            static bool isWord(std::string value);
+            static bool isWord(char value);
+            static VarType getType(std::string value);
+            static VarType getToken(std::string value);
+            static bool compare(std::string value1, TokenType value2);
+        };
+    }
+}
 
 #endif // TYPEDETECTOR_H

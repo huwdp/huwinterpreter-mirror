@@ -20,22 +20,26 @@
 #include "variables/variables.h"
 #include <memory>
 
-class Node;
-class Variables;
-class Variable;
+namespace HuwInterpreter {
+    namespace Variables {
+        class Node;
+        class VariableManager;
+        class Variable;
 
-class Scope
-{
-private:
-    std::shared_ptr<Variable> returnValue;
-    std::shared_ptr<Variables> variables;
-public:
-    Scope(std::shared_ptr<Passable> passable);
-    Scope(std::shared_ptr<Variables> variables);
-    std::shared_ptr<Variables> getVariables();
-    void setVariables(std::shared_ptr<Variables> variables);
-    std::shared_ptr<Variable> getReturnValue();
-    void setReturnValue(std::shared_ptr<Variable> value);
-};
+        class Scope
+        {
+        private:
+            std::shared_ptr<Variable> returnValue;
+            std::shared_ptr<VariableManager> variableManager;
+        public:
+            Scope(std::shared_ptr<Passable> passable);
+            Scope(std::shared_ptr<VariableManager> variableManager);
+            std::shared_ptr<VariableManager> getVariableManager();
+            void setVariableManager(std::shared_ptr<VariableManager> variableManager);
+            std::shared_ptr<Variable> getReturnValue();
+            void setReturnValue(std::shared_ptr<Variable> value);
+        };
+    }
+}
 
 #endif // SCOPE_H

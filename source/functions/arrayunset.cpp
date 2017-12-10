@@ -15,51 +15,56 @@
 
 #include "arrayunset.h"
 
-ArrayUnset::ArrayUnset(std::shared_ptr<Passable> passable)
-    : Function(passable)
-{
-    name = "arrayUnset";
-}
+namespace HuwInterpreter {
+    namespace Functions {
 
-std::shared_ptr<Variable> ArrayUnset::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
-                              std::shared_ptr<Scope> scope,
-                              std::vector<std::shared_ptr<Node>> arguments)
-{
-    std::shared_ptr<Variable> returnNode;
-    if (arguments.size() == 2)
-    {
-        std::shared_ptr<Node> node1 = arguments.at(0);
-        std::shared_ptr<Node> node2 = arguments.at(1);
-
-        if (node1 == nullptr || node2 == nullptr)
+        ArrayUnset::ArrayUnset(std::shared_ptr<Passable> passable)
+            : Function(passable)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-            return null;
+            name = "arrayUnset";
         }
 
-        std::shared_ptr<Variable> var1 = node1->execute(globalScope, scope);
-        std::shared_ptr<Variable> var2 = node2->execute(globalScope, scope);
-
-        if (var1 == nullptr || var2 == nullptr )
+        std::shared_ptr<Variable> ArrayUnset::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,
+                                      std::shared_ptr<Scope> scope,
+                                      std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-            return null;
+            std::shared_ptr<Variable> returnNode;
+            if (arguments.size() == 2)
+            {
+                std::shared_ptr<Nodes::Node> node1 = arguments.at(0);
+                std::shared_ptr<Nodes::Node> node2 = arguments.at(1);
+
+                if (node1 == nullptr || node2 == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                    return null;
+                }
+
+                std::shared_ptr<Variable> var1 = node1->execute(globalScope, scope);
+                std::shared_ptr<Variable> var2 = node2->execute(globalScope, scope);
+
+                if (var1 == nullptr || var2 == nullptr )
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                    return null;
+                }
+
+                if (var1->getType() != Types::ARRAY)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->firstParameterIsNotTypeOfArray(token, var1->getName(), name));
+                    return null;
+                }
+
+                var1->unset(var2->toString(), token);
+
+                // Todo
+                // Maybe turn true here
+            }
+            else
+            {
+                passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 2));
+            }
+            return returnNode;
         }
-
-        if (var1->getType() != ARRAY)
-        {
-            passable->getErrors()->add(passable->getErrorFactory()->firstParameterIsNotTypeOfArray(token, var1->getName(), name));
-            return null;
-        }
-
-        var1->unset(var2->toString(), token);
-
-        // Todo
-        // Maybe turn true here
     }
-    else
-    {
-        passable->getErrors()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 2));
-    }
-    return returnNode;
 }

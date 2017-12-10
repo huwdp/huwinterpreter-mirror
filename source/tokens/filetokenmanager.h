@@ -24,22 +24,25 @@
 #include <iostream>
 #include "tokenmanager.h"
 
-
-class FileTokenManager : public TokenManager
-{
-private:
-    std::vector<std::shared_ptr<FileLine>> lines;
-    std::vector<std::shared_ptr<FileLine>>::iterator it;
-public:
-    FileTokenManager(std::string input);
-    std::shared_ptr<FileLine> getCurrent();
-    std::shared_ptr<FileLine> getNext();
-    std::shared_ptr<FileLine> getPrev();
-    void next();
-    void prev();
-    std::shared_ptr<FileLine> peak();
-    bool isEnd();
-    bool isEmpty();
-};
+namespace HuwInterpreter {
+    namespace Tokens {
+        class FileTokenManager : public TokenManager
+        {
+        private:
+            std::vector<std::shared_ptr<IO::FileLine>> lines;
+            std::vector<std::shared_ptr<IO::FileLine>>::iterator it;
+        public:
+            FileTokenManager(std::string input);
+            std::shared_ptr<IO::FileLine> getCurrent();
+            std::shared_ptr<IO::FileLine> getNext();
+            std::shared_ptr<IO::FileLine> getPrev();
+            void next();
+            void prev();
+            std::shared_ptr<IO::FileLine> peak();
+            bool isEnd();
+            bool isEmpty();
+        };
+    }
+}
 
 #endif // FILETOKENMANAGERH

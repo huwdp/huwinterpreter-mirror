@@ -15,48 +15,52 @@
 
 #include "decrementnode.h"
 
-DecrementNode::DecrementNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> node)
-    : Node("DecrementNode", passable, token)
-{
-    this->node = node;
-    Debug::print("Decrement");
-}
-
-NodeType DecrementNode::getType()
-{
-    return DECREMENTNODETYPE;
-}
-
-std::shared_ptr<Variable> DecrementNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("Decrement");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (scope->getReturnValue() != nullptr)
-    {
-        return scope->getReturnValue();
-    }
-    if (node != nullptr)
-    {
-        std::shared_ptr<Variable> n = node->execute(globalScope, scope);
-        if (n == nullptr)
+namespace HuwInterpreter {
+    namespace Nodes {
+        DecrementNode::DecrementNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> node)
+            : Node("DecrementNode", passable, token)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+            this->node = node;
+            ErrorReporting::Debug::print("Decrement");
+        }
+
+        NodeType DecrementNode::getType()
+        {
+            return DECREMENTNODETYPE;
+        }
+
+        std::shared_ptr<Variables::Variable> DecrementNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
+        {
+            ErrorReporting::Debug::print("Decrement");
+            if (passable->getErrorManager()->count() > 0)
+            {
+                return null;
+            }
+            if (scope->getReturnValue() != nullptr)
+            {
+                return scope->getReturnValue();
+            }
+            if (node != nullptr)
+            {
+                std::shared_ptr<Variables::Variable> n = node->execute(globalScope, scope);
+                if (n == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+                    return null;
+                }
+                return n->decrement(token);
+            }
+            ErrorReporting::Debug::print("Could not increment.");
             return null;
         }
-        return n->decrement(token);
-    }
-    Debug::print("Could not increment.");
-    return null;
-}
 
-std::string DecrementNode::toString()
-{
-    if (node != nullptr)
-    {
-        return node->toString() + "--";
+        std::string DecrementNode::toString()
+        {
+            if (node != nullptr)
+            {
+                return node->toString() + "--";
+            }
+            return "";
+        }
     }
-    return "";
 }

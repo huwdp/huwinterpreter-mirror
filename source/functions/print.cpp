@@ -15,33 +15,37 @@
 
 #include "print.h"
 
-Print::Print(std::shared_ptr<Passable> passable)
-    : Function(passable)
-{
-    name = "print";
-}
-
-std::shared_ptr<Variable> Print::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
-                                     std::shared_ptr<Scope> scope,
-                                     std::vector<std::shared_ptr<Node>> arguments)
-{
-    std::shared_ptr<Variable> returnNode;
-    for (std::vector<std::shared_ptr<Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
-    {
-        if ((*it) != nullptr)
+namespace HuwInterpreter {
+    namespace Functions {
+        Print::Print(std::shared_ptr<Passable> passable)
+            : Function(passable)
         {
-            std::shared_ptr<Variable> var = (*it)->execute(globalScope, scope);
-            if (var != nullptr)
-            {
-                std::cout << var->toString() << std::endl;
-            }
+            name = "print";
         }
-        else
+
+        std::shared_ptr<Variable> Print::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,
+                                             std::shared_ptr<Scope> scope,
+                                             std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-            return null;
+            std::shared_ptr<Variable> returnNode;
+            for (std::vector<std::shared_ptr<Nodes::Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
+            {
+                if ((*it) != nullptr)
+                {
+                    std::shared_ptr<Variable> var = (*it)->execute(globalScope, scope);
+                    if (var != nullptr)
+                    {
+                        std::cout << var->toString() << std::endl;
+                    }
+                }
+                else
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                    return null;
+                }
+            }
+
+            return returnNode;
         }
     }
-    
-    return returnNode;
 }

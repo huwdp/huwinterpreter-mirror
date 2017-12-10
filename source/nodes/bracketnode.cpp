@@ -15,48 +15,52 @@
 
 #include "bracketnode.h"
 
-BracketNode::BracketNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> node)
-    : Node("BracketNode", passable, token)
-{
-    this->node = node;
-    Debug::print("Bracket");
-}
-
-NodeType BracketNode::getType()
-{
-    return BRACKETNODETYPE;
-}
-
-std::shared_ptr<Variable> BracketNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("Bracket");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (scope->getReturnValue() != nullptr)
-    {
-        return scope->getReturnValue();
-    }
-    if (node != nullptr)
-    {
-        std::shared_ptr<Variable> n = node->execute(globalScope, scope);
-        if (n == nullptr)
+namespace HuwInterpreter {
+    namespace Nodes {
+        BracketNode::BracketNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> node)
+            : Node("BracketNode", passable, token)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+            this->node = node;
+            ErrorReporting::Debug::print("Bracket");
+        }
+
+        NodeType BracketNode::getType()
+        {
+            return BRACKETNODETYPE;
+        }
+
+        std::shared_ptr<Variables::Variable> BracketNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
+        {
+            ErrorReporting::Debug::print("Bracket");
+            if (passable->getErrorManager()->count() > 0)
+            {
+                return null;
+            }
+            if (scope->getReturnValue() != nullptr)
+            {
+                return scope->getReturnValue();
+            }
+            if (node != nullptr)
+            {
+                std::shared_ptr<Variables::Variable> n = node->execute(globalScope, scope);
+                if (n == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+                    return null;
+                }
+                return n;
+            }
+            ErrorReporting::Debug::print("Could not bracket.");
             return null;
         }
-        return n;
-    }
-    Debug::print("Could not bracket.");
-    return null;
-}
 
-std::string BracketNode::toString()
-{
-    if (node != nullptr)
-    {
-        return "(" + node->toString() + ")";
+        std::string BracketNode::toString()
+        {
+            if (node != nullptr)
+            {
+                return "(" + node->toString() + ")";
+            }
+            return "";
+        }
     }
-    return "";
 }

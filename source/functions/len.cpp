@@ -15,40 +15,44 @@
 
 #include "len.h"
 
-Len::Len(std::shared_ptr<Passable> passable)
-    : Function(passable)
-{
-    name = "len";
-}
-
-std::shared_ptr<Variable> Len::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
-                                   std::shared_ptr<Scope> scope,
-                                   std::vector<std::shared_ptr<Node>> arguments)
-{
-    std::shared_ptr<Variable> returnNode;
-    if (arguments.size() == 1)
-    {
-        std::shared_ptr<Node> node = arguments.at(0);
-        if (node == nullptr)
+namespace HuwInterpreter {
+    namespace Functions {
+        Len::Len(std::shared_ptr<Passable> passable)
+            : Function(passable)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-            return null;
+            name = "len";
         }
 
-        std::shared_ptr<Variable> var = node->execute(globalScope, scope);
-        if (var == nullptr)
+        std::shared_ptr<Variable> Len::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,
+                                           std::shared_ptr<Scope> scope,
+                                           std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-            return null;
-        }
+            std::shared_ptr<Variable> returnNode;
+            if (arguments.size() == 1)
+            {
+                std::shared_ptr<Nodes::Node> node = arguments.at(0);
+                if (node == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                    return null;
+                }
 
-        long long length = var->toString().length();
-        returnNode = std::make_shared<NumberVariable>(passable, length);
+                std::shared_ptr<Variable> var = node->execute(globalScope, scope);
+                if (var == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                    return null;
+                }
+
+                long long length = var->toString().length();
+                returnNode = std::make_shared<NumberVariable>(passable, length);
+            }
+            else
+            {
+                passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 1));
+            }
+
+            return returnNode;
+        }
     }
-    else
-    {
-        passable->getErrors()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 1));
-    }
-    
-    return returnNode;
 }

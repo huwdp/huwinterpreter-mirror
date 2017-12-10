@@ -15,42 +15,46 @@
 
 #include "scan.h"
 
-Scan::Scan(std::shared_ptr<Passable> passable)
-    : Function(passable)
-{
-    name = "scan";
-}
-
-std::shared_ptr<Variable> Scan::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
-                                    std::shared_ptr<Scope> scope,
-                                    std::vector<std::shared_ptr<Node>> arguments)
-{
-    std::shared_ptr<Variable> returnNode;
-    for (std::vector<std::shared_ptr<Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
-    {
-        if ((*it) != nullptr)
+namespace HuwInterpreter {
+    namespace Functions {
+        Scan::Scan(std::shared_ptr<Passable> passable)
+            : Function(passable)
         {
-            std::shared_ptr<Node> node = (*it);
-            if (node != nullptr)
-            {
-                std::shared_ptr<Variable> var = (*it)->execute(globalScope, scope);
-                if (var == nullptr)
-                {
-                    passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-                    return null;
-                }
+            name = "scan";
+        }
 
-                std::string input;
-                std::cin >> input;
-                var->setValue(input);
-            }
-            else
+        std::shared_ptr<Variable> Scan::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,
+                                            std::shared_ptr<Scope> scope,
+                                            std::vector<std::shared_ptr<Nodes::Node>> arguments)
+        {
+            std::shared_ptr<Variable> returnNode;
+            for (std::vector<std::shared_ptr<Nodes::Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
             {
-                passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-                return null;
+                if ((*it) != nullptr)
+                {
+                    std::shared_ptr<Nodes::Node> node = (*it);
+                    if (node != nullptr)
+                    {
+                        std::shared_ptr<Variable> var = (*it)->execute(globalScope, scope);
+                        if (var == nullptr)
+                        {
+                            passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                            return null;
+                        }
+
+                        std::string input;
+                        std::cin >> input;
+                        var->setValue(input);
+                    }
+                    else
+                    {
+                        passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                        return null;
+                    }
+                }
             }
+
+            return returnNode;
         }
     }
-    
-    return returnNode;
 }

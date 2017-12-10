@@ -15,63 +15,62 @@
 
 #include "io.h"
 
-IO::IO()
-{
-
-}
-
-std::string IO::read(std::string file)
-{
-    std::string output;
-    std::string line;
-    std::ifstream stream(file);
-
-    if (stream.is_open())
-    {
-        while (std::getline(stream,line))
+namespace HuwInterpreter {
+    namespace IO {
+        std::string IO::read(std::string file)
         {
-            output.append(line);
+            std::string output;
+            std::string line;
+            std::ifstream stream(file);
+
+            if (stream.is_open())
+            {
+                while (std::getline(stream,line))
+                {
+                    output.append(line);
+                }
+                stream.close();
+            }
+            return output;
         }
-        stream.close();
-    }
-    return output;
-}
 
-bool IO::write(std::string fileLocation, std::string content)
-{
-    std::ofstream file(fileLocation);
-    if (file.is_open())
-    {
-        if (file.fail())
+        bool IO::write(std::string fileLocation, std::string content)
         {
+            std::ofstream file(fileLocation);
+            if (file.is_open())
+            {
+                if (file.fail())
+                {
+                    return false;
+                }
+                file << content;
+                file.close();
+                return true;
+            }
             return false;
         }
-        file << content;
-        file.close();
-        return true;
-    }
-    return false;
-}
 
-bool IO::append(std::string fileLocation, std::string content)
-{
-    std::ofstream file(fileLocation);
-    if (file.is_open())
-    {
-        file.open (fileLocation, std::ios_base::app);
-        if (file.fail())
+        bool IO::append(std::string fileLocation, std::string content)
         {
+            std::ofstream file(fileLocation);
+            if (file.is_open())
+            {
+                file.open (fileLocation, std::ios_base::app);
+                if (file.fail())
+                {
+                    return false;
+                }
+                file << content;
+                file.close();
+                return true;
+            }
             return false;
         }
-        file << content;
-        file.close();
-        return true;
-    }
-    return false;
-}
 
-bool IO::fileExists(std::string fileLocation)
-{
-    std::ifstream file(fileLocation);
-    return file.good();
+        bool IO::fileExists(std::string fileLocation)
+        {
+            std::ifstream file(fileLocation);
+            return file.good();
+        }
+    }
 }

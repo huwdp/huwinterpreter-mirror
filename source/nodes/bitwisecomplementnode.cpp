@@ -15,47 +15,51 @@
 
 #include "bitwisecomplementnode.h"
 
-BitwiseComplementNode::BitwiseComplementNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> node)
-    : Node("BitwiseComplementNode", passable, token)
-{
-    this->node = node;
-}
-
-NodeType BitwiseComplementNode::getType()
-{
-    return BITWISECOMPLEMENTNODETYPE;
-}
-
-std::shared_ptr<Variable> BitwiseComplementNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("BitwiseComplementNode");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (scope->getReturnValue() != null)
-    {
-        return scope->getReturnValue();
-    }
-    if (node != nullptr)
-    {
-        std::shared_ptr<Variable> var = node->execute(globalScope, scope);
-        if (var != nullptr)
+namespace HuwInterpreter {
+    namespace Nodes {
+        BitwiseComplementNode::BitwiseComplementNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> node)
+            : Node("BitwiseComplementNode", passable, token)
         {
-            return var->bitwiseComplement(token);
+            this->node = node;
         }
-        passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
-    }
-    return null;
-}
 
-std::string BitwiseComplementNode::toString()
-{
-    std::string output;
-    if (node != nullptr)
-    {
-        output.append("~").append(node->toString());
+        NodeType BitwiseComplementNode::getType()
+        {
+            return BITWISECOMPLEMENTNODETYPE;
+        }
+
+        std::shared_ptr<Variables::Variable> BitwiseComplementNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
+        {
+            ErrorReporting::Debug::print("BitwiseComplementNode");
+            if (passable->getErrorManager()->count() > 0)
+            {
+                return null;
+            }
+            if (scope->getReturnValue() != null)
+            {
+                return scope->getReturnValue();
+            }
+            if (node != nullptr)
+            {
+                std::shared_ptr<Variables::Variable> var = node->execute(globalScope, scope);
+                if (var != nullptr)
+                {
+                    return var->bitwiseComplement(token);
+                }
+                passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+            }
+            return null;
+        }
+
+        std::string BitwiseComplementNode::toString()
+        {
+            std::string output;
+            if (node != nullptr)
+            {
+                output.append("~").append(node->toString());
+            }
+            return output;
+        }
     }
-    return output;
 }
 

@@ -15,55 +15,59 @@
 
 #include "asin.h"
 
-Asin::Asin(std::shared_ptr<Passable> passable)
-    : Function(passable)
-{
-    name = "asin";
-}
-
-std::shared_ptr<Variable> Asin::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
-                                    std::shared_ptr<Scope> scope,
-                                    std::vector<std::shared_ptr<Node>> arguments)
-{
-    std::shared_ptr<Variable> returnNode;
-    if (arguments.size() == 1)
-    {
-        std::shared_ptr<Node> node = arguments.at(0);
-        if (node == nullptr)
+namespace HuwInterpreter {
+    namespace Functions {
+        Asin::Asin(std::shared_ptr<Passable> passable)
+            : Function(passable)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-            return null;
+            name = "asin";
         }
 
-        std::shared_ptr<Variable> var = node->execute(globalScope, scope);
-        if (var == nullptr)
+        std::shared_ptr<Variable> Asin::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,
+                                            std::shared_ptr<Scope> scope,
+                                            std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-            return null;
-        }
+            std::shared_ptr<Variable> returnNode;
+            if (arguments.size() == 1)
+            {
+                std::shared_ptr<Nodes::Node> node = arguments.at(0);
+                if (node == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                    return null;
+                }
 
-        try
-        {
-            double temp = var->toDouble();
-            double output = std::asin(temp);
-            returnNode = std::make_shared<NumberVariable>(passable, output);
-        }
-        catch (const std::invalid_argument ex)
-        {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, FUNCTION_ERROR, name, ex.what()));
-        }
-        catch (const std::out_of_range ex)
-        {
-            passable->getErrors()->add(passable->getErrorFactory()->outOfRange(token, name, ex.what()));
-        }
-        catch (const std::exception& ex)
-        {
-            passable->getErrors()->add(passable->getErrorFactory()->otherFunctionError(token, name, ex.what()));
+                std::shared_ptr<Variable> var = node->execute(globalScope, scope);
+                if (var == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                    return null;
+                }
+
+                try
+                {
+                    double temp = var->toDouble();
+                    double output = std::asin(temp);
+                    returnNode = std::make_shared<NumberVariable>(passable, output);
+                }
+                catch (const std::invalid_argument ex)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, FUNCTION_ERROR, name, ex.what()));
+                }
+                catch (const std::out_of_range ex)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->outOfRange(token, name, ex.what()));
+                }
+                catch (const std::exception& ex)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->otherFunctionError(token, name, ex.what()));
+                }
+            }
+            else
+            {
+                passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 1));
+            }
+            return returnNode;
         }
     }
-    else
-    {
-        passable->getErrors()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 1));
-    }
-    return returnNode;
 }

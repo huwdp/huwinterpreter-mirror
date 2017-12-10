@@ -19,18 +19,23 @@
 #include "errors/errors.h"
 #include "errors/errorfactory.h"
 
-class Passable
-{
-private:
-    std::shared_ptr<Errors> errors;
-    std::shared_ptr<ErrorFactory> errorFactory;
-public:
-    Passable();
-    Passable(std::shared_ptr<Errors> errors, std::shared_ptr<ErrorFactory> errorFactory);
-    std::shared_ptr<Errors> getErrors();
-    void setErrors(std::shared_ptr<Errors> errors);
-    std::shared_ptr<ErrorFactory> getErrorFactory();
-    void setErrorFactory(std::shared_ptr<ErrorFactory> errorFactory);
-};
+namespace HuwInterpreter {
+
+    using namespace ErrorReporting;
+
+    class Passable
+    {
+    private:
+        std::shared_ptr<ErrorManager> errorManager;
+        std::shared_ptr<ErrorFactory> errorFactory;
+    public:
+        Passable();
+        Passable(std::shared_ptr<ErrorManager> errorManager, std::shared_ptr<ErrorFactory> errorFactory);
+        std::shared_ptr<ErrorManager> getErrorManager();
+        void setErrorManager(std::shared_ptr<ErrorManager> errorManager);
+        std::shared_ptr<ErrorFactory> getErrorFactory();
+        void setErrorFactory(std::shared_ptr<ErrorFactory> errorFactory);
+    };
+}
 
 #endif // PASSABLE_H

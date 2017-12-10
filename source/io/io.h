@@ -20,15 +20,18 @@
 #include <iostream>
 #include <fstream>
 
-class IO
-{
-public:
-    IO();
-    std::string read(std::string file);
-    bool write(std::string fileLocation, std::string content);
-    bool append(std::string fileLocation, std::string content);
-    bool fileExists(std::string fileLocation);
+namespace HuwInterpreter {
+    namespace IO {
+        class IO
+        {
+        public:
+            std::string read(std::string file);
+            bool write(std::string fileLocation, std::string content);
+            bool append(std::string fileLocation, std::string content);
+            bool fileExists(std::string fileLocation);
 
-};
+        };
+    }
+}
 
 #endif // IO_H

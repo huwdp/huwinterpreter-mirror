@@ -15,36 +15,40 @@
 
 #include "variable.h"
 
-Variable::Variable(std::shared_ptr<Passable> passable)
-{
-    this->passable = passable;
-}
+namespace HuwInterpreter {
+    namespace Variables {
+        Variable::Variable(std::shared_ptr<Passable> passable)
+        {
+            this->passable = passable;
+        }
 
-Variable::Variable(std::shared_ptr<Passable> passable, std::string name)
-{
-    this->passable = passable;
-    this->name = name;
-}
+        Variable::Variable(std::shared_ptr<Passable> passable, std::string name)
+        {
+            this->passable = passable;
+            this->name = name;
+        }
 
-Variable::Variable(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token)
-{
-    this->passable = passable;
-    this->token = token;
-}
+        Variable::Variable(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token)
+        {
+            this->passable = passable;
+            this->token = token;
+        }
 
-Variable::Variable(std::shared_ptr<Passable> passable, std::string name, std::shared_ptr<Token> token)
-{
-    this->passable = passable;
-    this->name = name;
-    this->token = token;
-}
+        Variable::Variable(std::shared_ptr<Passable> passable, std::string name, std::shared_ptr<Tokens::Token> token)
+        {
+            this->passable = passable;
+            this->name = name;
+            this->token = token;
+        }
 
-std::string Variable::getName()
-{
-	return name;
-}
+        std::string Variable::getName()
+        {
+            return name;
+        }
 
-void Variable::setName(std::string name)
-{
-	this->name = name;
+        void Variable::setName(std::string name)
+        {
+            this->name = name;
+        }
+    }
 }

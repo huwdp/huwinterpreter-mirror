@@ -18,14 +18,18 @@
 
 #include "function.h"
 
-class IsNumber : public Function
-{
-public:
-    IsNumber(std::shared_ptr<Passable> passable);
-    std::shared_ptr<Variable> execute(std::shared_ptr<Token> token,
-                                  std::shared_ptr<Scope> globalScope,
-                                  std::shared_ptr<Scope> scope,
-                                  std::vector<std::shared_ptr<Node>> arguments);
-};
+namespace HuwInterpreter {
+    namespace Functions {
+        class IsNumber : public Function
+        {
+        public:
+            IsNumber(std::shared_ptr<Passable> passable);
+            std::shared_ptr<Variable> execute(std::shared_ptr<Tokens::Token> token,
+                                          std::shared_ptr<Scope> globalScope,
+                                          std::shared_ptr<Scope> scope,
+                                          std::vector<std::shared_ptr<Nodes::Node>> arguments);
+        };
+    }
+}
 
 #endif // ISNUMBER_H

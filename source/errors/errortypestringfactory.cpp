@@ -15,30 +15,34 @@
 
 #include "errortypestringfactory.h"
 
-ErrorTypeStringFactory::ErrorTypeStringFactory()
-{
+namespace HuwInterpreter {
+    namespace ErrorReporting {
+        ErrorTypeStringFactory::ErrorTypeStringFactory()
+        {
 
-}
+        }
 
-std::string ErrorTypeStringFactory::createErrorString(ErrorTypes errorTypes)
-{
-    switch (errorTypes)
-    {
-        case ERROR:
-            return "ERROR";
-        case WARNING:
-            return "WARNING";
-        case INFO:
-            return "INFO";
-        case FUNCTION_ERROR:
-            return "FUNCTION_ERROR";
-        case PARSER_ERROR:
-            return "PARSER_ERROR";
-        case STATEMENT_ERROR:
-            return "STATEMENT_ERROR";
-        case RUNTIME_ERROR:
-            return "RUNTIME_ERROR";
-        default:
-            return "UNKNOWN ERROR";
+        std::string ErrorTypeStringFactory::createErrorString(ErrorTypes errorTypes)
+        {
+            switch (errorTypes)
+            {
+                case ERROR:
+                    return "ERROR";
+                case WARNING:
+                    return "WARNING";
+                case INFO:
+                    return "INFO";
+                case FUNCTION_ERROR:
+                    return "FUNCTION_ERROR";
+                case PARSER_ERROR:
+                    return "PARSER_ERROR";
+                case STATEMENT_ERROR:
+                    return "STATEMENT_ERROR";
+                case RUNTIME_ERROR:
+                    return "RUNTIME_ERROR";
+                default:
+                    return "UNKNOWN ERROR";
+            }
+        }
     }
 }

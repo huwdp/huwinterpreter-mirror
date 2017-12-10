@@ -15,106 +15,110 @@
 
 #include "texttokenmanager.h"
 
-TextTokenManager::TextTokenManager(std::string input)
-{
-    long long lineNumber = 0;
-
-    for (std::string::iterator it = input.begin(); it != input.end(); ++it)
-    {
-        if ((*it) == '\n')
+namespace HuwInterpreter {
+    namespace Tokens {
+        TextTokenManager::TextTokenManager(std::string input)
         {
-            lineNumber++;
+            long long lineNumber = 0;
+
+            for (std::string::iterator it = input.begin(); it != input.end(); ++it)
+            {
+                if ((*it) == '\n')
+                {
+                    lineNumber++;
+                }
+                std::shared_ptr<IO::FileLine> fileLine(std::make_shared<IO::FileLine>((*it), lineNumber));
+                lines.push_back(std::move(fileLine));
+            }
+
+            if (lines.size() > 0)
+            {
+                it = lines.begin();
+            }
+            else
+            {
+                it = lines.end();
+            }
         }
-        std::shared_ptr<FileLine> fileLine(std::make_shared<FileLine>((*it), lineNumber));
-        lines.push_back(std::move(fileLine));
-    }
 
-    if (lines.size() > 0)
-    {
-        it = lines.begin();
-    }
-    else
-    {
-        it = lines.end();
-    }
-}
+        std::shared_ptr<IO::FileLine> TextTokenManager::getCurrent()
+        {
+            if (it != lines.end())
+            {
+                return (*it);
+            }
+            std::shared_ptr<IO::FileLine> null;
+            return null;
+        }
 
-std::shared_ptr<FileLine> TextTokenManager::getCurrent()
-{
-    if (it != lines.end())
-    {
-        return (*it);
-    }
-    std::shared_ptr<FileLine> null;
-    return null;
-}
+        std::shared_ptr<IO::FileLine> TextTokenManager::getNext()
+        {
+            if (it != lines.end())
+            {
+                it++;
+                return (*it);
+            }
+            std::shared_ptr<IO::FileLine> null;
+            return null;
+        }
 
-std::shared_ptr<FileLine> TextTokenManager::getNext()
-{
-    if (it != lines.end())
-    {
-        it++;
-        return (*it);
-    }
-    std::shared_ptr<FileLine> null;
-    return null;
-}
+        std::shared_ptr<IO::FileLine> TextTokenManager::getPrev()
+        {
+            if (it != lines.begin() && it != lines.end())
+            {
+                it--;
+                return (*it);
+            }
+            std::shared_ptr<IO::FileLine> null;
+            return null;
+        }
 
-std::shared_ptr<FileLine> TextTokenManager::getPrev()
-{
-    if (it != lines.begin() && it != lines.end())
-    {
-        it--;
-        return (*it);
-    }
-    std::shared_ptr<FileLine> null;
-    return null;
-}
+        void TextTokenManager::next()
+        {
+            if (it != lines.end())
+            {
+                it++;
+            }
+        }
 
-void TextTokenManager::next()
-{
-    if (it != lines.end())
-    {
-        it++;
-    }
-}
+        void TextTokenManager::prev()
+        {
+            if (it != lines.begin() && it != lines.end())
+            {
+                it--;
+            }
+        }
 
-void TextTokenManager::prev()
-{
-    if (it != lines.begin() && it != lines.end())
-    {
-        it--;
-    }
-}
+        std::shared_ptr<IO::FileLine> TextTokenManager::peak()
+        {
+            std::shared_ptr<IO::FileLine> null;
+            if (it != lines.end())
+            {
+                it++;
+                std::shared_ptr<IO::FileLine> line = (*it);
+                it--;
+                return line;
 
-std::shared_ptr<FileLine> TextTokenManager::peak()
-{
-    std::shared_ptr<FileLine> null;
-    if (it != lines.end())
-    {
-        it++;
-        std::shared_ptr<FileLine> line = (*it);
-        it--;
-        return line;
+            }
+            return null;
+        }
 
-    }
-    return null;
-}
+        bool TextTokenManager::isEnd()
+        {
+            if (it != lines.end())
+            {
+                return false;
+            }
+            return true;
+        }
 
-bool TextTokenManager::isEnd()
-{
-    if (it != lines.end())
-    {
-        return false;
+        bool TextTokenManager::isEmpty()
+        {
+            if (lines.size() > 0)
+            {
+              return true;
+            }
+            return false;
+        }
     }
-    return true;
-}
-
-bool TextTokenManager::isEmpty()
-{
-    if (lines.size() > 0)
-    {
-      return true;
-    }
-    return false;
 }

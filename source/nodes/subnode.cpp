@@ -15,58 +15,62 @@
 
 #include "subnode.h"
 
-SubNode::SubNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : Node("SubNode", passable, token)
-{
-    this->left = left;
-    this->right = right;
-    Debug::print("SubNode");
-}
-
-NodeType SubNode::getType()
-{
-    return SUBNODETYPE;
-}
-
-std::shared_ptr<Variable> SubNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("SubNode");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (scope->getReturnValue() != nullptr)
-    {
-        return scope->getReturnValue();
-    }
-    if (left != nullptr && right != nullptr)
-    {
-        std::shared_ptr<Variable> l = left->execute(globalScope, scope);
-        std::shared_ptr<Variable> r = right->execute(globalScope, scope);
-        if (l == nullptr)
+namespace HuwInterpreter {
+    namespace Nodes {
+        SubNode::SubNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> left, std::shared_ptr<Nodes::Node> right)
+            : Node("SubNode", passable, token)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+            this->left = left;
+            this->right = right;
+            ErrorReporting::Debug::print("SubNode");
+        }
+
+        NodeType SubNode::getType()
+        {
+            return SUBNODETYPE;
+        }
+
+        std::shared_ptr<Variables::Variable> SubNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
+        {
+            ErrorReporting::Debug::print("SubNode");
+            if (passable->getErrorManager()->count() > 0)
+            {
+                return null;
+            }
+            if (scope->getReturnValue() != nullptr)
+            {
+                return scope->getReturnValue();
+            }
+            if (left != nullptr && right != nullptr)
+            {
+                std::shared_ptr<Variables::Variable> l = left->execute(globalScope, scope);
+                std::shared_ptr<Variables::Variable> r = right->execute(globalScope, scope);
+                if (l == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+                    return null;
+                }
+                if (r == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+                    return null;
+                }
+                std::shared_ptr<Variables::Variable> v = l->sub(r, token);
+                return v;
+            }
+            ErrorReporting::Debug::print("Could not sub.");
             return null;
         }
-        if (r == nullptr)
-        {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
-            return null;
-        }
-        std::shared_ptr<Variable> v = l->sub(r, token);
-        return v;
-    }
-    Debug::print("Could not sub.");
-    return null;
-}
 
-std::string SubNode::toString()
-{
-    std::string output;
-    if (left != nullptr && right != nullptr)
-    {
-        output.append(left->toString()).append("-").append(right->toString());
+        std::string SubNode::toString()
+        {
+            std::string output;
+            if (left != nullptr && right != nullptr)
+            {
+                output.append(left->toString()).append("-").append(right->toString());
+            }
+            return output;
+        }
     }
-    return output;
 }
 

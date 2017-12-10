@@ -19,39 +19,47 @@
 #include "error.h"
 #include "variables/variablestringfactory.h"
 
-class ErrorFactory
-{
-private:
-    std::shared_ptr<VariableStringFactory> variableStringFactory;
-public:
-    ErrorFactory();
-    std::shared_ptr<Error> invalidArgument(std::shared_ptr<Token> token, ErrorTypes errorTypes, std::string name, std::string other);
-    std::shared_ptr<Error> invalidArgument(std::shared_ptr<Token> token, ErrorTypes errorTypes, std::string name);
-    std::shared_ptr<Error> outOfRange(std::shared_ptr<Token> token, std::string name, std::string other);
-    std::shared_ptr<Error> requiresArguments(std::shared_ptr<Token> token, std::string name, std::string method, ulong arguments);
-    std::shared_ptr<Error> firstParameterIsNotTypeOfArray(std::shared_ptr<Token> token, std::string varName, std::string funcName);
-    std::shared_ptr<Error> requiresAtLeastXArguments(std::shared_ptr<Token> token, std::string name, ulong arguments);
-    std::shared_ptr<Error> couldNotParseTime(std::shared_ptr<Token> token, std::string name);
-    std::shared_ptr<Error> functionNotDeclared(std::shared_ptr<Token> token, std::string name);
-    std::shared_ptr<Error> invalidExpression(ErrorTypes errorTypes, std::shared_ptr<Token> token, std::string name);
-    std::shared_ptr<Error> variableNotDeclared(std::shared_ptr<Token> token, std::string name);
-    std::shared_ptr<Error> constantNotDeclared(std::shared_ptr<Token> token, std::string className);
-    std::shared_ptr<Error> failedToCompare(std::shared_ptr<Token> token, std::string method);
-    std::shared_ptr<Error> failedToCompare(std::shared_ptr<Token> token, std::string method, std::string name, VarType type1);
-    std::shared_ptr<Error> failedToCompare(std::shared_ptr<Token> token, std::string method, std::string name, VarType type1, VarType type2);
-    std::shared_ptr<Error> syntaxError(std::shared_ptr<Token> token, std::string info);
-    std::shared_ptr<Error> couldNotConvertStringToNumber(std::shared_ptr<Token> token, std::string name, std::string method, std::string other);
-    std::shared_ptr<Error> couldNotconvertNumberToInteger(std::shared_ptr<Token> token, std::string className, std::string method, std::string other);
-    std::shared_ptr<Error> couldNotConvert(std::shared_ptr<Token> token, std::string name, std::string methodName, VarType varType, std::string other);
-    std::shared_ptr<Error> cannotCallFunction(std::shared_ptr<Token> token, VarType varType, std::string name, std::string method, std::string other);
-    std::shared_ptr<Error> cannotCallFunction(std::shared_ptr<Token> token, std::string name, VarType varType, std::string method, std::string other);
-    std::shared_ptr<Error> otherFunctionError(std::shared_ptr<Token> token, std::string name, std::string other);
-    std::shared_ptr<Error> unmatchedSpecifiedNumberOfArguments(std::shared_ptr<Token> token, std::string name);
-    std::shared_ptr<Error> outOfBounds(std::shared_ptr<Token> token, std::string name);
-    std::shared_ptr<Error> variableDeclared(std::shared_ptr<Token> token, std::string name);
-    std::shared_ptr<Error> constantDeclared(std::shared_ptr<Token> token, std::string name);
+namespace HuwInterpreter {
+    namespace ErrorReporting {
 
-    std::shared_ptr<Error> cannotChangeConstant(std::shared_ptr<Token> token, std::string name);
-};
+        using namespace Tokens;
+        using namespace Variables;
+
+        class ErrorFactory
+        {
+        private:
+            std::shared_ptr<VariableStringFactory> variableStringFactory;
+        public:
+            ErrorFactory();
+            std::shared_ptr<Error> invalidArgument(std::shared_ptr<Token> token, ErrorTypes errorTypes, std::string name, std::string other);
+            std::shared_ptr<Error> invalidArgument(std::shared_ptr<Token> token, ErrorTypes errorTypes, std::string name);
+            std::shared_ptr<Error> outOfRange(std::shared_ptr<Token> token, std::string name, std::string other);
+            std::shared_ptr<Error> requiresArguments(std::shared_ptr<Token> token, std::string name, std::string method, ulong arguments);
+            std::shared_ptr<Error> firstParameterIsNotTypeOfArray(std::shared_ptr<Token> token, std::string varName, std::string funcName);
+            std::shared_ptr<Error> requiresAtLeastXArguments(std::shared_ptr<Token> token, std::string name, ulong arguments);
+            std::shared_ptr<Error> couldNotParseTime(std::shared_ptr<Token> token, std::string name);
+            std::shared_ptr<Error> functionNotDeclared(std::shared_ptr<Token> token, std::string name);
+            std::shared_ptr<Error> invalidExpression(ErrorTypes errorTypes, std::shared_ptr<Token> token, std::string name);
+            std::shared_ptr<Error> variableNotDeclared(std::shared_ptr<Token> token, std::string name);
+            std::shared_ptr<Error> constantNotDeclared(std::shared_ptr<Token> token, std::string className);
+            std::shared_ptr<Error> failedToCompare(std::shared_ptr<Token> token, std::string method);
+            std::shared_ptr<Error> failedToCompare(std::shared_ptr<Token> token, std::string method, std::string name, Types::VarType type1);
+            std::shared_ptr<Error> failedToCompare(std::shared_ptr<Token> token, std::string method, std::string name, Types::VarType type1, Types::VarType type2);
+            std::shared_ptr<Error> syntaxError(std::shared_ptr<Token> token, std::string info);
+            std::shared_ptr<Error> couldNotConvertStringToNumber(std::shared_ptr<Token> token, std::string name, std::string method, std::string other);
+            std::shared_ptr<Error> couldNotconvertNumberToInteger(std::shared_ptr<Token> token, std::string className, std::string method, std::string other);
+            std::shared_ptr<Error> couldNotConvert(std::shared_ptr<Token> token, std::string name, std::string methodName, Types::VarType varType, std::string other);
+            std::shared_ptr<Error> cannotCallFunction(std::shared_ptr<Token> token, Types::VarType varType, std::string name, std::string method, std::string other);
+            std::shared_ptr<Error> cannotCallFunction(std::shared_ptr<Token> token, std::string name, Types::VarType varType, std::string method, std::string other);
+            std::shared_ptr<Error> otherFunctionError(std::shared_ptr<Token> token, std::string name, std::string other);
+            std::shared_ptr<Error> unmatchedSpecifiedNumberOfArguments(std::shared_ptr<Token> token, std::string name);
+            std::shared_ptr<Error> outOfBounds(std::shared_ptr<Token> token, std::string name);
+            std::shared_ptr<Error> variableDeclared(std::shared_ptr<Token> token, std::string name);
+            std::shared_ptr<Error> constantDeclared(std::shared_ptr<Token> token, std::string name);
+
+            std::shared_ptr<Error> cannotChangeConstant(std::shared_ptr<Token> token, std::string name);
+        };
+    }
+}
 
 #endif // ERRORFACTORY_H

@@ -15,11 +15,15 @@
 
 #include "debug.h"
 
-void Debug::print(std::string error)
-{
-    if (on)
-    {
-        std::cout << error << std::endl;
+namespace  HuwInterpreter {
+    namespace ErrorReporting {
+        void ErrorReporting::Debug::print(std::string error)
+        {
+            if (on)
+            {
+                std::cout << error << std::endl;
+            }
+        }
     }
 }
 

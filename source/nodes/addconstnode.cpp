@@ -15,69 +15,73 @@
 
 #include "addconstnode.h"
 
-AddConstNode::AddConstNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value)
-    : Node("AddConstNode", passable, token)
-{
-    this->name = name;
-    this->value = value;
-    Debug::print("AddConstNode");
-}
-
-NodeType AddConstNode::getType()
-{
-    return ADDCONSTNODETYPE;
-}
-
-std::shared_ptr<Variable> AddConstNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("AddConstNode");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (scope->getReturnValue() != nullptr)
-    {
-        return scope->getReturnValue();
-    }
-    if (!scope->getVariables()->exists(name))
-    {
-        std::shared_ptr<Variable> var = value->execute(globalScope, scope);
-        if (passable->getErrors()->count() > 0)
+namespace HuwInterpreter {
+    namespace Nodes {
+        AddConstNode::AddConstNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::string name, std::shared_ptr<Nodes::Node> value)
+            : Node("AddConstNode", passable, token)
         {
-            return null;
+            this->name = name;
+            this->value = value;
+            ErrorReporting::Debug::print("AddConstNode");
         }
-        if (scope->getReturnValue() != nullptr)
+
+        NodeType AddConstNode::getType()
         {
-            return scope->getReturnValue();
+            return ADDCONSTNODETYPE;
         }
-        if (var != nullptr)
+
+        std::shared_ptr<Variables::Variable> AddConstNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
         {
-            if (globalScope->getVariables()->exists(name))
+            ErrorReporting::Debug::print("AddConstNode");
+            if (passable->getErrorManager()->count() > 0)
             {
-                passable->getErrors()->add(passable->getErrorFactory()->constantDeclared(token, name));
                 return null;
             }
-            else if (!scope->getVariables()->addVariable(name, std::make_shared<ConstantVariable>(passable, var)))
+            if (scope->getReturnValue() != nullptr)
             {
-                passable->getErrors()->add(passable->getErrorFactory()->constantDeclared(token, name));
+                return scope->getReturnValue();
             }
+            if (!scope->getVariableManager()->exists(name))
+            {
+                std::shared_ptr<Variables::Variable> var = value->execute(globalScope, scope);
+                if (passable->getErrorManager()->count() > 0)
+                {
+                    return null;
+                }
+                if (scope->getReturnValue() != nullptr)
+                {
+                    return scope->getReturnValue();
+                }
+                if (var != nullptr)
+                {
+                    if (globalScope->getVariableManager()->exists(name))
+                    {
+                        passable->getErrorManager()->add(passable->getErrorFactory()->constantDeclared(token, name));
+                        return null;
+                    }
+                    else if (!scope->getVariableManager()->addVariable(name, std::make_shared<Variables::ConstantVariable>(passable, var)))
+                    {
+                        passable->getErrorManager()->add(passable->getErrorFactory()->constantDeclared(token, name));
+                    }
+                }
+                else
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+                }
+                return null;
+            }
+            passable->getErrorManager()->add(passable->getErrorFactory()->constantDeclared(token, name));
+            return null;
         }
-        else
-        {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
-        }
-        return null;
-    }
-    passable->getErrors()->add(passable->getErrorFactory()->constantDeclared(token, name));
-    return null;
-}
 
-std::string AddConstNode::toString()
-{
-    std::string output;
-    if (value != nullptr)
-    {
-        output.append("const ").append(name).append("=").append(value->toString());
+        std::string AddConstNode::toString()
+        {
+            std::string output;
+            if (value != nullptr)
+            {
+                output.append("const ").append(name).append("=").append(value->toString());
+            }
+            return output;
+        }
     }
-    return output;
 }

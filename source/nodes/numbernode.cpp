@@ -15,40 +15,44 @@
 
 #include "numbernode.h"
 
-NumberNode::NumberNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::string value)
-    : Node("NumberNode", passable, token)
-{
-    variableTypeFactory = std::make_shared<VariableTypeFactory>(passable);
-    this->value = variableTypeFactory->newVariable(TypeDetector::getType(value));
-    this->value->setValue(value);
-    Debug::print("NumberNode");
-}
+namespace HuwInterpreter {
+    namespace Nodes {
+        NumberNode::NumberNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::string value)
+            : Node("NumberNode", passable, token)
+        {
+            variableTypeFactory = std::make_shared<Variables::VariableTypeFactory>(passable);
+            this->value = variableTypeFactory->newVariable(Helpers::TypeDetector::getType(value));
+            this->value->setValue(value);
+            ErrorReporting::Debug::print("NumberNode");
+        }
 
-NodeType NumberNode::getType()
-{
-    return NUMBERNODETYPE;
-}
+        NodeType NumberNode::getType()
+        {
+            return NUMBERNODETYPE;
+        }
 
-std::shared_ptr<Variable> NumberNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("NumberNode");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (scope->getReturnValue() != nullptr)
-    {
-        return scope->getReturnValue();
-    }
-    return value;
-}
+        std::shared_ptr<Variables::Variable> NumberNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
+        {
+            ErrorReporting::Debug::print("NumberNode");
+            if (passable->getErrorManager()->count() > 0)
+            {
+                return null;
+            }
+            if (scope->getReturnValue() != nullptr)
+            {
+                return scope->getReturnValue();
+            }
+            return value;
+        }
 
-std::string NumberNode::toString()
-{
-    if (value->getType() == STRING)
-    {
-        std::string output = escapedOutput->output(value->toString());
-        return "\"" + output + "\"";
+        std::string NumberNode::toString()
+        {
+            if (value->getType() == Types::STRING)
+            {
+                std::string output = escapedOutput->output(value->toString());
+                return "\"" + output + "\"";
+            }
+            return value->toString();
+        }
     }
-    return value->toString();
 }

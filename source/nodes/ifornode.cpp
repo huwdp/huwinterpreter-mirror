@@ -15,65 +15,69 @@
 
 #include "ifornode.h"
 
-IfOrNode::IfOrNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : Node("IfOrNode", passable, token)
-{
-    this->left = left;
-    this->right = right;
-    Debug::print("Or");
-}
-
-NodeType IfOrNode::getType()
-{
-    return IFORNODETYPE;
-}
-
-std::shared_ptr<Variable> IfOrNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("Or");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (scope->getReturnValue() != nullptr)
-    {
-        return scope->getReturnValue();
-    }
-    if (left != nullptr && right != nullptr)
-    {
-        std::shared_ptr<Variable> l = left->execute(globalScope, scope);
-        if (l == nullptr)
+namespace HuwInterpreter {
+    namespace Nodes {
+        IfOrNode::IfOrNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> left, std::shared_ptr<Nodes::Node> right)
+            : Node("IfOrNode", passable, token)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+            this->left = left;
+            this->right = right;
+            ErrorReporting::Debug::print("Or");
+        }
+
+        NodeType IfOrNode::getType()
+        {
+            return IFORNODETYPE;
+        }
+
+        std::shared_ptr<Variables::Variable> IfOrNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
+        {
+            ErrorReporting::Debug::print("Or");
+            if (passable->getErrorManager()->count() > 0)
+            {
+                return null;
+            }
+            if (scope->getReturnValue() != nullptr)
+            {
+                return scope->getReturnValue();
+            }
+            if (left != nullptr && right != nullptr)
+            {
+                std::shared_ptr<Variables::Variable> l = left->execute(globalScope, scope);
+                if (l == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+                    return null;
+                }
+                if (l->toBool())
+                {
+                    return std::make_shared<Variables::NumberVariable>(passable, true);
+                }
+
+                std::shared_ptr<Variables::Variable> r = right->execute(globalScope, scope);
+                if (r == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+                    return null;
+                }
+                if (r->toBool() || l->toBool())
+                {
+                    return std::make_shared<Variables::NumberVariable>(passable, true);
+                }
+                return std::make_shared<Variables::NumberVariable>(passable, false);
+            }
+            ErrorReporting::Debug::print("Could not or.");
             return null;
         }
-        if (l->toBool())
-        {
-            return std::make_shared<NumberVariable>(passable, true);
-        }
 
-        std::shared_ptr<Variable> r = right->execute(globalScope, scope);
-        if (r == nullptr)
+        std::string IfOrNode::toString()
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
-            return null;
+            if (left != nullptr && right != nullptr)
+            {
+                return left->toString() + "||" + right->toString();
+            }
+            return "";
         }
-        if (r->toBool() || l->toBool())
-        {
-            return std::make_shared<NumberVariable>(passable, true);
-        }
-        return std::make_shared<NumberVariable>(passable, false);
     }
-    Debug::print("Could not or.");
-    return null;
-}
-
-std::string IfOrNode::toString()
-{
-    if (left != nullptr && right != nullptr)
-    {
-        return left->toString() + "||" + right->toString();
-    }
-    return "";
 }
 

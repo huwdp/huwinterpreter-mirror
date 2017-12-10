@@ -15,56 +15,60 @@
 
 #include "divnode.h"
 
-DivNode::DivNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : Node("DivNode", passable, token)
-{
-    this->left = left;
-    this->right = right;
-    Debug::print("Div");
-}
-
-NodeType DivNode::getType()
-{
-    return DIVNODETYPE;
-}
-
-std::shared_ptr<Variable> DivNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("Div");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (scope->getReturnValue() != nullptr)
-    {
-        return scope->getReturnValue();
-    }
-    if (left != nullptr && right != nullptr)
-    {
-        std::shared_ptr<Variable> l = left->execute(globalScope, scope);
-        std::shared_ptr<Variable> r = right->execute(globalScope, scope);
-        if (l == nullptr)
+namespace HuwInterpreter {
+    namespace Nodes {
+        DivNode::DivNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> left, std::shared_ptr<Nodes::Node> right)
+            : Node("DivNode", passable, token)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+            this->left = left;
+            this->right = right;
+            ErrorReporting::Debug::print("Div");
+        }
+
+        NodeType DivNode::getType()
+        {
+            return DIVNODETYPE;
+        }
+
+        std::shared_ptr<Variables::Variable> DivNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
+        {
+            ErrorReporting::Debug::print("Div");
+            if (passable->getErrorManager()->count() > 0)
+            {
+                return null;
+            }
+            if (scope->getReturnValue() != nullptr)
+            {
+                return scope->getReturnValue();
+            }
+            if (left != nullptr && right != nullptr)
+            {
+                std::shared_ptr<Variables::Variable> l = left->execute(globalScope, scope);
+                std::shared_ptr<Variables::Variable> r = right->execute(globalScope, scope);
+                if (l == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+                    return null;
+                }
+                if (r == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+                    return null;
+                }
+                return l->div(r, token);
+            }
+            ErrorReporting::Debug::print("Could not div.");
             return null;
         }
-        if (r == nullptr)
-        {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
-            return null;
-        }
-        return l->div(r, token);
-    }
-    Debug::print("Could not div.");
-    return null;
-}
 
-std::string DivNode::toString()
-{
-    std::string output;
-    if (left != nullptr && right != nullptr)
-    {
-        output.append(left->toString()).append("/").append(right->toString());
+        std::string DivNode::toString()
+        {
+            std::string output;
+            if (left != nullptr && right != nullptr)
+            {
+                output.append(left->toString()).append("/").append(right->toString());
+            }
+            return output;
+        }
     }
-    return output;
 }

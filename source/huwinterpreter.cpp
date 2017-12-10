@@ -15,57 +15,60 @@
 
 #include "huwinterpreter.h"
 
-HuwInterpreter::HuwInterpreter()
-{
-    std::shared_ptr<NodeFactoryFactory> nodeFactoryFactory = std::make_shared<NodeFactoryFactory>();
-    nodeFactory = nodeFactoryFactory->build(HUWCODE);
-    scanner = std::make_shared<Scanner>();
-}
+namespace  HuwInterpreter {
 
-void HuwInterpreter::executeFile(std::string fileLocation)
-{
-    std::ifstream file (fileLocation.c_str());
-    bool exists = (bool)file;
-    if (!exists)
+    Interpreter::Interpreter()
     {
-        std::string errorMessage = "Could not find file \"";
-        errorMessage.append(fileLocation);
-        errorMessage.append("\"");
-        return;
+        std::shared_ptr<NodeFactoryFactory> nodeFactoryFactory = std::make_shared<NodeFactoryFactory>();
+        nodeFactory = nodeFactoryFactory->build(HUWCODE);
+        scanner = std::make_shared<Scanner>();
     }
-    execute(parseFile(fileLocation));
-}
 
-void HuwInterpreter::execute(std::vector<std::shared_ptr<Token>> tokens)
-{
-    std::unique_ptr<Parser> parser(new Parser(tokens, nodeFactory));
-    parser->execute();
-}
-
-std::string HuwInterpreter::toString(std::vector<std::shared_ptr<Token>> tokens)
-{
-    std::unique_ptr<Parser> parser(new Parser(tokens, nodeFactory));
-    return parser->toString();
-}
-
-std::vector<std::shared_ptr<Token>> HuwInterpreter::parseFile(std::string fileLocation)
-{
-    std::vector<std::shared_ptr<Token>> tokens;
-    std::ifstream file (fileLocation.c_str());
-    bool exists = (bool)file;
-    if (!exists)
+    void Interpreter::executeFile(std::string fileLocation)
     {
-        std::string errorMessage = "Could not find file \"";
-        errorMessage.append(fileLocation);
-        errorMessage.append("\"");
-        return tokens;
+        std::ifstream file (fileLocation.c_str());
+        bool exists = (bool)file;
+        if (!exists)
+        {
+            std::string errorMessage = "Could not find file \"";
+            errorMessage.append(fileLocation);
+            errorMessage.append("\"");
+            return;
+        }
+        execute(parseFile(fileLocation));
     }
-    std::shared_ptr<FileTokenManager> fileTokenManager = std::make_shared<FileTokenManager>(fileLocation);
-    return scanner->tokenize(fileTokenManager);
-}
 
-std::vector<std::shared_ptr<Token>> HuwInterpreter::parseText(std::string text)
-{
-    std::shared_ptr<TokenManager> textTokenManager = std::make_shared<TextTokenManager>(text);
-    return scanner->tokenize(textTokenManager);
+    void Interpreter::execute(std::vector<std::shared_ptr<Token>> tokens)
+    {
+        std::unique_ptr<Parser> parser(new Parser(tokens, nodeFactory));
+        parser->execute();
+    }
+
+    std::string Interpreter::toString(std::vector<std::shared_ptr<Token>> tokens)
+    {
+        std::unique_ptr<Parser> parser(new Parser(tokens, nodeFactory));
+        return parser->toString();
+    }
+
+    std::vector<std::shared_ptr<Token>> Interpreter::parseFile(std::string fileLocation)
+    {
+        std::vector<std::shared_ptr<Token>> tokens;
+        std::ifstream file (fileLocation.c_str());
+        bool exists = (bool)file;
+        if (!exists)
+        {
+            std::string errorMessage = "Could not find file \"";
+            errorMessage.append(fileLocation);
+            errorMessage.append("\"");
+            return tokens;
+        }
+        std::shared_ptr<FileTokenManager> fileTokenManager = std::make_shared<FileTokenManager>(fileLocation);
+        return scanner->tokenize(fileTokenManager);
+    }
+
+    std::vector<std::shared_ptr<Token>> Interpreter::parseText(std::string text)
+    {
+        std::shared_ptr<TokenManager> textTokenManager = std::make_shared<TextTokenManager>(text);
+        return scanner->tokenize(textTokenManager);
+    }
 }

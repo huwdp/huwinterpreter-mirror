@@ -26,21 +26,28 @@
 #include "io/fileline.h"
 #include "../common/passable.h"
 
-class Function
-{
-protected:
-    std::string name;
-    std::shared_ptr<Variable> null;
-    std::shared_ptr<Passable> passable;
-public:
-    Function(std::shared_ptr<Passable> passable);
-    std::string getName();
-    void setName(std::string name);
-    virtual std::shared_ptr<Variable> execute(std::shared_ptr<Token> token,
-                                          std::shared_ptr<Scope> globalScope,
-                                          std::shared_ptr<Scope> scope,
-                                          std::vector<std::shared_ptr<Node>> arguments) = 0;
-    virtual std::string toString(std::vector<std::shared_ptr<Node>> arguments);
-};
+namespace HuwInterpreter {
+    namespace Functions {
+
+        using namespace Variables;
+
+        class Function
+        {
+        protected:
+            std::string name;
+            std::shared_ptr<Variable> null;
+            std::shared_ptr<Passable> passable;
+        public:
+            Function(std::shared_ptr<Passable> passable);
+            std::string getName();
+            void setName(std::string name);
+            virtual std::shared_ptr<Variable> execute(std::shared_ptr<Tokens::Token> token,
+                                                  std::shared_ptr<Scope> globalScope,
+                                                  std::shared_ptr<Scope> scope,
+                                                  std::vector<std::shared_ptr<Nodes::Node>> arguments) = 0;
+            virtual std::string toString(std::vector<std::shared_ptr<Nodes::Node>> arguments);
+        };
+    }
+}
 
 #endif // FUNCTION_H

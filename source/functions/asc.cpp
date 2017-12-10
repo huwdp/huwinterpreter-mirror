@@ -15,47 +15,50 @@
 
 #include "asc.h"
 
-Asc::Asc(std::shared_ptr<Passable> passable)
-    : Function(passable)
-{
-    name = "asc";
-}
-
-std::shared_ptr<Variable> Asc::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
-                                   std::shared_ptr<Scope> scope,
-                                   std::vector<std::shared_ptr<Node>> arguments)
-{
-    std::shared_ptr<Variable> returnNode;
-    if (arguments.size() == 1)
-    {
-        std::shared_ptr<Node> node = arguments.at(0);
-        if (node == nullptr)
+namespace HuwInterpreter {
+    namespace Functions {
+        Asc::Asc(std::shared_ptr<Passable> passable)
+            : Function(passable)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-            return null;
+            name = "asc";
         }
 
-        std::shared_ptr<Variable> var = node->execute(globalScope, scope);
-        if (var == nullptr)
+        std::shared_ptr<Variable> Asc::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,
+                                           std::shared_ptr<Scope> scope,
+                                           std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-            return null;
-        }
+            std::shared_ptr<Variable> returnNode;
+            if (arguments.size() == 1)
+            {
+                std::shared_ptr<Nodes::Node> node = arguments.at(0);
+                if (node == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                    return null;
+                }
 
-        std::string temp = var->toString();
-        if (temp.size() == 1)
-        {
-            int temp2 = temp.at(0);
-            double ascii = (double)temp2;
-            returnNode = std::make_shared<NumberVariable>(passable, ascii);
+                std::shared_ptr<Variable> var = node->execute(globalScope, scope);
+                if (var == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                    return null;
+                }
+
+                std::string temp = var->toString();
+                if (temp.size() == 1)
+                {
+                    int temp2 = temp.at(0);
+                    double ascii = (double)temp2;
+                    returnNode = std::make_shared<NumberVariable>(passable, ascii);
+                }
+            }
+            else
+            {
+                returnNode = std::make_shared<StringVariable>(passable);
+                passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 1));
+            }
+
+            return returnNode;
         }
     }
-    else
-    {
-        returnNode = std::make_shared<StringVariable>(passable);
-        passable->getErrors()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 1));
-    }
-    
-    return returnNode;
 }
-

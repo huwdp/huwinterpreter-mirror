@@ -22,20 +22,24 @@
 #include "types/tokentypes.h"
 #include <algorithm>
 
-class Tokens
-{
-private:
-    std::unordered_map<ushort, std::string> types;
-public:
-    Tokens();
-    void init();
-    std::string get(TokenType value);
-    TokenType get(std::string value);
-    bool compare(std::string value1, TokenType value2);
-    bool compare(char value1, TokenType value2);
-    bool exists(TokenType value);
-    bool exists(std::string value);
-    void add(std::string text, TokenType tokenType);
-};
+namespace HuwInterpreter {
+    namespace Tokens {
+        class Tokens
+        {
+        private:
+            std::unordered_map<ushort, std::string> types;
+        public:
+            Tokens();
+            void init();
+            std::string get(Types::TokenType value);
+            Types::TokenType get(std::string value);
+            bool compare(std::string value1, Types::TokenType value);
+            bool compare(char value1, Types::TokenType value);
+            bool exists(Types::TokenType value);
+            bool exists(std::string value);
+            void add(std::string text, Types::TokenType tokenType);
+        };
+    }
+}
 
 #endif // TOKENDETECTOR_H

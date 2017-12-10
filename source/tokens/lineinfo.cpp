@@ -15,39 +15,43 @@
 
 #include "lineinfo.h"
 
-LineInfo::LineInfo(std::string file, long long lineNumber, long long charNumber)
-{
-    this->file = file;
-    this->lineNumber = lineNumber;
-    this->charNumber = charNumber;
-}
+namespace HuwInterpreter {
+    namespace Tokens {
+        LineInfo::LineInfo(std::string file, long long lineNumber, long long charNumber)
+        {
+            this->file = file;
+            this->lineNumber = lineNumber;
+            this->charNumber = charNumber;
+        }
 
-std::string LineInfo::getFile()
-{
-    return file;
-}
+        std::string LineInfo::getFile()
+        {
+            return file;
+        }
 
-void LineInfo::setFile(std::string file)
-{
-    this->file = file;
-}
+        void LineInfo::setFile(std::string file)
+        {
+            this->file = file;
+        }
 
-long long LineInfo::getLineNumber()
-{
-    return lineNumber;
-}
+        long long LineInfo::getLineNumber()
+        {
+            return lineNumber;
+        }
 
-void LineInfo::setLineNumber(long long lineNumber)
-{
-    this->lineNumber = lineNumber;
-}
+        void LineInfo::setLineNumber(long long lineNumber)
+        {
+            this->lineNumber = lineNumber;
+        }
 
-long long LineInfo::getCharNumber()
-{
-    return charNumber;
-}
+        long long LineInfo::getCharNumber()
+        {
+            return charNumber;
+        }
 
-void LineInfo::setCharNumber(long long charNumber)
-{
-    this->charNumber = charNumber;
+        void LineInfo::setCharNumber(long long charNumber)
+        {
+            this->charNumber = charNumber;
+        }
+    }
 }

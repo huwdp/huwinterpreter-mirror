@@ -15,49 +15,53 @@
 
 #include "incrementnode.h"
 
-IncrementNode::IncrementNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> node)
-    : Node("IncrementNode", passable, token)
-{
-    this->node = node;
-    Debug::print("Increment");
-}
-
-NodeType IncrementNode::getType()
-{
-    return INCREMENTNODETYPE;
-}
-
-std::shared_ptr<Variable> IncrementNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("Increment");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (scope->getReturnValue() != nullptr)
-    {
-        return scope->getReturnValue();
-    }
-    if (node != nullptr)
-    {
-        std::shared_ptr<Variable> n = node->execute(globalScope, scope);
-        if (n == nullptr)
+namespace HuwInterpreter {
+    namespace Nodes {
+        IncrementNode::IncrementNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> node)
+            : Node("IncrementNode", passable, token)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+            this->node = node;
+            ErrorReporting::Debug::print("Increment");
+        }
+
+        NodeType IncrementNode::getType()
+        {
+            return INCREMENTNODETYPE;
+        }
+
+        std::shared_ptr<Variables::Variable> IncrementNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
+        {
+            ErrorReporting::Debug::print("Increment");
+            if (passable->getErrorManager()->count() > 0)
+            {
+                return null;
+            }
+            if (scope->getReturnValue() != nullptr)
+            {
+                return scope->getReturnValue();
+            }
+            if (node != nullptr)
+            {
+                std::shared_ptr<Variables::Variable> n = node->execute(globalScope, scope);
+                if (n == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+                    return null;
+                }
+                return n->increment(token);
+            }
+            ErrorReporting::Debug::print("Could not increment.");
             return null;
         }
-        return n->increment(token);
-    }
-    Debug::print("Could not increment.");
-    return null;
-}
 
-std::string IncrementNode::toString()
-{
-    std::string output;
-    if (node != nullptr)
-    {
-        output.append(node->toString()).append("++");
+        std::string IncrementNode::toString()
+        {
+            std::string output;
+            if (node != nullptr)
+            {
+                output.append(node->toString()).append("++");
+            }
+            return output;
+        }
     }
-    return output;
 }

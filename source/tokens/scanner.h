@@ -32,21 +32,25 @@
 
 #include <set>
 
-class Scanner
-{
-private:
-    std::shared_ptr<UnusableTokens> unusableTokens;
-    std::shared_ptr<Tokens> tokens;
-    std::vector<std::shared_ptr<Token>> items;
-    bool isAllowedCharacter(char character);
-    void AddToken(TokenType tokenType,
-                  std::shared_ptr<LineInfo> lineInfo);
-    void AddToken(std::string text,
-                  TokenType tokenType,
-                  std::shared_ptr<LineInfo> lineInfo);
-public:
-    Scanner();
-    std::vector<std::shared_ptr<Token>> tokenize(std::shared_ptr<TokenManager> fileReader);
-};
+namespace HuwInterpreter {
+    namespace Tokens {
+        class Scanner
+        {
+        private:
+            std::shared_ptr<UnusableTokens> unusableTokens;
+            std::shared_ptr<Tokens> tokens;
+            std::vector<std::shared_ptr<Token>> items;
+            bool isAllowedCharacter(char character);
+            void AddToken(Types::TokenType tokenType,
+                          std::shared_ptr<LineInfo> lineInfo);
+            void AddToken(std::string text,
+                          Types::TokenType tokenType,
+                          std::shared_ptr<LineInfo> lineInfo);
+        public:
+            Scanner();
+            std::vector<std::shared_ptr<Token>> tokenize(std::shared_ptr<TokenManager> fileReader);
+        };
+    }
+}
 
 #endif // SCANNER_H

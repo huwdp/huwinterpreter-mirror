@@ -15,121 +15,121 @@
 
 #include "typedetector.h"
 
-TypeDetector::TypeDetector()
-{
+namespace  HuwInterpreter {
+    namespace  Helpers {
 
-}
-
-bool TypeDetector::isInteger(std::string value)
-{
-    std::string::iterator it = value.begin();
-
-    if (!std::isdigit((*it)))
-    {
-        return false;
-    }
-
-    while (it != value.end())
-    {
-        if (!std::isdigit((*it)))
+        bool TypeDetector::isInteger(std::string value)
         {
+            std::string::iterator it = value.begin();
+
+            if (!std::isdigit((*it)))
+            {
+                return false;
+            }
+
+            while (it != value.end())
+            {
+                if (!std::isdigit((*it)))
+                {
+                    return false;
+                }
+                ++it;
+            }
+            return true;
+        }
+
+        bool TypeDetector::isInteger(char value)
+        {
+            if (std::isdigit(value))
+            {
+                return true;
+            }
             return false;
         }
-        ++it;
-    }
-    return true;
-}
 
-bool TypeDetector::isInteger(char value)
-{
-    if (std::isdigit(value))
-    {
-        return true;
-    }
-    return false;
-}
-
-bool TypeDetector::isNumeric(std::string value)
-{
-    std::string::iterator it = value.begin();
-    bool dot = false;
-
-    if (!std::isdigit((*it)) && (*it) != '.' && (*it) != '+' && (*it) != '-')
-    {
-        return false;
-    }
-
-    while (it != value.end())
-    {
-        if ((*it) == '.' && dot)
+        bool TypeDetector::isNumeric(std::string value)
         {
+            std::string::iterator it = value.begin();
+            bool dot = false;
+
+            if (!std::isdigit((*it)) && (*it) != '.' && (*it) != '+' && (*it) != '-')
+            {
+                return false;
+            }
+
+            while (it != value.end())
+            {
+                if ((*it) == '.' && dot)
+                {
+                    return false;
+                }
+                if ((*it) == '.')
+                {
+                    dot = true;
+                }
+                if (!std::isdigit((*it)) && (*it) != '.')
+                {
+                    return false;
+                }
+                ++it;
+            }
+            return true;
+        }
+
+        bool TypeDetector::isNumeric(char value)
+        {
+            if (std::isdigit(value))
+            {
+                return true;
+            }
             return false;
         }
-        if ((*it) == '.')
+
+        bool TypeDetector::isWord(std::string value)
         {
-            dot = true;
-        }
-        if (!std::isdigit((*it)) && (*it) != '.')
-        {
+            if (value == "")
+            {
+                return true;
+            }
+            if (!isNumeric(value))
+            {
+                return true;
+            }
             return false;
         }
-        ++it;
-    }
-    return true;
-}
 
-bool TypeDetector::isNumeric(char value)
-{
-    if (std::isdigit(value))
-    {
-        return true;
-    }
-    return false;
-}
+        bool TypeDetector::isWord(char value)
+        {
+            if (value == '\0')
+            {
+                return true;
+            }
+            std::stringstream ss;
+            ss << value;
+            std::string str;
+            ss >> str;
+            if (!isNumeric(str))
+            {
+                return true;
+            }
+            return false;
+        }
 
-bool TypeDetector::isWord(std::string value)
-{
-    if (value == "")
-    {
-        return true;
+        VarType TypeDetector::getType(std::string value)
+        {
+            if (isWord(value))
+            {
+                return VarType::STRING;
+            }
+            else if (isInteger(value))
+            {
+                return VarType::INTEGER;
+            }
+            else if (isNumeric(value))
+            {
+                return VarType::DOUBLE;
+            }
+            return VarType::NONE;
+        }
     }
-    if (!isNumeric(value))
-    {
-        return true;
-    }
-    return false;
-}
-
-bool TypeDetector::isWord(char value)
-{
-    if (value == '\0')
-    {
-        return true;
-    }
-    std::stringstream ss;
-    ss << value;
-    std::string str;
-    ss >> str;
-    if (!isNumeric(str))
-    {
-        return true;
-    }
-    return false;
-}
-
-VarType TypeDetector::getType(std::string value)
-{
-    if (isWord(value))
-    {
-        return VarType::STRING;
-    }
-    else if (isInteger(value))
-    {
-        return VarType::INTEGER;
-    }
-    else if (isNumeric(value))
-    {
-        return VarType::DOUBLE;
-    }
-    return VarType::NONE;
 }

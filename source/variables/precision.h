@@ -20,13 +20,17 @@
 #include "types/tokentypes.h"
 #include <variables/variable.h>
 
-class Precision
-{
-public:
-    Precision();
-    bool isSafeInteger(double value);
-    bool isSafeInteger(long long value);
-    VarType getType(double value);
-};
+namespace HuwInterpreter {
+    namespace Helpers {
+        class Precision
+        {
+        public:
+            Precision();
+            bool isSafeInteger(double value);
+            bool isSafeInteger(long long value);
+            Types::VarType getType(double value);
+        };
+    }
+}
 
 #endif // PRECISION_H

@@ -18,18 +18,22 @@
 
 #include "node.h"
 
-class SetVarNode : public Node
-{
-protected:
-    std::string name;
-    std::shared_ptr<Node> value;
-    std::shared_ptr<Scope> scope;
-public:
-    SetVarNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value);
-    NodeType getType();
-    std::shared_ptr<Variable> execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope);
-    std::string toString();
-};
+namespace HuwInterpreter {
+    namespace Nodes {
+        class SetVarNode : public Node
+        {
+        protected:
+            std::string name;
+            std::shared_ptr<Nodes::Node> value;
+            std::shared_ptr<Variables::Scope> scope;
+        public:
+            SetVarNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::string name, std::shared_ptr<Nodes::Node> value);
+            NodeType getType();
+            std::shared_ptr<Variables::Variable> execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope);
+            std::string toString();
+        };
+    }
+}
 
 #endif // SETVARNODE_H
 

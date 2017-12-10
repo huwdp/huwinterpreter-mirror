@@ -24,7 +24,7 @@
 class IErrors
 {
 private:
-    std::vector<std::shared<Error>> errorsList;
+    std::vector<std::shared_ptr<Error>> errorsList;
 public:
     IErrors();
     ~IErrors();

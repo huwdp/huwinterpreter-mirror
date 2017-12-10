@@ -19,21 +19,24 @@
 #include "error.h"
 
 
-class Errors
-{
-private:
-    std::vector<std::shared_ptr<Error>> errorList;
-public:
-    Errors();
-    ~Errors();
-    void add(std::string error);
-    void add(std::shared_ptr<Error> error);
-    void remove(std::shared_ptr<Error> error);
-    void removeAll();
-    std::vector<std::shared_ptr<Error>> get();
-    void set(std::vector<std::shared_ptr<Error>> errors);
-    void print();
-    long long count();
-};
+namespace HuwInterpreter {
+    namespace ErrorReporting {
+        class ErrorManager
+        {
+        private:
+            std::vector<std::shared_ptr<Error>> errorList;
+        public:
+            ~ErrorManager();
+            void add(std::string error);
+            void add(std::shared_ptr<Error> error);
+            void remove(std::shared_ptr<Error> error);
+            void removeAll();
+            std::vector<std::shared_ptr<Error>> get();
+            void set(std::vector<std::shared_ptr<Error>> errors);
+            void print();
+            long long count();
+        };
+    }
+}
 
 #endif // ERROR_H

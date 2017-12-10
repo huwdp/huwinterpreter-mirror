@@ -23,22 +23,28 @@
 #include "errortypes.h"
 #include "errortypestringfactory.h"
 
-class Error
-{
-private:
-    std::string error;
-    std::shared_ptr<Token> token;
-    std::string internalFile;
-    int internalLine;
-    ErrorTypes errorType;
-public:
-    Error();
-    Error(ErrorTypes errorTypes, std::string error);
-    Error(ErrorTypes errorTypes, std::string error, std::shared_ptr<Token> token);
-    Error(ErrorTypes errorTypes, std::string error, std::shared_ptr<Token> token, std::string internalFile, int internalLine);
-    std::string getError();
-    void setError(std::string error);
-    std::string getMessage();
-};
+namespace HuwInterpreter {
 
+    using namespace Tokens;
+
+    namespace ErrorReporting {
+        class Error
+        {
+        private:
+            std::string error;
+            std::shared_ptr<Token> token;
+            std::string internalFile;
+            int internalLine;
+            ErrorTypes errorType;
+        public:
+            Error();
+            Error(ErrorTypes errorTypes, std::string error);
+            Error(ErrorTypes errorTypes, std::string error, std::shared_ptr<Token> token);
+            Error(ErrorTypes errorTypes, std::string error, std::shared_ptr<Token> token, std::string internalFile, int internalLine);
+            std::string getError();
+            void setError(std::string error);
+            std::string getMessage();
+        };
+    }
+}
 #endif // ERROR_H

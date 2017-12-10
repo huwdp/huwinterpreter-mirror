@@ -15,34 +15,36 @@
 
 #include "passable.h"
 
-Passable::Passable()
-{
-    this->errors = std::make_shared<Errors>();
-    this->errorFactory = std::make_shared<ErrorFactory>();
-}
+namespace HuwInterpreter {
+    Passable::Passable()
+    {
+        this->errorManager = std::make_shared<ErrorManager>();
+        this->errorFactory = std::make_shared<ErrorFactory>();
+    }
 
-Passable::Passable(std::shared_ptr<Errors> errors, std::shared_ptr<ErrorFactory> errorFactory)
-{
-    this->errors = errors;
-    this->errorFactory = errorFactory;
-}
+    Passable::Passable(std::shared_ptr<ErrorManager> errorManager, std::shared_ptr<ErrorReporting::ErrorFactory> errorFactory)
+    {
+        this->errorManager = errorManager;
+        this->errorFactory = errorFactory;
+    }
 
-std::shared_ptr<Errors> Passable::getErrors()
-{
-    return errors;
-}
+    std::shared_ptr<ErrorManager> Passable::getErrorManager()
+    {
+        return errorManager;
+    }
 
-void Passable::setErrors(std::shared_ptr<Errors> errors)
-{
-    this->errors = std::move(errors);
-}
+    void Passable::setErrorManager(std::shared_ptr<ErrorManager> errorManager)
+    {
+        this->errorManager = std::move(errorManager);
+    }
 
-std::shared_ptr<ErrorFactory> Passable::getErrorFactory()
-{
-    return errorFactory;
-}
+    std::shared_ptr<ErrorFactory> Passable::getErrorFactory()
+    {
+        return errorFactory;
+    }
 
-void Passable::setErrorFactory(std::shared_ptr<ErrorFactory> errorFactory)
-{
-    this->errorFactory = std::move(errorFactory);
+    void Passable::setErrorFactory(std::shared_ptr<ErrorFactory> errorFactory)
+    {
+        this->errorFactory = std::move(errorFactory);
+    }
 }

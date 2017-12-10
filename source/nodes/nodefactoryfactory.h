@@ -19,13 +19,16 @@
 #include "nodefactory.h"
 #include "huwcodenodefactory.h"
 
-enum NodeFactoryType { HUWCODE };
+namespace HuwInterpreter {
+    namespace Nodes {
+        enum NodeFactoryType { HUWCODE };
 
-class NodeFactoryFactory
-{
-public:
-    NodeFactoryFactory();
-    std::shared_ptr<NodeFactory> build(NodeFactoryType type);
-};
+        class NodeFactoryFactory
+        {
+        public:
+            std::shared_ptr<NodeFactory> build(NodeFactoryType type);
+        };
+    }
+}
 
 #endif // NODEFACTORYFACTORY_H

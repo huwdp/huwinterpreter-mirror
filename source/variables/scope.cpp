@@ -15,32 +15,36 @@
 
 #include "scope.h"
 
-Scope::Scope(std::shared_ptr<Passable> passable)
-{
-    variables = std::move(std::make_shared<Variables>(passable, false));
-}
+namespace HuwInterpreter {
+    namespace Variables {
+        Scope::Scope(std::shared_ptr<Passable> passable)
+        {
+            variableManager = std::move(std::make_shared<VariableManager>(passable, false));
+        }
 
-Scope::Scope(std::shared_ptr<Variables> variables)
-{
-    variables = std::move(variables);
-}
+        Scope::Scope(std::shared_ptr<VariableManager> variableManager)
+        {
+            variableManager = std::move(variableManager);
+        }
 
-std::shared_ptr<Variables> Scope::getVariables()
-{
-    return variables;
-}
+        std::shared_ptr<VariableManager> Scope::getVariableManager()
+        {
+            return variableManager;
+        }
 
-void Scope::setVariables(std::shared_ptr<Variables> variables)
-{
-    this->variables = variables;
-}
+        void Scope::setVariableManager(std::shared_ptr<VariableManager> variableManager)
+        {
+            this->variableManager = variableManager;
+        }
 
-std::shared_ptr<Variable> Scope::getReturnValue()
-{
-    return returnValue;
-}
+        std::shared_ptr<Variable> Scope::getReturnValue()
+        {
+            return returnValue;
+        }
 
-void Scope::setReturnValue(std::shared_ptr<Variable> value)
-{
-    this->returnValue = value;
+        void Scope::setReturnValue(std::shared_ptr<Variable> value)
+        {
+            this->returnValue = value;
+        }
+    }
 }

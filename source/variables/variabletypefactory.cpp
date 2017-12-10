@@ -15,25 +15,29 @@
 
 #include "variabletypefactory.h"
 
-VariableTypeFactory::VariableTypeFactory(std::shared_ptr<Passable> passable)
-{
-    this->passable = passable;
-}
+namespace HuwInterpreter {
+    namespace Variables {
+        VariableTypeFactory::VariableTypeFactory(std::shared_ptr<Passable> passable)
+        {
+            this->passable = passable;
+        }
 
-std::shared_ptr<Variable> VariableTypeFactory::newVariable(VarType varType)
-{
-    std::shared_ptr<Variable> null;
-    if (varType == STRING)
-    {
-        return std::make_shared<StringVariable>(passable);
+        std::shared_ptr<Variable> VariableTypeFactory::newVariable(Types::VarType  varType)
+        {
+            std::shared_ptr<Variable> null;
+            if (varType == Types::VarType::STRING)
+            {
+                return std::make_shared<StringVariable>(passable);
+            }
+            else if (varType == Types::VarType::INTEGER)
+            {
+                return std::make_shared<NumberVariable>(passable, (long long)0);
+            }
+            else if (varType == Types::VarType::DOUBLE)
+            {
+                return std::make_shared<NumberVariable>(passable, 0.0);
+            }
+            return null;
+        }
     }
-    else if (varType == INTEGER)
-    {
-        return std::make_shared<NumberVariable>(passable, (long long)0);
-    }
-    else if (varType == DOUBLE)
-    {
-        return std::make_shared<NumberVariable>(passable, 0.0);
-    }
-    return null;
 }

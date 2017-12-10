@@ -15,39 +15,43 @@
 
 #include "setreturnnode.h"
 
-SetReturnNode::SetReturnNode(std::shared_ptr<Passable> passable, std::shared_ptr<Node> node)
-    : Node("SetReturnNode", passable, nullptr)
-{
-    this->node = node;
-}
+namespace HuwInterpreter {
+    namespace Nodes {
+        SetReturnNode::SetReturnNode(std::shared_ptr<Passable> passable, std::shared_ptr<Nodes::Node> node)
+            : Node("SetReturnNode", passable, nullptr)
+        {
+            this->node = node;
+        }
 
-NodeType SetReturnNode::getType()
-{
-    return SETRETURNNODETYPE;
-}
+        NodeType SetReturnNode::getType()
+        {
+            return SETRETURNNODETYPE;
+        }
 
-std::shared_ptr<Variable> SetReturnNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("SetReturnNode");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (scope->getReturnValue() != nullptr)
-    {
-        return scope->getReturnValue();
-    }
-    scope->setReturnValue(node->execute(globalScope, scope));
-    return scope->getReturnValue();
-    return null;
-}
+        std::shared_ptr<Variables::Variable> SetReturnNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
+        {
+            ErrorReporting::Debug::print("SetReturnNode");
+            if (passable->getErrorManager()->count() > 0)
+            {
+                return null;
+            }
+            if (scope->getReturnValue() != nullptr)
+            {
+                return scope->getReturnValue();
+            }
+            scope->setReturnValue(node->execute(globalScope, scope));
+            return scope->getReturnValue();
+            return null;
+        }
 
-std::string SetReturnNode::toString()
-{
-    std::string output;
-    if (node != nullptr)
-    {
-        output.append("return ").append(node->toString());
+        std::string SetReturnNode::toString()
+        {
+            std::string output;
+            if (node != nullptr)
+            {
+                output.append("return ").append(node->toString());
+            }
+            return output;
+        }
     }
-    return output;
 }

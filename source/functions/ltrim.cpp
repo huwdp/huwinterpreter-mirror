@@ -15,55 +15,59 @@
 
 #include "ltrim.h"
 
-LTrim::LTrim(std::shared_ptr<Passable> passable)
-    : Function(passable)
-{
-    name = "lTrim";
-}
-
-std::shared_ptr<Variable> LTrim::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
-                                     std::shared_ptr<Scope> scope,
-                                     std::vector<std::shared_ptr<Node>> arguments)
-{
-    std::shared_ptr<Variable> returnNode;
-    if (arguments.size() == 1)
-    {
-        std::shared_ptr<Node> node = arguments.at(0);
-        if (node == nullptr)
+namespace HuwInterpreter {
+    namespace Functions {
+        LTrim::LTrim(std::shared_ptr<Passable> passable)
+            : Function(passable)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-            return null;
+            name = "lTrim";
         }
 
-        std::shared_ptr<Variable> var = node->execute(globalScope, scope);
-        if (var == nullptr)
+        std::shared_ptr<Variable> LTrim::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,
+                                             std::shared_ptr<Scope> scope,
+                                             std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-            return null;
-        }
-
-        std::string temp = var->toString();
-
-        std::string::iterator it = temp.begin();
-        while(it != temp.end())
-        {
-            if ((*it) != ' ' && (*it) != '\t')
+            std::shared_ptr<Variable> returnNode;
+            if (arguments.size() == 1)
             {
-                break;
+                std::shared_ptr<Nodes::Node> node = arguments.at(0);
+                if (node == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                    return null;
+                }
+
+                std::shared_ptr<Variable> var = node->execute(globalScope, scope);
+                if (var == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                    return null;
+                }
+
+                std::string temp = var->toString();
+
+                std::string::iterator it = temp.begin();
+                while(it != temp.end())
+                {
+                    if ((*it) != ' ' && (*it) != '\t')
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        temp.erase(it);
+                        it--;
+                    }
+                    ++it;
+                }
+                returnNode = std::make_shared<StringVariable>(passable, "", temp);
             }
             else
             {
-                temp.erase(it);
-                it--;
+                passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 1));
             }
-            ++it;
-        }
-        returnNode = std::make_shared<StringVariable>(passable, "", temp);
-    }
-    else
-    {
-        passable->getErrors()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 1));
-    }
 
-    return returnNode;
+            return returnNode;
+        }
+    }
 }

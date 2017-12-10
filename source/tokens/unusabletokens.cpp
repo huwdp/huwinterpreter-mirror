@@ -15,89 +15,88 @@
 
 #include "unusabletokens.h"
 
-UnusableTokens::UnusableTokens()
-{
-    init();
-    tokens = std::make_shared<Tokens>();
-}
-
-void UnusableTokens::init()
-{
-    items.clear();
-    items.push_back(RIGHTPARENTHESIS);
-    items.push_back(LEFTPARENTHESIS);
-    items.push_back(MULTIPLICATION);
-    items.push_back(DIVISION);
-    items.push_back(SUBTRACTION);
-    items.push_back(MOD);
-    items.push_back(EQUALS);
-    items.push_back(IFEQUALS);
-    items.push_back(IFNOTEQUALS);
-    items.push_back(IFLESSTHAN);
-    items.push_back(IFLESSTHANOREQUAL);
-    items.push_back(IFGREATER);
-    items.push_back(IFGREATERTHANOREQUAL);
-    items.push_back(LEFTBRACKET);
-    items.push_back(RIGHTBRACKET);
-    items.push_back(SEMICOLON);
-    items.push_back(COMMA);
-    items.push_back(QUOTE);
-    items.push_back(NOT);
-    items.push_back(LEFTPARENTHESIS);
-    items.push_back(MULTIPLICATION);
-    items.push_back(DIVISION);
-    items.push_back(ADDITION);
-    items.push_back(AND);
-    items.push_back(OR);
-    items.push_back(BITWISEAND);
-    items.push_back(BITWISEOR);
-    items.push_back(BITWISEXOR);
-    items.push_back(DOT);
-    items.push_back(MULTIPLICATIONEQUAL);
-    items.push_back(DIVISIONEQUAL);
-    items.push_back(ADDITIONEQUAL);
-    items.push_back(SUBTRACTIONEQUAL);
-    items.push_back(INCREMENT);
-    items.push_back(DECREMENT);
-    items.push_back(BITWISECOMPLEMENT);
-    items.push_back(LEFTSHIFT);
-}
-
-bool UnusableTokens::tokenExists(TokenType tokenType)
-{
-    for (std::vector<TokenType>::iterator it = items.begin(); it != items.end(); ++it)
-    {
-        if ((*it) == tokenType)
+namespace HuwInterpreter {
+    namespace Tokens {
+        UnusableTokens::UnusableTokens()
         {
-            return true;
+            init();
+            tokens = std::make_shared<Tokens>();
+        }
+
+        void UnusableTokens::init()
+        {
+            items.clear();
+            items.push_back(Types::RIGHTPARENTHESIS);
+            items.push_back(Types::LEFTPARENTHESIS);
+            items.push_back(Types::MULTIPLICATION);
+            items.push_back(Types::DIVISION);
+            items.push_back(Types::SUBTRACTION);
+            items.push_back(Types::MOD);
+            items.push_back(Types::EQUALS);
+            items.push_back(Types::IFEQUALS);
+            items.push_back(Types::IFNOTEQUALS);
+            items.push_back(Types::IFLESSTHAN);
+            items.push_back(Types::IFLESSTHANOREQUAL);
+            items.push_back(Types::IFGREATER);
+            items.push_back(Types::IFGREATERTHANOREQUAL);
+            items.push_back(Types::LEFTBRACKET);
+            items.push_back(Types::RIGHTBRACKET);
+            items.push_back(Types::SEMICOLON);
+            items.push_back(Types::COMMA);
+            items.push_back(Types::QUOTE);
+            items.push_back(Types::NOT);
+            items.push_back(Types::LEFTPARENTHESIS);
+            items.push_back(Types::MULTIPLICATION);
+            items.push_back(Types::DIVISION);
+            items.push_back(Types::ADDITION);
+            items.push_back(Types::AND);
+            items.push_back(Types::OR);
+            items.push_back(Types::BITWISEAND);
+            items.push_back(Types::BITWISEOR);
+            items.push_back(Types::BITWISEXOR);
+            items.push_back(Types::DOT);
+            items.push_back(Types::MULTIPLICATIONEQUAL);
+            items.push_back(Types::DIVISIONEQUAL);
+            items.push_back(Types::ADDITIONEQUAL);
+            items.push_back(Types::SUBTRACTIONEQUAL);
+            items.push_back(Types::INCREMENT);
+            items.push_back(Types::DECREMENT);
+            items.push_back(Types::BITWISECOMPLEMENT);
+            items.push_back(Types::LEFTSHIFT);
+        }
+
+        bool UnusableTokens::tokenExists(Types::TokenType tokenType)
+        {
+            for (std::vector<Types::TokenType>::iterator it = items.begin(); it != items.end(); ++it)
+            {
+                if ((*it) == tokenType)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        bool UnusableTokens::exists(std::string value)
+        {
+            return tokenExists(tokens->get(value));
+        }
+
+        bool UnusableTokens::exists(char value)
+        {
+            std::stringstream ss;
+            std::string temp;
+            ss << value;
+            ss >> temp;
+            return exists(temp);
+        }
+
+        void UnusableTokens::add(Types::TokenType tokenType)
+        {
+            if (!exists(tokenType))
+            {
+                items.push_back(tokenType);
+            }
         }
     }
-    return false;
 }
-
-bool UnusableTokens::exists(std::string value)
-{
-    return tokenExists(tokens->get(value));
-}
-
-bool UnusableTokens::exists(char value)
-{
-    std::stringstream ss;
-    std::string temp;
-    ss << value;
-    ss >> temp;
-    return exists(temp);
-}
-
-void UnusableTokens::add(TokenType tokenType)
-{
-    if (!exists(tokenType))
-    {
-        items.push_back(tokenType);
-    }
-}
-
-
-
-
-

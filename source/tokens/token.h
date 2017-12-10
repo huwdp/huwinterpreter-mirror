@@ -22,20 +22,24 @@
 #include "tokens/token.h"
 #include "tokens/lineinfo.h"
 
-class Token
-{
-private:
-    std::string content;
-    TokenType type;
-    std::shared_ptr<LineInfo> lineInfo;
-public:
-    Token(std::string content, std::shared_ptr<LineInfo> lineInfo);
-    Token(std::string content, TokenType type, std::shared_ptr<LineInfo> lineInfo);
-    std::string getContent();
-    TokenType getType();
-    void setType(TokenType type);
-    std::shared_ptr<LineInfo> getLineInfo();
-    void setLineInfo(std::shared_ptr<LineInfo> lineInfo);
-};
+namespace HuwInterpreter {
+    namespace Tokens {
+        class Token
+        {
+        private:
+            std::string content;
+            Types::TokenType type;
+            std::shared_ptr<LineInfo> lineInfo;
+        public:
+            Token(std::string content, std::shared_ptr<LineInfo> lineInfo);
+            Token(std::string content, Types::TokenType type, std::shared_ptr<LineInfo> lineInfo);
+            std::string getContent();
+            Types::TokenType getType();
+            void setType(Types::TokenType type);
+            std::shared_ptr<LineInfo> getLineInfo();
+            void setLineInfo(std::shared_ptr<LineInfo> lineInfo);
+        };
+    }
+}
 
 #endif // TOKEN_H

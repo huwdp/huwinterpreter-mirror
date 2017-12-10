@@ -18,17 +18,21 @@
 
 #include "node.h"
 
-class LeftShiftNode : public Node
-{
-protected:
-    std::shared_ptr<Node> left;
-    std::shared_ptr<Node> right;
-public:
-    LeftShiftNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right);
-    NodeType getType();
-    std::shared_ptr<Variable> execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope);
-    std::string toString();
-};
+namespace HuwInterpreter {
+    namespace Nodes {
+        class LeftShiftNode : public Node
+        {
+        protected:
+            std::shared_ptr<Nodes::Node> left;
+            std::shared_ptr<Nodes::Node> right;
+        public:
+            LeftShiftNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> left, std::shared_ptr<Nodes::Node> right);
+            NodeType getType();
+            std::shared_ptr<Variables::Variable> execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope);
+            std::string toString();
+        };
+    }
+}
 
 #endif // LEFTSHIFTNODE_H
 

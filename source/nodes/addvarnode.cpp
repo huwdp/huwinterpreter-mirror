@@ -15,81 +15,85 @@
 
 #include "addvarnode.h"
 
-AddVarNode::AddVarNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value)
-    : Node("AddVarNode", passable, token)
-{
-    this->name = name;
-    this->value = value;
-    Debug::print("AddVarNode");
-}
-
-NodeType AddVarNode::getType()
-{
-    return ADDVARNODETYPE;
-}
-
-std::shared_ptr<Variable> AddVarNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("AddVarNode");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (scope->getReturnValue() != nullptr)
-    {
-        return scope->getReturnValue();
-    }
-    if (scope->getVariables()->exists(name))
-    {
-        std::shared_ptr<Variable> v = value->execute(globalScope, scope);
-        if (v != nullptr)
+namespace HuwInterpreter {
+    namespace Nodes {
+        AddVarNode::AddVarNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::string name, std::shared_ptr<Nodes::Node> value)
+            : Node("AddVarNode", passable, token)
         {
-            scope->getVariables()->setVariable(name, v->copy(token));
-        }
-        else
-        {
-            scope->getVariables()->setVariable(name, null);
-        }
-    }
-    else
-    {
-        std::shared_ptr<Variable> var;
-        var = value->execute(globalScope, scope);
-        if (passable->getErrors()->count() > 0)
-        {
-            return null;
-        }
-        if (scope->getReturnValue() != nullptr)
-        {
-            return scope->getReturnValue();
+            this->name = name;
+            this->value = value;
+            ErrorReporting::Debug::print("AddVarNode");
         }
 
-        if (var != nullptr)
+        NodeType AddVarNode::getType()
         {
-            if (globalScope->getVariables()->exists(name))
+            return ADDVARNODETYPE;
+        }
+
+        std::shared_ptr<Variables::Variable> AddVarNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
+        {
+            ErrorReporting::Debug::print("AddVarNode");
+            if (passable->getErrorManager()->count() > 0)
             {
-                passable->getErrors()->add(passable->getErrorFactory()->variableDeclared(token, name));
                 return null;
             }
-            else if (!scope->getVariables()->addVariable(name, var))
+            if (scope->getReturnValue() != nullptr)
             {
-                passable->getErrors()->add(passable->getErrorFactory()->variableNotDeclared(token, name));
+                return scope->getReturnValue();
             }
-        }
-        else
-        {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
-        }
-    }
-    return null;
-}
+            if (scope->getVariableManager()->exists(name))
+            {
+                std::shared_ptr<Variables::Variable> v = value->execute(globalScope, scope);
+                if (v != nullptr)
+                {
+                    scope->getVariableManager()->setVariable(name, v->copy(token));
+                }
+                else
+                {
+                    scope->getVariableManager()->setVariable(name, null);
+                }
+            }
+            else
+            {
+                std::shared_ptr<Variables::Variable> var;
+                var = value->execute(globalScope, scope);
+                if (passable->getErrorManager()->count() > 0)
+                {
+                    return null;
+                }
+                if (scope->getReturnValue() != nullptr)
+                {
+                    return scope->getReturnValue();
+                }
 
-std::string AddVarNode::toString()
-{
-    std::string output;
-    if (value != nullptr)
-    {
-        output.append("let ").append(name).append("=").append(value->toString());
+                if (var != nullptr)
+                {
+                    if (globalScope->getVariableManager()->exists(name))
+                    {
+                        passable->getErrorManager()->add(passable->getErrorFactory()->variableDeclared(token, name));
+                        return null;
+                    }
+                    else if (!scope->getVariableManager()->addVariable(name, var))
+                    {
+                        passable->getErrorManager()->add(passable->getErrorFactory()->variableNotDeclared(token, name));
+                    }
+                }
+                else
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+                }
+            }
+            return null;
+        }
+
+        std::string AddVarNode::toString()
+        {
+            std::string output;
+            if (value != nullptr)
+            {
+                output.append("let ").append(name).append("=").append(value->toString());
+            }
+            return output;
+        }
     }
-    return output;
 }

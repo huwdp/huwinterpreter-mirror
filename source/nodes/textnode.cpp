@@ -15,40 +15,44 @@
 
 #include "textnode.h"
 
-TextNode::TextNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::string value)
-    : Node("TextNode", passable, token)
-{
-    this->variableTypeFactory = std::make_shared<VariableTypeFactory>(passable);
-    this->value = variableTypeFactory->newVariable(TypeDetector::getType(value));
-    this->value->setValue(value);
-    Debug::print("TextNode");
-}
+namespace HuwInterpreter {
+    namespace Nodes {
+        TextNode::TextNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::string value)
+            : Node("TextNode", passable, token)
+        {
+            this->variableTypeFactory = std::make_shared<Variables::VariableTypeFactory>(passable);
+            this->value = variableTypeFactory->newVariable(Helpers::TypeDetector::getType(value));
+            this->value->setValue(value);
+            ErrorReporting::Debug::print("TextNode");
+        }
 
-NodeType TextNode::getType()
-{
-    return TEXTNODETYPE;
-}
+        NodeType TextNode::getType()
+        {
+            return TEXTNODETYPE;
+        }
 
-std::shared_ptr<Variable> TextNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("TextNode");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (scope->getReturnValue() != nullptr)
-    {
-        return scope->getReturnValue();
-    }
-    return value;
-}
+        std::shared_ptr<Variables::Variable> TextNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
+        {
+            ErrorReporting::Debug::print("TextNode");
+            if (passable->getErrorManager()->count() > 0)
+            {
+                return null;
+            }
+            if (scope->getReturnValue() != nullptr)
+            {
+                return scope->getReturnValue();
+            }
+            return value;
+        }
 
-std::string TextNode::toString()
-{
-    if (value != nullptr)
-    {
-        std::string output = escapedOutput->output(value->toString());
-        return "\"" + output + "\"";
+        std::string TextNode::toString()
+        {
+            if (value != nullptr)
+            {
+                std::string output = escapedOutput->output(value->toString());
+                return "\"" + output + "\"";
+            }
+            return "";
+        }
     }
-    return "";
 }

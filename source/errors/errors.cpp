@@ -15,51 +15,50 @@
 
 #include "errors.h"
 
-Errors::Errors()
-{
+namespace HuwInterpreter {
+    namespace ErrorReporting {
+        ErrorManager::~ErrorManager()
+        {
+            errorList.clear();
+        }
 
-}
+        void ErrorManager::add(std::string message)
+        {
+            errorList.push_back(std::make_shared<Error>(ERROR, message));
+        }
 
-Errors::~Errors()
-{
-    errorList.clear();
-}
+        void ErrorManager::add(std::shared_ptr<Error> error)
+        {
+            errorList.push_back(error);
+        }
 
-void Errors::add(std::string message)
-{
-    errorList.push_back(std::make_shared<Error>(ERROR, message));
-}
+        void ErrorManager::removeAll()
+        {
+            errorList.clear();
+        }
 
-void Errors::add(std::shared_ptr<Error> error)
-{
-    errorList.push_back(error);
-}
+        std::vector<std::shared_ptr<Error>> ErrorManager::get()
+        {
+            return errorList;
+        }
 
-void Errors::removeAll()
-{
-    errorList.clear();
-}
+        void ErrorManager::set(std::vector<std::shared_ptr<Error>> ErrorManager)
+        {
+            errorList = ErrorManager;
+        }
 
-std::vector<std::shared_ptr<Error>> Errors::get()
-{
-    return errorList;
-}
+        void ErrorManager::print()
+        {
+            for (std::vector<std::shared_ptr<Error>>::iterator it = errorList.begin(); it != errorList.end(); ++it)
+            {
+                std::string value = (*it)->getMessage();
+                std::cout << value << std::endl;
+            }
+        }
 
-void Errors::set(std::vector<std::shared_ptr<Error>> errors)
-{
-    errorList = errors;
-}
-
-void Errors::print()
-{
-    for (std::vector<std::shared_ptr<Error>>::iterator it = errorList.begin(); it != errorList.end(); ++it)
-    {
-        std::string value = (*it)->getMessage();
-        std::cout << value << std::endl;
+        long long ErrorManager::count()
+        {
+            return errorList.size();
+        }
     }
-}
-
-long long Errors::count()
-{
-    return errorList.size();
 }

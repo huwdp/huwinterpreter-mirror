@@ -18,20 +18,24 @@
 
 #include <string>
 
-class LineInfo
-{
-private:
-    std::string file;
-    long long lineNumber;
-    long long charNumber;
-public:
-    LineInfo(std::string file, long long lineNumber, long long charNumber);
-    std::string getFile();
-    void setFile(std::string file);
-    long long getLineNumber();
-    void setLineNumber(long long lineNumber);
-    long long getCharNumber();
-    void setCharNumber(long long charNumber);
-};
+namespace HuwInterpreter {
+    namespace Tokens {
+        class LineInfo
+        {
+        private:
+            std::string file;
+            long long lineNumber;
+            long long charNumber;
+        public:
+            LineInfo(std::string file, long long lineNumber, long long charNumber);
+            std::string getFile();
+            void setFile(std::string file);
+            long long getLineNumber();
+            void setLineNumber(long long lineNumber);
+            long long getCharNumber();
+            void setCharNumber(long long charNumber);
+        };
+    }
+}
 
 #endif // LINEINFO_H

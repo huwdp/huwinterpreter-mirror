@@ -15,49 +15,53 @@
 
 #include "unaryminusnode.h"
 
-UnaryMinusNode::UnaryMinusNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> node)
-    : Node("UnaryMinusNode", passable, token)
-{
-    this->node = node;
-}
-
-NodeType UnaryMinusNode::getType()
-{
-    return UNARYMINUSNODETYPE;
-}
-
-std::shared_ptr<Variable> UnaryMinusNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("UnaryMinusNode");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (scope->getReturnValue() != nullptr)
-    {
-        return scope->getReturnValue();
-    }
-    if (node != nullptr)
-    {
-        std::shared_ptr<Variable> value = node->execute(globalScope, scope);
-        if (value != nullptr)
+namespace HuwInterpreter {
+    namespace Nodes {
+        UnaryMinusNode::UnaryMinusNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> node)
+            : Node("UnaryMinusNode", passable, token)
         {
-            return value->mul(std::make_shared<IntegerVariable>(passable, -1), token);
+            this->node = node;
         }
-        else
-        {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
-        }
-    }
-    return null;
-}
 
-std::string UnaryMinusNode::toString()
-{
-    std::string output;
-    if (node != nullptr)
-    {
-        output.append("-").append(node->toString());
+        NodeType UnaryMinusNode::getType()
+        {
+            return UNARYMINUSNODETYPE;
+        }
+
+        std::shared_ptr<Variables::Variable> UnaryMinusNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
+        {
+            ErrorReporting::Debug::print("UnaryMinusNode");
+            if (passable->getErrorManager()->count() > 0)
+            {
+                return null;
+            }
+            if (scope->getReturnValue() != nullptr)
+            {
+                return scope->getReturnValue();
+            }
+            if (node != nullptr)
+            {
+                std::shared_ptr<Variables::Variable> value = node->execute(globalScope, scope);
+                if (value != nullptr)
+                {
+                    return value->mul(std::make_shared<Variables::IntegerVariable>(passable, -1), token);
+                }
+                else
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+                }
+            }
+            return null;
+        }
+
+        std::string UnaryMinusNode::toString()
+        {
+            std::string output;
+            if (node != nullptr)
+            {
+                output.append("-").append(node->toString());
+            }
+            return output;
+        }
     }
-    return output;
 }

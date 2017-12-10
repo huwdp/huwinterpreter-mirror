@@ -19,12 +19,16 @@
 #include <string>
 #include <iostream>
 
-class Debug
-{
-private:
-    static const bool on = false;
-public:
-    static void print(std::string text);
-};
+namespace HuwInterpreter {
+    namespace ErrorReporting {
+        class Debug
+        {
+        private:
+            static const bool on = false;
+        public:
+            static void print(std::string text);
+        };
+    }
+}
 
 #endif // DEBUG_H

@@ -15,41 +15,45 @@
 
 #include "token.h"
 
-Token::Token(std::string content, std::shared_ptr<LineInfo> lineInfo)
-{
-    this->content = content;
-    type = TokenType::WORD;
-    this->lineInfo = lineInfo;
-}
+namespace HuwInterpreter {
+    namespace Tokens {
+        Token::Token(std::string content, std::shared_ptr<LineInfo> lineInfo)
+        {
+            this->content = content;
+            type = Types::TokenType::WORD;
+            this->lineInfo = lineInfo;
+        }
 
-Token::Token(std::string content, TokenType type, std::shared_ptr<LineInfo> lineInfo)
-{
-    this->content = content;
-    this->type = type;
-    this->lineInfo = lineInfo;
-}
+        Token::Token(std::string content, Types::TokenType type, std::shared_ptr<LineInfo> lineInfo)
+        {
+            this->content = content;
+            this->type = type;
+            this->lineInfo = lineInfo;
+        }
 
-std::string Token::getContent()
-{
-    return content;
-}
+        std::string Token::getContent()
+        {
+            return content;
+        }
 
-TokenType Token::getType()
-{
-    return type;
-}
+        Types::TokenType Token::getType()
+        {
+            return type;
+        }
 
-void Token::setType(TokenType type)
-{
-    this->type = type;
-}
+        void Token::setType(Types::TokenType type)
+        {
+            this->type = type;
+        }
 
-std::shared_ptr<LineInfo> Token::getLineInfo()
-{
-    return lineInfo;
-}
+        std::shared_ptr<LineInfo> Token::getLineInfo()
+        {
+            return lineInfo;
+        }
 
-void Token::setLineInfo(std::shared_ptr<LineInfo> lineInfo)
-{
-    this->lineInfo = lineInfo;
+        void Token::setLineInfo(std::shared_ptr<LineInfo> lineInfo)
+        {
+            this->lineInfo = lineInfo;
+        }
+    }
 }

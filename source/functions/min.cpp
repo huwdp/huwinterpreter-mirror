@@ -15,60 +15,64 @@
 
 #include "min.h"
 
-Min::Min(std::shared_ptr<Passable> passable)
-    : Function(passable)
-{
-    name = "min";
-}
-
-std::shared_ptr<Variable> Min::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
-                                   std::shared_ptr<Scope> scope,
-                                   std::vector<std::shared_ptr<Node>> arguments)
-{
-    std::shared_ptr<Variable> returnNode;
-    if (arguments.size() > 1)
-    {
-        double min = std::numeric_limits<double>::max();
-        for (std::vector<std::shared_ptr<Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
+namespace HuwInterpreter {
+    namespace Functions {
+        Min::Min(std::shared_ptr<Passable> passable)
+            : Function(passable)
         {
-            if ((*it) != nullptr)
+            name = "min";
+        }
+
+        std::shared_ptr<Variable> Min::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,
+                                           std::shared_ptr<Scope> scope,
+                                           std::vector<std::shared_ptr<Nodes::Node>> arguments)
+        {
+            std::shared_ptr<Variable> returnNode;
+            if (arguments.size() > 1)
             {
-
-                std::shared_ptr<Variable> var = (*it)->execute(globalScope, scope);
-                if (var == nullptr)
+                double min = std::numeric_limits<double>::max();
+                for (std::vector<std::shared_ptr<Nodes::Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
                 {
-                    passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-                    return null;
-                }
-
-                try
-                {
-                    double temp = var->toDouble();
-                    if (temp < min)
+                    if ((*it) != nullptr)
                     {
-                        min = temp;
+
+                        std::shared_ptr<Variable> var = (*it)->execute(globalScope, scope);
+                        if (var == nullptr)
+                        {
+                            passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                            return null;
+                        }
+
+                        try
+                        {
+                            double temp = var->toDouble();
+                            if (temp < min)
+                            {
+                                min = temp;
+                            }
+                        }
+                        catch (const std::invalid_argument ex)
+                        {
+                            passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, FUNCTION_ERROR, name, ex.what()));
+                        }
+                        catch (const std::out_of_range ex)
+                        {
+                            passable->getErrorManager()->add(passable->getErrorFactory()->outOfRange(token, name, ex.what()));
+                        }
+                        catch (const std::exception& ex)
+                        {
+                            passable->getErrorManager()->add(passable->getErrorFactory()->otherFunctionError(token, name, ex.what()));
+                        }
                     }
                 }
-                catch (const std::invalid_argument ex)
-                {
-                    passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, FUNCTION_ERROR, name, ex.what()));
-                }
-                catch (const std::out_of_range ex)
-                {
-                    passable->getErrors()->add(passable->getErrorFactory()->outOfRange(token, name, ex.what()));
-                }
-                catch (const std::exception& ex)
-                {
-                    passable->getErrors()->add(passable->getErrorFactory()->otherFunctionError(token, name, ex.what()));
-                }
+                returnNode = std::make_shared<NumberVariable>(passable, min);
             }
+            else
+            {
+                passable->getErrorManager()->add(passable->getErrorFactory()->requiresAtLeastXArguments(token, name, 2));
+            }
+            return returnNode;
         }
-        returnNode = std::make_shared<NumberVariable>(passable, min);
     }
-    else
-    {
-        passable->getErrors()->add(passable->getErrorFactory()->requiresAtLeastXArguments(token, name, 2));
-    }
-    return returnNode;
 }
 

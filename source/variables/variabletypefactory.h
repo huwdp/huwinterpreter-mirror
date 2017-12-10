@@ -22,13 +22,17 @@
 #include "types/tokentypes.h"
 #include "types/typedetector.h"
 
-class VariableTypeFactory
-{
-private:
-    std::shared_ptr<Passable> passable;
-public:
-    VariableTypeFactory(std::shared_ptr<Passable> passable);
-    std::shared_ptr<Variable> newVariable(VarType varType);
-};
+namespace HuwInterpreter {
+    namespace Variables {
+        class VariableTypeFactory
+        {
+        private:
+            std::shared_ptr<Passable> passable;
+        public:
+            VariableTypeFactory(std::shared_ptr<Passable> passable);
+            std::shared_ptr<Variable> newVariable(Types::VarType  varType);
+        };
+    }
+}
 
 #endif // VARIABLETYPEFACTORY_H

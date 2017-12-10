@@ -15,55 +15,59 @@
 
 #include "bitwisexornode.h"
 
-BitwiseXORNode::BitwiseXORNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : Node("BitwiseXORNode", passable, token)
-{
-    this->left = left;
-    this->right = right;
-}
-
-NodeType BitwiseXORNode::getType()
-{
-    return BITWISEXORNODETYPE;
-}
-
-std::shared_ptr<Variable> BitwiseXORNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("BitwiseXOrNode");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (scope->getReturnValue() != nullptr)
-    {
-        return scope->getReturnValue();
-    }
-    if (left != nullptr && right != nullptr)
-    {
-        std::shared_ptr<Variable> l = left->execute(globalScope, scope);
-        std::shared_ptr<Variable> r = right->execute(globalScope, scope);
-        if (l == nullptr)
+namespace HuwInterpreter {
+    namespace Nodes {
+        BitwiseXORNode::BitwiseXORNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> left, std::shared_ptr<Nodes::Node> right)
+            : Node("BitwiseXORNode", passable, token)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+            this->left = left;
+            this->right = right;
+        }
+
+        NodeType BitwiseXORNode::getType()
+        {
+            return BITWISEXORNODETYPE;
+        }
+
+        std::shared_ptr<Variables::Variable> BitwiseXORNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
+        {
+            ErrorReporting::Debug::print("BitwiseXOrNode");
+            if (passable->getErrorManager()->count() > 0)
+            {
+                return null;
+            }
+            if (scope->getReturnValue() != nullptr)
+            {
+                return scope->getReturnValue();
+            }
+            if (left != nullptr && right != nullptr)
+            {
+                std::shared_ptr<Variables::Variable> l = left->execute(globalScope, scope);
+                std::shared_ptr<Variables::Variable> r = right->execute(globalScope, scope);
+                if (l == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+                    return null;
+                }
+                if (r == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+                    return null;
+                }
+                return l->bitwiseXOR(r, token);
+            }
+            ErrorReporting::Debug::print("Could not bitwiseXOR");
             return null;
         }
-        if (r == nullptr)
-        {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
-            return null;
-        }
-        return l->bitwiseXOR(r, token);
-    }
-    Debug::print("Could not bitwiseXOR");
-    return null;
-}
 
-std::string BitwiseXORNode::toString()
-{
-    std::string output;
-    if (left != nullptr && right != nullptr)
-    {
-        output.append(left->toString()).append("^").append(right->toString());
+        std::string BitwiseXORNode::toString()
+        {
+            std::string output;
+            if (left != nullptr && right != nullptr)
+            {
+                output.append(left->toString()).append("^").append(right->toString());
+            }
+            return output;
+        }
     }
-    return output;
 }

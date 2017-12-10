@@ -19,11 +19,14 @@
 #include <string>
 #include "types/tokentypes.h"
 
-class VariableStringFactory
-{
-public:
-    VariableStringFactory();
-    std::string toString(VarType varType);
-};
+namespace HuwInterpreter {
+    namespace Variables {
+        class VariableStringFactory
+        {
+        public:
+            std::string toString(Types::VarType varType);
+        };
+    }
+}
 
 #endif // VARIABLESTRINGFACTORY_H

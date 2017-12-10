@@ -15,34 +15,38 @@
 
 #include "precision.h"
 
-Precision::Precision()
-{
+namespace HuwInterpreter {
+    namespace Helpers {
+        Precision::Precision()
+        {
 
-}
+        }
 
-bool Precision::isSafeInteger(double value = 0.0)
-{
-    if (value >= -9007199254740991 && value <= 9007199254740991)
-    {
-        return true;
+        bool Precision::isSafeInteger(double value = 0.0)
+        {
+            if (value >= -9007199254740991 && value <= 9007199254740991)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        bool Precision::isSafeInteger(long long value = 0)
+        {
+            if (value >= -9007199254740991 && value <= 9007199254740991)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        Types::VarType Precision::getType(double value = 0.0)
+        {
+            if ((fmod(value,1) == 0.0) || (fabs(value - round(value)) < 0.000000001))
+            {
+                return Types::VarType::INTEGER;
+            }
+            return Types::VarType::DOUBLE;
+        }
     }
-    return false;
-}
-
-bool Precision::isSafeInteger(long long value = 0)
-{
-    if (value >= -9007199254740991 && value <= 9007199254740991)
-    {
-        return true;
-    }
-    return false;
-}
-
-VarType Precision::getType(double value = 0.0)
-{
-    if ((fmod(value,1) == 0.0) || (fabs(value - round(value)) < 0.000000001))
-    {
-        return VarType::INTEGER;
-    }
-    return DOUBLE;
 }

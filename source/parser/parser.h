@@ -76,63 +76,69 @@
 #include "variables/scope.h"
 #include "functions/customfunction.h"
 
-class Parser
-{
-private:
-    std::shared_ptr<NodeFactory> nodeFactory;
-    std::vector<std::shared_ptr<Token>> tokens;
-    std::vector<std::shared_ptr<Token>>::iterator it;
-    std::shared_ptr<Token> currentToken;
-    std::shared_ptr<Functions> functions;
-    std::shared_ptr<Functions> customFunctions;
-    bool compilation;
-    std::shared_ptr<Node> null;
-    std::shared_ptr<NodeFactory> codeFactory;
-    std::shared_ptr<Passable> passable;
+namespace HuwInterpreter {
 
-    void setCompilation(bool compilation);
-    void nextToken();
-    void prevToken();
-    std::shared_ptr<Token> peakToken();
-    void error(const std::string msg);
-    void acceptIndentation();
-    void acceptSemicolon();
-    bool accept(std::string s);
-    bool accept(TokenType tokenType);
-    bool expect(std::string s);
-    bool expect(TokenType tokenType);
-    std::string syntaxError(std::string content);
-    bool expectSemicolon();
-    void errorMessage(std::string errorMsg, std::shared_ptr<Token> currentToken);
-    std::shared_ptr<Node> parseValue();
-    std::shared_ptr<Node> parseFactor();
-    std::shared_ptr<Node> parseTerm();
-    std::shared_ptr<Node> parseExpression();
-    std::shared_ptr<Node> parseBitwiseLeftRight();
-    std::shared_ptr<Node> parseEqualAndEqualNot();
-    std::shared_ptr<Node> parseLessThanAndLessThanOrEqual();
-    std::shared_ptr<Node> parseGreaterThanAndGreaterThanOrEqual();
-    std::shared_ptr<Node> parseBitwiseAnd();
-    std::shared_ptr<Node> parseBitwiseXOr();
-    std::shared_ptr<Node> parseBitwiseOr();
-    std::shared_ptr<Node> parseAnd();
-    std::shared_ptr<Node> parseOr();
-    std::shared_ptr<Node> parseCondition();
-    std::shared_ptr<Node> parseBoolean();
-    std::shared_ptr<Node> parseCompound();
-    std::shared_ptr<Node> parseAssingment();
-    std::shared_ptr<Node> parseFunction();
-    std::shared_ptr<Node> parseDecloration();
-    std::shared_ptr<Node> parseElseStatement();
-    std::shared_ptr<Node> parseStatement();
-    std::shared_ptr<Node> parseBlock();
-public:
-    Parser(std::vector<std::shared_ptr<Token>> tokens,
-           std::shared_ptr<NodeFactory> nodeFactory);
-    bool getCompilation();
-    std::shared_ptr<Node> parse();
-    std::string toString();
-    bool execute();
-};
+    using namespace Nodes;
+    using namespace Types;
+
+    class Parser
+    {
+    private:
+        std::shared_ptr<NodeFactory> nodeFactory;
+        std::vector<std::shared_ptr<Tokens::Token>> tokens;
+        std::vector<std::shared_ptr<Tokens::Token>>::iterator it;
+        std::shared_ptr<Tokens::Token> currentToken;
+        std::shared_ptr<Functions::FunctionManager> functions;
+        std::shared_ptr<Functions::FunctionManager> customFunctions;
+        bool compilation;
+        std::shared_ptr<Nodes::Node> null;
+        std::shared_ptr<NodeFactory> codeFactory;
+        std::shared_ptr<Passable> passable;
+
+        void setCompilation(bool compilation);
+        void nextToken();
+        void prevToken();
+        std::shared_ptr<Tokens::Token> peakToken();
+        void error(const std::string msg);
+        void acceptIndentation();
+        void acceptSemicolon();
+        bool accept(std::string s);
+        bool accept(TokenType tokenType);
+        bool expect(std::string s);
+        bool expect(TokenType tokenType);
+        std::string syntaxError(std::string content);
+        bool expectSemicolon();
+        void errorMessage(std::string errorMsg, std::shared_ptr<Tokens::Token> currentToken);
+        std::shared_ptr<Nodes::Node> parseValue();
+        std::shared_ptr<Nodes::Node> parseFactor();
+        std::shared_ptr<Nodes::Node> parseTerm();
+        std::shared_ptr<Nodes::Node> parseExpression();
+        std::shared_ptr<Nodes::Node> parseBitwiseLeftRight();
+        std::shared_ptr<Nodes::Node> parseEqualAndEqualNot();
+        std::shared_ptr<Nodes::Node> parseLessThanAndLessThanOrEqual();
+        std::shared_ptr<Nodes::Node> parseGreaterThanAndGreaterThanOrEqual();
+        std::shared_ptr<Nodes::Node> parseBitwiseAnd();
+        std::shared_ptr<Nodes::Node> parseBitwiseXOr();
+        std::shared_ptr<Nodes::Node> parseBitwiseOr();
+        std::shared_ptr<Nodes::Node> parseAnd();
+        std::shared_ptr<Nodes::Node> parseOr();
+        std::shared_ptr<Nodes::Node> parseCondition();
+        std::shared_ptr<Nodes::Node> parseBoolean();
+        std::shared_ptr<Nodes::Node> parseCompound();
+        std::shared_ptr<Nodes::Node> parseAssingment();
+        std::shared_ptr<Nodes::Node> parseFunction();
+        std::shared_ptr<Nodes::Node> parseDecloration();
+        std::shared_ptr<Nodes::Node> parseElseStatement();
+        std::shared_ptr<Nodes::Node> parseStatement();
+        std::shared_ptr<Nodes::Node> parseBlock();
+    public:
+        Parser(std::vector<std::shared_ptr<Tokens::Token>> tokens,
+               std::shared_ptr<NodeFactory> nodeFactory);
+        bool getCompilation();
+        std::shared_ptr<Nodes::Node> parse();
+        std::string toString();
+        bool execute();
+    };
+}
 
 #endif // PARSER_H

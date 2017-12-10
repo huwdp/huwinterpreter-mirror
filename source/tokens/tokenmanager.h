@@ -23,17 +23,21 @@
 #include "io/fileline.h"
 #include "types/tokentypes.h"
 
-class TokenManager
-{
-public:
-    virtual std::shared_ptr<FileLine> getCurrent() = 0;
-    virtual std::shared_ptr<FileLine> getNext() = 0;
-    virtual std::shared_ptr<FileLine> getPrev() = 0;
-    virtual void next() = 0;
-    virtual void prev() = 0;
-    virtual std::shared_ptr<FileLine> peak() = 0;
-    virtual bool isEnd() = 0;
-    virtual bool isEmpty() = 0;
-};
+namespace HuwInterpreter {
+    namespace Tokens {
+        class TokenManager
+        {
+        public:
+            virtual std::shared_ptr<IO::FileLine> getCurrent() = 0;
+            virtual std::shared_ptr<IO::FileLine> getNext() = 0;
+            virtual std::shared_ptr<IO::FileLine> getPrev() = 0;
+            virtual void next() = 0;
+            virtual void prev() = 0;
+            virtual std::shared_ptr<IO::FileLine> peak() = 0;
+            virtual bool isEnd() = 0;
+            virtual bool isEmpty() = 0;
+        };
+    }
+}
 
 #endif // TOKENMANAGER_H

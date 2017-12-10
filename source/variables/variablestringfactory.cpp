@@ -15,34 +15,33 @@
 
 #include "variablestringfactory.h"
 
-VariableStringFactory::VariableStringFactory()
-{
-
+namespace HuwInterpreter {
+    namespace Variables {
+        std::string VariableStringFactory::toString(Types::VarType  varType)
+        {
+            std::string result;
+            switch (varType)
+            {
+            case Types::INTEGER:
+                    result = "integer";
+                    break;
+            case Types::DOUBLE:
+                result = "double";
+                break;
+            case Types::ARRAY:
+                result = "array";
+                break;
+            case Types::STRING:
+                result = "string";
+                break;
+            case Types::NONE:
+                result = "none";
+                break;
+            default:
+                result = "";
+                break;
+            }
+            return result;
+        }
 }
-
-std::string VariableStringFactory::toString(VarType varType)
-{
-    std::string result;
-    switch (varType)
-    {
-    case INTEGER:
-            result = "integer";
-            break;
-    case DOUBLE:
-        result = "double";
-        break;
-    case ARRAY:
-        result = "array";
-        break;
-    case STRING:
-        result = "string";
-        break;
-    case NONE:
-        result = "none";
-        break;
-    default:
-        result = "";
-        break;
-    }
-    return result;
 }

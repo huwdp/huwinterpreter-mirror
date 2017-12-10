@@ -18,17 +18,21 @@
 
 #include <string>
 
-class FileLine
-{
-private:
-    char content;
-    long long lineNumber;
-public:
-    FileLine(char content, long long lineNumber);
-    char getContent();
-    void setContent(char content);
-    long long getLineNumber();
-    void setLineNumber(long long lineNumber);
-};
+namespace HuwInterpreter {
+    namespace IO {
+        class FileLine
+        {
+        private:
+            char content;
+            long long lineNumber;
+        public:
+            FileLine(char content, long long lineNumber);
+            char getContent();
+            void setContent(char content);
+            long long getLineNumber();
+            void setLineNumber(long long lineNumber);
+        };
+    }
+}
 
 #endif // FILELINE_H

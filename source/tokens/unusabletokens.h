@@ -23,18 +23,22 @@
 #include <algorithm>
 #include <memory>
 
-class UnusableTokens
-{
-private:
-    std::vector<TokenType> items;
-    std::shared_ptr<Tokens> tokens;
-public:
-    UnusableTokens();
-    void init();
-    bool tokenExists(TokenType tokenType);
-    bool exists(std::string value);
-    bool exists(char value);
-    void add(TokenType tokenType);
-};
+namespace HuwInterpreter {
+    namespace Tokens {
+        class UnusableTokens
+        {
+        private:
+            std::vector<Types::TokenType> items;
+            std::shared_ptr<Tokens> tokens;
+        public:
+            UnusableTokens();
+            void init();
+            bool tokenExists(Types::TokenType tokenType);
+            bool exists(std::string value);
+            bool exists(char value);
+            void add(Types::TokenType tokenType);
+        };
+    }
+}
 
 #endif // UNUSABLETOKENS_H

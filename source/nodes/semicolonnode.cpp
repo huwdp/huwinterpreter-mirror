@@ -15,41 +15,45 @@
 
 #include "semicolonnode.h"
 
-SemicolonNode::SemicolonNode(std::shared_ptr<Passable> passable, std::shared_ptr<Node> node)
-    : Node("SemicolonNode", passable, nullptr)
-{
-    this->node = node;
-}
-
-NodeType SemicolonNode::getType()
-{
-    return SEMICOLONNODETYPE;
-}
-
-std::shared_ptr<Variable> SemicolonNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("SemicolonNode");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (node != nullptr)
-    {
-        return node->execute(globalScope, scope);
-    }
-    return null;
-}
-
-std::string SemicolonNode::toString()
-{
-    std::string output;
-    if (node != nullptr)
-    {
-        output += node->toString();
-        if (node->getType() != SEMICOLONNODETYPE)
+namespace HuwInterpreter {
+    namespace Nodes {
+        SemicolonNode::SemicolonNode(std::shared_ptr<Passable> passable, std::shared_ptr<Nodes::Node> node)
+            : Node("SemicolonNode", passable, nullptr)
         {
-            output += ";";
+            this->node = node;
+        }
+
+        NodeType SemicolonNode::getType()
+        {
+            return SEMICOLONNODETYPE;
+        }
+
+        std::shared_ptr<Variables::Variable> SemicolonNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
+        {
+            ErrorReporting::Debug::print("SemicolonNode");
+            if (passable->getErrorManager()->count() > 0)
+            {
+                return null;
+            }
+            if (node != nullptr)
+            {
+                return node->execute(globalScope, scope);
+            }
+            return null;
+        }
+
+        std::string SemicolonNode::toString()
+        {
+            std::string output;
+            if (node != nullptr)
+            {
+                output += node->toString();
+                if (node->getType() != SEMICOLONNODETYPE)
+                {
+                    output += ";";
+                }
+            }
+            return output;
         }
     }
-    return output;
 }

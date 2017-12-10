@@ -15,58 +15,62 @@
 
 #include "mulnode.h"
 
-MulNode::MulNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::shared_ptr<Node> left, std::shared_ptr<Node> right)
-    : Node("MulNode", passable, token)
-{
-    this->left = left;
-    this->right = right;
-    Debug::print("MulNode");
-}
-
-NodeType MulNode::getType()
-{
-    return MULNODETYPE;
-}
-
-std::shared_ptr<Variable> MulNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("MulNode");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (scope->getReturnValue() != null)
-    {
-        return scope->getReturnValue();
-    }
-    if (left != nullptr && right != nullptr)
-    {
-        std::shared_ptr<Variable> l = left->execute(globalScope, scope);
-        std::shared_ptr<Variable> r = right->execute(globalScope, scope);
-
-        if (l == nullptr)
+namespace HuwInterpreter {
+    namespace Nodes {
+        MulNode::MulNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> left, std::shared_ptr<Nodes::Node> right)
+            : Node("MulNode", passable, token)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+            this->left = left;
+            this->right = right;
+            ErrorReporting::Debug::print("MulNode");
+        }
+
+        NodeType MulNode::getType()
+        {
+            return MULNODETYPE;
+        }
+
+        std::shared_ptr<Variables::Variable> MulNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
+        {
+            ErrorReporting::Debug::print("MulNode");
+            if (passable->getErrorManager()->count() > 0)
+            {
+                return null;
+            }
+            if (scope->getReturnValue() != null)
+            {
+                return scope->getReturnValue();
+            }
+            if (left != nullptr && right != nullptr)
+            {
+                std::shared_ptr<Variables::Variable> l = left->execute(globalScope, scope);
+                std::shared_ptr<Variables::Variable> r = right->execute(globalScope, scope);
+
+                if (l == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+                    return null;
+                }
+                if (r == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
+                    return null;
+                }
+                std::shared_ptr<Variables::Variable> v = l->mul(r, token);
+                return v;
+            }
+            ErrorReporting::Debug::print("Could not mul.");
             return null;
         }
-        if (r == nullptr)
-        {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
-            return null;
-        }
-        std::shared_ptr<Variable> v = l->mul(r, token);
-        return v;
-    }
-    Debug::print("Could not mul.");
-    return null;
-}
 
-std::string MulNode::toString()
-{
-    std::string output;
-    if (left != nullptr && right != nullptr)
-    {
-        output.append(left->toString()).append("*").append(right->toString());
+        std::string MulNode::toString()
+        {
+            std::string output;
+            if (left != nullptr && right != nullptr)
+            {
+                output.append(left->toString()).append("*").append(right->toString());
+            }
+            return output;
+        }
     }
-    return output;
 }

@@ -15,95 +15,99 @@
 
 #include "setvarnode.h"
 
-SetVarNode::SetVarNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::string name, std::shared_ptr<Node> value)
-    : Node("SetVarNode", passable, token)
-{
-    this->name = name;
-    this->value = value;
-    Debug::print("SetVarNode");
-}
-
-NodeType SetVarNode::getType()
-{
-    return SETVARNODETYPE;
-}
-
-std::shared_ptr<Variable> SetVarNode::execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope)
-{
-    Debug::print("SetVarNode");
-    if (passable->getErrors()->count() > 0)
-    {
-        return null;
-    }
-    if (scope->getReturnValue() != nullptr)
-    {
-        return scope->getReturnValue();
-    }
-    std::shared_ptr<Variable> v = value->execute(globalScope, scope);
-
-    std::shared_ptr<Variable> globalVar = globalScope->getVariables()->get(name);
-    std::shared_ptr<Variable> localVar = globalScope->getVariables()->get(name);
-
-    if (globalScope->getVariables()->exists(name))
-    {
-
-        if (globalVar != nullptr && globalVar->isConst())
+namespace HuwInterpreter {
+    namespace Nodes {
+        SetVarNode::SetVarNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::string name, std::shared_ptr<Nodes::Node> value)
+            : Node("SetVarNode", passable, token)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->cannotChangeConstant(token, name));
+            this->name = name;
+            this->value = value;
+            ErrorReporting::Debug::print("SetVarNode");
+        }
+
+        NodeType SetVarNode::getType()
+        {
+            return SETVARNODETYPE;
+        }
+
+        std::shared_ptr<Variables::Variable> SetVarNode::execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope)
+        {
+            ErrorReporting::Debug::print("SetVarNode");
+            if (passable->getErrorManager()->count() > 0)
+            {
+                return null;
+            }
+            if (scope->getReturnValue() != nullptr)
+            {
+                return scope->getReturnValue();
+            }
+            std::shared_ptr<Variables::Variable> v = value->execute(globalScope, scope);
+
+            std::shared_ptr<Variables::Variable> globalVar = globalScope->getVariableManager()->get(name);
+            std::shared_ptr<Variables::Variable> localVar = globalScope->getVariableManager()->get(name);
+
+            if (globalScope->getVariableManager()->exists(name))
+            {
+
+                if (globalVar != nullptr && globalVar->isConst())
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->cannotChangeConstant(token, name));
+                    return null;
+                }
+
+                if (v != nullptr)
+                {
+                    globalScope->getVariableManager()->setVariable(name, v->copy(token));
+                }
+                else
+                {
+                    globalScope->getVariableManager()->setVariable(name, null);
+                }
+            }
+            else if (scope->getVariableManager()->exists(name))
+            {
+                if (localVar != nullptr && localVar->isConst())
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->cannotChangeConstant(token, name));
+                    return null;
+                }
+
+                if (v != nullptr)
+                {
+                    scope->getVariableManager()->setVariable(name, v->copy(token));
+                }
+                else
+                {
+                    scope->getVariableManager()->setVariable(name, null);
+                }
+            }
+            else
+            {
+                if (globalVar != nullptr && globalVar->isConst())
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->cannotChangeConstant(token, name));
+                }
+                else if (localVar != nullptr && localVar->isConst())
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->cannotChangeConstant(token, name));
+                }
+                else
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->variableDeclared(token, name));
+                }
+            }
             return null;
         }
 
-        if (v != nullptr)
+        std::string SetVarNode::toString()
         {
-            globalScope->getVariables()->setVariable(name, v->copy(token));
-        }
-        else
-        {
-            globalScope->getVariables()->setVariable(name, null);
-        }
-    }
-    else if (scope->getVariables()->exists(name))
-    {
-        if (localVar != nullptr && localVar->isConst())
-        {
-            passable->getErrors()->add(passable->getErrorFactory()->cannotChangeConstant(token, name));
-            return null;
-        }
-
-        if (v != nullptr)
-        {
-            scope->getVariables()->setVariable(name, v->copy(token));
-        }
-        else
-        {
-            scope->getVariables()->setVariable(name, null);
+            std::string output;
+            if (value != nullptr)
+            {
+                output.append("let ").append(name).append("=").append(value->toString());
+            }
+            return output;
         }
     }
-    else
-    {
-        if (globalVar != nullptr && globalVar->isConst())
-        {
-            passable->getErrors()->add(passable->getErrorFactory()->cannotChangeConstant(token, name));
-        }
-        else if (localVar != nullptr && localVar->isConst())
-        {
-            passable->getErrors()->add(passable->getErrorFactory()->cannotChangeConstant(token, name));
-        }
-        else
-        {
-            passable->getErrors()->add(passable->getErrorFactory()->variableDeclared(token, name));
-        }
-    }
-    return null;
-}
-
-std::string SetVarNode::toString()
-{
-    std::string output;
-    if (value != nullptr)
-    {
-        output.append("let ").append(name).append("=").append(value->toString());
-    }
-    return output;
 }
 

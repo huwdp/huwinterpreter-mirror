@@ -19,11 +19,15 @@
 #include <string>
 #include "errortypes.h"
 
-class ErrorTypeStringFactory
-{
-public:
-    ErrorTypeStringFactory();
-    std::string createErrorString(ErrorTypes errorTypes);
-};
+namespace HuwInterpreter {
+    namespace ErrorReporting {
+        class ErrorTypeStringFactory
+        {
+        public:
+            ErrorTypeStringFactory();
+            std::string createErrorString(ErrorTypes errorTypes);
+        };
+    }
+}
 
 #endif // ERRORTYPESTRINGFACTORY_H

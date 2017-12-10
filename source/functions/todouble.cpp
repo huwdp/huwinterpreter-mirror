@@ -15,50 +15,54 @@
 
 #include "todouble.h"
 
-ToDouble::ToDouble(std::shared_ptr<Passable> passable)
-    : Function(passable)
-{
-    name = "toDouble";
-}
-
-std::shared_ptr<Variable> ToDouble::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
-                                        std::shared_ptr<Scope> scope,
-                                        std::vector<std::shared_ptr<Node>> arguments)
-{
-    std::shared_ptr<Variable> returnNode;
-    if (arguments.size() == 1)
-    {
-        std::shared_ptr<Node> node = arguments.at(0);
-        if (node == nullptr)
+namespace HuwInterpreter {
+    namespace Functions {
+        ToDouble::ToDouble(std::shared_ptr<Passable> passable)
+            : Function(passable)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-            return null;
+            name = "toDouble";
         }
 
-        std::shared_ptr<Variable> var = node->execute(globalScope, scope);
-        if (var == nullptr)
+        std::shared_ptr<Variable> ToDouble::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,
+                                                std::shared_ptr<Scope> scope,
+                                                std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-            return null;
-        }
+            std::shared_ptr<Variable> returnNode;
+            if (arguments.size() == 1)
+            {
+                std::shared_ptr<Nodes::Node> node = arguments.at(0);
+                if (node == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                    return null;
+                }
 
-        if (var->getType() == DOUBLE)
-        {
-            return var;
-        }
-        else if (var->isNumber() || TypeDetector::isNumeric(var->toString()))
-        {
-            return std::make_shared<NumberVariable>(passable, var->toDouble());
-        }
-        else
-        {
-            passable->getErrors()->add(passable->getErrorFactory()->couldNotConvert(token, var->getName(), "toDouble", var->getType(), ""));
+                std::shared_ptr<Variable> var = node->execute(globalScope, scope);
+                if (var == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                    return null;
+                }
+
+                if (var->getType() == Types::DOUBLE)
+                {
+                    return var;
+                }
+                else if (var->isNumber() || Helpers::TypeDetector::isNumeric(var->toString()))
+                {
+                    return std::make_shared<NumberVariable>(passable, var->toDouble());
+                }
+                else
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->couldNotConvert(token, var->getName(), "toDouble", var->getType(), ""));
+                }
+            }
+            else
+            {
+                passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 1));
+            }
+
+            return returnNode;
         }
     }
-    else
-    {
-        passable->getErrors()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 1));
-    }
-
-    return returnNode;
 }

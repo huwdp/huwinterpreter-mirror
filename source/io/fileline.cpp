@@ -15,28 +15,32 @@
 
 #include "fileline.h"
 
-FileLine::FileLine(char content, long long lineNumber)
-{
-    this->content = content;
-    this->lineNumber = lineNumber;
-}
+namespace HuwInterpreter {
+    namespace IO {
+        FileLine::FileLine(char content, long long lineNumber)
+        {
+            this->content = content;
+            this->lineNumber = lineNumber;
+        }
 
-char FileLine::getContent()
-{
-    return content;
-}
+        char FileLine::getContent()
+        {
+            return content;
+        }
 
-void FileLine::setContent(char content)
-{
-    this->content = content;
-}
+        void FileLine::setContent(char content)
+        {
+            this->content = content;
+        }
 
-long long FileLine::getLineNumber()
-{
-    return lineNumber;
-}
+        long long FileLine::getLineNumber()
+        {
+            return lineNumber;
+        }
 
-void FileLine::setLineNumber(long long lineNumber)
-{
-    this->lineNumber = lineNumber;
+        void FileLine::setLineNumber(long long lineNumber)
+        {
+            this->lineNumber = lineNumber;
+        }
+    }
 }

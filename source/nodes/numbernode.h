@@ -21,18 +21,22 @@
 #include "types/typedetector.h"
 #include "../format/escapecharacteroutput.h"
 
-class NumberNode : public Node
-{
-private:
-    std::shared_ptr<EscapeCharacterOutput> escapedOutput;
-protected:
-    std::shared_ptr<Variable> value;
-    std::shared_ptr<VariableTypeFactory> variableTypeFactory;
-public:
-    NumberNode(std::shared_ptr<Passable> passable, std::shared_ptr<Token> token, std::string value);
-    NodeType getType();
-    std::shared_ptr<Variable> execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope);
-    std::string toString();
-};
+namespace HuwInterpreter {
+    namespace Nodes {
+        class NumberNode : public Node
+        {
+        private:
+            std::shared_ptr<Helpers::EscapeCharacterOutput> escapedOutput;
+        protected:
+            std::shared_ptr<Variables::Variable> value;
+            std::shared_ptr<Variables::VariableTypeFactory> variableTypeFactory;
+        public:
+            NumberNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::string value);
+            NodeType getType();
+            std::shared_ptr<Variables::Variable> execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope);
+            std::string toString();
+        };
+    }
+}
 
 #endif // NUMBERNODE_H

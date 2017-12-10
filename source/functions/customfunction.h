@@ -18,22 +18,26 @@
 
 #include "function.h"
 
-class CustomFunction : public Function
-{
-private:
-    std::vector<std::string> arguments;
-    std::shared_ptr<Node> block;
-public:
-    CustomFunction(std::shared_ptr<Passable> passable,
-                   std::shared_ptr<Token> token,
-                   std::string name,
-                   std::vector<std::string> arguments,
-                   std::shared_ptr<Node> block);
-    std::shared_ptr<Variable> execute(std::shared_ptr<Token> token,
-                                  std::shared_ptr<Scope> globalScope,
-                                  std::shared_ptr<Scope> scope,
-                                  std::vector<std::shared_ptr<Node>> arguments);
-    std::string toString(std::vector<std::shared_ptr<Node>> arguments);
-};
+namespace HuwInterpreter {
+    namespace Functions {
+        class CustomFunction : public Function
+        {
+        private:
+            std::vector<std::string> arguments;
+            std::shared_ptr<Nodes::Node> block;
+        public:
+            CustomFunction(std::shared_ptr<Passable> passable,
+                           std::shared_ptr<Tokens::Token> token,
+                           std::string name,
+                           std::vector<std::string> arguments,
+                           std::shared_ptr<Nodes::Node> block);
+            std::shared_ptr<Variable> execute(std::shared_ptr<Tokens::Token> token,
+                                          std::shared_ptr<Scope> globalScope,
+                                          std::shared_ptr<Scope> scope,
+                                          std::vector<std::shared_ptr<Nodes::Node>> arguments);
+            std::string toString(std::vector<std::shared_ptr<Nodes::Node>> arguments);
+        };
+    }
+}
 
 #endif // CUSTOMFUNCTION_H

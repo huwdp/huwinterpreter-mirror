@@ -28,79 +28,89 @@
 #include "variables/scope.h"
 #include "common/passable.h"
 
-enum NodeType {ADDCONSTNODETYPE,
-               ADDNODETYPE,
-               ADDVARNODETYPE,
-               BITWISECOMPLEMENTNODETYPE,
-               BITWISEANDNODETYPE,
-               BITWISEORNODETYPE,
-               BITWISEXORNODETYPE,
-               BRACKETNODETYPE,
-               DECREMENTNODETYPE,
-               DIVNODETYPE,
-               EQUALNODETYPE,
-               GETFUNCNODETYPE,
-               GETVARNODETYPE,
-               IFANDNODETYPE,
-               IFEQUALNODETYPE,
-               IFNODETYPE,
-               IFNOTEQUALNODETYPE,
-               IFORNODETYPE,
-               IFOVERNODETYPE,
-               IFOVEROREQUALNODETYPE,
-               IFUNDERNODETYPE,
-               IFUNDERORRQUALNODETYPE,
-               INCREMENTNODETYPE,
-               MODNODETYPE,
-               MULNODETYPE,
-               NUMBERNODETYPE,
-               RUNNODETYPE,
-               SEMICOLONNODETYPE,
-               SETRETURNNODETYPE,
-               SETVARNODETYPE,
-               SUBNODETYPE,
-               TEXTNODETYPE,
-               UNARYMINUSNODETYPE,
-               UNARYNOTNODETYPE,
-               WHILENODETYPE,
-               LEFTSHIFTNODETYPE,
-               RIGHTSHIFTNODETYPE
-              };
 
-class Scope;
 
-class Node
-{
-protected:
-    std::string internalName;
-    std::shared_ptr<Variable> null;
-    std::shared_ptr<Token> token;
-    std::shared_ptr<Passable> passable;
-public:
-    Node(std::string internalName, std::shared_ptr<Passable> passable, std::shared_ptr<Token> token)
-    {
-        this->internalName = internalName;
-        this->passable = passable;
-        this->token = token;
+namespace HuwInterpreter {
+    namespace Variables {
+        class Scope;
     }
 
-    std::shared_ptr<Token> getToken()
-    {
-        return token;
-    }
+    namespace Nodes {
+        enum NodeType {ADDCONSTNODETYPE,
+                       ADDNODETYPE,
+                       ADDVARNODETYPE,
+                       BITWISECOMPLEMENTNODETYPE,
+                       BITWISEANDNODETYPE,
+                       BITWISEORNODETYPE,
+                       BITWISEXORNODETYPE,
+                       BRACKETNODETYPE,
+                       DECREMENTNODETYPE,
+                       DIVNODETYPE,
+                       EQUALNODETYPE,
+                       GETFUNCNODETYPE,
+                       GETVARNODETYPE,
+                       IFANDNODETYPE,
+                       IFEQUALNODETYPE,
+                       IFNODETYPE,
+                       IFNOTEQUALNODETYPE,
+                       IFORNODETYPE,
+                       IFOVERNODETYPE,
+                       IFOVEROREQUALNODETYPE,
+                       IFUNDERNODETYPE,
+                       IFUNDERORRQUALNODETYPE,
+                       INCREMENTNODETYPE,
+                       MODNODETYPE,
+                       MULNODETYPE,
+                       NUMBERNODETYPE,
+                       RUNNODETYPE,
+                       SEMICOLONNODETYPE,
+                       SETRETURNNODETYPE,
+                       SETVARNODETYPE,
+                       SUBNODETYPE,
+                       TEXTNODETYPE,
+                       UNARYMINUSNODETYPE,
+                       UNARYNOTNODETYPE,
+                       WHILENODETYPE,
+                       LEFTSHIFTNODETYPE,
+                       RIGHTSHIFTNODETYPE
+                      };
 
-    void setToken(std::shared_ptr<Token> token)
-    {
-        this->token = token;
-    }
 
-    virtual std::shared_ptr<Variable> execute(std::shared_ptr<Scope> globalScope, std::shared_ptr<Scope> scope) = 0;
-    virtual std::string toString() = 0;
-    virtual NodeType getType() = 0;
-    virtual ~Node()
-    {
 
+        class Node
+        {
+        protected:
+            std::string internalName;
+            std::shared_ptr<Variables::Variable> null;
+            std::shared_ptr<Tokens::Token> token;
+            std::shared_ptr<Passable> passable;
+        public:
+            Node(std::string internalName, std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token)
+            {
+                this->internalName = internalName;
+                this->passable = passable;
+                this->token = token;
+            }
+
+            std::shared_ptr<Tokens::Token> getToken()
+            {
+                return token;
+            }
+
+            void setToken(std::shared_ptr<Tokens::Token> token)
+            {
+                this->token = token;
+            }
+
+            virtual std::shared_ptr<Variables::Variable> execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope) = 0;
+            virtual std::string toString() = 0;
+            virtual NodeType getType() = 0;
+            virtual ~Node()
+            {
+
+            }
+        };
     }
-};
+}
 
 #endif // NODE_H

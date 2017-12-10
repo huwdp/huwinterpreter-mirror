@@ -15,42 +15,46 @@
 
 #include "arrayget.h"
 
-ArrayGet::ArrayGet(std::shared_ptr<Passable> passable)
-    : Function(passable)
-{
-    name = "arrayGet";
-}
-
-std::shared_ptr<Variable> ArrayGet::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
-                              std::shared_ptr<Scope> scope,
-                              std::vector<std::shared_ptr<Node>> arguments)
-{
-    std::shared_ptr<Variable> returnNode;
-    if (arguments.size() == 2)
-    {
-        std::shared_ptr<Node> node1 = arguments.at(0);
-        std::shared_ptr<Node> node2 = arguments.at(1);
-
-        if (node1 == nullptr || node2 == nullptr)
+namespace HuwInterpreter {
+    namespace Functions {
+        ArrayGet::ArrayGet(std::shared_ptr<Passable> passable)
+            : Function(passable)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-            return null;
+            name = "arrayGet";
         }
 
-        std::shared_ptr<Variable> var1 = node1->execute(globalScope, scope);
-        std::shared_ptr<Variable> var2 = node2->execute(globalScope, scope);
-
-        if (var1 == nullptr || var2 == nullptr )
+        std::shared_ptr<Variable> ArrayGet::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,
+                                      std::shared_ptr<Scope> scope,
+                                      std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-            return null;
-        }
+            std::shared_ptr<Variable> returnNode;
+            if (arguments.size() == 2)
+            {
+                std::shared_ptr<Nodes::Node> node1 = arguments.at(0);
+                std::shared_ptr<Nodes::Node> node2 = arguments.at(1);
 
-        return var1->get(var2->toString(), token);
+                if (node1 == nullptr || node2 == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                    return null;
+                }
+
+                std::shared_ptr<Variable> var1 = node1->execute(globalScope, scope);
+                std::shared_ptr<Variable> var2 = node2->execute(globalScope, scope);
+
+                if (var1 == nullptr || var2 == nullptr )
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                    return null;
+                }
+
+                return var1->get(var2->toString(), token);
+            }
+            else
+            {
+                passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 2));
+            }
+            return returnNode;
+        }
     }
-    else
-    {
-        passable->getErrors()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 2));
-    }
-    return returnNode;
 }

@@ -20,6 +20,10 @@
 #include <string>
 #include <stdexcept>
 
-bool isNumeric(std::string input);
+namespace HuwInterpreter {
+    namespace Helpers {
+        bool isNumeric(std::string input);
+    }
+}
 
 #endif // ISNUMERIC_H

@@ -20,94 +20,109 @@
 #include <iostream>
 #include "errors/debug.h"
 
-Scanner::Scanner()
-{
-    unusableTokens = std::make_shared<UnusableTokens>();
-    tokens = std::make_shared<Tokens>();
-    items = std::vector<std::shared_ptr<Token>>();
-}
+namespace HuwInterpreter {
+    namespace Tokens {
 
-bool Scanner::isAllowedCharacter(char character)
-{
-    if (TypeDetector::isNumeric(character))
-    {
-        return false;
-    }
-    return !unusableTokens->exists(character);
-}
-
-void Scanner::AddToken(TokenType tokenType, std::shared_ptr<LineInfo> lineInfo)
-{
-    items.push_back(std::move(std::make_shared<Token>(tokens->get(tokenType), tokenType, lineInfo)));
-}
-
-void Scanner::AddToken(std::string text, TokenType tokenType, std::shared_ptr<LineInfo> lineInfo)
-{
-    items.push_back(std::move(std::make_shared<Token>(text , tokenType, lineInfo)));
-}
-
-std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManager> fileReader)
-{
-    items.clear();
-    std::string temp = "";
-    std::shared_ptr<LineInfo> lineInfo = std::make_shared<LineInfo>("", fileReader->getCurrent()->getLineNumber(),0);
-    while (!fileReader->isEnd())
-    {
-        lineInfo = std::make_shared<LineInfo>("", fileReader->getCurrent()->getLineNumber(),0);
-
-        if (fileReader->getCurrent()->getContent() == ' ')
+        Scanner::Scanner()
         {
-            if (!temp.empty())
+            unusableTokens = std::make_shared<UnusableTokens>();
+            tokens = std::make_shared<Tokens>();
+            items = std::vector<std::shared_ptr<Token>>();
+        }
+
+        bool Scanner::isAllowedCharacter(char character)
+        {
+            if (Helpers::TypeDetector::isNumeric(character))
             {
-                items.push_back(std::move(std::make_shared<Token>(temp, lineInfo)));
-                temp = "";
+                return false;
             }
+            return !unusableTokens->exists(character);
         }
-        else if (tokens->compare(fileReader->getCurrent()->getContent(), INDENTATION))
-        {
 
-        }
-        else if (tokens->compare(fileReader->getCurrent()->getContent(), TABINDENTATION))
+        void Scanner::AddToken(Types::TokenType tokenType, std::shared_ptr<LineInfo> lineInfo)
         {
+            items.push_back(std::move(std::make_shared<Token>(tokens->get(tokenType), tokenType, lineInfo)));
+        }
 
-        }
-        else if (fileReader->getCurrent()->getContent() == ' ' || fileReader->getCurrent()->getContent() == '\t')
+        void Scanner::AddToken(std::string text, Types::TokenType tokenType, std::shared_ptr<LineInfo> lineInfo)
         {
-            // Do nothing here as recording indentation is kinda pointless.
+            items.push_back(std::move(std::make_shared<Token>(text , tokenType, lineInfo)));
         }
-        else if (TypeDetector::isNumeric(fileReader->getCurrent()->getContent()))
+
+        std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManager> fileReader)
         {
-            temp.push_back(fileReader->getCurrent()->getContent());
-        }
-        else if (tokens->compare(fileReader->getCurrent()->getContent(), DOT))
-        {
-            temp.push_back(fileReader->getCurrent()->getContent());
-        }
-        else if (isAllowedCharacter(fileReader->getCurrent()->getContent()))
-        {
-            temp.push_back(fileReader->getCurrent()->getContent());
-        }
-        else
-        {
-            if (!temp.empty())
+            items.clear();
+            std::string temp = "";
+            std::shared_ptr<LineInfo> lineInfo = std::make_shared<LineInfo>("", fileReader->getCurrent()->getLineNumber(),0);
+            while (!fileReader->isEnd())
             {
-                items.push_back(std::move(std::make_shared<Token>(temp, lineInfo)));
-                temp = "";
-            }
-            else if (tokens->compare(fileReader->getCurrent()->getContent(), QUOTE))
-            {
-                fileReader->next();
-                while (!tokens->compare(fileReader->getCurrent()->getContent(), QUOTE) && !fileReader->isEnd())
+                lineInfo = std::make_shared<LineInfo>("", fileReader->getCurrent()->getLineNumber(),0);
+
+                if (fileReader->getCurrent()->getContent() == ' ')
                 {
-                    lineInfo = std::make_shared<LineInfo>("", fileReader->getCurrent()->getLineNumber(),0);
-                    if (fileReader->getCurrent()->getContent() == '\\')
+                    if (!temp.empty())
                     {
-                        if (!fileReader->isEnd())
+                        items.push_back(std::move(std::make_shared<Token>(temp, lineInfo)));
+                        temp = "";
+                    }
+                }
+                else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::INDENTATION))
+                {
+
+                }
+                else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::TABINDENTATION))
+                {
+
+                }
+                else if (fileReader->getCurrent()->getContent() == ' ' || fileReader->getCurrent()->getContent() == '\t')
+                {
+                    // Do nothing here as recording indentation is kinda pointless.
+                }
+                else if (Helpers::TypeDetector::isNumeric(fileReader->getCurrent()->getContent()))
+                {
+                    temp.push_back(fileReader->getCurrent()->getContent());
+                }
+                else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::DOT))
+                {
+                    temp.push_back(fileReader->getCurrent()->getContent());
+                }
+                else if (isAllowedCharacter(fileReader->getCurrent()->getContent()))
+                {
+                    temp.push_back(fileReader->getCurrent()->getContent());
+                }
+                else
+                {
+                    if (!temp.empty())
+                    {
+                        items.push_back(std::move(std::make_shared<Token>(temp, lineInfo)));
+                        temp = "";
+                    }
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::QUOTE))
+                    {
+                        fileReader->next();
+                        while (!tokens->compare(fileReader->getCurrent()->getContent(), Types::QUOTE) && !fileReader->isEnd())
                         {
-                            if (tokens->compare(fileReader->getNext()->getContent(), QUOTE))
+                            lineInfo = std::make_shared<LineInfo>("", fileReader->getCurrent()->getLineNumber(),0);
+                            if (fileReader->getCurrent()->getContent() == '\\')
                             {
-                                temp.push_back(fileReader->getCurrent()->getContent());
-                                fileReader->next();
+                                if (!fileReader->isEnd())
+                                {
+                                    if (tokens->compare(fileReader->getNext()->getContent(), Types::QUOTE))
+                                    {
+                                        temp.push_back(fileReader->getCurrent()->getContent());
+                                        fileReader->next();
+                                    }
+                                    else
+                                    {
+                                        temp.push_back(fileReader->getCurrent()->getContent());
+                                        fileReader->next();
+                                    }
+                                }
+                                else
+                                {
+                                    temp.push_back(fileReader->getCurrent()->getContent());
+                                    fileReader->next();
+                                }
                             }
                             else
                             {
@@ -115,269 +130,259 @@ std::vector<std::shared_ptr<Token>> Scanner::tokenize(std::shared_ptr<TokenManag
                                 fileReader->next();
                             }
                         }
-                        else
+                        items.push_back(std::move(std::make_shared<Token>(temp, Types::TEXT, lineInfo)));
+                        temp = "";
+
+                        // Move to next it
+                        if (!fileReader->isEnd())
                         {
-                            temp.push_back(fileReader->getCurrent()->getContent());
                             fileReader->next();
                         }
                     }
-                    else
+
+                    lineInfo = std::make_shared<LineInfo>("", fileReader->getCurrent()->getLineNumber(),0);
+
+                    if (tokens->compare(fileReader->getCurrent()->getContent(), Types::LEFTPARENTHESIS))
                     {
-                        temp.push_back(fileReader->getCurrent()->getContent());
-                        fileReader->next();
+                        AddToken(Types::LEFTPARENTHESIS, lineInfo);
                     }
-                }
-                items.push_back(std::move(std::make_shared<Token>(temp, TEXT, lineInfo)));
-                temp = "";
-
-                // Move to next it
-                if (!fileReader->isEnd())
-                {
-                    fileReader->next();
-                }
-            }
-
-            lineInfo = std::make_shared<LineInfo>("", fileReader->getCurrent()->getLineNumber(),0);
-
-            if (tokens->compare(fileReader->getCurrent()->getContent(), LEFTPARENTHESIS))
-            {
-                AddToken(LEFTPARENTHESIS, lineInfo);
-            }
-            else if (tokens->compare(fileReader->getCurrent()->getContent(), RIGHTPARENTHESIS))
-            {
-                AddToken(RIGHTPARENTHESIS, lineInfo);
-            }
-            else if (tokens->compare(fileReader->getCurrent()->getContent(), SEMICOLON))
-            {
-                AddToken(SEMICOLON, lineInfo);
-            }
-
-            else if (fileReader->getCurrent()->getContent() == ' ' || fileReader->getCurrent()->getContent() == '\t')
-            {
-                // Do nothing here as recording indentation is kinda pointless.
-            }
-            else if (tokens->compare(fileReader->getCurrent()->getContent(), MULTIPLICATION))
-            {
-                if (tokens->compare(fileReader->peak()->getContent(), EQUALS))
-                {
-                    fileReader->next();
-                    AddToken(MULTIPLICATIONEQUAL, lineInfo);
-                }
-                else
-                {
-                    AddToken(MULTIPLICATION, lineInfo);
-                }
-            }
-            else if (tokens->compare(fileReader->getCurrent()->getContent(), DIVISION))
-            {
-                if (tokens->compare(fileReader->peak()->getContent(), MULTIPLICATION))
-                {
-                    fileReader->next();
-                    while (!fileReader->isEnd() && fileReader->getCurrent()->getContent() != '\n')
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::RIGHTPARENTHESIS))
                     {
-                        if (!fileReader->isEnd() && fileReader->getNext()->getContent() == '*')
+                        AddToken(Types::RIGHTPARENTHESIS, lineInfo);
+                    }
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::SEMICOLON))
+                    {
+                        AddToken(Types::SEMICOLON, lineInfo);
+                    }
+
+                    else if (fileReader->getCurrent()->getContent() == ' ' || fileReader->getCurrent()->getContent() == '\t')
+                    {
+                        // Do nothing here as recording indentation is kinda pointless.
+                    }
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::MULTIPLICATION))
+                    {
+                        if (tokens->compare(fileReader->peak()->getContent(), Types::EQUALS))
                         {
-                            if (!fileReader->isEnd() && fileReader->getNext()->getContent() == '/')
+                            fileReader->next();
+                            AddToken(Types::MULTIPLICATIONEQUAL, lineInfo);
+                        }
+                        else
+                        {
+                            AddToken(Types::MULTIPLICATION, lineInfo);
+                        }
+                    }
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::DIVISION))
+                    {
+                        if (tokens->compare(fileReader->peak()->getContent(), Types::MULTIPLICATION))
+                        {
+                            fileReader->next();
+                            while (!fileReader->isEnd() && fileReader->getCurrent()->getContent() != '\n')
                             {
-                                break;
+                                if (!fileReader->isEnd() && fileReader->getNext()->getContent() == '*')
+                                {
+                                    if (!fileReader->isEnd() && fileReader->getNext()->getContent() == '/')
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (tokens->compare(fileReader->peak()->getContent(), Types::EQUALS))
+                            {
+                                fileReader->next();
+                                AddToken(Types::DIVISIONEQUAL, lineInfo);
+                            }
+                            else
+                            {
+                                AddToken(Types::DIVISION, lineInfo);
                             }
                         }
                     }
-                }
-                else
-                {
-                    if (tokens->compare(fileReader->peak()->getContent(), EQUALS))
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::MOD))
                     {
-                        fileReader->next();
-                        AddToken(DIVISIONEQUAL, lineInfo);
+                        AddToken(Types::MOD, lineInfo);
                     }
-                    else
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::ADDITION))
                     {
-                        AddToken(DIVISION, lineInfo);
+                        if (tokens->compare(fileReader->peak()->getContent(), Types::EQUALS))
+                        {
+                            fileReader->next();
+                            AddToken(Types::ADDITIONEQUAL, lineInfo);
+                        }
+                        else if (tokens->compare(fileReader->peak()->getContent(), Types::ADDITION))
+                        {
+                            fileReader->next();
+                            AddToken(Types::INCREMENT, lineInfo);
+                        }
+                        else
+                        {
+                            AddToken(Types::ADDITION, lineInfo);
+                        }
                     }
-                }
-            }
-            else if (tokens->compare(fileReader->getCurrent()->getContent(), MOD))
-            {
-                AddToken(MOD, lineInfo);
-            }
-            else if (tokens->compare(fileReader->getCurrent()->getContent(), ADDITION))
-            {
-                if (tokens->compare(fileReader->peak()->getContent(), EQUALS))
-                {
-                    fileReader->next();
-                    AddToken(ADDITIONEQUAL, lineInfo);
-                }
-                else if (tokens->compare(fileReader->peak()->getContent(), ADDITION))
-                {
-                    fileReader->next();
-                    AddToken(INCREMENT, lineInfo);
-                }
-                else
-                {
-                    AddToken(ADDITION, lineInfo);
-                }
-            }
-            else if (tokens->compare(fileReader->getCurrent()->getContent(), SUBTRACTION))
-            {
-                if (tokens->compare(fileReader->peak()->getContent(), EQUALS))
-                {
-                    fileReader->next();
-                    AddToken(SUBTRACTIONEQUAL, lineInfo);
-                }
-                else if (tokens->compare(fileReader->peak()->getContent(), SUBTRACTION))
-                {
-                    fileReader->next();
-                    AddToken(DECREMENT, lineInfo);
-                }
-                else
-                {
-                    AddToken(SUBTRACTION, lineInfo);
-                }
-            }
-            else if (tokens->compare(fileReader->getCurrent()->getContent(), EQUALS))
-            {
-                if (!fileReader->isEnd())
-                {
-                    if (tokens->compare(fileReader->getNext()->getContent(), EQUALS))
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::SUBTRACTION))
                     {
-                        AddToken(IFEQUALS, lineInfo);
+                        if (tokens->compare(fileReader->peak()->getContent(), Types::EQUALS))
+                        {
+                            fileReader->next();
+                            AddToken(Types::SUBTRACTIONEQUAL, lineInfo);
+                        }
+                        else if (tokens->compare(fileReader->peak()->getContent(), Types::SUBTRACTION))
+                        {
+                            fileReader->next();
+                            AddToken(Types::DECREMENT, lineInfo);
+                        }
+                        else
+                        {
+                            AddToken(Types::SUBTRACTION, lineInfo);
+                        }
                     }
-                    else
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::EQUALS))
                     {
-                        fileReader->prev();
-                        AddToken(EQUALS, lineInfo);
+                        if (!fileReader->isEnd())
+                        {
+                            if (tokens->compare(fileReader->getNext()->getContent(), Types::EQUALS))
+                            {
+                                AddToken(Types::IFEQUALS, lineInfo);
+                            }
+                            else
+                            {
+                                fileReader->prev();
+                                AddToken(Types::EQUALS, lineInfo);
+                            }
+                        }
+                        else
+                        {
+                            AddToken(Types::EQUALS, lineInfo);
+                        }
                     }
-                }
-                else
-                {
-                    AddToken(EQUALS, lineInfo);
-                }
-            }
-            else if (tokens->compare(fileReader->getCurrent()->getContent(), BITWISEAND))
-            {
-                if (!fileReader->isEnd())
-                {
-                    if (tokens->compare(fileReader->getNext()->getContent(), BITWISEAND))
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::BITWISEAND))
                     {
-                        AddToken(AND, lineInfo);
+                        if (!fileReader->isEnd())
+                        {
+                            if (tokens->compare(fileReader->getNext()->getContent(), Types::BITWISEAND))
+                            {
+                                AddToken(Types::AND, lineInfo);
+                            }
+                            else
+                            {
+                                AddToken(Types::BITWISEAND, lineInfo);
+                                fileReader->prev();
+                            }
+                        }
                     }
-                    else
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::BITWISEOR))
                     {
-                        AddToken(BITWISEAND, lineInfo);
-                        fileReader->prev();
+                        if (!fileReader->isEnd())
+                        {
+                            if (tokens->compare(fileReader->getNext()->getContent(), Types::BITWISEOR))
+                            {
+                                AddToken(Types::OR, lineInfo);
+                            }
+                            else
+                            {
+                                AddToken(Types::BITWISEOR, lineInfo);
+                                fileReader->prev();
+                            }
+                        }
                     }
-                }
-            }
-            else if (tokens->compare(fileReader->getCurrent()->getContent(), BITWISEOR))
-            {
-                if (!fileReader->isEnd())
-                {
-                    if (tokens->compare(fileReader->getNext()->getContent(), BITWISEOR))
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::BITWISEXOR))
                     {
-                        AddToken(OR, lineInfo);
+                        AddToken(Types::BITWISEXOR, lineInfo);
                     }
-                    else
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::NOT))
                     {
-                        AddToken(BITWISEOR, lineInfo);
-                        fileReader->prev();
+                        if (!fileReader->isEnd())
+                        {
+                            if (tokens->compare(fileReader->peak()->getContent(), Types::EQUALS))
+                            {
+                                fileReader->next();
+                                AddToken(Types::IFNOTEQUALS, lineInfo);
+                            }
+                            else
+                            {
+                                AddToken(Types::NOT, lineInfo);
+                            }
+                        }
+                        else
+                        {
+                            AddToken(Types::NOT, lineInfo);
+                        }
                     }
-                }
-            }
-            else if (tokens->compare(fileReader->getCurrent()->getContent(), BITWISEXOR))
-            {
-                AddToken(BITWISEXOR, lineInfo);
-            }
-            else if (tokens->compare(fileReader->getCurrent()->getContent(), NOT))
-            {
-                if (!fileReader->isEnd())
-                {
-                    if (tokens->compare(fileReader->peak()->getContent(), EQUALS))
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::IFLESSTHAN))
                     {
-                        fileReader->next();
-                        AddToken(IFNOTEQUALS, lineInfo);
-                    }
-                    else
-                    {
-                        AddToken(NOT, lineInfo);
-                    }
-                }
-                else
-                {
-                    AddToken(NOT, lineInfo);
-                }
-            }
-            else if (tokens->compare(fileReader->getCurrent()->getContent(), IFLESSTHAN))
-            {
-                if (!fileReader->isEnd())
-                {
-                    if (tokens->compare(fileReader->peak()->getContent(), EQUALS))
-                    {
-                        fileReader->next();
-                        AddToken(IFLESSTHANOREQUAL, lineInfo);
-                    }
-                    else if (tokens->compare(fileReader->peak()->getContent(), IFLESSTHAN))
-                    {
-                        fileReader->next();
-                        AddToken(LEFTSHIFT, lineInfo);
-                    }
-                    else
-                    {
-                        AddToken(IFLESSTHAN, lineInfo);
+                        if (!fileReader->isEnd())
+                        {
+                            if (tokens->compare(fileReader->peak()->getContent(), Types::EQUALS))
+                            {
+                                fileReader->next();
+                                AddToken(Types::IFLESSTHANOREQUAL, lineInfo);
+                            }
+                            else if (tokens->compare(fileReader->peak()->getContent(), Types::IFLESSTHAN))
+                            {
+                                fileReader->next();
+                                AddToken(Types::LEFTSHIFT, lineInfo);
+                            }
+                            else
+                            {
+                                AddToken(Types::IFLESSTHAN, lineInfo);
 
+                            }
+                        }
+                        else
+                        {
+                            items.push_back(std::move(std::make_shared<Token>("<", Types::IFLESSTHAN, lineInfo)));
+                        }
                     }
-                }
-                else
-                {
-                    items.push_back(std::move(std::make_shared<Token>("<", IFLESSTHAN, lineInfo)));
-                }
-            }
-            else if (tokens->compare(fileReader->getCurrent()->getContent(), IFGREATER))
-            {
-                if (!fileReader->isEnd())
-                {
-                    if (tokens->compare(fileReader->peak()->getContent(), EQUALS))
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::IFGREATER))
                     {
-                        fileReader->next();
-                        AddToken(IFGREATERTHANOREQUAL, lineInfo);
+                        if (!fileReader->isEnd())
+                        {
+                            if (tokens->compare(fileReader->peak()->getContent(), Types::EQUALS))
+                            {
+                                fileReader->next();
+                                AddToken(Types::IFGREATERTHANOREQUAL, lineInfo);
+                            }
+                            else if (tokens->compare(fileReader->peak()->getContent(), Types::IFGREATER))
+                            {
+                                fileReader->next();
+                                AddToken(Types::RIGHTSHIFT, lineInfo);
+                            }
+                            else
+                            {
+                                AddToken(Types::IFGREATER, lineInfo);
+                            }
+                        }
+                        else
+                        {
+                            AddToken(Types::IFGREATER, lineInfo);
+                        }
                     }
-                    else if (tokens->compare(fileReader->peak()->getContent(), IFGREATER))
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::BITWISECOMPLEMENT))
                     {
-                        fileReader->next();
-                        AddToken(RIGHTSHIFT, lineInfo);
+                        AddToken(Types::BITWISECOMPLEMENT, lineInfo);
                     }
-                    else
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::SEMICOLON))
                     {
-                        AddToken(IFGREATER, lineInfo);
+                        AddToken(Types::SEMICOLON, lineInfo);
+                    }
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::RIGHTBRACKET))
+                    {
+                        AddToken(Types::RIGHTBRACKET, lineInfo);
+                    }
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::LEFTBRACKET))
+                    {
+                        AddToken(Types::LEFTBRACKET, lineInfo);
+                    }
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::COMMA))
+                    {
+                        AddToken(Types::COMMA, lineInfo);
                     }
                 }
-                else
-                {
-                    AddToken(IFGREATER, lineInfo);
-                }
+                fileReader->next();
             }
-            else if (tokens->compare(fileReader->getCurrent()->getContent(), BITWISECOMPLEMENT))
-            {
-                AddToken(BITWISECOMPLEMENT, lineInfo);
-            }
-            else if (tokens->compare(fileReader->getCurrent()->getContent(), SEMICOLON))
-            {
-                AddToken(SEMICOLON, lineInfo);
-            }
-            else if (tokens->compare(fileReader->getCurrent()->getContent(), RIGHTBRACKET))
-            {
-                AddToken(RIGHTBRACKET, lineInfo);
-            }
-            else if (tokens->compare(fileReader->getCurrent()->getContent(), LEFTBRACKET))
-            {
-                AddToken(LEFTBRACKET, lineInfo);
-            }
-            else if (tokens->compare(fileReader->getCurrent()->getContent(), COMMA))
-            {
-                AddToken(COMMA, lineInfo);
-            }
+            return items;
         }
-        fileReader->next();
     }
-    return items;
 }

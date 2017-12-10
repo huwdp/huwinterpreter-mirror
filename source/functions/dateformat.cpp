@@ -15,73 +15,77 @@
 
 #include "dateformat.h"
 
-DateFormat::DateFormat(std::shared_ptr<Passable> passable)
-    : Function(passable)
-{
-    name = "dateFormat";
-}
-
-std::shared_ptr<Variable> DateFormat::execute(std::shared_ptr<Token> token, std::shared_ptr<Scope> globalScope,
-                                          std::shared_ptr<Scope> scope,
-                                          std::vector<std::shared_ptr<Node>> arguments)
-{
-    std::shared_ptr<Variable> returnNode;
-    if (arguments.size() == 2)
-    {
-        std::shared_ptr<Node> node1 = arguments.at(0);
-        std::shared_ptr<Node> node2 = arguments.at(1);
-        if (node1 == nullptr || node2 == nullptr)
+namespace HuwInterpreter {
+    namespace Functions {
+        DateFormat::DateFormat(std::shared_ptr<Passable> passable)
+            : Function(passable)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-            return null;
+            name = "dateFormat";
         }
 
-        std::shared_ptr<Variable> var1 = node1->execute(globalScope, scope);
-        std::shared_ptr<Variable> var2 = node2->execute(globalScope, scope);
-
-        if (var1 == nullptr || var2 == nullptr)
+        std::shared_ptr<Variable> DateFormat::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,
+                                                  std::shared_ptr<Scope> scope,
+                                                  std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-            return null;
-        }
-
-        try
-        {
-            double d = var1->toDouble();
-            long value = (long)d;   // TODO
-
-            std::string format = var2->toString();
-            std::time_t t = (int)value;
-            std::tm tm = *std::localtime(&t);
-
-            std::stringstream ss;
-            ss << std::put_time(&tm, format.c_str());
-            if (ss.fail())
+            std::shared_ptr<Variable> returnNode;
+            if (arguments.size() == 2)
             {
-                passable->getErrors()->add(passable->getErrorFactory()->couldNotParseTime(token, name));
+                std::shared_ptr<Nodes::Node> node1 = arguments.at(0);
+                std::shared_ptr<Nodes::Node> node2 = arguments.at(1);
+                if (node1 == nullptr || node2 == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                    return null;
+                }
+
+                std::shared_ptr<Variable> var1 = node1->execute(globalScope, scope);
+                std::shared_ptr<Variable> var2 = node2->execute(globalScope, scope);
+
+                if (var1 == nullptr || var2 == nullptr)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
+                    return null;
+                }
+
+                try
+                {
+                    double d = var1->toDouble();
+                    long value = (long)d;   // TODO
+
+                    std::string format = var2->toString();
+                    std::time_t t = (int)value;
+                    std::tm tm = *std::localtime(&t);
+
+                    std::stringstream ss;
+                    ss << std::put_time(&tm, format.c_str());
+                    if (ss.fail())
+                    {
+                        passable->getErrorManager()->add(passable->getErrorFactory()->couldNotParseTime(token, name));
+                    }
+                    else
+                    {
+                        returnNode = std::make_shared<StringVariable>(passable, "", ss.str());
+                    }
+                }
+                catch (const std::invalid_argument ex)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, FUNCTION_ERROR, name, ex.what()));
+                }
+                catch (const std::out_of_range ex)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->outOfRange(token, name, ex.what()));
+                }
+                catch (const std::exception& ex)
+                {
+                    passable->getErrorManager()->add(passable->getErrorFactory()->otherFunctionError(token, name, ex.what()));
+                }
             }
             else
             {
-                returnNode = std::make_shared<StringVariable>(passable, "", ss.str());
+                passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 2));
             }
-        }
-        catch (const std::invalid_argument ex)
-        {
-            passable->getErrors()->add(passable->getErrorFactory()->invalidArgument(token, FUNCTION_ERROR, name, ex.what()));
-        }
-        catch (const std::out_of_range ex)
-        {
-            passable->getErrors()->add(passable->getErrorFactory()->outOfRange(token, name, ex.what()));
-        }
-        catch (const std::exception& ex)
-        {
-            passable->getErrors()->add(passable->getErrorFactory()->otherFunctionError(token, name, ex.what()));
-        }
-    }
-    else
-    {
-        passable->getErrors()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 2));
-    }
 
-    return returnNode;
+            return returnNode;
+        }
+    }
 }
