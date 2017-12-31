@@ -47,8 +47,7 @@ namespace HuwInterpreter {
             {
                 return (*it);
             }
-            std::shared_ptr<IO::FileLine> null;
-            return null;
+            return nullToken;
         }
 
         std::shared_ptr<IO::FileLine> TextTokenManager::getNext()
@@ -58,8 +57,7 @@ namespace HuwInterpreter {
                 it++;
                 return (*it);
             }
-            std::shared_ptr<IO::FileLine> null;
-            return null;
+            return nullToken;
         }
 
         std::shared_ptr<IO::FileLine> TextTokenManager::getPrev()
@@ -69,8 +67,7 @@ namespace HuwInterpreter {
                 it--;
                 return (*it);
             }
-            std::shared_ptr<IO::FileLine> null;
-            return null;
+            return nullToken;
         }
 
         void TextTokenManager::next()
@@ -91,7 +88,6 @@ namespace HuwInterpreter {
 
         std::shared_ptr<IO::FileLine> TextTokenManager::peak()
         {
-            std::shared_ptr<IO::FileLine> null;
             if (it != lines.end())
             {
                 it++;
@@ -100,7 +96,7 @@ namespace HuwInterpreter {
                 return line;
 
             }
-            return null;
+            return nullToken;
         }
 
         bool TextTokenManager::isEnd()

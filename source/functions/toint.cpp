@@ -34,7 +34,7 @@ namespace HuwInterpreter {
                 if (node == nullptr)
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-                    return null;
+                    return nullVariable;
                 }
 
 
@@ -42,7 +42,7 @@ namespace HuwInterpreter {
                 if (var == nullptr)
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-                    return null;
+                    return nullVariable;
                 }
 
                 if (var->getType() == Types::INTEGER)

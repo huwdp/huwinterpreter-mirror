@@ -27,6 +27,8 @@ namespace HuwInterpreter {
     namespace Tokens {
         class TokenManager
         {
+        protected:
+            std::shared_ptr<IO::FileLine> nullToken;
         public:
             virtual std::shared_ptr<IO::FileLine> getCurrent() = 0;
             virtual std::shared_ptr<IO::FileLine> getNext() = 0;

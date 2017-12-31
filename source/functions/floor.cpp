@@ -34,14 +34,14 @@ namespace HuwInterpreter {
                 if (node == nullptr)
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-                    return null;
+                    return nullVariable;
                 }
 
                 std::shared_ptr<Variable> var = node->execute(globalScope, scope);
                 if (var == nullptr)
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-                    return null;
+                    return nullVariable;
                 }
                 try
                 {
@@ -62,7 +62,7 @@ namespace HuwInterpreter {
                     passable->getErrorManager()->add(passable->getErrorFactory()->otherFunctionError(token, name, ex.what()));
                 }
 
-                return null;
+                return nullVariable;
             }
             else
             {

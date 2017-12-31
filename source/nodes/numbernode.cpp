@@ -36,7 +36,7 @@ namespace HuwInterpreter {
             ErrorReporting::Debug::print("NumberNode");
             if (passable->getErrorManager()->count() > 0)
             {
-                return null;
+                return nullVariable;
             }
             if (scope->getReturnValue() != nullptr)
             {

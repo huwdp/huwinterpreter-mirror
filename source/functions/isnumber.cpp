@@ -34,14 +34,14 @@ namespace HuwInterpreter {
                 if (node == nullptr)
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-                    return null;
+                    return nullVariable;
                 }
 
                 std::shared_ptr<Variable> var = node->execute(globalScope, scope);
                 if (var == nullptr)
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-                    return null;
+                    return nullVariable;
                 }
 
                 returnNode = std::make_shared<NumberVariable>(passable, Helpers::TypeDetector::isNumeric(var->toString()));

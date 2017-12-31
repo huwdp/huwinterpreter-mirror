@@ -33,13 +33,13 @@ namespace HuwInterpreter {
             ErrorReporting::Debug::print("SemicolonNode");
             if (passable->getErrorManager()->count() > 0)
             {
-                return null;
+                return nullVariable;
             }
             if (node != nullptr)
             {
                 return node->execute(globalScope, scope);
             }
-            return null;
+            return nullVariable;
         }
 
         std::string SemicolonNode::toString()

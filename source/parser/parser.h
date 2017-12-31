@@ -91,7 +91,7 @@ namespace HuwInterpreter {
         std::shared_ptr<Functions::FunctionManager> functions;
         std::shared_ptr<Functions::FunctionManager> customFunctions;
         bool compilation;
-        std::shared_ptr<Nodes::Node> null;
+        std::shared_ptr<Nodes::Node> nullNode;
         std::shared_ptr<NodeFactory> codeFactory;
         std::shared_ptr<Passable> passable;
 

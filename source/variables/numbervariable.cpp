@@ -173,7 +173,7 @@ namespace HuwInterpreter {
         {
             if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return std::move(toValue(std::move(this->variable->pow(variable, token))));
         }
@@ -182,7 +182,7 @@ namespace HuwInterpreter {
         {
             if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return std::move(toValue(std::move(this->variable->mul(variable, token))));
         }
@@ -191,7 +191,7 @@ namespace HuwInterpreter {
         {
             if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return std::move(toValue(std::move(this->variable->div(variable, token))));
         }
@@ -200,7 +200,7 @@ namespace HuwInterpreter {
         {
             if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return std::move(toValue(std::move(this->variable->mod(variable, token))));
         }
@@ -209,7 +209,7 @@ namespace HuwInterpreter {
         {
             if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return std::move(toValue(std::move(this->variable->add(variable, token))));
         }
@@ -218,7 +218,7 @@ namespace HuwInterpreter {
         {
             if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return std::move(toValue(std::move(this->variable->sub(variable, token))));
         }
@@ -228,7 +228,7 @@ namespace HuwInterpreter {
             if (variable == nullptr)
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, "ifUnder", name, getType()));
-                return null;
+                return nullVariable;
             }
             return std::move(toValue(this->variable->ifUnder(variable, token)));
         }
@@ -238,7 +238,7 @@ namespace HuwInterpreter {
             if (variable == nullptr)
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, "ifUnderOrEqual", name, getType()));
-                return null;
+                return nullVariable;
             }
             return std::move(toValue(std::move(this->variable->ifUnderOrEqual(variable, token))));
         }
@@ -248,7 +248,7 @@ namespace HuwInterpreter {
             if (variable == nullptr)
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, "ifOver", name, getType()));
-                return null;
+                return nullVariable;
             }
             return std::move(toValue(std::move(this->variable->ifOver(variable, token))));
         }
@@ -258,7 +258,7 @@ namespace HuwInterpreter {
             if (variable == nullptr)
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, "ifOverOrEqual", name, getType()));
-                return null;
+                return nullVariable;
             }
             return std::move(toValue(std::move(this->variable->ifOverOrEqual(variable, token))));
         }
@@ -268,7 +268,7 @@ namespace HuwInterpreter {
             if (variable == nullptr)
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, "ifEqual", name, getType()));
-                return null;
+                return nullVariable;
             }
             return std::move(toValue(std::move(this->variable->ifEqual(variable, token))));
         }
@@ -278,7 +278,7 @@ namespace HuwInterpreter {
             if (variable == nullptr)
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, "ifNotEqual", name, getType()));
-                return null;
+                return nullVariable;
             }
             return toValue(std::move(this->variable->ifNotEqual(variable, token)));
         }
@@ -359,7 +359,7 @@ namespace HuwInterpreter {
         {
             if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return variable->copy(token);
         }
@@ -368,7 +368,7 @@ namespace HuwInterpreter {
         {
             if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return this->variable->bitwiseAnd(variable, token);
         }
@@ -377,7 +377,7 @@ namespace HuwInterpreter {
         {
             if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return this->variable->bitwiseOr(variable, token);
         }
@@ -386,7 +386,7 @@ namespace HuwInterpreter {
         {
             if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return this->variable->bitwiseXOR(variable, token);
         }
@@ -395,25 +395,25 @@ namespace HuwInterpreter {
         {
             if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return this->variable->bitwiseComplement(token);
         }
 
         std::shared_ptr<Variable> NumberVariable::leftShift(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (variable == null)
+            if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return this->variable->leftShift(variable, token);
         }
 
         std::shared_ptr<Variable> NumberVariable::rightShift(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (variable == null)
+            if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return this->variable->rightShift(variable, token);
         }

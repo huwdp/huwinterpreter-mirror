@@ -37,7 +37,7 @@ namespace HuwInterpreter {
                 if (node1 == nullptr || node2 == nullptr)
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-                    return null;
+                    return nullVariable;
                 }
 
                 std::shared_ptr<Variable> var1 = node1->execute(globalScope, scope);
@@ -46,13 +46,13 @@ namespace HuwInterpreter {
                 if (var1 == nullptr || var2 == nullptr )
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-                    return null;
+                    return nullVariable;
                 }
 
                 if (var1->getType() != Types::ARRAY)
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->firstParameterIsNotTypeOfArray(token, var1->getName(), name));
-                    return null;
+                    return nullVariable;
                 }
 
                 var1->unset(var2->toString(), token);

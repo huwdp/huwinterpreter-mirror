@@ -34,7 +34,7 @@ namespace HuwInterpreter {
             ErrorReporting::Debug::print("BitwiseOrNode");
             if (passable->getErrorManager()->count() > 0)
             {
-                return null;
+                return nullVariable;
             }
             if (scope->getReturnValue() != nullptr)
             {
@@ -47,17 +47,17 @@ namespace HuwInterpreter {
                 if (l == nullptr)
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
-                    return null;
+                    return nullVariable;
                 }
                 if (r == nullptr)
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
-                    return null;
+                    return nullVariable;
                 }
                 return l->bitwiseOr(r, token);
             }
             ErrorReporting::Debug::print("Could not bitwiseOr");
-            return null;
+            return nullVariable;
         }
 
         std::string BitwiseOrNode::toString()

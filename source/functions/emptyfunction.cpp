@@ -29,7 +29,7 @@ namespace HuwInterpreter {
                                                      std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
             passable->getErrorManager()->add(passable->getErrorFactory()->functionNotDeclared(token, name));
-            return null;
+            return nullVariable;
         }
     }
 }

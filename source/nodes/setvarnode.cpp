@@ -35,7 +35,7 @@ namespace HuwInterpreter {
             ErrorReporting::Debug::print("SetVarNode");
             if (passable->getErrorManager()->count() > 0)
             {
-                return null;
+                return nullVariable;
             }
             if (scope->getReturnValue() != nullptr)
             {
@@ -52,7 +52,7 @@ namespace HuwInterpreter {
                 if (globalVar != nullptr && globalVar->isConst())
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->cannotChangeConstant(token, name));
-                    return null;
+                    return nullVariable;
                 }
 
                 if (v != nullptr)
@@ -61,7 +61,7 @@ namespace HuwInterpreter {
                 }
                 else
                 {
-                    globalScope->getVariableManager()->setVariable(name, null);
+                    globalScope->getVariableManager()->setVariable(name, nullVariable);
                 }
             }
             else if (scope->getVariableManager()->exists(name))
@@ -69,7 +69,7 @@ namespace HuwInterpreter {
                 if (localVar != nullptr && localVar->isConst())
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->cannotChangeConstant(token, name));
-                    return null;
+                    return nullVariable;
                 }
 
                 if (v != nullptr)
@@ -78,7 +78,7 @@ namespace HuwInterpreter {
                 }
                 else
                 {
-                    scope->getVariableManager()->setVariable(name, null);
+                    scope->getVariableManager()->setVariable(name, nullVariable);
                 }
             }
             else
@@ -96,7 +96,7 @@ namespace HuwInterpreter {
                     passable->getErrorManager()->add(passable->getErrorFactory()->variableDeclared(token, name));
                 }
             }
-            return null;
+            return nullVariable;
         }
 
         std::string SetVarNode::toString()

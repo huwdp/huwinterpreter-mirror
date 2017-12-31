@@ -177,7 +177,7 @@ namespace HuwInterpreter {
                     nextToken();
                     if (!expect(Types::LEFTPARENTHESIS))
                     {
-                        return null;
+                        return nullNode;
                     }
                     std::vector<std::shared_ptr<Nodes::Node>> arguments;
                     if (currentToken->getType() != Types::RIGHTPARENTHESIS) // Check for end of function parenthesis
@@ -193,7 +193,7 @@ namespace HuwInterpreter {
                     if (!expect(Types::RIGHTPARENTHESIS))
                     {
                         arguments.clear();
-                        return null;
+                        return nullNode;
                     }
                     acceptIndentation();
                     return nodeFactory->CreateGetFuncNode(passable, currentToken, word, functions, arguments);
@@ -218,7 +218,7 @@ namespace HuwInterpreter {
             errorMessage("", currentToken);
             nextToken();
         }
-        return null;
+        return nullNode;
     }
 
     std::shared_ptr<Nodes::Node> Parser::parseFactor()
@@ -233,7 +233,7 @@ namespace HuwInterpreter {
                 value = parseBoolean();
                 if (!expect(Types::RIGHTPARENTHESIS))
                 {
-                    return null;
+                    return nullNode;
                 }
                 return nodeFactory->CreateBracketNode(passable, currentToken, value);
             }
@@ -259,7 +259,7 @@ namespace HuwInterpreter {
             }
             return parseValue();
         }
-        return null;
+        return nullNode;
     }
 
     std::shared_ptr<Nodes::Node> Parser::parseTerm()
@@ -292,7 +292,7 @@ namespace HuwInterpreter {
             }
             return node;
         }
-        return null;
+        return nullNode;
     }
 
     std::shared_ptr<Nodes::Node> Parser::parseExpression()
@@ -320,7 +320,7 @@ namespace HuwInterpreter {
             }
             return node;
         }
-        return null;
+        return nullNode;
     }
 
     std::shared_ptr<Nodes::Node> Parser::parseBitwiseLeftRight()
@@ -348,7 +348,7 @@ namespace HuwInterpreter {
             }
             return node;
         }
-        return null;
+        return nullNode;
     }
 
     std::shared_ptr<Nodes::Node> Parser::parseEqualAndEqualNot()
@@ -381,7 +381,7 @@ namespace HuwInterpreter {
                 return node;
             }
         }
-        return null;
+        return nullNode;
     }
 
     std::shared_ptr<Nodes::Node> Parser::parseLessThanAndLessThanOrEqual()
@@ -414,7 +414,7 @@ namespace HuwInterpreter {
                 return node;
             }
         }
-        return null;
+        return nullNode;
     }
 
     std::shared_ptr<Nodes::Node> Parser::parseGreaterThanAndGreaterThanOrEqual()
@@ -447,7 +447,7 @@ namespace HuwInterpreter {
                 return node;
             }
         }
-        return null;
+        return nullNode;
     }
 
     std::shared_ptr<Nodes::Node> Parser::parseBitwiseAnd()
@@ -467,7 +467,7 @@ namespace HuwInterpreter {
             }
             return node;
         }
-        return null;
+        return nullNode;
     }
 
     std::shared_ptr<Nodes::Node> Parser::parseBitwiseXOr()
@@ -487,7 +487,7 @@ namespace HuwInterpreter {
             }
             return node;
         }
-        return null;
+        return nullNode;
     }
 
     std::shared_ptr<Nodes::Node> Parser::parseBitwiseOr()
@@ -507,7 +507,7 @@ namespace HuwInterpreter {
             }
             return node;
         }
-        return null;
+        return nullNode;
     }
 
     std::shared_ptr<Nodes::Node> Parser::parseAnd()
@@ -527,7 +527,7 @@ namespace HuwInterpreter {
             }
             return node;
         }
-        return null;
+        return nullNode;
     }
 
     std::shared_ptr<Nodes::Node> Parser::parseOr()
@@ -547,7 +547,7 @@ namespace HuwInterpreter {
             }
             return node;
         }
-        return null;
+        return nullNode;
     }
 
     std::shared_ptr<Nodes::Node> Parser::parseCondition()
@@ -570,7 +570,7 @@ namespace HuwInterpreter {
             if (!Helpers::TypeDetector::isWord(word))
             {
                 compilation = false;
-                return null;
+                return nullNode;
             }
             nextToken();
             acceptIndentation();
@@ -581,7 +581,7 @@ namespace HuwInterpreter {
                 std::shared_ptr<Nodes::Node> node = nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateIncrementNode(passable, currentToken, nodeFactory->CreateGetVarNode(passable, currentToken, word)));
                 if (!expectSemicolon())
                 {
-                    return null;
+                    return nullNode;
                 }
                 return nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateRunNode(passable, currentToken, (node), parseBlock()));
             }
@@ -590,7 +590,7 @@ namespace HuwInterpreter {
                 std::shared_ptr<Nodes::Node> node = nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateDecrementNode(passable, currentToken, nodeFactory->CreateGetVarNode(passable, currentToken, word)));
                 if (!expectSemicolon())
                 {
-                    return null;
+                    return nullNode;
                 }
                 return nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateRunNode(passable, currentToken, node, parseBlock()));
             }
@@ -610,7 +610,7 @@ namespace HuwInterpreter {
             {
                 // Unexpected token... report error here
                 compilation = false;
-                return null;
+                return nullNode;
             }
             nextToken();
             acceptIndentation();
@@ -618,12 +618,12 @@ namespace HuwInterpreter {
             if (expressionNode == nullptr)
             {
                 compilation = false;
-                return null;
+                return nullNode;
             }
             acceptIndentation();
             if (!expect(Types::SEMICOLON))
             {
-                return null;
+                return nullNode;
             }
             acceptIndentation();
             acceptSemicolon();
@@ -658,7 +658,7 @@ namespace HuwInterpreter {
                 return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateSetVarNode(passable, currentToken, word, divNode)), blockNode);
             }
         }
-        return null;
+        return nullNode;
     }
 
     std::shared_ptr<Nodes::Node> Parser::parseDecloration()
@@ -674,7 +674,7 @@ namespace HuwInterpreter {
                 if (!Helpers::TypeDetector::isWord(word))
                 {
                     compilation = false;
-                    return null;
+                    return nullNode;
                 }
                 nextToken();
                 acceptIndentation();
@@ -694,7 +694,7 @@ namespace HuwInterpreter {
                 {
                     // Unexpected token... report error here
                     compilation = false;
-                    return null;
+                    return nullNode;
                 }
                 nextToken();
                 acceptIndentation();
@@ -702,12 +702,12 @@ namespace HuwInterpreter {
                 if (expressionNode == nullptr)
                 {
                     compilation = false;
-                    return null;
+                    return nullNode;
                 }
                 acceptIndentation();
                 if (!expectSemicolon())
                 {
-                    return null;
+                    return nullNode;
                 }
                 std::shared_ptr<Nodes::Node> blockNode = parseBlock();
 
@@ -740,7 +740,7 @@ namespace HuwInterpreter {
                     return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateAddVarNode(passable, currentToken, word, divNode)), blockNode);
                 }
             }
-            return null;
+            return nullNode;
         }
         else if (accept("const"))
         {
@@ -752,7 +752,7 @@ namespace HuwInterpreter {
                 if (!Helpers::TypeDetector::isWord(word))
                 {
                     compilation = false;
-                    return null;
+                    return nullNode;
                 }
                 nextToken();
                 acceptIndentation();
@@ -772,7 +772,7 @@ namespace HuwInterpreter {
                 {
                     // Unexpected token... report error here
                     compilation = false;
-                    return null;
+                    return nullNode;
                 }
                 nextToken();
                 acceptIndentation();
@@ -780,12 +780,12 @@ namespace HuwInterpreter {
                 if (expressionNode == nullptr)
                 {
                     compilation = false;
-                    return null;
+                    return nullNode;
                 }
                 acceptIndentation();
                 if (!expectSemicolon())
                 {
-                    return null;
+                    return nullNode;
                 }
                 std::shared_ptr<Nodes::Node> blockNode = parseBlock();
 
@@ -818,17 +818,17 @@ namespace HuwInterpreter {
                     return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateAddConstNode(passable, currentToken, word, divNode)), blockNode);
                 }
             }
-            return null;
+            return nullNode;
         }
-        return null;
+        return nullNode;
     }
 
     std::shared_ptr<Nodes::Node> Parser::parseElseStatement()
     {
-        std::shared_ptr<Nodes::Node> returnNode = null;
-        std::shared_ptr<Nodes::Node> conditionNode = null;
-        std::shared_ptr<Nodes::Node> statementNode = null;
-        std::shared_ptr<Nodes::Node> elseNode = null;
+        std::shared_ptr<Nodes::Node> returnNode;
+        std::shared_ptr<Nodes::Node> conditionNode;
+        std::shared_ptr<Nodes::Node> statementNode;
+        std::shared_ptr<Nodes::Node> elseNode;
         acceptIndentation();
         if (accept("else"))
         {
@@ -838,25 +838,25 @@ namespace HuwInterpreter {
                 acceptIndentation();
                 if (!expect(Types::LEFTPARENTHESIS))
                 {
-                    return null;
+                    return nullNode;
                 }
                 acceptIndentation();
                 conditionNode = parseBoolean();
                 acceptIndentation();
                 if (!expect(Types::RIGHTPARENTHESIS))
                 {
-                    return null;
+                    return nullNode;
                 }
                 acceptIndentation();
                 if (!expect(Types::LEFTBRACKET))
                 {
-                    return null;
+                    return nullNode;
                 }
                 acceptIndentation();
                 statementNode = parseBlock();
                 if (!expect(Types::RIGHTBRACKET))
                 {
-                    return null;
+                    return nullNode;
                 }
                 acceptIndentation();
 
@@ -868,13 +868,13 @@ namespace HuwInterpreter {
                 acceptIndentation();
                 if (!expect(Types::LEFTBRACKET))
                 {
-                    return null;
+                    return nullNode;
                 }
                 acceptIndentation();
                 std::shared_ptr<Nodes::Node> node = parseBlock();
                 if (!expect(Types::RIGHTBRACKET))
                 {
-                    return null;
+                    return nullNode;
                 }
                 acceptIndentation();
                 return node;
@@ -896,14 +896,14 @@ namespace HuwInterpreter {
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->functionNotDeclared(currentToken, word));
                     compilation = false;
-                    return null;
+                    return nullNode;
                 }
                 acceptIndentation();
                 nextToken();
                 acceptIndentation();
                 if (!expect(Types::LEFTPARENTHESIS))
                 {
-                    return null;
+                    return nullNode;
                 }
                 std::vector<std::shared_ptr<Nodes::Node>> arguments;
                 if (currentToken->getType() != Types::RIGHTPARENTHESIS)
@@ -918,11 +918,11 @@ namespace HuwInterpreter {
                 }
                 if (!expect(Types::RIGHTPARENTHESIS))
                 {
-                    return null;
+                    return nullNode;
                 }
                 if (!expectSemicolon())
                 {
-                    return null;
+                    return nullNode;
                 }
                 std::shared_ptr<Nodes::Node> blockNode = parseBlock();
                 std::shared_ptr<Nodes::Node> functions = nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateGetFuncNode(passable, currentToken, word, this->functions, arguments));
@@ -943,25 +943,25 @@ namespace HuwInterpreter {
                 acceptIndentation();
                 if (!expect(Types::LEFTPARENTHESIS))
                 {
-                    return null;
+                    return nullNode;
                 }
                 acceptIndentation();
                 std::shared_ptr<Nodes::Node> conditionNode = parseBoolean();
                 acceptIndentation();
                 if (!expect(Types::RIGHTPARENTHESIS))
                 {
-                    return null;
+                    return nullNode;
                 }
                 acceptIndentation();
                 if (!expect(Types::LEFTBRACKET))
                 {
-                    return null;
+                    return nullNode;
                 }
                 acceptIndentation();
                 std::shared_ptr<Nodes::Node> statementNode = parseBlock();
                 if (!expect(Types::RIGHTBRACKET))
                 {
-                    return null;
+                    return nullNode;
                 }
                 acceptIndentation();
 
@@ -991,7 +991,7 @@ namespace HuwInterpreter {
             }
             return parseFunction();
         }
-        return null;
+        return nullNode;
     }
 
     std::shared_ptr<Nodes::Node> Parser::parseBlock()
@@ -1005,7 +1005,7 @@ namespace HuwInterpreter {
                 std::shared_ptr<Nodes::Node> returnNode = nodeFactory->CreateSetReturnNode(passable, parseBoolean());
                 if (!expectSemicolon())
                 {
-                    return null;
+                    return nullNode;
                 }
 
                 std::shared_ptr<Nodes::Node> blockNode = parseBlock();
@@ -1030,7 +1030,7 @@ namespace HuwInterpreter {
                 if (!Helpers::TypeDetector::isWord(word) || functions->exists(word))
                 {
                     compilation = false;
-                    return null;
+                    return nullNode;
                 }
 
                 // Here we add a hint that the function exists
@@ -1041,7 +1041,7 @@ namespace HuwInterpreter {
                 {
                     functions->removeFunction(word);
                     customFunctions->removeFunction(word);
-                    return null;
+                    return nullNode;
                 }
                 acceptIndentation();
 
@@ -1063,7 +1063,7 @@ namespace HuwInterpreter {
                     functions->removeFunction(word);
                     customFunctions->removeFunction(word);
                     arguments.clear();
-                    return null;
+                    return nullNode;
                 }
                 acceptIndentation();
 
@@ -1091,7 +1091,7 @@ namespace HuwInterpreter {
             }
             return parseStatement();
         }
-        return null;
+        return nullNode;
     }
 
     std::shared_ptr<Nodes::Node> Parser::parse()
@@ -1101,7 +1101,7 @@ namespace HuwInterpreter {
             nextToken();
             return parseBlock();
         }
-        return null;
+        return nullNode;
     }
 
     std::string Parser::toString()

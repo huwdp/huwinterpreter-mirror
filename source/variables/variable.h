@@ -37,7 +37,7 @@ namespace HuwInterpreter {
             std::shared_ptr<Tokens::Token> token;
         public:
             std::shared_ptr<Passable> passable;
-            std::shared_ptr<Variable> null;
+            std::shared_ptr<Variable> nullVariable;
             Variable(std::shared_ptr<Passable> passable);
             Variable(std::shared_ptr<Passable> passable, std::string name);
             Variable(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token);

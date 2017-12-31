@@ -171,32 +171,32 @@ namespace HuwInterpreter {
         std::shared_ptr<Variable> StringVariable::pow(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             ErrorReporting::Debug::print("Cannot call power method on string");
-            return null;
+            return nullVariable;
         }
 
         std::shared_ptr<Variable> StringVariable::mul(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             ErrorReporting::Debug::print("Cannot call multiple method on string");
-            return null;
+            return nullVariable;
         }
 
         std::shared_ptr<Variable> StringVariable::div(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             ErrorReporting::Debug::print("Cannot call divide method on string");
-            return null;
+            return nullVariable;
         }
 
         std::shared_ptr<Variable> StringVariable::mod(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             ErrorReporting::Debug::print("Cannot call mod method on string");
-            return null;
+            return nullVariable;
         }
 
         std::shared_ptr<Variable> StringVariable::add(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return std::make_shared<StringVariable>(passable, this->toString() + variable->toString());
         }
@@ -204,7 +204,7 @@ namespace HuwInterpreter {
         std::shared_ptr<Variable> StringVariable::sub(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             ErrorReporting::Debug::print("Cannot call subtract method on string");
-            return null;
+            return nullVariable;
         }
 
         std::shared_ptr<Variable> StringVariable::ifUnder(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
@@ -212,7 +212,7 @@ namespace HuwInterpreter {
             if (variable == nullptr)
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, "ifUnder", name, getType()));
-                return null;
+                return nullVariable;
             }
             if (Helpers::TypeDetector::isNumeric(toString()))
             {
@@ -237,7 +237,7 @@ namespace HuwInterpreter {
             if (variable == nullptr)
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, "ifUnderOrEqual", name, getType()));
-                return null;
+                return nullVariable;
             }
             if (Helpers::TypeDetector::isNumeric(toString()))
             {
@@ -262,7 +262,7 @@ namespace HuwInterpreter {
             if (variable == nullptr)
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, "ifOver", name, getType()));
-                return null;
+                return nullVariable;
             }
             if (Helpers::TypeDetector::isNumeric(toString()))
             {
@@ -287,7 +287,7 @@ namespace HuwInterpreter {
             if (variable == nullptr)
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, "ifOverOrEqual", name, getType()));
-                return null;
+                return nullVariable;
             }
             if (Helpers::TypeDetector::isNumeric(toString()))
             {
@@ -312,7 +312,7 @@ namespace HuwInterpreter {
             if (variable == nullptr)
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, "ifEqual", name, getType()));
-                return null;
+                return nullVariable;
             }
             if (Helpers::TypeDetector::isNumeric(toString()))
             {
@@ -337,7 +337,7 @@ namespace HuwInterpreter {
             if (variable == nullptr)
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, "ifNotEqual", name, getType()));
-                return null;
+                return nullVariable;
             }
             if (Helpers::TypeDetector::isNumeric(toString()))
             {
@@ -361,7 +361,7 @@ namespace HuwInterpreter {
         {
             if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             std::string value = this->value;
             value.append(variable->toString());
@@ -372,9 +372,9 @@ namespace HuwInterpreter {
         {
             if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
-            return null;
+            return nullVariable;
             passable->getErrorManager()->add(passable->getErrorFactory()->cannotCallFunction(token, name, getType(), "subEqual", ""));
         }
 
@@ -382,27 +382,27 @@ namespace HuwInterpreter {
         {
             if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             passable->getErrorManager()->add(passable->getErrorFactory()->cannotCallFunction(token, name, getType(), "mulEqual", ""));
-            return null;
+            return nullVariable;
         }
 
         std::shared_ptr<Variable> StringVariable::divEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             passable->getErrorManager()->add(passable->getErrorFactory()->cannotCallFunction(token, name, getType(), "divEqual", ""));
-            return null;
+            return nullVariable;
         }
 
         std::shared_ptr<Variable> StringVariable::equal(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             if (value.compare(variable->toString()) == 0)
             {
@@ -414,13 +414,13 @@ namespace HuwInterpreter {
         std::shared_ptr<Variable> StringVariable::increment(std::shared_ptr<Tokens::Token> token)
         {
             passable->getErrorManager()->add(passable->getErrorFactory()->cannotCallFunction(token, name, getType(), "increment", ""));
-            return null;
+            return nullVariable;
         }
 
         std::shared_ptr<Variable> StringVariable::decrement(std::shared_ptr<Tokens::Token> token)
         {
             passable->getErrorManager()->add(passable->getErrorFactory()->cannotCallFunction(token, name, getType(), "decrement", ""));
-            return null;
+            return nullVariable;
         }
 
         std::shared_ptr<Variable> StringVariable::count(std::shared_ptr<Tokens::Token> token)
@@ -452,7 +452,7 @@ namespace HuwInterpreter {
                 return std::make_shared<StringVariable>(passable, character);
             }
             passable->getErrorManager()->add(passable->getErrorFactory()->outOfBounds(token, name));
-            return null;
+            return nullVariable;
         }
 
         void StringVariable::unset(std::string index, std::shared_ptr<Tokens::Token> token)
@@ -468,37 +468,37 @@ namespace HuwInterpreter {
         std::shared_ptr<Variable> StringVariable::bitwiseAnd(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             passable->getErrorManager()->add(passable->getErrorFactory()->cannotCallFunction(token, name, getType(), "bitwiseAnd", "Cannot bitwiseAND string type"));
-            return null;
+            return nullVariable;
         }
 
         std::shared_ptr<Variable> StringVariable::bitwiseOr(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             passable->getErrorManager()->add(passable->getErrorFactory()->cannotCallFunction(token, name, getType(), "bitwiseOr", "Cannot bitwiseOR string type"));
-            return null;
+            return nullVariable;
         }
 
         std::shared_ptr<Variable> StringVariable::bitwiseXOR(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             passable->getErrorManager()->add(passable->getErrorFactory()->cannotCallFunction(token, name, getType(), "bitwiseXOR", "Cannot bitwiseXOR string type"));
-            return null;
+            return nullVariable;
         }
 
         std::shared_ptr<Variable> StringVariable::bitwiseComplement(std::shared_ptr<Tokens::Token> token)
         {
             passable->getErrorManager()->add(passable->getErrorFactory()->cannotCallFunction(token, name, getType(), "bitwiseComplement", "Cannot bitwiseComplement string type"));
-            return null;
+            return nullVariable;
         }
 
         std::shared_ptr<Variable> StringVariable::leftShift(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             passable->getErrorManager()->add(passable->getErrorFactory()->cannotCallFunction(token, name, getType(), "leftShift", "Cannot leftShift string type"));
-            return null;
+            return nullVariable;
         }
 
         std::shared_ptr<Variable> StringVariable::rightShift(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             passable->getErrorManager()->add(passable->getErrorFactory()->cannotCallFunction(token, name, getType(), "rightShift", "Cannot leftShift string type"));
-            return null;
+            return nullVariable;
         }
     }
 }
