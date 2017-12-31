@@ -35,9 +35,9 @@ namespace HuwInterpreter {
             ErrorReporting::Debug::print("MulNode");
             if (passable->getErrorManager()->count() > 0)
             {
-                return null;
+                return nullVariable;
             }
-            if (scope->getReturnValue() != null)
+            if (scope->getReturnValue() != nullptr)
             {
                 return scope->getReturnValue();
             }
@@ -49,18 +49,18 @@ namespace HuwInterpreter {
                 if (l == nullptr)
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
-                    return null;
+                    return nullVariable;
                 }
                 if (r == nullptr)
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
-                    return null;
+                    return nullVariable;
                 }
                 std::shared_ptr<Variables::Variable> v = l->mul(r, token);
                 return v;
             }
             ErrorReporting::Debug::print("Could not mul.");
-            return null;
+            return nullVariable;
         }
 
         std::string MulNode::toString()

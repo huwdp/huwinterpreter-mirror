@@ -35,7 +35,7 @@ namespace HuwInterpreter {
             ErrorReporting::Debug::print("AddVarNode");
             if (passable->getErrorManager()->count() > 0)
             {
-                return null;
+                return nullVariable;
             }
             if (scope->getReturnValue() != nullptr)
             {
@@ -50,7 +50,7 @@ namespace HuwInterpreter {
                 }
                 else
                 {
-                    scope->getVariableManager()->setVariable(name, null);
+                    scope->getVariableManager()->setVariable(name, nullVariable);
                 }
             }
             else
@@ -59,7 +59,7 @@ namespace HuwInterpreter {
                 var = value->execute(globalScope, scope);
                 if (passable->getErrorManager()->count() > 0)
                 {
-                    return null;
+                    return nullVariable;
                 }
                 if (scope->getReturnValue() != nullptr)
                 {
@@ -71,7 +71,7 @@ namespace HuwInterpreter {
                     if (globalScope->getVariableManager()->exists(name))
                     {
                         passable->getErrorManager()->add(passable->getErrorFactory()->variableDeclared(token, name));
-                        return null;
+                        return nullVariable;
                     }
                     else if (!scope->getVariableManager()->addVariable(name, var))
                     {
@@ -83,7 +83,7 @@ namespace HuwInterpreter {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
                 }
             }
-            return null;
+            return nullVariable;
         }
 
         std::string AddVarNode::toString()

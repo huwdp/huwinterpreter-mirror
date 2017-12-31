@@ -32,7 +32,7 @@ namespace HuwInterpreter {
             {
                 ErrorReporting::Debug::print("Command function requires at least 1 argument");
                 passable->getErrorManager()->add(passable->getErrorFactory()->requiresAtLeastXArguments(token, name, 1));
-                return null;
+                return nullVariable;
             }
             for (std::vector<std::shared_ptr<Nodes::Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
             {
@@ -42,7 +42,7 @@ namespace HuwInterpreter {
                     if (var == nullptr)
                     {
                         passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-                        return null;
+                        return nullVariable;
                     }
 
                     system(var->toString().c_str());

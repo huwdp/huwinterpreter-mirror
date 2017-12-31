@@ -50,5 +50,25 @@ namespace HuwInterpreter {
         {
             this->name = name;
         }
+
+        long long Variable::getReferenceCount()
+        {
+            return referenceCount;
+        }
+
+        void Variable::setReferenceCount(long long n)
+        {
+            referenceCount = n;
+        }
+
+        void Variable::incrementReferenceCount()
+        {
+            referenceCount++;
+        }
+
+        void Variable::decrementReferenceCount()
+        {
+            referenceCount--;
+        }
     }
 }

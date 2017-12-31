@@ -34,7 +34,7 @@ namespace HuwInterpreter {
             ErrorReporting::Debug::print("GetVarNode");
             if (passable->getErrorManager()->count() > 0)
             {
-                return null;
+                return nullVariable;
             }
             if (scope->getReturnValue() != nullptr)
             {
@@ -55,10 +55,10 @@ namespace HuwInterpreter {
             else
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->variableNotDeclared(token, name));
-                return null;
+                return nullVariable;
             }
             ErrorReporting::Debug::print("Could not find variable.");
-            return null;
+            return nullVariable;
         }
 
         std::string GetVarNode::toString()

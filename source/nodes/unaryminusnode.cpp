@@ -33,7 +33,7 @@ namespace HuwInterpreter {
             ErrorReporting::Debug::print("UnaryMinusNode");
             if (passable->getErrorManager()->count() > 0)
             {
-                return null;
+                return nullVariable;
             }
             if (scope->getReturnValue() != nullptr)
             {
@@ -51,7 +51,7 @@ namespace HuwInterpreter {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
                 }
             }
-            return null;
+            return nullVariable;
         }
 
         std::string UnaryMinusNode::toString()

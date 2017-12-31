@@ -35,7 +35,7 @@ namespace HuwInterpreter {
             ErrorReporting::Debug::print("AddConstNode");
             if (passable->getErrorManager()->count() > 0)
             {
-                return null;
+                return nullVariable;
             }
             if (scope->getReturnValue() != nullptr)
             {
@@ -46,7 +46,7 @@ namespace HuwInterpreter {
                 std::shared_ptr<Variables::Variable> var = value->execute(globalScope, scope);
                 if (passable->getErrorManager()->count() > 0)
                 {
-                    return null;
+                    return nullVariable;
                 }
                 if (scope->getReturnValue() != nullptr)
                 {
@@ -57,7 +57,7 @@ namespace HuwInterpreter {
                     if (globalScope->getVariableManager()->exists(name))
                     {
                         passable->getErrorManager()->add(passable->getErrorFactory()->constantDeclared(token, name));
-                        return null;
+                        return nullVariable;
                     }
                     else if (!scope->getVariableManager()->addVariable(name, std::make_shared<Variables::ConstantVariable>(passable, var)))
                     {
@@ -68,10 +68,10 @@ namespace HuwInterpreter {
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
                 }
-                return null;
+                return nullVariable;
             }
             passable->getErrorManager()->add(passable->getErrorFactory()->constantDeclared(token, name));
-            return null;
+            return nullVariable;
         }
 
         std::string AddConstNode::toString()

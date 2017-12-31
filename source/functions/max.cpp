@@ -39,7 +39,7 @@ namespace HuwInterpreter {
                         if (var == nullptr)
                         {
                             passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-                            return null;
+                            return nullVariable;
                         }
 
                         try

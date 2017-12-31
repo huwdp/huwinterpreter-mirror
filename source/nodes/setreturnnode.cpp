@@ -33,7 +33,7 @@ namespace HuwInterpreter {
             ErrorReporting::Debug::print("SetReturnNode");
             if (passable->getErrorManager()->count() > 0)
             {
-                return null;
+                return nullVariable;
             }
             if (scope->getReturnValue() != nullptr)
             {
@@ -41,7 +41,7 @@ namespace HuwInterpreter {
             }
             scope->setReturnValue(node->execute(globalScope, scope));
             return scope->getReturnValue();
-            return null;
+            return nullVariable;
         }
 
         std::string SetReturnNode::toString()

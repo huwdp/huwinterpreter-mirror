@@ -93,150 +93,150 @@ namespace HuwInterpreter {
 
         std::shared_ptr<Variable> ConstantVariable::pow(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (this->variable == null)
+            if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return this->variable->pow(variable, token);
         }
 
         std::shared_ptr<Variable> ConstantVariable::mul(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (this->variable == null)
+            if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return this->variable->mul(variable, token);
         }
 
         std::shared_ptr<Variable> ConstantVariable::div(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (this->variable == null)
+            if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return this->variable->div(variable, token);
         }
 
         std::shared_ptr<Variable> ConstantVariable::mod(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (this->variable == null)
+            if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return this->variable->mod(variable, token);
         }
 
         std::shared_ptr<Variable> ConstantVariable::add(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (this->variable == null)
+            if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return this->variable->add(variable, token);
         }
 
         std::shared_ptr<Variable> ConstantVariable::sub(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (this->variable == null)
+            if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return this->variable->sub(variable, token);
         }
 
         std::shared_ptr<Variable> ConstantVariable::ifUnder(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (this->variable == null)
+            if (variable == nullptr)
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, "ifUnder", name, getType()));
-                return null;
+                return nullVariable;
             }
             return this->variable->sub(variable, token);
         }
 
         std::shared_ptr<Variable> ConstantVariable::ifUnderOrEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (this->variable)
+            if (this->variable == nullptr)
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, "ifUnderOrEqual", name, getType()));
-                return null;
+                return nullVariable;
             }
             return this->variable->ifUnderOrEqual(variable, token);
         }
 
         std::shared_ptr<Variable> ConstantVariable::ifOver(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (this->variable == null)
+            if (variable == nullptr)
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, "ifOver", name, getType()));
-                return null;
+                return nullVariable;
             }
             return this->variable->ifOver(variable, token);
         }
 
         std::shared_ptr<Variable> ConstantVariable::ifOverOrEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (this->variable == null)
+            if (variable == nullptr)
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, "ifOverOrEqual", name, getType()));
-                return null;
+                return nullVariable;
             }
             return this->ifOverOrEqual(variable, token);
         }
 
         std::shared_ptr<Variable> ConstantVariable::ifEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (this->variable == null)
+            if (variable == nullptr)
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, "ifEqual", name, getType()));
-                return null;
+                return nullVariable;
             }
             return this->variable->ifEqual(variable, token);
         }
 
         std::shared_ptr<Variable> ConstantVariable::ifNotEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (this->variable == null)
+            if (variable == nullptr)
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, "ifNotEqual", name, getType()));
-                return null;
+                return nullVariable;
             }
             return this->variable->ifNotEqual(variable, token);
         }
 
         std::shared_ptr<Variable> ConstantVariable::increment(std::shared_ptr<Tokens::Token> token)
         {
-            if (!isSet && this->variable == null && variable == nullptr)
+            if (!isSet && variable == nullptr)
             {
                 isSet = true;
-                return null;
+                return nullVariable;
             }
             return this->variable->increment(token);
         }
 
         std::shared_ptr<Variable> ConstantVariable::count(std::shared_ptr<Tokens::Token> token)
         {
-            if (this->variable == null)
+            if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return this->variable->count(token);
         }
 
         std::shared_ptr<Variable> ConstantVariable::decrement(std::shared_ptr<Tokens::Token> token)
         {
-            if (!isSet && this->variable == null && variable == nullptr)
+            if (!isSet && variable == nullptr)
             {
                 isSet = true;
-                return null;
+                return nullVariable;
             }
             return this->variable->decrement(token);
         }
 
         void ConstantVariable::set(std::string index, std::shared_ptr<Variable> value, std::shared_ptr<Tokens::Token> token)
         {
-            if (!isSet && this->variable == null && variable == nullptr)
+            if (!isSet && variable == nullptr)
             {
                 isSet = true;
                 return;
@@ -246,16 +246,16 @@ namespace HuwInterpreter {
 
         std::shared_ptr<Variable> ConstantVariable::get(std::string value, std::shared_ptr<Tokens::Token> token)
         {
-            if (this->variable == null)
+            if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return this->variable->get(value, token);
         }
 
         void ConstantVariable::unset(std::string index, std::shared_ptr<Tokens::Token> token)
         {
-            if (!isSet && this->variable == null && variable == nullptr)
+            if (!isSet && variable == nullptr)
             {
                 isSet = true;
                 return;
@@ -267,61 +267,61 @@ namespace HuwInterpreter {
         {
             if (variable != nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return variable->copy(token);
         }
 
         std::shared_ptr<Variable> ConstantVariable::bitwiseAnd(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (!isSet && this->variable == null && variable == nullptr)
+            if (!isSet && variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return this->variable->bitwiseAnd(variable, token);
         }
 
         std::shared_ptr<Variable> ConstantVariable::bitwiseOr(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (!isSet && this->variable == null && variable == nullptr)
+            if (!isSet && variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return this->variable->bitwiseOr(variable, token);
         }
 
         std::shared_ptr<Variable> ConstantVariable::bitwiseXOR(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (!isSet && this->variable == null && variable == nullptr)
+            if (!isSet && variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return this->variable->bitwiseXOR(variable, token);
         }
 
         std::shared_ptr<Variable> ConstantVariable::bitwiseComplement(std::shared_ptr<Tokens::Token> token)
         {
-            if (variable == null)
+            if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return variable->bitwiseComplement(token);
         }
 
         std::shared_ptr<Variable> ConstantVariable::leftShift(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (variable == null)
+            if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return this->variable->leftShift(variable, token);
         }
 
         std::shared_ptr<Variable> ConstantVariable::rightShift(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (variable == null)
+            if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             return this->variable->rightShift(variable, token);
         }

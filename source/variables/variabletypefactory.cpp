@@ -24,7 +24,7 @@ namespace HuwInterpreter {
 
         std::shared_ptr<Variable> VariableTypeFactory::newVariable(Types::VarType  varType)
         {
-            std::shared_ptr<Variable> null;
+            std::shared_ptr<Variable> nullVariable;
             if (varType == Types::VarType::STRING)
             {
                 return std::make_shared<StringVariable>(passable);
@@ -37,7 +37,7 @@ namespace HuwInterpreter {
             {
                 return std::make_shared<NumberVariable>(passable, 0.0);
             }
-            return null;
+            return nullVariable;
         }
     }
 }

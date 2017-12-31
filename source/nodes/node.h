@@ -81,7 +81,7 @@ namespace HuwInterpreter {
         {
         protected:
             std::string internalName;
-            std::shared_ptr<Variables::Variable> null;
+            std::shared_ptr<Variables::Variable> nullVariable;
             std::shared_ptr<Tokens::Token> token;
             std::shared_ptr<Passable> passable;
         public:

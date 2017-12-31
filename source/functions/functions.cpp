@@ -109,8 +109,8 @@ namespace HuwInterpreter {
             std::unordered_map<std::string,std::shared_ptr<Functions::Function>>::const_iterator got = functions.find(name);
             if (got == functions.end())
             {
-                std::shared_ptr<Functions::Function> null;
-                return null;
+                std::shared_ptr<Functions::Function> nullFunction;
+                return nullFunction;
             }
             else
             {

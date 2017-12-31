@@ -36,7 +36,7 @@ namespace HuwInterpreter {
             ErrorReporting::Debug::print("IfNode");
             if (passable->getErrorManager()->count() > 0)
             {
-                return null;
+                return nullVariable;
             }
             if (scope->getReturnValue() != nullptr)
             {
@@ -52,7 +52,7 @@ namespace HuwInterpreter {
                         body->execute(globalScope, scope);
                         if (passable->getErrorManager()->count() > 0)
                         {
-                            return null;
+                            return nullVariable;
                         }
                         if (scope->getReturnValue() != nullptr)
                         {
@@ -71,7 +71,7 @@ namespace HuwInterpreter {
                         elseNode->execute(globalScope, scope);
                         if (passable->getErrorManager()->count() > 0)
                         {
-                            return null;
+                            return nullVariable;
                         }
                         if (scope->getReturnValue() != nullptr)
                         {
@@ -84,7 +84,7 @@ namespace HuwInterpreter {
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, internalName));
             }
-            return null;
+            return nullVariable;
         }
 
         std::string IfNode::toString()

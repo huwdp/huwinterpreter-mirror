@@ -36,7 +36,7 @@ namespace HuwInterpreter {
             ErrorReporting::Debug::print("WhileNode");
             if (passable->getErrorManager()->count() > 0)
             {
-                return null;
+                return nullVariable;
             }
             if (scope->getReturnValue() != nullptr)
             {
@@ -46,17 +46,17 @@ namespace HuwInterpreter {
             {
                 std::shared_ptr<Variables::Variable> c = this->condition->execute(globalScope, scope);
 
-                if (c == null)
+                if (c == nullptr)
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
-                    return null;
+                    return nullVariable;
                 }
                 bool loop = c->toBool();
                 while (loop)
                 {
                     if (passable->getErrorManager()->count() > 0)
                     {
-                        return null;
+                        return nullVariable;
                     }
                     if (scope->getReturnValue() != nullptr)
                     {
@@ -64,29 +64,29 @@ namespace HuwInterpreter {
                     }
                     body->execute(globalScope, scope);
                     c = condition->execute(globalScope, scope);
-                    if (c == null)
+                    if (c == nullptr)
                     {
                         // Most likely an error here so return null
-                        return null;
+                        return nullVariable;
                     }
                     loop = c->toBool();
-                    if (c == null)
+                    if (c == nullptr)
                     {
                         passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
-                        return null;
+                        return nullVariable;
                     }
                 }
             }
             else
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, internalName));
-                return null;
+                return nullVariable;
             }
             if (next != nullptr)
             {
                 return next->execute(globalScope, scope);
             }
-            return null;
+            return nullVariable;
         }
 
         std::string WhileNode::toString()

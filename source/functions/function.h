@@ -35,7 +35,7 @@ namespace HuwInterpreter {
         {
         protected:
             std::string name;
-            std::shared_ptr<Variable> null;
+            std::shared_ptr<Variable> nullVariable;
             std::shared_ptr<Passable> passable;
         public:
             Function(std::shared_ptr<Passable> passable);

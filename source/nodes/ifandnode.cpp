@@ -35,7 +35,7 @@ namespace HuwInterpreter {
             ErrorReporting::Debug::print("And");
             if (passable->getErrorManager()->count() > 0)
             {
-                return null;
+                return nullVariable;
             }
             if (scope->getReturnValue() != nullptr)
             {
@@ -47,7 +47,7 @@ namespace HuwInterpreter {
                 if (l == nullptr)
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
-                    return null;
+                    return nullVariable;
                 }
                 if (!l->toBool())
                 {
@@ -58,7 +58,7 @@ namespace HuwInterpreter {
                 if (r == nullptr)
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
-                    return null;
+                    return nullVariable;
                 }
 
                 if (r->toBool() && l->toBool())
@@ -68,7 +68,7 @@ namespace HuwInterpreter {
                 return std::make_shared<Variables::NumberVariable>(passable, false);
             }
             ErrorReporting::Debug::print("Could not and");
-            return null;
+            return nullVariable;
         }
 
         std::string IfAndNode::toString()

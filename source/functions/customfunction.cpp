@@ -38,7 +38,7 @@ namespace HuwInterpreter {
             if (this->arguments.size() != arguments.size())
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->unmatchedSpecifiedNumberOfArguments(token, name));
-                return null;
+                return nullVariable;
             }
 
             // Clean code below: TODO
@@ -65,7 +65,7 @@ namespace HuwInterpreter {
                 }
                 return output;
             }
-            return null;
+            return nullVariable;
         }
 
         std::string CustomFunction::toString(std::vector<std::shared_ptr<Nodes::Node>> arguments)

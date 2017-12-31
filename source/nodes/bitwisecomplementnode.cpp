@@ -33,9 +33,9 @@ namespace HuwInterpreter {
             ErrorReporting::Debug::print("BitwiseComplementNode");
             if (passable->getErrorManager()->count() > 0)
             {
-                return null;
+                return nullVariable;
             }
-            if (scope->getReturnValue() != null)
+            if (scope->getReturnValue() != nullptr)
             {
                 return scope->getReturnValue();
             }
@@ -48,7 +48,7 @@ namespace HuwInterpreter {
                 }
                 passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
             }
-            return null;
+            return nullVariable;
         }
 
         std::string BitwiseComplementNode::toString()

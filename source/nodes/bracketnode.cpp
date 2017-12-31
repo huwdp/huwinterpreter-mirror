@@ -34,7 +34,7 @@ namespace HuwInterpreter {
             ErrorReporting::Debug::print("Bracket");
             if (passable->getErrorManager()->count() > 0)
             {
-                return null;
+                return nullVariable;
             }
             if (scope->getReturnValue() != nullptr)
             {
@@ -46,12 +46,12 @@ namespace HuwInterpreter {
                 if (n == nullptr)
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
-                    return null;
+                    return nullVariable;
                 }
                 return n;
             }
             ErrorReporting::Debug::print("Could not bracket.");
-            return null;
+            return nullVariable;
         }
 
         std::string BracketNode::toString()

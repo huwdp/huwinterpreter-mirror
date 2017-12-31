@@ -47,7 +47,7 @@ namespace HuwInterpreter {
             std::unordered_map<std::string,std::shared_ptr<Variable>>::const_iterator got = variables.find(name);
             if (got == variables.end())
             {
-                return null;
+                return nullVariable;
             }
             else
             {
@@ -60,7 +60,7 @@ namespace HuwInterpreter {
             std::unordered_map<std::string,std::shared_ptr<Variable>>::const_iterator got = variables.find(name);
             if (got == variables.end())
             {
-                return null;
+                return nullVariable;
             }
             else
             {
@@ -72,14 +72,14 @@ namespace HuwInterpreter {
         {
             if (variable == nullptr)
             {
-                return null;
+                return nullVariable;
             }
             std::shared_ptr<Variable> e = exists(variable->getName());
             if (e != nullptr)
             {
                 return e;
             }
-            return null;
+            return nullVariable;
         }
 
         bool VariableManager::addVariable(std::shared_ptr<Variable> variable)

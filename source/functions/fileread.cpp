@@ -38,7 +38,7 @@ namespace HuwInterpreter {
                     if (var == nullptr)
                     {
                         passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-                        return null;
+                        return nullVariable;
                     }
 
                     std::string stream = file.read(var->toString());
@@ -47,7 +47,7 @@ namespace HuwInterpreter {
                 else
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-                    return null;
+                    return nullVariable;
                 }
             }
             else
