@@ -47,7 +47,7 @@ namespace HuwInterpreter {
                 try
                 {
                     double d = var->toDouble();
-                    int value = (int)d;
+                    int value = static_cast<int>(d);
                     std::time_t t = value;
                     std::tm tm = *std::localtime(&t);
                     std::stringstream ss;

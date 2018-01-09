@@ -32,7 +32,7 @@ namespace HuwInterpreter {
             {
                 std::srand(std::time(0));
                 int number = std::rand();
-                double value = (double)number;
+                double value = static_cast<double>(number);
                 returnNode = std::make_shared<NumberVariable>(passable, value);
             }
             else

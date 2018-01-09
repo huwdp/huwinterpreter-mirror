@@ -74,7 +74,7 @@ namespace HuwInterpreter {
         {
             try
             {
-                this->value = (double)value;
+                this->value = static_cast<double>(value);
             }
             catch (const std::exception& e)
             {
@@ -312,7 +312,7 @@ namespace HuwInterpreter {
             {
                 return nullVariable;
             }
-            long long value = (long long)((long long)this->value | variable->toInt());
+            long long value = static_cast<long long>(static_cast<long long>(this->value) | variable->toInt());
             return std::move(std::make_shared<NumberVariable>(passable, value));
         }
 
@@ -322,7 +322,7 @@ namespace HuwInterpreter {
             {
                 return nullVariable;
             }
-            long long value = (long long)((long long)this->value ^ variable->toInt());
+            long long value = static_cast<long long>(static_cast<long long>(this->value) ^ variable->toInt());
             return std::move(std::make_shared<NumberVariable>(passable, value));
         }
 

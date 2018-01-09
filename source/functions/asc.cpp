@@ -48,7 +48,7 @@ namespace HuwInterpreter {
                 if (temp.size() == 1)
                 {
                     int temp2 = temp.at(0);
-                    double ascii = (double)temp2;
+                    double ascii = static_cast<double>(temp2);
                     returnNode = std::make_shared<NumberVariable>(passable, ascii);
                 }
             }

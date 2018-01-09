@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, bool value)
             : Variable(passable)
         {
-            this->variable = std::move(std::make_shared<IntegerVariable>(passable, (long long)(int)value));
+            this->variable = std::move(std::make_shared<IntegerVariable>(passable, static_cast<long long>(static_cast<int>(value))));
         }
 
         NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, std::shared_ptr<Variable> variable)
@@ -69,7 +69,7 @@ namespace HuwInterpreter {
         NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, bool value, std::shared_ptr<Tokens::Token> token)
             : Variable(passable, token)
         {
-            this->variable = std::move(std::make_shared<IntegerVariable>(passable, (long long)(int)value));
+            this->variable = std::move(std::make_shared<IntegerVariable>(passable, static_cast<long long>(static_cast<int>(value))));
         }
 
         NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)

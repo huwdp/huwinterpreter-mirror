@@ -50,10 +50,10 @@ namespace HuwInterpreter {
                 try
                 {
                     double d = var1->toDouble();
-                    long value = (long)d;   // TODO
+                    long value = static_cast<long>(d);   // TODO
 
                     std::string format = var2->toString();
-                    std::time_t t = (int)value;
+                    std::time_t t = static_cast<int>(value);
                     std::tm tm = *std::localtime(&t);
 
                     std::stringstream ss;

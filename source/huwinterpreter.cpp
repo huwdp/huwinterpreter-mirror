@@ -27,7 +27,7 @@ namespace  HuwInterpreter {
     void Interpreter::executeFile(std::string fileLocation)
     {
         std::ifstream file (fileLocation.c_str());
-        bool exists = (bool)file;
+        bool exists = static_cast<bool>(file);
         if (!exists)
         {
             std::string errorMessage = "Could not find file \"";
@@ -54,7 +54,7 @@ namespace  HuwInterpreter {
     {
         std::vector<std::shared_ptr<Token>> tokens;
         std::ifstream file (fileLocation.c_str());
-        bool exists = (bool)file;
+        bool exists = static_cast<bool>(file);
         if (!exists)
         {
             std::string errorMessage = "Could not find file \"";

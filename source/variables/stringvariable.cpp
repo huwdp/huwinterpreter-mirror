@@ -448,7 +448,7 @@ namespace HuwInterpreter {
             if (index >= 0 && index < this->value.length())
             {
                 std::string character;
-                character.append(1, (char)this->value.at(index));
+                character.append(1, static_cast<char>(this->value.at(index)));
                 return std::make_shared<StringVariable>(passable, character);
             }
             passable->getErrorManager()->add(passable->getErrorFactory()->outOfBounds(token, name));

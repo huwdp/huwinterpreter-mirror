@@ -77,7 +77,7 @@ namespace HuwInterpreter {
 
         double IntegerVariable::toDouble()
         {
-            return (double)value;
+            return static_cast<double>(value);
         }
 
         long long IntegerVariable::toInt()
@@ -322,7 +322,7 @@ namespace HuwInterpreter {
             {
                 return nullVariable;
             }
-            return std::make_shared<NumberVariable>(passable, (long long)(value << variable->toInt()));
+            return std::make_shared<NumberVariable>(passable, static_cast<long long>(value << variable->toInt()));
         }
 
         std::shared_ptr<Variable> IntegerVariable::rightShift(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
@@ -331,7 +331,7 @@ namespace HuwInterpreter {
             {
                 return nullVariable;
             }
-            return std::make_shared<NumberVariable>(passable, (long long)(value >> variable->toInt()));
+            return std::make_shared<NumberVariable>(passable, static_cast<long long>(value >> variable->toInt()));
         }
     }
 }
