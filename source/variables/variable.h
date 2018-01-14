@@ -55,6 +55,7 @@ namespace HuwInterpreter {
             virtual Types::VarType getType() = 0;
             virtual bool isNumber() = 0;
             virtual bool isConst() = 0;
+            virtual bool isArray() = 0;
             virtual std::shared_ptr<Variable> pow(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token) = 0;
             virtual std::shared_ptr<Variable> mul(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token) = 0;
             virtual std::shared_ptr<Variable> div(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token) = 0;

@@ -91,6 +91,11 @@ namespace HuwInterpreter {
             return true;
         }
 
+        bool ConstantVariable::isArray()
+        {
+            return false;
+        }
+
         std::shared_ptr<Variable> ConstantVariable::pow(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             if (variable == nullptr)

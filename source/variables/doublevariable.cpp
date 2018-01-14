@@ -142,6 +142,11 @@ namespace HuwInterpreter {
             return false;
         }
 
+        bool DoubleVariable::isArray()
+        {
+            return false;
+        }
+
         std::shared_ptr<Variable> DoubleVariable::pow(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             if (variable == nullptr)

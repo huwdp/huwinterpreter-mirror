@@ -111,9 +111,6 @@ namespace HuwInterpreter {
             variable = std::move(var);
         }
 
-
-
-
         void NumberVariable::setValue(double value)
         {
             this->variable->setValue(value);
@@ -165,6 +162,11 @@ namespace HuwInterpreter {
         }
 
         bool NumberVariable::isConst()
+        {
+            return false;
+        }
+
+        bool NumberVariable::isArray()
         {
             return false;
         }

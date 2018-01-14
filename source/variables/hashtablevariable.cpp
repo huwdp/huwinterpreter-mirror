@@ -92,6 +92,11 @@ namespace HuwInterpreter {
             return false;
         }
 
+        bool HashTableVariable::isArray()
+        {
+            return true;
+        }
+
         std::shared_ptr<Variable> HashTableVariable::pow(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             passable->getErrorManager()->add(passable->getErrorFactory()->cannotCallFunction(token, name, getType(), "pow", ""));

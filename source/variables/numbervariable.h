@@ -39,7 +39,6 @@ namespace HuwInterpreter {
             NumberVariable(std::shared_ptr<Passable> passable, std::string name, double value);
             NumberVariable(std::shared_ptr<Passable> passable, std::string name, long long value);
             NumberVariable(std::shared_ptr<Passable> passable, std::string name, std::string value);
-
             NumberVariable(std::shared_ptr<Passable> passable, bool value, std::shared_ptr<Tokens::Token> token);
             NumberVariable(std::shared_ptr<Passable> passable, std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token);
             NumberVariable(std::shared_ptr<Passable> passable, double value, std::shared_ptr<Tokens::Token> token);
@@ -47,8 +46,6 @@ namespace HuwInterpreter {
             NumberVariable(std::shared_ptr<Passable> passable, std::string name, double value, std::shared_ptr<Tokens::Token> token);
             NumberVariable(std::shared_ptr<Passable> passable, std::string name, long long value, std::shared_ptr<Tokens::Token> token);
             NumberVariable(std::shared_ptr<Passable> passable, std::string name, std::string value, std::shared_ptr<Tokens::Token> token);
-
-
             void setValue(double value);
             void setValue(std::string value);
             void setValue(long long value);
@@ -60,6 +57,7 @@ namespace HuwInterpreter {
             double getValue();
             bool isNumber();
             bool isConst();
+            bool isArray();
             std::shared_ptr<Variable> pow(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token);
             std::shared_ptr<Variable> mul(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token);
             std::shared_ptr<Variable> div(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token);

@@ -168,6 +168,11 @@ namespace HuwInterpreter {
             return false;
         }
 
+        bool StringVariable::isArray()
+        {
+            return true;
+        }
+
         std::shared_ptr<Variable> StringVariable::pow(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             ErrorReporting::Debug::print("Cannot call power method on string");
