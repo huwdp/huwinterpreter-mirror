@@ -67,16 +67,13 @@
 #include "leftshiftnode.h"
 #include "rightshiftnode.h"
 
+#include "arraygetnode.h"
+
 namespace HuwInterpreter {
     namespace Nodes {
         class NodeFactory
         {
         public:
-            virtual std::shared_ptr<Node> CreateAddConstNode(std::shared_ptr<Passable> passable,
-                                                             std::shared_ptr<Tokens::Token> token,
-                                                             std::string name,
-                                                             std::shared_ptr<Node> value) = 0;
-
             virtual std::shared_ptr<Node> CreateAddNode(std::shared_ptr<Passable> passable,
                                                         std::shared_ptr<Tokens::Token> token,
                                                         std::shared_ptr<Node> left,
@@ -86,6 +83,16 @@ namespace HuwInterpreter {
                                                            std::shared_ptr<Tokens::Token> token,
                                                            std::string name,
                                                            std::shared_ptr<Node> value) = 0;
+
+            virtual std::shared_ptr<Node> CreateAddConstNode(std::shared_ptr<Passable> passable,
+                                                             std::shared_ptr<Tokens::Token> token,
+                                                             std::string name,
+                                                             std::shared_ptr<Node> value) = 0;
+
+            virtual std::shared_ptr<Node> CreateArrayGetNode(std::shared_ptr<Passable> passable,
+                                                             std::shared_ptr<Tokens::Token> token,
+                                                             std::shared_ptr<Node> left,
+                                                             std::shared_ptr<Node> right) = 0;
 
             virtual std::shared_ptr<Node> CreateBitwiseComplementNode(std::shared_ptr<Passable> passable,
                                                                       std::shared_ptr<Tokens::Token> token,
@@ -248,7 +255,6 @@ namespace HuwInterpreter {
                                                                std::shared_ptr<Tokens::Token> token,
                                                                std::shared_ptr<Node> left,
                                                                std::shared_ptr<Node> right) = 0;
-
         };
     }
 }

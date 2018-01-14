@@ -379,6 +379,14 @@ namespace HuwInterpreter {
                     {
                         AddToken(Types::COMMA, lineInfo);
                     }
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::LEFTSQUAREBRACKET))
+                    {
+                        AddToken(Types::LEFTSQUAREBRACKET, lineInfo);
+                    }
+                    else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::RIGHTSQUAREBRACKET))
+                    {
+                        AddToken(Types::RIGHTSQUAREBRACKET, lineInfo);
+                    }
                 }
                 fileReader->next();
             }

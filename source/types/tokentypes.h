@@ -57,7 +57,9 @@ namespace HuwInterpreter {
                          DECREMENT,
                          NOT,
                          LEFTSHIFT,
-                         RIGHTSHIFT
+                         RIGHTSHIFT,
+                         LEFTSQUAREBRACKET,
+                         RIGHTSQUAREBRACKET
         };
 
 

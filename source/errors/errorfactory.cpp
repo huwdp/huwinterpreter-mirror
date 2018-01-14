@@ -165,5 +165,14 @@ namespace HuwInterpreter {
         {
             return std::make_shared<Error>(RUNTIME_ERROR, "Cannot reassign constant '" + name + "'", token);
         }
+
+        std::shared_ptr<Error> ErrorFactory::isNotAnArray(std::shared_ptr<Token> token, std::string name)
+        {
+            if (name.empty())
+            {
+                return std::make_shared<Error>(RUNTIME_ERROR, "Variable is not an array", token);
+            }
+            return std::make_shared<Error>(RUNTIME_ERROR, "Variable " + name + "is not an array", token);
+        }
     }
 }

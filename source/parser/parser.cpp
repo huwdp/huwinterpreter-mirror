@@ -155,6 +155,27 @@ namespace HuwInterpreter {
         passable->getErrorManager()->add(passable->getErrorFactory()->syntaxError(currentToken, errorMsg));
     }
 
+    std::shared_ptr<Nodes::Node> Parser::parseSquareBrackets(std::shared_ptr<Nodes::Node> node)
+    {
+        acceptIndentation();
+        if (!tokens.empty() && compilation)
+        {
+            if (accept(Types::LEFTSQUAREBRACKET))
+            {
+                acceptIndentation();
+                std::shared_ptr<Nodes::Node> index = parseBoolean();    // This is the index
+                acceptIndentation();
+                if (!expect(RIGHTSQUAREBRACKET))
+                {
+                    return nullNode;
+                }
+                std::shared_ptr<Nodes::Node> node2 = nodeFactory->CreateArrayGetNode(passable, currentToken, node, index);
+                return parseSquareBrackets(node2);
+            }
+        }
+        return node;
+    }
+
     std::shared_ptr<Nodes::Node> Parser::parseValue()
     {
         acceptIndentation();
@@ -198,6 +219,10 @@ namespace HuwInterpreter {
                     acceptIndentation();
                     return nodeFactory->CreateGetFuncNode(passable, currentToken, word, functions, arguments);
                 }
+                else if (peak != nullptr && peakToken()->getType() == Types::LEFTSQUAREBRACKET)
+                {
+
+                }
                 else if (currentToken->getType() == Types::TEXT)
                 {
                     nextToken();
@@ -213,7 +238,7 @@ namespace HuwInterpreter {
                 }
                 std::shared_ptr<Nodes::Node> var = nodeFactory->CreateGetVarNode(passable, currentToken, word);
                 nextToken();
-                return var;
+                return parseSquareBrackets(var);
             }
             errorMessage("", currentToken);
             nextToken();

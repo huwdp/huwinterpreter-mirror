@@ -76,6 +76,8 @@
 #include "variables/scope.h"
 #include "functions/customfunction.h"
 
+#include "nodes/arraygetnode.h"
+
 namespace HuwInterpreter {
 
     using namespace Nodes;
@@ -109,6 +111,7 @@ namespace HuwInterpreter {
         std::string syntaxError(std::string content);
         bool expectSemicolon();
         void errorMessage(std::string errorMsg, std::shared_ptr<Tokens::Token> currentToken);
+        std::shared_ptr<Nodes::Node> parseSquareBrackets(std::shared_ptr<Nodes::Node> node);
         std::shared_ptr<Nodes::Node> parseValue();
         std::shared_ptr<Nodes::Node> parseFactor();
         std::shared_ptr<Nodes::Node> parseTerm();

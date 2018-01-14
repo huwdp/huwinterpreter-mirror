@@ -60,6 +60,8 @@ namespace HuwInterpreter {
             types[Types::INDENTATION] = " ";
             types[Types::BITWISEXOR] = "^";
             types[Types::BITWISECOMPLEMENT] = "~";
+            types[Types::LEFTSQUAREBRACKET] = "[";
+            types[Types::RIGHTSQUAREBRACKET] = "]";
         }
 
         std::string Tokens::get(Types::TokenType value)

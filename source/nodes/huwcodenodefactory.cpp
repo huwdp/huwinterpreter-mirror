@@ -41,6 +41,14 @@ namespace HuwInterpreter {
             return std::make_shared<AddVarNode>(passable, token, name, value);
         }
 
+        std::shared_ptr<Node> HuwCodeNodeFactory::CreateArrayGetNode(std::shared_ptr<Passable> passable,
+                                                         std::shared_ptr<Tokens::Token> token,
+                                                         std::shared_ptr<Node> left,
+                                                         std::shared_ptr<Node> right)
+        {
+            return std::make_shared<ArrayGetNode>(passable, token, left, right);
+        }
+
         std::shared_ptr<Nodes::Node> HuwCodeNodeFactory::CreateBitwiseComplementNode(std::shared_ptr<Passable> passable,
                                                                                      std::shared_ptr<Tokens::Token> token,
                                                                                      std::shared_ptr<Nodes::Node> node)

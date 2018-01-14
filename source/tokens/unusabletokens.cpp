@@ -63,6 +63,8 @@ namespace HuwInterpreter {
             items.push_back(Types::DECREMENT);
             items.push_back(Types::BITWISECOMPLEMENT);
             items.push_back(Types::LEFTSHIFT);
+            items.push_back(Types::LEFTSQUAREBRACKET);
+            items.push_back(Types::RIGHTSQUAREBRACKET);
         }
 
         bool UnusableTokens::tokenExists(Types::TokenType tokenType)
