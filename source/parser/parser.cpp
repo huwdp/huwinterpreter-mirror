@@ -169,8 +169,7 @@ namespace HuwInterpreter {
                 {
                     return nullNode;
                 }
-                std::shared_ptr<Nodes::Node> node2 = nodeFactory->CreateArrayGetNode(passable, currentToken, node, index);
-                return parseSquareBrackets(node2);
+                return parseSquareBrackets(nodeFactory->CreateArrayGetNode(passable, currentToken, node, index));
             }
         }
         return node;
