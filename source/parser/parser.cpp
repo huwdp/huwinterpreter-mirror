@@ -216,7 +216,7 @@ namespace HuwInterpreter {
                         return nullNode;
                     }
                     acceptIndentation();
-                    return nodeFactory->CreateGetFuncNode(passable, currentToken, word, functions, arguments);
+                    return parseSquareBrackets(nodeFactory->CreateGetFuncNode(passable, currentToken, word, functions, arguments));
                 }
                 else if (peak != nullptr && peakToken()->getType() == Types::LEFTSQUAREBRACKET)
                 {
