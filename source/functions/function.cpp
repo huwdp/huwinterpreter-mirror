@@ -41,7 +41,7 @@ namespace HuwInterpreter {
                 if ((*it) = nullptr)
                 {
                     output.append((*it)->toString());
-                    it++;
+                    ++it;
                     if (it != arguments.end())
                     {
                         output.append(",");

@@ -79,7 +79,7 @@ namespace HuwInterpreter {
             for (std::vector<std::string>::iterator it = this->arguments.begin(); it != this->arguments.end(); ++it)
             {
                 output.append((*it));
-                it++;
+                ++it;
                 if (it != this->arguments.end())
                 {
                     output.append(",");

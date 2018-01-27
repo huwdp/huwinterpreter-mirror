@@ -64,7 +64,7 @@ namespace HuwInterpreter {
         if (it < tokens.end())
         {
             currentToken = (*it);
-            it++;
+            ++it;
         }
     }
 

@@ -31,7 +31,7 @@ namespace HuwInterpreter {
             if (arguments.size() > 0)
             {
                 double max = std::numeric_limits<double>::min();
-                for (std::vector<std::shared_ptr<Nodes::Node>>::iterator it = arguments.begin(); it != arguments.end(); it++)
+                for (std::vector<std::shared_ptr<Nodes::Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
                 {
                     if ((*it) != nullptr)
                     {
