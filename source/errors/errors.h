@@ -33,7 +33,6 @@ namespace HuwInterpreter {
             void removeAll();
             std::vector<std::shared_ptr<Error>> get();
             void set(std::vector<std::shared_ptr<Error>> errors);
-            void print();
             long long count();
         };
     }

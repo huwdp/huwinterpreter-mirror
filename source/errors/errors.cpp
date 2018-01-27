@@ -47,15 +47,6 @@ namespace HuwInterpreter {
             errorList = ErrorManager;
         }
 
-        void ErrorManager::print()
-        {
-            for (std::vector<std::shared_ptr<Error>>::iterator it = errorList.begin(); it != errorList.end(); ++it)
-            {
-                std::string value = (*it)->getMessage();
-                std::cout << value << std::endl;
-            }
-        }
-
         long long ErrorManager::count()
         {
             return errorList.size();
