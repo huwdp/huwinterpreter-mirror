@@ -20,12 +20,16 @@ namespace HuwInterpreter {
     {
         this->errorManager = std::make_shared<ErrorManager>();
         this->errorFactory = std::make_shared<ErrorFactory>();
+        this->stackTraceManager = std::make_shared<StackTraceManager>();
     }
 
-    Passable::Passable(std::shared_ptr<ErrorManager> errorManager, std::shared_ptr<ErrorReporting::ErrorFactory> errorFactory)
+    Passable::Passable(std::shared_ptr<ErrorManager> errorManager,
+                       std::shared_ptr<ErrorFactory> errorFactory,
+                       std::shared_ptr<StackTraceManager> stackTraceManager)
     {
         this->errorManager = errorManager;
         this->errorFactory = errorFactory;
+        this->stackTraceManager = stackTraceManager;
     }
 
     std::shared_ptr<ErrorManager> Passable::getErrorManager()
@@ -46,5 +50,15 @@ namespace HuwInterpreter {
     void Passable::setErrorFactory(std::shared_ptr<ErrorFactory> errorFactory)
     {
         this->errorFactory = std::move(errorFactory);
+    }
+
+    std::shared_ptr<StackTraceManager> Passable::getStackTraceManager()
+    {
+        return stackTraceManager;
+    }
+
+    void Passable::setStackTraceManager(std::shared_ptr<StackTraceManager> stackTraceManager)
+    {
+        this->stackTraceManager = stackTraceManager;
     }
 }

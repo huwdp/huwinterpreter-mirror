@@ -167,7 +167,9 @@ SOURCES += \
     nodes/leftshiftnode.cpp \
     nodes/rightshiftnode.cpp \
     variables/variablestringfactory.cpp \
-    nodes/arraygetnode.cpp
+    nodes/arraygetnode.cpp \
+    errors/stacktracemanager.cpp \
+    errors/stacktrace.cpp
 
 
 
@@ -363,7 +365,9 @@ HEADERS += \
     nodes/leftshiftnode.h \
     nodes/rightshiftnode.h \
     variables/variablestringfactory.h \
-    nodes/arraygetnode.h
+    nodes/arraygetnode.h \
+    errors/stacktracemanager.h \
+    errors/stacktrace.h
 
 
 

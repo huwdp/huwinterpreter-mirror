@@ -45,6 +45,7 @@ namespace HuwInterpreter {
             std::shared_ptr<Functions::Function> func = functionManager->get(name);
             if (func != nullptr)
             {
+                passable->getStackTraceManager()->enqueue(std::make_shared<ErrorReporting::StackTrace>(name, token->getLineInfo()));
                 return func->execute(token, globalScope, scope, arguments);
                 if (passable->getErrorManager()->count() > 0)
                 {

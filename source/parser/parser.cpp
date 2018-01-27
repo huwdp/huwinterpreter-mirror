@@ -1157,6 +1157,14 @@ namespace HuwInterpreter {
                     std::cout << output->toString() << std::endl;
                 }
                 passable->getErrorManager()->print();
+                if (passable->getErrorManager()->count() > 0)
+                {
+                    std::deque<std::shared_ptr<StackTrace>> stackTraces = passable->getStackTraceManager()->get();
+                    for (std::deque<std::shared_ptr<StackTrace>>::iterator it = stackTraces.begin(); it != stackTraces.end(); ++it)
+                    {
+                        std::cout << (*it)->toString() << std::endl;
+                    }
+                }
                 return true;
             }
         }

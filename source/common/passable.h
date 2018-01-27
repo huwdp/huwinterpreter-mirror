@@ -18,6 +18,7 @@
 
 #include "errors/errors.h"
 #include "errors/errorfactory.h"
+#include "errors/stacktracemanager.h"
 
 namespace HuwInterpreter {
 
@@ -28,13 +29,18 @@ namespace HuwInterpreter {
     private:
         std::shared_ptr<ErrorManager> errorManager;
         std::shared_ptr<ErrorFactory> errorFactory;
+        std::shared_ptr<StackTraceManager> stackTraceManager;
     public:
         Passable();
-        Passable(std::shared_ptr<ErrorManager> errorManager, std::shared_ptr<ErrorFactory> errorFactory);
+        Passable(std::shared_ptr<ErrorManager> errorManager,
+                 std::shared_ptr<ErrorFactory> errorFactory,
+                 std::shared_ptr<StackTraceManager> stackTraceManager);
         std::shared_ptr<ErrorManager> getErrorManager();
         void setErrorManager(std::shared_ptr<ErrorManager> errorManager);
         std::shared_ptr<ErrorFactory> getErrorFactory();
         void setErrorFactory(std::shared_ptr<ErrorFactory> errorFactory);
+        std::shared_ptr<StackTraceManager> getStackTraceManager();
+        void setStackTraceManager(std::shared_ptr<StackTraceManager> stackTraceManager);
     };
 }
 
