@@ -26,6 +26,7 @@ namespace HuwInterpreter {
             this->name = name;
             this->arguments = arguments;
             this->block = block;
+            this->token = token;
         }
 
         std::shared_ptr<Variable> CustomFunction::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,
@@ -55,6 +56,12 @@ namespace HuwInterpreter {
 
             if (block != nullptr)
             {
+                if (passable->getErrorManager()->count() > 0)
+                {
+                    return nullVariable;
+                }
+
+                passable->getStackTraceManager()->enqueue(std::make_shared<ErrorReporting::StackTrace>(name, token->getLineInfo()));
                 block->execute(globalScope, newScope);
                 std::shared_ptr<Variable> output = newScope->getReturnValue();
 

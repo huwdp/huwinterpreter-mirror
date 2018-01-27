@@ -1160,12 +1160,10 @@ namespace HuwInterpreter {
                 {
                     std::vector<std::shared_ptr<Error>> errors = passable->getErrorManager()->get();
                     std::deque<std::shared_ptr<StackTrace>> stackTraces = passable->getStackTraceManager()->get();
-
                     for (std::vector<std::shared_ptr<Error>>::iterator it = errors.begin(); it != errors.end(); ++it)
                     {
                         std::cout << (*it)->getMessage() << std::endl;
                     }
-
                     for (std::deque<std::shared_ptr<StackTrace>>::iterator it = stackTraces.begin(); it != stackTraces.end(); ++it)
                     {
                         std::cout << (*it)->toString() << std::endl;

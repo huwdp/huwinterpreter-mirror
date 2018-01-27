@@ -97,7 +97,6 @@ namespace HuwInterpreter {
                     }
                 }
             }
-            message.append(".");
             return message;
         }
     }

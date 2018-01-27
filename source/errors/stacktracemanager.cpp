@@ -35,6 +35,7 @@ namespace HuwInterpreter {
         void StackTraceManager::enqueue(std::shared_ptr<StackTrace> stackTrace)
         {
             stackTraceQueue.push_front(stackTrace);
+
             if (stackTraceQueue.size() > queueSize)
             {
                 stackTraceQueue.pop_back();
@@ -43,7 +44,10 @@ namespace HuwInterpreter {
 
         void StackTraceManager::dequeue()
         {
-            stackTraceQueue.pop_back();
+            if (stackTraceQueue.size() > 0)
+            {
+                stackTraceQueue.pop_front();
+            }
         }
 
         std::deque<std::shared_ptr<StackTrace>> StackTraceManager::get()

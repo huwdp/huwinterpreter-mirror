@@ -25,6 +25,7 @@ namespace HuwInterpreter {
         private:
             std::vector<std::string> arguments;
             std::shared_ptr<Nodes::Node> block;
+            std::shared_ptr<Tokens::Token> token;
         public:
             CustomFunction(std::shared_ptr<Passable> passable,
                            std::shared_ptr<Tokens::Token> token,
