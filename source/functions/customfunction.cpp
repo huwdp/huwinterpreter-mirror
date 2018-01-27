@@ -65,6 +65,10 @@ namespace HuwInterpreter {
                 block->execute(globalScope, newScope);
                 std::shared_ptr<Variable> output = newScope->getReturnValue();
 
+                if (passable->getErrorManager()->count() == 0)
+                {
+                    passable->getStackTraceManager()->dequeue();
+                }
                 // Remove arguments given from scope
                 for (std::vector<std::string>::iterator it1 = this->arguments.begin(); it1 != this->arguments.end(); ++it1)
                 {

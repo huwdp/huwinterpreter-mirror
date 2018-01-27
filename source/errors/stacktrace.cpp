@@ -45,7 +45,7 @@ namespace HuwInterpreter {
 
         std::string StackTrace::toString()
         {
-            std::string message = functionName + "(...)";
+            std::string message = functionName;
             if (lineInfo != nullptr)
             {
                 if (lineInfo->getLineNumber() >= 0)
