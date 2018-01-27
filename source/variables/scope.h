@@ -29,15 +29,20 @@ namespace HuwInterpreter {
         class Scope
         {
         private:
+            std::string functionName;
             std::shared_ptr<Variable> returnValue;
             std::shared_ptr<VariableManager> variableManager;
         public:
             Scope(std::shared_ptr<Passable> passable);
             Scope(std::shared_ptr<VariableManager> variableManager);
+            Scope(std::string functionName, std::shared_ptr<Passable> passable);
+            Scope(std::string functionName, std::shared_ptr<VariableManager> variableManager);
             std::shared_ptr<VariableManager> getVariableManager();
             void setVariableManager(std::shared_ptr<VariableManager> variableManager);
             std::shared_ptr<Variable> getReturnValue();
             void setReturnValue(std::shared_ptr<Variable> value);
+            std::string getFunctionName();
+            void setFunctionName(std::string functionName);
         };
     }
 }

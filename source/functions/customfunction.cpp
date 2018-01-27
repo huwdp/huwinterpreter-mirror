@@ -34,7 +34,7 @@ namespace HuwInterpreter {
                                                       std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
             // New scope
-            std::shared_ptr<Scope> newScope = std::make_shared<Scope>(passable);
+            std::shared_ptr<Scope> newScope = std::make_shared<Scope>(name, passable);
 
             if (this->arguments.size() != arguments.size())
             {
@@ -61,7 +61,7 @@ namespace HuwInterpreter {
                     return nullVariable;
                 }
 
-                passable->getStackTraceManager()->enqueue(std::make_shared<ErrorReporting::StackTrace>(name, token->getLineInfo()));
+                passable->getStackTraceManager()->enqueue(std::make_shared<ErrorReporting::StackTrace>(scope->getFunctionName(), token->getLineInfo()));
                 block->execute(globalScope, newScope);
                 std::shared_ptr<Variable> output = newScope->getReturnValue();
 
