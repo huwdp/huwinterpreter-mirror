@@ -36,7 +36,7 @@ namespace HuwInterpreter {
         {
             stackTraceQueue.push_front(stackTrace);
 
-            if (stackTraceQueue.size() > queueSize)
+            if (stackTraceQueue.size() >= queueSize)
             {
                 stackTraceQueue.pop_back();
             }
