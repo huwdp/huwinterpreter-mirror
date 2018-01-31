@@ -21,7 +21,7 @@ namespace HuwInterpreter {
         ArraySet::ArraySet(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "arraySet";
+            setName("arraySet");
         }
 
         std::shared_ptr<Variable> ArraySet::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

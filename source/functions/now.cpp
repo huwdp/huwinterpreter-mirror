@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Now::Now(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "now";
+            setName("now");
         }
 
         std::shared_ptr<Variable> Now::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

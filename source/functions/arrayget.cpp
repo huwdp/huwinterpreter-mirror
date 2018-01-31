@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         ArrayGet::ArrayGet(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "arrayGet";
+            setName("arrayGet");
         }
 
         std::shared_ptr<Variable> ArrayGet::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

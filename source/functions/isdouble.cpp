@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         IsDouble::IsDouble(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "isDouble";
+            setName("isDouble");
         }
 
         std::shared_ptr<Variable> IsDouble::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

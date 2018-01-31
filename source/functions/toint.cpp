@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         ToInt::ToInt(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "toInt";
+            setName("toInt");
         }
 
         std::shared_ptr<Variable> ToInt::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         IsStringType::IsStringType(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "isStringType";
+            setName("isStringType");
         }
 
         std::shared_ptr<Variable> IsStringType::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

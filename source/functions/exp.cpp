@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Exp::Exp(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "exp";
+            setName("exp");
         }
 
         std::shared_ptr<Variable> Exp::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Not::Not(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "not";
+            setName("not");
         }
 
         std::shared_ptr<Variable> Not::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

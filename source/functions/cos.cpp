@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Cos::Cos(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "cos";
+            setName("cos");
         }
 
         std::shared_ptr<Variable> Cos::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

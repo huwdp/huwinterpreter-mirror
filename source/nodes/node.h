@@ -28,7 +28,7 @@
 #include "variables/scope.h"
 #include "common/passable.h"
 
-
+#include "common/nameableobject.h"
 
 namespace HuwInterpreter {
     namespace Variables {
@@ -78,7 +78,7 @@ namespace HuwInterpreter {
 
 
 
-        class Node
+        class Node : public NameableObject
         {
         protected:
             std::string internalName;
@@ -87,6 +87,7 @@ namespace HuwInterpreter {
             std::shared_ptr<Passable> passable;
         public:
             Node(std::string internalName, std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token)
+                : NameableObject(internalName)
             {
                 this->internalName = internalName;
                 this->passable = passable;

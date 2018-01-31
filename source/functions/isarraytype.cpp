@@ -21,7 +21,7 @@ namespace HuwInterpreter {
         IsArrayType::IsArrayType(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "isArray";
+            setName("isArray");
         }
 
         std::shared_ptr<Variable> IsArrayType::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

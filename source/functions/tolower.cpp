@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         ToLower::ToLower(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "toLower";
+            setName("toLower");
         }
 
         std::shared_ptr<Variable> ToLower::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

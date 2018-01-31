@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Tan::Tan(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "tan";
+            setName("tan");
         }
 
         std::shared_ptr<Variable> Tan::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

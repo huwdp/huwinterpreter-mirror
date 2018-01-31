@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Min::Min(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "min";
+            setName("min");
         }
 
         std::shared_ptr<Variable> Min::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

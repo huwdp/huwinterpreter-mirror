@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Print::Print(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "print";
+            setName("print");
         }
 
         std::shared_ptr<Variable> Print::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

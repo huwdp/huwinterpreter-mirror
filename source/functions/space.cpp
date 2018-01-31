@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Space::Space(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "space";
+            setName("space");
         }
 
         std::shared_ptr<Variable> Space::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Mid::Mid(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "mid";
+            setName("mid");
         }
 
         std::shared_ptr<Variable> Mid::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Sqrt::Sqrt(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "sqrt";
+            setName("sqrt");
         }
 
         std::shared_ptr<Variable> Sqrt::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

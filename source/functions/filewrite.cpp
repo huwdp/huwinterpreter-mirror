@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         FileWrite::FileWrite(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "fileWrite";
+            setName("fileWrite");
         }
 
         std::shared_ptr<Variable> FileWrite::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

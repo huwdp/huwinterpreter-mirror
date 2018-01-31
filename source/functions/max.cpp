@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Max::Max(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "max";
+            setName("max");
         }
 
         std::shared_ptr<Variable> Max::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

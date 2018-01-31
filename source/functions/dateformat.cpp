@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         DateFormat::DateFormat(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "dateFormat";
+            setName("dateFormat");
         }
 
         std::shared_ptr<Variable> DateFormat::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

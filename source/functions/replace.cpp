@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Replace::Replace(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "replace";
+            setName("replace");
         }
 
         std::shared_ptr<Variable> Replace::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

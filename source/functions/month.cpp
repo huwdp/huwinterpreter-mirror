@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Month::Month(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "month";
+            setName("month");
         }
 
         std::shared_ptr<Variable> Month::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

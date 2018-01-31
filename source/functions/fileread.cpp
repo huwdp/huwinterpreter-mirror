@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         FileRead::FileRead(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "fileRead";
+            setName("fileRead");
         }
 
         std::shared_ptr<Variable> FileRead::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

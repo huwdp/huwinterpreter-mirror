@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Weekday::Weekday(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            this->name = "weekday";
+            setName("weekday");
         }
 
         std::shared_ptr<Variable> Weekday::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

@@ -196,7 +196,8 @@ SOURCES       = ../source/errors/debug.cpp \
 		../source/variables/variablestringfactory.cpp \
 		../source/nodes/arraygetnode.cpp \
 		../source/errors/stacktracemanager.cpp \
-		../source/errors/stacktrace.cpp 
+		../source/errors/stacktrace.cpp \
+		../source/common/nameableobject.cpp 
 OBJECTS       = debug.o \
 		error.o \
 		errors.o \
@@ -343,7 +344,8 @@ OBJECTS       = debug.o \
 		variablestringfactory.o \
 		arraygetnode.o \
 		stacktracemanager.o \
-		stacktrace.o
+		stacktrace.o \
+		nameableobject.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -609,7 +611,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../source/variables/variablestringfactory.h \
 		../source/nodes/arraygetnode.h \
 		../source/errors/stacktracemanager.h \
-		../source/errors/stacktrace.h ../source/errors/debug.cpp \
+		../source/errors/stacktrace.h \
+		../source/common/nameableobject.h ../source/errors/debug.cpp \
 		../source/errors/error.cpp \
 		../source/errors/errors.cpp \
 		../source/errors/errortypestringfactory.cpp \
@@ -755,7 +758,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../source/variables/variablestringfactory.cpp \
 		../source/nodes/arraygetnode.cpp \
 		../source/errors/stacktracemanager.cpp \
-		../source/errors/stacktrace.cpp
+		../source/errors/stacktrace.cpp \
+		../source/common/nameableobject.cpp
 QMAKE_TARGET  = HuwInterpreter
 DESTDIR       = 
 TARGET        = HuwInterpreter
@@ -935,8 +939,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../source/errors/debug.h ../source/errors/error.h ../source/errors/errors.h ../source/errors/errortypes.h ../source/errors/errortypestringfactory.h ../source/errors/ierrors.h ../source/io/fileline.h ../source/io/io.h ../source/nodes/addnode.h ../source/nodes/bracketnode.h ../source/nodes/divnode.h ../source/nodes/equalnode.h ../source/nodes/getfuncnode.h ../source/nodes/getvarnode.h ../source/nodes/ifandnode.h ../source/nodes/ifequalnode.h ../source/nodes/ifnode.h ../source/nodes/ifnotequalnode.h ../source/nodes/ifornode.h ../source/nodes/ifovernode.h ../source/nodes/ifoverorequalnode.h ../source/nodes/ifundernode.h ../source/nodes/ifunderorequalnode.h ../source/nodes/modnode.h ../source/nodes/mulnode.h ../source/nodes/node.h ../source/nodes/numbernode.h ../source/nodes/runnode.h ../source/nodes/setvarnode.h ../source/nodes/subnode.h ../source/nodes/textnode.h ../source/nodes/whilenode.h ../source/parser/parser.h ../source/tokens/filetokenmanager.h ../source/tokens/lineinfo.h ../source/tokens/scanner.h ../source/tokens/texttokenmanager.h ../source/tokens/token.h ../source/tokens/tokenmanager.h ../source/types/isnumeric.h ../source/types/tokentypes.h ../source/types/typedetector.h ../source/variables/precision.h ../source/variables/scope.h ../source/variables/variable.h ../source/variables/variables.h ../source/variables/variabletypefactory.h ../source/huwinterpreter.h ../source/nodes/setreturnnode.h ../source/nodes/incrementnode.h ../source/nodes/decrementnode.h ../source/variables/doublevariable.h ../source/variables/hashtablevariable.h ../source/variables/stringvariable.h ../source/variables/numbervariable.h ../source/variables/integervariable.h ../source/functions/arrayget.h ../source/functions/array.h ../source/variables/constantvariable.h ../source/tokens/tokenmanager.h ../source/tokens/unusabletokens.h ../source/nodes/unaryminusnode.h ../source/nodes/unarynotnode.h ../source/tokens/tokens.h ../source/nodes/bitwiseandnode.h ../source/nodes/bitwiseornode.h ../source/functions/isdoubletype.h ../source/functions/isinttype.h ../source/functions/isnumbertype.h ../source/functions/isint.h ../source/functions/isdouble.h ../source/functions/isnumber.h ../source/nodes/addconstnode.h ../source/nodes/addvarnode.h ../source/nodes/huwcodenodefactory.h ../source/nodes/nodefactory.h ../source/functions/abs.h ../source/functions/acos.h ../source/functions/arrayset.h ../source/functions/arrayunset.h ../source/functions/asc.h ../source/functions/asin.h ../source/functions/atan.h ../source/functions/atan2.h ../source/functions/ceil.h ../source/functions/cha.h ../source/functions/command.h ../source/functions/cos.h ../source/functions/count.h ../source/functions/customfunction.h ../source/functions/dateformat.h ../source/functions/emptyfunction.h ../source/functions/exp.h ../source/functions/fileread.h ../source/functions/filewrite.h ../source/functions/floor.h ../source/functions/function.h ../source/functions/functionlist.h ../source/functions/functions.h ../source/functions/instr.h ../source/functions/instrrev.h ../source/functions/isarraytype.h ../source/functions/isstringtype.h ../source/functions/left.h ../source/functions/len.h ../source/functions/log.h ../source/functions/ltrim.h ../source/functions/max.h ../source/functions/mid.h ../source/functions/min.h ../source/functions/month.h ../source/functions/monthname.h ../source/functions/not.h ../source/functions/now.h ../source/functions/pow.h ../source/functions/print.h ../source/functions/random.h ../source/functions/replace.h ../source/functions/right.h ../source/functions/round.h ../source/functions/rtrim.h ../source/functions/scan.h ../source/functions/sin.h ../source/functions/space.h ../source/functions/sqrt.h ../source/functions/str.h ../source/functions/strcomp.h ../source/functions/strreverse.h ../source/functions/tan.h ../source/functions/todouble.h ../source/functions/toint.h ../source/functions/tolower.h ../source/functions/tostring.h ../source/functions/toupper.h ../source/functions/trim.h ../source/functions/weekday.h ../source/functions/weekdayname.h ../source/functions/year.h ../source/nodes/addconstnode.h ../source/nodes/addnode.h ../source/nodes/addvarnode.h ../source/nodes/bitwiseandnode.h ../source/nodes/bitwiseornode.h ../source/nodes/bracketnode.h ../source/nodes/decrementnode.h ../source/nodes/divnode.h ../source/nodes/equalnode.h ../source/nodes/getfuncnode.h ../source/nodes/getvarnode.h ../source/nodes/huwcodenodefactory.h ../source/nodes/ifandnode.h ../source/nodes/ifequalnode.h ../source/nodes/ifnode.h ../source/nodes/ifnotequalnode.h ../source/nodes/ifornode.h ../source/nodes/ifovernode.h ../source/nodes/ifoverorequalnode.h ../source/nodes/ifundernode.h ../source/nodes/ifunderorequalnode.h ../source/nodes/incrementnode.h ../source/nodes/modnode.h ../source/nodes/mulnode.h ../source/nodes/node.h ../source/nodes/nodefactory.h ../source/nodes/numbernode.h ../source/nodes/runnode.h ../source/nodes/setreturnnode.h ../source/nodes/setvarnode.h ../source/nodes/subnode.h ../source/nodes/textnode.h ../source/nodes/unaryminusnode.h ../source/nodes/unarynotnode.h ../source/nodes/whilenode.h ../source/parser/parser.h ../source/types/isnumeric.h ../source/types/tokentypes.h ../source/nodes/nodefactoryfactory.h ../source/nodes/semicolonnode.h ../source/format/escapecharacteroutput.h ../source/common/passable.h ../source/errors/errorfactory.h ../source/functions/fileexists.h ../source/functions/regexsearch.h ../source/functions/regexmatch.h ../source/functions/regexreplace.h ../source/nodes/bitwisexornode.h ../source/nodes/bitwisecomplementnode.h ../source/nodes/leftshiftnode.h ../source/nodes/rightshiftnode.h ../source/variables/variablestringfactory.h ../source/nodes/arraygetnode.h ../source/errors/stacktracemanager.h ../source/errors/stacktrace.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../source/errors/debug.cpp ../source/errors/error.cpp ../source/errors/errors.cpp ../source/errors/errortypestringfactory.cpp ../source/io/fileline.cpp ../source/io/io.cpp ../source/types/typedetector.cpp ../source/variables/precision.cpp ../source/variables/scope.cpp ../source/variables/variable.cpp ../source/variables/variables.cpp ../source/variables/variabletypefactory.cpp ../source/huwinterpreter.cpp ../source/functions/customfunction.cpp ../source/functions/emptyfunction.cpp ../source/variables/doublevariable.cpp ../source/variables/integervariable.cpp ../source/variables/numbervariable.cpp ../source/variables/stringvariable.cpp ../source/variables/hashtablevariable.cpp ../source/functions/arrayget.cpp ../source/functions/arrayset.cpp ../source/functions/array.cpp ../source/functions/arrayunset.cpp ../source/functions/count.cpp ../source/variables/constantvariable.cpp ../source/tokens/unusabletokens.cpp ../source/functions/isarraytype.cpp ../source/functions/isdoubletype.cpp ../source/functions/isnumbertype.cpp ../source/functions/isinttype.cpp ../source/functions/isstringtype.cpp ../source/functions/isint.cpp ../source/functions/isdouble.cpp ../source/functions/todouble.cpp ../source/functions/toint.cpp ../source/functions/abs.cpp ../source/functions/acos.cpp ../source/functions/asc.cpp ../source/functions/asin.cpp ../source/functions/atan.cpp ../source/functions/atan2.cpp ../source/functions/ceil.cpp ../source/functions/cha.cpp ../source/functions/command.cpp ../source/functions/cos.cpp ../source/functions/dateformat.cpp ../source/functions/exp.cpp ../source/functions/fileread.cpp ../source/functions/filewrite.cpp ../source/functions/floor.cpp ../source/functions/function.cpp ../source/functions/functions.cpp ../source/functions/instr.cpp ../source/functions/instrrev.cpp ../source/functions/isnumber.cpp ../source/functions/left.cpp ../source/functions/len.cpp ../source/functions/log.cpp ../source/functions/ltrim.cpp ../source/functions/max.cpp ../source/functions/mid.cpp ../source/functions/min.cpp ../source/functions/month.cpp ../source/functions/monthname.cpp ../source/functions/not.cpp ../source/functions/now.cpp ../source/functions/pow.cpp ../source/functions/print.cpp ../source/functions/random.cpp ../source/functions/replace.cpp ../source/functions/right.cpp ../source/functions/round.cpp ../source/functions/rtrim.cpp ../source/functions/scan.cpp ../source/functions/sin.cpp ../source/functions/space.cpp ../source/functions/sqrt.cpp ../source/functions/str.cpp ../source/functions/strcomp.cpp ../source/functions/strreverse.cpp ../source/functions/tan.cpp ../source/functions/tolower.cpp ../source/functions/tostring.cpp ../source/functions/toupper.cpp ../source/functions/trim.cpp ../source/functions/weekday.cpp ../source/functions/weekdayname.cpp ../source/functions/year.cpp ../source/parser/parser.cpp ../source/tokens/filetokenmanager.cpp ../source/tokens/lineinfo.cpp ../source/tokens/scanner.cpp ../source/tokens/texttokenmanager.cpp ../source/tokens/token.cpp ../source/tokens/tokens.cpp ../source/main.cpp ../source/nodes/addconstnode.cpp ../source/nodes/addnode.cpp ../source/nodes/addvarnode.cpp ../source/nodes/bitwiseandnode.cpp ../source/nodes/bitwiseornode.cpp ../source/nodes/getfuncnode.cpp ../source/nodes/equalnode.cpp ../source/nodes/divnode.cpp ../source/nodes/decrementnode.cpp ../source/nodes/bracketnode.cpp ../source/nodes/ifequalnode.cpp ../source/nodes/ifnode.cpp ../source/nodes/ifandnode.cpp ../source/nodes/huwcodenodefactory.cpp ../source/nodes/getvarnode.cpp ../source/nodes/ifnotequalnode.cpp ../source/nodes/ifornode.cpp ../source/nodes/ifovernode.cpp ../source/nodes/ifoverorequalnode.cpp ../source/nodes/ifundernode.cpp ../source/nodes/ifunderorequalnode.cpp ../source/nodes/numbernode.cpp ../source/nodes/mulnode.cpp ../source/nodes/modnode.cpp ../source/nodes/incrementnode.cpp ../source/nodes/runnode.cpp ../source/nodes/setreturnnode.cpp ../source/nodes/setvarnode.cpp ../source/nodes/subnode.cpp ../source/nodes/textnode.cpp ../source/nodes/unaryminusnode.cpp ../source/nodes/whilenode.cpp ../source/nodes/unarynotnode.cpp ../source/nodes/nodefactoryfactory.cpp ../source/nodes/semicolonnode.cpp ../source/format/escapecharacteroutput.cpp ../source/common/passable.cpp ../source/errors/errorfactory.cpp ../source/functions/fileexists.cpp ../source/functions/regexsearch.cpp ../source/functions/regexmatch.cpp ../source/functions/regexreplace.cpp ../source/nodes/bitwisexornode.cpp ../source/nodes/bitwisecomplementnode.cpp ../source/nodes/leftshiftnode.cpp ../source/nodes/rightshiftnode.cpp ../source/variables/variablestringfactory.cpp ../source/nodes/arraygetnode.cpp ../source/errors/stacktracemanager.cpp ../source/errors/stacktrace.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../source/errors/debug.h ../source/errors/error.h ../source/errors/errors.h ../source/errors/errortypes.h ../source/errors/errortypestringfactory.h ../source/errors/ierrors.h ../source/io/fileline.h ../source/io/io.h ../source/nodes/addnode.h ../source/nodes/bracketnode.h ../source/nodes/divnode.h ../source/nodes/equalnode.h ../source/nodes/getfuncnode.h ../source/nodes/getvarnode.h ../source/nodes/ifandnode.h ../source/nodes/ifequalnode.h ../source/nodes/ifnode.h ../source/nodes/ifnotequalnode.h ../source/nodes/ifornode.h ../source/nodes/ifovernode.h ../source/nodes/ifoverorequalnode.h ../source/nodes/ifundernode.h ../source/nodes/ifunderorequalnode.h ../source/nodes/modnode.h ../source/nodes/mulnode.h ../source/nodes/node.h ../source/nodes/numbernode.h ../source/nodes/runnode.h ../source/nodes/setvarnode.h ../source/nodes/subnode.h ../source/nodes/textnode.h ../source/nodes/whilenode.h ../source/parser/parser.h ../source/tokens/filetokenmanager.h ../source/tokens/lineinfo.h ../source/tokens/scanner.h ../source/tokens/texttokenmanager.h ../source/tokens/token.h ../source/tokens/tokenmanager.h ../source/types/isnumeric.h ../source/types/tokentypes.h ../source/types/typedetector.h ../source/variables/precision.h ../source/variables/scope.h ../source/variables/variable.h ../source/variables/variables.h ../source/variables/variabletypefactory.h ../source/huwinterpreter.h ../source/nodes/setreturnnode.h ../source/nodes/incrementnode.h ../source/nodes/decrementnode.h ../source/variables/doublevariable.h ../source/variables/hashtablevariable.h ../source/variables/stringvariable.h ../source/variables/numbervariable.h ../source/variables/integervariable.h ../source/functions/arrayget.h ../source/functions/array.h ../source/variables/constantvariable.h ../source/tokens/tokenmanager.h ../source/tokens/unusabletokens.h ../source/nodes/unaryminusnode.h ../source/nodes/unarynotnode.h ../source/tokens/tokens.h ../source/nodes/bitwiseandnode.h ../source/nodes/bitwiseornode.h ../source/functions/isdoubletype.h ../source/functions/isinttype.h ../source/functions/isnumbertype.h ../source/functions/isint.h ../source/functions/isdouble.h ../source/functions/isnumber.h ../source/nodes/addconstnode.h ../source/nodes/addvarnode.h ../source/nodes/huwcodenodefactory.h ../source/nodes/nodefactory.h ../source/functions/abs.h ../source/functions/acos.h ../source/functions/arrayset.h ../source/functions/arrayunset.h ../source/functions/asc.h ../source/functions/asin.h ../source/functions/atan.h ../source/functions/atan2.h ../source/functions/ceil.h ../source/functions/cha.h ../source/functions/command.h ../source/functions/cos.h ../source/functions/count.h ../source/functions/customfunction.h ../source/functions/dateformat.h ../source/functions/emptyfunction.h ../source/functions/exp.h ../source/functions/fileread.h ../source/functions/filewrite.h ../source/functions/floor.h ../source/functions/function.h ../source/functions/functionlist.h ../source/functions/functions.h ../source/functions/instr.h ../source/functions/instrrev.h ../source/functions/isarraytype.h ../source/functions/isstringtype.h ../source/functions/left.h ../source/functions/len.h ../source/functions/log.h ../source/functions/ltrim.h ../source/functions/max.h ../source/functions/mid.h ../source/functions/min.h ../source/functions/month.h ../source/functions/monthname.h ../source/functions/not.h ../source/functions/now.h ../source/functions/pow.h ../source/functions/print.h ../source/functions/random.h ../source/functions/replace.h ../source/functions/right.h ../source/functions/round.h ../source/functions/rtrim.h ../source/functions/scan.h ../source/functions/sin.h ../source/functions/space.h ../source/functions/sqrt.h ../source/functions/str.h ../source/functions/strcomp.h ../source/functions/strreverse.h ../source/functions/tan.h ../source/functions/todouble.h ../source/functions/toint.h ../source/functions/tolower.h ../source/functions/tostring.h ../source/functions/toupper.h ../source/functions/trim.h ../source/functions/weekday.h ../source/functions/weekdayname.h ../source/functions/year.h ../source/nodes/addconstnode.h ../source/nodes/addnode.h ../source/nodes/addvarnode.h ../source/nodes/bitwiseandnode.h ../source/nodes/bitwiseornode.h ../source/nodes/bracketnode.h ../source/nodes/decrementnode.h ../source/nodes/divnode.h ../source/nodes/equalnode.h ../source/nodes/getfuncnode.h ../source/nodes/getvarnode.h ../source/nodes/huwcodenodefactory.h ../source/nodes/ifandnode.h ../source/nodes/ifequalnode.h ../source/nodes/ifnode.h ../source/nodes/ifnotequalnode.h ../source/nodes/ifornode.h ../source/nodes/ifovernode.h ../source/nodes/ifoverorequalnode.h ../source/nodes/ifundernode.h ../source/nodes/ifunderorequalnode.h ../source/nodes/incrementnode.h ../source/nodes/modnode.h ../source/nodes/mulnode.h ../source/nodes/node.h ../source/nodes/nodefactory.h ../source/nodes/numbernode.h ../source/nodes/runnode.h ../source/nodes/setreturnnode.h ../source/nodes/setvarnode.h ../source/nodes/subnode.h ../source/nodes/textnode.h ../source/nodes/unaryminusnode.h ../source/nodes/unarynotnode.h ../source/nodes/whilenode.h ../source/parser/parser.h ../source/types/isnumeric.h ../source/types/tokentypes.h ../source/nodes/nodefactoryfactory.h ../source/nodes/semicolonnode.h ../source/format/escapecharacteroutput.h ../source/common/passable.h ../source/errors/errorfactory.h ../source/functions/fileexists.h ../source/functions/regexsearch.h ../source/functions/regexmatch.h ../source/functions/regexreplace.h ../source/nodes/bitwisexornode.h ../source/nodes/bitwisecomplementnode.h ../source/nodes/leftshiftnode.h ../source/nodes/rightshiftnode.h ../source/variables/variablestringfactory.h ../source/nodes/arraygetnode.h ../source/errors/stacktracemanager.h ../source/errors/stacktrace.h ../source/common/nameableobject.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../source/errors/debug.cpp ../source/errors/error.cpp ../source/errors/errors.cpp ../source/errors/errortypestringfactory.cpp ../source/io/fileline.cpp ../source/io/io.cpp ../source/types/typedetector.cpp ../source/variables/precision.cpp ../source/variables/scope.cpp ../source/variables/variable.cpp ../source/variables/variables.cpp ../source/variables/variabletypefactory.cpp ../source/huwinterpreter.cpp ../source/functions/customfunction.cpp ../source/functions/emptyfunction.cpp ../source/variables/doublevariable.cpp ../source/variables/integervariable.cpp ../source/variables/numbervariable.cpp ../source/variables/stringvariable.cpp ../source/variables/hashtablevariable.cpp ../source/functions/arrayget.cpp ../source/functions/arrayset.cpp ../source/functions/array.cpp ../source/functions/arrayunset.cpp ../source/functions/count.cpp ../source/variables/constantvariable.cpp ../source/tokens/unusabletokens.cpp ../source/functions/isarraytype.cpp ../source/functions/isdoubletype.cpp ../source/functions/isnumbertype.cpp ../source/functions/isinttype.cpp ../source/functions/isstringtype.cpp ../source/functions/isint.cpp ../source/functions/isdouble.cpp ../source/functions/todouble.cpp ../source/functions/toint.cpp ../source/functions/abs.cpp ../source/functions/acos.cpp ../source/functions/asc.cpp ../source/functions/asin.cpp ../source/functions/atan.cpp ../source/functions/atan2.cpp ../source/functions/ceil.cpp ../source/functions/cha.cpp ../source/functions/command.cpp ../source/functions/cos.cpp ../source/functions/dateformat.cpp ../source/functions/exp.cpp ../source/functions/fileread.cpp ../source/functions/filewrite.cpp ../source/functions/floor.cpp ../source/functions/function.cpp ../source/functions/functions.cpp ../source/functions/instr.cpp ../source/functions/instrrev.cpp ../source/functions/isnumber.cpp ../source/functions/left.cpp ../source/functions/len.cpp ../source/functions/log.cpp ../source/functions/ltrim.cpp ../source/functions/max.cpp ../source/functions/mid.cpp ../source/functions/min.cpp ../source/functions/month.cpp ../source/functions/monthname.cpp ../source/functions/not.cpp ../source/functions/now.cpp ../source/functions/pow.cpp ../source/functions/print.cpp ../source/functions/random.cpp ../source/functions/replace.cpp ../source/functions/right.cpp ../source/functions/round.cpp ../source/functions/rtrim.cpp ../source/functions/scan.cpp ../source/functions/sin.cpp ../source/functions/space.cpp ../source/functions/sqrt.cpp ../source/functions/str.cpp ../source/functions/strcomp.cpp ../source/functions/strreverse.cpp ../source/functions/tan.cpp ../source/functions/tolower.cpp ../source/functions/tostring.cpp ../source/functions/toupper.cpp ../source/functions/trim.cpp ../source/functions/weekday.cpp ../source/functions/weekdayname.cpp ../source/functions/year.cpp ../source/parser/parser.cpp ../source/tokens/filetokenmanager.cpp ../source/tokens/lineinfo.cpp ../source/tokens/scanner.cpp ../source/tokens/texttokenmanager.cpp ../source/tokens/token.cpp ../source/tokens/tokens.cpp ../source/main.cpp ../source/nodes/addconstnode.cpp ../source/nodes/addnode.cpp ../source/nodes/addvarnode.cpp ../source/nodes/bitwiseandnode.cpp ../source/nodes/bitwiseornode.cpp ../source/nodes/getfuncnode.cpp ../source/nodes/equalnode.cpp ../source/nodes/divnode.cpp ../source/nodes/decrementnode.cpp ../source/nodes/bracketnode.cpp ../source/nodes/ifequalnode.cpp ../source/nodes/ifnode.cpp ../source/nodes/ifandnode.cpp ../source/nodes/huwcodenodefactory.cpp ../source/nodes/getvarnode.cpp ../source/nodes/ifnotequalnode.cpp ../source/nodes/ifornode.cpp ../source/nodes/ifovernode.cpp ../source/nodes/ifoverorequalnode.cpp ../source/nodes/ifundernode.cpp ../source/nodes/ifunderorequalnode.cpp ../source/nodes/numbernode.cpp ../source/nodes/mulnode.cpp ../source/nodes/modnode.cpp ../source/nodes/incrementnode.cpp ../source/nodes/runnode.cpp ../source/nodes/setreturnnode.cpp ../source/nodes/setvarnode.cpp ../source/nodes/subnode.cpp ../source/nodes/textnode.cpp ../source/nodes/unaryminusnode.cpp ../source/nodes/whilenode.cpp ../source/nodes/unarynotnode.cpp ../source/nodes/nodefactoryfactory.cpp ../source/nodes/semicolonnode.cpp ../source/format/escapecharacteroutput.cpp ../source/common/passable.cpp ../source/errors/errorfactory.cpp ../source/functions/fileexists.cpp ../source/functions/regexsearch.cpp ../source/functions/regexmatch.cpp ../source/functions/regexreplace.cpp ../source/nodes/bitwisexornode.cpp ../source/nodes/bitwisecomplementnode.cpp ../source/nodes/leftshiftnode.cpp ../source/nodes/rightshiftnode.cpp ../source/variables/variablestringfactory.cpp ../source/nodes/arraygetnode.cpp ../source/errors/stacktracemanager.cpp ../source/errors/stacktrace.cpp ../source/common/nameableobject.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -1029,7 +1033,9 @@ precision.o: ../source/variables/precision.cpp ../source/variables/precision.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
-		../source/variables/variablestringfactory.h
+		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o precision.o ../source/variables/precision.cpp
 
 scope.o: ../source/variables/scope.cpp ../source/variables/scope.h \
@@ -1048,13 +1054,16 @@ scope.o: ../source/variables/scope.cpp ../source/variables/scope.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
 		../source/variables/variabletypefactory.h \
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
-		../source/variables/constantvariable.h
+		../source/variables/constantvariable.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scope.o ../source/variables/scope.cpp
 
 variable.o: ../source/variables/variable.cpp ../source/variables/variable.h \
@@ -1069,7 +1078,9 @@ variable.o: ../source/variables/variable.cpp ../source/variables/variable.h \
 		../source/errors/errortypestringfactory.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
-		../source/variables/variablestringfactory.h
+		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o variable.o ../source/variables/variable.cpp
 
 variables.o: ../source/variables/variables.cpp ../source/variables/variables.h \
@@ -1086,6 +1097,8 @@ variables.o: ../source/variables/variables.cpp ../source/variables/variables.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -1094,7 +1107,8 @@ variables.o: ../source/variables/variables.cpp ../source/variables/variables.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/nodes/node.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o variables.o ../source/variables/variables.cpp
 
 variabletypefactory.o: ../source/variables/variabletypefactory.cpp ../source/variables/variabletypefactory.h \
@@ -1111,6 +1125,8 @@ variabletypefactory.o: ../source/variables/variabletypefactory.cpp ../source/var
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -1136,6 +1152,8 @@ huwinterpreter.o: ../source/huwinterpreter.cpp ../source/huwinterpreter.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -1144,6 +1162,7 @@ huwinterpreter.o: ../source/huwinterpreter.cpp ../source/huwinterpreter.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/nodes/nodefactory.h \
 		../source/nodes/equalnode.h \
 		../source/nodes/setvarnode.h \
@@ -1284,6 +1303,8 @@ customfunction.o: ../source/functions/customfunction.cpp ../source/functions/cus
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1294,6 +1315,7 @@ customfunction.o: ../source/functions/customfunction.cpp ../source/functions/cus
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o customfunction.o ../source/functions/customfunction.cpp
 
@@ -1312,6 +1334,8 @@ emptyfunction.o: ../source/functions/emptyfunction.cpp ../source/functions/empty
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1322,6 +1346,7 @@ emptyfunction.o: ../source/functions/emptyfunction.cpp ../source/functions/empty
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o emptyfunction.o ../source/functions/emptyfunction.cpp
 
@@ -1339,6 +1364,8 @@ doublevariable.o: ../source/variables/doublevariable.cpp ../source/variables/dou
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
 		../source/variables/variabletypefactory.h \
@@ -1360,6 +1387,8 @@ integervariable.o: ../source/variables/integervariable.cpp ../source/variables/i
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/numbervariable.h \
 		../source/variables/doublevariable.h \
 		../source/variables/variabletypefactory.h \
@@ -1381,6 +1410,8 @@ numbervariable.o: ../source/variables/numbervariable.cpp ../source/variables/num
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/integervariable.h \
 		../source/variables/variabletypefactory.h \
@@ -1402,6 +1433,8 @@ stringvariable.o: ../source/variables/stringvariable.cpp ../source/variables/str
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -1424,6 +1457,8 @@ hashtablevariable.o: ../source/variables/hashtablevariable.cpp ../source/variabl
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/integervariable.h \
 		../source/variables/variabletypefactory.h \
@@ -1446,6 +1481,8 @@ arrayget.o: ../source/functions/arrayget.cpp ../source/functions/arrayget.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1456,6 +1493,7 @@ arrayget.o: ../source/functions/arrayget.cpp ../source/functions/arrayget.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o arrayget.o ../source/functions/arrayget.cpp
 
@@ -1474,6 +1512,8 @@ arrayset.o: ../source/functions/arrayset.cpp ../source/functions/arrayset.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1484,6 +1524,7 @@ arrayset.o: ../source/functions/arrayset.cpp ../source/functions/arrayset.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o arrayset.o ../source/functions/arrayset.cpp
 
@@ -1502,6 +1543,8 @@ array.o: ../source/functions/array.cpp ../source/functions/array.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1512,6 +1555,7 @@ array.o: ../source/functions/array.cpp ../source/functions/array.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h \
 		../source/variables/hashtablevariable.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o array.o ../source/functions/array.cpp
@@ -1531,6 +1575,8 @@ arrayunset.o: ../source/functions/arrayunset.cpp ../source/functions/arrayunset.
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1541,6 +1587,7 @@ arrayunset.o: ../source/functions/arrayunset.cpp ../source/functions/arrayunset.
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o arrayunset.o ../source/functions/arrayunset.cpp
 
@@ -1559,6 +1606,8 @@ count.o: ../source/functions/count.cpp ../source/functions/count.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1569,6 +1618,7 @@ count.o: ../source/functions/count.cpp ../source/functions/count.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o count.o ../source/functions/count.cpp
 
@@ -1588,13 +1638,16 @@ constantvariable.o: ../source/variables/constantvariable.cpp ../source/variables
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
 		../source/variables/variabletypefactory.h \
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o constantvariable.o ../source/variables/constantvariable.cpp
 
 unusabletokens.o: ../source/tokens/unusabletokens.cpp ../source/tokens/unusabletokens.h \
@@ -1617,6 +1670,8 @@ isarraytype.o: ../source/functions/isarraytype.cpp ../source/functions/isarrayty
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1627,6 +1682,7 @@ isarraytype.o: ../source/functions/isarraytype.cpp ../source/functions/isarrayty
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isarraytype.o ../source/functions/isarraytype.cpp
 
@@ -1645,6 +1701,8 @@ isdoubletype.o: ../source/functions/isdoubletype.cpp ../source/functions/isdoubl
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1655,6 +1713,7 @@ isdoubletype.o: ../source/functions/isdoubletype.cpp ../source/functions/isdoubl
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isdoubletype.o ../source/functions/isdoubletype.cpp
 
@@ -1673,6 +1732,8 @@ isnumbertype.o: ../source/functions/isnumbertype.cpp ../source/functions/isnumbe
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1683,6 +1744,7 @@ isnumbertype.o: ../source/functions/isnumbertype.cpp ../source/functions/isnumbe
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isnumbertype.o ../source/functions/isnumbertype.cpp
 
@@ -1701,6 +1763,8 @@ isinttype.o: ../source/functions/isinttype.cpp ../source/functions/isinttype.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1711,6 +1775,7 @@ isinttype.o: ../source/functions/isinttype.cpp ../source/functions/isinttype.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isinttype.o ../source/functions/isinttype.cpp
 
@@ -1729,6 +1794,8 @@ isstringtype.o: ../source/functions/isstringtype.cpp ../source/functions/isstrin
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1739,6 +1806,7 @@ isstringtype.o: ../source/functions/isstringtype.cpp ../source/functions/isstrin
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isstringtype.o ../source/functions/isstringtype.cpp
 
@@ -1757,6 +1825,8 @@ isint.o: ../source/functions/isint.cpp ../source/functions/isint.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1767,6 +1837,7 @@ isint.o: ../source/functions/isint.cpp ../source/functions/isint.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isint.o ../source/functions/isint.cpp
 
@@ -1785,6 +1856,8 @@ isdouble.o: ../source/functions/isdouble.cpp ../source/functions/isdouble.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1795,6 +1868,7 @@ isdouble.o: ../source/functions/isdouble.cpp ../source/functions/isdouble.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isdouble.o ../source/functions/isdouble.cpp
 
@@ -1813,6 +1887,8 @@ todouble.o: ../source/functions/todouble.cpp ../source/functions/todouble.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1823,6 +1899,7 @@ todouble.o: ../source/functions/todouble.cpp ../source/functions/todouble.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o todouble.o ../source/functions/todouble.cpp
 
@@ -1841,6 +1918,8 @@ toint.o: ../source/functions/toint.cpp ../source/functions/toint.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1851,6 +1930,7 @@ toint.o: ../source/functions/toint.cpp ../source/functions/toint.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o toint.o ../source/functions/toint.cpp
 
@@ -1869,6 +1949,8 @@ abs.o: ../source/functions/abs.cpp ../source/functions/abs.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1879,6 +1961,7 @@ abs.o: ../source/functions/abs.cpp ../source/functions/abs.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o abs.o ../source/functions/abs.cpp
 
@@ -1897,6 +1980,8 @@ acos.o: ../source/functions/acos.cpp ../source/functions/acos.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1907,6 +1992,7 @@ acos.o: ../source/functions/acos.cpp ../source/functions/acos.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o acos.o ../source/functions/acos.cpp
 
@@ -1925,6 +2011,8 @@ asc.o: ../source/functions/asc.cpp ../source/functions/asc.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1935,6 +2023,7 @@ asc.o: ../source/functions/asc.cpp ../source/functions/asc.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o asc.o ../source/functions/asc.cpp
 
@@ -1953,6 +2042,8 @@ asin.o: ../source/functions/asin.cpp ../source/functions/asin.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1963,6 +2054,7 @@ asin.o: ../source/functions/asin.cpp ../source/functions/asin.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o asin.o ../source/functions/asin.cpp
 
@@ -1981,6 +2073,8 @@ atan.o: ../source/functions/atan.cpp ../source/functions/atan.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -1991,6 +2085,7 @@ atan.o: ../source/functions/atan.cpp ../source/functions/atan.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o atan.o ../source/functions/atan.cpp
 
@@ -2009,6 +2104,8 @@ atan2.o: ../source/functions/atan2.cpp ../source/functions/atan2.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2019,6 +2116,7 @@ atan2.o: ../source/functions/atan2.cpp ../source/functions/atan2.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o atan2.o ../source/functions/atan2.cpp
 
@@ -2037,6 +2135,8 @@ ceil.o: ../source/functions/ceil.cpp ../source/functions/ceil.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2047,6 +2147,7 @@ ceil.o: ../source/functions/ceil.cpp ../source/functions/ceil.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ceil.o ../source/functions/ceil.cpp
 
@@ -2065,6 +2166,8 @@ cha.o: ../source/functions/cha.cpp ../source/functions/cha.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2075,6 +2178,7 @@ cha.o: ../source/functions/cha.cpp ../source/functions/cha.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cha.o ../source/functions/cha.cpp
 
@@ -2093,6 +2197,8 @@ command.o: ../source/functions/command.cpp ../source/functions/command.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2103,6 +2209,7 @@ command.o: ../source/functions/command.cpp ../source/functions/command.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o command.o ../source/functions/command.cpp
 
@@ -2121,6 +2228,8 @@ cos.o: ../source/functions/cos.cpp ../source/functions/cos.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2131,6 +2240,7 @@ cos.o: ../source/functions/cos.cpp ../source/functions/cos.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cos.o ../source/functions/cos.cpp
 
@@ -2149,6 +2259,8 @@ dateformat.o: ../source/functions/dateformat.cpp ../source/functions/dateformat.
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2159,6 +2271,7 @@ dateformat.o: ../source/functions/dateformat.cpp ../source/functions/dateformat.
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dateformat.o ../source/functions/dateformat.cpp
 
@@ -2177,6 +2290,8 @@ exp.o: ../source/functions/exp.cpp ../source/functions/exp.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2187,6 +2302,7 @@ exp.o: ../source/functions/exp.cpp ../source/functions/exp.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o exp.o ../source/functions/exp.cpp
 
@@ -2205,6 +2321,8 @@ fileread.o: ../source/functions/fileread.cpp ../source/functions/fileread.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2215,6 +2333,7 @@ fileread.o: ../source/functions/fileread.cpp ../source/functions/fileread.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h \
 		../source/io/io.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fileread.o ../source/functions/fileread.cpp
@@ -2234,6 +2353,8 @@ filewrite.o: ../source/functions/filewrite.cpp ../source/functions/filewrite.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2244,6 +2365,7 @@ filewrite.o: ../source/functions/filewrite.cpp ../source/functions/filewrite.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h \
 		../source/io/io.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o filewrite.o ../source/functions/filewrite.cpp
@@ -2263,6 +2385,8 @@ floor.o: ../source/functions/floor.cpp ../source/functions/floor.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2273,6 +2397,7 @@ floor.o: ../source/functions/floor.cpp ../source/functions/floor.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o floor.o ../source/functions/floor.cpp
 
@@ -2290,6 +2415,8 @@ function.o: ../source/functions/function.cpp ../source/functions/function.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2300,6 +2427,7 @@ function.o: ../source/functions/function.cpp ../source/functions/function.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o function.o ../source/functions/function.cpp
 
@@ -2318,6 +2446,8 @@ functions.o: ../source/functions/functions.cpp ../source/functions/functions.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2328,6 +2458,7 @@ functions.o: ../source/functions/functions.cpp ../source/functions/functions.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h \
 		../source/functions/functionlist.h \
 		../source/functions/print.h \
@@ -2418,6 +2549,8 @@ instr.o: ../source/functions/instr.cpp ../source/functions/instr.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2428,6 +2561,7 @@ instr.o: ../source/functions/instr.cpp ../source/functions/instr.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o instr.o ../source/functions/instr.cpp
 
@@ -2446,6 +2580,8 @@ instrrev.o: ../source/functions/instrrev.cpp ../source/functions/instrrev.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2456,6 +2592,7 @@ instrrev.o: ../source/functions/instrrev.cpp ../source/functions/instrrev.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o instrrev.o ../source/functions/instrrev.cpp
 
@@ -2474,6 +2611,8 @@ isnumber.o: ../source/functions/isnumber.cpp ../source/functions/isnumber.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2484,6 +2623,7 @@ isnumber.o: ../source/functions/isnumber.cpp ../source/functions/isnumber.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o isnumber.o ../source/functions/isnumber.cpp
 
@@ -2502,6 +2642,8 @@ left.o: ../source/functions/left.cpp ../source/functions/left.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2512,6 +2654,7 @@ left.o: ../source/functions/left.cpp ../source/functions/left.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o left.o ../source/functions/left.cpp
 
@@ -2530,6 +2673,8 @@ len.o: ../source/functions/len.cpp ../source/functions/len.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2540,6 +2685,7 @@ len.o: ../source/functions/len.cpp ../source/functions/len.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o len.o ../source/functions/len.cpp
 
@@ -2558,6 +2704,8 @@ log.o: ../source/functions/log.cpp ../source/functions/log.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2568,6 +2716,7 @@ log.o: ../source/functions/log.cpp ../source/functions/log.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o log.o ../source/functions/log.cpp
 
@@ -2586,6 +2735,8 @@ ltrim.o: ../source/functions/ltrim.cpp ../source/functions/ltrim.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2596,6 +2747,7 @@ ltrim.o: ../source/functions/ltrim.cpp ../source/functions/ltrim.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ltrim.o ../source/functions/ltrim.cpp
 
@@ -2614,6 +2766,8 @@ max.o: ../source/functions/max.cpp ../source/functions/max.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2624,6 +2778,7 @@ max.o: ../source/functions/max.cpp ../source/functions/max.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o max.o ../source/functions/max.cpp
 
@@ -2642,6 +2797,8 @@ mid.o: ../source/functions/mid.cpp ../source/functions/mid.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2652,6 +2809,7 @@ mid.o: ../source/functions/mid.cpp ../source/functions/mid.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mid.o ../source/functions/mid.cpp
 
@@ -2670,6 +2828,8 @@ min.o: ../source/functions/min.cpp ../source/functions/min.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2680,6 +2840,7 @@ min.o: ../source/functions/min.cpp ../source/functions/min.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o min.o ../source/functions/min.cpp
 
@@ -2698,6 +2859,8 @@ month.o: ../source/functions/month.cpp ../source/functions/month.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2708,6 +2871,7 @@ month.o: ../source/functions/month.cpp ../source/functions/month.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o month.o ../source/functions/month.cpp
 
@@ -2726,6 +2890,8 @@ monthname.o: ../source/functions/monthname.cpp ../source/functions/monthname.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2736,6 +2902,7 @@ monthname.o: ../source/functions/monthname.cpp ../source/functions/monthname.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o monthname.o ../source/functions/monthname.cpp
 
@@ -2754,6 +2921,8 @@ not.o: ../source/functions/not.cpp ../source/functions/not.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2764,6 +2933,7 @@ not.o: ../source/functions/not.cpp ../source/functions/not.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o not.o ../source/functions/not.cpp
 
@@ -2782,6 +2952,8 @@ now.o: ../source/functions/now.cpp ../source/functions/now.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2792,6 +2964,7 @@ now.o: ../source/functions/now.cpp ../source/functions/now.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o now.o ../source/functions/now.cpp
 
@@ -2810,6 +2983,8 @@ pow.o: ../source/functions/pow.cpp ../source/functions/pow.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2820,6 +2995,7 @@ pow.o: ../source/functions/pow.cpp ../source/functions/pow.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pow.o ../source/functions/pow.cpp
 
@@ -2838,6 +3014,8 @@ print.o: ../source/functions/print.cpp ../source/functions/print.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2848,6 +3026,7 @@ print.o: ../source/functions/print.cpp ../source/functions/print.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o print.o ../source/functions/print.cpp
 
@@ -2866,6 +3045,8 @@ random.o: ../source/functions/random.cpp ../source/functions/random.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2876,6 +3057,7 @@ random.o: ../source/functions/random.cpp ../source/functions/random.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o random.o ../source/functions/random.cpp
 
@@ -2894,6 +3076,8 @@ replace.o: ../source/functions/replace.cpp ../source/functions/replace.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2904,6 +3088,7 @@ replace.o: ../source/functions/replace.cpp ../source/functions/replace.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o replace.o ../source/functions/replace.cpp
 
@@ -2922,6 +3107,8 @@ right.o: ../source/functions/right.cpp ../source/functions/right.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2932,6 +3119,7 @@ right.o: ../source/functions/right.cpp ../source/functions/right.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o right.o ../source/functions/right.cpp
 
@@ -2950,6 +3138,8 @@ round.o: ../source/functions/round.cpp ../source/functions/round.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2960,6 +3150,7 @@ round.o: ../source/functions/round.cpp ../source/functions/round.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o round.o ../source/functions/round.cpp
 
@@ -2978,6 +3169,8 @@ rtrim.o: ../source/functions/rtrim.cpp ../source/functions/rtrim.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -2988,6 +3181,7 @@ rtrim.o: ../source/functions/rtrim.cpp ../source/functions/rtrim.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rtrim.o ../source/functions/rtrim.cpp
 
@@ -3006,6 +3200,8 @@ scan.o: ../source/functions/scan.cpp ../source/functions/scan.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3016,6 +3212,7 @@ scan.o: ../source/functions/scan.cpp ../source/functions/scan.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scan.o ../source/functions/scan.cpp
 
@@ -3034,6 +3231,8 @@ sin.o: ../source/functions/sin.cpp ../source/functions/sin.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3044,6 +3243,7 @@ sin.o: ../source/functions/sin.cpp ../source/functions/sin.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sin.o ../source/functions/sin.cpp
 
@@ -3062,6 +3262,8 @@ space.o: ../source/functions/space.cpp ../source/functions/space.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3072,6 +3274,7 @@ space.o: ../source/functions/space.cpp ../source/functions/space.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o space.o ../source/functions/space.cpp
 
@@ -3090,6 +3293,8 @@ sqrt.o: ../source/functions/sqrt.cpp ../source/functions/sqrt.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3100,6 +3305,7 @@ sqrt.o: ../source/functions/sqrt.cpp ../source/functions/sqrt.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sqrt.o ../source/functions/sqrt.cpp
 
@@ -3118,6 +3324,8 @@ str.o: ../source/functions/str.cpp ../source/functions/str.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3128,6 +3336,7 @@ str.o: ../source/functions/str.cpp ../source/functions/str.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o str.o ../source/functions/str.cpp
 
@@ -3146,6 +3355,8 @@ strcomp.o: ../source/functions/strcomp.cpp ../source/functions/strcomp.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3156,6 +3367,7 @@ strcomp.o: ../source/functions/strcomp.cpp ../source/functions/strcomp.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o strcomp.o ../source/functions/strcomp.cpp
 
@@ -3174,6 +3386,8 @@ strreverse.o: ../source/functions/strreverse.cpp ../source/functions/strreverse.
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3184,6 +3398,7 @@ strreverse.o: ../source/functions/strreverse.cpp ../source/functions/strreverse.
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o strreverse.o ../source/functions/strreverse.cpp
 
@@ -3202,6 +3417,8 @@ tan.o: ../source/functions/tan.cpp ../source/functions/tan.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3212,6 +3429,7 @@ tan.o: ../source/functions/tan.cpp ../source/functions/tan.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tan.o ../source/functions/tan.cpp
 
@@ -3230,6 +3448,8 @@ tolower.o: ../source/functions/tolower.cpp ../source/functions/tolower.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3240,6 +3460,7 @@ tolower.o: ../source/functions/tolower.cpp ../source/functions/tolower.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tolower.o ../source/functions/tolower.cpp
 
@@ -3258,6 +3479,8 @@ tostring.o: ../source/functions/tostring.cpp ../source/functions/tostring.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3268,6 +3491,7 @@ tostring.o: ../source/functions/tostring.cpp ../source/functions/tostring.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tostring.o ../source/functions/tostring.cpp
 
@@ -3286,6 +3510,8 @@ toupper.o: ../source/functions/toupper.cpp ../source/functions/toupper.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3296,6 +3522,7 @@ toupper.o: ../source/functions/toupper.cpp ../source/functions/toupper.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o toupper.o ../source/functions/toupper.cpp
 
@@ -3314,6 +3541,8 @@ trim.o: ../source/functions/trim.cpp ../source/functions/trim.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3324,6 +3553,7 @@ trim.o: ../source/functions/trim.cpp ../source/functions/trim.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h \
 		../source/functions/ltrim.h \
 		../source/functions/rtrim.h
@@ -3344,6 +3574,8 @@ weekday.o: ../source/functions/weekday.cpp ../source/functions/weekday.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3354,6 +3586,7 @@ weekday.o: ../source/functions/weekday.cpp ../source/functions/weekday.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o weekday.o ../source/functions/weekday.cpp
 
@@ -3372,6 +3605,8 @@ weekdayname.o: ../source/functions/weekdayname.cpp ../source/functions/weekdayna
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3382,6 +3617,7 @@ weekdayname.o: ../source/functions/weekdayname.cpp ../source/functions/weekdayna
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o weekdayname.o ../source/functions/weekdayname.cpp
 
@@ -3400,6 +3636,8 @@ year.o: ../source/functions/year.cpp ../source/functions/year.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -3410,6 +3648,7 @@ year.o: ../source/functions/year.cpp ../source/functions/year.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o year.o ../source/functions/year.cpp
 
@@ -3430,6 +3669,8 @@ parser.o: ../source/parser/parser.cpp ../source/parser/parser.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -3438,6 +3679,7 @@ parser.o: ../source/parser/parser.cpp ../source/parser/parser.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/nodes/nodefactory.h \
 		../source/nodes/equalnode.h \
 		../source/nodes/setvarnode.h \
@@ -3609,6 +3851,8 @@ main.o: ../source/main.cpp ../source/parser/parser.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -3617,6 +3861,7 @@ main.o: ../source/main.cpp ../source/parser/parser.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/nodes/nodefactory.h \
 		../source/nodes/equalnode.h \
 		../source/nodes/setvarnode.h \
@@ -3759,6 +4004,8 @@ addconstnode.o: ../source/nodes/addconstnode.cpp ../source/nodes/addconstnode.h 
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -3766,7 +4013,8 @@ addconstnode.o: ../source/nodes/addconstnode.cpp ../source/nodes/addconstnode.h 
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o addconstnode.o ../source/nodes/addconstnode.cpp
 
 addnode.o: ../source/nodes/addnode.cpp ../source/nodes/addnode.h \
@@ -3785,6 +4033,8 @@ addnode.o: ../source/nodes/addnode.cpp ../source/nodes/addnode.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -3792,7 +4042,8 @@ addnode.o: ../source/nodes/addnode.cpp ../source/nodes/addnode.h \
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o addnode.o ../source/nodes/addnode.cpp
 
 addvarnode.o: ../source/nodes/addvarnode.cpp ../source/nodes/addvarnode.h \
@@ -3811,6 +4062,8 @@ addvarnode.o: ../source/nodes/addvarnode.cpp ../source/nodes/addvarnode.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -3818,7 +4071,8 @@ addvarnode.o: ../source/nodes/addvarnode.cpp ../source/nodes/addvarnode.h \
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o addvarnode.o ../source/nodes/addvarnode.cpp
 
 bitwiseandnode.o: ../source/nodes/bitwiseandnode.cpp ../source/nodes/bitwiseandnode.h \
@@ -3837,6 +4091,8 @@ bitwiseandnode.o: ../source/nodes/bitwiseandnode.cpp ../source/nodes/bitwiseandn
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -3844,7 +4100,8 @@ bitwiseandnode.o: ../source/nodes/bitwiseandnode.cpp ../source/nodes/bitwiseandn
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bitwiseandnode.o ../source/nodes/bitwiseandnode.cpp
 
 bitwiseornode.o: ../source/nodes/bitwiseornode.cpp ../source/nodes/bitwiseornode.h \
@@ -3863,6 +4120,8 @@ bitwiseornode.o: ../source/nodes/bitwiseornode.cpp ../source/nodes/bitwiseornode
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -3870,7 +4129,8 @@ bitwiseornode.o: ../source/nodes/bitwiseornode.cpp ../source/nodes/bitwiseornode
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bitwiseornode.o ../source/nodes/bitwiseornode.cpp
 
 getfuncnode.o: ../source/nodes/getfuncnode.cpp ../source/nodes/getfuncnode.h \
@@ -3889,6 +4149,8 @@ getfuncnode.o: ../source/nodes/getfuncnode.cpp ../source/nodes/getfuncnode.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -3897,6 +4159,7 @@ getfuncnode.o: ../source/nodes/getfuncnode.cpp ../source/nodes/getfuncnode.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/functions/function.h \
 		../source/io/fileline.h \
 		../source/functions/functions.h \
@@ -3990,6 +4253,8 @@ equalnode.o: ../source/nodes/equalnode.cpp ../source/nodes/equalnode.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -3998,6 +4263,7 @@ equalnode.o: ../source/nodes/equalnode.cpp ../source/nodes/equalnode.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/nodes/setvarnode.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o equalnode.o ../source/nodes/equalnode.cpp
 
@@ -4017,6 +4283,8 @@ divnode.o: ../source/nodes/divnode.cpp ../source/nodes/divnode.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4024,7 +4292,8 @@ divnode.o: ../source/nodes/divnode.cpp ../source/nodes/divnode.h \
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o divnode.o ../source/nodes/divnode.cpp
 
 decrementnode.o: ../source/nodes/decrementnode.cpp ../source/nodes/decrementnode.h \
@@ -4043,6 +4312,8 @@ decrementnode.o: ../source/nodes/decrementnode.cpp ../source/nodes/decrementnode
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4050,7 +4321,8 @@ decrementnode.o: ../source/nodes/decrementnode.cpp ../source/nodes/decrementnode
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o decrementnode.o ../source/nodes/decrementnode.cpp
 
 bracketnode.o: ../source/nodes/bracketnode.cpp ../source/nodes/bracketnode.h \
@@ -4069,6 +4341,8 @@ bracketnode.o: ../source/nodes/bracketnode.cpp ../source/nodes/bracketnode.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4076,7 +4350,8 @@ bracketnode.o: ../source/nodes/bracketnode.cpp ../source/nodes/bracketnode.h \
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bracketnode.o ../source/nodes/bracketnode.cpp
 
 ifequalnode.o: ../source/nodes/ifequalnode.cpp ../source/nodes/ifequalnode.h \
@@ -4095,6 +4370,8 @@ ifequalnode.o: ../source/nodes/ifequalnode.cpp ../source/nodes/ifequalnode.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4102,7 +4379,8 @@ ifequalnode.o: ../source/nodes/ifequalnode.cpp ../source/nodes/ifequalnode.h \
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ifequalnode.o ../source/nodes/ifequalnode.cpp
 
 ifnode.o: ../source/nodes/ifnode.cpp ../source/nodes/ifnode.h \
@@ -4121,6 +4399,8 @@ ifnode.o: ../source/nodes/ifnode.cpp ../source/nodes/ifnode.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4128,7 +4408,8 @@ ifnode.o: ../source/nodes/ifnode.cpp ../source/nodes/ifnode.h \
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ifnode.o ../source/nodes/ifnode.cpp
 
 ifandnode.o: ../source/nodes/ifandnode.cpp ../source/nodes/ifandnode.h \
@@ -4147,6 +4428,8 @@ ifandnode.o: ../source/nodes/ifandnode.cpp ../source/nodes/ifandnode.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4154,7 +4437,8 @@ ifandnode.o: ../source/nodes/ifandnode.cpp ../source/nodes/ifandnode.h \
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ifandnode.o ../source/nodes/ifandnode.cpp
 
 huwcodenodefactory.o: ../source/nodes/huwcodenodefactory.cpp ../source/nodes/huwcodenodefactory.h \
@@ -4174,6 +4458,8 @@ huwcodenodefactory.o: ../source/nodes/huwcodenodefactory.cpp ../source/nodes/huw
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4182,6 +4468,7 @@ huwcodenodefactory.o: ../source/nodes/huwcodenodefactory.cpp ../source/nodes/huw
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/nodes/equalnode.h \
 		../source/nodes/setvarnode.h \
 		../source/nodes/ifequalnode.h \
@@ -4314,6 +4601,8 @@ getvarnode.o: ../source/nodes/getvarnode.cpp ../source/nodes/getvarnode.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4321,7 +4610,8 @@ getvarnode.o: ../source/nodes/getvarnode.cpp ../source/nodes/getvarnode.h \
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o getvarnode.o ../source/nodes/getvarnode.cpp
 
 ifnotequalnode.o: ../source/nodes/ifnotequalnode.cpp ../source/nodes/ifnotequalnode.h \
@@ -4340,6 +4630,8 @@ ifnotequalnode.o: ../source/nodes/ifnotequalnode.cpp ../source/nodes/ifnotequaln
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4347,7 +4639,8 @@ ifnotequalnode.o: ../source/nodes/ifnotequalnode.cpp ../source/nodes/ifnotequaln
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ifnotequalnode.o ../source/nodes/ifnotequalnode.cpp
 
 ifornode.o: ../source/nodes/ifornode.cpp ../source/nodes/ifornode.h \
@@ -4366,6 +4659,8 @@ ifornode.o: ../source/nodes/ifornode.cpp ../source/nodes/ifornode.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4373,7 +4668,8 @@ ifornode.o: ../source/nodes/ifornode.cpp ../source/nodes/ifornode.h \
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ifornode.o ../source/nodes/ifornode.cpp
 
 ifovernode.o: ../source/nodes/ifovernode.cpp ../source/nodes/ifovernode.h \
@@ -4392,6 +4688,8 @@ ifovernode.o: ../source/nodes/ifovernode.cpp ../source/nodes/ifovernode.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4399,7 +4697,8 @@ ifovernode.o: ../source/nodes/ifovernode.cpp ../source/nodes/ifovernode.h \
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ifovernode.o ../source/nodes/ifovernode.cpp
 
 ifoverorequalnode.o: ../source/nodes/ifoverorequalnode.cpp ../source/nodes/ifoverorequalnode.h \
@@ -4418,6 +4717,8 @@ ifoverorequalnode.o: ../source/nodes/ifoverorequalnode.cpp ../source/nodes/ifove
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4425,7 +4726,8 @@ ifoverorequalnode.o: ../source/nodes/ifoverorequalnode.cpp ../source/nodes/ifove
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ifoverorequalnode.o ../source/nodes/ifoverorequalnode.cpp
 
 ifundernode.o: ../source/nodes/ifundernode.cpp ../source/nodes/ifundernode.h \
@@ -4444,6 +4746,8 @@ ifundernode.o: ../source/nodes/ifundernode.cpp ../source/nodes/ifundernode.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4451,7 +4755,8 @@ ifundernode.o: ../source/nodes/ifundernode.cpp ../source/nodes/ifundernode.h \
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ifundernode.o ../source/nodes/ifundernode.cpp
 
 ifunderorequalnode.o: ../source/nodes/ifunderorequalnode.cpp ../source/nodes/ifunderorequalnode.h \
@@ -4470,6 +4775,8 @@ ifunderorequalnode.o: ../source/nodes/ifunderorequalnode.cpp ../source/nodes/ifu
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4477,7 +4784,8 @@ ifunderorequalnode.o: ../source/nodes/ifunderorequalnode.cpp ../source/nodes/ifu
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ifunderorequalnode.o ../source/nodes/ifunderorequalnode.cpp
 
 numbernode.o: ../source/nodes/numbernode.cpp ../source/nodes/numbernode.h \
@@ -4496,6 +4804,8 @@ numbernode.o: ../source/nodes/numbernode.cpp ../source/nodes/numbernode.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4504,6 +4814,7 @@ numbernode.o: ../source/nodes/numbernode.cpp ../source/nodes/numbernode.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/format/escapecharacteroutput.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o numbernode.o ../source/nodes/numbernode.cpp
 
@@ -4523,6 +4834,8 @@ mulnode.o: ../source/nodes/mulnode.cpp ../source/nodes/mulnode.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4530,7 +4843,8 @@ mulnode.o: ../source/nodes/mulnode.cpp ../source/nodes/mulnode.h \
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mulnode.o ../source/nodes/mulnode.cpp
 
 modnode.o: ../source/nodes/modnode.cpp ../source/nodes/modnode.h \
@@ -4549,6 +4863,8 @@ modnode.o: ../source/nodes/modnode.cpp ../source/nodes/modnode.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4556,7 +4872,8 @@ modnode.o: ../source/nodes/modnode.cpp ../source/nodes/modnode.h \
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o modnode.o ../source/nodes/modnode.cpp
 
 incrementnode.o: ../source/nodes/incrementnode.cpp ../source/nodes/incrementnode.h \
@@ -4575,6 +4892,8 @@ incrementnode.o: ../source/nodes/incrementnode.cpp ../source/nodes/incrementnode
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4582,7 +4901,8 @@ incrementnode.o: ../source/nodes/incrementnode.cpp ../source/nodes/incrementnode
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o incrementnode.o ../source/nodes/incrementnode.cpp
 
 runnode.o: ../source/nodes/runnode.cpp ../source/nodes/runnode.h \
@@ -4601,6 +4921,8 @@ runnode.o: ../source/nodes/runnode.cpp ../source/nodes/runnode.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4608,7 +4930,8 @@ runnode.o: ../source/nodes/runnode.cpp ../source/nodes/runnode.h \
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o runnode.o ../source/nodes/runnode.cpp
 
 setreturnnode.o: ../source/nodes/setreturnnode.cpp ../source/nodes/setreturnnode.h \
@@ -4627,6 +4950,8 @@ setreturnnode.o: ../source/nodes/setreturnnode.cpp ../source/nodes/setreturnnode
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4634,7 +4959,8 @@ setreturnnode.o: ../source/nodes/setreturnnode.cpp ../source/nodes/setreturnnode
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o setreturnnode.o ../source/nodes/setreturnnode.cpp
 
 setvarnode.o: ../source/nodes/setvarnode.cpp ../source/nodes/setvarnode.h \
@@ -4653,6 +4979,8 @@ setvarnode.o: ../source/nodes/setvarnode.cpp ../source/nodes/setvarnode.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4660,7 +4988,8 @@ setvarnode.o: ../source/nodes/setvarnode.cpp ../source/nodes/setvarnode.h \
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o setvarnode.o ../source/nodes/setvarnode.cpp
 
 subnode.o: ../source/nodes/subnode.cpp ../source/nodes/subnode.h \
@@ -4679,6 +5008,8 @@ subnode.o: ../source/nodes/subnode.cpp ../source/nodes/subnode.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4686,7 +5017,8 @@ subnode.o: ../source/nodes/subnode.cpp ../source/nodes/subnode.h \
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o subnode.o ../source/nodes/subnode.cpp
 
 textnode.o: ../source/nodes/textnode.cpp ../source/nodes/textnode.h \
@@ -4705,6 +5037,8 @@ textnode.o: ../source/nodes/textnode.cpp ../source/nodes/textnode.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4713,6 +5047,7 @@ textnode.o: ../source/nodes/textnode.cpp ../source/nodes/textnode.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/format/escapecharacteroutput.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o textnode.o ../source/nodes/textnode.cpp
 
@@ -4732,6 +5067,8 @@ unaryminusnode.o: ../source/nodes/unaryminusnode.cpp ../source/nodes/unaryminusn
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4739,7 +5076,8 @@ unaryminusnode.o: ../source/nodes/unaryminusnode.cpp ../source/nodes/unaryminusn
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o unaryminusnode.o ../source/nodes/unaryminusnode.cpp
 
 whilenode.o: ../source/nodes/whilenode.cpp ../source/nodes/whilenode.h \
@@ -4758,6 +5096,8 @@ whilenode.o: ../source/nodes/whilenode.cpp ../source/nodes/whilenode.h \
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4765,7 +5105,8 @@ whilenode.o: ../source/nodes/whilenode.cpp ../source/nodes/whilenode.h \
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o whilenode.o ../source/nodes/whilenode.cpp
 
 unarynotnode.o: ../source/nodes/unarynotnode.cpp ../source/nodes/unarynotnode.h \
@@ -4784,6 +5125,8 @@ unarynotnode.o: ../source/nodes/unarynotnode.cpp ../source/nodes/unarynotnode.h 
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4791,7 +5134,8 @@ unarynotnode.o: ../source/nodes/unarynotnode.cpp ../source/nodes/unarynotnode.h 
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o unarynotnode.o ../source/nodes/unarynotnode.cpp
 
 nodefactoryfactory.o: ../source/nodes/nodefactoryfactory.cpp ../source/nodes/nodefactoryfactory.h \
@@ -4811,6 +5155,8 @@ nodefactoryfactory.o: ../source/nodes/nodefactoryfactory.cpp ../source/nodes/nod
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4819,6 +5165,7 @@ nodefactoryfactory.o: ../source/nodes/nodefactoryfactory.cpp ../source/nodes/nod
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/nodes/equalnode.h \
 		../source/nodes/setvarnode.h \
 		../source/nodes/ifequalnode.h \
@@ -4952,6 +5299,8 @@ semicolonnode.o: ../source/nodes/semicolonnode.cpp ../source/nodes/semicolonnode
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -4959,7 +5308,8 @@ semicolonnode.o: ../source/nodes/semicolonnode.cpp ../source/nodes/semicolonnode
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o semicolonnode.o ../source/nodes/semicolonnode.cpp
 
 escapecharacteroutput.o: ../source/format/escapecharacteroutput.cpp ../source/format/escapecharacteroutput.h
@@ -4974,7 +5324,9 @@ passable.o: ../source/common/passable.cpp ../source/common/passable.h \
 		../source/errors/errortypes.h \
 		../source/errors/errortypestringfactory.h \
 		../source/errors/errorfactory.h \
-		../source/variables/variablestringfactory.h
+		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o passable.o ../source/common/passable.cpp
 
 errorfactory.o: ../source/errors/errorfactory.cpp ../source/errors/errorfactory.h \
@@ -5002,6 +5354,8 @@ fileexists.o: ../source/functions/fileexists.cpp ../source/functions/fileexists.
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -5012,6 +5366,7 @@ fileexists.o: ../source/functions/fileexists.cpp ../source/functions/fileexists.
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h \
 		../source/io/io.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fileexists.o ../source/functions/fileexists.cpp
@@ -5031,6 +5386,8 @@ regexsearch.o: ../source/functions/regexsearch.cpp ../source/functions/regexsear
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -5041,6 +5398,7 @@ regexsearch.o: ../source/functions/regexsearch.cpp ../source/functions/regexsear
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o regexsearch.o ../source/functions/regexsearch.cpp
 
@@ -5059,6 +5417,8 @@ regexmatch.o: ../source/functions/regexmatch.cpp ../source/functions/regexmatch.
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -5069,6 +5429,7 @@ regexmatch.o: ../source/functions/regexmatch.cpp ../source/functions/regexmatch.
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h \
 		../source/variables/hashtablevariable.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o regexmatch.o ../source/functions/regexmatch.cpp
@@ -5088,6 +5449,8 @@ regexreplace.o: ../source/functions/regexreplace.cpp ../source/functions/regexre
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/nodes/node.h \
 		../source/variables/variables.h \
 		../source/variables/doublevariable.h \
@@ -5098,6 +5461,7 @@ regexreplace.o: ../source/functions/regexreplace.cpp ../source/functions/regexre
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
 		../source/variables/scope.h \
+		../source/common/nameableobject.h \
 		../source/io/fileline.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o regexreplace.o ../source/functions/regexreplace.cpp
 
@@ -5117,6 +5481,8 @@ bitwisexornode.o: ../source/nodes/bitwisexornode.cpp ../source/nodes/bitwisexorn
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -5124,7 +5490,8 @@ bitwisexornode.o: ../source/nodes/bitwisexornode.cpp ../source/nodes/bitwisexorn
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bitwisexornode.o ../source/nodes/bitwisexornode.cpp
 
 bitwisecomplementnode.o: ../source/nodes/bitwisecomplementnode.cpp ../source/nodes/bitwisecomplementnode.h \
@@ -5143,6 +5510,8 @@ bitwisecomplementnode.o: ../source/nodes/bitwisecomplementnode.cpp ../source/nod
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -5150,7 +5519,8 @@ bitwisecomplementnode.o: ../source/nodes/bitwisecomplementnode.cpp ../source/nod
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bitwisecomplementnode.o ../source/nodes/bitwisecomplementnode.cpp
 
 leftshiftnode.o: ../source/nodes/leftshiftnode.cpp ../source/nodes/leftshiftnode.h \
@@ -5169,6 +5539,8 @@ leftshiftnode.o: ../source/nodes/leftshiftnode.cpp ../source/nodes/leftshiftnode
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -5176,7 +5548,8 @@ leftshiftnode.o: ../source/nodes/leftshiftnode.cpp ../source/nodes/leftshiftnode
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o leftshiftnode.o ../source/nodes/leftshiftnode.cpp
 
 rightshiftnode.o: ../source/nodes/rightshiftnode.cpp ../source/nodes/rightshiftnode.h \
@@ -5195,6 +5568,8 @@ rightshiftnode.o: ../source/nodes/rightshiftnode.cpp ../source/nodes/rightshiftn
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -5202,7 +5577,8 @@ rightshiftnode.o: ../source/nodes/rightshiftnode.cpp ../source/nodes/rightshiftn
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rightshiftnode.o ../source/nodes/rightshiftnode.cpp
 
 variablestringfactory.o: ../source/variables/variablestringfactory.cpp ../source/variables/variablestringfactory.h \
@@ -5225,6 +5601,8 @@ arraygetnode.o: ../source/nodes/arraygetnode.cpp ../source/nodes/arraygetnode.h 
 		../source/common/passable.h \
 		../source/errors/errorfactory.h \
 		../source/variables/variablestringfactory.h \
+		../source/errors/stacktracemanager.h \
+		../source/errors/stacktrace.h \
 		../source/variables/doublevariable.h \
 		../source/variables/numbervariable.h \
 		../source/variables/integervariable.h \
@@ -5232,7 +5610,8 @@ arraygetnode.o: ../source/nodes/arraygetnode.cpp ../source/nodes/arraygetnode.h 
 		../source/variables/stringvariable.h \
 		../source/variables/precision.h \
 		../source/variables/constantvariable.h \
-		../source/variables/scope.h
+		../source/variables/scope.h \
+		../source/common/nameableobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o arraygetnode.o ../source/nodes/arraygetnode.cpp
 
 stacktracemanager.o: ../source/errors/stacktracemanager.cpp ../source/errors/stacktracemanager.h \
@@ -5243,6 +5622,9 @@ stacktracemanager.o: ../source/errors/stacktracemanager.cpp ../source/errors/sta
 stacktrace.o: ../source/errors/stacktrace.cpp ../source/errors/stacktrace.h \
 		../source/tokens/lineinfo.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stacktrace.o ../source/errors/stacktrace.cpp
+
+nameableobject.o: ../source/common/nameableobject.cpp ../source/common/nameableobject.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o nameableobject.o ../source/common/nameableobject.cpp
 
 ####### Install
 

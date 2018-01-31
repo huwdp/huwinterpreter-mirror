@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Count::Count(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "count";
+            setName("count");
         }
 
         std::shared_ptr<Variable> Count::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

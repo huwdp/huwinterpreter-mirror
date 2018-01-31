@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Sin::Sin(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "sin";
+            setName("sin");
         }
 
         std::shared_ptr<Variable> Sin::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

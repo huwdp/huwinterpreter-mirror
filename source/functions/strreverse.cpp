@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         StrReverse::StrReverse(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "strRev";
+            setName("strRev");
         }
 
         std::shared_ptr<Variable> StrReverse::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

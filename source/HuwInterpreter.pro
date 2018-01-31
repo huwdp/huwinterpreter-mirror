@@ -169,7 +169,8 @@ SOURCES += \
     variables/variablestringfactory.cpp \
     nodes/arraygetnode.cpp \
     errors/stacktracemanager.cpp \
-    errors/stacktrace.cpp
+    errors/stacktrace.cpp \
+    common/nameableobject.cpp
 
 
 
@@ -367,7 +368,8 @@ HEADERS += \
     variables/variablestringfactory.h \
     nodes/arraygetnode.h \
     errors/stacktracemanager.h \
-    errors/stacktrace.h
+    errors/stacktrace.h \
+    common/nameableobject.h
 
 
 

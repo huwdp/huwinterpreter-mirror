@@ -23,9 +23,9 @@ namespace HuwInterpreter {
         }
 
         Variable::Variable(std::shared_ptr<Passable> passable, std::string name)
+            : NameableObject(name)
         {
             this->passable = passable;
-            this->name = name;
         }
 
         Variable::Variable(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token)
@@ -35,20 +35,10 @@ namespace HuwInterpreter {
         }
 
         Variable::Variable(std::shared_ptr<Passable> passable, std::string name, std::shared_ptr<Tokens::Token> token)
+            : NameableObject(name)
         {
             this->passable = passable;
-            this->name = name;
             this->token = token;
-        }
-
-        std::string Variable::getName()
-        {
-            return name;
-        }
-
-        void Variable::setName(std::string name)
-        {
-            this->name = name;
         }
     }
 }

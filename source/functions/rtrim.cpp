@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         RTrim::RTrim(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "rTrim";
+            setName("rTrim");
         }
 
         std::shared_ptr<Variable> RTrim::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

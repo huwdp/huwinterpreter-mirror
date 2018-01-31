@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Abs::Abs(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "abs";
+            setName("abs");
         }
 
         std::shared_ptr<Variable> Abs::execute(std::shared_ptr<Tokens::Token> token,

@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         RegexSearch::RegexSearch(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "regexSearch";
+            setName("regexSearch");
         }
 
         std::shared_ptr<Variable> RegexSearch::execute(std::shared_ptr<Tokens::Token> token,

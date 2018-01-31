@@ -23,7 +23,7 @@ namespace HuwInterpreter {
                                        std::shared_ptr<Nodes::Node> block)
             : Function(passable)
         {
-            this->name = name;
+            setName(name);
             this->arguments = arguments;
             this->block = block;
             this->token = token;
@@ -61,13 +61,13 @@ namespace HuwInterpreter {
                     return nullVariable;
                 }
 
-                passable->getStackTraceManager()->enqueue(std::make_shared<ErrorReporting::StackTrace>(scope->getFunctionName(), token->getLineInfo()));
+                passable->getStackTraceManager()->push(std::make_shared<ErrorReporting::StackTrace>(scope->getFunctionName(), token->getLineInfo()));
                 block->execute(globalScope, newScope);
                 std::shared_ptr<Variable> output = newScope->getReturnValue();
 
                 if (passable->getErrorManager()->count() == 0)
                 {
-                    passable->getStackTraceManager()->dequeue();
+                    passable->getStackTraceManager()->pop();
                 }
                 // Remove arguments given from scope
                 for (std::vector<std::string>::iterator it1 = this->arguments.begin(); it1 != this->arguments.end(); ++it1)

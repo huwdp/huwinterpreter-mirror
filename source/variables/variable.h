@@ -26,10 +26,11 @@
 #include "errors/debug.h"
 #include "errors/errors.h"
 #include "common/passable.h"
+#include "common/nameableobject.h"
 
 namespace HuwInterpreter {
     namespace Variables {
-        class Variable
+        class Variable : public NameableObject
         {
         protected:
             long long referenceCount = 0;
@@ -43,8 +44,6 @@ namespace HuwInterpreter {
             Variable(std::shared_ptr<Passable> passable, std::string name);
             Variable(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token);
             Variable(std::shared_ptr<Passable> passable, std::string name, std::shared_ptr<Tokens::Token> token);
-            std::string getName();
-            void setName(std::string name);
             virtual void setValue(double value) = 0;
             virtual void setValue(std::string value) = 0;
             virtual void setValue(long long value) = 0;

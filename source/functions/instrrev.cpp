@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         InStrRev::InStrRev(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "inStrRev";
+            setName("inStrRev");
         }
 
         std::shared_ptr<Variable> InStrRev::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

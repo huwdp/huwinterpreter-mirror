@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Round::Round(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "round";
+            setName("round");
         }
 
         std::shared_ptr<Variable> Round::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

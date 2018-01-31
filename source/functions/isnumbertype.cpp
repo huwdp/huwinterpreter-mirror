@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         IsNumberType::IsNumberType(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "isNumberType";
+            setName("isNumberType");
         }
 
         std::shared_ptr<Variable> IsNumberType::execute(std::shared_ptr<Tokens::Token> token,

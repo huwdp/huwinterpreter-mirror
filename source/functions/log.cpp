@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Log::Log(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "log";
+            setName("log");
         }
 
         std::shared_ptr<Variable> Log::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

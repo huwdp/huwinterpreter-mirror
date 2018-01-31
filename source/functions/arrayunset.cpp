@@ -21,7 +21,7 @@ namespace HuwInterpreter {
         ArrayUnset::ArrayUnset(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "arrayUnset";
+            setName("arrayUnset");
         }
 
         std::shared_ptr<Variable> ArrayUnset::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

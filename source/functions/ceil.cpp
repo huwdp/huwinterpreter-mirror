@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Ceil::Ceil(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "ceil";
+            setName("ceil");
         }
 
         std::shared_ptr<Variable> Ceil::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

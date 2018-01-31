@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Acos::Acos(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "acos";
+            setName("acos");
         }
 
         std::shared_ptr<Variable> Acos::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

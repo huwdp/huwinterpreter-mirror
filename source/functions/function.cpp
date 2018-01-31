@@ -22,16 +22,6 @@ namespace HuwInterpreter {
             this->passable = passable;
         }
 
-        std::string Function::getName()
-        {
-            return name;
-        }
-
-        void Function::setName(std::string name)
-        {
-            this->name = name;
-        }
-
         std::string Function::toString(std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
             std::string output;

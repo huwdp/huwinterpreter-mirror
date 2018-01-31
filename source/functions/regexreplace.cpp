@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         RegexReplace::RegexReplace(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "regexReplace";
+            setName("regexReplace");
         }
 
         std::shared_ptr<Variable> RegexReplace::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

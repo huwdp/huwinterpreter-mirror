@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Random::Random(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "random";
+            setName("random");
         }
 
         std::shared_ptr<Variable> Random::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

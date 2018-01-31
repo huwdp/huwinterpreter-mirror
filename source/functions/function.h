@@ -25,22 +25,21 @@
 #include "errors/error.h"
 #include "io/fileline.h"
 #include "../common/passable.h"
+#include "common/nameableobject.h"
 
 namespace HuwInterpreter {
     namespace Functions {
 
         using namespace Variables;
 
-        class Function
+        class Function : public NameableObject
         {
         protected:
-            std::string name;
             std::shared_ptr<Variable> nullVariable;
             std::shared_ptr<Passable> passable;
         public:
             Function(std::shared_ptr<Passable> passable);
-            std::string getName();
-            void setName(std::string name);
+
             virtual std::shared_ptr<Variable> execute(std::shared_ptr<Tokens::Token> token,
                                                   std::shared_ptr<Scope> globalScope,
                                                   std::shared_ptr<Scope> scope,

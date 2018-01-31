@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Right::Right(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "right";
+            setName("right");
         }
 
         std::shared_ptr<Variable> Right::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

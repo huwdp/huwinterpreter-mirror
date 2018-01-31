@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         EmptyFunction::EmptyFunction(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "EmptyFunction";
+            setName("EmptyFunction");
         }
 
         std::shared_ptr<Variable> EmptyFunction::execute(std::shared_ptr<Tokens::Token> token,

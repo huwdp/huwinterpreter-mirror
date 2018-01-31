@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Asc::Asc(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "asc";
+            setName("asc");
         }
 
         std::shared_ptr<Variable> Asc::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,

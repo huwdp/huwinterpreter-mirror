@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         Len::Len(std::shared_ptr<Passable> passable)
             : Function(passable)
         {
-            name = "len";
+            setName("len");
         }
 
         std::shared_ptr<Variable> Len::execute(std::shared_ptr<Tokens::Token> token, std::shared_ptr<Scope> globalScope,
