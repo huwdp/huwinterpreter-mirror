@@ -27,13 +27,15 @@ namespace HuwInterpreter {
         {
         private:
             unsigned int queueSize = 20;
+            bool queueLimit;
             std::deque<std::shared_ptr<StackTrace>> stackTraceQueue;
         public:
             StackTraceManager();
             StackTraceManager(unsigned int queueSize);
+            StackTraceManager(unsigned int queueSize, bool queueLimit);
             ~StackTraceManager();
-            void enqueue(std::shared_ptr<StackTrace> stackTrace);
-            void dequeue();
+            void push(std::shared_ptr<StackTrace> stackTrace);
+            void pop();
             std::deque<std::shared_ptr<StackTrace>> get();
         };
     }

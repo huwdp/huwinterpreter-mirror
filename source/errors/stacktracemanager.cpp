@@ -19,12 +19,20 @@ namespace HuwInterpreter {
     namespace ErrorReporting {
         StackTraceManager::StackTraceManager()
         {
-            this->queueSize = 20;
+            this->queueSize = 0;
+            this->queueLimit = false;
         }
 
         StackTraceManager::StackTraceManager(unsigned int queueSize)
         {
             this->queueSize = queueSize;
+            this->queueLimit = true;
+        }
+
+        StackTraceManager::StackTraceManager(unsigned int queueSize, bool queueLimit)
+        {
+            this->queueSize = queueSize;
+            this->queueLimit = queueLimit;
         }
 
         StackTraceManager::~StackTraceManager()
@@ -32,17 +40,17 @@ namespace HuwInterpreter {
             stackTraceQueue.clear();
         }
 
-        void StackTraceManager::enqueue(std::shared_ptr<StackTrace> stackTrace)
+        void StackTraceManager::push(std::shared_ptr<StackTrace> stackTrace)
         {
             stackTraceQueue.push_front(stackTrace);
 
-            if (stackTraceQueue.size() >= queueSize)
+            if (queueLimit && stackTraceQueue.size() >= queueSize)
             {
                 stackTraceQueue.pop_back();
             }
         }
 
-        void StackTraceManager::dequeue()
+        void StackTraceManager::pop()
         {
             if (stackTraceQueue.size() > 0)
             {
