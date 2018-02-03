@@ -114,7 +114,7 @@ namespace HuwInterpreter {
             return true;
         }
         compilation = false;
-        errorMessage(syntaxError(currentToken->getContent()), currentToken);
+        syntaxError(currentToken->getContent());
         return false;
     }
 
@@ -125,7 +125,7 @@ namespace HuwInterpreter {
             return true;
         }
         compilation = false;
-        errorMessage(syntaxError(currentToken->getContent()), currentToken);
+        syntaxError(currentToken->getContent());
         return false;
     }
 
@@ -134,6 +134,15 @@ namespace HuwInterpreter {
         std::string errorMsg;
         errorMsg.append("Parse error: syntax error, unexpected \"")
                 .append(content)
+                .append("\"");
+        errorMessage(errorMsg, currentToken);
+        return errorMsg;
+    }
+
+    std::string Parser::syntaxError()
+    {
+        std::string errorMsg;
+        errorMsg.append("Parse error: syntax error, unexpected \"")
                 .append("\"");
         errorMessage(errorMsg, currentToken);
         return errorMsg;
@@ -593,6 +602,7 @@ namespace HuwInterpreter {
             std::string word = currentToken->getContent();
             if (!Helpers::TypeDetector::isWord(word))
             {
+                errorMessage(syntaxError(), currentToken);
                 compilation = false;
                 return nullNode;
             }
@@ -632,7 +642,7 @@ namespace HuwInterpreter {
                     tokenType != Types::MULTIPLICATIONEQUAL &&
                     tokenType != Types::DIVISIONEQUAL)
             {
-                // Unexpected token... report error here
+                errorMessage(syntaxError(), currentToken);
                 compilation = false;
                 return nullNode;
             }
@@ -641,6 +651,7 @@ namespace HuwInterpreter {
             std::shared_ptr<Nodes::Node> expressionNode = parseBoolean();
             if (expressionNode == nullptr)
             {
+                errorMessage(syntaxError(), currentToken);
                 compilation = false;
                 return nullNode;
             }
@@ -697,6 +708,7 @@ namespace HuwInterpreter {
                 std::string word = currentToken->getContent();
                 if (!Helpers::TypeDetector::isWord(word))
                 {
+                    errorMessage(syntaxError(), currentToken);
                     compilation = false;
                     return nullNode;
                 }
@@ -716,7 +728,7 @@ namespace HuwInterpreter {
                         tokenType != Types::MULTIPLICATIONEQUAL &&
                         tokenType != Types::DIVISIONEQUAL)
                 {
-                    // Unexpected token... report error here
+                    errorMessage(syntaxError(), currentToken);
                     compilation = false;
                     return nullNode;
                 }
@@ -725,6 +737,7 @@ namespace HuwInterpreter {
                 std::shared_ptr<Nodes::Node> expressionNode = parseBoolean();
                 if (expressionNode == nullptr)
                 {
+                    errorMessage(syntaxError(), currentToken);
                     compilation = false;
                     return nullNode;
                 }
@@ -775,6 +788,7 @@ namespace HuwInterpreter {
                 std::string word = currentToken->getContent();
                 if (!Helpers::TypeDetector::isWord(word))
                 {
+                    errorMessage(syntaxError(), currentToken);
                     compilation = false;
                     return nullNode;
                 }
@@ -794,7 +808,7 @@ namespace HuwInterpreter {
                         tokenType != Types::MULTIPLICATIONEQUAL &&
                         tokenType != Types::DIVISIONEQUAL)
                 {
-                    // Unexpected token... report error here
+                    errorMessage(syntaxError(), currentToken);
                     compilation = false;
                     return nullNode;
                 }
@@ -803,6 +817,7 @@ namespace HuwInterpreter {
                 std::shared_ptr<Nodes::Node> expressionNode = parseBoolean();
                 if (expressionNode == nullptr)
                 {
+                    errorMessage(syntaxError(), currentToken);
                     compilation = false;
                     return nullNode;
                 }
@@ -1053,6 +1068,7 @@ namespace HuwInterpreter {
                 nextToken();
                 if (!Helpers::TypeDetector::isWord(word) || functions->exists(word))
                 {
+                    errorMessage(syntaxError(), currentToken);
                     compilation = false;
                     return nullNode;
                 }

@@ -109,6 +109,7 @@ namespace HuwInterpreter {
         bool expect(std::string s);
         bool expect(TokenType tokenType);
         std::string syntaxError(std::string content);
+        std::string syntaxError();
         bool expectSemicolon();
         void errorMessage(std::string errorMsg, std::shared_ptr<Tokens::Token> currentToken);
         std::shared_ptr<Nodes::Node> parseSquareBrackets(std::shared_ptr<Nodes::Node> node);
