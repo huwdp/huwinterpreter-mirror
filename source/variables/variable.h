@@ -35,7 +35,6 @@ namespace HuwInterpreter {
         protected:
             long long referenceCount = 0;
             std::string internalName;
-            std::string name;
             std::shared_ptr<Tokens::Token> token;
         public:
             std::shared_ptr<Passable> passable;
