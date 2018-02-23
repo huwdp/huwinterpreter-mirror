@@ -1,0 +1,1 @@
+let a=10;a++;print(a);a--;print(a);;;

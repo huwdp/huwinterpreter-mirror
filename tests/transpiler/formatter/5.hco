@@ -1,0 +1,1 @@
+let a=1+(9*8);if (a){print(a);}print(1+1);

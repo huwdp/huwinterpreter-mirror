@@ -1,0 +1,4 @@
+let a = "1.1";
+print(toDouble(a));
+let a = "1";
+print(toDouble(a));

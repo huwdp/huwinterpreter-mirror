@@ -1,0 +1,1 @@
+function add(a){let a=a+1;if (a<100){add(a);}print(a);}add(1);

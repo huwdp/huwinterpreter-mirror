@@ -1,0 +1,1 @@
+let i=0;let list=array();while (i<10){arraySet(list,i,"Item "+i);i++;;}let i=0;while (i<10){print(arrayGet(list,i));i++;;}print("Array count: "+count(list));

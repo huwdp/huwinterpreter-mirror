@@ -1,0 +1,1 @@
+print(abs(1));print(acos(1));print(asin(1));print(atan(1));print(atan2(1,1));print(ceil(1));print(cos(1));print(exp(1));print(sin(1));print(sqrt(2));print(tan(1));print(pow(2,2));print(sqrt(2));print(min(1,2,3));print(max(1,2,3));
