@@ -44,7 +44,7 @@ namespace HuwInterpreter {
                 std::shared_ptr<Variables::Variable> value = node->execute(globalScope, scope);
                 if (value != nullptr)
                 {
-                    return value->mul(std::make_shared<Variables::IntegerVariable>(passable, -1), token);
+                    return value->mul(std::make_shared<Variables::DoubleVariable>(passable, -1), token);
                 }
                 else
                 {

@@ -20,7 +20,6 @@
 
 #include "variable.h"
 #include "doublevariable.h"
-#include "integervariable.h"
 #include "variabletypefactory.h"
 #include "precision.h"
 

@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, bool value)
             : Variable(passable)
         {
-            this->variable = std::move(std::make_shared<IntegerVariable>(passable, static_cast<long long>(static_cast<int>(value))));
+            this->variable = std::move(std::make_shared<DoubleVariable>(passable, static_cast<long long>(static_cast<int>(value))));
         }
 
         NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, std::shared_ptr<Variable> variable)
@@ -69,7 +69,7 @@ namespace HuwInterpreter {
         NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, bool value, std::shared_ptr<Tokens::Token> token)
             : Variable(passable, token)
         {
-            this->variable = std::move(std::make_shared<IntegerVariable>(passable, static_cast<long long>(static_cast<int>(value))));
+            this->variable = std::move(std::make_shared<DoubleVariable>(passable, static_cast<long long>(static_cast<int>(value))));
         }
 
         NumberVariable::NumberVariable(std::shared_ptr<Passable> passable, std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
@@ -297,7 +297,7 @@ namespace HuwInterpreter {
                 {
                     return std::move(std::make_shared<DoubleVariable>(passable, value));
                 }
-                return std::move(std::make_shared<IntegerVariable>(passable, value));
+                return std::move(std::make_shared<DoubleVariable>(passable, value));
             }
         }
 
@@ -312,16 +312,6 @@ namespace HuwInterpreter {
 
         std::shared_ptr<Variable> NumberVariable::toValue(std::shared_ptr<Variable> variable)
         {
-            double value = variable->toDouble();
-            if (precision.isSafeInteger(value))
-            {
-                return std::move(variable);
-            }
-            else if (precision.getType(value) == Types::INTEGER)
-            {
-                long long intValue = (long long)value;
-                return std::make_shared<NumberVariable>(passable, std::move(std::make_shared<IntegerVariable>(passable, intValue)));
-            }
             return std::move(variable);
         }
 

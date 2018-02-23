@@ -225,7 +225,7 @@ namespace HuwInterpreter {
                 var->setValue(toString());
                 return var->ifUnder(variable, token);
             }
-            std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passable);
+            std::shared_ptr<DoubleVariable> temp = std::make_shared<DoubleVariable>(passable);
             if (this->toString().compare(variable->toString()) < 0)
             {
                 temp->setValue(double(1));
@@ -250,7 +250,7 @@ namespace HuwInterpreter {
                 var->setValue(toString());
                 return var->ifUnderOrEqual(variable, token);
             }
-            std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passable);
+            std::shared_ptr<DoubleVariable> temp = std::make_shared<DoubleVariable>(passable);
             if (this->toString().compare(variable->toString()) <= 0)
             {
                 temp->setValue(double(1));
@@ -275,7 +275,7 @@ namespace HuwInterpreter {
                 var->setValue(toString());
                 return var->ifOver(variable, token);
             }
-            std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passable);
+            std::shared_ptr<DoubleVariable> temp = std::make_shared<DoubleVariable>(passable);
             if (this->toString().compare(variable->toString()) > 0)
             {
                 temp->setValue(double(1));
@@ -300,7 +300,7 @@ namespace HuwInterpreter {
                 var->setValue(toString());
                 return var->ifOverOrEqual(variable, token);
             }
-            std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passable);
+            std::shared_ptr<DoubleVariable> temp = std::make_shared<DoubleVariable>(passable);
             if (this->toString().compare(variable->toString()) >= 0)
             {
                 temp->setValue(double(1));
@@ -325,7 +325,7 @@ namespace HuwInterpreter {
                 var->setValue(toString());
                 return var->ifEqual(variable, token);
             }
-            std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passable);
+            std::shared_ptr<DoubleVariable> temp = std::make_shared<DoubleVariable>(passable);
             if (this->toString().compare(variable->toString()) == 0)
             {
                 temp->setValue(double(1));
@@ -350,7 +350,7 @@ namespace HuwInterpreter {
                 var->setValue(toString());
                 return var->ifNotEqual(variable, token);
             }
-            std::shared_ptr<IntegerVariable> temp = std::make_shared<IntegerVariable>(passable);
+            std::shared_ptr<DoubleVariable> temp = std::make_shared<DoubleVariable>(passable);
             if (this->toString().compare(variable->toString()) != 0)
             {
                 temp->setValue(double(1));
