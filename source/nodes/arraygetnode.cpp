@@ -63,9 +63,9 @@ namespace HuwInterpreter {
 
         std::string ArrayGetNode::toString()
         {
-            if (right != nullptr)
+            if (left != nullptr && right != nullptr)
             {
-                return "[" + right->toString() + "]";
+                return left->toString() + "[" + right->toString() + "]";
             }
             return "";
         }
