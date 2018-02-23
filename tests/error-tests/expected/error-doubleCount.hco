@@ -1,0 +1,1 @@
+RUNTIME_ERROR: Cannot call 'count' method in '' double variable. Double is not an array at line number 3
