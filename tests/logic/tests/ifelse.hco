@@ -1,0 +1,18 @@
+let i = 10;
+if (i < 10)
+{
+	print("If");
+}
+else if (i > 10)
+{
+	print("Else If 1");
+}
+else if (i > 5)
+{
+	print("Else If 2");
+}
+else
+{
+	print("Else");
+}
+print("Done");

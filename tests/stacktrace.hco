@@ -1,0 +1,127 @@
+function test1()
+{
+    
+}
+
+function test2()
+{
+    test1();
+}
+
+function test3()
+{
+    test2();
+    let a = 1;
+    count(a); /* Should error here */
+}
+
+function test4()
+{
+    test3();
+}
+
+function test5()
+{
+    test4();
+}
+
+function test6()
+{
+    test5();
+}
+
+function test7()
+{
+    test6();
+}
+
+function test8()
+{
+    test7();
+}
+
+function test9()
+{
+    test8();
+}
+
+function test10()
+{
+    test9();
+}
+
+function test11()
+{
+    test10();
+}
+
+function test12()
+{
+    test11();
+}
+
+function test13()
+{
+    test12();
+}
+
+function test14()
+{
+    test13();
+}
+
+function test15()
+{
+    test14();
+}
+
+function test16()
+{
+    test15();
+}
+
+function test17()
+{
+    test16();
+}
+
+function test18()
+{
+    test17();
+}
+
+function test19()
+{
+    test18();
+}
+
+function test20()
+{
+    test19();
+}
+
+function test21()
+{
+    test20();
+}
+
+function test22()
+{
+    test21();
+}
+
+function test23()
+{
+    test22();
+}
+
+function test24()
+{
+    test23();
+}
+
+function test25()
+{
+    test24();
+}
+test25();

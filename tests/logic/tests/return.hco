@@ -1,0 +1,15 @@
+function test()
+{
+    return "Hello World";
+    print("Hello World");
+    return "Hello World";
+}
+print(test());
+
+function test2()
+{
+    return 1;
+    print("Hello World");
+    return 2;
+}
+print(test2());

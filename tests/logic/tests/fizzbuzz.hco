@@ -1,0 +1,28 @@
+let i = 1;
+let maxNumber = 15;
+while (i < maxNumber)
+{
+	if (i % 5 == 0 && i % 3 == 0)
+	{
+		print("FizzBuzz");
+    }
+	else
+	{
+		if (i % 3 == 0)
+		{
+			print("Fizz");
+		}
+		else
+		{
+			if (i % 5 == 0)
+			{
+				print("Buzz");
+			}
+			else
+			{
+				print(i);
+			}
+		}
+	}
+	i++;
+}

@@ -1,0 +1,5 @@
+let list = array();
+
+arraySet(list, "1", "Hello World!");
+
+print(list["1"]);

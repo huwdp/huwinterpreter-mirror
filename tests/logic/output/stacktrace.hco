@@ -1,0 +1,24 @@
+RUNTIME_ERROR: Cannot call 'count' method in 'a' double variable. Double is not an array at line number 16
+test4 at line number 21
+test5 at line number 26
+test6 at line number 31
+test7 at line number 36
+test8 at line number 41
+test9 at line number 46
+test10 at line number 51
+test11 at line number 56
+test12 at line number 61
+test13 at line number 66
+test14 at line number 71
+test15 at line number 76
+test16 at line number 81
+test17 at line number 86
+test18 at line number 91
+test19 at line number 96
+test20 at line number 101
+test21 at line number 106
+test22 at line number 111
+test23 at line number 116
+test24 at line number 121
+test25 at line number 126
+Global scope at line number 127
