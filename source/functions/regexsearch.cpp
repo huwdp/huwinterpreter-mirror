@@ -52,7 +52,7 @@ namespace HuwInterpreter {
                 std::string str2 = var2->toString();
                 std::regex regex(str2);
                 bool result = std::regex_search(str, regex);
-                return std::make_shared<NumberVariable>(passable, result);
+                return std::make_shared<DoubleVariable>(passable, result);
             }
             else
             {

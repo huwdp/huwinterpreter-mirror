@@ -46,11 +46,11 @@ namespace HuwInterpreter {
 
                 if (var->toBool())
                 {
-                    returnNode = std::make_shared<NumberVariable>(passable, 0.0);
+                    returnNode = std::make_shared<DoubleVariable>(passable, 0.0);
                 }
                 else
                 {
-                    returnNode = std::make_shared<NumberVariable>(passable, 1.0);
+                    returnNode = std::make_shared<DoubleVariable>(passable, 1.0);
                 }
             }
             else

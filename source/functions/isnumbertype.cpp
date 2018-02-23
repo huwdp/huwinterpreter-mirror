@@ -47,11 +47,11 @@ namespace HuwInterpreter {
 
                 if (var->isNumber())
                 {
-                    returnNode = std::make_shared<NumberVariable>(passable, true);
+                    returnNode = std::make_shared<DoubleVariable>(passable, true);
                 }
                 else
                 {
-                    returnNode = std::make_shared<NumberVariable>(passable, false);
+                    returnNode = std::make_shared<DoubleVariable>(passable, false);
                 }
             }
             else

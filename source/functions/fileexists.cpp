@@ -27,7 +27,7 @@ namespace HuwInterpreter {
                                                 std::shared_ptr<Scope> scope,
                                                 std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
-            std::shared_ptr<Variable> returnNode = std::make_shared<NumberVariable>(passable, false);
+            std::shared_ptr<Variable> returnNode = std::make_shared<DoubleVariable>(passable, false);
             if (arguments.size() == 1)
             {
                 IO::IO file;
@@ -43,7 +43,7 @@ namespace HuwInterpreter {
 
                     if (file.fileExists(var->toString()))
                     {
-                        returnNode = std::make_shared<NumberVariable>(passable, true);
+                        returnNode = std::make_shared<DoubleVariable>(passable, true);
                     }
                 }
                 else

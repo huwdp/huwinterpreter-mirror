@@ -21,7 +21,7 @@
 #include <string>
 #include <unordered_map>
 #include "variable.h"
-#include "doublevariable.h"
+
 #include "stringvariable.h"
 #include "constantvariable.h"
 #include "types/typedetector.h"

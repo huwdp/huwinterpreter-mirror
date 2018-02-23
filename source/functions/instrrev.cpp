@@ -52,11 +52,11 @@ namespace HuwInterpreter {
                 std::size_t found = str.find_last_of(str2);
                 if (found != std::string::npos)
                 {
-                    returnNode = std::make_shared<NumberVariable>(passable, (long long)found);
+                    returnNode = std::make_shared<DoubleVariable>(passable, (long long)found);
                 }
                 else
                 {
-                    returnNode = std::make_shared<NumberVariable>(passable, -1.0);
+                    returnNode = std::make_shared<DoubleVariable>(passable, -1.0);
                 }
             }
             else

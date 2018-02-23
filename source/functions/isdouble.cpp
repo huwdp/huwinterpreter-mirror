@@ -46,11 +46,11 @@ namespace HuwInterpreter {
 
                 if (!Helpers::TypeDetector::isInteger(var->toString()) && Helpers::TypeDetector::isNumeric(var->toString()))
                 {
-                    returnNode = std::make_shared<NumberVariable>(passable, true);
+                    returnNode = std::make_shared<DoubleVariable>(passable, true);
                 }
                 else
                 {
-                    returnNode = std::make_shared<NumberVariable>(passable, false);
+                    returnNode = std::make_shared<DoubleVariable>(passable, false);
                 }
             }
             else

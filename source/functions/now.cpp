@@ -32,7 +32,7 @@ namespace HuwInterpreter {
             {
                 time_t t = std::time(0);
                 double now = static_cast<double> (t);
-                returnNode = std::make_shared<NumberVariable>(passable, now);
+                returnNode = std::make_shared<DoubleVariable>(passable, now);
             }
             else
             {

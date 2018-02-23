@@ -17,7 +17,7 @@
 #define STRINGVARIABLE_H
 
 #include "variable.h"
-#include "doublevariable.h"
+
 #include "variabletypefactory.h"
 
 namespace HuwInterpreter {

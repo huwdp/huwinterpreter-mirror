@@ -411,9 +411,9 @@ namespace HuwInterpreter {
             }
             if (value.compare(variable->toString()) == 0)
             {
-                return std::make_shared<NumberVariable>(passable, true);
+                return std::make_shared<DoubleVariable>(passable, true);
             }
-            return std::make_shared<NumberVariable>(passable, false);
+            return std::make_shared<DoubleVariable>(passable, false);
         }
 
         std::shared_ptr<Variable> StringVariable::increment(std::shared_ptr<Tokens::Token> token)
@@ -430,7 +430,7 @@ namespace HuwInterpreter {
 
         std::shared_ptr<Variable> StringVariable::count(std::shared_ptr<Tokens::Token> token)
         {
-            return std::make_shared<NumberVariable>(passable, (long long)value.size());
+            return std::make_shared<DoubleVariable>(passable, (long long)value.size());
         }
 
         void StringVariable::set(std::string index, std::shared_ptr<Variable> value, std::shared_ptr<Tokens::Token> token)

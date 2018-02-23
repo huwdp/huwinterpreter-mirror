@@ -49,7 +49,7 @@ namespace HuwInterpreter {
                     double temp = var->toDouble();
                     double output = std::sin(temp);
 
-                    return std::make_shared<NumberVariable>(passable, output);
+                    return std::make_shared<DoubleVariable>(passable, output);
                 }
                 catch (const std::invalid_argument ex)
                 {

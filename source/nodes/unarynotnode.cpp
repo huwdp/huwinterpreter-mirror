@@ -46,9 +46,9 @@ namespace HuwInterpreter {
                 {
                     if (var->toBool())
                     {
-                        return std::make_shared<Variables::NumberVariable>(passable, 0.0);
+                        return std::make_shared<Variables::DoubleVariable>(passable, 0.0);
                     }
-                    return std::make_shared<Variables::NumberVariable>(passable, 1.0);
+                    return std::make_shared<Variables::DoubleVariable>(passable, 1.0);
                 }
                 passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, internalName));
             }

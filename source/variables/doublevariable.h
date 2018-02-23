@@ -19,7 +19,7 @@
 #include <iostream>
 
 #include "variable.h"
-#include "numbervariable.h"
+#include "precision.h"
 
 #include <iostream>
 #include <memory>

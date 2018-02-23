@@ -229,12 +229,12 @@ namespace HuwInterpreter {
             {
                 return nullVariable;
             }
-            return std::move(std::make_shared<NumberVariable>(passable, toString() == variable->toString()));
+            return std::move(std::make_shared<DoubleVariable>(passable, toString() == variable->toString()));
         }
 
         std::shared_ptr<Variable> HashTableVariable::count(std::shared_ptr<Tokens::Token> token)
         {
-            return std::make_shared<NumberVariable>(passable, (long long)this->map.size());
+            return std::make_shared<DoubleVariable>(passable, (long long)this->map.size());
         }
 
         std::shared_ptr<Variable> HashTableVariable::increment(std::shared_ptr<Tokens::Token> token)

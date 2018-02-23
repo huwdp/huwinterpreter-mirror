@@ -44,7 +44,7 @@ namespace HuwInterpreter {
                     return nullVariable;
                 }
 
-                returnNode = std::make_shared<NumberVariable>(passable, Helpers::TypeDetector::isNumeric(var->toString()));
+                returnNode = std::make_shared<DoubleVariable>(passable, Helpers::TypeDetector::isNumeric(var->toString()));
             }
             else
             {

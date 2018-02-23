@@ -49,7 +49,7 @@ namespace HuwInterpreter {
                 {
                     int temp2 = temp.at(0);
                     double ascii = static_cast<double>(temp2);
-                    returnNode = std::make_shared<NumberVariable>(passable, ascii);
+                    returnNode = std::make_shared<DoubleVariable>(passable, ascii);
                 }
             }
             else

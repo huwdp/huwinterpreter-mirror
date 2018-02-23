@@ -31,11 +31,11 @@ namespace HuwInterpreter {
             }
             else if (varType == Types::VarType::INTEGER)
             {
-                return std::make_shared<NumberVariable>(passable, (long long)0);
+                return std::make_shared<DoubleVariable>(passable, (long long)0);
             }
             else if (varType == Types::VarType::DOUBLE)
             {
-                return std::make_shared<NumberVariable>(passable, 0.0);
+                return std::make_shared<DoubleVariable>(passable, 0.0);
             }
             return nullVariable;
         }

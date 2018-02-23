@@ -51,7 +51,7 @@ namespace HuwInterpreter {
                 }
                 if (l->toBool())
                 {
-                    return std::make_shared<Variables::NumberVariable>(passable, true);
+                    return std::make_shared<Variables::DoubleVariable>(passable, true);
                 }
 
                 std::shared_ptr<Variables::Variable> r = right->execute(globalScope, scope);
@@ -62,9 +62,9 @@ namespace HuwInterpreter {
                 }
                 if (r->toBool() || l->toBool())
                 {
-                    return std::make_shared<Variables::NumberVariable>(passable, true);
+                    return std::make_shared<Variables::DoubleVariable>(passable, true);
                 }
-                return std::make_shared<Variables::NumberVariable>(passable, false);
+                return std::make_shared<Variables::DoubleVariable>(passable, false);
             }
             ErrorReporting::Debug::print("Could not or.");
             return nullVariable;

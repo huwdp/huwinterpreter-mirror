@@ -39,7 +39,6 @@ SOURCES += \
     functions/customfunction.cpp \
     functions/emptyfunction.cpp \
     variables/doublevariable.cpp \
-    variables/numbervariable.cpp \
     variables/stringvariable.cpp \
     variables/hashtablevariable.cpp \
     functions/arrayget.cpp \
@@ -229,7 +228,6 @@ HEADERS += \
     variables/doublevariable.h \
     variables/hashtablevariable.h \
     variables/stringvariable.h \
-    variables/numbervariable.h \
     functions/arrayget.h \
     functions/array.h \
     variables/constantvariable.h \

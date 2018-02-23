@@ -50,7 +50,7 @@ namespace HuwInterpreter {
                 }
                 else if (var->isNumber() || Helpers::TypeDetector::isNumeric(var->toString()))
                 {
-                    return std::make_shared<NumberVariable>(passable, var->toDouble());
+                    return std::make_shared<DoubleVariable>(passable, var->toDouble());
                 }
                 else
                 {

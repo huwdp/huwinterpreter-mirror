@@ -32,13 +32,13 @@ namespace HuwInterpreter {
         {
             if (!isEmpty)
             {
-                addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "PI", 3.14159265358979))));
-                addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "e", 2.718281828459045))));
-                addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "y", 0.577215664901532))));
-                addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "Φ", 1.618033988749894))));
-                addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "φ", 0.618033988749894))));
-                addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "δs", 2.41421356237309))));
-                addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<NumberVariable>(passable, "ρ", 1.324717957244746))));
+                addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<DoubleVariable>(passable, "PI", 3.14159265358979))));
+                addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<DoubleVariable>(passable, "e", 2.718281828459045))));
+                addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<DoubleVariable>(passable, "y", 0.577215664901532))));
+                addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<DoubleVariable>(passable, "Φ", 1.618033988749894))));
+                addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<DoubleVariable>(passable, "φ", 0.618033988749894))));
+                addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<DoubleVariable>(passable, "δs", 2.41421356237309))));
+                addVariable(std::move(std::make_shared<ConstantVariable>(passable, std::make_shared<DoubleVariable>(passable, "ρ", 1.324717957244746))));
             }
         }
 

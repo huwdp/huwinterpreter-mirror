@@ -19,9 +19,9 @@
 #include <iostream>
 #include <memory>
 #include <unordered_map>
-#include "numbervariable.h"
 
 #include "variable.h"
+#include "doublevariable.h"
 
 namespace HuwInterpreter {
     namespace Variables {

@@ -49,7 +49,7 @@ namespace HuwInterpreter {
                 std::string str1 = var1->toString();
                 std::string str2 = var2->toString();
                 double diff = double(str1.compare(str2));
-                returnNode = std::make_shared<NumberVariable>(passable, diff);
+                returnNode = std::make_shared<DoubleVariable>(passable, diff);
             }
             else
             {

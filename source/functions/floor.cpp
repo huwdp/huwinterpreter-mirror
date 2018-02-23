@@ -47,7 +47,7 @@ namespace HuwInterpreter {
                 {
                     double temp = var->toDouble();
                     double output = std::floor(temp);
-                    returnNode = std::make_shared<NumberVariable>(passable, output);
+                    returnNode = std::make_shared<DoubleVariable>(passable, output);
                 }
                 catch (const std::invalid_argument ex)
                 {

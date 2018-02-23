@@ -52,7 +52,7 @@ namespace HuwInterpreter {
                     double x = var1->toDouble();
                     double y = var2->toDouble();
                     double output = std::atan2(x,y);
-                    returnNode = std::make_shared<NumberVariable>(passable, output);
+                    returnNode = std::make_shared<DoubleVariable>(passable, output);
                 }
                 catch (const std::invalid_argument ex)
                 {

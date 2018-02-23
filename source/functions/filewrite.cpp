@@ -40,7 +40,7 @@ namespace HuwInterpreter {
                     if (var1 == nullptr || var2 == nullptr)
                     {
                         passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-                        returnNode = std::make_shared<NumberVariable>(passable, 0.0);
+                        returnNode = std::make_shared<DoubleVariable>(passable, 0.0);
                     }
 
                     std::string fileLocation = var1->toString();
@@ -48,13 +48,13 @@ namespace HuwInterpreter {
                     IO::IO file;
                     if (file.write(fileLocation, output))
                     {
-                        returnNode = std::make_shared<NumberVariable>(passable, 1.0);
+                        returnNode = std::make_shared<DoubleVariable>(passable, 1.0);
                     }
                 }
                 else
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
-                    returnNode = std::make_shared<NumberVariable>(passable, 0.0);
+                    returnNode = std::make_shared<DoubleVariable>(passable, 0.0);
                 }
             }
             else

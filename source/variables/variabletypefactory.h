@@ -17,6 +17,7 @@
 #define VARIABLETYPEFACTORY_H
 
 #include "variable.h"
+
 #include "doublevariable.h"
 #include "stringvariable.h"
 #include "types/tokentypes.h"

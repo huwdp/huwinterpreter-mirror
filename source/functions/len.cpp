@@ -45,7 +45,7 @@ namespace HuwInterpreter {
                 }
 
                 long long length = var->toString().length();
-                returnNode = std::make_shared<NumberVariable>(passable, length);
+                returnNode = std::make_shared<DoubleVariable>(passable, length);
             }
             else
             {

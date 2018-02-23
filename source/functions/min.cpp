@@ -65,7 +65,7 @@ namespace HuwInterpreter {
                         }
                     }
                 }
-                returnNode = std::make_shared<NumberVariable>(passable, min);
+                returnNode = std::make_shared<DoubleVariable>(passable, min);
             }
             else
             {

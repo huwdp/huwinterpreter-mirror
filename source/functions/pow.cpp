@@ -50,7 +50,7 @@ namespace HuwInterpreter {
                 {
                     double x = var1->toDouble();
                     double y = var2->toDouble();
-                    returnNode = std::make_shared<NumberVariable>(passable, std::pow(x,y));
+                    returnNode = std::make_shared<DoubleVariable>(passable, std::pow(x,y));
                 }
                 catch (const std::invalid_argument ex)
                 {
