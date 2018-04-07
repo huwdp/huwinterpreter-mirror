@@ -166,20 +166,36 @@ namespace HuwInterpreter {
 
     std::shared_ptr<Nodes::Node> Parser::parseSquareBrackets(std::shared_ptr<Nodes::Node> node)
     {
-        acceptIndentation();
         if (!tokens.empty() && compilation)
         {
-            if (accept(Types::LEFTSQUAREBRACKET))
+            std::queue<std::shared_ptr<Nodes::Node>> indexes;
+
+            while (accept(Types::LEFTSQUAREBRACKET))
             {
                 acceptIndentation();
-                std::shared_ptr<Nodes::Node> index = parseBoolean();    // This is the index
+                indexes.push(parseBoolean());
                 acceptIndentation();
+
                 if (!expect(RIGHTSQUAREBRACKET))
                 {
                     return nullNode;
                 }
-                return parseSquareBrackets(nodeFactory->CreateArrayGetNode(passable, currentToken, node, index));
             }
+
+            std::shared_ptr<Nodes::Node> returnNode = nullNode;
+
+            if (indexes.size() > 0)
+            {
+                returnNode = node;
+                while (indexes.size() > 0)
+                {
+                    std::shared_ptr<Nodes::Node> index = indexes.front();
+                    indexes.pop();
+                    returnNode = nodeFactory->CreateArrayGetNode(passable, currentToken, returnNode, index);
+                }
+                return returnNode;
+            }
+            return node;
         }
         return node;
     }
