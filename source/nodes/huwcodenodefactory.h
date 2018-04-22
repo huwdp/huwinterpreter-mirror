@@ -43,6 +43,12 @@ namespace HuwInterpreter {
                                                              std::shared_ptr<Node> left,
                                                              std::shared_ptr<Node> right);
 
+            std::shared_ptr<Node> CreateArraySetNode(std::shared_ptr<Passable> passable,
+                                                     std::shared_ptr<Tokens::Token> token,
+                                                     std::shared_ptr<Node> array,
+                                                     std::queue<std::shared_ptr<Node>> indexes,
+                                                     std::shared_ptr<Node> value);
+
             std::shared_ptr<Node> CreateBitwiseComplementNode(std::shared_ptr<Passable> passable,
                                                               std::shared_ptr<Tokens::Token> token,
                                                               std::shared_ptr<Node> node);

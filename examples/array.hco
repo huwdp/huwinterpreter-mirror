@@ -17,3 +17,10 @@ while (i < 10)
 }
 
 print("Array count: " + count(list));
+
+
+let universe = array();
+universe["Galaxy"]["Earth"] = "Hello Earth!";
+universe["Galaxy"]["Mars"] = "Hello Mars!";
+print(universe["Galaxy"]["Earth"]);
+print(universe["Galaxy"]["Mars"]);

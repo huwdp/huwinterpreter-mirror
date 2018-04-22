@@ -168,7 +168,8 @@ SOURCES += \
     nodes/arraygetnode.cpp \
     errors/stacktracemanager.cpp \
     errors/stacktrace.cpp \
-    common/nameableobject.cpp
+    common/nameableobject.cpp \
+    nodes/arraysetnode.cpp
 
 
 
@@ -365,7 +366,8 @@ HEADERS += \
     nodes/arraygetnode.h \
     errors/stacktracemanager.h \
     errors/stacktrace.h \
-    common/nameableobject.h
+    common/nameableobject.h \
+    nodes/arraysetnode.h
 
 
 

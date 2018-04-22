@@ -166,10 +166,11 @@ namespace HuwInterpreter {
 
     std::shared_ptr<Nodes::Node> Parser::parseSquareBrackets(std::shared_ptr<Nodes::Node> node)
     {
-        if (!tokens.empty() && compilation)
+        if (!tokens.empty() && compilation && currentToken->getType() == LEFTSQUAREBRACKET)
         {
             std::queue<std::shared_ptr<Nodes::Node>> indexes;
 
+            acceptIndentation();
             while (accept(Types::LEFTSQUAREBRACKET))
             {
                 acceptIndentation();
@@ -187,6 +188,18 @@ namespace HuwInterpreter {
             if (indexes.size() > 0)
             {
                 returnNode = node;
+
+                acceptIndentation();
+                if (accept(EQUALS))
+                {
+                    acceptIndentation();
+                    std::shared_ptr<Nodes::Node> value = parseBoolean();
+                    acceptIndentation();
+                    acceptSemicolon();
+                    acceptIndentation();
+                    return nodeFactory->CreateArraySetNode(passable, currentToken, node, indexes, value);
+                }
+
                 while (indexes.size() > 0)
                 {
                     std::shared_ptr<Nodes::Node> index = indexes.front();
@@ -650,6 +663,14 @@ namespace HuwInterpreter {
                 acceptIndentation();
                 acceptSemicolon();
                 return nodeFactory->CreateRunNode(passable, currentToken, nodeFactory->CreateSemicolonNode(passable, nodeFactory->CreateSetVarNode(passable, currentToken, word, nullptr)), parseBlock());
+            }
+
+
+            // Parse blocks here!
+            if (tokenType == Types::LEFTSQUAREBRACKET)
+            {
+                std::shared_ptr<Nodes::Node> squareBrackets = parseSquareBrackets(nodeFactory->CreateGetVarNode(passable, currentToken, word));
+                return nodeFactory->CreateRunNode(passable, currentToken, squareBrackets, parseBlock());
             }
 
             if (tokenType != Types::EQUALS &&

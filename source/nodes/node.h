@@ -73,7 +73,8 @@ namespace HuwInterpreter {
                        WHILENODETYPE,
                        LEFTSHIFTNODETYPE,
                        RIGHTSHIFTNODETYPE,
-                       ARRAYGETNODE
+                       ARRAYGETNODE,
+                       ARRAYSETNODE
                       };
 
 
