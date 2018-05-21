@@ -38,19 +38,27 @@ namespace HuwInterpreter {
         {
             if (array == nullptr)
             {
+                //passable->getErrorManager()->add(passable->getErrorFactory()->variableNotDeclared(token, ""));
                 return nullVariable;
             }
 
             std::shared_ptr<Variable> var = array->execute(globalScope, scope);
 
+            /*if (var != nullptr)
+            {
+                //passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, array->getName()));
+                return nullVariable;
+            }*/
+
             if (!var->isArray())
             {
-                // Throw error
+                //passable->getErrorManager()->add(passable->getErrorFactory()->isNotAnArray(token, var->getName()));
                 return nullVariable;
             }
 
             if (indexes.size() == 0)
             {
+                //passable->getErrorManager()->add(passable->getErrorFactory()->requiresAtLeastXArguments(token, var->getName(), 1));
                 return nullVariable;
             }
 
@@ -66,6 +74,7 @@ namespace HuwInterpreter {
 
                 if (index == nullptr)
                 {
+                    //passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, array->getName()));
                     return nullVariable;
                 }
 
@@ -75,7 +84,6 @@ namespace HuwInterpreter {
                 {
                     std::shared_ptr<Variable> newHashTable = std::make_shared<Variables::HashTableVariable>(passable);
                     var->set(index->toString(), newHashTable, token);
-                    //var = var->get(index->toString(), token);
                 }
 
                 var = var->get(index->toString(), token);
@@ -83,6 +91,7 @@ namespace HuwInterpreter {
 
             if (indexes.front() == nullptr)
             {
+                //passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, array->getName()));
                 return nullVariable;
             }
 
@@ -99,7 +108,23 @@ namespace HuwInterpreter {
 
         std::string ArraySetNode::toString()
         {
-            return "";
+            std::string output;
+            if (array == nullptr)
+            {
+                return "";
+            }
+            output = array->toString();
+            while (!indexes.empty())
+            {
+                output += ("[" + indexes.front()->toString() + "]");
+                indexes.pop();
+            }
+            if (value == nullptr)
+            {
+                return output;
+            }
+            output += ("=" + value->toString());
+            return output;
         }
     }
 }

@@ -65,7 +65,8 @@ namespace HuwInterpreter {
         {
             if (left != nullptr && right != nullptr)
             {
-                return left->toString() + "[" + right->toString() + "]";
+                std::string temp = left->toString() + "[" + right->toString() + "]";
+                return temp;
             }
             return "";
         }

@@ -197,7 +197,13 @@ namespace HuwInterpreter {
                     acceptIndentation();
                     acceptSemicolon();
                     acceptIndentation();
-                    return nodeFactory->CreateArraySetNode(passable, currentToken, node, indexes, value);
+                    std::shared_ptr<Nodes::Node> setIndexNode = nodeFactory->CreateArraySetNode(
+                                passable,
+                                currentToken,
+                                node,
+                                indexes,
+                                value);
+                    return nodeFactory->CreateSemicolonNode(passable, setIndexNode);
                 }
 
                 while (indexes.size() > 0)
