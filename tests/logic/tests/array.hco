@@ -1,0 +1,21 @@
+let i = 0;
+let list = array();
+
+print("Array count: " + count(list));
+
+/* Add items to the hash table */
+while (i < 10)
+{
+    arraySet(list, i, "Item " + i);
+    i++;
+}
+
+/* Print items */
+let i = 0;
+while (i < 10)
+{
+    print(arrayGet(list, i));
+    i++;
+}
+
+print("Array count: " + count(list));

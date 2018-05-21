@@ -1,5 +1,5 @@
 Hello
-RUNTIME_ERROR: Cannot call 'count' method in '' double variable. Double is not an array at line number 5
+RUNTIME_ERROR: Cannot call 'count' method in 'a' double variable. Double is not an array at line number 5
 test2 at line number 10
 test3 at line number 15
 test4 at line number 20

@@ -1,0 +1,1 @@
+let c=0;let next=0;let first=0;let second=1;let n=70;while (c<n){if (c<=1){let next=c;}else{let next=first+second;let first=second;let second=next;}print(next);let c=c+1;}

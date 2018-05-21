@@ -1,0 +1,1 @@
+let i=0;let list=array();let list2=array();arraySet(list2,2,3);arraySet(list,1,list2);print(list[1][2]);

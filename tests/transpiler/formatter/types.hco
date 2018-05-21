@@ -1,0 +1,1 @@
+let number=0;let number="";let example1=0;let number=number+"bob";print(number);
