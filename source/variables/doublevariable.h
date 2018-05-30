@@ -45,6 +45,7 @@ namespace HuwInterpreter {
             void setValue(double value);
             void setValue(std::string value);
             void setValue(long long value);
+            void setValue(std::shared_ptr<Variable> variable);
             double toDouble();
             long long toInt();
             std::string toString();
@@ -54,6 +55,7 @@ namespace HuwInterpreter {
             bool isNumber();
             bool isConst();
             bool isArray();
+            bool isRef();
             std::shared_ptr<Variable> pow(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token);
             std::shared_ptr<Variable> mul(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token);
             std::shared_ptr<Variable> div(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token);

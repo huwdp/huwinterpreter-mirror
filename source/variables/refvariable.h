@@ -13,21 +13,22 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef CONSTANTVARIABLE_H
-#define CONSTANTVARIABLE_H
+#ifndef REFVARIABLE_H
+#define REFVARIABLE_H
 
 #include "nodes/node.h"
 
+
 namespace HuwInterpreter {
     namespace Variables {
-        class ConstantVariable : public Variable
+        class RefVariable : public Variable
         {
         private:
             bool isSet;
             std::shared_ptr<Variable> variable;
         public:
-            ConstantVariable(std::shared_ptr<Passable> passable, std::shared_ptr<Variable> variable);
-            ConstantVariable(std::shared_ptr<Passable> passable, std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token);
+            RefVariable(std::shared_ptr<Passable> passable, std::shared_ptr<Variable> variable);
+            RefVariable(std::shared_ptr<Passable> passable, std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token);
             void setValue(double value);
             void setValue(std::string value);
             void setValue(long long value);
@@ -76,4 +77,4 @@ namespace HuwInterpreter {
     }
 }
 
-#endif // CONSTANTVARIABLE_H
+#endif // REFVARIABLE_H

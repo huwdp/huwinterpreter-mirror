@@ -82,6 +82,11 @@ namespace HuwInterpreter {
             }
         }
 
+        void DoubleVariable::setValue(std::shared_ptr<Variable> variable)
+        {
+            return;
+        }
+
         long long DoubleVariable::toInt()
         {
             return (long long)value;
@@ -143,6 +148,11 @@ namespace HuwInterpreter {
         }
 
         bool DoubleVariable::isArray()
+        {
+            return false;
+        }
+
+        bool DoubleVariable::isRef()
         {
             return false;
         }

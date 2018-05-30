@@ -102,6 +102,8 @@ namespace HuwInterpreter {
             functions["regexSearch"] = std::move(std::make_shared<RegexSearch>(passable));
             functions["regexReplace"] = std::move(std::make_shared<RegexReplace>(passable));
             functions["regexMatch"] = std::move(std::make_shared<RegexMatch>(passable));
+
+            functions["ref"] = std::move(std::make_shared<RefFunction>(passable));
         }
 
         std::shared_ptr<Functions::Function> FunctionManager::get(std::string name)

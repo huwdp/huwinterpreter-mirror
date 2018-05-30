@@ -109,5 +109,7 @@
 #include "regexreplace.h"
 #include"regexmatch.h"
 
+#include "reffunction.h"
+
 #endif  //FUNCTIONLIST_H
 

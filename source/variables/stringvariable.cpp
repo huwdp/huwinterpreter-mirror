@@ -106,6 +106,11 @@ namespace HuwInterpreter {
             this->value = value;
         }
 
+        void StringVariable::setValue(std::shared_ptr<Variable> variable)
+        {
+            return;
+        }
+
         double StringVariable::toDouble()
         {
             double value = 0.0;
@@ -171,6 +176,11 @@ namespace HuwInterpreter {
         bool StringVariable::isArray()
         {
             return true;
+        }
+
+        bool StringVariable::isRef()
+        {
+            return false;
         }
 
         std::shared_ptr<Variable> StringVariable::pow(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)

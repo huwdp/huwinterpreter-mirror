@@ -169,7 +169,9 @@ SOURCES += \
     errors/stacktracemanager.cpp \
     errors/stacktrace.cpp \
     common/nameableobject.cpp \
-    nodes/arraysetnode.cpp
+    nodes/arraysetnode.cpp \
+    variables/refvariable.cpp \
+    functions/reffunction.cpp
 
 
 
@@ -367,7 +369,10 @@ HEADERS += \
     errors/stacktracemanager.h \
     errors/stacktrace.h \
     common/nameableobject.h \
-    nodes/arraysetnode.h
+    nodes/arraysetnode.h \
+    nodes/refnode.h \
+    variables/refvariable.h \
+    functions/reffunction.h
 
 
 

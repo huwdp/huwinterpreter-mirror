@@ -13,100 +13,88 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "constantvariable.h"
+#include "refvariable.h"
 
 namespace HuwInterpreter {
     namespace Variables {
-        ConstantVariable::ConstantVariable(std::shared_ptr<Passable> passable, std::shared_ptr<Variable> variable)
+        RefVariable::RefVariable(std::shared_ptr<Passable> passable, std::shared_ptr<Variable> variable)
             : Variable(passable, variable->getName())
         {
             this->variable = std::move(variable);
         }
 
-        ConstantVariable::ConstantVariable(std::shared_ptr<Passable> passable, std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
+        RefVariable::RefVariable(std::shared_ptr<Passable> passable, std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
             : Variable(passable, variable->getName(), token)
         {
             this->variable = std::move(variable);
         }
 
-        void ConstantVariable::setValue(double value)
+        void RefVariable::setValue(double value)
         {
-            if (!isSet)
-            {
-                variable->setValue(value);
-                isSet = true;
-            }
+            variable->setValue(value);
         }
 
-        void ConstantVariable::setValue(std::string value)
+        void RefVariable::setValue(std::string value)
         {
-            if (!isSet)
-            {
-                variable->setValue(value);
-                isSet = true;
-            }
+            variable->setValue(value);
         }
 
-        void ConstantVariable::setValue(long long value)
+        void RefVariable::setValue(long long value)
         {
-            if (!isSet)
-            {
-                variable->setValue(value);
-                isSet = true;
-            }
+            variable->setValue(value);
         }
 
-        void ConstantVariable::setValue(std::shared_ptr<Variable> variable)
-        {
-            return;
-        }
-
-        long long ConstantVariable::toInt()
+        long long RefVariable::toInt()
         {
             return variable->toInt();
         }
 
-        double ConstantVariable::toDouble()
+        double RefVariable::toDouble()
         {
             return variable->toDouble();
         }
 
-        std::string ConstantVariable::toString()
+        std::string RefVariable::toString()
         {
             return variable->toString();
         }
 
-        bool ConstantVariable::toBool()
+        bool RefVariable::toBool()
         {
             return variable->toBool();
         }
 
-        Types::VarType ConstantVariable::getType()
+        Types::VarType RefVariable::getType()
         {
             return variable->getType();
         }
 
-        bool ConstantVariable::isNumber()
+        bool RefVariable::isNumber()
         {
             return variable->isNumber();
         }
 
-        bool ConstantVariable::isConst()
+        bool RefVariable::isConst()
         {
             return true;
         }
 
-        bool ConstantVariable::isArray()
+        bool RefVariable::isArray()
         {
             return false;
         }
 
-        bool ConstantVariable::isRef()
+        bool RefVariable::isRef()
         {
-            return false;
+            return true;
         }
 
-        std::shared_ptr<Variable> ConstantVariable::pow(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
+        void RefVariable::setValue(std::shared_ptr<Variable> variable)
+        {
+            this->variable = variable;
+        }
+
+        std::shared_ptr<Variable> RefVariable::pow(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             if (variable == nullptr)
             {
@@ -115,7 +103,7 @@ namespace HuwInterpreter {
             return this->variable->pow(variable, token);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::mul(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::mul(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             if (variable == nullptr)
             {
@@ -124,7 +112,7 @@ namespace HuwInterpreter {
             return this->variable->mul(variable, token);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::div(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::div(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             if (variable == nullptr)
             {
@@ -133,7 +121,7 @@ namespace HuwInterpreter {
             return this->variable->div(variable, token);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::mod(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::mod(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             if (variable == nullptr)
             {
@@ -142,7 +130,7 @@ namespace HuwInterpreter {
             return this->variable->mod(variable, token);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::add(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::add(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             if (variable == nullptr)
             {
@@ -151,7 +139,7 @@ namespace HuwInterpreter {
             return this->variable->add(variable, token);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::sub(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::sub(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             if (variable == nullptr)
             {
@@ -160,7 +148,7 @@ namespace HuwInterpreter {
             return this->variable->sub(variable, token);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::ifUnder(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::ifUnder(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             if (variable == nullptr)
             {
@@ -170,7 +158,7 @@ namespace HuwInterpreter {
             return this->variable->sub(variable, token);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::ifUnderOrEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::ifUnderOrEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             if (this->variable == nullptr)
             {
@@ -180,7 +168,7 @@ namespace HuwInterpreter {
             return this->variable->ifUnderOrEqual(variable, token);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::ifOver(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::ifOver(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             if (variable == nullptr)
             {
@@ -190,7 +178,7 @@ namespace HuwInterpreter {
             return this->variable->ifOver(variable, token);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::ifOverOrEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::ifOverOrEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             if (variable == nullptr)
             {
@@ -200,7 +188,7 @@ namespace HuwInterpreter {
             return this->ifOverOrEqual(variable, token);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::ifEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::ifEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             if (variable == nullptr)
             {
@@ -210,27 +198,17 @@ namespace HuwInterpreter {
             return this->variable->ifEqual(variable, token);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::ifNotEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::ifNotEqual(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (variable == nullptr)
-            {
-                passable->getErrorManager()->add(passable->getErrorFactory()->failedToCompare(token, "ifNotEqual", name, getType()));
-                return nullVariable;
-            }
             return this->variable->ifNotEqual(variable, token);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::increment(std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::increment(std::shared_ptr<Tokens::Token> token)
         {
-            if (!isSet && variable == nullptr)
-            {
-                isSet = true;
-                return nullVariable;
-            }
             return this->variable->increment(token);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::count(std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::count(std::shared_ptr<Tokens::Token> token)
         {
             if (variable == nullptr)
             {
@@ -239,27 +217,17 @@ namespace HuwInterpreter {
             return this->variable->count(token);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::decrement(std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::decrement(std::shared_ptr<Tokens::Token> token)
         {
-            if (!isSet && variable == nullptr)
-            {
-                isSet = true;
-                return nullVariable;
-            }
             return this->variable->decrement(token);
         }
 
-        void ConstantVariable::set(std::string index, std::shared_ptr<Variable> value, std::shared_ptr<Tokens::Token> token)
+        void RefVariable::set(std::string index, std::shared_ptr<Variable> value, std::shared_ptr<Tokens::Token> token)
         {
-            if (!isSet && variable == nullptr)
-            {
-                isSet = true;
-                return;
-            }
             this->variable->set(index, value, token);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::get(std::string value, std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::get(std::string value, std::shared_ptr<Tokens::Token> token)
         {
             if (variable == nullptr)
             {
@@ -268,53 +236,32 @@ namespace HuwInterpreter {
             return this->variable->get(value, token);
         }
 
-        void ConstantVariable::unset(std::string index, std::shared_ptr<Tokens::Token> token)
+        void RefVariable::unset(std::string index, std::shared_ptr<Tokens::Token> token)
         {
-            if (!isSet && variable == nullptr)
-            {
-                isSet = true;
-                return;
-            }
             return this->variable->unset(index, token);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::copy(std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::copy(std::shared_ptr<Tokens::Token> token)
         {
-            if (variable != nullptr)
-            {
-                return nullVariable;
-            }
-            return variable->copy(token);
+            return std::make_shared<RefVariable>(passable, variable);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::bitwiseAnd(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::bitwiseAnd(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (!isSet && variable == nullptr)
-            {
-                return nullVariable;
-            }
             return this->variable->bitwiseAnd(variable, token);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::bitwiseOr(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::bitwiseOr(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (!isSet && variable == nullptr)
-            {
-                return nullVariable;
-            }
             return this->variable->bitwiseOr(variable, token);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::bitwiseXOR(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::bitwiseXOR(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            if (!isSet && variable == nullptr)
-            {
-                return nullVariable;
-            }
             return this->variable->bitwiseXOR(variable, token);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::bitwiseComplement(std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::bitwiseComplement(std::shared_ptr<Tokens::Token> token)
         {
             if (variable == nullptr)
             {
@@ -323,7 +270,7 @@ namespace HuwInterpreter {
             return variable->bitwiseComplement(token);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::leftShift(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::leftShift(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             if (variable == nullptr)
             {
@@ -332,7 +279,7 @@ namespace HuwInterpreter {
             return this->variable->leftShift(variable, token);
         }
 
-        std::shared_ptr<Variable> ConstantVariable::rightShift(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
+        std::shared_ptr<Variable> RefVariable::rightShift(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
             if (variable == nullptr)
             {
@@ -342,3 +289,5 @@ namespace HuwInterpreter {
         }
     }
 }
+
+

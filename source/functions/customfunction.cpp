@@ -42,14 +42,20 @@ namespace HuwInterpreter {
                 return nullVariable;
             }
 
-            // Clean code below: TODO
             std::vector<std::shared_ptr<Nodes::Node>>::iterator variableIt = arguments.begin();
             for (std::vector<std::string>::iterator argumentIt = this->arguments.begin(); argumentIt != this->arguments.end(); ++argumentIt)
             {
                 std::shared_ptr<Variable> argument = (*variableIt)->execute(globalScope, scope);
                 if (argument != nullptr)
                 {
-                    newScope->getVariableManager()->addVariable((*argumentIt), argument->copy(token));
+                    if (argument->isRef())
+                    {
+                        newScope->getVariableManager()->addVariable((*argumentIt), argument);
+                    }
+                    else
+                    {
+                        newScope->getVariableManager()->addVariable((*argumentIt), argument->copy(token));
+                    }
                 }
                 ++variableIt;
             }

@@ -44,6 +44,11 @@ namespace HuwInterpreter {
 
         }
 
+        void HashTableVariable::setValue(std::shared_ptr<Variable> variable)
+        {
+            return;
+        }
+
         double HashTableVariable::toDouble()
         {
             passable->getErrorManager()->add(passable->getErrorFactory()->couldNotConvert(token, name, "toDouble", getType(), "Cannot convert array to number."));
@@ -95,6 +100,11 @@ namespace HuwInterpreter {
         bool HashTableVariable::isArray()
         {
             return true;
+        }
+
+        bool HashTableVariable::isRef()
+        {
+            return false;
         }
 
         std::shared_ptr<Variable> HashTableVariable::pow(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
