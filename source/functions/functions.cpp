@@ -40,6 +40,7 @@ namespace HuwInterpreter {
             functions["weekday"] = std::move(std::make_shared<Weekday>(passable));
             functions["weekdayName"] = std::move(std::make_shared<WeekdayName>(passable));
             functions["year"] = std::move(std::make_shared<Year>(passable));
+            functions["currentTime"] = std::move(std::make_shared<CurrentTimeFunction>(passable));
 
 
             functions["abs"] = std::move(std::make_shared<Abs>(passable));
@@ -104,6 +105,9 @@ namespace HuwInterpreter {
             functions["regexMatch"] = std::move(std::make_shared<RegexMatch>(passable));
 
             functions["ref"] = std::move(std::make_shared<RefFunction>(passable));
+
+            functions["clock"] = std::move(std::make_shared<ClockFunction>(passable));
+            functions["localTime"] = std::move(std::make_shared<LocalTimeFunction>(passable));
         }
 
         std::shared_ptr<Functions::Function> FunctionManager::get(std::string name)

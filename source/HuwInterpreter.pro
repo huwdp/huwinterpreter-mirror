@@ -19,6 +19,8 @@ QMAKE_CXXFLAGS += -Wformat=2
 QMAKE_CXXFLAGS_RELEASE += -fno-rtti
 QMAKE_CXXFLAGS_RELEASE += -fmerge-all-constants
 QMAKE_CXXFLAGS_RELEASE += -O2
+-QMAKE_CXXFLAGS_RELEASE += march=athlon64
+-QMAKE_CXXFLAGS_RELEASE += -pipe
 
 QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter
 
@@ -171,7 +173,10 @@ SOURCES += \
     common/nameableobject.cpp \
     nodes/arraysetnode.cpp \
     variables/refvariable.cpp \
-    functions/reffunction.cpp
+    functions/reffunction.cpp \
+    functions/currenttimefunction.cpp \
+    functions/clockfunction.cpp \
+    functions/localtimefunction.cpp
 
 
 
@@ -372,7 +377,10 @@ HEADERS += \
     nodes/arraysetnode.h \
     nodes/refnode.h \
     variables/refvariable.h \
-    functions/reffunction.h
+    functions/reffunction.h \
+    functions/currenttimefunction.h \
+    functions/clockfunction.h \
+    functions/localtimefunction.h
 
 
 

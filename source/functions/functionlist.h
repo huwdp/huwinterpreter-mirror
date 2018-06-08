@@ -56,6 +56,7 @@
 #include "fileread.h"
 #include "filewrite.h"
 #include "fileexists.h"
+#include "currenttimefunction.h"
 
 // Math
 #include "abs.h"
@@ -110,6 +111,9 @@
 #include"regexmatch.h"
 
 #include "reffunction.h"
+
+#include "clockfunction.h"
+#include "localtimefunction.h"
 
 #endif  //FUNCTIONLIST_H
 
