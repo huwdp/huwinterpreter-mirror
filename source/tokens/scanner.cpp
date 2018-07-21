@@ -102,6 +102,11 @@ namespace HuwInterpreter {
                         fileReader->next();
                         while (!tokens->compare(fileReader->getCurrent()->getContent(), Types::QUOTE) && !fileReader->isEnd())
                         {
+                            if (fileReader->isEnd())
+                            {
+                                return items;
+                            }
+
                             lineInfo = std::make_shared<LineInfo>("", fileReader->getCurrent()->getLineNumber(),0);
                             if (fileReader->getCurrent()->getContent() == '\\')
                             {
@@ -182,7 +187,16 @@ namespace HuwInterpreter {
                             fileReader->next();
                             while (!fileReader->isEnd() && fileReader->getCurrent()->getContent() != '\n')
                             {
-                                if (!fileReader->isEnd() && fileReader->getNext()->getContent() == '*')
+                                if (fileReader->isEnd())
+                                {
+                                    return items;
+                                }
+                                fileReader->getNext();
+                                if (fileReader->isEnd())
+                                {
+                                    return items;
+                                }
+                                if (fileReader->getCurrent()->getContent() == '*')
                                 {
                                     if (!fileReader->isEnd() && fileReader->getNext()->getContent() == '/')
                                     {
