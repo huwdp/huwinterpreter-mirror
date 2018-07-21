@@ -10,9 +10,13 @@ Associative Array is an abstact collection of key, value pairs. The internal imp
 arrayGet(array, key)
 ArratGet returns the value of the associative array by the key. ArrayGet requires 2 arguments.
 
+Alternatively an element can be access by the key in an array by using square brackets. E.g. array["element1"];.
+
 ## ArraySet
 arraySet(array, key, value)
 ArraySet function sets the key in the associative array with the value. ArraySet funciton requires 3 arguments.
+
+Alternatively an element can be set in an array by the key by using square brackets. E.g. array["element1"] = "Hello World!";
 
 ## ArrayUnset
 arrayUnset(array, key)
