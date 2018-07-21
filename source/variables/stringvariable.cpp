@@ -460,10 +460,10 @@ namespace HuwInterpreter {
                 passable->getErrorManager()->add(passable->getErrorFactory()->couldNotConvertStringToNumber(token, name, "get", e.what()));
             }
 
-            if (index >= 0 && index < this->value.length())
+            if (index >= 0 && index < static_cast<long>(this->value.length()))
             {
                 std::string character;
-                character.append(1, static_cast<char>(this->value.at(index)));
+                character.append(1, this->value.at(index));
                 return std::make_shared<StringVariable>(passable, character);
             }
             passable->getErrorManager()->add(passable->getErrorFactory()->outOfBounds(token, name));

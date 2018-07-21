@@ -327,7 +327,7 @@ namespace HuwInterpreter {
             {
                 return nullVariable;
             }
-            long long value = static_cast<long long>(static_cast<long long>(this->value) | variable->toInt());
+            long long value = static_cast<long long>(this->value) | variable->toInt();
             return std::move(std::make_shared<DoubleVariable>(passable, value));
         }
 
@@ -337,7 +337,7 @@ namespace HuwInterpreter {
             {
                 return nullVariable;
             }
-            long long value = static_cast<long long>(static_cast<long long>(this->value) ^ variable->toInt());
+            long long value = static_cast<long long>(this->value) ^ variable->toInt();
             return std::move(std::make_shared<DoubleVariable>(passable, value));
         }
 
