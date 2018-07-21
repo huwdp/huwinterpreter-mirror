@@ -57,6 +57,7 @@
 #include "filewrite.h"
 #include "fileexists.h"
 #include "currenttimefunction.h"
+#include "dirfunction.h"
 
 // Math
 #include "abs.h"

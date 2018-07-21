@@ -133,7 +133,7 @@ namespace HuwInterpreter {
 
         std::shared_ptr<Variable> HashTableVariable::add(std::shared_ptr<Variable> variable, std::shared_ptr<Tokens::Token> token)
         {
-            passable->getErrorManager()->add(passable->getErrorFactory()->cannotCallFunction(token, name, getType(), "add", ""));
+            map[std::to_string(map.size()+1)] = variable;
             return nullVariable;
         }
 

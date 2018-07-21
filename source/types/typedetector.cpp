@@ -52,6 +52,11 @@ namespace  HuwInterpreter {
             std::string::iterator it = value.begin();
             bool dot = false;
 
+            if (value == ".")
+            {
+                return false;
+            }
+
             if (!std::isdigit((*it)) && (*it) != '.' && (*it) != '+' && (*it) != '-')
             {
                 return false;
