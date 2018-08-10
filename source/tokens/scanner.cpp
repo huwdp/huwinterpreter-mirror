@@ -53,6 +53,10 @@ namespace HuwInterpreter {
         {
             items.clear();
             std::string temp = "";
+            if (fileReader->isEmpty())
+            {
+                return items;
+            }
             std::shared_ptr<LineInfo> lineInfo = std::make_shared<LineInfo>("", fileReader->getCurrent()->getLineNumber(),0);
             while (!fileReader->isEnd())
             {

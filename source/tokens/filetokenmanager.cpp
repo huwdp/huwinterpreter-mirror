@@ -115,7 +115,7 @@ namespace HuwInterpreter {
 
         bool FileTokenManager::isEmpty()
         {
-            if (lines.size() > 0)
+            if (lines.size() == 0)
             {
               return true;
             }
