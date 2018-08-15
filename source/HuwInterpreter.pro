@@ -173,8 +173,8 @@ SOURCES += \
     functions/reffunction.cpp \
     functions/currenttimefunction.cpp \
     functions/clockfunction.cpp \
-    functions/localtimefunction.cpp \
-    functions/dirfunction.cpp
+    functions/dirfunction.cpp \
+    functions/timefunction.cpp
 
 
 
@@ -375,8 +375,8 @@ HEADERS += \
     functions/reffunction.h \
     functions/currenttimefunction.h \
     functions/clockfunction.h \
-    functions/localtimefunction.h \
-    functions/dirfunction.h
+    functions/dirfunction.h \
+    functions/timefunction.h
 
 
 

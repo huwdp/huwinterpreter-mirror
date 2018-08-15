@@ -21,10 +21,10 @@
 
 namespace HuwInterpreter {
     namespace Functions {
-        class LocalTimeFunction : public Function
+        class TimeFunction : public Function
         {
         public:
-            LocalTimeFunction(std::shared_ptr<Passable> passable);
+            TimeFunction(std::shared_ptr<Passable> passable);
             std::shared_ptr<Variable> execute(std::shared_ptr<Tokens::Token> token,
                                           std::shared_ptr<Scope> globalScope,
                                           std::shared_ptr<Scope> scope,

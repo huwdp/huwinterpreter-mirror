@@ -105,7 +105,7 @@ namespace HuwInterpreter {
             functions["ref"] = std::move(std::make_shared<RefFunction>(passable));
 
             functions["clock"] = std::move(std::make_shared<ClockFunction>(passable));
-            functions["localTime"] = std::move(std::make_shared<LocalTimeFunction>(passable));            
+            functions["localTime"] = std::move(std::make_shared<TimeFunction>(passable));
         }
 
         std::shared_ptr<Functions::Function> FunctionManager::get(std::string name)
