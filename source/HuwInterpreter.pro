@@ -43,8 +43,6 @@ SOURCES += \
     variables/doublevariable.cpp \
     variables/stringvariable.cpp \
     variables/hashtablevariable.cpp \
-    functions/arrayget.cpp \
-    functions/arrayset.cpp \
     functions/array.cpp \
     functions/arrayunset.cpp \
     functions/count.cpp \
@@ -237,7 +235,6 @@ HEADERS += \
     variables/doublevariable.h \
     variables/hashtablevariable.h \
     variables/stringvariable.h \
-    functions/arrayget.h \
     functions/array.h \
     variables/constantvariable.h \
     tokens/tokenmanager.h \
@@ -259,7 +256,6 @@ HEADERS += \
     nodes/nodefactory.h \
     functions/abs.h \
     functions/acos.h \
-    functions/arrayset.h \
     functions/arrayunset.h \
     functions/asc.h \
     functions/asin.h \

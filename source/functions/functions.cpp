@@ -82,8 +82,6 @@ namespace HuwInterpreter {
             functions["str"] = std::move(std::make_shared<Str>(passable));
 
             functions["array"] = std::move(std::make_shared<Array>(passable));
-            functions["arrayGet"] = std::move(std::make_shared<ArrayGet>(passable));
-            functions["arraySet"] = std::move(std::make_shared<ArraySet>(passable));
             functions["arrayUnset"] = std::move(std::make_shared<ArrayUnset>(passable));
 
             functions["count"] = std::move(std::make_shared<Count>(passable));

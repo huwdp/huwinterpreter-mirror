@@ -86,8 +86,6 @@
 
 //Array
 #include "functions/array.h"
-#include "functions/arrayget.h"
-#include "functions/arrayset.h"
 #include "functions/arrayunset.h"
 
 // String/array
