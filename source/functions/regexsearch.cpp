@@ -28,7 +28,6 @@ namespace HuwInterpreter {
                                                    std::shared_ptr<Scope> scope,
                                                    std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
-            std::shared_ptr<Variable> returnNode;
             if (arguments.size() == 2)
             {
                 std::shared_ptr<Nodes::Node> node1 = arguments.at(0);
@@ -54,11 +53,8 @@ namespace HuwInterpreter {
                 bool result = std::regex_search(str, regex);
                 return std::make_shared<DoubleVariable>(passable, result);
             }
-            else
-            {
-                passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 2));
-            }
-            return returnNode;
+            passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 2));
+            return nullVariable;
         }
     }
 }

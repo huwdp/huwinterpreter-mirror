@@ -27,7 +27,6 @@ namespace HuwInterpreter {
                                                   std::shared_ptr<Scope> scope,
                                                   std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
-            std::shared_ptr<Variable> returnNode;
             if (arguments.size() == 1)
             {
                 std::shared_ptr<Nodes::Node> node = arguments.at(0);
@@ -36,15 +35,12 @@ namespace HuwInterpreter {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
                     return nullVariable;
                 }
-
-
                 std::shared_ptr<Variable> var = node->execute(globalScope, scope);
                 if (var == nullptr)
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
                     return nullVariable;
                 }
-
                 if (var->getType() == Types::INTEGER)
                 {
                     return var;
@@ -53,13 +49,11 @@ namespace HuwInterpreter {
                 {
                     return std::make_shared<DoubleVariable>(passable, var->toInt());
                 }
+                passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, name));
+            	return nullVariable;
             }
-            else
-            {
-                passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 1));
-            }
-
-            return returnNode;
+            passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 1));
+            return nullVariable;
         }
     }
 }

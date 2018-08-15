@@ -27,26 +27,19 @@ namespace HuwInterpreter {
                                              std::shared_ptr<Scope> scope,
                                              std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
-            std::shared_ptr<Variable> returnNode;
             if (arguments.size() == 1)
             {
                 std::shared_ptr<Nodes::Node> node = arguments.at(0);
                 if (node != nullptr)
                 {
                     // Wrap node in RefVariable here
-                    returnNode = std::make_shared<RefVariable>(passable, node->execute(globalScope, scope));
+                    return std::make_shared<RefVariable>(passable, node->execute(globalScope, scope));
                 }
-                else
-                {
-                    passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, this->getName()));
-                }
+                passable->getErrorManager()->add(passable->getErrorFactory()->invalidExpression(RUNTIME_ERROR, token, this->getName()));
+		return nullVariable;
             }
-            else
-            {
-                passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 1));
-            }
-
-            return returnNode;
+            passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 1));
+            return nullVariable;
         }
     }
 }

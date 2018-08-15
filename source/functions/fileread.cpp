@@ -27,7 +27,6 @@ namespace HuwInterpreter {
                                                 std::shared_ptr<Scope> scope,
                                                 std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
-            std::shared_ptr<Variable> returnNode;
             if (arguments.size() == 1)
             {
                 IO::IO file;
@@ -54,7 +53,7 @@ namespace HuwInterpreter {
             {
                 passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 1));
             }
-            return returnNode;
+            return nullVariable;
         }
     }
 }

@@ -27,7 +27,6 @@ namespace HuwInterpreter {
                                                std::shared_ptr<Scope> scope,
                                                std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
-            std::shared_ptr<Variable> returnNode;
             if (arguments.size() == 0)
             {
                 ErrorReporting::Debug::print("Command function requires at least 1 argument");
@@ -47,7 +46,7 @@ namespace HuwInterpreter {
                     return std::make_shared<DoubleVariable>(passable, system(var->toString().c_str()));
                 }
             }
-            return returnNode;
+            return nullVariable;
         }
     }
 }

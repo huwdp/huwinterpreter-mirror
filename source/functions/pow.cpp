@@ -27,7 +27,6 @@ namespace HuwInterpreter {
                                            std::shared_ptr<Scope> scope,
                                            std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
-            std::shared_ptr<Variable> returnNode;
             if (arguments.size() == 2)
             {
                 std::shared_ptr<Nodes::Node> node1 = arguments.at(0);
@@ -37,7 +36,6 @@ namespace HuwInterpreter {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
                     return nullVariable;
                 }
-
                 std::shared_ptr<Variable> var1 = node1->execute(globalScope, scope);
                 std::shared_ptr<Variable> var2 = node2->execute(globalScope, scope);
                 if (var1 == nullptr || var2 == nullptr)
@@ -45,12 +43,11 @@ namespace HuwInterpreter {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
                     return nullVariable;
                 }
-
                 try
                 {
                     double x = var1->toDouble();
                     double y = var2->toDouble();
-                    returnNode = std::make_shared<DoubleVariable>(passable, std::pow(x,y));
+                    return std::make_shared<DoubleVariable>(passable, std::pow(x,y));
                 }
                 catch (const std::invalid_argument ex)
                 {
@@ -64,13 +61,10 @@ namespace HuwInterpreter {
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->otherFunctionError(token, name, ex.what()));
                 }
+		return nullVariable;
             }
-            else
-            {
-                passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 2));
-            }
-
-            return returnNode;
+            passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 2));
+            return nullVariable;
         }
     }
 }

@@ -27,7 +27,6 @@ namespace HuwInterpreter {
                                             std::shared_ptr<Scope> scope,
                                             std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
-            std::shared_ptr<Variable> returnNode;
             for (std::vector<std::shared_ptr<Nodes::Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
             {
                 if ((*it) != nullptr)
@@ -41,7 +40,6 @@ namespace HuwInterpreter {
                             passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
                             return nullVariable;
                         }
-
                         std::string input;
                         std::cin >> input;
                         var->setValue(input);
@@ -53,8 +51,7 @@ namespace HuwInterpreter {
                     }
                 }
             }
-
-            return returnNode;
+            return nullVariable;
         }
     }
 }

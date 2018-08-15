@@ -27,7 +27,6 @@ namespace HuwInterpreter {
                                              std::shared_ptr<Scope> scope,
                                              std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
-            std::shared_ptr<Variable> returnNode;
             for (std::vector<std::shared_ptr<Nodes::Node>>::iterator it = arguments.begin(); it != arguments.end(); ++it)
             {
                 if ((*it) != nullptr)
@@ -44,8 +43,7 @@ namespace HuwInterpreter {
                     return nullVariable;
                 }
             }
-
-            return returnNode;
+            return nullVariable;
         }
     }
 }

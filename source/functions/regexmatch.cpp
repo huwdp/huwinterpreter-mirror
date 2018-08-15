@@ -27,7 +27,6 @@ namespace HuwInterpreter {
                                       std::shared_ptr<Scope> scope,
                                       std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
-            std::shared_ptr<Variable> returnNode;
             if (arguments.size() == 2)
             {
                 std::shared_ptr<Nodes::Node> node1 = arguments.at(0);
@@ -37,7 +36,6 @@ namespace HuwInterpreter {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
                     return nullVariable;
                 }
-
                 std::shared_ptr<Variable> var1 = node1->execute(globalScope, scope);
                 std::shared_ptr<Variable> var2 = node2->execute(globalScope, scope);
 
@@ -46,12 +44,9 @@ namespace HuwInterpreter {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
                     return nullVariable;
                 }
-
                 std::string str = var1->toString();
                 std::string str2 = var2->toString();
-
                 std::shared_ptr<HashTableVariable> result = std::make_shared<HashTableVariable>(passable);
-
                 std::regex pieces_regex(str2);
                 std::smatch pieces_match;
                 if (std::regex_match(str, pieces_match, pieces_regex))
@@ -65,11 +60,8 @@ namespace HuwInterpreter {
                 }
                 return result;
             }
-            else
-            {
-                passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 2));
-            }
-            return returnNode;
+            passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 2));
+            return nullVariable;
         }
     }
 }

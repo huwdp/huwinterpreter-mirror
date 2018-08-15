@@ -28,43 +28,32 @@ namespace HuwInterpreter {
                                       std::shared_ptr<Scope> scope,
                                       std::vector<std::shared_ptr<Nodes::Node>> arguments)
         {
-            std::shared_ptr<Variable> returnNode;
             if (arguments.size() == 2)
             {
                 std::shared_ptr<Nodes::Node> node1 = arguments.at(0);
                 std::shared_ptr<Nodes::Node> node2 = arguments.at(1);
-
                 if (node1 == nullptr || node2 == nullptr)
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
                     return nullVariable;
                 }
-
                 std::shared_ptr<Variable> var1 = node1->execute(globalScope, scope);
                 std::shared_ptr<Variable> var2 = node2->execute(globalScope, scope);
-
                 if (var1 == nullptr || var2 == nullptr )
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, name));
                     return nullVariable;
                 }
-
                 if (var1->getType() != Types::ARRAY)
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->firstParameterIsNotTypeOfArray(token, var1->getName(), name));
                     return nullVariable;
                 }
-
                 var1->unset(var2->toString(), token);
-
-                // Todo
-                // Maybe turn true here
+		return nullVariable;
             }
-            else
-            {
-                passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 2));
-            }
-            return returnNode;
+            passable->getErrorManager()->add(passable->getErrorFactory()->requiresArguments(token, name, "", 2));
+            return nullVariable;
         }
     }
 }
