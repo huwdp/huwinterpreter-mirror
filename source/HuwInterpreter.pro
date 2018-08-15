@@ -67,7 +67,6 @@ SOURCES += \
     functions/cha.cpp \
     functions/command.cpp \
     functions/cos.cpp \
-    functions/dateformat.cpp \
     functions/exp.cpp \
     functions/fileread.cpp \
     functions/filewrite.cpp \
@@ -267,7 +266,6 @@ HEADERS += \
     functions/cos.h \
     functions/count.h \
     functions/customfunction.h \
-    functions/dateformat.h \
     functions/emptyfunction.h \
     functions/exp.h \
     functions/fileread.h \

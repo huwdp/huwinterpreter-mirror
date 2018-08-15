@@ -50,7 +50,6 @@
 #include "now.h"
 #include "month.h"
 #include "monthname.h"
-#include "dateformat.h"
 
 // File and directories
 #include "fileread.h"

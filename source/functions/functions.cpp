@@ -25,7 +25,6 @@ namespace HuwInterpreter {
         void FunctionManager::init()
         {
             functions["command"] = std::move(std::make_shared<Command>(passable));
-            functions["dateFormat"] = std::move(std::make_shared<DateFormat>(passable));
 
             functions["fileRead"] = std::move(std::make_shared<FileRead>(passable));
             functions["fileWrite"] = std::move(std::make_shared<FileWrite>(passable));
