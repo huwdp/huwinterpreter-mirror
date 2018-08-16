@@ -55,7 +55,7 @@ namespace HuwInterpreter {
                     else
                     {
                         temp.erase(it);
-                        it--;
+                        --it;
                     }
                     ++it;
                 }

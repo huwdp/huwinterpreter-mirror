@@ -20,6 +20,7 @@ namespace HuwInterpreter {
         RightShiftNode::RightShiftNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> left, std::shared_ptr<Nodes::Node> right)
             : Node("RightShiftNode", passable, token)
         {
+            ErrorReporting::Debug::print("RightShiftNode");
             this->left = left;
             this->right = right;
         }

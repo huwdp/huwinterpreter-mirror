@@ -20,6 +20,7 @@ namespace HuwInterpreter {
         IfOrNode::IfOrNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> left, std::shared_ptr<Nodes::Node> right)
             : Node("IfOrNode", passable, token)
         {
+            ErrorReporting::Debug::print("IfOrNode");
             this->left = left;
             this->right = right;
             ErrorReporting::Debug::print("Or");

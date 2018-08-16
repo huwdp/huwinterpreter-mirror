@@ -24,6 +24,7 @@ namespace HuwInterpreter {
                                    std::shared_ptr<Node> value)
             : Node("ArraySetNode", passable, token)
         {
+            ErrorReporting::Debug::print("ArraySetNode");
             this->array = array;
             this->indexes = indexes;
             this->value = value;

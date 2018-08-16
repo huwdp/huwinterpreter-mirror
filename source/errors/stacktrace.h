@@ -29,11 +29,11 @@ namespace HuwInterpreter
             std::string functionName;
             std::shared_ptr<Tokens::LineInfo> lineInfo;
             StackTrace(std::string functionName, std::shared_ptr<Tokens::LineInfo> lineInfo);
-            std::string getFunctionName();
+            const std::string getFunctionName();
             void setFunctionName(std::string functionName);
-            std::shared_ptr<Tokens::LineInfo> getLineInfo();
+            const std::shared_ptr<Tokens::LineInfo> getLineInfo();
             void setLineInfo(std::shared_ptr<Tokens::LineInfo> lineInfo);
-            std::string toString();
+            const std::string toString();
         };
     }
 }

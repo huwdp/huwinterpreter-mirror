@@ -47,11 +47,11 @@ namespace HuwInterpreter {
                     double output = std::log(temp);
                     return std::make_shared<DoubleVariable>(passable, output);
                 }
-                catch (const std::invalid_argument ex)
+                catch (const std::invalid_argument& ex)
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, FUNCTION_ERROR, name, ex.what()));
                 }
-                catch (const std::out_of_range ex)
+                catch (const std::out_of_range& ex)
                 {
                     passable->getErrorManager()->add(passable->getErrorFactory()->outOfRange(token, name, ex.what()));
                 }

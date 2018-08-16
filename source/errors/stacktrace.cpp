@@ -23,7 +23,7 @@ namespace HuwInterpreter {
             this->lineInfo = lineInfo;
         }
 
-        std::string StackTrace::getFunctionName()
+        const std::string StackTrace::getFunctionName()
         {
             return functionName;
         }
@@ -33,7 +33,7 @@ namespace HuwInterpreter {
             this->functionName = functionName;
         }
 
-        std::shared_ptr<Tokens::LineInfo> StackTrace::getLineInfo()
+        const std::shared_ptr<Tokens::LineInfo> StackTrace::getLineInfo()
         {
             return lineInfo;
         }
@@ -43,7 +43,7 @@ namespace HuwInterpreter {
             this->lineInfo = lineInfo;
         }
 
-        std::string StackTrace::toString()
+        const std::string StackTrace::toString()
         {
             std::string message = functionName;
             if (lineInfo != nullptr)

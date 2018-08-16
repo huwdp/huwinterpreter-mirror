@@ -18,9 +18,7 @@
 namespace HuwInterpreter {
     namespace ErrorReporting {
         ErrorTypeStringFactory::ErrorTypeStringFactory()
-        {
-
-        }
+        {}
 
         std::string ErrorTypeStringFactory::createErrorString(ErrorTypes errorTypes)
         {

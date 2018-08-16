@@ -20,8 +20,8 @@ namespace HuwInterpreter {
         IncrementNode::IncrementNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> node)
             : Node("IncrementNode", passable, token)
         {
+            ErrorReporting::Debug::print("IncrementNode");
             this->node = node;
-            ErrorReporting::Debug::print("Increment");
         }
 
         NodeType IncrementNode::getType()

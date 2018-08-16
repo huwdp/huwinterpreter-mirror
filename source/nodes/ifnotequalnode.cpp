@@ -20,9 +20,9 @@ namespace HuwInterpreter {
         IfNotEqualNode::IfNotEqualNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> left, std::shared_ptr<Nodes::Node> right)
             : Node("IfNotEqualNode", passable, token)
         {
+            ErrorReporting::Debug::print("IfNotEqualNode");
             this->left = left;
             this->right = right;
-            ErrorReporting::Debug::print("NotEqualNode");
         }
 
         NodeType IfNotEqualNode::getType()

@@ -53,7 +53,7 @@ namespace HuwInterpreter {
                     else
                     {
                         temp.erase(it);
-                        it--;
+                        ++it;
                     }
                     ++it;
                 }
@@ -61,7 +61,7 @@ namespace HuwInterpreter {
                 it = temp.end();
                 if (it != temp.begin())
                 {
-                    it--;
+                    --it;
                     while(it != temp.begin())
                     {
                         if ((*it) != ' ' && (*it) != '\t')

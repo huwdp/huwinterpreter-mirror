@@ -61,7 +61,7 @@ namespace HuwInterpreter {
             this->internalLine = internalLine;
         }
 
-        std::string Error::getError()
+        const std::string Error::getError()
         {
             return error;
         }
@@ -71,7 +71,7 @@ namespace HuwInterpreter {
             this->error = error;
         }
 
-        std::string Error::getMessage()
+        const std::string Error::getMessage()
         {
             ErrorTypeStringFactory errorTypeStringFactory;
             std::string message = errorTypeStringFactory.createErrorString(errorType);

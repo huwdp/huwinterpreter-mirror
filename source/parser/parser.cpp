@@ -72,7 +72,7 @@ namespace HuwInterpreter {
     {
         if (it != tokens.begin())
         {
-            it--;
+            --it;
             currentToken = (*it);
         }
     }

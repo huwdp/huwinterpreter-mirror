@@ -22,7 +22,7 @@ namespace HuwInterpreter {
         {
             this->left = left;
             this->right = right;
-            ErrorReporting::Debug::print("Add");
+            ErrorReporting::Debug::print("AddNode");
         }
 
         NodeType AddNode::getType()

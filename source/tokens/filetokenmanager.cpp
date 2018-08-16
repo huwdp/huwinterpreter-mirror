@@ -26,7 +26,7 @@ namespace HuwInterpreter {
             {
                 while(std::getline(file, line))
                 {
-                    lineNumber++;
+                    ++lineNumber;
                     for (std::string::iterator it = line.begin(); it != line.end(); ++it)
                     {
                         std::shared_ptr<IO::FileLine> fileLine = std::make_shared<IO::FileLine>((*it), lineNumber);
@@ -69,7 +69,7 @@ namespace HuwInterpreter {
         {
             if (it != lines.begin() && it != lines.end())
             {
-                it--;
+                --it;
                 return (*it);
             }
             return nullToken;
@@ -87,7 +87,7 @@ namespace HuwInterpreter {
         {
             if (it != lines.begin() && it != lines.end())
             {
-                it--;
+                --it;
             }
         }
 
@@ -97,7 +97,7 @@ namespace HuwInterpreter {
             {
                 ++it;
                 std::shared_ptr<IO::FileLine> line = (*it);
-                it--;
+                --it;
                 return line;
             }
             std::shared_ptr<IO::FileLine> null;

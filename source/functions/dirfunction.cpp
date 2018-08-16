@@ -42,7 +42,8 @@ namespace HuwInterpreter {
                     std::shared_ptr<HashTableVariable> output = std::make_shared<HashTableVariable>(passable);
                     DIR* dirp = opendir(var->toString().c_str());
                     struct dirent * dp;
-                    while ((dp = readdir(dirp)) != NULL) {
+                    while ((dp = readdir(dirp)) != NULL)
+                    {
                        output->add(std::make_shared<StringVariable>(passable, dp->d_name), token);
                     }
                     closedir(dirp);

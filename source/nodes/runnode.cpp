@@ -20,9 +20,9 @@ namespace HuwInterpreter {
         RunNode::RunNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> left, std::shared_ptr<Nodes::Node> right)
             : Node("RunNode", passable, token)
         {
+            ErrorReporting::Debug::print("RunNode");
             this->left = left;
             this->right = right;
-            ErrorReporting::Debug::print("RunNode");
         }
 
         NodeType RunNode::getType()

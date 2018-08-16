@@ -71,13 +71,9 @@ namespace HuwInterpreter {
                     }
                 }
                 else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::INDENTATION))
-                {
-
-                }
+                {}
                 else if (tokens->compare(fileReader->getCurrent()->getContent(), Types::TABINDENTATION))
-                {
-
-                }
+                {}
                 else if (fileReader->getCurrent()->getContent() == ' ' || fileReader->getCurrent()->getContent() == '\t')
                 {
                     // Do nothing here as recording indentation is kinda pointless.

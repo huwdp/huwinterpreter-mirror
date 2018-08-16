@@ -20,6 +20,7 @@ namespace HuwInterpreter {
         GetFuncNode::GetFuncNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::string name, std::shared_ptr<Functions::FunctionManager> functionManager, std::vector<std::shared_ptr<Nodes::Node>> arguments)
             : Node("GetFuncNode", passable, token)
         {
+            ErrorReporting::Debug::print("GetFuncNode");
             this->name = name;
             this->functionManager = functionManager;
             this->arguments = arguments;

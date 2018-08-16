@@ -45,7 +45,7 @@ namespace HuwInterpreter {
                 std::string::iterator it = temp.end();
                 if (it != temp.begin())
                 {
-                    it--;
+                    --it;
                     while(it != temp.begin())
                     {
                         if ((*it) != ' ' && (*it) != '\t')

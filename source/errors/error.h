@@ -34,16 +34,16 @@ namespace HuwInterpreter {
             std::string error;
             std::shared_ptr<Token> token;
             std::string internalFile;
-            int internalLine;
             ErrorTypes errorType;
+            int internalLine = 0;
         public:
             Error();
             Error(ErrorTypes errorTypes, std::string error);
             Error(ErrorTypes errorTypes, std::string error, std::shared_ptr<Token> token);
             Error(ErrorTypes errorTypes, std::string error, std::shared_ptr<Token> token, std::string internalFile, int internalLine);
-            std::string getError();
+            const std::string getError();
             void setError(std::string error);
-            std::string getMessage();
+            const std::string getMessage();
         };
     }
 }

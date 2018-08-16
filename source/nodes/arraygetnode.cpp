@@ -20,6 +20,7 @@ namespace HuwInterpreter {
         ArrayGetNode::ArrayGetNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> left, std::shared_ptr<Nodes::Node> right)
             : Node("ArrayGetNode", passable, token)
         {
+            ErrorReporting::Debug::print("ArrayGetNode");
             this->left = left;
             this->right = right;
         }

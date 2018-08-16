@@ -3,9 +3,7 @@
 namespace HuwInterpreter {
     namespace Helpers {
         EscapeCharacterOutput::EscapeCharacterOutput()
-        {
-
-        }
+        {}
 
         std::string EscapeCharacterOutput::output(char value)
         {

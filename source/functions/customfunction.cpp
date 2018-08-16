@@ -101,7 +101,7 @@ namespace HuwInterpreter {
                 {
                     output.append(",");
                 }
-                it--;
+                --it;
             }
             output.append(")");
             output.append("{");

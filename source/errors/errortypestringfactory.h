@@ -25,7 +25,7 @@ namespace HuwInterpreter {
         {
         public:
             ErrorTypeStringFactory();
-            std::string createErrorString(ErrorTypes errorTypes);
+            static std::string createErrorString(ErrorTypes errorTypes);
         };
     }
 }

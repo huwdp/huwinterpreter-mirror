@@ -119,9 +119,7 @@ namespace HuwInterpreter {
                 value = stod(this->value);
             }
             catch (const std::exception& ex)
-            {
-
-            }
+            {}
             return value;
         }
 
@@ -138,9 +136,7 @@ namespace HuwInterpreter {
                 value = stol(this->value);
             }
             catch (const std::exception& ex)
-            {
-
-            }
+            {}
             return value;
         }
 

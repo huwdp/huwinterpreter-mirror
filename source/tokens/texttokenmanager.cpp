@@ -64,7 +64,7 @@ namespace HuwInterpreter {
         {
             if (it != lines.begin() && it != lines.end())
             {
-                it--;
+                --it;
                 return (*it);
             }
             return nullToken;
@@ -82,7 +82,7 @@ namespace HuwInterpreter {
         {
             if (it != lines.begin() && it != lines.end())
             {
-                it--;
+                --it;
             }
         }
 
@@ -92,9 +92,8 @@ namespace HuwInterpreter {
             {
                 ++it;
                 std::shared_ptr<IO::FileLine> line = (*it);
-                it--;
+                --it;
                 return line;
-
             }
             return nullToken;
         }

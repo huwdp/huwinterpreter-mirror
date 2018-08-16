@@ -20,6 +20,7 @@ namespace HuwInterpreter {
         DecrementNode::DecrementNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> node)
             : Node("DecrementNode", passable, token)
         {
+            ErrorReporting::Debug::print("DecrementNode");
             this->node = node;
             ErrorReporting::Debug::print("Decrement");
         }

@@ -16,15 +16,11 @@
 #include "nameableobject.h"
 
 namespace HuwInterpreter {
-    NameableObject::NameableObject()
-    {
-        name = "";
-    }
+    NameableObject::NameableObject() : name("")
+    {}
 
-    NameableObject::NameableObject(std::string name)
-    {
-        this->name = name;
-    }
+    NameableObject::NameableObject(std::string name) : name(name)
+    {}
 
     std::string NameableObject::getName()
     {

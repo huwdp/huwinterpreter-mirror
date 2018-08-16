@@ -20,9 +20,9 @@ namespace HuwInterpreter {
         SetVarNode::SetVarNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::string name, std::shared_ptr<Nodes::Node> value)
             : Node("SetVarNode", passable, token)
         {
+            ErrorReporting::Debug::print("SetVarNode");
             this->name = name;
             this->value = value;
-            ErrorReporting::Debug::print("SetVarNode");
         }
 
         NodeType SetVarNode::getType()

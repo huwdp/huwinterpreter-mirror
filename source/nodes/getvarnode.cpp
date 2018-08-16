@@ -20,6 +20,7 @@ namespace HuwInterpreter {
         GetVarNode::GetVarNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::string name)
             : Node("GetVarNode", passable, token)
         {
+	    ErrorReporting::Debug::print("GetVarNode");
             this->name = name;
             ErrorReporting::Debug::print("GetVarNode");
         }

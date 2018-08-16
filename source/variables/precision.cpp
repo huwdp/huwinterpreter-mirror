@@ -18,9 +18,7 @@
 namespace HuwInterpreter {
     namespace Helpers {
         Precision::Precision()
-        {
-
-        }
+        {}
 
         bool Precision::isSafeInteger(double value = 0.0)
         {

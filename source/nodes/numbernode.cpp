@@ -20,10 +20,10 @@ namespace HuwInterpreter {
         NumberNode::NumberNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::string value)
             : Node("NumberNode", passable, token)
         {
+            ErrorReporting::Debug::print("NumberNode");
             variableTypeFactory = std::make_shared<Variables::VariableTypeFactory>(passable);
             this->value = variableTypeFactory->newVariable(Helpers::TypeDetector::getType(value));
             this->value->setValue(value);
-            ErrorReporting::Debug::print("NumberNode");
         }
 
         NodeType NumberNode::getType()

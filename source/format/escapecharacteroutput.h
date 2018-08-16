@@ -9,8 +9,8 @@ namespace HuwInterpreter {
         {
         public:
             EscapeCharacterOutput();
-            std::string output(char value);
-            std::string output(std::string value);
+            static std::string output(char value);
+            static std::string output(std::string value);
         };
     }
 }

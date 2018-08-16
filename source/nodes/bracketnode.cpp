@@ -20,6 +20,7 @@ namespace HuwInterpreter {
         BracketNode::BracketNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> node)
             : Node("BracketNode", passable, token)
         {
+            ErrorReporting::Debug::print("BracketNode");
             this->node = node;
             ErrorReporting::Debug::print("Bracket");
         }

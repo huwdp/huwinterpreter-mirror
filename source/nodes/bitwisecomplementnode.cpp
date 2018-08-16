@@ -20,6 +20,7 @@ namespace HuwInterpreter {
         BitwiseComplementNode::BitwiseComplementNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token, std::shared_ptr<Nodes::Node> node)
             : Node("BitwiseComplementNode", passable, token)
         {
+            ErrorReporting::Debug::print("BitwiseComplementNode");
             this->node = node;
         }
 
