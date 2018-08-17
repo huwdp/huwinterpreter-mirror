@@ -174,7 +174,7 @@ SOURCES += \
     functions/currenttimefunction.cpp \
     functions/clockfunction.cpp \
     functions/dirfunction.cpp \
-    functions/timefunction.cpp
+    functions/timeformatfunction.cpp
 
 
 
@@ -376,7 +376,7 @@ HEADERS += \
     functions/currenttimefunction.h \
     functions/clockfunction.h \
     functions/dirfunction.h \
-    functions/timefunction.h
+    functions/timeformatfunction.h
 
 
 

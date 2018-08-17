@@ -13,18 +13,18 @@
     along with HuwInterpreter.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LOCALTIMEFUNCTION_H
-#define LOCALTIMEFUNCTION_H
+#ifndef TIMEFORMATFUNCTION_H
+#define TIMEFORMATFUNCTION_H
 
 #include "function.h"
 #include <sstream>
 
 namespace HuwInterpreter {
     namespace Functions {
-        class TimeFunction : public Function
+        class TimeFormatFunction : public Function
         {
         public:
-            TimeFunction(std::shared_ptr<Passable> passable);
+            TimeFormatFunction(std::shared_ptr<Passable> passable);
             std::shared_ptr<Variable> execute(std::shared_ptr<Tokens::Token> token,
                                           std::shared_ptr<Scope> globalScope,
                                           std::shared_ptr<Scope> scope,
@@ -33,4 +33,4 @@ namespace HuwInterpreter {
     }
 }
 
-#endif // LOCALTIMEFUNCTION_H
+#endif // TIMEFORMATFUNCTION_H

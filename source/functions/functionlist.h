@@ -111,7 +111,7 @@
 #include "reffunction.h"
 
 #include "clockfunction.h"
-#include "timefunction.h"
+#include "timeformatfunction.h"
 
 #endif  //FUNCTIONLIST_H
 
