@@ -63,10 +63,10 @@ namespace HuwInterpreter {
 
         std::string HashTableVariable::toString()
         {
-            std::string output = "[";
+            std::string output = "[\n";
             for (std::unordered_map<std::string, std::shared_ptr<Variable>>::iterator it = map.begin(); it != map.end(); ++it)
             {
-                output.append("Key:" + (*it).first + " Value:" + (*it).second->toString());
+                output.append("\tKey: \"" + (*it).first + "\", Value: \"" + (*it).second->toString()+"\"\n");
             }
             output.append("]");
             return output;
