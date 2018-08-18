@@ -20,7 +20,7 @@ namespace HuwInterpreter {
         ArraySetNode::ArraySetNode(std::shared_ptr<Passable> passable,
                                    std::shared_ptr<Tokens::Token> token,
                                    std::shared_ptr<Nodes::Node> array,
-                                   std::queue<std::shared_ptr<Nodes::Node>> indexes,
+                                   std::vector<std::shared_ptr<Nodes::Node>> indexes,
                                    std::shared_ptr<Node> value)
             : Node("ArraySetNode", passable, token)
         {
@@ -63,41 +63,46 @@ namespace HuwInterpreter {
                 return nullVariable;
             }
 
-            while (indexes.size() > 1)
+            std::vector<std::shared_ptr<Nodes::Node>>::iterator indexIt = indexes.begin();
+
+            if (indexes.size() > 1)
             {
-                if (indexes.front() == nullptr)
+                while (indexIt != (indexes.end()-1))
                 {
-                    return nullVariable;
+                    if ((*indexIt) == nullptr)
+                    {
+                        return nullVariable;
+                    }
+
+                    std::shared_ptr<Variable> index = (*indexIt)->execute(globalScope, scope);
+
+                    if (index == nullptr)
+                    {
+                        // Report here error here. Index cannot be null
+                        return nullVariable;
+                    }
+
+                    std::shared_ptr<Variable> variable = var->get(index->toString(), token);
+
+                    if (variable == nullptr)
+                    {
+                        std::shared_ptr<Variable> newHashTable = std::make_shared<Variables::HashTableVariable>(passable);
+                        var->set(index->toString(), std::move(newHashTable), token);
+                    }
+
+                    var = var->get(index->toString(), token);
+                    ++indexIt;
                 }
-
-                std::shared_ptr<Variable> index = indexes.front()->execute(globalScope, scope);
-                indexes.pop();
-
-                if (index == nullptr)
-                {
-                    //passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, array->getName()));
-                    return nullVariable;
-                }
-
-                std::shared_ptr<Variable> variable = var->get(index->toString(), token);
-
-                if (variable == nullptr)
-                {
-                    std::shared_ptr<Variable> newHashTable = std::make_shared<Variables::HashTableVariable>(passable);
-                    var->set(index->toString(), newHashTable, token);
-                }
-
-                var = var->get(index->toString(), token);
+                //--indexIt;
             }
 
-            if (indexes.front() == nullptr)
+            if ((*indexIt) == nullptr)
             {
                 //passable->getErrorManager()->add(passable->getErrorFactory()->invalidArgument(token, RUNTIME_ERROR, array->getName()));
                 return nullVariable;
             }
 
-            std::shared_ptr<Variable> finalIndex = indexes.front()->execute(globalScope, scope);
-            indexes.pop(); // Cleanup
+            std::shared_ptr<Variable> finalIndex = (*indexIt)->execute(globalScope, scope);
 
             if (finalIndex == nullptr)
             {
@@ -115,11 +120,12 @@ namespace HuwInterpreter {
                 return "";
             }
             output = array->toString();
-            while (!indexes.empty())
+
+            for (std::vector<std::shared_ptr<Nodes::Node>>::iterator it = indexes.begin(); it != indexes.end(); ++it)
             {
-                output += ("[" + indexes.front()->toString() + "]");
-                indexes.pop();
+                output += ("[" + (*it)->toString() + "]");
             }
+
             if (value == nullptr)
             {
                 return output;

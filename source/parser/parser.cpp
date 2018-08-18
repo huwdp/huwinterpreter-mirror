@@ -168,13 +168,13 @@ namespace HuwInterpreter {
     {
         if (!tokens.empty() && compilation && currentToken->getType() == LEFTSQUAREBRACKET)
         {
-            std::queue<std::shared_ptr<Nodes::Node>> indexes;
+            std::vector<std::shared_ptr<Nodes::Node>> indexes;
 
             acceptIndentation();
             while (accept(Types::LEFTSQUAREBRACKET))
             {
                 acceptIndentation();
-                indexes.push(parseBoolean());
+                indexes.push_back(std::move(parseBoolean()));
                 acceptIndentation();
 
                 if (!expect(RIGHTSQUAREBRACKET))
@@ -206,10 +206,9 @@ namespace HuwInterpreter {
                     return nodeFactory->CreateSemicolonNode(passable, setIndexNode);
                 }
 
-                while (indexes.size() > 0)
+                for (std::vector<std::shared_ptr<Nodes::Node>>::iterator it = indexes.begin(); it != indexes.end(); ++it)
                 {
-                    std::shared_ptr<Nodes::Node> index = indexes.front();
-                    indexes.pop();
+                    std::shared_ptr<Nodes::Node> index = (*it);
                     returnNode = nodeFactory->CreateArrayGetNode(passable, currentToken, returnNode, index);
                 }
                 return returnNode;

@@ -52,7 +52,7 @@ namespace HuwInterpreter {
         std::shared_ptr<Node> HuwCodeNodeFactory::CreateArraySetNode(std::shared_ptr<Passable> passable,
                                                                      std::shared_ptr<Tokens::Token> token,
                                                                      std::shared_ptr<Node> array,
-                                                                     std::queue<std::shared_ptr<Node> > indexes,
+                                                                     std::vector<std::shared_ptr<Node> > indexes,
                                                                      std::shared_ptr<Node> value)
         {
             return std::make_shared<ArraySetNode>(passable, token, array, indexes, value);

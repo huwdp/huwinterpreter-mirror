@@ -25,12 +25,12 @@ namespace HuwInterpreter {
         {
         private:
             std::shared_ptr<Nodes::Node> array;
-            std::queue<std::shared_ptr<Nodes::Node>> indexes;
+            std::vector<std::shared_ptr<Nodes::Node>> indexes;
             std::shared_ptr<Nodes::Node> value;
         public:
             ArraySetNode(std::shared_ptr<Passable> passable, std::shared_ptr<Tokens::Token> token,
                          std::shared_ptr<Nodes::Node> array,
-                         std::queue<std::shared_ptr<Node> > indexes,
+                         std::vector<std::shared_ptr<Node> > indexes,
                          std::shared_ptr<Nodes::Node> value);
             NodeType getType();
             std::shared_ptr<Variables::Variable> execute(std::shared_ptr<Variables::Scope> globalScope, std::shared_ptr<Variables::Scope> scope);
