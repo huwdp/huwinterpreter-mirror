@@ -6,17 +6,11 @@ Array funciton returns an array. Array funciton requires 0 arguments.
 
 Associative Array is an abstact collection of key, value pairs. The internal implementation of the array within HuwCode is implemented with std::unordered_map.
 
-## ArrayGet
-arrayGet(array, key)
-ArratGet returns the value of the associative array by the key. ArrayGet requires 2 arguments.
+## Get value in an array
+An element can be access by the key in an array by using square brackets. E.g. array["element1"];.
 
-Alternatively an element can be access by the key in an array by using square brackets. E.g. array["element1"];.
-
-## ArraySet
-arraySet(array, key, value)
-ArraySet function sets the key in the associative array with the value. ArraySet funciton requires 3 arguments.
-
-Alternatively an element can be set in an array by the key by using square brackets. E.g. array["element1"] = "Hello World!";
+## Set value in an array
+An element can be set in an array by the key by using square brackets. E.g. array["element1"] = "Hello World!";
 
 ## ArrayUnset
 arrayUnset(array, key)
