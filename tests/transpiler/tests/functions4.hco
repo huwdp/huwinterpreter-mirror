@@ -2,4 +2,4 @@ let txt = "This is a beautiful day!";
 print(inStrRev(txt,"i"));
 print(inStrRev(txt,"t"));
 print(inStrRev(txt,"T"));
-print(dateFormat(1505150753, "%c"));
+print(timeFormat(1505150753, "%c"));
