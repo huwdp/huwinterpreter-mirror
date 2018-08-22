@@ -1,3 +1,0 @@
-let number = 1.0;
-
-arraySet(number, 1, 1);

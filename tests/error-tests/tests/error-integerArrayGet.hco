@@ -1,3 +1,0 @@
-let number = 9007199254740995;
-
-arrayGet(number, 1);

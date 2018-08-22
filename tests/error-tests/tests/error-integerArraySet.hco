@@ -1,3 +1,0 @@
-let number = 9007199254740995;
-
-arraySet(number, 1, 1);

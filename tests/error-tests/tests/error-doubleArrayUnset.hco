@@ -1,3 +1,0 @@
-let number = 1.0;
-
-arrayUnset(number, 1);

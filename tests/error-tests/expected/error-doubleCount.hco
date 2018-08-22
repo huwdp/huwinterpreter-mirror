@@ -1,1 +1,0 @@
-RUNTIME_ERROR: Cannot call 'count' method in 'number' double variable. Double is not an array at line number 3

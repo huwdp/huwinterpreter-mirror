@@ -1,7 +1,0 @@
-let text = "Hello World";
-let i = -10;
-while (i < count(text)+10)
-{
-    print(arrayGet(text, i));
-    i++;
-}
