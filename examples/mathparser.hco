@@ -6,20 +6,20 @@ function valueOfFactor()
     let value = 0;
     if (i < count(list)-1)
     {
-        if ((arrayGet(list, i) == "("))
+        if (list[i] == "(")
         {
             i++;
             value = valueOfExpr();
         }
         else
         {
-            value = toDouble(arrayGet(list, i));
+            value = toDouble(list[i]);
             i++;
         }
     }
     else
     {
-        value = toDouble(arrayGet(list, i));
+        value = toDouble(list[i]);
     }
     return value;
 }
@@ -28,9 +28,9 @@ function valueOfTerm()
 {
     let value = 0;
     value = valueOfFactor();
-    while (i < count(list) && arrayGet(list, i) == "*" || arrayGet(list, i) == "/")
+    while (i < count(list) && list[i] == "*" || list[i] == "/")
     {
-        let op = arrayGet(list, i);
+        let op = list[i];
         i++;
         if (op == "*")
         {
@@ -48,9 +48,9 @@ function valueOfExpr()
 {
     let value = 0;
     value = valueOfTerm();
-    while (i < count(list) && (arrayGet(list, i) == "+" || arrayGet(list, i) == "-"))
+    while (i < count(list) && (list[i] == "+" || list[i] == "-"))
     {
-        let op = arrayGet(list, i);
+        let op = list[i];
         i++;
         if (op == "+")
         {

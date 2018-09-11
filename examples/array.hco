@@ -4,7 +4,7 @@ let list = array();
 /* Add items to the hash table */
 while (i < 10)
 {
-    arraySet(list, i, "Item " + i);
+    list[i] = ("Item " + i);
     i++;
 }
 
@@ -12,7 +12,7 @@ while (i < 10)
 let i = 0;
 while (i < 10)
 {
-    print(arrayGet(list, i));
+    print(list[i]);
     i++;
 }
 
